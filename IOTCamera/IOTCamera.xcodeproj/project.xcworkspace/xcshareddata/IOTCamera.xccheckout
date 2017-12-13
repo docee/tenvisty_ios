@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E2FF9AD2-6F30-4AFB-B7F3-2064721CA55C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>IOTCamera</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B2CCD3B61C647B454ABACF6BAF889CFA56F0B1CE</key>
+		<string>https://gitent-scm.com/git/feng/tenvis_p2p_hd_lib.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IOTCamera.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B2CCD3B61C647B454ABACF6BAF889CFA56F0B1CE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://gitent-scm.com/git/feng/tenvis_p2p_hd_lib.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B2CCD3B61C647B454ABACF6BAF889CFA56F0B1CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B2CCD3B61C647B454ABACF6BAF889CFA56F0B1CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOTCamera</string>
+		</dict>
+	</array>
+</dict>
+</plist>

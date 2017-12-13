@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G17023" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tableviewCellListImg" id="hIr-DV-QbY" customClass="ListImgTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hIr-DV-QbY" id="UHx-Ai-BQu">
+                <frame key="frameInset" width="342" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_modifyname" translatesAutoresizingMaskIntoConstraints="NO" id="tcK-6i-cCn">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Pn0-5S-RSO"/>
+                            <constraint firstAttribute="width" constant="30" id="dse-8Y-rR6"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3G-zI-jB3">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCa-gq-dCq">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMo-TF-nv4">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="0.32114955360000003" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="yCa-gq-dCq" secondAttribute="trailing" id="BWz-Vr-T0J"/>
+                    <constraint firstItem="H3G-zI-jB3" firstAttribute="leading" secondItem="tcK-6i-cCn" secondAttribute="trailing" id="DM7-Wa-rqG"/>
+                    <constraint firstItem="yCa-gq-dCq" firstAttribute="centerY" secondItem="UHx-Ai-BQu" secondAttribute="centerY" id="Wn3-On-iMX"/>
+                    <constraint firstItem="H3G-zI-jB3" firstAttribute="centerY" secondItem="UHx-Ai-BQu" secondAttribute="centerY" id="m9t-um-G6Z"/>
+                    <constraint firstItem="tMo-TF-nv4" firstAttribute="centerY" secondItem="UHx-Ai-BQu" secondAttribute="centerY" id="nBC-ge-uS7"/>
+                    <constraint firstItem="yCa-gq-dCq" firstAttribute="leading" secondItem="tMo-TF-nv4" secondAttribute="trailing" constant="10" id="pyi-Su-Lfv"/>
+                    <constraint firstItem="tcK-6i-cCn" firstAttribute="leading" secondItem="UHx-Ai-BQu" secondAttribute="leading" constant="10" id="rO2-FL-WCz"/>
+                    <constraint firstItem="tcK-6i-cCn" firstAttribute="centerY" secondItem="UHx-Ai-BQu" secondAttribute="centerY" id="zaX-UF-uak"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="constraint_width_leftImg" destination="dse-8Y-rR6" id="Lix-pg-uoQ"/>
+                <outlet property="leftImg" destination="tcK-6i-cCn" id="wLX-SE-pgY"/>
+                <outlet property="leftLabTitle" destination="H3G-zI-jB3" id="1nx-LO-lgm"/>
+                <outlet property="rightLabLoading" destination="tMo-TF-nv4" id="UFn-A8-ABe"/>
+                <outlet property="rightLabValue" destination="yCa-gq-dCq" id="rB1-mB-laJ"/>
+            </connections>
+            <point key="canvasLocation" x="-140.5" y="-40"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_modifyname" width="20" height="20"/>
+    </resources>
+</document>

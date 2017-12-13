@@ -1,0 +1,79 @@
+//
+//  PrefixHeader.pch
+//  tenvisty
+//
+//  Created by Tenvis on 17/11/6.
+//  Copyright © 2017年 Tenvis. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "MyCamera.h"
+#import "UIColor+Hex.h"
+#import "UIImage+Colors.h"
+#import "MBProgressHUD.h"
+#import "TwsTools.h"
+#import "TwsProgress.h"
+#import "GNetworkStates.h"
+#import "GBase.h"
+
+//宏定义国际化字符
+#define INTERNATIONAL
+#ifdef INTERNATIONAL
+#define LOCALSTR(a)   (NSLocalizedString(a, nil))
+#else
+#define LOCALSTR(a)   (a)
+#endif
+
+# define LOG(fmt, ...) NSLog((@"[函数名:%s]\n" "[行号:%d] " fmt), __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define FORMAT(format, ...) [NSString stringWithFormat:(format), ##__VA_ARGS__]
+
+#define Screen_Main [UIScreen mainScreen].bounds.size
+#define zkDevice_IsiPhoneXOrBigger ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+//#define DidEnterBackground  (@"applicationDidEnterBackground")
+#define zkDevice_IsiPhoneXOrBigger_SafeArea ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define NO_USE_UID @"00000000000000000000"
+
+#define Color_Primary   (RGBA_COLOR(0, 140, 214,1))
+#define Color_Primary_alpha   (RGBA_COLOR(0, 140, 214,0.4))
+#define Color_PrimaryDark   (RGBA_COLOR(0, 140, 214,1))
+#define Color_PrimaryDarkest   (RGBA_COLOR(2, 115, 175,1))
+#define Color_Accent   (RGBA_COLOR(255, 64, 129,1))
+#define Color_Blue   (RGBA_COLOR(0, 0, 255,1))
+#define Color_Red   (RGBA_COLOR(255, 0, 0,1))
+#define Color_RedDark   (RGBA_COLOR(215, 0, 0,1))
+#define Color_RedLight  (RGBA_COLOR(255, 95, 95,1))
+#define Color_Green   (RGBA_COLOR(0, 255, 0,1))
+#define Color_GreenDark   (RGBA_COLOR(4, 166, 9,1))
+#define Color_GreenLight  (RGBA_COLOR(109, 253, 123,1))
+#define Color_White  (RGBA_COLOR(255, 255, 255,1))
+#define Color_Black  (RGBA_COLOR(0, 0, 0,1))
+#define Color_GrayLightless  (RGBA_COLOR(207, 207, 207,1))
+#define Color_GrayLight  (RGBA_COLOR(230, 230, 230,1))
+#define Color_GrayLight_alpha  (RGBA_COLOR(230, 230, 230,0.4))
+#define Color_GrayLightest  (RGBA_COLOR(241, 241, 241,1))
+#define Color_Gray  (RGBA_COLOR(149, 149, 149,1))
+#define Color_Gray_alpha  (RGBA_COLOR(149, 149, 149,0.4))
+#define Color_GrayDark  (RGBA_COLOR(100,100, 100,1))
+#define Color_Transparent  (RGBA_COLOR(0, 0, 0,0))
+
+#define Color_Item_Selected_BG (RGBA_COLOR(220, 220, 220, 0.8))
+
+
+#define TableViewCell_TextField_Normal (@"tableviewCellTextField")
+#define TableViewCell_TextField_Img (@"tableviewCellTextFieldImg")
+#define TableViewCell_TextField_Disable (@"tableviewCellTextFieldDisable")
+#define TableViewCell_TextField_Password (@"tableviewCellPasswordField")
+#define TableViewCell_Detail (@"tableviewCellDetail")
+#define TableViewCell_ListImg (@"tableviewCellListImg")
+#define TableViewCell_Switch (@"tableviewCellSwitch")
+#define TableViewCell_SelectItem (@"tableviewCellSelectItem")
+
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */

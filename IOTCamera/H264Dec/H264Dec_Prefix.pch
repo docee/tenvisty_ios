@@ -1,0 +1,14 @@
+//
+// Prefix header for all source files of the 'CocoaTouchStaticLibrary' target in the 'CocoaTouchStaticLibrary' project.
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
+
+#define HAVE_LLRINT 1
+#define HAVE_LLRINTF 1
+#define HAVE_LRINT 1
+#define HAVE_LRINTF 1
+#define HAVE_ROUND 1
+#define HAVE_ROUNDF 1
