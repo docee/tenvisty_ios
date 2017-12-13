@@ -11,6 +11,7 @@
 #import "ModifyCameraNameTableViewController.h"
 
 @interface CameraListViewController ()
+@property (weak, nonatomic) IBOutlet UIView *view_first_add;
 
 @end
 
@@ -31,9 +32,22 @@
     [self.navigationController pushViewController:test2obj animated:YES];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if([GBase sharedInstance].cameras.count == 0){
+        [self.view_first_add setHidden:NO];
+        //[self.tableview setHidden:YES];
+    }
+    else{
+        [self.tableview setHidden:YES];
+        //[self.tableview setHidden:NO];
+    }
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [GBase sharedInstance].cameras.count;
 }
 - (IBAction)go2EventList:(id)sender {
     [self performSegueWithIdentifier:@"CameraList2EventList" sender:self];
