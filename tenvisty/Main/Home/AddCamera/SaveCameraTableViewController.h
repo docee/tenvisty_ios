@@ -12,5 +12,5 @@
 
 @interface SaveCameraTableViewController : BaseTableViewController<OCScanLifeViewControllerDelegate>
 
-@property (nonatomic,weak) NSString *uid;
+@property (nonatomic,strong) NSString *uid;
 @end

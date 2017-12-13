@@ -40,7 +40,7 @@
         //[self.tableview setHidden:YES];
     }
     else{
-        [self.tableview setHidden:YES];
+        [self.view_first_add setHidden:YES];
         //[self.tableview setHidden:NO];
     }
 }

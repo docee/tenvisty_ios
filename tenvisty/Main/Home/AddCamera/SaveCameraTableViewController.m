@@ -26,6 +26,40 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 - (IBAction)saveCamera:(id)sender {
+    if([self checkData]){
+        NSString *nickName = [self iptName];
+        if(nickName.length == 0){
+            nickName = LOCALSTR(@"Camera Name");
+        }
+        NSString *password = [self iptPassword];
+        MyCamera *camera = [[MyCamera alloc] initWithUid:self.uid Name:nickName UserName:@"admin" Password:password];
+        [GBase addCamera:camera];
+        [self performSegueWithIdentifier:@"SaveCamera2CameraList" sender:self];
+    }
+    
+}
+-(BOOL)checkData{
+    if([self iptUid].length == 0){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"UID can not empty")];
+        return NO;
+    }
+    NSString *uid = [TwsTools readUID:[self iptUid]];
+    for(MyCamera *camera in [GBase sharedInstance].cameras){
+        if([camera.uid isEqualToString:uid]){
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"the camera is added")];
+            return NO;
+        }
+    }
+    if(uid == nil){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"UID format is wrong")];
+        return NO;
+    }
+    if([self iptPassword].length == 0){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Password can not empty")];
+        return NO;
+    }
+    self.uid = uid;
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,6 +106,19 @@
         return cell;
     }
     return nil;
+}
+
+-(NSString*)iptUid{
+    TextFieldImgTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    return cell.midTextField.text;
+}
+-(NSString*)iptPassword{
+    PasswordFieldTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    return cell.midPasswordField.text;
+}
+-(NSString*)iptName{
+    TextFieldTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    return cell.rightTextField.text;
 }
 
 -(void)go2ScanQRCode{

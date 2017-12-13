@@ -63,13 +63,16 @@
     
     if(cancelTitle){
         UIAlertAction *actionNO = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-            cancelBlock();
+            if(cancelBlock != nil){
+                cancelBlock();
+            }
         }];
         [alertController addAction:actionNO];
     }
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:defaultTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        defaultBlock();
+        if(defaultBlock != nil){
+            defaultBlock();
+        }
     }];
     
     //    [actionNO setValue:LightBlueColor forKey:@"_titleTextColor"];
@@ -80,6 +83,11 @@
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [owner presentViewController:alertController animated:YES completion:NULL];
     });
+}
+
++ (void)presentAlertMsg:(UIViewController*)owner message:(NSString *)message  {
+    
+    [self presentAlertTitle:owner title:nil message:message alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:nil actionCancelTitle:nil actionCancelBlock:nil];
 }
 
 +(void)goPhoneSettingPage:(NSString *)root{
