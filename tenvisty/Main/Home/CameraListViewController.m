@@ -124,7 +124,7 @@
     
 }
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
-    //[self.tableview reloadData];
+    [self.tableview reloadData];
 }
 /*
 #pragma mark - Navigation

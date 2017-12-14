@@ -95,7 +95,7 @@
 }
 
 -(void)setState:(NSInteger)state{
-    if(YES || state == CONNECTION_STATE_CONNECTING){
+    if(state == CONNECTION_STATE_CONNECTING){
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
        MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
         [p setColor:[UIColor clearColor]];

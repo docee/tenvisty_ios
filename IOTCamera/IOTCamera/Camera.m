@@ -958,23 +958,23 @@ int bLocalSearch = 0;
     
     [connectThreadLock lock];
     LOG(@"=== Connect Thread Start (%@) ===", self.uid);
-           
-    NSInteger sid = -1;
+
+    int sid = -1;
     int get_sid = -1;
-    // NSInteger nRetryCount = 0;
-    
+     NSInteger nRetryCount = 0;
+
     while (self.isRunningConnectingThread && self.sessionID < 0) {
-        
+
         char *u = (char *)malloc(20);
         memcpy(u, [self.uid UTF8String], 20);
-        
-        
+
+
         char *aes = NULL;
         if (aesKey != nil && [aesKey length] > 0) {
             aes = (char *)malloc([aesKey length]);
             memcpy(aes, [aesKey UTF8String], [aesKey length]);
         }
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
 
             self.sessionState = CONNECTION_STATE_CONNECTING;
@@ -982,28 +982,30 @@ int bLocalSearch = 0;
 
             if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
                 [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTING];
-            
+
         });
         get_sid=IOTC_Get_SessionID();
         if(get_sid>=0){
             sid = IOTC_Connect_ByUID_Parallel(u,get_sid);
         }
 //        sid = IOTC_Connect_ByUID2(u, aes, IOTC_ARBITRARY_MODE);
-        
+//
         if (u) free(u);
         if (aes) free(aes);
-        
+ 
+
         LOG(@"IOTC_Connect_ByUID(%@) : %d", self.uid, sid);
-                
+
         if (sid >= 0) {
-            
+
             self.sessionID = sid;
-            
+
             struct st_SInfo Sinfo;
+            //struct st_SInfoEx SinfoEx;
             int ret;
-            
+            //ret = IOTC_Session_Check_Ex(sid, &SinfoEx);
             ret = IOTC_Session_Check(sid, &Sinfo);
-            
+
             if(Sinfo.Mode == 0){
                 LOG(@"Remote: [%s:%d; Mode=P2P]",Sinfo.RemoteIP, Sinfo.RemotePort);
             }
@@ -1013,62 +1015,67 @@ int bLocalSearch = 0;
             else if(Sinfo.Mode == 2){
                 LOG(@"Remote: [%s:%d; Mode=LAN]",Sinfo.RemoteIP, Sinfo.RemotePort);
             }
-            
-            LOG(@"Remote: [IOTCAPIVer=%@]", [self parseIOTCAPIsVerion:Sinfo.IOTCVersion]);
-            
+//            NSMutableString *hexString = [NSMutableString string];
+//            for (int i=0; i<sizeof(SinfoEx.RemoteWANIP); i++)
+//            {
+//                [hexString appendFormat:@"%02x ", SinfoEx.RemoteWANIP[i]];
+//            }
+//            LOG(@"LocalNatType:%d; RemoteNatType:%d; RelayType:%d; NetState:%d; RemoteWANIP:%@",SinfoEx.LocalNatType,SinfoEx.RemoteNatType,SinfoEx.RelayType,SinfoEx.NetState, [hexString lowercaseString]);
+            LOG(@"Remote: [IOTCAPIVer=%@] NateType:%d", [self parseIOTCAPIsVerion:Sinfo.IOTCVersion],Sinfo.NatType);
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+
 //                self.sessionState = CONNECTION_STATE_CONNECTED;
 //
 //                if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
 //                    [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTED];
             });
-            
+
         } else if (sid == IOTC_ER_UNLICENSE || sid == IOTC_ER_UNKNOWN_DEVICE || sid == IOTC_ER_CAN_NOT_FIND_DEVICE) {
-                                
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                    
+
                 self.sessionState = CONNECTION_STATE_UNKNOWN_DEVICE;
                 LOG(@"session: CONNECTION_STATE_UNKNOWN_DEVICE");
 
                 if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
                     [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_UNKNOWN_DEVICE];
             });
-            
+
 //            break;
             usleep(4000 * 1000); //4秒后重连
         } else if (sid == IOTC_ER_TIMEOUT) {
-                        
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+
                 self.sessionState = CONNECTION_STATE_TIMEOUT;;
                 LOG(@"session: CONNECTION_STATE_TIMEOUT");
 
                 if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
                     [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_TIMEOUT];
             });
-            
+
             usleep(1000 * 1000);
-            
+
         } else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
-            
+
             usleep(1000 * 1000);
-            
+
         } else {
-                        
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                         
+
                 self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
                 LOG(@"session: CONNECTION_STATE_CONNECT_FAILED");
 
                 if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
                     [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECT_FAILED];
             });
-            
+
             usleep(1000 * 1000);
         }
     }
-    
+
     LOG(@"=== Connect Thread Exit (%@) ===", self.uid);
     
     [connectThreadLock unlockWithCondition:DONE];
