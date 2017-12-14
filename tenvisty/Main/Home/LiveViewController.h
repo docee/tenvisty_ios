@@ -5,9 +5,9 @@
 //  Created by lu yi on 12/3/17.
 //  Copyright © 2017 Tenvis. All rights reserved.
 //
+#import "BaseViewController.h"
 
-#import <UIKit/UIKit.h>
 
-@interface LiveViewController : UIViewController
+@interface LiveViewController : BaseViewController
 
 @end

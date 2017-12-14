@@ -34,28 +34,29 @@
         NSString *password = [self iptPassword];
         MyCamera *camera = [[MyCamera alloc] initWithUid:self.uid Name:nickName UserName:@"admin" Password:password];
         [GBase addCamera:camera];
-        [self performSegueWithIdentifier:@"SaveCamera2CameraList" sender:self];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        //[self performSegueWithIdentifier:@"SaveCamera2CameraList" sender:self];
     }
     
 }
 -(BOOL)checkData{
     if([self iptUid].length == 0){
-        [TwsTools presentAlertMsg:self message:LOCALSTR(@"UID can not empty")];
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"[UID] is not entered.")];
         return NO;
     }
     NSString *uid = [TwsTools readUID:[self iptUid]];
     for(MyCamera *camera in [GBase sharedInstance].cameras){
         if([camera.uid isEqualToString:uid]){
-            [TwsTools presentAlertMsg:self message:LOCALSTR(@"the camera is added")];
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"This camera already exists, please enter another one.")];
             return NO;
         }
     }
     if(uid == nil){
-        [TwsTools presentAlertMsg:self message:LOCALSTR(@"UID format is wrong")];
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Invalid UID")];
         return NO;
     }
     if([self iptPassword].length == 0){
-        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Password can not empty")];
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"[Password] is not entered.")];
         return NO;
     }
     self.uid = uid;
@@ -81,15 +82,16 @@
 {
     NSString *id = TableViewCell_TextField_Disable;
     if(indexPath.row == 0){
-        TextFieldImgTableViewCell *cell = nil;
+        TwsTableViewCell *cell = nil;
         id = TableViewCell_TextField_Img;
         cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
         if(self.uid != nil && ![self.uid isEqualToString:NO_USE_UID]){
-            cell.midTextField.text = self.uid;
+            cell.value = self.uid;
         }
-        cell.leftLabel.text = LOCALSTR(@"Name");
-        [cell.rightButton setImage:[UIImage imageNamed:@"btnQRCode"] forState:UIControlStateNormal];
-        [cell.rightButton addTarget:self action:@selector(go2ScanQRCode) forControlEvents:UIControlEventTouchUpInside];
+        cell.title = LOCALSTR(@"Name");
+        cell.rightImage = @"btnQRCode";
+        cell.action = @selector(go2ScanQRCode);
+        cell.actionOwner = self;
         return cell;
     }
     else if(indexPath.row ==1){
@@ -109,16 +111,16 @@
 }
 
 -(NSString*)iptUid{
-    TextFieldImgTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    return cell.midTextField.text;
+    TwsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    return cell.value;
 }
 -(NSString*)iptPassword{
-    PasswordFieldTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    return cell.midPasswordField.text;
+    TwsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    return cell.value;
 }
 -(NSString*)iptName{
     TextFieldTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    return cell.rightTextField.text;
+    return cell.value;
 }
 
 -(void)go2ScanQRCode{
@@ -138,8 +140,8 @@
     if(result){
         if(![result isEqualToString:NO_USE_UID]){
             _uid = result;
-            TextFieldImgTableViewCell *cell  = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-            cell.midTextField.text = _uid;
+            TwsTableViewCell *cell  = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+            cell.value = _uid;
         }
     }
 }

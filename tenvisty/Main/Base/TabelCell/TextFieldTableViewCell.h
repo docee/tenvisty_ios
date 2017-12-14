@@ -6,12 +6,9 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TwsTableViewCell.h"
 
-@interface TextFieldTableViewCell : UITableViewCell
+@interface TextFieldTableViewCell : TwsTableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *rightTextField;
-@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
 
--(void) setLeftImage:(NSString*)imageName;
 @end

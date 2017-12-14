@@ -10,4 +10,5 @@
 
 @interface AddDeviceWirelessViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic,strong) NSString *uid;
 @end

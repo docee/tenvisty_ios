@@ -10,6 +10,6 @@
 #import "BaseTableViewController.h"
 
 @interface ModifyCameraNameTableViewController : BaseTableViewController
-@property (nonatomic,weak) NSString *uid;
+
 
 @end

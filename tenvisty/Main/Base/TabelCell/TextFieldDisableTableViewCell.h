@@ -6,12 +6,8 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TwsTableViewCell.h"
 
-@interface TextFieldDisableTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
-@property (weak, nonatomic) IBOutlet UITextField *rightTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_rightTextField;
+@interface TextFieldDisableTableViewCell : TwsTableViewCell
 
--(void) setLeftImage:(NSString*)imageName;
 @end

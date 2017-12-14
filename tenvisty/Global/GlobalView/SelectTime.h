@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSDate *fromTime;
 @property (nonatomic, strong) NSDate *toTime;
 
-@property (nonatomic, copy) void(^cancelBlock)();
+@property (nonatomic, copy) void(^cancelBlock)(void);
 @property (nonatomic, copy) void(^okBlock)(NSDate *fromTime,NSDate * toTime);
 
 + (SelectTime *)sharedInstance;

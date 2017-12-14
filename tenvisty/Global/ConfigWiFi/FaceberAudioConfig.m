@@ -59,12 +59,12 @@ int freqss[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,1700
     
     if (![udpSocket bindToPort:8601 error:&error])
     {
-        NSLog(FORMAT(@"Error binding: %@", error));
+        NSLog(@"%@", FORMAT(@"Error binding: %@", error));
         return;
     }
     if (![udpSocket beginReceiving:&error])
     {
-        NSLog(FORMAT(@"Error receiving: %@", error));
+        NSLog(@"%@", FORMAT(@"Error receiving: %@", error));
         return;
     }
     

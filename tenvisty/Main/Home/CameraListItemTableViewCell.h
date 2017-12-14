@@ -19,5 +19,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCameraEvent;
 @property (weak, nonatomic) IBOutlet UIButton *btnCameraSetting;
 @property (weak, nonatomic) IBOutlet UIButton *btnCameraDelete;
+@property (weak, nonatomic) IBOutlet UIButton *btnPlay;
+@property (weak, nonatomic) IBOutlet UIButton *btnReconnect;
+@property (weak, nonatomic) IBOutlet UIButton *btnModifyPassword;
+
+-(void)setState:(NSInteger)state;
+-(void)setAlarm:(NSInteger)num;
 
 @end

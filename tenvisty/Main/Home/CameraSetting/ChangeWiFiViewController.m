@@ -40,17 +40,17 @@
     if(indexPath.row == 0){
         NSString *id = TableViewCell_TextField_Disable;
         TextFieldDisableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.leftLabel.text = LOCALSTR(@"SSID");
-        cell.rightTextField.text = @"tenvis";
-        [cell setLeftImage:@"ic_wifi"];
+        cell.title = LOCALSTR(@"SSID");
+        cell.value = @"tenvis";
+        cell.leftImage = @"ic_wifi";
         NSLog(@"end1 :%f",[NSDate timeIntervalSinceReferenceDate]);
         return cell;
     }
     else{
         NSString *id = TableViewCell_TextField_Password;
         PasswordFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.leftLabel.text = LOCALSTR(@"Password");
-        [cell setLeftImage:@"ic_password"];
+        cell.title = LOCALSTR(@"Password");
+        cell.leftImage = @"ic_password";
         //[cell.midPasswordField becomeFirstResponder];
         NSLog(@"end2 :%f",[NSDate timeIntervalSinceReferenceDate]);
         return cell;

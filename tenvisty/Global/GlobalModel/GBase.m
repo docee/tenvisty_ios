@@ -188,6 +188,9 @@ static GBase *base = nil;
 - (NSString *)documentsWithFileName:(NSString *)fileName {
     return [self.Documents stringByAppendingPathComponent:fileName];
 }
-
++ (MyCamera*)getCamera:(NSInteger)index{
+    GBase *base = [GBase sharedInstance];
+    return [base.cameras objectAtIndex:index];
+}
 
 @end

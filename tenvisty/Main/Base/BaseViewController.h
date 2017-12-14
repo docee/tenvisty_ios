@@ -11,6 +11,5 @@
 @interface BaseViewController : UIViewController
 
 @property (nonatomic,strong) MyCamera *camera;
-@property (nonatomic,strong) NSString *uid;
 
 @end

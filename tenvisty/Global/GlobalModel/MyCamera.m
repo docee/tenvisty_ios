@@ -10,7 +10,7 @@
 #import <IOTCamera/AVIOCTRLDEFs.h>
 #import <IOTCamera/AVFrameInfo.h>
 
-@interface MyCamera()
+@interface MyCamera()<CameraDelegate>
 
 @end
 
@@ -104,24 +104,24 @@
 
 -(NSString *)getCameraStatus{
     if (self.sessionState == CONNECTION_STATE_CONNECTING) {
-        return NSLocalizedString(@"Connecting...", @"");
+        return LOCALSTR(@"Connecting...");
     }
     else if (self.sessionState == CONNECTION_STATE_DISCONNECTED) {
-        return NSLocalizedString(@"Off line", @"");
+        return LOCALSTR(@"Off line");
     }
     else if (self.sessionState == CONNECTION_STATE_UNKNOWN_DEVICE) {
-        return NSLocalizedString(@"Unknown Device", @"");
+        return LOCALSTR(@"Unknown Device");
     }
     else if (self.sessionState == CONNECTION_STATE_TIMEOUT) {
-        return NSLocalizedString(@"Timeout", @"");
+        return LOCALSTR(@"Timeout");
     }
     else if (self.sessionState == CONNECTION_STATE_UNSUPPORTED) {
-        return NSLocalizedString(@"Unsupported", @"");
+        return LOCALSTR(@"Unsupported");
     }
     else if (self.sessionState == CONNECTION_STATE_CONNECT_FAILED) {
-        return NSLocalizedString(@"Connect Failed", @"");
+        return LOCALSTR(@"Connect Failed");
     }
-    return CONNECTION_STATE_NONE;
+    return LOCALSTR(@"Off line");
 }
 
 #pragma mark -
@@ -370,7 +370,7 @@
     }
     
     NSData *buf = [NSData dataWithBytes:data length:size];
-    NSNumber *t = [NSNumber numberWithInt:type];
+    NSNumber *t = [NSNumber numberWithLong:type];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys: buf, @"recvData", t, @"type", self.uid, @"uid", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"didReceiveIOCtrl" object:self userInfo:dict];
     
@@ -402,6 +402,58 @@
     }else if (type == (int)IOTYPE_USER_IPCAM_SETSTREAMCTRL_RESP) {
         [self startVideo];
     }
+}
+
+
+
+//获取截图
+- (UIImage *)image {
+    
+    if ([self fileExistsAtPath:self.imagePath]) {
+        return [UIImage imageWithContentsOfFile:self.imagePath];
+    }
+    else {
+        return [UIImage imageNamed:@"videoclip"];
+    }
+}
+
+
+//保存截图至沙盒
+- (void)saveImage:(UIImage *)image {
+    //[UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+    [UIImageJPEGRepresentation(image, 1) writeToFile:self.imagePath atomically:YES];
+}
+
+//判断一个文件是否存在
+- (BOOL)fileExistsAtPath:(NSString *)filePath {
+    NSFileManager *tFileManager = [NSFileManager defaultManager];
+    return [tFileManager fileExistsAtPath:filePath];
+}
+
+
+//保存图片沙盒路径
+- (NSString *)imagePath {
+    NSString *fileName = [NSString stringWithFormat:@"%@.jpg", self.uid];
+    NSString *filePath = [[self documents] stringByAppendingPathComponent:fileName];
+    return filePath;
+}
+
+//Documents
+- (NSString *)documents {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+}
+
+
+-(void)openPush{
+    
+}
+
+-(void)closePush{
+    
+}
+
+-(BOOL)isDisconnected{
+    return self.sessionState != CONNECTION_STATE_CONNECTING && self.sessionState != CONNECTION_STATE_CONNECTED && self.sessionState != CONNECTION_STATE_WRONG_PASSWORD;
 }
 
 @end

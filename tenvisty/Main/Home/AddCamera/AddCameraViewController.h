@@ -11,4 +11,5 @@
 
 @interface AddCameraViewController : BaseViewController<OCScanLifeViewControllerDelegate>
 
+@property (nonatomic,strong) NSString *uid;
 @end

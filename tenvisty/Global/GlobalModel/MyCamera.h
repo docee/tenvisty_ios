@@ -83,5 +83,12 @@
 - (BOOL)getVideoQualitySettingSupportOfChannel:(NSInteger)channel;
 - (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel;
 -(NSString *)getCameraStatus;
+
+- (void)saveImage:(UIImage *)image;
+- (UIImage *)image;
+
+-(void)openPush;
+-(void)closePush;
+-(BOOL)isDisconnected;
 @end
 

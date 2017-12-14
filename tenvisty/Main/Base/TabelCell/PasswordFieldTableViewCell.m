@@ -10,9 +10,12 @@
 
 @interface PasswordFieldTableViewCell()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_midPasswordField;
 @property (weak, nonatomic) IBOutlet UIImageView *leftImg;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_leftImg;
 
+@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UITextField *midPasswordField;
 @end
 
 @implementation PasswordFieldTableViewCell
@@ -40,9 +43,32 @@
     }
 }
 
+-(NSString*)title{
+    return _leftLabel.text;
+}
+
+-(void)setTitle:(NSString*)t{
+    _leftLabel.text = t;
+}
+-(NSString*)value{
+    return _midPasswordField.text;
+}
+
+-(void)setValue:(NSString*)t{
+    _midPasswordField.text = t;
+}
+
+
 -(void) setLeftImage:(NSString*)imageName{
-    [self.leftImg setImage:[UIImage imageNamed:imageName]];
-    self.constraint_width_leftImg.constant = 30;
+    [_leftImg setImage:[UIImage imageNamed:imageName]];
+    _constraint_width_leftImg.constant = 30;
+}
+
+-(void) setValueAligment:(NSTextAlignment)align{
+    _midPasswordField.textAlignment = align;
+}
+-(void) setValueMarginLeft:(CGFloat)left{
+    _constraint_left_midPasswordField.constant  = left;
 }
 
 @end

@@ -85,7 +85,10 @@ typedef enum {
 #endif
 
 #if NS_BLOCKS_AVAILABLE
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
 typedef void (^MBProgressHUDCompletionBlock)();
+#pragma clang diagnostic pop
 #endif
 
 

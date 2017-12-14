@@ -38,21 +38,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         NSString *vid = TableViewCell_TextField_Disable;
-        TextFieldDisableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        cell.leftLabel.text = @"";
-        [cell setLeftImage:@"ic_wifi"];
-        cell.rightTextField.text = [GNetworkStates getDeviceSSID];
-        cell.rightTextField.textAlignment = NSTextAlignmentLeft;
-        cell.constraint_left_rightTextField.constant = 60;
+        TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
+        cell.title = @"";
+        cell.leftImage = @"ic_wifi";
+        cell.value = [GNetworkStates getDeviceSSID];
+        cell.valueAligment = NSTextAlignmentLeft;
+        cell.valueMarginLeft = 60;
         return cell;
     }
     else{
         NSString *vid = TableViewCell_TextField_Password;
-        PasswordFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        cell.leftLabel.text = @"";
+        TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
+        [cell setTitle:@""];
         [cell setLeftImage:@"ic_password"];
-        cell.midPasswordField.textAlignment = NSTextAlignmentLeft;
-        cell.constraint_left_midPasswordField.constant = 60;
+        [cell setValueAligment:NSTextAlignmentLeft];
+        [cell setValueMarginLeft:60];
         return cell;
     }
     return nil;
@@ -62,8 +62,8 @@
      if([segue.identifier isEqualToString:@"AddDeviceWireless2AddDeviceWirelessSetting"]){
         AddDeviceWirelessSettingViewController *controller= segue.destinationViewController;
         controller.uid = self.uid;
-        controller.wifiSsid = ((TextFieldDisableTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).rightTextField.text;
-        controller.wifiPassword = ((PasswordFieldTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).midPasswordField.text;
+        controller.wifiSsid = ((TwsTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).value;
+        controller.wifiPassword = ((TwsTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).value;
         controller.wifiAuthMode = 1;
      }
 }

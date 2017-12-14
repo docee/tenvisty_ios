@@ -36,12 +36,12 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *id = TableViewCell_TextField_Disable;
-    TextFieldDisableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
     if(indexPath.row == 0){
-        cell.leftLabel.text = LOCALSTR(@"Total size");
+        cell.title = LOCALSTR(@"Total size");
     }
     else if(indexPath.row == 1){
-        cell.leftLabel.text = LOCALSTR(@"Free size");
+        cell.title = LOCALSTR(@"Free size");
     }
     
     return cell;

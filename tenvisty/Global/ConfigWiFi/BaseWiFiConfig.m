@@ -18,4 +18,23 @@
 -(NSInteger) getWiFiIpAddressInt{
     return 0;
 }
+
+-(void) runConfig{
+    
+}
+
+-(void) stopConfig{
+    
+}
+
++(id)sharedInstance{
+    static BaseWiFiConfig *instance = nil;
+    @synchronized(self) {
+        if (instance == nil)
+            instance = [[self alloc] init];
+    }
+    return instance;
+}
+
+
 @end

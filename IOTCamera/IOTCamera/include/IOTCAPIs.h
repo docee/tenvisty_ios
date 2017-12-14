@@ -394,7 +394,7 @@ struct st_LanSearchInfo2
  *						is called last time.
  *
  */
-typedef void (__stdcall *loginInfoCB)(unsigned int nLoginInfo);
+typedef void (__stdcall *loginInfoCB)(unsigned int pnLoginInfo);
 
 /**
  * \details The prototype of getting session status function, used by a device

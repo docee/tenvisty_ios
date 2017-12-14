@@ -7,6 +7,10 @@
 //
 
 #define SMART_WIFI_TIME (60)
+#define CONFIG_WIFI_FAIL (0)
+#define CONFIG_WIFI_SUCCESS (1)
+#define CONFIG_WIFI_WRONG_PWD (2)
+
 #import "AddDeviceWirelessSettingViewController.h"
 #import <FLAnimatedImage/FLAnimatedImage.h>
 #import "WiFiConfigContext.h"
@@ -19,13 +23,14 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_pop;
 @property (weak, nonatomic) IBOutlet UILabel *labProcess;
 @property (nonatomic,strong) NSTimer* pTimer;
+@property (nonatomic,assign) NSInteger configWifiResult;
 @end
 
 @implementation AddDeviceWirelessSettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.configWifiResult = CONFIG_WIFI_FAIL;
     NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"configwifi_setting" withExtension:@"gif"];
     NSData *data1 = [NSData dataWithContentsOfURL:url1];
     FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
@@ -36,6 +41,7 @@
     [[WiFiConfigContext sharedInstance] setData:self.wifiSsid password:self.wifiPassword auth:self.wifiAuthMode];
     [[WiFiConfigContext sharedInstance] setReceiveListner:self];
     [self setTimerInterval:SMART_WIFI_TIME/100.0f];
+    self.camera = [[MyCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"MyCamera") UserName:@"admin" Password:@"admin"];
     
     // Do any additional setup after loading the view.
 }
@@ -52,17 +58,64 @@
 }
 
 - (void)progressMethod : (id)sender {
-     self.progressView.progress += 0.01f;
+    self.progressView.progress += 0.01f;
     self.labProcess.text = [NSString stringWithFormat:@"%d%%",(int)(self.progressView.progress*100)];
     self.constraint_left_pop.constant -= self.progressView.frame.size.width / 100.0f;
     if(self.progressView.progress >= 1){
+        [[WiFiConfigContext sharedInstance] stopConfig];
         [self.pTimer invalidate];
+        if([self.camera.uid isEqualToString:NO_USE_UID]){
+            [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Camera sound end?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"YES") actionDefaultBlock:^{
+                [TwsProgress showText:LOCALSTR(@"Search Camera on LAN")];
+                [self go2Search];
+            } actionCancelTitle:LOCALSTR(@"NO") actionCancelBlock:^{
+                
+                [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Configure Wi-Fi failed, please check your Wi-Fi password") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Retry") actionDefaultBlock:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                } actionCancelTitle:LOCALSTR(@"Help") actionCancelBlock:^{
+                    [self go2Help];
+                }];
+            }];
+        }
+        else{
+            if(self.configWifiResult == CONFIG_WIFI_SUCCESS){
+                [self go2List];
+                [self saveCamera];
+            }
+            else if(self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
+                [self go2List];
+                [self saveCamera];
+            }
+            else{
+                [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Configure Wi-Fi failed, please check your Wi-Fi password") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Retry") actionDefaultBlock:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                } actionCancelTitle:LOCALSTR(@"Help") actionCancelBlock:^{
+                    [self go2Help];
+                }];
+            }
+        }
     }
 }
 
+-(void)saveCamera{
+    BOOL isExist = NO;
+    for(MyCamera *c in [GBase sharedInstance].cameras){
+        if([c.uid isEqualToString:self.camera.uid]){
+            isExist = YES;
+            break;
+        }
+    }
+    if(!isExist){
+        [GBase addCamera:self.camera];
+    }
+}
+
+
 -(void)onReceived:(NSString *)status ip:(NSString*) ip uid:(NSString*)uid{
     if([self.uid isEqualToString:NO_USE_UID] || [self.uid isEqualToString:uid]){
-        [self go2List];
+        self.configWifiResult = CONFIG_WIFI_SUCCESS;
+        self.camera.uid = uid;
+        [self setTimerInterval:0.01f];
     }
 }
 
@@ -74,9 +127,13 @@
 
 -(void)go2List{
     [self stopConfig];
-    [self performSegueWithIdentifier:@"AddDeviceWirelessSetting2CameraList" sender:self];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self performSegueWithIdentifier:@"AddDeviceWirelessSetting2CameraList" sender:self];
 }
-
+-(void)go2Help{
+    [self stopConfig];
+    [self performSegueWithIdentifier:@"AddDeviceWirelessSetting2SearchCamera" sender:self];
+}
 -(void)go2Search{
     [self stopConfig];
     [self performSegueWithIdentifier:@"AddDeviceWirelessSetting2SearchCamera" sender:self];

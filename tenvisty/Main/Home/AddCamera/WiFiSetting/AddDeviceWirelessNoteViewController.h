@@ -10,4 +10,5 @@
 
 @interface AddDeviceWirelessNoteViewController : BaseViewController
 
+@property (nonatomic,strong) NSString *uid;
 @end

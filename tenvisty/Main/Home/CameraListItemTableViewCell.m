@@ -8,7 +8,11 @@
 //
 
 #import "CameraListItemTableViewCell.h"
-#import "ModifyCameraNameTableViewController.h"
+
+@interface CameraListItemTableViewCell()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_labConnectstate;
+
+@end
 
 @implementation CameraListItemTableViewCell
 
@@ -33,13 +37,14 @@
     [self.labCameraName setTextColor:Color_GrayDark];
     
     [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayLight_alpha] forState:UIControlStateNormal];
+    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
 
     [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayLight_alpha] forState:UIControlStateNormal];
+    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
     
     [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayLight_alpha] forState:UIControlStateNormal];
+    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
+    
     // Initialization code
 }
 - (IBAction)modifyCameraName:(UIButton *)sender {
@@ -87,6 +92,51 @@
         }
     }
     return self;
+}
+
+-(void)setState:(NSInteger)state{
+    if(YES || state == CONNECTION_STATE_CONNECTING){
+        [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
+       MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        [p setColor:[UIColor clearColor]];
+        [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = [UIColor whiteColor];
+        [self.btnReconnect setHidden:YES];
+        [self.btnModifyPassword setHidden:YES];
+        [self.btnPlay setHidden:YES];
+        self.labCameraConnectState.text = LOCALSTR(@"Connecting");
+        [self.labCameraConnectState setBackgroundColor:Color_Primary];
+    }
+    else if(state == CONNECTION_STATE_CONNECTED){
+        [MBProgressHUD hideHUDForView:self animated:YES];
+        [self.btnReconnect setHidden:YES];
+        [self.btnModifyPassword setHidden:YES];
+        [self.btnPlay setHidden:NO];
+        self.labCameraConnectState.text = LOCALSTR(@"Online");
+        [self.labCameraConnectState setBackgroundColor:Color_GreenDark];
+    }
+    else if(state == CONNECTION_STATE_WRONG_PASSWORD){
+        [MBProgressHUD hideHUDForView:self animated:YES];
+        [self.btnReconnect setHidden:YES];
+        [self.btnModifyPassword setHidden:NO];
+        [self.btnPlay setHidden:YES];
+        [TwsViewTools setButtonContentCenter:self.btnModifyPassword];
+        self.labCameraConnectState.text = LOCALSTR(@"Wrong Password");
+        [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
+        self.constraint_width_labConnectstate.constant = 105;
+    }
+    else{
+        [MBProgressHUD hideHUDForView:self animated:YES];
+        [self.btnReconnect setHidden:NO];
+        [self.btnModifyPassword setHidden:YES];
+        [self.btnPlay setHidden:YES];
+        [TwsViewTools setButtonContentCenter:self.btnReconnect];
+        self.labCameraConnectState.text = LOCALSTR(@"Offline");
+        [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
+    }
+}
+
+-(void)setAlarm:(NSInteger)num{
+    [self.imgAlarm setHidden:num<1];
 }
 
 @end

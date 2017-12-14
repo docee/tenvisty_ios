@@ -6,12 +6,9 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TwsTableViewCell.h"
 
-@interface TextFieldImgTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UITextField *midTextField;
-@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
-@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@interface TextFieldImgTableViewCell : TwsTableViewCell
 
 
 @end

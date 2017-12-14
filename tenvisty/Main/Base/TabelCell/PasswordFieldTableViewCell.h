@@ -6,13 +6,9 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TwsTableViewCell.h"
 
-@interface PasswordFieldTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
-@property (weak, nonatomic) IBOutlet UITextField *midPasswordField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_midPasswordField;
+@interface PasswordFieldTableViewCell : TwsTableViewCell
 
 
--(void) setLeftImage:(NSString*)imageName;
 @end

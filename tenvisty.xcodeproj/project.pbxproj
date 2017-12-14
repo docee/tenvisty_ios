@@ -23,6 +23,8 @@
 		890B46AB1FB034C000C1061A /* MyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46AA1FB034C000C1061A /* MyCamera.m */; };
 		890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B41FB03CD500C1061A /* UIColor+Hex.m */; };
 		890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B61FB03CD500C1061A /* UIImage+Colors.m */; };
+		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
+		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
 		892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB571FD63CEA00BD8929 /* ListImgTableViewCellModel.m */; };
 		892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892ADB591FD64CC000BD8929 /* CameraSetting.storyboard */; };
@@ -195,6 +197,10 @@
 		890B46B61FB03CD500C1061A /* UIImage+Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Colors.m"; sourceTree = "<group>"; };
 		890B46BC1FB050A900C1061A /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "tenvisty/lib/Debug-iphonesimulator/IOTCamera.framework"; sourceTree = "<group>"; };
 		890B47231FB0635400C1061A /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "tenvisty/lib/Debug-iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
+		892477941FE263F70021D8E6 /* TwsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsTableViewCell.h; sourceTree = "<group>"; };
+		892477951FE263F70021D8E6 /* TwsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsTableViewCell.m; sourceTree = "<group>"; };
+		8924779B1FE28AF60021D8E6 /* TwsViewTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsViewTools.h; sourceTree = "<group>"; };
+		8924779C1FE28AF60021D8E6 /* TwsViewTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsViewTools.m; sourceTree = "<group>"; };
 		892ADB511FD635EB00BD8929 /* ListImgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListImgTableViewCell.h; sourceTree = "<group>"; };
 		892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListImgTableViewCell.m; sourceTree = "<group>"; };
 		892ADB561FD63CEA00BD8929 /* ListImgTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListImgTableViewCellModel.h; sourceTree = "<group>"; };
@@ -592,6 +598,8 @@
 				892ADB991FD8F83000BD8929 /* ImageTableViewCell.m */,
 				896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */,
 				896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */,
+				892477941FE263F70021D8E6 /* TwsTableViewCell.h */,
+				892477951FE263F70021D8E6 /* TwsTableViewCell.m */,
 			);
 			path = TabelCell;
 			sourceTree = "<group>";
@@ -709,6 +717,8 @@
 			children = (
 				89870A221FDA83AA005207AB /* TwsTools.h */,
 				89870A231FDA83AA005207AB /* TwsTools.m */,
+				8924779B1FE28AF60021D8E6 /* TwsViewTools.h */,
+				8924779C1FE28AF60021D8E6 /* TwsViewTools.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1018,6 +1028,7 @@
 				892ADB971FD80AB600BD8929 /* PlaybackViewController.m in Sources */,
 				89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */,
 				898D8BB41FE0F75B00062F04 /* GBase.m in Sources */,
+				8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */,
 				892ADB9A1FD8F83000BD8929 /* ImageTableViewCell.m in Sources */,
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
@@ -1073,6 +1084,7 @@
 				EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */,
 				892ADB661FD67A0A00BD8929 /* ChangeWiFiViewController.m in Sources */,
 				890B40931FB02FD000C1061A /* TwsCell.m in Sources */,
+				892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */,
 				896BA3E11FD950A200EE31AB /* ImageCameraListViewController.m in Sources */,
 				892ADB791FD6A70400BD8929 /* RecordSettingViewController.m in Sources */,
 				89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */,

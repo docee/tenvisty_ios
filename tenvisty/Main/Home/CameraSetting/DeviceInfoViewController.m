@@ -36,10 +36,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *id = TableViewCell_TextField_Disable;
-    TextFieldDisableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
     if(indexPath.row == 0){
-        cell.leftLabel.text = LOCALSTR(@"Version");
-        cell.rightTextField.text = @"1.0.0";
+        cell.title = LOCALSTR(@"Version");
+        cell.value = @"1.0.0";
     }
     return cell;
 }

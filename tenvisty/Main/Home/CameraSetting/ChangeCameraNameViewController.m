@@ -37,13 +37,15 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *id = TableViewCell_TextField_Normal;
-    TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    cell.leftLabel.text = LOCALSTR(@"Name");
+    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+    cell.title = LOCALSTR(@"Name");
 
     //[cell.rightTextField becomeFirstResponder];
     return cell;
 }
 - (IBAction)save:(id)sender {
+    self.camera.nickName = ((TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).value;
+    [GBase editCamera:self.camera];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

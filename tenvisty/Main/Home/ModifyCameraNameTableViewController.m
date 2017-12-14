@@ -40,18 +40,28 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
-    NSString *id = TableViewCell_TextField_Normal;
-    TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+    NSString *id = nil;
+    TwsTableViewCell *cell = nil;
     
     if(indexPath.row == 0){
-        cell.leftLabel.text = LOCALSTR(@"UID");
-        cell.rightTextField.text = _uid;
+        id = TableViewCell_TextField_Disable;
+       cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+        cell.title = LOCALSTR(@"UID");
+        cell.value = self.camera.uid;
     }
     else if(indexPath.row == 1){
-        cell.leftLabel.text = LOCALSTR(@"Name");
+        id = TableViewCell_TextField_Normal;
+        cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+        cell.title = LOCALSTR(@"Name");
+        cell.value = self.camera.nickName;
     }
     
     return cell;
+}
+- (IBAction)save:(id)sender {
+    self.camera.nickName = [self getRowCell:1].value;
+    [GBase editCamera:self.camera];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

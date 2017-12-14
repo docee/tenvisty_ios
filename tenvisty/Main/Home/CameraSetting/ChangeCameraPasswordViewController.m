@@ -37,19 +37,19 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *id = TableViewCell_TextField_Normal;
-    TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
     if(indexPath.row == 0){
-        cell.leftLabel.text = LOCALSTR(@"Old");
-        [cell.rightTextField setPlaceholder:@"Old Password"];
+        cell.title = LOCALSTR(@"Old");
+        cell.placeHolder = @"Old Password";
         //[cell.rightTextField becomeFirstResponder];
     }
     else if(indexPath.row == 1){
-        cell.leftLabel.text = LOCALSTR(@"New");
-        [cell.rightTextField setPlaceholder:@"New Password"];
+        cell.title = LOCALSTR(@"New");
+        cell.placeHolder  = @"New Password";
     }
     else if(indexPath.row == 2){
-        cell.leftLabel.text = LOCALSTR(@"Confirm");
-        [cell.rightTextField setPlaceholder:@"Confirm Password"];
+        cell.title = LOCALSTR(@"Confirm");
+        cell.placeHolder = @"Confirm Password";
     }
     return cell;
 }

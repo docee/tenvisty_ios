@@ -31,6 +31,4 @@
 
 -(void) set:(NSString *)ssid pwd:(NSString*)password;
 
-+(id)sharedInstance;
-
 @end

@@ -19,5 +19,7 @@
 
 @interface BaseTableViewController : UITableViewController
 
-@property (nonatomic,strong) MyCamera *camera;
+@property (nonatomic,weak) MyCamera *camera;
+
+-(TwsTableViewCell*) getRowCell:(NSInteger)row;
 @end
