@@ -158,13 +158,16 @@
      [self presentViewController:alertController animated:YES completion:NULL];
 }
 - (IBAction)reconnectCamera:(UIButton *)sender {
+    [sender setEnabled:NO];
+    NSInteger row = sender.tag;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         // 处理耗时操作的代码块...
-        [[GBase getCamera:sender.tag] stop];
-        [[GBase getCamera:sender.tag] start];
+        [[GBase getCamera:row] stop];
+        [[GBase getCamera:row] start];
         //通知主线程刷新
         dispatch_async(dispatch_get_main_queue(), ^{
             //回调或者说是通知主线程刷新，
+            [sender setEnabled:YES];
         });
     });
 }
@@ -177,13 +180,13 @@
 
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
-    CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-    LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
-    if(cell){
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+        if(cell){
+            LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
             [cell refreshState];
-        });
-    }
+        }
+    });
 }
 /*
 #pragma mark - Navigation
