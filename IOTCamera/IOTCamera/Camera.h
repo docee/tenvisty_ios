@@ -52,6 +52,7 @@ typedef struct SUB_STREAM SubStream_t;
 @property (readonly) NSInteger sessionID;
 @property (readonly) NSInteger sessionMode;
 @property (nonatomic, assign) id<CameraDelegate> delegate;
+@property (nonatomic,assign) NSInteger retryTimes;
 
 + (void)initIOTC;
 + (void)uninitIOTC;

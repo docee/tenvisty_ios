@@ -15,6 +15,7 @@
 #define CONNECTION_STATE_TIMEOUT 6
 #define CONNECTION_STATE_UNSUPPORTED 7
 #define CONNECTION_STATE_CONNECT_FAILED 8
+#define CONNECTION_STATE_NETWORK_FAILED 9
 
 #import <Foundation/Foundation.h>
 #import "CameraProtocol.h"

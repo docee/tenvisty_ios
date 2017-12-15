@@ -338,6 +338,7 @@
 
 - (void)camera:(Camera *)camera didChangeSessionStatus:(NSInteger)status
 {
+    self.connectState = status;
     if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
         [self.delegate2 camera:self _didChangeSessionStatus:status];
     }
@@ -351,6 +352,7 @@
 
 - (void)camera:(Camera *)camera didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status
 {
+    self.connectState = status;
     if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
         [self.delegate2 camera:self _didChangeChannelStatus:channel ChannelStatus:status];
     }
@@ -453,7 +455,7 @@
 }
 
 -(BOOL)isDisconnected{
-    return self.sessionState != CONNECTION_STATE_CONNECTING && self.sessionState != CONNECTION_STATE_CONNECTED && self.sessionState != CONNECTION_STATE_WRONG_PASSWORD;
+    return self.connectState != CONNECTION_STATE_CONNECTING && self.connectState != CONNECTION_STATE_CONNECTED && self.connectState != CONNECTION_STATE_WRONG_PASSWORD;
 }
 
 @end

@@ -84,6 +84,8 @@
 - (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel;
 -(NSString *)getCameraStatus;
 
+@property (nonatomic,assign) NSInteger connectState;
+
 - (void)saveImage:(UIImage *)image;
 - (UIImage *)image;
 

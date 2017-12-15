@@ -9,7 +9,9 @@
 
 #import "CameraListItemTableViewCell.h"
 
-@interface CameraListItemTableViewCell()
+@interface CameraListItemTableViewCell(){
+   __weak MyCamera *_camera;
+}
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_labConnectstate;
 
 @end
@@ -38,12 +40,15 @@
     
     [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
     [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
+    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayDark] forState:UIControlStateDisabled];
 
     [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
     [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
+    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayDark] forState:UIControlStateDisabled];
     
     [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
     [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
+    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayDark] forState:UIControlStateDisabled];
     
     // Initialization code
 }
@@ -94,6 +99,7 @@
     return self;
 }
 
+
 -(void)setState:(NSInteger)state{
     if(state == CONNECTION_STATE_CONNECTING){
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
@@ -105,38 +111,85 @@
         [self.btnPlay setHidden:YES];
         self.labCameraConnectState.text = LOCALSTR(@"Connecting");
         [self.labCameraConnectState setBackgroundColor:Color_Primary];
-    }
-    else if(state == CONNECTION_STATE_CONNECTED){
-        [MBProgressHUD hideHUDForView:self animated:YES];
-        [self.btnReconnect setHidden:YES];
-        [self.btnModifyPassword setHidden:YES];
-        [self.btnPlay setHidden:NO];
-        self.labCameraConnectState.text = LOCALSTR(@"Online");
-        [self.labCameraConnectState setBackgroundColor:Color_GreenDark];
-    }
-    else if(state == CONNECTION_STATE_WRONG_PASSWORD){
-        [MBProgressHUD hideHUDForView:self animated:YES];
-        [self.btnReconnect setHidden:YES];
-        [self.btnModifyPassword setHidden:NO];
-        [self.btnPlay setHidden:YES];
-        [TwsViewTools setButtonContentCenter:self.btnModifyPassword];
-        self.labCameraConnectState.text = LOCALSTR(@"Wrong Password");
-        [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
-        self.constraint_width_labConnectstate.constant = 105;
+        self.constraint_width_labConnectstate.constant = 75;
+        [_btnCameraEvent setEnabled:NO];
+        [_btnCameraSetting setEnabled:NO];
     }
     else{
-        [MBProgressHUD hideHUDForView:self animated:YES];
-        [self.btnReconnect setHidden:NO];
-        [self.btnModifyPassword setHidden:YES];
-        [self.btnPlay setHidden:YES];
-        [TwsViewTools setButtonContentCenter:self.btnReconnect];
-        self.labCameraConnectState.text = LOCALSTR(@"Offline");
-        [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
+        [MBProgressHUD hideAllHUDsForView:self animated:NO];
+        if(state == CONNECTION_STATE_CONNECTED){
+            [self.btnReconnect setHidden:YES];
+            [self.btnModifyPassword setHidden:YES];
+            [self.btnPlay setHidden:NO];
+            self.labCameraConnectState.text = LOCALSTR(@"Online");
+            [self.labCameraConnectState setBackgroundColor:Color_GreenDark];
+            self.constraint_width_labConnectstate.constant = 75;
+            [_btnCameraEvent setEnabled:YES];
+            [_btnCameraSetting setEnabled:YES];
+        }
+        else if(state == CONNECTION_STATE_WRONG_PASSWORD){
+            [self.btnReconnect setHidden:YES];
+            [self.btnModifyPassword setHidden:NO];
+            [self.btnPlay setHidden:YES];
+            [TwsViewTools setButtonContentCenter:self.btnModifyPassword];
+            self.labCameraConnectState.text = LOCALSTR(@"Wrong Password");
+            [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
+            self.constraint_width_labConnectstate.constant = 105;
+            [_btnCameraEvent setEnabled:NO];
+            [_btnCameraSetting setEnabled:NO];
+        }
+        else{
+            [self.btnReconnect setHidden:NO];
+            [self.btnModifyPassword setHidden:YES];
+            [self.btnPlay setHidden:YES];
+            [TwsViewTools setButtonContentCenter:self.btnReconnect];
+            self.labCameraConnectState.text = LOCALSTR(@"Offline");
+            [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
+            self.constraint_width_labConnectstate.constant = 75;
+            [_btnCameraEvent setEnabled:NO];
+            [_btnCameraSetting setEnabled:NO];
+        }
     }
 }
 
--(void)setAlarm:(NSInteger)num{
-    [self.imgAlarm setHidden:num<1];
+-(void)refreshAlarmState{
+    if(self.camera){
+        [self.imgAlarm setHidden:self.camera.eventNotification<1];
+    }
+}
+
+-(void)refreshState{
+    if(self.camera){
+        [self setState:self.camera.connectState];
+    }
+}
+-(void)refreshSnapshot{
+    if(self.camera){
+        [self.imgCameraSnap setImage:self.camera.image];
+    }
+}
+-(void)refreshInfo{
+    if(self.camera){
+        NSInteger index = [GBase getCameraIndex:self.camera];
+        self.btnCameraDelete.tag  = index;
+        self.labCameraName.text = self.camera.nickName;
+        self.btnModifyCameraName.tag = index;
+        self.btnPlay.tag = index;
+        self.btnReconnect.tag = index;
+        self.btnModifyPassword.tag = index;
+        
+    }
+}
+
+
+-(void)setCamera:(MyCamera *)camera{
+    _camera = camera;
+    if(_camera){
+        [self refreshState];
+        [self refreshSnapshot];
+        [self refreshAlarmState];
+        [self refreshInfo];
+    }
 }
 
 @end

@@ -84,6 +84,35 @@
     });
 }
 
++ (void)presentAlertTitle:(UIViewController*)owner title:(NSString *)title message:(NSString *)message alertStyle:(UIAlertControllerStyle)style actionDefaultTitle:(NSString *)defaultTitle actionDefaultBlock:(void (^)(void))defaultBlock defaultActionStyle:(UIAlertActionStyle)actionstyle actionCancelTitle:(NSString *)cancelTitle actionCancelBlock:(void (^)(void))cancelBlock {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
+    
+    if(cancelTitle){
+        UIAlertAction *actionNO = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            if(cancelBlock != nil){
+                cancelBlock();
+            }
+        }];
+        [alertController addAction:actionNO];
+    }
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:defaultTitle style:actionstyle handler:^(UIAlertAction * _Nonnull action) {
+        if(defaultBlock != nil){
+            defaultBlock();
+        }
+    }];
+    
+    //    [actionNO setValue:LightBlueColor forKey:@"_titleTextColor"];
+    //    [actionOk setValue:LightBlueColor forKey:@"_titleTextColor"];
+    
+    [alertController addAction:actionOk];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [owner presentViewController:alertController animated:YES completion:NULL];
+    });
+}
+
+
 + (void)presentAlertMsg:(UIViewController*)owner message:(NSString *)message  {
     
     [self presentAlertTitle:owner title:nil message:message alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:nil actionCancelTitle:nil actionCancelBlock:nil];

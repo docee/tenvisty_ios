@@ -174,11 +174,17 @@
                                                     <rect key="frame" x="0.0" y="40" width="375" height="100"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="tap to reconnect" image="btn_reconnect"/>
+                                                    <connections>
+                                                        <action selector="reconnectCamera:" destination="BDn-US-UtP" eventType="touchUpInside" id="fLF-Hk-326"/>
+                                                    </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d58-C2-ZfB">
                                                     <rect key="frame" x="0.0" y="40" width="375" height="100"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="tap to enter password" image="btn_modifypassword_listitem"/>
+                                                    <connections>
+                                                        <action selector="showModifyPassword:" destination="BDn-US-UtP" eventType="touchUpInside" id="NaY-oP-2gm"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -239,7 +245,7 @@
                                         <state key="normal" image="ic_first_add_nor"/>
                                         <state key="highlighted" image="ic_first_add_press"/>
                                         <connections>
-                                            <segue destination="8Lq-GA-z5B" kind="show" id="KEp-Ju-c90"/>
+                                            <segue destination="8Lq-GA-z5B" kind="show" identifier="CameraList2AddCameraFirst" id="KEp-Ju-c90"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to add camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kP-BJ-mYi">
@@ -279,7 +285,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xzh-MX-CiK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="8Lq-GA-z5B" kind="show" id="p9E-YF-VbO"/>
+                                <segue destination="8Lq-GA-z5B" kind="show" identifier="CameraList2AddCamera" id="p9E-YF-VbO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1838,7 +1844,7 @@
         <segue reference="kBZ-yA-gOg"/>
         <segue reference="wkI-hP-L0S"/>
         <segue reference="SOf-2T-VCX"/>
-        <segue reference="KEp-Ju-c90"/>
+        <segue reference="p9E-YF-VbO"/>
         <segue reference="vaj-Ea-7it"/>
     </inferredMetricsTieBreakers>
 </document>

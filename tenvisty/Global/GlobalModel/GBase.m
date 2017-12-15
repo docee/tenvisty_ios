@@ -193,4 +193,13 @@ static GBase *base = nil;
     return [base.cameras objectAtIndex:index];
 }
 
++(NSInteger)getCameraIndex:(MyCamera*)camera{
+    for(int i = 0; i< [GBase sharedInstance].cameras.count; i++){
+        if([[GBase sharedInstance].cameras objectAtIndex:i] == camera){
+            return i;
+        }
+    }
+    return -1;
+}
+
 @end

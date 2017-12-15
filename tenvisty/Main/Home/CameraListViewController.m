@@ -37,6 +37,16 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self checkShowFirstAddView];
+    for(MyCamera *camera in [GBase sharedInstance].cameras){
+        camera.delegate2 = self;
+        if([camera isDisconnected]){
+            [camera start];
+        }
+    }
+    [self.tableview reloadData];
+}
+-(void)checkShowFirstAddView{
     if([GBase sharedInstance].cameras.count == 0){
         [self.view_first_add setHidden:NO];
         //[self.tableview setHidden:YES];
@@ -45,21 +55,13 @@
         [self.view_first_add setHidden:YES];
         //[self.tableview setHidden:NO];
     }
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
-        camera.delegate2 = self;
-        if([camera isDisconnected]){
-            [camera start];
-        }
-    }
-    
-    
-    [self.tableview reloadData];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [GBase sharedInstance].cameras.count;
 }
+
 - (IBAction)go2EventList:(id)sender {
     [self performSegueWithIdentifier:@"CameraList2EventList" sender:self];
 }
@@ -70,12 +72,7 @@
     NSString *vid = @"cameraListItemCell";
     MyCamera *camera = [GBase getCamera:indexPath.row];
     CameraListItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-    cell.btnCameraDelete.tag  = indexPath.row;
-    cell.labCameraName.text = camera.nickName;
-    cell.btnModifyCameraName.tag = indexPath.row;
-    [cell setAlarm:camera.eventNotification];
-    [cell.imgCameraSnap setImage:camera.image];
-    [cell setState:camera.sessionState];
+    cell.camera = camera;
     return cell;
 }
 
@@ -86,35 +83,89 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton*)sender{
-    if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
-        BaseViewController *controller= segue.destinationViewController;
-        controller.camera =  [GBase getCamera:sender.tag];
-    }
-    else if([segue.destinationViewController isKindOfClass:[BaseTableViewController class]]){
-        BaseTableViewController *controller= segue.destinationViewController;
-        controller.camera =  [GBase getCamera:sender.tag];
-    }
-    if([segue.identifier isEqualToString:@"CameraList2ModifyCameraName"]){
+   
+    if([segue.identifier isEqualToString:@"CameraList2AddCamera"] || [segue.identifier isEqualToString:@"CameraList2AddCameraFirst"]){
         
     }
-    else if([segue.identifier isEqualToString:@"CameraList2LiveView"]){
-
-        
+    else{
+        if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
+            BaseViewController *controller= segue.destinationViewController;
+            controller.camera =  [GBase getCamera:sender.tag];
+        }
+        else if([segue.destinationViewController isKindOfClass:[BaseTableViewController class]]){
+            BaseTableViewController *controller= segue.destinationViewController;
+            controller.camera =  [GBase getCamera:sender.tag];
+        }
     }
+//    if([segue.identifier isEqualToString:@"CameraList2ModifyCameraName"]){
+//        
+//    }
+//    else if([segue.identifier isEqualToString:@"CameraList2LiveView"]){
+//
+//        
+//    }
     
 }
+
 - (IBAction)deleteCamera:(UIButton *)sender {
     NSInteger row = sender.tag;
-    dispatch_async(dispatch_get_main_queue(), ^(void){
-        [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to remove this camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
-            MyCamera *camera = [[GBase sharedInstance].cameras objectAtIndex:row];
+    [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to remove this camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+        MyCamera *camera = [[GBase sharedInstance].cameras objectAtIndex:row];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            // 处理耗时操作的代码块...
             [camera stop];
             [camera closePush];
-            [GBase deleteCamera:camera];
-            [self.tableview beginUpdates];
-            [self.tableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableview endUpdates];
-        } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+            //通知主线程刷新
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //回调或者说是通知主线程刷新，
+            });
+        });
+        
+        [GBase deleteCamera:camera];
+        [self.tableview beginUpdates];
+        [self.tableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableview endUpdates];
+        [self checkShowFirstAddView];
+    } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+}
+- (IBAction)showModifyPassword:(UIButton *)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALSTR(@"Wrong password") message:LOCALSTR(@"Re-enter password") preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        
+        textField.placeholder = LOCALSTR(@"Camera Password");
+        textField.secureTextEntry = YES;
+        
+    }];
+    
+    UIAlertAction *actionNO = [UIAlertAction actionWithTitle:LOCALSTR(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:actionNO];
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:LOCALSTR(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        MyCamera *camera = [GBase getCamera:sender.tag];
+        camera.pwd = alertController.textFields.firstObject.text;
+        [GBase editCamera:camera];
+        [camera stop];
+        [camera start];
+//        dispatch_async(dispatch_get_global_queue(0,0), ^{
+//            [camera stop];
+//            [camera start];
+//        });
+    }];
+    
+    [alertController addAction:actionOk];
+     [self presentViewController:alertController animated:YES completion:NULL];
+}
+- (IBAction)reconnectCamera:(UIButton *)sender {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // 处理耗时操作的代码块...
+        [[GBase getCamera:sender.tag] stop];
+        [[GBase getCamera:sender.tag] start];
+        //通知主线程刷新
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //回调或者说是通知主线程刷新，
+        });
     });
 }
 
@@ -123,8 +174,16 @@
 - (IBAction)CameraListViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     
 }
+
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
-    [self.tableview reloadData];
+    NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+    CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+    LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
+    if(cell){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [cell refreshState];
+        });
+    }
 }
 /*
 #pragma mark - Navigation

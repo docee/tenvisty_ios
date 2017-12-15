@@ -23,7 +23,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnReconnect;
 @property (weak, nonatomic) IBOutlet UIButton *btnModifyPassword;
 
--(void)setState:(NSInteger)state;
--(void)setAlarm:(NSInteger)num;
+@property (weak, nonatomic) MyCamera* camera;
+
+
+
+-(void)refreshAlarmState;
+-(void)refreshState;
+-(void)refreshSnapshot;
+-(void)refreshInfo;
 
 @end

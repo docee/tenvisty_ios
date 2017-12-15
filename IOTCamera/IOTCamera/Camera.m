@@ -58,6 +58,7 @@
 // ALog always displays output regardless of the DEBUG setting
 #define RLOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
+
 @interface Camera() <AudioRecordDelegate>
 {
     SpeexBits speex_enc_bits;
@@ -104,6 +105,7 @@
 @synthesize isRunningCheckingThread;
 @synthesize connectThread, checkThread;
 @synthesize connectThreadLock, checkThreadLock;
+@synthesize retryTimes;
 
 #pragma mark - Common method
 unsigned int _getTickCount() {
@@ -269,6 +271,7 @@ void uninitSpeexAEC()
         self.sessionID = -1;
         self.sessionMode = CONNECTION_MODE_NONE;
         self.sessionState = CONNECTION_STATE_NONE;
+        self.retryTimes = 5;
     }
     
     return self;
@@ -390,7 +393,7 @@ void uninitSpeexAEC()
     
      //ret = IOTC_Initialize(nUdpPort, "50.19.254.134", "122.248.234.207", "m4.iotcplatform.com", "m5.iotcplatform.com");
     ret = IOTC_Initialize2(nUdpPort);
-    
+    IOTC_Setup_Session_Alive_Timeout(30);
     if (ret < 0)
         LOG(@"IOTC_Initialize2() failed -> %d", ret);
     
@@ -962,9 +965,18 @@ int bLocalSearch = 0;
     int sid = -1;
     int get_sid = -1;
      NSInteger nRetryCount = 0;
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.sessionState = CONNECTION_STATE_CONNECTING;
+        LOG(@"session: CONNECTION_STATE_CONNECTING");
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+            [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTING];
+        
+    });
     while (self.isRunningConnectingThread && self.sessionID < 0) {
 
+        nRetryCount++;
         char *u = (char *)malloc(20);
         memcpy(u, [self.uid UTF8String], 20);
 
@@ -975,15 +987,7 @@ int bLocalSearch = 0;
             memcpy(aes, [aesKey UTF8String], [aesKey length]);
         }
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-
-            self.sessionState = CONNECTION_STATE_CONNECTING;
-            LOG(@"session: CONNECTION_STATE_CONNECTING");
-
-            if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTING];
-
-        });
+  
         get_sid=IOTC_Get_SessionID();
         if(get_sid>=0){
             sid = IOTC_Connect_ByUID_Parallel(u,get_sid);
@@ -1031,49 +1035,43 @@ int bLocalSearch = 0;
 //                    [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTED];
             });
 
-        } else if (sid == IOTC_ER_UNLICENSE || sid == IOTC_ER_UNKNOWN_DEVICE || sid == IOTC_ER_CAN_NOT_FIND_DEVICE) {
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                self.sessionState = CONNECTION_STATE_UNKNOWN_DEVICE;
-                LOG(@"session: CONNECTION_STATE_UNKNOWN_DEVICE");
-
-                if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                    [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_UNKNOWN_DEVICE];
-            });
-
-//            break;
-            usleep(4000 * 1000); //4秒后重连
-        } else if (sid == IOTC_ER_TIMEOUT) {
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-
+        }else{
+            int wait = 0;
+            if (sid == IOTC_ER_UNLICENSE || sid == IOTC_ER_UNKNOWN_DEVICE || sid == IOTC_ER_CAN_NOT_FIND_DEVICE) {
+                  self.sessionState = CONNECTION_STATE_UNKNOWN_DEVICE;
+                wait = 4000 * 1000;
+            }
+            else if (sid == IOTC_ER_TIMEOUT) {
                 self.sessionState = CONNECTION_STATE_TIMEOUT;;
-                LOG(@"session: CONNECTION_STATE_TIMEOUT");
-
-                if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                    [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_TIMEOUT];
-            });
-
-            usleep(1000 * 1000);
-
-        } else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
-
-            usleep(1000 * 1000);
-
-        } else {
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
-                LOG(@"session: CONNECTION_STATE_CONNECT_FAILED");
-
-                if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                    [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECT_FAILED];
-            });
-
-            usleep(1000 * 1000);
+                wait = 1000 * 1000;
+            }
+            else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
+                 self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
+                wait = 1000 * 1000;
+            }
+            else if(sid == IOTC_ER_NETWORK_UNREACHABLE){
+                self.sessionState = CONNECTION_STATE_NETWORK_FAILED;
+            }
+            else{
+                 self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
+                 wait = 1000 * 1000;
+            }
+            if(nRetryCount < self.retryTimes || sid == IOTC_ER_NETWORK_UNREACHABLE){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    LOG(@"session: CONNECTION_STATE: %d", self.sessionState);
+                    
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+                        [self.delegate camera:self didChangeSessionStatus:self.sessionState];
+                });
+                break;
+                
+            }else{
+                usleep(wait);
+            }
         }
+        
+        
+        
     }
 
     LOG(@"=== Connect Thread Exit (%@) ===", self.uid);
@@ -1108,55 +1106,46 @@ int bLocalSearch = 0;
             self.sessionMode = info->Mode;
             
             if (ret >= 0) {
-//                if (self.sessionState != CONNECTION_STATE_CONNECTED) {
-//                    self.sessionState = CONNECTION_STATE_CONNECTED;
-//                    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)]){
-//                        dispatch_async(dis patch_get_main_queue(), ^{
-//                            [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTED];
-//                        });
-//                        
-//                    }
-//                    
-//                }
                 
-                
-            } else if (ret == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT || ret == IOTC_ER_TIMEOUT) {
+            } else if (ret == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT || ret == IOTC_ER_TIMEOUT || ret == IOTC_SESSION_ALIVE_TIMEOUT) {
 
                 LOG(@"IOTC_Session_Check(%@) : %d", self.uid, ret);
+                if(self.sessionState != CONNECTION_STATE_TIMEOUT){
+                    dispatch_async(dispatch_get_main_queue(), ^{
 
-                dispatch_async(dispatch_get_main_queue(), ^{
-
-                    self.sessionState = CONNECTION_STATE_TIMEOUT;
-                    
-                    for (AVChannel *ch in arrayAVChannel) {
-                        ch.connectionState = CONNECTION_STATE_TIMEOUT;
-                    }
-                    
-                    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                        [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_TIMEOUT];
-                });
+                        self.sessionState = CONNECTION_STATE_TIMEOUT;
+                        
+                        for (AVChannel *ch in arrayAVChannel) {
+                            ch.connectionState = CONNECTION_STATE_TIMEOUT;
+                        }
+                        
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+                            [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_TIMEOUT];
+                    });
+                }
+                break;
                 
-            }else if (self.sessionState == CONNECTION_STATE_WRONG_PASSWORD) {
-                
-            }  else {
+            } else {
 
                 LOG(@"IOTC_Session_Check(%@) : %d", self.uid, ret);
                 
-                                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                
-                    self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
+                if(self.sessionState != CONNECTION_STATE_CONNECT_FAILED){
+                    dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    for (AVChannel *ch in arrayAVChannel) {
-                        ch.connectionState = CONNECTION_STATE_CONNECT_FAILED;
-                    }
-                    
-                    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])                
-                        [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECT_FAILED];
-                });                
+                        self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
+                        
+                        for (AVChannel *ch in arrayAVChannel) {
+                            ch.connectionState = CONNECTION_STATE_CONNECT_FAILED;
+                        }
+                        
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+                            [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECT_FAILED];
+                    });
+                }
+                break;
             }
                         
-            usleep(1000 * 1000);
+            usleep(5000 * 1000);
         }
     }
     

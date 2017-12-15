@@ -21,4 +21,5 @@
 + (void)deleteCamera:(Camera *)mycam;
 + (void)editCamera:(MyCamera *)mycam;
 + (MyCamera*)getCamera:(NSInteger)index;
++(NSInteger)getCameraIndex:(MyCamera*)camera;
 @end
