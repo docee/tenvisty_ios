@@ -144,6 +144,8 @@
 		B2CC0AF717F924FD008EDC4C /* CameraProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B2CC0AF617F924FD008EDC4C /* CameraProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2CC0B1217F92EE3008EDC4C /* LANSearchDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B2CC0B1017F92EE3008EDC4C /* LANSearchDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2CC0B1317F92EE3008EDC4C /* LANSearchDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CC0B1117F92EE3008EDC4C /* LANSearchDevice.m */; };
+		ED16C8EB1FE57F1F00DBA148 /* TwsThread.m in Sources */ = {isa = PBXBuildFile; fileRef = ED16C8E91FE57F1E00DBA148 /* TwsThread.m */; };
+		ED16C8EC1FE57F1F00DBA148 /* TwsThread.h in Headers */ = {isa = PBXBuildFile; fileRef = ED16C8EA1FE57F1E00DBA148 /* TwsThread.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +298,8 @@
 		B2CC0AF617F924FD008EDC4C /* CameraProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraProtocol.h; sourceTree = SOURCE_ROOT; };
 		B2CC0B1017F92EE3008EDC4C /* LANSearchDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LANSearchDevice.h; sourceTree = SOURCE_ROOT; };
 		B2CC0B1117F92EE3008EDC4C /* LANSearchDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LANSearchDevice.m; sourceTree = SOURCE_ROOT; };
+		ED16C8E91FE57F1E00DBA148 /* TwsThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwsThread.m; path = IOTCamera/TwsThread.m; sourceTree = SOURCE_ROOT; };
+		ED16C8EA1FE57F1E00DBA148 /* TwsThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwsThread.h; path = IOTCamera/TwsThread.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +399,8 @@
 		612B289115999A29002E82F9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				ED16C8EA1FE57F1E00DBA148 /* TwsThread.h */,
+				ED16C8E91FE57F1E00DBA148 /* TwsThread.m */,
 				899AD47F1FC7CD32008ED303 /* ffmpeg */,
 				89C62B131ACE77C40004FF08 /* AVAPIs.h */,
 				89C62B141ACE77C40004FF08 /* IOTCAPIs.h */,
@@ -659,6 +665,8 @@
 				614AF7D915A667AD009869D3 /* Monitor.h in Headers */,
 				899AD4CC1FC7CD32008ED303 /* sha1.h in Headers */,
 				61B9490715A66B210000BCF8 /* AVFRAMEINFO.h in Headers */,
+				ED16C8EC1FE57F1F00DBA148 /* TwsThread.h in Headers */,
+				89C62B171ACE77C40004FF08 /* IOTCAPIs.h in Headers */,
 				61B9490815A66B210000BCF8 /* AVIOCTRLDEFs.h in Headers */,
 				899AD4BA1FC7CD32008ED303 /* intfloat_readwrite.h in Headers */,
 				899AD4B61FC7CD32008ED303 /* crc.h in Headers */,
@@ -674,7 +682,6 @@
 				B2CC0B1217F92EE3008EDC4C /* LANSearchDevice.h in Headers */,
 				B27738401808F5A300CA52DA /* NSCamera.h in Headers */,
 				89C62B161ACE77C40004FF08 /* AVAPIs.h in Headers */,
-				89C62B171ACE77C40004FF08 /* IOTCAPIs.h in Headers */,
 				899AD4B01FC7CD32008ED303 /* avutil.h in Headers */,
 				899AD4BE1FC7CD32008ED303 /* lzo.h in Headers */,
 				899AD4CE1FC7CD32008ED303 /* swscale.h in Headers */,
@@ -881,6 +888,7 @@
 				B2CC0B1317F92EE3008EDC4C /* LANSearchDevice.m in Sources */,
 				6101938A15B5494F008E5D04 /* g726_32.c in Sources */,
 				6101938B15B5494F008E5D04 /* g726_40.c in Sources */,
+				ED16C8EB1FE57F1F00DBA148 /* TwsThread.m in Sources */,
 				B27738421808F5A300CA52DA /* NSCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

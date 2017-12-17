@@ -20,9 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self setup];
 }
-
+-(void)setup{
+    for(MyCamera *camera in [GBase sharedInstance].cameras){
+        camera.delegate2 = self;
+        [camera start];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -36,16 +41,25 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self checkShowFirstAddView];
     for(MyCamera *camera in [GBase sharedInstance].cameras){
         camera.delegate2 = self;
-        if([camera isDisconnected]){
-            [camera start];
-        }
     }
+    [self checkShowFirstAddView];
+
     [self.tableview reloadData];
+    
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    for(MyCamera *camera in [GBase sharedInstance].cameras){
+        camera.delegate2 = nil;
+    }
+}
+
 -(void)checkShowFirstAddView{
     if([GBase sharedInstance].cameras.count == 0){
         [self.view_first_add setHidden:NO];
@@ -110,24 +124,38 @@
 - (IBAction)deleteCamera:(UIButton *)sender {
     NSInteger row = sender.tag;
     [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to remove this camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
-        MyCamera *camera = [[GBase sharedInstance].cameras objectAtIndex:row];
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            // 处理耗时操作的代码块...
-            [camera stop];
-            [camera closePush];
-            //通知主线程刷新
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //回调或者说是通知主线程刷新，
+        MyCamera *camera = [GBase getCamera:row];
+        if(camera){
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                // 处理耗时操作的代码块...
+                [camera stop];
+                [camera closePush];
+                //通知主线程刷新
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //回调或者说是通知主线程刷新，
+                });
             });
-        });
-        
-        [GBase deleteCamera:camera];
-        [self.tableview beginUpdates];
-        [self.tableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableview endUpdates];
-        [self checkShowFirstAddView];
+            
+            [GBase deleteCamera:camera];
+            [self.tableview beginUpdates];
+            [self.tableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableview endUpdates];
+            [self checkShowFirstAddView];
+            [self refreshTableTag];
+        }
     } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
 }
+
+-(void)refreshTableTag{
+    NSInteger rowCount = [GBase sharedInstance].cameras.count;
+    for (int i=0; i<rowCount; i++) {
+       CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if(cell){
+            [cell refreshInfo];
+        }
+    }
+}
+
 - (IBAction)showModifyPassword:(UIButton *)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALSTR(@"Wrong password") message:LOCALSTR(@"Re-enter password") preferredStyle:UIAlertControllerStyleAlert];
     
@@ -146,8 +174,9 @@
         MyCamera *camera = [GBase getCamera:sender.tag];
         camera.pwd = alertController.textFields.firstObject.text;
         [GBase editCamera:camera];
-        [camera stop];
-        [camera start];
+        [camera start:0];
+//        [camera stop];
+//        [camera start];
 //        dispatch_async(dispatch_get_global_queue(0,0), ^{
 //            [camera stop];
 //            [camera start];
@@ -180,13 +209,23 @@
 
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-        if(cell){
-            LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
-            [cell refreshState];
-        }
-    });
+    if([camera.pwd isEqualToString:DEFAULT_PASSWORD]){
+        [TwsTools presentAlertMsg:self message:@"for security, please change the camera" actionDefaultBlock:^{
+            UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
+            BaseTableViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_changcamerapassword"];  //test2为viewcontroller的StoryboardId
+            test2obj.camera = (MyCamera*)camera;
+            [self.navigationController pushViewController:test2obj animated:YES];
+        }];
+    }
+    if(row >= 0){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+            if(cell){
+                LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
+                [cell refreshState];
+            }
+        });
+    }
 }
 /*
 #pragma mark - Navigation

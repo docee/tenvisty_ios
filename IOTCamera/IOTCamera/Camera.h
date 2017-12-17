@@ -42,6 +42,7 @@ typedef struct SUB_STREAM SubStream_t;
 #import <AudioToolbox/AudioToolbox.h>
 #import "LANSearchDevice.h"
 #import "NSCamera.h"
+#import "TwsThread.h"
 
 @protocol CameraDelegate;
 
@@ -49,6 +50,7 @@ typedef struct SUB_STREAM SubStream_t;
     
 }
 
+@property (readonly) NSInteger preConnectSessionID;
 @property (readonly) NSInteger sessionID;
 @property (readonly) NSInteger sessionMode;
 @property (nonatomic, assign) id<CameraDelegate> delegate;

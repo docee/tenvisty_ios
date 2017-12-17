@@ -92,5 +92,6 @@
 -(void)openPush;
 -(void)closePush;
 -(BOOL)isDisconnected;
+-(NSString*)strConnectState;
 @end
 

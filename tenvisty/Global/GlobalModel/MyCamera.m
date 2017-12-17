@@ -457,5 +457,20 @@
 -(BOOL)isDisconnected{
     return self.connectState != CONNECTION_STATE_CONNECTING && self.connectState != CONNECTION_STATE_CONNECTED && self.connectState != CONNECTION_STATE_WRONG_PASSWORD;
 }
-
+-(NSString*)strConnectState{
+    if(self.connectState == CONNECTION_STATE_CONNECTING){
+       return LOCALSTR(@"Connecting");
+    }
+    else{
+        if(self.connectState == CONNECTION_STATE_CONNECTED){
+            return LOCALSTR(@"Online");
+        }
+        else if(self.connectState == CONNECTION_STATE_WRONG_PASSWORD){
+            return LOCALSTR(@"Wrong Password");
+        }
+        else{
+            return LOCALSTR(@"Offline");
+        }
+    }
+}
 @end

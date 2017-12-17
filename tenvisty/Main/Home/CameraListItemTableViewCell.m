@@ -101,15 +101,18 @@
 
 
 -(void)setState:(NSInteger)state{
+    if(self.camera){
+        self.labCameraConnectState.text = [self.camera strConnectState];
+    }
     if(state == CONNECTION_STATE_CONNECTING){
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
-       MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
         [p setColor:[UIColor clearColor]];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = [UIColor whiteColor];
         [self.btnReconnect setHidden:YES];
         [self.btnModifyPassword setHidden:YES];
         [self.btnPlay setHidden:YES];
-        self.labCameraConnectState.text = LOCALSTR(@"Connecting");
+        //self.labCameraConnectState.text = LOCALSTR(@"Connecting");
         [self.labCameraConnectState setBackgroundColor:Color_Primary];
         self.constraint_width_labConnectstate.constant = 75;
         [_btnCameraEvent setEnabled:NO];
@@ -121,7 +124,7 @@
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:YES];
             [self.btnPlay setHidden:NO];
-            self.labCameraConnectState.text = LOCALSTR(@"Online");
+            //self.labCameraConnectState.text = LOCALSTR(@"Online");
             [self.labCameraConnectState setBackgroundColor:Color_GreenDark];
             self.constraint_width_labConnectstate.constant = 75;
             [_btnCameraEvent setEnabled:YES];
@@ -132,7 +135,7 @@
             [self.btnModifyPassword setHidden:NO];
             [self.btnPlay setHidden:YES];
             [TwsViewTools setButtonContentCenter:self.btnModifyPassword];
-            self.labCameraConnectState.text = LOCALSTR(@"Wrong Password");
+            //self.labCameraConnectState.text = LOCALSTR(@"Wrong Password");
             [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
             self.constraint_width_labConnectstate.constant = 105;
             [_btnCameraEvent setEnabled:NO];
@@ -143,7 +146,7 @@
             [self.btnModifyPassword setHidden:YES];
             [self.btnPlay setHidden:YES];
             [TwsViewTools setButtonContentCenter:self.btnReconnect];
-            self.labCameraConnectState.text = LOCALSTR(@"Offline");
+            //self.labCameraConnectState.text = LOCALSTR(@"Offline");
             [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
             self.constraint_width_labConnectstate.constant = 75;
             [_btnCameraEvent setEnabled:NO];

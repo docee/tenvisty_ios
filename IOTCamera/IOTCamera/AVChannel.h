@@ -33,7 +33,6 @@ typedef struct SendIOCtrlStruct {
 @property (readonly, copy) NSString *viewAcc;
 @property (readonly, copy) NSString *viewPwd;
 
-@property Boolean isRunningStartThread;
 @property Boolean isRunningRecvVideoThread;
 @property Boolean isRunningRecvAudioThread;
 @property Boolean isRunningDecVideoThread;
@@ -48,7 +47,7 @@ typedef struct SendIOCtrlStruct {
 @property ip_block_fifo_t *videoQueue;
 @property ip_block_fifo_t *audioQueue;
 
-@property (nonatomic, retain) NSThread *startThread;
+@property (nonatomic, retain) TwsThread *startThread;
 @property (nonatomic, retain) NSThread *recvVideoThread;
 @property (nonatomic, retain) NSThread *recvAudioThread;
 @property (nonatomic, retain) NSThread *decVideoThread;
@@ -81,4 +80,5 @@ typedef struct SendIOCtrlStruct {
 - (int)dequeueSendIOCtrl:(int *)type :(char*)buffer :(int *)buffer_size;
 - (unsigned int)getVideoBuffer:(char **)buf;
 -(void)releaseVideoBuffer;
+-(void)setPassword:(NSString*)pwd;
 @end

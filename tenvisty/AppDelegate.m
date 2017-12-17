@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+    BOOL isEnterBackground;
+}
 
 @end
 
@@ -39,16 +41,38 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    isEnterBackground = YES;
+    for(MyCamera *camera in [GBase sharedInstance].cameras){
+        [camera stop];
+        //camera.delegate2 = nil;
+    }
+    [MyCamera uninitIOTC];
+   
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    //isEnterBackground = NO;
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        for(MyCamera *camera in [GBase sharedInstance].cameras){
+//            [camera start];
+//            //camera.delegate2 = nil;
+//        }
+//    });
+    isEnterBackground = NO;
+     [MyCamera initIOTC];
+     for(MyCamera *camera in [GBase sharedInstance].cameras){
+        [camera start];
+            //camera.delegate2 = nil;
+     }
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+//    isEnterBackground = NO;
+
 }
 
 

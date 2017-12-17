@@ -33,6 +33,7 @@
         }
         NSString *password = [self iptPassword];
         MyCamera *camera = [[MyCamera alloc] initWithUid:self.uid Name:nickName UserName:@"admin" Password:password];
+        [camera start];
         [GBase addCamera:camera];
         [self.navigationController popToRootViewControllerAnimated:YES];
         //[self performSegueWithIdentifier:@"SaveCamera2CameraList" sender:self];

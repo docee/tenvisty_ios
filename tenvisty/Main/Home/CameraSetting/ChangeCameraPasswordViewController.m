@@ -18,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    if([self.camera.pwd isEqualToString:DEFAULT_PASSWORD]){
+        [self.navigationItem.leftBarButtonItem setEnabled:NO];// = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

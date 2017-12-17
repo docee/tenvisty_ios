@@ -54,7 +54,6 @@
 @synthesize videoWidth;
 @synthesize videoHeight;
 
-@synthesize isRunningStartThread;
 @synthesize isRunningDecVideoThread;
 @synthesize isRunningDecAudioThread;
 @synthesize isRunningRecvIOCtrlThread;
@@ -271,4 +270,9 @@
         videoBuffer = nil;
     }
 }
+
+-(void)setPassword:(NSString*)pwd{
+    self.viewPwd = pwd;
+}
+
 @end

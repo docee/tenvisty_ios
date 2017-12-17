@@ -117,6 +117,10 @@
     
     [self presentAlertTitle:owner title:nil message:message alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:nil actionCancelTitle:nil actionCancelBlock:nil];
 }
++ (void)presentAlertMsg:(UIViewController*)owner message:(NSString *)message actionDefaultBlock:(void (^)(void))defaultBlock  {
+    
+    [self presentAlertTitle:owner title:nil message:message alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:defaultBlock actionCancelTitle:nil actionCancelBlock:nil];
+}
 
 +(void)goPhoneSettingPage:(NSString *)root{
     [self openScheme:root];

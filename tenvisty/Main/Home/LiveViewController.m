@@ -8,7 +8,7 @@
 
 #import "LiveViewController.h"
 
-@interface LiveViewController ()
+@interface LiveViewController ()<MyCameraDelegate>
 @property (weak, nonatomic) IBOutlet UIView *toolbtns_land;
 @property (weak, nonatomic) IBOutlet UIView *connectStatus_port;
 @property (weak, nonatomic) IBOutlet UIView *toolbtns_portrait;
@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_status_height;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_videowrapper_height;
 @property (nonatomic,assign) Boolean isFullscreen;
+@property (weak, nonatomic) IBOutlet UILabel *labConnectState;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
@@ -26,7 +27,21 @@
     [super viewDidLoad];
     _isFullscreen = self.view.bounds.size.width > self.view.bounds.size.height;// self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight;
     [self rotateOrientation:_isFullscreen?UIInterfaceOrientationLandscapeLeft:UIInterfaceOrientationPortrait];
+    [self setup];
     // Do any additional setup after loading the view.
+}
+
+-(void)setup{
+    self.title = self.camera.nickName;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.camera.delegate2 = self;
+    _labConnectState.text = [(self.camera) strConnectState];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    self.camera.delegate2 = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,5 +118,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _labConnectState.text = [((MyCamera*)camera) strConnectState];
+    });
+}
+
 
 @end

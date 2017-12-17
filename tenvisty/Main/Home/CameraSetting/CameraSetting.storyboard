@@ -101,7 +101,7 @@
         <!--Navigation Controller-->
         <scene sceneID="6hq-xd-qg6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dpg-GR-jo0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="dpg-GR-jo0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="vad-tM-f1X">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -120,7 +120,7 @@
         <!--Camera Name-->
         <scene sceneID="UMG-1x-5MR">
             <objects>
-                <tableViewController id="y9d-zb-Q0d" customClass="ChangeCameraNameViewController" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="y9d-zb-Q0d" customClass="ChangeCameraNameViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="ku2-ex-jWq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,7 +163,7 @@
         <!--Change Camera Password-->
         <scene sceneID="xB4-df-H8f">
             <objects>
-                <tableViewController id="vEH-oV-IOe" customClass="ChangeCameraPasswordViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="storyboard_changcamerapassword" hidesBottomBarWhenPushed="YES" id="vEH-oV-IOe" customClass="ChangeCameraPasswordViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="RSg-oQ-oyY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -193,6 +193,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="navDone" id="Y6a-K4-VGw">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="save:" destination="vEH-oV-IOe" id="PGG-cV-SCy"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
