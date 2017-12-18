@@ -2978,7 +2978,7 @@ int bLocalSearch = 0;
             
             bFirst = NO;
             
-            channel.chIndexForSendAudio = IOTC_Session_Get_Free_Channel(sessionID);
+            channel.chIndexForSendAudio = IOTC_Session_Get_Free_Channel((int)sessionID);
             
             LOG(@"IOTC_Session_Get_Free_Channel(%d) : %d", sessionID, channel.chIndexForSendAudio);
             

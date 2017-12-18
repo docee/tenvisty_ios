@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/AppDelegate.m"
-            timestampString = "535212110.596642"
+            timestampString = "535301477.042515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/AppDelegate.m"
-            timestampString = "535212110.597075"
+            timestampString = "535301477.042627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/MyCamera.m"
-            timestampString = "535212110.597173"
+            timestampString = "535214415.964875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/MyCamera.m"
-            timestampString = "535212110.597438"
+            timestampString = "535214415.965271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.597521"
+            timestampString = "535214415.965347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "506"
@@ -118,11 +118,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.597817"
+            timestampString = "535214415.965683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "592"
@@ -131,14 +131,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[Camera start:viewAccount:viewPassword:]"
                   moduleName = "tenvisty"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luyi/Desktop/Github/tenvisty_ios/IOTCamera/IOTCamera/Camera.m"
-                  timestampString = "535210684.937366"
+                  timestampString = "535217006.979308"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "592"
@@ -146,14 +146,14 @@
                   offsetFromSymbolStart = "100">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[Camera start:viewAccount:viewPassword:]"
                   moduleName = "tenvisty"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luyi/Desktop/Github/tenvisty_ios/IOTCamera/IOTCamera/Camera.m"
-                  timestampString = "535210684.942383"
+                  timestampString = "535217006.984904"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "592"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "535212110.597924"
+            timestampString = "535214415.965775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "535212110.598144"
+            timestampString = "535214415.966045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "535212110.598233"
+            timestampString = "535214415.966136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "195"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598318"
+            timestampString = "535214415.966214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "959"
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598414"
+            timestampString = "535214415.96628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1168"
@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598508"
+            timestampString = "535214415.966341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3159"
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598601"
+            timestampString = "535214415.966403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3194"
@@ -278,11 +278,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598692"
+            timestampString = "535214415.966463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "973"
@@ -298,7 +298,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598818"
+            timestampString = "535214415.966521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "978"
@@ -314,7 +314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598908"
+            timestampString = "535214415.966579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1002"
@@ -330,7 +330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.598995"
+            timestampString = "535214415.966676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1003"
@@ -346,7 +346,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599086"
+            timestampString = "535214415.966741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1092"
@@ -362,7 +362,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.59917"
+            timestampString = "535214415.966802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1096"
@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599284"
+            timestampString = "535214415.96686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1091"
@@ -394,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599376"
+            timestampString = "535214415.966918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "990"
@@ -410,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599464"
+            timestampString = "535214415.966976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "993"
@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599548"
+            timestampString = "535214415.967034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "997"
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599632"
+            timestampString = "535214415.967092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1100"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.599711"
+            timestampString = "535214415.967243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1102"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraSetting/ChangeCameraPasswordViewController.m"
-            timestampString = "535212110.599829"
+            timestampString = "535214415.967295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
@@ -486,11 +486,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.60007"
+            timestampString = "535214415.967502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1059"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600146"
+            timestampString = "535214415.967554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "708"
@@ -522,7 +522,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600217"
+            timestampString = "535214415.967597"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "640"
@@ -538,7 +538,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600319"
+            timestampString = "535214415.967679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "676"
@@ -554,7 +554,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600379"
+            timestampString = "535214415.967774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "702"
@@ -570,7 +570,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600439"
+            timestampString = "535214415.967828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "689"
@@ -586,7 +586,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/MyCamera.m"
-            timestampString = "535212110.600499"
+            timestampString = "535214415.967871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "191"
@@ -602,7 +602,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600548"
+            timestampString = "535214415.967913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1225"
@@ -665,7 +665,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600606"
+            timestampString = "535214415.967954"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1226"
@@ -681,7 +681,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.600667"
+            timestampString = "535214415.967994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1179"
@@ -693,11 +693,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/TwsThread.m"
-            timestampString = "535212110.600747"
+            timestampString = "535214415.968039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -709,11 +709,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/TwsThread.m"
-            timestampString = "535212110.600965"
+            timestampString = "535214415.968322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -729,7 +729,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "535212110.601019"
+            timestampString = "535214415.968372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "177"
@@ -745,7 +745,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601073"
+            timestampString = "535214415.968416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1228"
@@ -761,7 +761,7 @@
                   moduleName = "tenvisty"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luyi/Desktop/Github/tenvisty_ios/IOTCamera/IOTCamera/Camera.m"
-                  timestampString = "535210685.087775"
+                  timestampString = "535301011.492451"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1228"
@@ -776,7 +776,7 @@
                   moduleName = "tenvisty"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luyi/Desktop/Github/tenvisty_ios/IOTCamera/IOTCamera/Camera.m"
-                  timestampString = "535210685.093032"
+                  timestampString = "535301011.497106"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1228"
@@ -793,7 +793,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601131"
+            timestampString = "535214415.96846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1219"
@@ -809,7 +809,7 @@
                   moduleName = "tenvisty"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luyi/Desktop/Github/tenvisty_ios/IOTCamera/IOTCamera/Camera.m"
-                  timestampString = "535210685.10339"
+                  timestampString = "535301011.508983"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1219"
@@ -824,7 +824,7 @@
                   moduleName = "tenvisty"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luyi/Desktop/Github/tenvisty_ios/IOTCamera/IOTCamera/Camera.m"
-                  timestampString = "535210685.10881"
+                  timestampString = "535301011.513951"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1219"
@@ -841,7 +841,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601185"
+            timestampString = "535214415.968501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1183"
@@ -857,7 +857,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601296"
+            timestampString = "535214415.968543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1184"
@@ -869,11 +869,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601374"
+            timestampString = "535214415.968585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1199"
@@ -889,7 +889,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.60144"
+            timestampString = "535214415.968665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1246"
@@ -905,7 +905,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601496"
+            timestampString = "535214415.968715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1248"
@@ -917,11 +917,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.60155"
+            timestampString = "535214415.968757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1186"
@@ -933,11 +933,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOTCamera/IOTCamera/Camera.m"
-            timestampString = "535212110.601601"
+            timestampString = "535214415.968812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "596"
@@ -953,12 +953,140 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "535212110.601651"
+            timestampString = "535214415.968881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "174"
             endingLineNumber = "174"
             landmarkName = "-showModifyPassword:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Home/LiveViewController.m"
+            timestampString = "535301477.043709"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-toggleBtnsLand:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Home/LiveViewController.m"
+            timestampString = "535301477.045005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-toggleBtnsLand:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Home/LiveViewController.m"
+            timestampString = "535301477.045908"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "-rotateOrientation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Home/LiveViewController.m"
+            timestampString = "535301477.046787"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-toggleBtnsLand:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/AppDelegate.m"
+            timestampString = "535301477.047613"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-application:supportedInterfaceOrientationsForWindow:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/AppDelegate.m"
+            timestampString = "535301477.047698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "-application:supportedInterfaceOrientationsForWindow:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/AppDelegate.m"
+            timestampString = "535301477.047828"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-shouldAutorotate"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Home/LiveViewController.m"
+            timestampString = "535301477.047911"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-toggleTools:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -122,6 +122,7 @@
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
+		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
 		EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1C1841FD5A99D00DAE334 /* CameraSettingViewController.m */; };
 		EDF1C1871FD5AA6B00DAE334 /* ListImgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1C1861FD5AA6B00DAE334 /* ListImgTableViewCell.xib */; };
@@ -376,6 +377,8 @@
 		89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		ED3D50691FD59D0300F0C658 /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
 		ED3D506A1FD59D0300F0C658 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
+		ED3E88B61FE6C012006754E8 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
+		ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFDevice.m"; sourceTree = "<group>"; };
 		ED8CA6861FD40A29005858CC /* LiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		ED8CA6871FD40A29005858CC /* LiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
 		EDF1C1831FD5A99D00DAE334 /* CameraSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSettingViewController.h; sourceTree = "<group>"; };
@@ -497,6 +500,7 @@
 		890B46B01FB03CD500C1061A /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */,
 				89E6D9971FDA61DC0049F1E7 /* MBProgressHUD */,
 				890B46B11FB03CD500C1061A /* Tools */,
 			);
@@ -892,6 +896,15 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */ = {
+			isa = PBXGroup;
+			children = (
+				ED3E88B61FE6C012006754E8 /* UIDevice+TFDevice.h */,
+				ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */,
+			);
+			path = "UIDevice+TFDevice";
+			sourceTree = "<group>";
+		};
 		EDF1C17F1FD5A48800DAE334 /* CameraSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1050,6 +1063,7 @@
 				ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */,
 				896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */,
 				892ADB881FD7A0F400BD8929 /* SDCardViewController.m in Sources */,
+				ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */,
 				890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */,
 				89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */,
 				896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */,

@@ -511,18 +511,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="lFG-sW-s6a">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lFG-sW-s6a">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera On LAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aws-Ae-pPR">
-                                    <rect key="frame" x="20" y="-8.5" width="104" height="17"/>
+                                    <rect key="frame" x="20" y="9" width="104" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQ4-0Q-4BU">
-                                    <rect key="frame" x="129" y="-10" width="20" height="20"/>
+                                    <rect key="frame" x="129" y="7.5" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="CXQ-EY-o2l"/>
                                         <constraint firstAttribute="height" constant="20" id="ZVJ-BT-7m8"/>
@@ -675,13 +675,13 @@
                                         </constraints>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZI-tt-F9o">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                                        <rect key="frame" x="1" y="1" width="373" height="238"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubj-6M-Oic">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="373" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jF-qv-Yn0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="50"/>
                                                         <color key="backgroundColor" white="0.59999999999999998" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                                         <state key="normal" image="btnSnap_land"/>
                                                         <connections>
@@ -689,7 +689,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhj-bf-m19">
-                                                        <rect key="frame" x="125" y="0.0" width="125" height="50"/>
+                                                        <rect key="frame" x="124.5" y="0.0" width="124" height="50"/>
                                                         <color key="backgroundColor" white="0.59999999999999998" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                                         <state key="normal" image="btnPreset_land"/>
                                                         <connections>
@@ -697,7 +697,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1I-QQ-IN7">
-                                                        <rect key="frame" x="250" y="0.0" width="125" height="50"/>
+                                                        <rect key="frame" x="248.5" y="0.0" width="124.5" height="50"/>
                                                         <color key="backgroundColor" white="0.59999999999999998" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                                         <state key="normal" image="btnExit"/>
                                                         <connections>
@@ -732,10 +732,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pH-cP-QwW">
-                                                <rect key="frame" x="0.0" y="190" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="188" width="373" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="we4-Y2-7c1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="50"/>
                                                         <color key="backgroundColor" white="0.59999999999999998" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                                         <state key="normal" image="btnSound_closed_land"/>
                                                         <connections>
@@ -743,7 +743,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJ8-Hf-4xs">
-                                                        <rect key="frame" x="125" y="0.0" width="125" height="50"/>
+                                                        <rect key="frame" x="124.5" y="0.0" width="124" height="50"/>
                                                         <color key="backgroundColor" white="0.59999999999999998" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                                         <state key="normal" image="btnRecord_closed_land"/>
                                                         <state key="selected" image="btnRecord_opened_land"/>
@@ -752,10 +752,10 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOF-Tf-vVQ">
-                                                        <rect key="frame" x="250" y="0.0" width="125" height="50"/>
+                                                        <rect key="frame" x="248.5" y="0.0" width="124.5" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orD-Hb-W61">
-                                                                <rect key="frame" x="23" y="13" width="80" height="25"/>
+                                                                <rect key="frame" x="22.5" y="13" width="80" height="25"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.54901960780000003" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="FgA-3S-efx"/>
@@ -807,7 +807,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kE-U2-S3h">
-                                                <rect key="frame" x="235" y="50" width="120" height="120"/>
+                                                <rect key="frame" x="233" y="48" width="120" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="FFu-IZ-PwT"/>
                                                     <constraint firstAttribute="height" constant="120" id="am3-g8-rtZ"/>
@@ -821,6 +821,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="6pH-cP-QwW" secondAttribute="bottom" id="5Xz-71-rTR"/>
                                             <constraint firstItem="6pH-cP-QwW" firstAttribute="top" secondItem="4kE-U2-S3h" secondAttribute="bottom" constant="20" id="761-O9-PdB"/>
@@ -878,13 +879,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="jEH-rg-a1Z" secondAttribute="trailing" id="2td-aw-J28"/>
-                                    <constraint firstItem="BZI-tt-F9o" firstAttribute="top" secondItem="HEB-va-RUZ" secondAttribute="top" id="5DY-fP-PFv"/>
+                                    <constraint firstItem="BZI-tt-F9o" firstAttribute="top" secondItem="HEB-va-RUZ" secondAttribute="top" constant="1" id="5DY-fP-PFv"/>
                                     <constraint firstItem="jEH-rg-a1Z" firstAttribute="top" secondItem="HEB-va-RUZ" secondAttribute="top" id="7cf-dp-tl4"/>
-                                    <constraint firstAttribute="bottom" secondItem="BZI-tt-F9o" secondAttribute="bottom" id="Cl7-Yy-KXZ"/>
-                                    <constraint firstItem="BZI-tt-F9o" firstAttribute="leading" secondItem="HEB-va-RUZ" secondAttribute="leading" id="Gb6-oz-nbC"/>
+                                    <constraint firstAttribute="bottom" secondItem="BZI-tt-F9o" secondAttribute="bottom" constant="1" id="Cl7-Yy-KXZ"/>
+                                    <constraint firstItem="BZI-tt-F9o" firstAttribute="leading" secondItem="HEB-va-RUZ" secondAttribute="leading" constant="1" id="Gb6-oz-nbC"/>
                                     <constraint firstAttribute="trailing" secondItem="nD4-hg-e9M" secondAttribute="trailing" constant="20" id="M7t-Qn-BiW"/>
                                     <constraint firstAttribute="bottom" secondItem="jEH-rg-a1Z" secondAttribute="bottom" id="SY4-Zv-krZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="BZI-tt-F9o" secondAttribute="trailing" id="WEc-sQ-yKK"/>
+                                    <constraint firstAttribute="trailing" secondItem="BZI-tt-F9o" secondAttribute="trailing" constant="1" id="WEc-sQ-yKK"/>
                                     <constraint firstAttribute="height" constant="240" id="avk-tm-hb4"/>
                                     <constraint firstItem="nD4-hg-e9M" firstAttribute="centerY" secondItem="HEB-va-RUZ" secondAttribute="centerY" multiplier="3/4" id="hv7-dx-HcQ"/>
                                     <constraint firstItem="jEH-rg-a1Z" firstAttribute="leading" secondItem="HEB-va-RUZ" secondAttribute="leading" id="krP-sN-oT4"/>
@@ -1091,6 +1092,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="HEB-va-RUZ" firstAttribute="leading" secondItem="Bpq-F5-tPb" secondAttribute="leading" id="1Ei-ZK-7ML"/>
                             <constraint firstAttribute="trailing" secondItem="ZAP-Xc-HbE" secondAttribute="trailing" id="87x-iJ-Ap3"/>
@@ -1103,6 +1105,9 @@
                             <constraint firstItem="2Di-zb-hug" firstAttribute="leading" secondItem="Bpq-F5-tPb" secondAttribute="leading" id="oBU-dH-sZb"/>
                             <constraint firstItem="HEB-va-RUZ" firstAttribute="top" secondItem="2Di-zb-hug" secondAttribute="bottom" id="utG-C6-RTT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="gTc-Hu-qn0" appends="YES" id="9H1-0N-6hg"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Camera Name" id="h29-hI-td0">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="KdF-fa-swW">
@@ -1117,6 +1122,7 @@
                         <outlet property="btnListen_port" destination="Jcf-Ud-PAY" id="v5r-Nx-Nvi"/>
                         <outlet property="btnRecord_land" destination="rJ8-Hf-4xs" id="t4r-GJ-cWj"/>
                         <outlet property="btnRecord_port" destination="Z4V-Zq-vxw" id="o1b-XI-np3"/>
+                        <outlet property="btnTalk_land" destination="4kE-U2-S3h" id="dJt-Ui-ePX"/>
                         <outlet property="connectStatus_port" destination="2Di-zb-hug" id="uaA-SZ-9xk"/>
                         <outlet property="constraint_status_height" destination="4OC-13-FiM" id="cT6-uI-1r6"/>
                         <outlet property="constraint_toolbar_portrait_height" destination="PRR-dw-VfX" id="dZV-dg-gm0"/>
@@ -1127,11 +1133,17 @@
                         <outlet property="toolbtns_portrait" destination="ZAP-Xc-HbE" id="EM9-vi-5Ed"/>
                         <outlet property="videoMonitor" destination="Lqe-ji-dgY" id="lxV-iQ-hj7"/>
                         <outlet property="video_wrapper" destination="HEB-va-RUZ" id="jt5-gk-BFk"/>
+                        <outlet property="viewLoading" destination="BhT-Sb-LI5" id="rzo-F3-C0q"/>
                         <outlet property="viewRecordTime" destination="nD4-hg-e9M" id="cu6-Ek-L3z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWz-Cm-f6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OMN-zo-xvB" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="gTc-Hu-qn0">
+                    <connections>
+                        <action selector="toggleBtnsLand:" destination="Clh-uG-1TF" id="tH2-wv-G5t"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="23.199999999999999" y="-636.4317841079461"/>
         </scene>

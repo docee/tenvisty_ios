@@ -128,4 +128,18 @@
     }
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window{
+    if (self.allowRotation == YES) {
+        //横屏
+        return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+    }else{
+        //竖屏
+        return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscape;
+    }
+}
+- (BOOL)shouldAutorotate
+{
+    return true;
+}
+
 @end
