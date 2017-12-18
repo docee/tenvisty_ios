@@ -76,6 +76,8 @@
 		894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 894D7E551FAB01D900C58BB2 /* Main.storyboard */; };
 		894D7E5A1FAB01D900C58BB2 /* tenvisty.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 894D7E581FAB01D900C58BB2 /* tenvisty.xcdatamodeld */; };
 		894D7E5C1FAB01D900C58BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 894D7E5B1FAB01D900C58BB2 /* Assets.xcassets */; };
+		895141D01FE763BD00905355 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141CC1FE763BD00905355 /* iToast.m */; };
+		895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141D81FE7780100905355 /* LocalVideoInfo.m */; };
 		896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */; };
 		896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */; };
 		896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D61FD92C7600EE31AB /* ImageCollectionViewCell.m */; };
@@ -287,6 +289,10 @@
 		894D7E591FAB01D900C58BB2 /* tenvisty.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tenvisty.xcdatamodel; sourceTree = "<group>"; };
 		894D7E5B1FAB01D900C58BB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		894D7E601FAB01D900C58BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		895141CB1FE763BD00905355 /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		895141CC1FE763BD00905355 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
+		895141D71FE7780100905355 /* LocalVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVideoInfo.h; sourceTree = "<group>"; };
+		895141D81FE7780100905355 /* LocalVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoInfo.m; sourceTree = "<group>"; };
 		896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
 		896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -407,6 +413,7 @@
 		890B40671FAFF99400C1061A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				895141D51FE7780100905355 /* Model */,
 				89E6D9931FDA2B0B0049F1E7 /* Extend */,
 				896BA3CB1FD9255500EE31AB /* Image */,
 				892CE0A51FD0F57100942E28 /* Base */,
@@ -499,6 +506,8 @@
 		890B46B11FB03CD500C1061A /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				895141D11FE7761300905355 /* FileHelper */,
+				895141CA1FE763BD00905355 /* iToast */,
 				898D8BA11FE0F66600062F04 /* fmdb */,
 				898D8B911FE0CDA900062F04 /* GCD */,
 				89D946641FDF7D90000ABB0A /* GNetworkStates */,
@@ -679,6 +688,39 @@
 				894D7E4D1FAB01D900C58BB2 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		895141CA1FE763BD00905355 /* iToast */ = {
+			isa = PBXGroup;
+			children = (
+				895141CB1FE763BD00905355 /* iToast.h */,
+				895141CC1FE763BD00905355 /* iToast.m */,
+			);
+			path = iToast;
+			sourceTree = "<group>";
+		};
+		895141D11FE7761300905355 /* FileHelper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FileHelper;
+			sourceTree = "<group>";
+		};
+		895141D51FE7780100905355 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				895141D61FE7780100905355 /* Video */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		895141D61FE7780100905355 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				895141D71FE7780100905355 /* LocalVideoInfo.h */,
+				895141D81FE7780100905355 /* LocalVideoInfo.m */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		896BA3CB1FD9255500EE31AB /* Image */ = {
@@ -1028,10 +1070,12 @@
 				892ADB971FD80AB600BD8929 /* PlaybackViewController.m in Sources */,
 				89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */,
 				898D8BB41FE0F75B00062F04 /* GBase.m in Sources */,
+				895141D01FE763BD00905355 /* iToast.m in Sources */,
 				8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */,
 				892ADB9A1FD8F83000BD8929 /* ImageTableViewCell.m in Sources */,
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
+				895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */,
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
 				892CE0D71FD13E1500942E28 /* OCScanLifeViewController.m in Sources */,
 				89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */,

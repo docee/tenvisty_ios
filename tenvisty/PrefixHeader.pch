@@ -18,6 +18,7 @@
 #import "TwsProgress.h"
 #import "GNetworkStates.h"
 #import "GBase.h"
+#import "iToast.h"
 
 //宏定义国际化字符
 #define INTERNATIONAL
@@ -35,6 +36,7 @@
 //#define DidEnterBackground  (@"applicationDidEnterBackground")
 #define zkDevice_IsiPhoneXOrBigger_SafeArea ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) : NO)
 
+#define SystemVersion       ([[UIDevice currentDevice] systemVersion].floatValue)
 #define NO_USE_UID @"00000000000000000000"
 #define DEFAULT_PASSWORD @"admin"
 

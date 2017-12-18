@@ -142,4 +142,20 @@
     }
 }
 
++ (void)presentMessage:(NSString *)message atDeviceOrientation:(DeviceOrientation)orientation {
+    
+    if (orientation == DeviceOrientationPortrait) {
+        [[iToast makeText:message] show];
+    }
+    
+    if (orientation == DeviceOrientationLandscapeLeft) {
+        [[iToast makeText:message] showRota];
+    }
+    
+    if (orientation == DeviceOrientationLandscapeRight) {
+        [[iToast makeText:message] showUnRota];
+    }
+}
+
+
 @end

@@ -22,4 +22,6 @@
 + (void)editCamera:(MyCamera *)mycam;
 + (MyCamera*)getCamera:(NSInteger)index;
 +(NSInteger)getCameraIndex:(MyCamera*)camera;
++ (BOOL)savePictureForCamera:(MyCamera *)mycam image:(UIImage*)img;
++ (NSString*)saveRecordingForCamera:(Camera *)mycam;
 @end

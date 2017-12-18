@@ -8,6 +8,7 @@
 
 #import "GBase.h"
 #import "FMDB.h"
+#import "LocalVideoInfo.h"
 
 #define SQLCMD_CREATE_TABLE_DEVICE @"CREATE TABLE IF NOT EXISTS device(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_nickname TEXT, dev_name TEXT, dev_pwd TEXT, view_acc TEXT, view_pwd TEXT, ask_format_sdcard INTEGER, channel INTEGER, video_quality INTEGER, event_notification INTEGER)"
 
@@ -16,7 +17,7 @@
 #define SQLCMD_CREATE_TABLE_ALARM @"CREATE TABLE IF NOT EXISTS alarm(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, type INTEGER, time INTEGER)"
 
 
-#define SQLCMD_CREATE_TABLE_VIDEO @"CREATE TABLE IF NOT EXISTS video(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, file_path TEXT, time REAL, recording_type INTEGER)"
+#define SQLCMD_CREATE_TABLE_VIDEO @"CREATE TABLE IF NOT EXISTS video(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, file_path TEXT,small_file_path TEXT, time REAL, recording_type INTEGER)"
 
 //#define SQLCMD_CREATE_TABLE_DEVICE_FUNCTION @"CREATE TABLE IF NOT EXISTS device_function(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_function TEXT)"
 //
@@ -143,20 +144,19 @@ static GBase *base = nil;
     }
 }
 
-+ (BOOL)savePictureForCamera:(MyCamera *)mycam {
++ (BOOL)savePictureForCamera:(MyCamera *)mycam image:(UIImage*)img {
     
     GBase *base = [GBase sharedInstance];
     
     NSString *imgName = [NSString stringWithFormat:@"%f.jpg", [[NSDate date] timeIntervalSince1970]];
     //NSString *imgPath = [base imgFilePathWithImgName:imgName];
     
-    UIImage *image = nil;//[mycam ];
     //NSLog(@"imgPath:%@", imgName);
     
-    if (image == nil) {
+    if (img == nil) {
         return NO;
     }
-    [base saveImageToFile:image imageName:imgName];
+    [base saveImageToFile:img imageName:imgName];
     
     if (base.db != NULL) {
         if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path, time) VALUES(?,?,?)", mycam.uid, imgName, [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
@@ -200,6 +200,172 @@ static GBase *base = nil;
         }
     }
     return -1;
+}
+
+
+//删除录像
++ (void)deleteRecording:(NSString *)recordingPath camera:(Camera *)mycam {
+    
+    GBase *base = [GBase sharedInstance];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];//去处需要的路径
+    
+    NSString *strPath = [documentsDirectory stringByAppendingPathComponent:mycam.uid];
+    
+    //更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath: strPath];
+    //删除
+    [fileManager removeItemAtPath:[ NSString stringWithFormat:@"%@.mp4", recordingPath] error:nil];
+    
+    
+    
+    if (base.db != NULL) {
+        if (![base.db executeUpdate:@"DELETE FROM video where file_path=?", recordingPath]){
+            NSLog(@"Fail to remove device from database.");
+        }
+    }
+    
+}
+
+//根据完整路径删除录像
++ (void)deleteRecord:(NSString *)fullFilePath  camera:(Camera *)mycam{
+    GBase *base = [GBase sharedInstance];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];//去处需要的路径
+    NSString *strPath = [documentsDirectory stringByAppendingPathComponent:mycam.uid];
+    //更改到待操作的目录下
+    [fileManager changeCurrentDirectoryPath: strPath];
+    //删除
+    NSLog(@"删除的地址：%@",fullFilePath);
+    [fileManager removeItemAtPath:fullFilePath error:nil];
+    
+    
+    //输出掉数据库里边的录像！（数据库里边的录像是按照后半段的文件名存储的）
+    NSRange range = [fullFilePath rangeOfString:@"Download/"];
+    NSString *recordingName = [fullFilePath substringFromIndex:NSMaxRange(range)];
+    NSLog(@"dddddeee %@ dddddeee",recordingName);
+    if (base.db != NULL) {
+        if (![base.db executeUpdate:@"DELETE FROM video where file_path=?", recordingName]){
+            NSLog(@"Fail to remove device from database.");
+        }
+    }
+}
+
+- (NSString *)recordingFileName:(Camera *)mycam {
+    
+    NSDate* date = [NSDate date];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd_HH-mm-ss"];
+    NSString* strDateTime = [formatter stringFromDate:date];
+    
+    NSString *strFileName = [NSString stringWithFormat:@"%@_%@.mp4", mycam.uid, strDateTime];
+    
+    LOG(@"recording_strFileName : %@",strFileName);
+    
+    return strFileName;
+}
+
+- (NSString *)recordingFilePath:(Camera *)mycam fileName:(NSString *)fileName {
+    
+    //创建文件管理器
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //获取路径
+    //参数NSDocumentDirectory要获取那种路径
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];//去处需要的路径
+    
+    NSString *strPath = [documentsDirectory stringByAppendingPathComponent:mycam.uid];
+    
+    [fileManager createDirectoryAtPath:strPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    strPath = [strPath stringByAppendingPathComponent:fileName];
+    
+    LOG(@"recording_strPath : %@",strPath);
+    
+    
+    return strPath;
+}
+
+
+- (NSString *)recordingNameWithCamera:(Camera *)mycam {
+    
+    NSDate* date = [NSDate date];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd_HH-mm-ss"];
+    NSString* strDateTime = [formatter stringFromDate:date];
+    
+    NSString *strFileName = [NSString stringWithFormat:@"%@_%@.mp4", mycam.uid, strDateTime];
+    
+    LOG(@"recording_strFileName : %@",strFileName);
+    return strFileName;
+}
+
+// 本地录像存储路径 Documents/uid/recordingName.mp4
+- (NSString *)recordingPathWithCamera:(Camera *)mycam recordingName:(NSString *)recordingName {
+    
+    NSString *document_uid = [self.Documents stringByAppendingPathComponent:mycam.uid];
+    [[NSFileManager defaultManager] createDirectoryAtPath:document_uid withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    return [document_uid stringByAppendingPathComponent:recordingName];
+}
+
++ (NSMutableArray *)recordingsForCamera:(Camera *)mycam {
+    
+    GBase *base = [GBase sharedInstance];
+    
+    NSMutableArray *recordings = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM video WHERE dev_uid=?", mycam.uid];
+    
+    while([rs next]) {
+        
+        NSString *filePath = [rs stringForColumn:@"file_path"];
+        NSInteger time = [rs doubleForColumn:@"time"];
+        NSInteger type = [rs intForColumn:@"recording_type"];
+        
+        LOG(@"FMResultSet_filePath : %@ type:%d", filePath, (int)type);
+        // 兼容Goke机器之前版本录像
+        if ([filePath rangeOfString:@".mp4"].location == NSNotFound) {
+            if ([filePath rangeOfString:@".avi"].location == NSNotFound) {
+                filePath = [filePath stringByAppendingString:@".mp4"];
+            }
+        }
+        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:filePath time:time type:type];
+        
+        [recordings addObject:vi];
+    }
+    
+    [rs close];
+    
+    return recordings;
+}
+
+//保存录像
++ (NSString*)saveRecordingForCamera:(Camera *)mycam {
+    
+    GBase *base = [GBase sharedInstance];
+    
+    
+    NSString *recordFileName = [base recordingNameWithCamera:mycam];
+    
+    NSString *recordFilePath = [base recordingPathWithCamera:mycam recordingName:recordFileName];
+    if (base.db != NULL) {
+        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path, recording_type, time) VALUES(?,?,?,?)", mycam.uid, recordFileName, [NSNumber numberWithInteger:0], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+            NSLog(@"Fail to save recording to database.");
+            return nil;
+        }
+    }
+    else{
+        return nil;
+    }
+    
+    return recordFilePath;
+    
 }
 
 @end
