@@ -78,6 +78,7 @@
 		894D7E5C1FAB01D900C58BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 894D7E5B1FAB01D900C58BB2 /* Assets.xcassets */; };
 		895141D01FE763BD00905355 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141CC1FE763BD00905355 /* iToast.m */; };
 		895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141D81FE7780100905355 /* LocalVideoInfo.m */; };
+		895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */; };
 		896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */; };
 		896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */; };
 		896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D61FD92C7600EE31AB /* ImageCollectionViewCell.m */; };
@@ -294,6 +295,8 @@
 		895141CC1FE763BD00905355 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		895141D71FE7780100905355 /* LocalVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVideoInfo.h; sourceTree = "<group>"; };
 		895141D81FE7780100905355 /* LocalVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoInfo.m; sourceTree = "<group>"; };
+		895141E31FE8C7FF00905355 /* SwitchVideoQualityDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchVideoQualityDialog.h; sourceTree = "<group>"; };
+		895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchVideoQualityDialog.m; sourceTree = "<group>"; };
 		896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
 		896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -713,6 +716,7 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				895141DF1FE8C7BE00905355 /* View */,
 				895141D61FE7780100905355 /* Video */,
 			);
 			path = Model;
@@ -725,6 +729,15 @@
 				895141D81FE7780100905355 /* LocalVideoInfo.m */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		895141DF1FE8C7BE00905355 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				895141E31FE8C7FF00905355 /* SwitchVideoQualityDialog.h */,
+				895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		896BA3CB1FD9255500EE31AB /* Image */ = {
@@ -1132,6 +1145,7 @@
 				892ADB8B1FD7AE8500BD8929 /* DeviceInfoViewController.m in Sources */,
 				894D7E5A1FAB01D900C58BB2 /* tenvisty.xcdatamodeld in Sources */,
 				890B40791FB006A000C1061A /* ImageViewController.m in Sources */,
+				895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */,
 				89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */,
 				892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */,
 				898D8BB11FE0F66600062F04 /* FMResultSet.m in Sources */,

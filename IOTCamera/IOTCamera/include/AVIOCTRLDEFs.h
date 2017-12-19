@@ -164,6 +164,54 @@ typedef enum
 
 
 
+//faceber
+//user-defined cmd type
+//preset point operate
+#define IOTYPE_USER_IPCAM_GET_PRESET_LIST_REQ  (0x2001)
+#define IOTYPE_USER_IPCAM_GET_PRESET_LIST_RESP  (0x2002)
+
+#define IOTYPE_USER_IPCAM_SET_PRESET_POINT_REQ  (0x2003)
+#define IOTYPE_USER_IPCAM_SET_PRESET_POINT_RESP (0x2004)
+
+#define IOTYPE_USER_IPCAM_OPR_PRESET_POINT_REQ  (0x2005)
+#define IOTYPE_USER_IPCAM_OPR_PRESET_POINT_RESP  (0x2006)
+
+//daylight saving time
+//    public static final int IOTYPE_USER_IPCAM_GET_DST_REQ = 0x2007;
+//    public static final int IOTYPE_USER_IPCAM_GET_DST_RESP = 0x2008;
+
+//    public static final int IOTYPE_USER_IPCAM_SET_DST_REQ = 0x2009;
+//    public static final int IOTYPE_USER_IPCAM_SET_DST_RESP = 0x200A;
+
+//reboot
+#define IOTYPE_USER_IPCAM_REBOOT_REQ                (0x200B)
+#define IOTYPE_USER_IPCAM_REBOOT_RESP               (0x200C)
+
+
+#define IOTYPE_USER_IPCAM_RESET_DEFAULT_REQ         (0x200D)
+#define IOTYPE_USER_IPCAM_RESET_DEFAULT_RESP        (0x200E)
+
+#define IOTYPE_USER_IPCAM_GET_UPRADE_URL_REQ        (0x2017)
+#define IOTYPE_USER_IPCAM_GET_UPRADE_URL_RESP       (0x2018)
+
+#define IOTYPE_USER_IPCAM_SET_UPRADE_REQ            (0x2019)
+#define IOTYPE_USER_IPCAM_SET_UPRADE_RESP           (0x2020)
+#define IOTYPE_USER_IPCAM_UPGRADE_STATUS            (0x2021)
+
+#define IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_REQ     (0x2022)
+#define IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_RESP    (0x2023)
+#define IOTYPE_USER_IPCAM_GET_TIME_INFO_REQ         (0x2024)
+#define IOTYPE_USER_IPCAM_GET_TIME_INFO_RESP        (0x2025)
+#define IOTYPE_USER_IPCAM_SET_TIME_INFO_REQ         (0x2026)
+#define IOTYPE_USER_IPCAM_SET_TIME_INFO_RESP        (0x2027)
+#define IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ         (0x2028)
+#define IOTYPE_USER_IPCAM_GET_ZONE_INFO_RESP        (0x2029)
+#define IOTYPE_USER_IPCAM_SET_ZONE_INFO_REQ         (0x202A)
+#define IOTYPE_USER_IPCAM_SET_ZONE_INFO_RESP        (0x202B)
+#define IOTYPE_USER_IPCAM_UPDATE_WIFI_STATUS        (0x202C)
+
+
+
 /*********************   æﬂÃÂÀµ√˜   **************************************/
 
 
@@ -1208,4 +1256,217 @@ typedef struct{
     char reserved[4];
 }SMsgAVIoctrlExSetAlarmRingResp;
 
+
+//faceber
+//user-defined cmd type
+//preset point operate
+//#define IOTYPE_USER_IPCAM_GET_PRESET_LIST_REQ  (0x2001)
+//#define IOTYPE_USER_IPCAM_GET_PRESET_LIST_RESP  (0x2002)
+typedef struct
+{
+    int BitID;  //值为-1时，自动分配ID。>=0 指定ID
+    char Desc[32];    //预置点描述
+}SMsgAVIoctrlPointInfo;
+
+typedef struct
+{
+    unsigned int  channel;        // Camera Index
+    unsigned int  total;        // Total event amount in this search session
+    unsigned char index;
+    unsigned char endflag;        // end flag; endFlag = 1 means this package is the last one.
+    unsigned char count;        // how much events in this package
+    unsigned char reserved[1];
+    SMsgAVIoctrlPointInfo stPoint[1];        // The first memory address of the events in this package
+}SMsgAVIoctrlGetPreListResp;
+//
+//#define IOTYPE_USER_IPCAM_SET_PRESET_POINT_REQ  (0x2003)
+//#define IOTYPE_USER_IPCAM_SET_PRESET_POINT_RESP (0x2004)
+typedef struct
+{
+    int BitID;  //值为-1时，自动分配ID。>=0 指定ID
+    char Desc[32];
+}SMsgAVIoctrlSetPointReq;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetPointResp;
+//
+//#define IOTYPE_USER_IPCAM_OPR_PRESET_POINT_REQ  (0x2005)
+//#define IOTYPE_USER_IPCAM_OPR_PRESET_POINT_RESP  (0x2006)
+typedef struct
+{
+    unsigned int Type; //0-调用预置点，1-清除单个预置点，2-清除所有预置点
+    unsigned int BitID; //单个清除预置点时，预置点序号
+}SMsgAVIoctrlPointOprReq;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlPointOprResp;
+//
+
+////reboot
+//#define IOTYPE_USER_IPCAM_REBOOT_REQ                (0x200B)
+//#define IOTYPE_USER_IPCAM_REBOOT_RESP               (0x200C)
+//
+//
+//#define IOTYPE_USER_IPCAM_RESET_DEFAULT_REQ         (0x200D)
+//#define IOTYPE_USER_IPCAM_RESET_DEFAULT_RESP        (0x200E)
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlResultResp;
+//
+//#define IOTYPE_USER_IPCAM_GET_UPRADE_URL_REQ        (0x2017)
+//#define IOTYPE_USER_IPCAM_GET_UPRADE_URL_RESP       (0x2018)
+typedef struct
+{
+    char  LocalUrl[128];     //局域网路径
+    char  UpgradeUrl[128];  //外网路径
+    char  SystemType[128];  //system.dat,usr.dat,web.dat的存放路径
+    char  CustomType[128];  //custom.dat存放路径
+    char  VendorType[128];  //vendor.dat存放路径
+}SMsgAVIoctrlGetUpgradeResp;
+//
+//#define IOTYPE_USER_IPCAM_SET_UPRADE_REQ            (0x2019)
+//#define IOTYPE_USER_IPCAM_SET_UPRADE_RESP           (0x2020)
+typedef struct
+{
+    char version[32];    //依次是web.system.usr
+    char usrcheck[32];    //usr.dat检验码
+    char systemcheck[32];    //system.dat校验码
+    char webcheck[32];        //web.dat检验码
+}SMsgAVIoctrlSystemDatInfo;
+
+//custom.dat 版本号，校验码
+typedef struct
+{
+    char version[32];
+    char customcheck[32];
+}SMsgAVIoctrlCustomDatInfo;
+
+//vendor.dat 版本号，校验码
+typedef struct
+{
+    char version[32];
+    char vendorcheck[32];
+}SMsgAVIoctrlVendorDatInfo;
+
+typedef struct
+{
+    int SerType;   //0-远程服务器，1-本地服务器
+    SMsgAVIoctrlSystemDatInfo SystemInfo;//system.dat,web.dat,usr.dat版本和校验码信息
+    SMsgAVIoctrlCustomDatInfo CustomInfo;//custom.dat版本和校验码信息
+    SMsgAVIoctrlVendorDatInfo VendorInfo;//vendor.dat版本和校验码信息
+}SMsgAVIoctrlSetUpgradeReq;
+
+typedef struct
+{
+    char version[32];    //版本号依次是web.system.usr
+    char usrcheck[32];    //usr.dat校验码
+    char systemcheck[32];    //system.dat校验码
+    char webcheck[32];        //web.dat校验码
+}IpcnetUpgradeSystemInfo_st;
+
+typedef struct
+{
+    char version[32];    //custom.dat版本号
+    char customcheck[32];    //检验码
+}IpcnetUpgradeCustomInfo_st;
+
+typedef struct
+{
+    char version[32];    //vendor.dat版本号
+    char vendorcheck[32];    //vendor.dat检验码
+}IpcnetUpgradeVendorInfo_st;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetUpgradeResp;
+//#define IOTYPE_USER_IPCAM_UPGRADE_STATUS            (0x2021)
+typedef struct
+{
+    int ret;    //升级过程，暂时未用到，目前返回都是610
+    int p;      //percent,升级百分比
+}SMsgAVIoctrlUpgradeStatus;
+//
+//#define IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_REQ     (0x2022)
+//#define IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_RESP    (0x2023)
+typedef struct
+{
+    char FirmwareVer[32];   //custom.vendor.web.system.usr
+}SMsgAVIoctrlFirmwareInfoResp;
+//#define IOTYPE_USER_IPCAM_GET_TIME_INFO_REQ         (0x2024)
+//#define IOTYPE_USER_IPCAM_GET_TIME_INFO_RESP        (0x2025)
+typedef struct
+{
+    int ReqTimeType;    //0-格林威治时间，1-本地时间
+}SMsgAVIoctrlGetTimeReq;
+
+typedef struct
+{
+    //0-格林威治时间，1-本地时间，作为设置时，目前不支持本地时间设置设备时间
+    int TimeType;
+    STimeDay TimeInfo;
+    int AdjustFlg;    //Get: 是否已经校过时，用于测试两台设备时间相差的问题。
+    //Set: 0: 不校时， 1：校时
+    int NtpEnable;    //是否开启网络自动校时
+    char NtpServ[128];  //NTP校时地址
+    char reserve[8];
+}SMsgAVIoctrlGetTimeResp,SMsgAVIoctrlSetTimeReq;
+//#define IOTYPE_USER_IPCAM_SET_TIME_INFO_REQ         (0x2026)
+//#define IOTYPE_USER_IPCAM_SET_TIME_INFO_RESP        (0x2027)
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetTimeResp;
+
+//#define IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ         (0x2028)
+//#define IOTYPE_USER_IPCAM_GET_ZONE_INFO_RESP        (0x2029)
+typedef struct
+{
+    char DstDistId[64]; //夏令时地区标识，与上述列表中第一个元素匹配。
+    char TimeZoneDesc[32]; //时区文字描述
+    int Isdst;            //当前时区是否采用夏令时
+}SMsgAVIoctrlDistrictInfo;      //夏令时地区信息
+
+typedef struct
+{
+    SMsgAVIoctrlDistrictInfo DstDistrictInfo;
+    int enable;     //是否自动调整夏令时开关
+}SMsgAVIoctrlGetDstResp;
+//#define IOTYPE_USER_IPCAM_SET_ZONE_INFO_REQ         (0x202A)
+//#define IOTYPE_USER_IPCAM_SET_ZONE_INFO_RESP        (0x202B)
+typedef struct
+{
+    char DstDistId[64];     //地区标识
+    int Enable;     //是否自动调整夏令时开关
+}SMsgAVIoctrlSetDstReq;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetDstResp;
+
+//#define IOTYPE_USER_IPCAM_UPDATE_WIFI_STATUS        (0x202C)
+typedef enum
+{
+    AVIOTC_WIRELESS_SETTING_OK,
+    AVIOTC_WIRELESS_SETTING_FAIL, //设备连接或设置IP等操作失败
+    AVIOTC_WIRELESS_PASSWD_ERROR,//密码错误
+}ENUM_WIRELESS_STATUS;
+
+typedef struct
+{
+    char ssid[32];        //连接的无线的ssid
+    int status;            //ENUM_WIRELESS_STATUS
+}SMsgAVIoctrlUpdateWifiStatus;
 #endif

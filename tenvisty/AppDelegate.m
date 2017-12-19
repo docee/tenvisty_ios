@@ -134,7 +134,7 @@
         return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
     }else{
         //竖屏
-        return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscape;
+        return UIInterfaceOrientationMaskPortrait;
     }
 }
 - (BOOL)shouldAutorotate

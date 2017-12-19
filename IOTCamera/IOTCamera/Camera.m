@@ -2567,7 +2567,7 @@ int bLocalSearch = 0;
                     
                     [player openAudioFromQueue:[NSData dataWithBytes:outG726Buf length:outLen]];
                 }
-                else if (nCodecId == MEDTA_CODEC_AUDIO_G711) {  // G711 ADD ZPF
+                else if (nCodecId == MEDIA_CODEC_AUDIO_G711) {  // G711 ADD ZPF
                     NSLog(@"pengfei-Audio--MEDTA_CODEC_AUDIO_G711");
                     
                     unsigned char ucOutBuff[1024] = {0};
@@ -2964,6 +2964,7 @@ int bLocalSearch = 0;
     BOOL bSpeexInited = NO;
     BOOL bG726Inited = NO;
     BOOL bAudioRecordInited = NO;
+    BOOL bG711aInited = NO;
     
     FILE *fpAudio = NULL;
     
@@ -3023,7 +3024,10 @@ int bLocalSearch = 0;
                 bG726Inited = YES;
                 LOG(@"init G726 encoder");
             }
-            
+            if (channel.audioCodec == MEDIA_CODEC_AUDIO_G711) {
+                bG711aInited = YES;
+                LOG(@"init G726 encoder");
+            }
 #ifdef REAL_AUDIO_OUT            
             // init Audio Desc
             AudioStreamBasicDescription format = (AudioStreamBasicDescription) {
@@ -3041,7 +3045,7 @@ int bLocalSearch = 0;
             // init AudioRecorder
             recorder = [[AudioRecorder alloc] initAudioRecorderWithAvIndex:channel.avIndexForSendAudio Codec:channel.audioCodec AudioFormat:format Delegate:self];
             
-            if (channel.audioCodec == MEDIA_CODEC_AUDIO_G726)
+            if (channel.audioCodec == MEDIA_CODEC_AUDIO_G726 || channel.audioCodec == MEDIA_CODEC_AUDIO_G711)
                 [recorder start:320];
             else
                 [recorder start:640];
@@ -3318,13 +3322,13 @@ int bLocalSearch = 0;
             
             LOG(@"avSendAudioData_PCM(%d) : %d", avIndex, r);
         }
-        else if (codec == MEDTA_CODEC_AUDIO_G711) { // ADD G711 ZPF   G711 解码...
+        else if (codec == MEDIA_CODEC_AUDIO_G711) { // ADD G711 ZPF   G711 解码...
             NSLog(@"pengfei-MEDTA_CODEC_AUDIO_G711--Speak-");
             
             unsigned long outLen = 0;
             unsigned char outG711[2048] = {0};
             outLen = G711_EnCode( (unsigned char *)outG711, buff, length);
-            frameInfo.codec_id = MEDTA_CODEC_AUDIO_G711;
+            frameInfo.codec_id = MEDIA_CODEC_AUDIO_G711;
             r = avSendAudioData(avIndex, (char *)outG711, outLen, &frameInfo, sizeof(FRAMEINFO_t));
         }
     }

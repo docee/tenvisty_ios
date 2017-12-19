@@ -348,6 +348,12 @@
         self.sessionState == CONNECTION_STATE_CONNECT_FAILED) {
         
     }
+    else if(status == CONNECTION_STATE_CONNECTED){
+        SMsgAVIoctrlGetAudioOutFormatReq *s = (SMsgAVIoctrlGetAudioOutFormatReq *)malloc(sizeof(SMsgAVIoctrlGetAudioOutFormatReq));
+        s->channel = 0;
+        [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
+        free(s);
+    }
 }
 
 - (void)camera:(Camera *)camera didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status
@@ -362,6 +368,12 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
         });
+    }
+    else if(status == CONNECTION_STATE_CONNECTED){
+        SMsgAVIoctrlGetAudioOutFormatReq *s = (SMsgAVIoctrlGetAudioOutFormatReq *)malloc(sizeof(SMsgAVIoctrlGetAudioOutFormatReq));
+        s->channel = (unsigned int)channel;
+        [self sendIOCtrlToChannel:channel Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
+        free(s);
     }
 }
 
@@ -471,6 +483,16 @@
         else{
             return LOCALSTR(@"Offline");
         }
+    }
+}
+//判断划动手势，返回摄像机转动方向
+- (NSInteger)direction:(CGPoint)translation {
+    
+    if (fabs(translation.x) > fabs(translation.y)) {
+        return translation.x > 0.0  ?AVIOCTRL_PTZ_LEFT :AVIOCTRL_PTZ_RIGHT;
+    }
+    else {
+        return translation.y > 0.0 ? AVIOCTRL_PTZ_UP:AVIOCTRL_PTZ_DOWN;
     }
 }
 @end

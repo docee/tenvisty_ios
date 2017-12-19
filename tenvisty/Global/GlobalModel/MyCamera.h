@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <IOTCamera/Camera.h>
 #import <IOTCamera/NSCamera.h>
+#import <IOTCamera/AVIOCTRLDEFs.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface MyCamera : Camera
 <CameraDelegate>
@@ -93,5 +95,6 @@
 -(void)closePush;
 -(BOOL)isDisconnected;
 -(NSString*)strConnectState;
+- (NSInteger)direction:(CGPoint)translation;
 @end
 
