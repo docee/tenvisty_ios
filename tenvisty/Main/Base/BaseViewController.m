@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface BaseViewController ()
+@interface BaseViewController ()<MyCameraDelegate>
 
 @end
 
@@ -23,6 +23,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.camera.delegate2 = self;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.camera.delegate2 = nil;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -32,5 +43,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (BOOL)prefersHomeIndicatorAutoHidden{
+    return YES;
+}
 @end

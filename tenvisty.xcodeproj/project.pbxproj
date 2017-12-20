@@ -66,6 +66,7 @@
 		892CE0DE1FD13E6300942E28 /* AddCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0D91FD13E6200942E28 /* AddCameraViewController.m */; };
 		892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DB1FD13E6200942E28 /* SaveCameraTableViewController.m */; };
 		892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */; };
+		89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */; };
 		894871C11FDF6B7F008F15F2 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A8F4651FDE97D2003863B6 /* FLAnimatedImage.framework */; };
 		894871C51FDF6B93008F15F2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C41FDF6B93008F15F2 /* QuartzCore.framework */; };
 		894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C61FDF6B9B008F15F2 /* ImageIO.framework */; };
@@ -279,6 +280,8 @@
 		892CE0DB1FD13E6200942E28 /* SaveCameraTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCameraTableViewController.m; sourceTree = "<group>"; };
 		892CE0DC1FD13E6200942E28 /* SearchCameraTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCameraTableViewController.h; sourceTree = "<group>"; };
 		892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCameraTableViewController.m; sourceTree = "<group>"; };
+		89368D9D1FEA13EF000FCDC0 /* BaseFragmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseFragmentViewController.h; sourceTree = "<group>"; };
+		89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseFragmentViewController.m; sourceTree = "<group>"; };
 		894871C41FDF6B93008F15F2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		894871C61FDF6B9B008F15F2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		894871C81FDF6BA3008F15F2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -577,6 +580,8 @@
 				ED3D506A1FD59D0300F0C658 /* BaseTableView.m */,
 				89E6D98A1FDA25F30049F1E7 /* BaseViewController.h */,
 				89E6D98B1FDA25F30049F1E7 /* BaseViewController.m */,
+				89368D9D1FEA13EF000FCDC0 /* BaseFragmentViewController.h */,
+				89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1106,6 +1111,7 @@
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
 				892CE0D71FD13E1500942E28 /* OCScanLifeViewController.m in Sources */,
 				89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */,
+				89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */,
 				890B408D1FB02F5300C1061A /* TwsViewController.m in Sources */,
 				890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */,
 				890B407E1FB006C600C1061A /* AboutViewController.m in Sources */,
@@ -1309,6 +1315,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/tenvisty/lib";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1343,7 +1350,8 @@
 				INFOPLIST_FILE = tenvisty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/tenvisty/lib";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

@@ -8,7 +8,7 @@
 
 #import "BaseTableViewController.h"
 
-@interface BaseTableViewController ()
+@interface BaseTableViewController ()<MyCameraDelegate>
 
 @end
 
@@ -26,7 +26,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SwitchTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Switch];
     [self.tableView registerNib:[UINib nibWithNibName:@"SelectItemTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_SelectItem];
     
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -49,11 +49,23 @@
     return 0;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.camera.delegate2 = self;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.camera.delegate2 = nil;
+}
+
 
 -(TwsTableViewCell*) getRowCell:(NSInteger)row{
     return (TwsTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:row inSection:0]];
 }
-
+- (BOOL)prefersHomeIndicatorAutoHidden{
+    return YES;
+}
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];

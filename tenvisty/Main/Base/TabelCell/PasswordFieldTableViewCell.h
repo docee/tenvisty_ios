@@ -10,5 +10,8 @@
 
 @interface PasswordFieldTableViewCell : TwsTableViewCell
 
+-(void)hideImgBtn;
+-(void)showPassword;
+-(void)hidePassword;
 
 @end

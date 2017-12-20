@@ -9,10 +9,13 @@
 #import "CameraSettingViewController.h"
 #import "ListImgTableViewCell.h"
 #import "ListImgTableViewCellModel.h"
+#import "BaseTableViewController.h"
 
 @interface CameraSettingViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong,nonatomic) NSArray *listItems;
+@property (weak, nonatomic) IBOutlet UIImageView *imgCameraSnapShot;
+@property (weak, nonatomic) IBOutlet UILabel *labUID;
 
 @end
 
@@ -22,7 +25,18 @@
     [super viewDidLoad];
     
         [self.tableview registerNib:[UINib nibWithNibName:@"ListImgTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_ListImg];
-    // Do any additional setup after loading the view.
+     [self setup];
+}
+
+-(void)setup{
+    [_imgCameraSnapShot setImage:self.camera.image];
+    [_labUID setText:self.camera.uid];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _listItems = nil;
+    [self.tableview reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +46,7 @@
 
 -(NSArray *)listItems{
     if(!_listItems){
-        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") loadingTxt:LOCALSTR(@"loading...") value:@"Camera Name"],[ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") loadingTxt:nil value:nil], nil];
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") loadingTxt:nil value:self.camera.nickName],[ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") loadingTxt:nil value:nil], nil];
         NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Network") loadingTxt:LOCALSTR(@"loading...") value:nil],[ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") loadingTxt:LOCALSTR(@"loading...") value:nil],
             [ListImgTableViewCellModel initObj:@"ic_setting_record" title:LOCALSTR(@"Record") loadingTxt:LOCALSTR(@"loading...") value:nil],nil];
         NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"Other Setting") loadingTxt:nil value:nil],nil];
@@ -120,10 +134,14 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"CameraSetting2ChangeCameraName"]){
-        
+    if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
+        BaseViewController *controller= segue.destinationViewController;
+        controller.camera =  self.camera;
     }
-    
+    else if([segue.destinationViewController isKindOfClass:[BaseTableViewController class]]){
+        BaseTableViewController *controller= segue.destinationViewController;
+        controller.camera =  self.camera;
+    }
 }
 
 //其他界面返回到此界面调用的方法

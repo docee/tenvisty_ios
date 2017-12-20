@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseFragmentViewController.h"
 
-@interface CameraListViewController : UIViewController<UITableViewDelegate>
+@interface CameraListViewController : BaseFragmentViewController<UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end

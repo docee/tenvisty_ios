@@ -9,6 +9,7 @@
 #define ISFULLSCREEN self.view.bounds.size.width > self.view.bounds.size.height
 #define ZOOM_MAX_SCALE 5.0
 #define ZOOM_MIN_SCALE 1.0
+#define RECORD_TIMEOUT (5)
 
 #import "LiveViewController.h"
 #import <IOTCamera/Monitor.h>
@@ -25,12 +26,13 @@
     BOOL isShowingToolBtnsLand;
     NSDate *switchTime;
     double ptz_ctrl_time;
+    double receiveVideoTime;
+    double lostVideoTime;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollviewVideo;
 @property (weak, nonatomic) IBOutlet UIView *viewSwitchVideoQuality_port;
 //@property (weak, nonatomic) IBOutlet SwitchVideoQualityDialog *viewSwitchVideoQuality_land;
 @property (weak, nonatomic) IBOutlet UIImageView *viewPopDown_port;
-@property (weak, nonatomic) IBOutlet UIView *toolbtns_land;
 @property (weak, nonatomic) IBOutlet UIView *connectStatus_port;
 @property (weak, nonatomic) IBOutlet UIView *toolbtns_portrait;
 @property (weak, nonatomic) IBOutlet UIView *video_wrapper;
@@ -53,6 +55,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_x_viewSwitchVideoQuality_land;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_top_viewSwitchVideoQuality_land;
 @property (weak, nonatomic) IBOutlet UIView *viewPreset;
+@property (weak, nonatomic) IBOutlet UIView *viewToolbarTop;
+@property (weak, nonatomic) IBOutlet UIView *viewToolbarBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_viewtoolbarbottom;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
@@ -69,6 +74,9 @@
     //允许转成横屏
     appDelegate.allowRotation = YES;
     _viewPopDown_port.tintColor = Color_Primary;
+    if(zkDevice_IsiPhoneXOrBigger){
+        _constraint_bottom_viewtoolbarbottom.constant = 30;\
+    }
     
 }
 
@@ -130,6 +138,7 @@
         if(_viewPreset.tag > 0){
             SMsgAVIoctrlSetPointReq *req = malloc(sizeof(SMsgAVIoctrlSetPointReq));
             NSString *desc = [NSString stringWithFormat:@"preset%d",(int)_viewPreset.tag];
+            memset(req, 0, sizeof(SMsgAVIoctrlSetPointReq));
             memcpy(req->Desc,[desc UTF8String], desc.length);
             req->BitID = (int)_viewPreset.tag;
             [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetPointReq)];
@@ -163,14 +172,18 @@
 
 -(void)toggleTools:(BOOL)hide{
     isShowingToolBtnsLand = !hide;
-    [_toolbtns_land setHidden:!isShowingToolBtnsLand];
+    [_viewToolbarTop setHidden:!isShowingToolBtnsLand];
+    [_viewToolbarBottom setHidden:!isShowingToolBtnsLand];
+    if(isShowingToolBtnsLand){
+        [_btnTalk_land setHidden:!isListening];
+    }
     if(isShowingToolBtnsLand){
         [self.scrollviewVideo setZoomScale:1.0];
     }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.camera.delegate2 = self;
+    [super viewWillAppear:animated];
     _labConnectState.text = [(self.camera) strConnectState];
     [_videoMonitor attachCamera:self.camera];
     [_viewLoading setHidden:NO];
@@ -184,8 +197,27 @@
     
     [_btnRecord_land setEnabled:NO];
     [_btnRecord_port setEnabled:NO];
-    
+    //注册通知，进入后台时退回主界面
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_videoMonitor deattachCamera];
+    [self stopRecord];
+    [self.camera stopVideo];
+    [self.camera stopSpeak];
+    [self.camera stopAudio];
+    if(_videoMonitor.image){
+        [self.camera saveImage:_videoMonitor.image];
+    }
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = NO;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
 -(void)changeStream:(NSInteger)stream{
     SMsgAVIoctrlSetStreamCtrlReq *req = malloc(sizeof(SMsgAVIoctrlSetStreamCtrlReq));
     req->channel = 0;
@@ -218,20 +250,6 @@
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    self.camera.delegate2 = nil;
-    [_videoMonitor deattachCamera];
-    [self stopRecord];
-    [self.camera stopVideo];
-    [self.camera stopSpeak];
-    [self.camera stopAudio];
-    if(_videoMonitor.image){
-        [self.camera saveImage:_videoMonitor.image];
-    }
-    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    //允许转成横屏
-    appDelegate.allowRotation = NO;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -281,6 +299,7 @@
         [_viewPreset setHidden:YES];
       //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     }
+    [_viewSwitchVideoQuality_port setHidden:YES];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -330,24 +349,35 @@
     }
 }
 - (IBAction)doRecord:(UIButton*)sender {
-    _btnRecord_land.selected = !sender.selected;
-    _btnRecord_port.selected = _btnRecord_land.selected;
-    if (sender.selected) {
-       NSString *recordNameString =  [GBase saveRecordingForCamera:self.camera];
-        [self.camera startRecordVideo:recordNameString];
-        [_viewRecordTime setHidden:NO];
-        [_labRecordTime setText:@"00:00"];
-        _labRecordTime.tag = 0;
-        recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshRecordTime) userInfo:NULL repeats:YES];
+    if (!sender.selected) {
+        [self startRecord];
     }else{
-        [self.camera stopRecordVideo];
-        [_viewRecordTime setHidden:YES];
-        if(recordTimer){
-            [recordTimer invalidate];
-            recordTimer = nil;
-        }
+        [self stopRecord];
     }
-    
+}
+
+-(void)startRecord{
+    _btnRecord_land.selected = YES;
+    _btnRecord_port.selected = YES;
+    isRecording = YES;
+    NSString *recordNameString =  [GBase saveRecordingForCamera:self.camera];
+    [self.camera startRecordVideo:recordNameString];
+    [_viewRecordTime setHidden:NO];
+    [_labRecordTime setText:@"00:00"];
+    _labRecordTime.tag = 0;
+    recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshRecordTime) userInfo:NULL repeats:YES];
+}
+
+-(void)stopRecord{
+    _btnRecord_land.selected = NO;
+    _btnRecord_port.selected = NO;
+    isRecording = NO;
+    [self.camera stopRecordVideo];
+    [_viewRecordTime setHidden:YES];
+    if(recordTimer){
+        [recordTimer invalidate];
+        recordTimer = nil;
+    }
 }
 
 -(void)refreshRecordTime{
@@ -509,14 +539,22 @@
 - (void)camera:(NSCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
     dispatch_async(dispatch_get_main_queue(), ^{
         if(fps > 1 ){
+            receiveVideoTime = [[NSDate date] timeIntervalSinceReferenceDate];
             [_viewLoading setHidden:YES];
             [_btnRecord_land setEnabled:YES];
             [_btnRecord_port setEnabled:YES];
         }
         else{
+            lostVideoTime = [[NSDate date] timeIntervalSinceReferenceDate];
+            if(!receiveVideoTime || lostVideoTime - receiveVideoTime > RECORD_TIMEOUT){
+                if(!isRecording){
+                    [_btnRecord_land setEnabled:NO];
+                    [_btnRecord_port setEnabled:NO];
+                }else{
+                    [self stopRecord];
+                }
+            }
             [_viewLoading setHidden:NO];
-            [_btnRecord_land setEnabled:NO];
-            [_btnRecord_port setEnabled:NO];
             
         }
     });
@@ -559,7 +597,7 @@
                 [self getPresetList];
             }
             else{
-                [iToast makeText:LOCALSTR(@" Preset setting failed")];
+                [[iToast makeText:LOCALSTR(@" Preset setting failed")] show];
             }
             break;
         case IOTYPE_USER_IPCAM_OPR_PRESET_POINT_RESP:
@@ -567,7 +605,7 @@
                   [self getPresetList];
             }
             else{
-                [iToast makeText:LOCALSTR(@" Preset calling failed")];
+                [[iToast makeText:LOCALSTR(@" Preset calling failed")] show];
             }
             break;
             
@@ -576,13 +614,6 @@
     }
 }
 
--(void) stopRecord{
-    if(recordTimer){
-        [recordTimer invalidate];
-    }
-    [self.camera stopRecordVideo];
-    [_viewRecordTime setHidden:YES];
-}
 
 #pragma mark - MonitorTouchDelegate Methods
 
@@ -626,6 +657,20 @@
 //        }
 //        
 //    }//@if
+}
+
+
+- (void)didReceiveNotification:(NSNotification *)notification {
+    
+    LOG(@"LiveView_didReceiveNotification : %@", notification.name);
+    if(notification.name == UIApplicationDidBecomeActiveNotification){
+        
+    }
+    else{
+        if(isRecording){
+            [self stopRecord];
+        }
+    }
 }
 
 @end

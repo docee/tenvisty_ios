@@ -10,4 +10,9 @@
 
 @interface ChangeWiFiViewController : BaseTableViewController
 
+@property (nonatomic,strong) NSString *wifiSsid;
+@property (nonatomic,assign) char wifiEnctype;
+@property (nonatomic,assign) char wifiMode;
+
+
 @end

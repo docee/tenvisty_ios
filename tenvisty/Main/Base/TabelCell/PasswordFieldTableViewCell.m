@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_leftImg;
 
 @property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UIButton *btnShowHidePassword;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_btnImg;
 @property (weak, nonatomic) IBOutlet UITextField *midPasswordField;
 @end
 
@@ -34,13 +36,18 @@
 
 - (IBAction)togglePassword:(UIButton *)sender {
     if(_midPasswordField.isSecureTextEntry){
-        [sender setImage:[UIImage imageNamed:@"icPasswordShown"] forState:UIControlStateNormal];
+        sender.selected = YES;
         [_midPasswordField setSecureTextEntry:NO];
     }
     else{
-        [sender setImage:[UIImage imageNamed:@"icPasswordHidden"] forState:UIControlStateNormal];
+         sender.selected = NO;
         [_midPasswordField setSecureTextEntry:YES];
     }
+}
+-(void)hideImgBtn{
+    [_btnShowHidePassword setImage:nil forState:UIControlStateNormal];
+    [_btnShowHidePassword setImage:nil forState:UIControlStateSelected];
+    _constraint_width_btnImg.constant = 0;
 }
 
 -(NSString*)title{
@@ -70,5 +77,10 @@
 -(void) setValueMarginLeft:(CGFloat)left{
     _constraint_left_midPasswordField.constant  = left;
 }
-
+-(void)showPassword{
+    [_midPasswordField setSecureTextEntry:NO];
+}
+-(void)hidePassword{
+    [_midPasswordField setSecureTextEntry:YES];
+}
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2017 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface CameraSettingViewController :  UIViewController<UITableViewDelegate>
+@interface CameraSettingViewController :  BaseViewController<UITableViewDelegate>
 
 @end

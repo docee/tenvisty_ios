@@ -39,7 +39,7 @@
     NSString *id = TableViewCell_TextField_Normal;
     TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
     cell.title = LOCALSTR(@"Name");
-
+    cell.value = self.camera.nickName;
     //[cell.rightTextField becomeFirstResponder];
     return cell;
 }

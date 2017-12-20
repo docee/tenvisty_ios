@@ -17,7 +17,7 @@
 #import "SelectItemTableViewCell.h"
 #import "ListImgTableViewCellModel.h"
 
-@interface BaseTableViewController : UITableViewController
+@interface BaseTableViewController : UITableViewController<UITableViewDelegate>
 
 @property (nonatomic,weak) MyCamera *camera;
 

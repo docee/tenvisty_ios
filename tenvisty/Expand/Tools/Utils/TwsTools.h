@@ -32,5 +32,5 @@ typedef NS_ENUM(NSInteger, DeviceOrientation) {
 + (void)presentAlertTitle:(UIViewController*)owner title:(NSString *)title message:(NSString *)message alertStyle:(UIAlertControllerStyle)style actionDefaultTitle:(NSString *)defaultTitle actionDefaultBlock:(void (^)(void))defaultBlock defaultActionStyle:(UIAlertActionStyle)actionstyle actionCancelTitle:(NSString *)cancelTitle actionCancelBlock:(void (^)(void))cancelBlock;
 
 + (void)presentMessage:(NSString *)message atDeviceOrientation:(DeviceOrientation)orientation;
-
++ (BOOL)checkPasswordFormat:(NSString*)pwd;
 @end

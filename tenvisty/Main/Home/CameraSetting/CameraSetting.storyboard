@@ -84,6 +84,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imgCameraSnapShot" destination="gyE-tc-n6T" id="jEU-cN-yJK"/>
+                        <outlet property="labUID" destination="gn6-o7-9oY" id="HB4-E7-Wo7"/>
                         <outlet property="tableview" destination="rrP-Iz-cZj" id="cAd-US-lLc"/>
                         <segue destination="y9d-zb-Q0d" kind="show" identifier="CameraSetting2ChangeCameraName" id="26v-v0-GrG"/>
                         <segue destination="vEH-oV-IOe" kind="show" identifier="CameraSetting2ChangeCameraPassword" id="Zbd-lo-FTL"/>
@@ -164,18 +166,58 @@
         <scene sceneID="xB4-df-H8f">
             <objects>
                 <tableViewController storyboardIdentifier="storyboard_changcamerapassword" hidesBottomBarWhenPushed="YES" id="vEH-oV-IOe" customClass="ChangeCameraPasswordViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="RSg-oQ-oyY">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="RSg-oQ-oyY" customClass="BaseTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Rq2-qC-v0s">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewCellFooter" rowHeight="280" id="Rq2-qC-v0s">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="280"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rq2-qC-v0s" id="uf2-mb-xYm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="279.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JiJ-eD-K2J">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-e0-0f5">
+                                                    <rect key="frame" x="243" y="5" width="122" height="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <state key="normal" title="show password" image="checkbox_uncheck">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <state key="selected" image="checkbox_checked"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgD-YU-DJU">
+                                                    <rect key="frame" x="10" y="33" width="365" height="122.5"/>
+                                                    <string key="text">Please make sure your password length is 6-12 characters and contaqins at least two combinations of below characters.
+1.capital
+2.small letter
+3.number
+4.special character:~!@$%^()_-,|/*.</string>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="OgD-YU-DJU" firstAttribute="leading" secondItem="JiJ-eD-K2J" secondAttribute="leading" constant="10" id="IYP-Bk-UJb"/>
+                                                <constraint firstAttribute="height" constant="230" id="RvN-ut-ADr"/>
+                                                <constraint firstAttribute="trailing" secondItem="OgD-YU-DJU" secondAttribute="trailing" id="Vz3-vT-sn6"/>
+                                                <constraint firstAttribute="trailing" secondItem="bHT-e0-0f5" secondAttribute="trailing" constant="10" id="YHe-VD-Atd"/>
+                                                <constraint firstItem="bHT-e0-0f5" firstAttribute="top" secondItem="JiJ-eD-K2J" secondAttribute="top" constant="5" id="fw2-9Y-uNm"/>
+                                                <constraint firstItem="OgD-YU-DJU" firstAttribute="top" secondItem="bHT-e0-0f5" secondAttribute="bottom" constant="10" id="lrM-Yi-uHv"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="JiJ-eD-K2J" secondAttribute="trailing" id="BHz-gz-spI"/>
+                                        <constraint firstItem="JiJ-eD-K2J" firstAttribute="leading" secondItem="uf2-mb-xYm" secondAttribute="leading" id="EcF-U5-hZi"/>
+                                        <constraint firstItem="JiJ-eD-K2J" firstAttribute="top" secondItem="uf2-mb-xYm" secondAttribute="top" id="Uvg-VN-QPJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -194,7 +236,7 @@
                         <barButtonItem key="rightBarButtonItem" image="navDone" id="Y6a-K4-VGw">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="save:" destination="vEH-oV-IOe" id="PGG-cV-SCy"/>
+                                <action selector="save:" destination="vEH-oV-IOe" id="pdh-wo-mdB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -202,6 +244,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WdG-Bk-kEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SZ3-4q-jPl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="329.68515742128938"/>
         </scene>
         <!--Wi-Fi Setting-->
         <scene sceneID="YNh-xS-tUP">
@@ -227,6 +270,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="navRefresh" id="gzX-TU-mf6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="refreshWifiList:" destination="gZk-HX-Ihr" id="MK1-WM-dEB"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -270,6 +316,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="navDone" id="H6d-By-K8y">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="save:" destination="t3s-Bm-tpk" id="AoH-ZS-fur"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -721,6 +770,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkbox_checked" width="16" height="16"/>
+        <image name="checkbox_uncheck" width="16" height="16"/>
         <image name="navBack" width="30" height="30"/>
         <image name="navDone" width="30" height="30"/>
         <image name="navRefresh" width="30" height="30"/>

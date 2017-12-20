@@ -8,6 +8,7 @@
 //
 
 #import "CameraListItemTableViewCell.h"
+#import "BaseViewController.h"
 
 @interface CameraListItemTableViewCell(){
    __weak MyCamera *_camera;
@@ -184,6 +185,12 @@
     }
 }
 
+- (IBAction)go2CameraSetting:(id)sender {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
+    BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_cameraSetting"];  //test2为viewcontroller的StoryboardId
+    test2obj.camera = self.camera;
+    [[self currentViewController].navigationController pushViewController:test2obj animated:YES];
+}
 
 -(void)setCamera:(MyCamera *)camera{
     _camera = camera;
@@ -193,6 +200,18 @@
         [self refreshAlarmState];
         [self refreshInfo];
     }
+}
+-(UIViewController *)currentViewController{
+    UIViewController *vc;
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder* nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]] ) {
+            vc=(UIViewController*)nextResponder;
+            
+            return vc;
+        }
+    }
+    return vc;
 }
 
 @end

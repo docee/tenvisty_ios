@@ -35,7 +35,7 @@
 
 - (IBAction)go2CameraSetting:(UIButton *)sender {
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
-    UIViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_cameraSetting"];  //test2为viewcontroller的StoryboardId
+    BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_cameraSetting"];  //test2为viewcontroller的StoryboardId
     [self.navigationController pushViewController:test2obj animated:YES];
 }
 
@@ -227,6 +227,8 @@
         });
     }
 }
+
+
 /*
 #pragma mark - Navigation
 
