@@ -40,16 +40,16 @@
     [self.labCameraName setTextColor:Color_GrayDark];
     
     [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
-    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayDark] forState:UIControlStateDisabled];
+    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_White_alpha] forState:UIControlStateNormal];
+    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:[UIColor clearColor]] forState:UIControlStateDisabled];
 
     [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
-    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayDark] forState:UIControlStateDisabled];
+    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_White_alpha] forState:UIControlStateNormal];
+    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:[UIColor clearColor]] forState:UIControlStateDisabled];
     
     [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Gray_alpha] forState:UIControlStateNormal];
-    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_GrayDark] forState:UIControlStateDisabled];
+    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_White_alpha] forState:UIControlStateNormal];
+    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:[UIColor clearColor]] forState:UIControlStateDisabled];
     
     // Initialization code
 }
@@ -127,6 +127,7 @@
             [self.btnPlay setHidden:NO];
             //self.labCameraConnectState.text = LOCALSTR(@"Online");
             [self.labCameraConnectState setBackgroundColor:Color_GreenDark];
+            [TwsViewTools setButtonContentCenter:self.btnPlay];
             self.constraint_width_labConnectstate.constant = 75;
             [_btnCameraEvent setEnabled:YES];
             [_btnCameraSetting setEnabled:YES];

@@ -24,19 +24,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-        [self.tableview registerNib:[UINib nibWithNibName:@"ListImgTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_ListImg];
-     [self setup];
+    [self.tableview registerNib:[UINib nibWithNibName:@"ListImgTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_ListImg];
+
 }
 
 -(void)setup{
     [_imgCameraSnapShot setImage:self.camera.image];
     [_labUID setText:self.camera.uid];
+    [self doGetRecordSetting];
+    [self doGetWiFi];
+}
+
+-(void)doGetWiFi{
+    [self setRowValue:nil section:1 row:0];
+    SMsgAVIoctrlGetWifiReq *req = malloc(sizeof(SMsgAVIoctrlGetWifiReq));
+    memset(req, 0, sizeof(SMsgAVIoctrlGetWifiReq));
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetWifiReq)];
+    free(req);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    _listItems = nil;
-    [self.tableview reloadData];
+    [self setup];
+    //刷新摄像机名称
+    [self setRowValue:self.camera.nickName section:0 row:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,10 +55,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)doGetRecordSetting{
+    [self setRowValue:nil section:1 row:2];
+    SMsgAVIoctrlGetRecordReq *req = malloc(sizeof(SMsgAVIoctrlGetRecordReq));
+    req->channel = 0;
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETRECORD_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetRecordReq)];
+    free(req);
+}
+
 -(NSArray *)listItems{
     if(!_listItems){
         NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") loadingTxt:nil value:self.camera.nickName],[ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") loadingTxt:nil value:nil], nil];
-        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Network") loadingTxt:LOCALSTR(@"loading...") value:nil],[ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") loadingTxt:LOCALSTR(@"loading...") value:nil],
+        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Network") loadingTxt:LOCALSTR(@"loading...") value:nil],[ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") loadingTxt:nil value:nil],
             [ListImgTableViewCellModel initObj:@"ic_setting_record" title:LOCALSTR(@"Record") loadingTxt:LOCALSTR(@"loading...") value:nil],nil];
         NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"Other Setting") loadingTxt:nil value:nil],nil];
         NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"System Setting") loadingTxt:nil value:nil],nil];
@@ -150,6 +169,39 @@
 }
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    switch (type) {
+        case IOTYPE_USER_IPCAM_GETRECORD_RESP:{
+            SMsgAVIoctrlGetRecordResq *resp = (SMsgAVIoctrlGetRecordResq*)data;
+            NSString* v = resp->recordType == 0?LOCALSTR(@"OFF"):(resp->recordType == 1 ? LOCALSTR(@"Full Time Recording") : LOCALSTR(@"Alarm Recording"));
+            [self setRowValue:v section:1 row:2];
+            break;
+        }
+        case IOTYPE_USER_IPCAM_GETWIFI_RESP:{
+            SMsgAVIoctrlGetWifiResp *resp = (SMsgAVIoctrlGetWifiResp*)data;
+            NSString* ssid =  [NSString stringWithUTF8String: (const char*)resp->ssid];
+            if(resp->status == 1 || resp->status == 3){
+                [self setRowValue:ssid section:1 row:0];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+-(void)setRowValue:(NSString*)value section:(NSInteger)section row:(NSInteger)row{
+    ListImgTableViewCellModel* model = (ListImgTableViewCellModel*)[[self.listItems objectAtIndex:section] objectAtIndex:row];
+    if(value==nil){
+        model.loadingText = LOCALSTR(@"loading...");
+    }
+    else{
+        model.loadingText = nil;
+    }
+    model.titleValue = value;
+    [self.tableview reloadData];
 }
 
 /*

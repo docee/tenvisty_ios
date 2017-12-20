@@ -109,13 +109,20 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9b-ky-InE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="IRz-r0-26P" firstAttribute="top" secondItem="fvd-pr-T2T" secondAttribute="top" id="020-9V-VDi"/>
+                                                        <constraint firstAttribute="trailing" secondItem="r9b-ky-InE" secondAttribute="trailing" id="CmN-Nq-TyI"/>
                                                         <constraint firstAttribute="bottom" secondItem="IRz-r0-26P" secondAttribute="bottom" id="LKM-Nx-IcG"/>
                                                         <constraint firstItem="IRz-r0-26P" firstAttribute="leading" secondItem="fvd-pr-T2T" secondAttribute="leading" id="M1b-qm-nhD"/>
+                                                        <constraint firstItem="r9b-ky-InE" firstAttribute="leading" secondItem="fvd-pr-T2T" secondAttribute="leading" id="RPs-CT-EuY"/>
+                                                        <constraint firstItem="r9b-ky-InE" firstAttribute="top" secondItem="fvd-pr-T2T" secondAttribute="top" id="j9d-2M-lsK"/>
                                                         <constraint firstAttribute="trailing" secondItem="IRz-r0-26P" secondAttribute="trailing" id="pAr-mG-umu"/>
+                                                        <constraint firstAttribute="bottom" secondItem="r9b-ky-InE" secondAttribute="bottom" id="vcz-Kh-Klo"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Rl-LW-pyl" userLabel="bottom_toolbar">
@@ -165,7 +172,8 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5f-YR-My6">
                                                     <rect key="frame" x="0.0" y="40" width="375" height="100"/>
-                                                    <state key="normal" image="btn_play"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <state key="normal" title="tap to live view" image="btn_play"/>
                                                     <connections>
                                                         <segue destination="Clh-uG-1TF" kind="show" identifier="CameraList2LiveView" id="1tY-Qx-EyW"/>
                                                     </connections>
@@ -511,18 +519,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="lFG-sW-s6a">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lFG-sW-s6a">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera On LAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aws-Ae-pPR">
-                                    <rect key="frame" x="20" y="81.666666666666671" width="104" height="17"/>
+                                    <rect key="frame" x="20" y="9" width="104" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQ4-0Q-4BU">
-                                    <rect key="frame" x="129" y="80" width="20" height="20"/>
+                                    <rect key="frame" x="129" y="7.6666666666666679" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="CXQ-EY-o2l"/>
                                         <constraint firstAttribute="height" constant="20" id="ZVJ-BT-7m8"/>
@@ -2269,7 +2277,7 @@
         <image name="btnWirelessInstall_nor" width="150" height="150"/>
         <image name="btnWirelessInstall_press" width="150" height="150"/>
         <image name="btn_modifypassword_listitem" width="40" height="40"/>
-        <image name="btn_play" width="50" height="50"/>
+        <image name="btn_play" width="40" height="40"/>
         <image name="btn_reconnect" width="40" height="40"/>
         <image name="btn_scan_flash_off_nor" width="43" height="45"/>
         <image name="btn_scan_flash_on_nor" width="43" height="45"/>
@@ -2291,10 +2299,11 @@
         <image name="view_event_record" width="80" height="61"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u2h-rS-5ub"/>
+        <segue reference="JdR-Cy-kRK"/>
+        <segue reference="qha-sq-VLD"/>
         <segue reference="FqI-rB-fmr"/>
-        <segue reference="6Zl-SU-ISp"/>
-        <segue reference="Y28-Yq-DHg"/>
+        <segue reference="wkI-hP-L0S"/>
+        <segue reference="SOf-2T-VCX"/>
         <segue reference="p9E-YF-VbO"/>
         <segue reference="xAs-AT-dZ3"/>
     </inferredMetricsTieBreakers>

@@ -177,6 +177,9 @@
     if(isShowingToolBtnsLand){
         [_btnTalk_land setHidden:!isListening];
     }
+    else{
+        [_btnTalk_land setHidden:YES];
+    }
     if(isShowingToolBtnsLand){
         [self.scrollviewVideo setZoomScale:1.0];
     }
@@ -188,7 +191,6 @@
     [_videoMonitor attachCamera:self.camera];
     [_viewLoading setHidden:NO];
     [self changeStream:self.camera.videoQuality];
-    [self.camera startVideo];
     if(isListening){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.camera startAudio];
@@ -206,9 +208,10 @@
     [super viewWillDisappear:animated];
     [_videoMonitor deattachCamera];
     [self stopRecord];
-    [self.camera stopVideo];
-    [self.camera stopSpeak];
-    [self.camera stopAudio];
+    [self.camera stopVideoAsync:^{
+        [self.camera stopSpeak];
+        [self.camera stopAudio];
+    }];
     if(_videoMonitor.image){
         [self.camera saveImage:_videoMonitor.image];
     }
@@ -232,8 +235,9 @@
         switchTime = [NSDate date];
         self.camera.videoQuality = 1;
         [GBase editCamera:self.camera];
-        [self.camera stopVideo];
-        [self changeStream:1];
+        [self.camera stopVideoAsync:^{
+            [self changeStream:1];
+        }];
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -244,8 +248,9 @@
         switchTime = [NSDate date];
         self.camera.videoQuality = 0;
         [GBase editCamera:self.camera];
-        [self.camera stopVideo];
-        [self changeStream:0];
+        [self.camera stopVideoAsync:^{
+            [self changeStream:0];
+        }];
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -408,7 +413,9 @@
             [self.camera stopAudio];
         }
     }
-    [_btnTalk_land setHidden:!isListening];
+    if(_isFullscreen){
+        [_btnTalk_land setHidden:!isListening];
+    }
 }
 
 -(void)startListen:(BOOL)changeUI{
@@ -527,7 +534,7 @@
         _labConnectState.text = [((MyCamera*)camera) strConnectState];
     });
     if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
-        [self.camera startVideo];
+        [self changeStream:self.camera.videoQuality];
         if(isListening){
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.camera startAudio];

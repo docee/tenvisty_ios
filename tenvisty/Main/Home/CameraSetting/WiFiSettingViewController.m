@@ -151,7 +151,14 @@
             
             wifiSSIDListCount = p->number;
             memcpy(wifiSSIDList, p->stWifiAp, size - sizeof(p->number));
-            
+            SWifiAp tmpAp = wifiSSIDList[0];
+            for(int i=0;i<wifiSSIDListCount;i++){
+                if(wifiSSIDList[i].status != 0){
+                    wifiSSIDList[0] = wifiSSIDList[i];
+                    wifiSSIDList[i] = tmpAp;
+                    break;
+                }
+            }
             [self.tableView reloadData];
             break;
             

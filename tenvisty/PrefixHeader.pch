@@ -53,6 +53,7 @@
 #define Color_GreenDark   (RGBA_COLOR(4, 166, 9,1))
 #define Color_GreenLight  (RGBA_COLOR(109, 253, 123,1))
 #define Color_White  (RGBA_COLOR(255, 255, 255,1))
+#define Color_White_alpha  (RGBA_COLOR(255, 255, 255,0.3))
 #define Color_Black  (RGBA_COLOR(0, 0, 0,1))
 #define Color_GrayLightless  (RGBA_COLOR(207, 207, 207,1))
 #define Color_GrayLight  (RGBA_COLOR(230, 230, 230,1))
@@ -61,8 +62,9 @@
 #define Color_Gray  (RGBA_COLOR(149, 149, 149,1))
 #define Color_Gray_alpha  (RGBA_COLOR(149, 149, 149,0.4))
 #define Color_GrayDark  (RGBA_COLOR(100,100, 100,1))
-#define Color_GrayDark_alpha  (RGBA_COLOR(100,100, 100,0.4))
+#define Color_GrayDark_alpha  (RGBA_COLOR(100,100, 100,0.9))
 #define Color_Transparent  (RGBA_COLOR(0, 0, 0,0))
+#define Color_Black_alpha  (RGBA_COLOR(0, 0, 0,0.4))
 
 #define Color_Item_Selected_BG (RGBA_COLOR(220, 220, 220, 0.8))
 

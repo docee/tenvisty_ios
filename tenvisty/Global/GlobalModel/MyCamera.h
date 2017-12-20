@@ -96,5 +96,6 @@
 -(BOOL)isDisconnected;
 -(NSString*)strConnectState;
 - (NSInteger)direction:(CGPoint)translation;
+-(void)stopVideoAsync:(void (^)(void))block;
 @end
 

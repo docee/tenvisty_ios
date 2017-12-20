@@ -130,7 +130,7 @@ withFilterContext:(id)filterContext
                 [self.delegate onReceived:status ip:ip uid:uid];
             }
         }
-        NSLog(FORMAT(@"RECV: %@", msg));
+        LOG(@"RECV: %@", msg);
     }
     else
     {
@@ -138,7 +138,7 @@ withFilterContext:(id)filterContext
         uint16_t port = 0;
         [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
         
-        NSLog(FORMAT(@"RECV: Unknown message from: %@:%hu", host, port));
+        LOG(@"RECV: Unknown message from: %@:%hu", host, port);
     }
 }
 

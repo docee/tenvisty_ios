@@ -201,6 +201,15 @@
     [self stopShow:0];
 }
 
+-(void)stopVideoAsync:(void (^)(void))block{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self stopVideo];
+        if(block != nil){
+            block();
+        }
+    });
+}
+
 -(void)startAudio{
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     [self startSoundToPhone:0];
