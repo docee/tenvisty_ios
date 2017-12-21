@@ -9,7 +9,9 @@
 #import "TimeZoneSettingViewController.h"
 #import "TimeZoneModel.h"
 
-@interface TimeZoneSettingViewController ()
+@interface TimeZoneSettingViewController (){
+    NSInteger timezoneIndex;
+}
 
 @end
 
@@ -17,7 +19,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setup];
     // Do any additional setup after loading the view.
+}
+-(void)setup{
+    [self getTimezone];
+}
+
+-(void)getTimezone{
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
+    free(req);
+}
+
+-(void)setTimezone:(NSInteger)index{
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    SMsgAVIoctrlSetDstReq *req = malloc(sizeof(SMsgAVIoctrlSetDstReq));
+    memset(req, 0, sizeof(SMsgAVIoctrlSetDstReq));
+//    if([[NSTimeZone localTimeZone] isDaylightSavingTime] && [[NSTimeZone localTimeZone] isDaylightSavingTimeForDate:[NSDate date]]){
+//        req->Enable = 1;
+//    }
+    req->Enable = 1;
+    NSString *area = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:index]).area;
+    memcpy(req->DstDistId, [area UTF8String], area.length);
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetTimeReq)];
+    free(req);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +69,7 @@
     cell.labTitle.text = model.area;
     cell.labDesc.text = model.strGMT;
     
-    [cell setSelect:indexPath.row == 2];
+    [cell setSelect:indexPath.row == timezoneIndex];
     
     return cell;
 }
@@ -57,15 +84,43 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
+    [self setTimezone:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40.0;
 }
-
+- (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    switch (type) {
+        case IOTYPE_USER_IPCAM_GET_ZONE_INFO_RESP:{
+            SMsgAVIoctrlGetDstResp *resp = (SMsgAVIoctrlGetDstResp*)data;
+            for(int i=0; i < [TimeZoneModel getAll].count; i++){
+                TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
+                if([tz.area isEqualToString:[NSString stringWithUTF8String:resp->DstDistrictInfo.DstDistId]]){
+                    timezoneIndex = i;
+                    break;
+                }
+            }
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            [self.tableView reloadData];
+            break;
+            break;
+        }
+        case IOTYPE_USER_IPCAM_SET_ZONE_INFO_RESP:{
+            SMsgAVIoctrlSetDstResp *resp = (SMsgAVIoctrlSetDstResp*)data;
+            if(resp->result == 0){
+                [[iToast makeText:LOCALSTR(@"setting successfully")] show];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else{
+                [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];
+            }
+        }
+        default:
+            break;
+    }
+}
 
 /*
 #pragma mark - Navigation

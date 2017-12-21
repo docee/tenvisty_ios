@@ -67,6 +67,7 @@
 		892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DB1FD13E6200942E28 /* SaveCameraTableViewController.m */; };
 		892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */; };
 		89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */; };
+		89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */; };
 		894871C11FDF6B7F008F15F2 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A8F4651FDE97D2003863B6 /* FLAnimatedImage.framework */; };
 		894871C51FDF6B93008F15F2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C41FDF6B93008F15F2 /* QuartzCore.framework */; };
 		894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C61FDF6B9B008F15F2 /* ImageIO.framework */; };
@@ -282,6 +283,8 @@
 		892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCameraTableViewController.m; sourceTree = "<group>"; };
 		89368D9D1FEA13EF000FCDC0 /* BaseFragmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseFragmentViewController.h; sourceTree = "<group>"; };
 		89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseFragmentViewController.m; sourceTree = "<group>"; };
+		89368DA41FEB6305000FCDC0 /* SyncTimeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncTimeTableViewCell.h; sourceTree = "<group>"; };
+		89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncTimeTableViewCell.m; sourceTree = "<group>"; };
 		894871C41FDF6B93008F15F2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		894871C61FDF6B9B008F15F2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		894871C81FDF6BA3008F15F2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -621,6 +624,8 @@
 				896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */,
 				892477941FE263F70021D8E6 /* TwsTableViewCell.h */,
 				892477951FE263F70021D8E6 /* TwsTableViewCell.m */,
+				89368DA41FEB6305000FCDC0 /* SyncTimeTableViewCell.h */,
+				89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */,
 			);
 			path = TabelCell;
 			sourceTree = "<group>";
@@ -1107,6 +1112,7 @@
 				892ADB9A1FD8F83000BD8929 /* ImageTableViewCell.m in Sources */,
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
+				89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */,
 				895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */,
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
 				892CE0D71FD13E1500942E28 /* OCScanLifeViewController.m in Sources */,

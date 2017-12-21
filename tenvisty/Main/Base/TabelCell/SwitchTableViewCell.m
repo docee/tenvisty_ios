@@ -30,8 +30,15 @@
 }
 
 -(void) setLeftImage:(NSString*)imageName{
-    [self.leftImg setImage:[UIImage imageNamed:imageName]];
-    self.constraint_width_leftImg.constant = 30;
+    if(imageName == nil){
+        [self.leftImg setHidden:YES];
+         self.constraint_width_leftImg.constant = 0;
+    }
+    else{
+        [self.leftImg setHidden:NO];
+        [self.leftImg setImage:[UIImage imageNamed:imageName]];
+        self.constraint_width_leftImg.constant = 30;
+    }
 }
 
 @end

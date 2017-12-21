@@ -8,49 +8,326 @@
 
 #import "SystemSettingTableViewController.h"
 
-@interface SystemSettingTableViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *btnReset;
-@property (weak, nonatomic) IBOutlet UIButton *btnReboot;
-@property (weak, nonatomic) IBOutlet UIButton *btnCheckFm;
+@interface SystemSettingTableViewController (){
+    NSInteger updateState;
+    NSInteger resetState;
+    NSInteger rebootState;
+    NSString *accCustomTypeVersion;
+    NSString *accVendorTypeVersion;
+    NSString *accSystemTypeVersion;
+}
 
 @end
 
 @implementation SystemSettingTableViewController
 
-+ (UIImage *)imageWithColor:(UIColor *)color
-{
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
+//+ (UIImage *)imageWithColor:(UIColor *)color
+//{
+//    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+//    UIGraphicsBeginImageContext(rect.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetFillColorWithColor(context, [color CGColor]);
+//    CGContextFillRect(context, rect);
+//    
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    return image;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.btnReset setBackgroundImage:[SystemSettingTableViewController imageWithColor:Color_Gray] forState:UIControlStateHighlighted];
-    [self.btnReboot setBackgroundImage:[SystemSettingTableViewController imageWithColor:Color_Gray] forState:UIControlStateHighlighted];
-    [self.btnCheckFm setBackgroundImage:[SystemSettingTableViewController imageWithColor:Color_Gray] forState:UIControlStateHighlighted];
+//    [self.btnReset setBackgroundImage:[SystemSettingTableViewController imageWithColor:Color_Gray] forState:UIControlStateHighlighted];
+//    [self.btnReboot setBackgroundImage:[SystemSettingTableViewController imageWithColor:Color_Gray] forState:UIControlStateHighlighted];
+//    [self.btnCheckFm setBackgroundImage:[SystemSettingTableViewController imageWithColor:Color_Gray] forState:UIControlStateHighlighted];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setup];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [TwsProgress setDismissBlock:^(NSString *text) {
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Timeout")];
+    }];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [TwsProgress dismiss];
+    [TwsProgress setDismissBlock:nil];
+}
+
+-(void)setup{
+    updateState = -1;
+    resetState = -1;
+    rebootState = -1;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(void)doReset{
+    resetState = 0;
+    [TwsProgress showText:LOCALSTR(@"Resetting...") durationTime:60];
+    SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RESET_DEFAULT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
+    free(req);
+}
+-(void)doReboot{
+    rebootState = 0;
+    [TwsProgress showText:LOCALSTR(@"Rebooting...") durationTime:60];
+    SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_REBOOT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
+    free(req);
+    
+}
+-(void)doGetAccFmInfo{
+    updateState = 0;
+    [TwsProgress showText:LOCALSTR(@"checking...") durationTime:60];
+    SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
+    free(req);
+}
+
+//根据url获取固件信息
+-(void)getFMInfo:(NSString*)localUrl upgradeUrl:(NSString*)remoteUrl systemType:(NSString*)sysType customType:(NSString*)cusType vendorType:(NSString*)vendType{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *systemTypeResp = [self getHttpResp:FORMAT(@"%@%@%@",remoteUrl,sysType,@"msg.json")];
+        NSString *customTypeResp = [self getHttpResp:FORMAT(@"%@%@%@",remoteUrl,cusType,@"msg.json")];
+        NSString *vendTypeResp = [self getHttpResp:FORMAT(@"%@%@%@",remoteUrl,vendType,@"msg.json")];
+        [self checkFM:systemTypeResp customType:customTypeResp vendorType:vendTypeResp];
+    });
+}
+
+-(NSString*)getHttpResp:(NSString*)url{
+    NSString* webStringURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL* url1 = [NSURL URLWithString:webStringURL];
+    NSLog(@"webStringURL = %@", webStringURL);
+    //創建一個請求
+    NSURLRequest * pRequest = [NSURLRequest requestWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //建立連接
+    NSURLResponse * pResponse = nil;
+    NSError * pError = nil;
+    //向伺服器發起請求（發出後線程就會一直等待伺服器響應，知道超出最大響應事件），獲取數據後，轉換為NSData類型數據
+    NSData * pData = [NSURLConnection sendSynchronousRequest:pRequest returningResponse:&pResponse error:&pError];
+    //輸出數據，查看，??後期還可以解析數據
+    NSString *responseStr = [[NSString alloc] initWithData:pData encoding:NSUTF8StringEncoding];
+    NSLog(@"htmlString = %@", responseStr);
+    return responseStr;
+}
+
+//比较固件版本是否可以升级
+-(void)checkFM:(NSString*)systemType customType:(NSString*)cusType vendorType:(NSString*)vendType{
+    NSError *error = nil;
+    NSString *systemTypeVersion = nil;
+    NSString *systemCheck = nil;
+    NSString *webCheck = nil;
+    NSString *usrCheck = nil;
+    NSString *customTypeVersion = nil;
+    NSString *customTypeCheck = nil;
+    NSString *vendorTypeVersion = nil;
+    NSString *vendorTypeCheck = nil;
+    
+    id sysTypeJsonObj = [NSJSONSerialization JSONObjectWithData:[[systemType substringToIndex:systemType.length] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error];
+    
+    if(sysTypeJsonObj != nil && [sysTypeJsonObj isKindOfClass:[NSDictionary class]]){
+        NSDictionary *jsonDic = (NSDictionary *)sysTypeJsonObj;
+        NSArray *sysTypeDirect =  jsonDic[@"Direct"];
+        if(sysTypeDirect != nil){
+            if([[sysTypeDirect objectAtIndex:0] isKindOfClass:[NSDictionary class]]){
+                systemTypeVersion = [sysTypeDirect objectAtIndex:0][@"Version"];
+                systemCheck = [sysTypeDirect objectAtIndex:0][@"SystemCheck"];
+                webCheck = [sysTypeDirect objectAtIndex:0][@"WebCheck"];
+                usrCheck = [sysTypeDirect objectAtIndex:0][@"UsrCheck"];
+            }
+        }
+    }
+    
+    id cusTypeJsonObj = [NSJSONSerialization JSONObjectWithData:[[cusType substringToIndex:cusType.length] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error];
+    
+    if(cusTypeJsonObj != nil && [cusTypeJsonObj isKindOfClass:[NSDictionary class]]){
+        NSDictionary *jsonDic = (NSDictionary *)cusTypeJsonObj;
+        NSArray *cusTypeDirect =  jsonDic[@"Direct"];
+        if(cusTypeDirect != nil){
+            if([[cusTypeDirect objectAtIndex:0] isKindOfClass:[NSDictionary class]]){
+                customTypeVersion = [cusTypeDirect objectAtIndex:0][@"Version"];
+                customTypeCheck = [cusTypeDirect objectAtIndex:0][@"SystemCheck"];
+            }
+        }
+    }
+    
+    id vendTypeJsonObj = [NSJSONSerialization JSONObjectWithData:[[vendType substringToIndex:vendType.length] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error];
+    
+    if(vendTypeJsonObj != nil && [vendTypeJsonObj isKindOfClass:[NSDictionary class]]){
+        NSDictionary *jsonDic = (NSDictionary *)vendTypeJsonObj;
+        NSArray *vendTypeDirect =  jsonDic[@"Direct"];
+        if(vendTypeDirect != nil){
+             if([[vendTypeDirect objectAtIndex:0] isKindOfClass:[NSDictionary class]]){
+                vendorTypeVersion = [vendTypeDirect objectAtIndex:0][@"Version"];
+                vendorTypeCheck = [vendTypeDirect objectAtIndex:0][@"VendorCheck"];
+             }
+        }
+    }
+    [TwsProgress dismiss];
+//    if(systemTypeVersion == nil || systemCheck == nil|| webCheck == nil|| usrCheck == nil|| customTypeVersion == nil|| customTypeCheck == nil|| vendorTypeVersion == nil|| vendorTypeCheck == nil){
+//        [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
+//        return;
+//    }
+//    else
+    {
+        if([systemTypeVersion compare:accSystemTypeVersion] >0 || [customTypeVersion compare:accCustomTypeVersion] >0 || [vendorTypeVersion compare:accVendorTypeVersion]>0 ){
+            [TwsTools presentAlertTitle:self title:LOCALSTR(@"Prompt") message:LOCALSTR(@"new firmware is available, update?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+                [self upgradeFM:systemTypeVersion systemCheck:systemCheck webCheck:webCheck userCheck:usrCheck customTypeVersion:customTypeVersion customTypeCheck:customTypeCheck vendorTypeVersion:vendorTypeVersion vendorTypeCheck:vendorTypeCheck];
+            } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+        }
+        
+    }
+}
+
+//获取服务器固件URL
+-(void)getFMUrl{
+    SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_UPRADE_URL_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
+    free(req);
+}
+-(void)upgradeFM:(NSString*)sysTypeVersion systemCheck:(NSString*)sysCheck webCheck:(NSString*)wbcheck userCheck:(NSString*)usrCheck customTypeVersion:(NSString*)cusTypeVersion customTypeCheck:(NSString*)cusTypeCheck vendorTypeVersion:(NSString*)vendTypeVersion vendorTypeCheck:(NSString*)vendTypeCheck{
+    
+    [TwsProgress showText:LOCALSTR(@"Updating") durationTime:60];
+    SMsgAVIoctrlSetUpgradeReq *req = malloc(sizeof(SMsgAVIoctrlSetUpgradeReq));
+    memset(req, 0, sizeof(SMsgAVIoctrlSetUpgradeReq));
+    memcpy(req->CustomInfo.customcheck, [cusTypeCheck UTF8String], cusTypeCheck.length);
+    memcpy(req->CustomInfo.version, [cusTypeVersion UTF8String], cusTypeVersion.length);
+    memcpy(req->SystemInfo.systemcheck, [sysCheck UTF8String], sysCheck.length);
+    memcpy(req->SystemInfo.usrcheck, [usrCheck UTF8String], usrCheck.length);
+    memcpy(req->SystemInfo.version, [sysTypeVersion UTF8String], sysTypeVersion.length);
+    memcpy(req->SystemInfo.webcheck, [wbcheck UTF8String], wbcheck.length);
+    memcpy(req->VendorInfo.vendorcheck, [vendTypeCheck UTF8String], vendTypeCheck.length);
+    memcpy(req->VendorInfo.version, [vendTypeVersion UTF8String], vendTypeVersion.length);
+    req->SerType = 0;
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_UPRADE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetUpgradeReq)];
+    free(req);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //reset
+    if(indexPath.section == 0){
+        [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Setup data will be initialized. Are you sure to reset?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+            [self doReset];
+        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+    }
+    //reboot
+    else if(indexPath.section == 1){
+        [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to reboot camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+            [self doReboot];
+        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+    }
+    //check new firmware
+    else if(indexPath.section == 2){
+        [self doGetAccFmInfo];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    switch (type) {
+        case IOTYPE_USER_IPCAM_REBOOT_RESP:{
+            [TwsProgress dismiss];
+            SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
+            //重启成功
+            if(resp->result ==0){
+                rebootState = 1;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            else{
+                [TwsTools presentAlertMsg:self message:LOCALSTR(@"Reboot failed, please try again.")];
+            }
+        
+            break;
+        }
+        case IOTYPE_USER_IPCAM_RESET_DEFAULT_RESP:{
+            [TwsProgress dismiss];
+            SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
+            //复位成功
+            if(resp->result ==0){
+                resetState = 1;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            else{
+                
+                [TwsTools presentAlertMsg:self message:LOCALSTR(@"Reboot failed, please try again.")];
+            }
+            break;
+        }
+        case IOTYPE_USER_IPCAM_GET_UPRADE_URL_RESP:{
+            SMsgAVIoctrlGetUpgradeResp *resp = (SMsgAVIoctrlGetUpgradeResp *)data;
+            [self getFMInfo:[NSString stringWithUTF8String:resp->LocalUrl] upgradeUrl:[NSString stringWithUTF8String:resp->UpgradeUrl] systemType:[NSString stringWithUTF8String:resp->SystemType] customType:[NSString stringWithUTF8String:resp->CustomType] vendorType:[NSString stringWithUTF8String:resp->VendorType]];
+            break;
+        }
+        case IOTYPE_USER_IPCAM_UPGRADE_STATUS:{
+            SMsgAVIoctrlUpgradeStatus *resp = (SMsgAVIoctrlUpgradeStatus*)data;
+            updateState = 2;
+            if(resp->p >=100){
+                updateState =3;
+                [TwsProgress showText:LOCALSTR(@"Firmwre update success, camera will reboot later, please wait a moment.")];
+            }
+            else{
+                NSString *t = FORMAT(@"Updating %d%%",resp->p);
+                [TwsProgress showText:LOCALSTR(t) durationTime:60];
+            }
+            break;
+        }
+        case IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_RESP:{
+            SMsgAVIoctrlFirmwareInfoResp *resp = (SMsgAVIoctrlFirmwareInfoResp*)data;
+            NSString *fmVer =[NSString stringWithUTF8String:resp->FirmwareVer];
+            NSArray *arrFm = [fmVer componentsSeparatedByString:@"."];
+            if(arrFm.count >= 5){
+                accCustomTypeVersion = [arrFm objectAtIndex:0];
+                accVendorTypeVersion = [arrFm objectAtIndex:1];
+                accSystemTypeVersion = FORMAT(@"%@.%@.%@",[arrFm objectAtIndex:2],[arrFm objectAtIndex:3], [arrFm objectAtIndex:4]);
+            }
+            if(updateState != 0){
+                return;
+            }
+            updateState = 1;
+            if(accSystemTypeVersion != nil){
+                [self getFMUrl];
+            }
+            else{
+                [TwsTools presentAlertMsg:self message:LOCALSTR(@"Get firmware info failed, please try again later.") ];
+                [TwsProgress dismiss];
+            }
+            break;
+        }
+        case IOTYPE_USER_IPCAM_SET_UPRADE_RESP:{
+            SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp *)data;
+            if(resp->result == 0){
+                updateState =1;
+                [TwsProgress dismiss];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            else{
+                [TwsTools presentAlertMsg:self message:LOCALSTR(@"update firmware failed")];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

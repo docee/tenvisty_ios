@@ -22,5 +22,6 @@
 
 + (void)dismiss;
 
++(void)setDismissBlock:(void(^)(NSString* text))dismissBlock;
 
 @end

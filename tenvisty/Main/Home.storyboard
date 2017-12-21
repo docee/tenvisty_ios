@@ -2299,7 +2299,6 @@
         <image name="view_event_record" width="80" height="61"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JdR-Cy-kRK"/>
         <segue reference="qha-sq-VLD"/>
         <segue reference="FqI-rB-fmr"/>
         <segue reference="wkI-hP-L0S"/>

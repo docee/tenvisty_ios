@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface SystemSettingTableViewController : UITableViewController
+@interface SystemSettingTableViewController : BaseTableViewController
 
 @end

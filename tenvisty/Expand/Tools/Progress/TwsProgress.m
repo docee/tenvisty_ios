@@ -10,6 +10,7 @@
 
 @interface TwsProgress ()
 
+@property (nonatomic, copy) void(^dismissBlock)(NSString* text);
 @end
 
 
@@ -149,7 +150,9 @@
     if (seconds > 0) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(seconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+            if([TwsProgress sharedProgress].dismissBlock != nil){
+                [TwsProgress sharedProgress].dismissBlock(text);
+            }
             [self dismiss];
         });
     }
@@ -273,7 +276,9 @@
     return rect;
 }
 
-
++(void)setDismissBlock:(void(^)(NSString* text))dismissBlock{
+    [TwsProgress sharedProgress].dismissBlock = dismissBlock;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
