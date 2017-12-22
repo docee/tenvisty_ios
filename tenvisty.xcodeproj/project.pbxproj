@@ -109,6 +109,8 @@
 		899AD5051FCD3C32008ED303 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5041FCD3C32008ED303 /* OpenAL.framework */; };
 		899AD5071FCD3CB0008ED303 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5061FCD3CB0008ED303 /* CoreVideo.framework */; };
 		899AD5091FCD3DAD008ED303 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
+		89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89A7E93B1FECB30B00F12BFF /* Localizable.strings */; };
+		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
 		89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D869821FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m */; };
@@ -352,6 +354,11 @@
 		899AD5041FCD3C32008ED303 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		899AD5061FCD3CB0008ED303 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		89A7E9331FECB2CC00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		89A7E93A1FECB30B00F12BFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		89A7E93C1FECB31A00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		89A7E93D1FED108200F12BFF /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		89A7E93E1FED108200F12BFF /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		89A8F4651FDE97D2003863B6 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAnimatedImage.framework; path = "tenvisty/lib/Release-iphoneos/FLAnimatedImage.framework"; sourceTree = "<group>"; };
 		89D2B4E61FDF804A00639DD3 /* AddDeviceWirelessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessViewController.h; sourceTree = "<group>"; };
 		89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
@@ -703,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				894D7E4D1FAB01D900C58BB2 /* main.m */,
+				89A7E93B1FECB30B00F12BFF /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -735,6 +743,8 @@
 		895141D61FE7780100905355 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				89A7E93D1FED108200F12BFF /* Event.h */,
+				89A7E93E1FED108200F12BFF /* Event.m */,
 				895141D71FE7780100905355 /* LocalVideoInfo.h */,
 				895141D81FE7780100905355 /* LocalVideoInfo.m */,
 			);
@@ -1008,6 +1018,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 894D7E401FAB01D900C58BB2;
 			productRefGroup = 894D7E4A1FAB01D900C58BB2 /* Products */;
@@ -1071,6 +1082,7 @@
 				892CE0C91FD126D900942E28 /* TextFieldImgTableViewCell.xib in Resources */,
 				892CE0C71FD126C300942E28 /* TextFieldTableViewCell.xib in Resources */,
 				892CE0CD1FD1271300942E28 /* TextFieldDisableTableViewCell.xib in Resources */,
+				89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */,
 				898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */,
 				892ADB6B1FD6928A00BD8929 /* SwitchTableViewCell.xib in Resources */,
 			);
@@ -1138,6 +1150,7 @@
 				89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */,
 				898D8BAF1FE0F66600062F04 /* FMDatabasePool.m in Sources */,
 				890B40941FB02FD000C1061A /* SelectTime.m in Sources */,
+				89A7E93F1FED108200F12BFF /* Event.m in Sources */,
 				89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */,
 				898D8BAE1FE0F66600062F04 /* FMDatabaseAdditions.m in Sources */,
 				89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */,
@@ -1183,8 +1196,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				894D7E561FAB01D900C58BB2 /* Base */,
+				89A7E9331FECB2CC00F12BFF /* fr */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		89A7E93B1FECB30B00F12BFF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89A7E93A1FECB30B00F12BFF /* en */,
+				89A7E93C1FECB31A00F12BFF /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1194,6 +1217,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1251,6 +1275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

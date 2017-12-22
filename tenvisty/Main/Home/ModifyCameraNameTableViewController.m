@@ -61,7 +61,7 @@
 - (IBAction)save:(id)sender {
     self.camera.nickName = [self getRowCell:1].value;
     [GBase editCamera:self.camera];
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

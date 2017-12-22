@@ -11,6 +11,7 @@
 @interface SDCardViewController (){
     NSInteger freeSize;
     NSInteger totalSize;
+    BOOL isFormatting;
 }
 
 @end
@@ -35,7 +36,7 @@
 }
 
 -(void)doFormatSDCard{
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [MBProgressHUD showMessag:LOCALSTR(@"formating...") toView:self.tableView].userInteractionEnabled = YES;
     SMsgAVIoctrlFormatExtStorageReq *req = malloc(sizeof(SMsgAVIoctrlFormatExtStorageReq));
     req->storage = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlFormatExtStorageReq)];
@@ -111,15 +112,21 @@
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
         case IOTYPE_USER_IPCAM_DEVINFO_RESP:{
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlDeviceInfoResp *resp = (SMsgAVIoctrlDeviceInfoResp*)data;
             freeSize = resp->free;
             totalSize = resp->total;
             [self.tableView reloadData];
+            if(isFormatting){
+                [[[iToast makeText:LOCALSTR(@"format success")]setDuration:1] show];
+                isFormatting= NO;
+            }
             break;
         }
         case IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_RESP:{
             SMsgAVIoctrlFormatExtStorageResp *resp = (SMsgAVIoctrlFormatExtStorageResp*)data;
             if(resp->result == 0){
+                isFormatting = YES;
                 [self getSDCardInfo];
                 [self.tableView reloadData];
             }

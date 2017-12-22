@@ -14,6 +14,7 @@
    __weak MyCamera *_camera;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_labConnectstate;
+@property (weak, nonatomic) IBOutlet UIView *viewSnapshotMask;
 
 @end
 
@@ -105,7 +106,8 @@
     if(self.camera){
         self.labCameraConnectState.text = [self.camera strConnectState];
     }
-    if(state == CONNECTION_STATE_CONNECTING){
+    if(state == CONNECTION_STATE_CONNECTING || self.camera.processState != CAMERASTATE_NONE){
+        [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
         MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
         [p setColor:[UIColor clearColor]];
@@ -122,6 +124,7 @@
     else{
         [MBProgressHUD hideAllHUDsForView:self animated:NO];
         if(state == CONNECTION_STATE_CONNECTED){
+            [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_2];
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:YES];
             [self.btnPlay setHidden:NO];
@@ -133,6 +136,7 @@
             [_btnCameraSetting setEnabled:YES];
         }
         else if(state == CONNECTION_STATE_WRONG_PASSWORD){
+            [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:NO];
             [self.btnPlay setHidden:YES];
@@ -144,6 +148,7 @@
             [_btnCameraSetting setEnabled:NO];
         }
         else{
+            [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
             [self.btnReconnect setHidden:NO];
             [self.btnModifyPassword setHidden:YES];
             [self.btnPlay setHidden:YES];

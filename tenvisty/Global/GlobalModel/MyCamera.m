@@ -5,13 +5,16 @@
 //  Created by Cloud Hsiao on 12/7/2.
 //  Copyright (c) 2012年 TUTK. All rights reserved.
 //
+#define CONNECT_TIMEOUT_WAITTIME 30
 
 #import "MyCamera.h"
 #import <IOTCamera/AVIOCTRLDEFs.h>
 #import <IOTCamera/AVFrameInfo.h>
 
 @interface MyCamera()<CameraDelegate>
-
+@property (nonatomic,assign) NSInteger beginRebootTime;
+@property (nonatomic,assign) NSInteger rebootTimeout;
+@property (nonatomic,assign) NSInteger connectTimeoutBeginTime;
 @end
 
 @implementation MyCamera
@@ -347,10 +350,6 @@
 
 - (void)camera:(Camera *)camera didChangeSessionStatus:(NSInteger)status
 {
-    self.connectState = status;
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
-        [self.delegate2 camera:self _didChangeSessionStatus:status];
-    }
     
     if (self.sessionState == CONNECTION_STATE_UNKNOWN_DEVICE ||
         self.sessionState == CONNECTION_STATE_UNSUPPORTED ||
@@ -358,11 +357,67 @@
         
     }
     else if(status == CONNECTION_STATE_CONNECTED){
+        _connectTimeoutBeginTime = 0;
         SMsgAVIoctrlGetAudioOutFormatReq *s = (SMsgAVIoctrlGetAudioOutFormatReq *)malloc(sizeof(SMsgAVIoctrlGetAudioOutFormatReq));
         s->channel = 0;
         [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
         free(s);
     }
+    
+    if(status == CONNECTION_STATE_CONNECTED && self.processState != CAMERASTATE_WILLUPGRADING && self.processState != CAMERASTATE_WILLREBOOTING && self.processState != CAMERASTATE_WILLRESETING){
+        self.processState = CAMERASTATE_NONE;
+    }
+    else if(status == CONNECTION_STATE_WRONG_PASSWORD){
+        if(self.processState == CAMERASTATE_RESETING){
+            [self setPwd:DEFAULT_PASSWORD];
+            [GBase editCamera:self];
+            [self start:0];
+        }
+    }
+    //手动调用stop接口才是CONNECTION_STATE_DISCONNECTED ||
+    else if(status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_CONNECT_FAILED ||  status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_NETWORK_FAILED){
+        if(self.processState == CAMERASTATE_WILLREBOOTING){
+            self.processState = CAMERASTATE_REBOOTING;
+            _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            _rebootTimeout = 120;
+        }
+        else if(self.processState == CAMERASTATE_WILLRESETING){
+            self.processState = CAMERASTATE_RESETING;
+            _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            _rebootTimeout = 120;
+            
+        }
+        if([NSDate timeIntervalSinceReferenceDate] - _beginRebootTime > _rebootTimeout){
+            if(_processState != CAMERASTATE_NONE){
+                _processState = CAMERASTATE_NONE;
+            }
+        }
+        
+        if(self.processState != CAMERASTATE_NONE){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self stop];
+                [self start];
+            });
+        }
+        else if(status == CONNECTION_STATE_TIMEOUT){
+            if(self.connectTimeoutBeginTime == 0){
+                self.connectTimeoutBeginTime = [NSDate timeIntervalSinceReferenceDate];
+            }
+            else if([NSDate timeIntervalSinceReferenceDate] - self.connectTimeoutBeginTime < CONNECT_TIMEOUT_WAITTIME){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self stop];
+                    [self start];
+                });
+            }
+        }
+    }
+    
+    
+    self.connectState = status;
+    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
+        [self.delegate2 camera:self _didChangeSessionStatus:status];
+    }
+    
 }
 
 - (void)camera:(Camera *)camera didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status
@@ -425,6 +480,36 @@
     }else if (type == (int)IOTYPE_USER_IPCAM_SETSTREAMCTRL_RESP) {
         [self startVideo];
     }
+    else if(type == IOTYPE_USER_IPCAM_REBOOT_RESP){
+        SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
+        if(resp->result == 0){
+            self.processState = CAMERASTATE_WILLREBOOTING;
+        }
+    }
+    else if(type == IOTYPE_USER_IPCAM_RESET_DEFAULT_RESP){
+        SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
+        if(resp->result == 0){
+            self.processState = CAMERASTATE_WILLRESETING;
+        }
+    }
+    else if(type == IOTYPE_USER_IPCAM_SET_UPRADE_RESP){
+        SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
+        if(resp->result == 0){
+            self.processState = CAMERASTATE_WILLUPGRADING;
+            self.beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            self.rebootTimeout = 120;
+        }
+    }
+    else if(type == IOTYPE_USER_IPCAM_UPGRADE_STATUS){
+        SMsgAVIoctrlUpgradeStatus *resp = (SMsgAVIoctrlUpgradeStatus*)data;
+        self.upgradePercent = resp->p;
+        if(resp->p>=100){
+            self.processState = CAMERASTATE_WILLREBOOTING;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [iToast makeText:LOCALSTR(@"Firmware update success, camera will reboot later, please wait a moment.")];
+            });
+        }
+    }
 }
 
 
@@ -479,20 +564,39 @@
     return self.connectState != CONNECTION_STATE_CONNECTING && self.connectState != CONNECTION_STATE_CONNECTED && self.connectState != CONNECTION_STATE_WRONG_PASSWORD;
 }
 -(NSString*)strConnectState{
-    if(self.connectState == CONNECTION_STATE_CONNECTING){
-       return LOCALSTR(@"Connecting");
-    }
-    else{
-        if(self.connectState == CONNECTION_STATE_CONNECTED){
-            return LOCALSTR(@"Online");
-        }
-        else if(self.connectState == CONNECTION_STATE_WRONG_PASSWORD){
-            return LOCALSTR(@"Wrong Password");
+    if(self.processState == CAMERASTATE_NONE){
+        if(self.connectState == CONNECTION_STATE_CONNECTING){
+           return LOCALSTR(@"Connecting");
         }
         else{
-            return LOCALSTR(@"Offline");
+            if(self.connectState == CONNECTION_STATE_CONNECTED){
+                return LOCALSTR(@"Online");
+            }
+            else if(self.connectState == CONNECTION_STATE_WRONG_PASSWORD){
+                return LOCALSTR(@"Wrong Password");
+            }
+            else{
+                return LOCALSTR(@"Offline");
+            }
         }
     }
+    else{
+        if(self.processState == CAMERASTATE_WILLREBOOTING || self.processState == CAMERASTATE_REBOOTING){
+            return LOCALSTR(@"Rebooting...");
+        }
+        else if(self.processState == CAMERASTATE_WILLRESETING || self.processState == CAMERASTATE_RESETING){
+            return LOCALSTR(@"Reseting...");
+        }
+        else if(self.processState == CAMERASTATE_WILLUPGRADING || self.processState == CAMERASTATE_UPGRADING){
+            if(self.upgradePercent > 0){
+                return FORMAT(LOCALSTR(@"Upgrading %d%%"),self.upgradePercent);
+            }
+            else{
+                return LOCALSTR(@"Upgrading...");
+            }
+        }
+    }
+    return @"";
 }
 //判断划动手势，返回摄像机转动方向
 - (NSInteger)direction:(CGPoint)translation {

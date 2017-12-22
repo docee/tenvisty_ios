@@ -60,5 +60,7 @@
 -(void)setRightImage:(NSString *)rightImage{
     [_rightButton setImage:[UIImage imageNamed:rightImage] forState:UIControlStateNormal];
 }
-
+-(void)resignFirstResponder{
+    [_midTextField resignFirstResponder];
+}
 @end

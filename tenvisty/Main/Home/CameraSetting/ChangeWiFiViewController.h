@@ -14,5 +14,6 @@
 @property (nonatomic,assign) char wifiEnctype;
 @property (nonatomic,assign) char wifiMode;
 
+@property (nonatomic,assign,readonly) BOOL hasChangedWiFi;
 
 @end

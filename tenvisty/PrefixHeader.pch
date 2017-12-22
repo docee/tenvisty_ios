@@ -12,7 +12,7 @@
 #import "MyCamera.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Colors.h"
-#import "MBProgressHUD.h"
+#import "MBProgressHUD+Add.h"
 #import "TwsTools.h"
 #import "TwsViewTools.h"
 #import "TwsProgress.h"
@@ -140,7 +140,11 @@
 #define Color_GrayDark  (RGBA_COLOR(100,100, 100,1))
 #define Color_GrayDark_alpha  (RGBA_COLOR(100,100, 100,0.9))
 #define Color_Transparent  (RGBA_COLOR(0, 0, 0,0))
-#define Color_Black_alpha  (RGBA_COLOR(0, 0, 0,0.4))
+#define Color_Black_alpha_4  (RGBA_COLOR(0, 0, 0,0.4))
+#define Color_Black_alpha_5 (RGBA_COLOR(0, 0, 0,0.5))
+#define Color_Black_alpha_3 (RGBA_COLOR(0, 0, 0,0.3))
+#define Color_Black_alpha_2 (RGBA_COLOR(0, 0, 0,0.2))
+#define Color_Black_alpha_1 (RGBA_COLOR(0, 0, 0,0.1))
 
 #define Color_Item_Selected_BG (RGBA_COLOR(220, 220, 220, 0.8))
 

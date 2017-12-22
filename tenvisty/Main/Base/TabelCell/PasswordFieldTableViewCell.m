@@ -8,7 +8,7 @@
 
 #import "PasswordFieldTableViewCell.h"
 
-@interface PasswordFieldTableViewCell()
+@interface PasswordFieldTableViewCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_midPasswordField;
 @property (weak, nonatomic) IBOutlet UIImageView *leftImg;
@@ -82,5 +82,9 @@
 }
 -(void)hidePassword{
     [_midPasswordField setSecureTextEntry:YES];
+}
+
+-(void)resignFirstResponder{
+    [_midPasswordField resignFirstResponder];
 }
 @end

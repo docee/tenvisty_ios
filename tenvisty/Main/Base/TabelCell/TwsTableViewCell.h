@@ -20,4 +20,6 @@
 @property (nonatomic,assign) SEL action;
 @property (nonatomic,weak) NSObject *actionOwner;
 
+-(void)resignFirstResponder;
+
 @end

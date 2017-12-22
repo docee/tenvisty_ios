@@ -330,7 +330,6 @@
 - (IBAction)endTalk:(id)sender {
     [self.camera stopSpeak];
     if(isListening){
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.camera startAudio];
         });
@@ -338,6 +337,7 @@
         [_btnListen_land setImage:[UIImage imageNamed:@"btnSound_opened_portrait"] forState:UIControlStateNormal];
     }
     isTalking = NO;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 - (IBAction)startTalk:(id)sender {
     //[self.camera stopAudio];

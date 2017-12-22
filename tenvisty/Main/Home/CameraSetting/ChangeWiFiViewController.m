@@ -6,18 +6,19 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 #define SET_WIFI_TIMEOUT 70
-#define GET_WIFI_DELAY 45
+#define GET_WIFI_DELAY_WIRED 45
+#define GET_WIFI_DELAY_WIRELESS 10
 #import "ChangeWiFiViewController.h"
 
 @interface ChangeWiFiViewController (){
-    dispatch_block_t timeoutTask;
-    dispatch_block_t delayTask;
     BOOL isTimeout;
     BOOL isSetting;
     BOOL isRequestWiFiListForResult;
     NSString *wifiPassword;
 }
-
+@property (nonatomic,copy) dispatch_block_t delayTask;
+@property (nonatomic,copy) dispatch_block_t timeoutTask;
+@property (nonatomic,assign) BOOL hasChangedWiFi;
 @end
 
 @implementation ChangeWiFiViewController
@@ -29,25 +30,51 @@
 }
 
 -(void)setup{
-    timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-        isTimeout = YES;
-        isSetting = NO;
-        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-        [[iToast makeText:LOCALSTR(@"Connection timeout, please try again.")] show];
-    });
-    delayTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-        if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
-            isRequestWiFiListForResult = YES;
-            [self doGetWifiList];
-        }
-        
-    });
+    
+}
+-(dispatch_block_t)timeoutTask{
+    if(_timeoutTask == nil){
+        _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            isTimeout = YES;
+            isSetting = NO;
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Connection timeout, please try again.")];
+        });
+    }
+    return _timeoutTask;
+}
+-(dispatch_block_t)newTimeoutTask{
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+    }
+    _timeoutTask = nil;
+    return self.timeoutTask;
+}
+
+-(dispatch_block_t)delayTask{
+    if(_delayTask == nil){
+        _delayTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
+                isRequestWiFiListForResult = YES;
+                [self doGetWifiList];
+            }
+            
+        });
+    }
+    return _delayTask;
+}
+-(dispatch_block_t)newDelayTask{
+    if(_delayTask != nil){
+        dispatch_block_cancel(_delayTask);
+    }
+    _delayTask = nil;
+    return self.delayTask;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-     dispatch_block_cancel(delayTask);
-    dispatch_block_cancel(timeoutTask);
+    dispatch_block_cancel(self.delayTask);
+    dispatch_block_cancel(self.timeoutTask);
 }
 
 -(void)doGetWifiList{
@@ -62,7 +89,7 @@
 }
 
 -(void)doSetWifi:(NSString*)password{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showMessag:LOCALSTR(@"setting...") toView:self.tableView].userInteractionEnabled = YES;
     SMsgAVIoctrlSetWifiReq *req = malloc(sizeof(SMsgAVIoctrlSetWifiReq));
     memset(req, 0, sizeof(SMsgAVIoctrlSetWifiReq));
     req->enctype = self.wifiEnctype;
@@ -114,12 +141,14 @@
 - (IBAction)save:(id)sender {
     if(!isSetting){
         isSetting = YES;
-        wifiPassword = ((TwsTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]]).value;
+        TwsTableViewCell* cell = (TwsTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]];
+        [cell resignFirstResponder];
+        wifiPassword = cell.value;
         if(self.wifiEnctype != 1&& wifiPassword.length == 0){
-            [[iToast makeText:LOCALSTR(@"wifi password is not entered.")] show];
+            [[[iToast makeText:LOCALSTR(@"wifi password is not entered.")] setDuration:1] show];
             return;
         }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SET_WIFI_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), timeoutTask);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SET_WIFI_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
         [self doSetWifi:wifiPassword];
     }
 }
@@ -128,9 +157,9 @@
     switch (type) {
         case IOTYPE_USER_IPCAM_SETWIFI_RESP:{
             SMsgAVIoctrlSetWifiResp *resp = (SMsgAVIoctrlSetWifiResp*)data;
-            dispatch_block_cancel(timeoutTask);
+            dispatch_block_cancel(self.timeoutTask);
             if(resp->result == 0){
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(),delayTask );
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRED * NSEC_PER_SEC)), dispatch_get_main_queue(),self.delayTask);
             }
             else{
                 [self doGetWifi];
@@ -140,7 +169,7 @@
         case IOTYPE_USER_IPCAM_UPDATE_WIFI_STATUS:{
             SMsgAVIoctrlUpdateWifiStatus *resp = (SMsgAVIoctrlUpdateWifiStatus*)data;
             if([[NSString stringWithUTF8String: resp->ssid] isEqualToString:self.wifiSsid]){
-                dispatch_block_cancel(delayTask);
+                dispatch_block_cancel(self.delayTask);
                 [self doGetWifiList];
                 if(isSetting){
                     isSetting = NO;
@@ -152,8 +181,9 @@
                         [TwsTools presentAlertMsg:self message:LOCALSTR(@"Fail to connect Wi-Fi, please try again later.")];
                     }
                     else if(resp ->status == 0){
-                        [[iToast makeText:LOCALSTR(@"setting successfully")] show];
-                        [self.navigationController popViewControllerAnimated:YES];
+                        [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
+                        self.hasChangedWiFi = YES;
+                        [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
                     }
                 }
             }
@@ -167,7 +197,7 @@
                 NSString* ssid =  [NSString stringWithUTF8String: (const char*)resp->ssid];
                 NSString* password =  [NSString stringWithUTF8String: (const char*)resp->password];
                 if([ssid isEqualToString:self.wifiSsid] && [password isEqualToString:wifiPassword]){
-                    [[iToast makeText:LOCALSTR(@"setting successfully")] show];
+                    [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
                 else{
@@ -187,7 +217,7 @@
                     SWifiAp ap = p->stWifiAp[i];
                     if([[NSString stringWithUTF8String:ap.ssid] isEqualToString:self.wifiSsid]){
                         if(ap.status == 1 || ap.status == 4){
-                            [[iToast makeText:LOCALSTR(@"setting successfully")] show];
+                            [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
                             [self.navigationController popViewControllerAnimated:YES];
                         }
                         else if(ap.status == 2){
@@ -205,8 +235,14 @@
 }
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     if(status == CONNECTION_STATE_CONNECTED){
-        dispatch_block_cancel(delayTask);
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(),delayTask );
+        if(isSetting){
+            dispatch_block_cancel(self.delayTask);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRELESS* NSEC_PER_SEC)), dispatch_get_main_queue(),[self newDelayTask] );
+        }
+    }
+    else if(status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_UNSUPPORTED || status == CONNECTION_STATE_CONNECT_FAILED || status == CONNECTION_STATE_NETWORK_FAILED){
+        [camera stop];
+        [camera start];
     }
 }
 /*

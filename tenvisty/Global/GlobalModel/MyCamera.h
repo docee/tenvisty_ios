@@ -6,6 +6,16 @@
 //  Copyright (c) 2012年 TUTK. All rights reserved.
 //
 
+#define CAMERASTATE_NONE 0
+#define CAMERASTATE_WILLREBOOTING 1
+#define CAMERASTATE_REBOOTING 2
+#define CAMERASTATE_WILLRESETING 3
+#define CAMERASTATE_RESETING 4
+#define CAMERASTATE_WILLUPGRADING 5
+#define CAMERASTATE_UPGRADING 6
+
+
+
 #import <Foundation/Foundation.h>
 #import <IOTCamera/Camera.h>
 #import <IOTCamera/NSCamera.h>
@@ -30,6 +40,8 @@
 @property (nonatomic,assign) NSInteger videoQuality;
 @property (nonatomic,strong) NSString* nickName;
 @property (nonatomic,assign) NSInteger eventNotification;
+@property (nonatomic,assign) NSInteger processState;
+@property (nonatomic,assign) NSInteger upgradePercent;
 
 //  ---- 传感器 ---- //
 

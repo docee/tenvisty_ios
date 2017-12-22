@@ -15,10 +15,10 @@
     SWifiAp wifiSSIDList[28];
     int wifiSSIDListCount;
     BOOL isRefreshing;
-    dispatch_block_t timeoutTask;
     SWifiAp selectedAP;
+    BOOL needRefresh;
 }
-
+@property (nonatomic,copy) dispatch_block_t timeoutTask;
 @end
 
 @implementation WiFiSettingViewController
@@ -29,36 +29,53 @@
     [self setup];
 }
 -(void)setup{
-    timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-        isRefreshing = NO;
-        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-        [[iToast makeText:LOCALSTR(@"Connection timeout, please try again.")] show];
-    });
     [self getWiFiList];
 }
+-(dispatch_block_t)timeoutTask{
+    if(_timeoutTask == nil){
+        _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            isRefreshing = NO;
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            [[[iToast makeText:LOCALSTR(@"Connection timeout, please try again.")] setDuration:1] show];
+        });
+    }
+    return _timeoutTask;
+}
+-(dispatch_block_t)newTimeoutTask{
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+    }
+    _timeoutTask = nil;
+    return self.timeoutTask;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)refreshWifiList:(id)sender {
-    
-      [self getWiFiList];
+    needRefresh = NO;
+    [self getWiFiList];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if(needRefresh){
+        [self refreshWifiList:nil];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    dispatch_block_cancel(self.timeoutTask);
 }
 
 -(void)getWiFiList{
     if(isRefreshing){
         return;
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFILIST_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), timeoutTask);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFILIST_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     isRefreshing = YES;
     wifiSSIDListCount = 0;
     [self.tableView reloadData];
@@ -125,6 +142,11 @@
 }
 //其他界面返回到此界面调用的方法
 - (IBAction)WiFiSettingViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
+        UIViewController *controller = unwindSegue.sourceViewController;
+    if([controller isKindOfClass:[ChangeWiFiViewController class]]){
+        ChangeWiFiViewController *cwvc = (ChangeWiFiViewController *)controller;
+        needRefresh = cwvc.hasChangedWiFi;
+    }
     
 }
 
@@ -142,7 +164,7 @@
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
         case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:
-            dispatch_block_cancel(timeoutTask);
+            dispatch_block_cancel(self.timeoutTask);
             isRefreshing = NO;
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             memset(wifiSSIDList, 0, sizeof(wifiSSIDList));

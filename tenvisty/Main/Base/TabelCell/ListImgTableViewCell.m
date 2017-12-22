@@ -11,6 +11,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *leftImg;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_leftImg;
 
+@property (weak, nonatomic) IBOutlet UILabel *leftLabTitle;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabValue;
 @end
 
 @implementation ListImgTableViewCell
@@ -39,5 +41,22 @@
     }
 }
 
+-(NSString*)title{
+    return _leftLabTitle.text;
+}
+-(void)setTitle:(NSString *)title{
+    _leftLabTitle.text = title;
+}
+
+-(NSString*)value{
+    return _rightLabValue.text;
+}
+
+-(void)setValue:(NSString *)value{
+    if(value == nil && _showValue){
+        value = LOCALSTR(@"loading...");
+    }
+    _rightLabValue.text = value;
+}
 
 @end

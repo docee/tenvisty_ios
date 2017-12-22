@@ -21,7 +21,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.constraint_width_leftImg.constant = 0;
-
     // Initialization code
     
 }
@@ -62,5 +61,7 @@
     [self.leftImg setImage:[UIImage imageNamed:imageName]];
     self.constraint_width_leftImg.constant = 30;
 }
-
+-(void)resignFirstResponder{
+    [_rightTextField resignFirstResponder];
+}
 @end

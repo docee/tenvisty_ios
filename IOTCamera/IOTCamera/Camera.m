@@ -704,13 +704,13 @@ int bLocalSearch = 0;
             // LOG(@"avClientStop(%d)", stoppedChannel.avIndex);
         }               
         
-        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-            [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_DISCONNECTED];
         
         stoppedChannel.avIndex = -1;
         
         [arrayAVChannel removeObject:stoppedChannel];
     }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+        [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_DISCONNECTED];
 }
 
 - (Boolean)isStarting:(NSInteger)channel
@@ -1033,27 +1033,37 @@ int bLocalSearch = 0;
         }else{
             int wait = 0;
             if (sid == IOTC_ER_UNLICENSE || sid == IOTC_ER_UNKNOWN_DEVICE ) {
-                  self.sessionState = CONNECTION_STATE_UNKNOWN_DEVICE;
                 wait = 4;
             }
             else if (sid == IOTC_ER_TIMEOUT) {
-                self.sessionState = CONNECTION_STATE_TIMEOUT;;
                 wait = 1;
             }
             else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
-                 self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
                 wait = 1;
             }
             else if(sid == IOTC_ER_NETWORK_UNREACHABLE){
-                self.sessionState = CONNECTION_STATE_NETWORK_FAILED;
             }
             else{
-                 self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
-                 wait = 1;
+                wait = 1;
             }
             if(nRetryCount > self.retryTimes || sid == IOTC_ER_NETWORK_UNREACHABLE){
+                if (sid == IOTC_ER_UNLICENSE || sid == IOTC_ER_UNKNOWN_DEVICE ) {
+                    self.sessionState = CONNECTION_STATE_UNKNOWN_DEVICE;
+                }
+                else if (sid == IOTC_ER_TIMEOUT) {
+                    self.sessionState = CONNECTION_STATE_TIMEOUT;;
+                }
+                else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
+                    self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
+                }
+                else if(sid == IOTC_ER_NETWORK_UNREACHABLE){
+                    self.sessionState = CONNECTION_STATE_NETWORK_FAILED;
+                }
+                else{
+                    self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
+                }
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    LOG(@"session: CONNECTION_STATE: %d", self.sessionState);
+                    LOG(@"session: CONNECTION_STATE: %d", (int)self.sessionState);
                     
                     if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
                         [self.delegate camera:self didChangeSessionStatus:self.sessionState];

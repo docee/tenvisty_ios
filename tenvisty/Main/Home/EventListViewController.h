@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface EventListViewController : UIViewController<UITableViewDelegate>
+@interface EventListViewController : BaseViewController<UITableViewDelegate>
 
 @end

@@ -49,11 +49,9 @@
 
 -(NSArray *)listItems{
     if(!_listItems){
-        _listItems = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Time Setting") loadingTxt:nil value:nil viewId:TableViewCell_ListImg],
-        [ListImgTableViewCellModel initObj:@"ic_reverse" title:LOCALSTR(@"Mirror") loadingTxt:LOCALSTR(@"loading...") value:nil viewId:TableViewCell_Switch],
-        [ListImgTableViewCellModel initObj:@"ic_inverse" title:LOCALSTR(@"Flip") loadingTxt:LOCALSTR(@"loading...") value:nil viewId:TableViewCell_Switch],
-        [ListImgTableViewCellModel initObj:@"ic_sd" title:LOCALSTR(@"SD Card") loadingTxt:nil value:nil viewId:TableViewCell_ListImg],
-        [ListImgTableViewCellModel initObj:@"ic_info" title:LOCALSTR(@"Device Infomation") loadingTxt:nil value:nil viewId:TableViewCell_ListImg], nil];
+        [ListImgTableViewCellModel initObj:@"ic_reverse" title:LOCALSTR(@"Mirror") showValue:YES value:nil viewId:TableViewCell_Switch],
+        [ListImgTableViewCellModel initObj:@"ic_sd" title:LOCALSTR(@"SD Card") showValue:NO value:nil viewId:TableViewCell_ListImg],
+        [ListImgTableViewCellModel initObj:@"ic_info" title:LOCALSTR(@"Device Infomation") showValue:NO value:nil viewId:TableViewCell_ListImg], nil];
        
         
     }
@@ -83,14 +81,9 @@
     if([vid isEqualToString:TableViewCell_ListImg]){
         ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
         [cell setLeftImage:model.titleImgName];
-        cell.leftLabTitle.text = model.titleText;
-        if(model.loadingText == nil){
-            [cell.rightLabLoading setHidden:YES];
-        }
-        else{
-            cell.rightLabLoading.text = model.loadingText;
-        }
-        cell.rightLabValue.text = model.titleValue;
+        cell.title = model.titleText;
+        cell.showValue = model.showValue;
+        cell.value = model.titleValue;
 //        [cell setSeparatorInset:UIEdgeInsetsZero];
 //        [cell setLayoutMargins:UIEdgeInsetsZero];
         return cell;
@@ -99,8 +92,10 @@
         SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
         [cell setLeftImage:model.titleImgName];
         cell.leftLabTitle.text = model.titleText;
-        cell.rightLabLoading.text = model.loadingText;
         [cell.rightSwitch setEnabled:model.loadingText == nil];
+        cell.rightLabLoading.text = LOCALSTR(@"loading...");
+        [cell.rightLabLoading setHidden:model.titleValue != nil];
+        [cell.rightSwitch setEnabled:model.titleValue != nil];
         [cell.rightSwitch setOn:[model.titleValue isEqualToString:@"on"]];
         [cell.rightSwitch addTarget:self action:@selector(clickSwitch:)
                    forControlEvents:UIControlEventTouchUpInside];
@@ -160,12 +155,6 @@
 
 -(void)setRowValue:(NSString*)value row:(NSInteger)row{
     ListImgTableViewCellModel* model = (ListImgTableViewCellModel*)[self.listItems objectAtIndex:row];
-    if(value==nil){
-        model.loadingText = LOCALSTR(@"loading...");
-    }
-    else{
-        model.loadingText = nil;
-    }
     model.titleValue = value;
 }
 /*

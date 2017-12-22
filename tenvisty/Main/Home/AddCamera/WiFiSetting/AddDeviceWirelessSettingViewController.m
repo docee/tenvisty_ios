@@ -66,7 +66,7 @@
         [self.pTimer invalidate];
         if([self.camera.uid isEqualToString:NO_USE_UID]){
             [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Camera sound end?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"YES") actionDefaultBlock:^{
-                [TwsProgress showText:LOCALSTR(@"Search Camera on LAN")];
+                [[[iToast makeText:LOCALSTR(@"Search Camera on LAN")] setDuration:2] show];
                 [self go2Search];
             } actionCancelTitle:LOCALSTR(@"NO") actionCancelBlock:^{
                 

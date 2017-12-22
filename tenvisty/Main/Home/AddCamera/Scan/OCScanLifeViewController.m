@@ -277,9 +277,7 @@
         if(uid == nil){
             self.output.metadataObjectTypes = @[];
             [self.session startRunning];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [TwsProgress showText:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label") durationTime:3];
-            });
+            [[[iToast makeText:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label")] setDuration:3] show];
             if(_reRunTimer == nil){
                _reRunTimer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(reRunScan) userInfo:nil repeats:NO];
             }
@@ -334,7 +332,7 @@
         }
         else{
             sender.selected = NO;
-            [TwsProgress showText:LOCALSTR(@"no flash detected") withSize:CGSizeMake(1, 1) durationTime:1];
+            [[[iToast makeText:LOCALSTR(@"no flash detected")] setDuration:1] show];
         }
     }else{//关闭闪光灯
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -344,6 +342,10 @@
             [device unlockForConfiguration];
         }  
     }
+}
+
+- (BOOL)prefersHomeIndicatorAutoHidden{
+    return YES;
 }
 
 @end

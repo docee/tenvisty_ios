@@ -58,4 +58,7 @@
 -(void) setValueMarginLeft:(CGFloat)left{
     _constraint_left_rightTextField.constant  = left;
 }
+-(void)resignFirstResponder{
+    [_rightTextField resignFirstResponder];
+}
 @end

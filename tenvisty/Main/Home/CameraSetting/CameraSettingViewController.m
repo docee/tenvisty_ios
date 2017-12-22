@@ -65,11 +65,11 @@
 
 -(NSArray *)listItems{
     if(!_listItems){
-        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") loadingTxt:nil value:self.camera.nickName],[ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") loadingTxt:nil value:nil], nil];
-        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Network") loadingTxt:LOCALSTR(@"loading...") value:nil],[ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") loadingTxt:nil value:nil],
-            [ListImgTableViewCellModel initObj:@"ic_setting_record" title:LOCALSTR(@"Record") loadingTxt:LOCALSTR(@"loading...") value:nil],nil];
-        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"Other Setting") loadingTxt:nil value:nil],nil];
-        NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"System Setting") loadingTxt:nil value:nil],nil];
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") showValue:NO value:self.camera.nickName],[ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") showValue:NO value:nil], nil];
+        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Network") showValue:YES value:nil],[ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") showValue:NO value:nil],
+            [ListImgTableViewCellModel initObj:@"ic_setting_record" title:LOCALSTR(@"Record") showValue:YES value:nil],nil];
+        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"Other Setting") showValue:NO value:nil],nil];
+        NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"System Setting") showValue:NO value:nil],nil];
         _listItems = [[NSArray alloc] initWithObjects:sec1,sec2,sec3,sec4, nil];
     }
     return _listItems;
@@ -96,14 +96,9 @@
     }
     ListImgTableViewCellModel *model = [[[self listItems]objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     [cell setLeftImage:model.titleImgName];
-    cell.leftLabTitle.text = model.titleText;
-    if(model.loadingText == nil){
-        [cell.rightLabLoading setHidden:YES];
-    }
-    else{
-        cell.rightLabLoading.text = model.loadingText;
-    }
-    cell.rightLabValue.text = model.titleValue;
+    cell.title = model.titleText;
+    cell.showValue = model.showValue;
+    cell.value= model.titleValue;
     
     [cell setSeparatorInset:UIEdgeInsetsZero];
     [cell setLayoutMargins:UIEdgeInsetsZero];
@@ -185,6 +180,9 @@
             if(resp->status == 1 || resp->status == 3){
                 [self setRowValue:ssid section:1 row:0];
             }
+            else{
+                [self setRowValue:LOCALSTR(@"") section:1 row:0];
+            }
             break;
         }
         default:
@@ -194,12 +192,6 @@
 
 -(void)setRowValue:(NSString*)value section:(NSInteger)section row:(NSInteger)row{
     ListImgTableViewCellModel* model = (ListImgTableViewCellModel*)[[self.listItems objectAtIndex:section] objectAtIndex:row];
-    if(value==nil){
-        model.loadingText = LOCALSTR(@"loading...");
-    }
-    else{
-        model.loadingText = nil;
-    }
     model.titleValue = value;
     [self.tableview reloadData];
 }

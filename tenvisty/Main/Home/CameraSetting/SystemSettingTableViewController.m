@@ -6,7 +6,10 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
+#define REBOOT_WAIT_TIMEOUT 60
+
 #import "SystemSettingTableViewController.h"
+
 
 @interface SystemSettingTableViewController (){
     NSInteger updateState;
@@ -17,24 +20,27 @@
     NSString *accSystemTypeVersion;
 }
 
+@property (nonatomic,copy) dispatch_block_t timeoutTask;
 @end
 
 @implementation SystemSettingTableViewController
 
-//+ (UIImage *)imageWithColor:(UIColor *)color
-//{
-//    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-//    UIGraphicsBeginImageContext(rect.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    
-//    CGContextSetFillColorWithColor(context, [color CGColor]);
-//    CGContextFillRect(context, rect);
-//    
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    return image;
-//}
+-(dispatch_block_t)timeoutTask{
+    if(_timeoutTask == nil){
+        _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            [[[iToast makeText:LOCALSTR(@"Connection timeout, please try again.")] setDuration:1] show];
+        });
+    }
+    return _timeoutTask;
+}
+-(dispatch_block_t)newTimeoutTask{
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+    }
+    _timeoutTask = nil;
+    return self.timeoutTask;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,15 +57,12 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [TwsProgress setDismissBlock:^(NSString *text) {
-        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Timeout")];
-    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [TwsProgress dismiss];
-    [TwsProgress setDismissBlock:nil];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    dispatch_block_cancel(self.timeoutTask);
 }
 
 -(void)setup{
@@ -82,14 +85,16 @@
 
 -(void)doReset{
     resetState = 0;
-    [TwsProgress showText:LOCALSTR(@"Resetting...") durationTime:60];
+    [MBProgressHUD showMessag:LOCALSTR(@"Resetting...") toView:self.tableView].userInteractionEnabled = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(REBOOT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RESET_DEFAULT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
 }
 -(void)doReboot{
     rebootState = 0;
-    [TwsProgress showText:LOCALSTR(@"Rebooting...") durationTime:60];
+    [MBProgressHUD showMessag:LOCALSTR(@"Rebooting...") toView:self.tableView].userInteractionEnabled = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(REBOOT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_REBOOT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
@@ -97,7 +102,8 @@
 }
 -(void)doGetAccFmInfo{
     updateState = 0;
-    [TwsProgress showText:LOCALSTR(@"checking...") durationTime:60];
+    [MBProgressHUD showMessag:LOCALSTR(@"Checking...") toView:self.tableView].userInteractionEnabled = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(REBOOT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
@@ -182,17 +188,20 @@
              }
         }
     }
-    [TwsProgress dismiss];
-//    if(systemTypeVersion == nil || systemCheck == nil|| webCheck == nil|| usrCheck == nil|| customTypeVersion == nil|| customTypeCheck == nil|| vendorTypeVersion == nil|| vendorTypeCheck == nil){
-//        [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
-//        return;
-//    }
-//    else
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if(systemTypeVersion == nil || systemCheck == nil|| webCheck == nil|| usrCheck == nil|| customTypeVersion == nil|| customTypeCheck == nil|| vendorTypeVersion == nil|| vendorTypeCheck == nil){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
+        return;
+    }
+    else
     {
         if([systemTypeVersion compare:accSystemTypeVersion] >0 || [customTypeVersion compare:accCustomTypeVersion] >0 || [vendorTypeVersion compare:accVendorTypeVersion]>0 ){
             [TwsTools presentAlertTitle:self title:LOCALSTR(@"Prompt") message:LOCALSTR(@"new firmware is available, update?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
                 [self upgradeFM:systemTypeVersion systemCheck:systemCheck webCheck:webCheck userCheck:usrCheck customTypeVersion:customTypeVersion customTypeCheck:customTypeCheck vendorTypeVersion:vendorTypeVersion vendorTypeCheck:vendorTypeCheck];
             } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+        }
+        else{
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
         }
         
     }
@@ -206,7 +215,8 @@
 }
 -(void)upgradeFM:(NSString*)sysTypeVersion systemCheck:(NSString*)sysCheck webCheck:(NSString*)wbcheck userCheck:(NSString*)usrCheck customTypeVersion:(NSString*)cusTypeVersion customTypeCheck:(NSString*)cusTypeCheck vendorTypeVersion:(NSString*)vendTypeVersion vendorTypeCheck:(NSString*)vendTypeCheck{
     
-    [TwsProgress showText:LOCALSTR(@"Updating") durationTime:60];
+    [MBProgressHUD showMessag:LOCALSTR(@"Updating...") toView:self.tableView].userInteractionEnabled = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(REBOOT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     SMsgAVIoctrlSetUpgradeReq *req = malloc(sizeof(SMsgAVIoctrlSetUpgradeReq));
     memset(req, 0, sizeof(SMsgAVIoctrlSetUpgradeReq));
     memcpy(req->CustomInfo.customcheck, [cusTypeCheck UTF8String], cusTypeCheck.length);
@@ -237,6 +247,7 @@
     }
     //check new firmware
     else if(indexPath.section == 2){
+        self.camera.upgradePercent = 0;
         [self doGetAccFmInfo];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -245,7 +256,8 @@
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
         case IOTYPE_USER_IPCAM_REBOOT_RESP:{
-            [TwsProgress dismiss];
+            dispatch_block_cancel(self.timeoutTask);
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
             //重启成功
             if(resp->result ==0){
@@ -259,7 +271,8 @@
             break;
         }
         case IOTYPE_USER_IPCAM_RESET_DEFAULT_RESP:{
-            [TwsProgress dismiss];
+            dispatch_block_cancel(self.timeoutTask);
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
             //复位成功
             if(resp->result ==0){
@@ -267,7 +280,6 @@
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
             else{
-                
                 [TwsTools presentAlertMsg:self message:LOCALSTR(@"Reboot failed, please try again.")];
             }
             break;
@@ -277,16 +289,16 @@
             [self getFMInfo:[NSString stringWithUTF8String:resp->LocalUrl] upgradeUrl:[NSString stringWithUTF8String:resp->UpgradeUrl] systemType:[NSString stringWithUTF8String:resp->SystemType] customType:[NSString stringWithUTF8String:resp->CustomType] vendorType:[NSString stringWithUTF8String:resp->VendorType]];
             break;
         }
+            //no use
         case IOTYPE_USER_IPCAM_UPGRADE_STATUS:{
             SMsgAVIoctrlUpgradeStatus *resp = (SMsgAVIoctrlUpgradeStatus*)data;
             updateState = 2;
             if(resp->p >=100){
                 updateState =3;
-                [TwsProgress showText:LOCALSTR(@"Firmwre update success, camera will reboot later, please wait a moment.")];
+                [[[iToast makeText:LOCALSTR(@"Firmwre update success, camera will reboot later, please wait a moment.")] setDuration:1] show];
             }
             else{
-                NSString *t = FORMAT(@"Updating %d%%",resp->p);
-                [TwsProgress showText:LOCALSTR(t) durationTime:60];
+                [MBProgressHUD showMessag:FORMAT(LOCALSTR(@"Updating %d%%"),resp->p) toView:self.tableView];
             }
             break;
         }
@@ -308,15 +320,17 @@
             }
             else{
                 [TwsTools presentAlertMsg:self message:LOCALSTR(@"Get firmware info failed, please try again later.") ];
-                [TwsProgress dismiss];
+                [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                dispatch_block_cancel(self.timeoutTask);
             }
             break;
         }
         case IOTYPE_USER_IPCAM_SET_UPRADE_RESP:{
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            dispatch_block_cancel(self.timeoutTask);
             SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp *)data;
             if(resp->result == 0){
                 updateState =1;
-                [TwsProgress dismiss];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
             else{

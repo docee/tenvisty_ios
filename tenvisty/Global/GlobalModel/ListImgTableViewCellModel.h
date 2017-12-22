@@ -11,12 +11,12 @@
 @interface ListImgTableViewCellModel : NSObject
 @property (nonatomic,copy) NSString *titleImgName;
 @property (nonatomic,copy) NSString *titleText;
-@property (nonatomic,copy) NSString *loadingText;
 @property (nonatomic,copy) NSString *titleValue;
 @property (nonatomic,copy) NSString *viewId;
+@property (nonatomic,assign) BOOL showValue;
 
-+(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt loadingTxt:(NSString *)loadingTxt value:(NSString *)value;
++(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt showValue:(BOOL)showV value:(NSString *)value;
 
 
-+(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt loadingTxt:(NSString *)loadingTxt value:(NSString *)value viewId:(NSString *)vid;
++(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt showValue:(BOOL)showV value:(NSString *)value viewId:(NSString *)vid;
 @end

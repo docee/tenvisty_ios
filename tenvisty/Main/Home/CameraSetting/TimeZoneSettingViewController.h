@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseViewController.h"
 
-@interface TimeZoneSettingViewController : BaseTableViewController
+@interface TimeZoneSettingViewController : BaseViewController
 
 @end

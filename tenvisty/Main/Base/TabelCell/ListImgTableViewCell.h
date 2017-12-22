@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ListImgTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *leftLabTitle;
-@property (weak, nonatomic) IBOutlet UILabel *rightLabLoading;
-@property (weak, nonatomic) IBOutlet UILabel *rightLabValue;
 -(void) setLeftImage:(NSString*)imageName;
+
+@property (nonatomic,strong) NSString *title;
+@property (nonatomic,strong) NSString *value;
+@property (nonatomic,assign) BOOL showValue;
 @end

@@ -183,7 +183,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-e0-0f5">
-                                                    <rect key="frame" x="243" y="5" width="122" height="18"/>
+                                                    <rect key="frame" x="238" y="8" width="122" height="18"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="show password" image="checkbox_uncheck">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -191,7 +191,7 @@
                                                     <state key="selected" image="checkbox_checked"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgD-YU-DJU">
-                                                    <rect key="frame" x="10" y="33" width="365" height="122.5"/>
+                                                    <rect key="frame" x="10" y="36" width="365" height="122.5"/>
                                                     <string key="text">Please make sure your password length is 6-12 characters and contaqins at least two combinations of below characters.
 1.capital
 2.small letter
@@ -207,8 +207,8 @@
                                                 <constraint firstItem="OgD-YU-DJU" firstAttribute="leading" secondItem="JiJ-eD-K2J" secondAttribute="leading" constant="10" id="IYP-Bk-UJb"/>
                                                 <constraint firstAttribute="height" constant="230" id="RvN-ut-ADr"/>
                                                 <constraint firstAttribute="trailing" secondItem="OgD-YU-DJU" secondAttribute="trailing" id="Vz3-vT-sn6"/>
-                                                <constraint firstAttribute="trailing" secondItem="bHT-e0-0f5" secondAttribute="trailing" constant="10" id="YHe-VD-Atd"/>
-                                                <constraint firstItem="bHT-e0-0f5" firstAttribute="top" secondItem="JiJ-eD-K2J" secondAttribute="top" constant="5" id="fw2-9Y-uNm"/>
+                                                <constraint firstAttribute="trailing" secondItem="bHT-e0-0f5" secondAttribute="trailing" constant="15" id="YHe-VD-Atd"/>
+                                                <constraint firstItem="bHT-e0-0f5" firstAttribute="top" secondItem="JiJ-eD-K2J" secondAttribute="top" constant="8" id="fw2-9Y-uNm"/>
                                                 <constraint firstItem="OgD-YU-DJU" firstAttribute="top" secondItem="bHT-e0-0f5" secondAttribute="bottom" constant="10" id="lrM-Yi-uHv"/>
                                             </constraints>
                                         </view>
@@ -311,7 +311,7 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="OrK-dL-qZB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="5zs-tC-coA" kind="unwind" unwindAction="WiFiSettingViewController1UnwindSegue:" id="SKQ-Wu-kWA"/>
+                                <segue destination="5zs-tC-coA" kind="unwind" identifier="ChangeWiFi2WiFiSetting" unwindAction="WiFiSettingViewController1UnwindSegue:" id="SKQ-Wu-kWA"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="navDone" id="H6d-By-K8y">
@@ -499,7 +499,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="bJR-q4-zkh" kind="show" identifier="TimeSetting2TimeZoneSetting" id="EnD-GI-PEq"/>
+                        <segue destination="bJR-q4-zkh" kind="show" identifier="" id="EnD-GI-PEq"/>
+                        <segue destination="eWU-SD-bQe" kind="show" identifier="TimeSetting2TimeZoneSetting" id="avz-o8-zCS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHw-QS-7od" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,7 +629,7 @@
         <scene sceneID="bGh-nL-TqF">
             <objects>
                 <tableViewController id="Xz8-Fb-QrX" customClass="SystemSettingTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="Cjj-s4-R5N">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="40" sectionHeaderHeight="18" sectionFooterHeight="18" id="Cjj-s4-R5N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -636,14 +637,14 @@
                             <tableViewSection id="sYv-Jn-sL6">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hM0-Mx-fxr">
-                                        <rect key="frame" x="0.0" y="35" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="35" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hM0-Mx-fxr" id="bhd-s9-0h9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zN4-RK-gmB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -662,14 +663,14 @@
                             <tableViewSection id="4Na-v9-ChD">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UrY-fQ-5Hj">
-                                        <rect key="frame" x="0.0" y="121" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="111" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UrY-fQ-5Hj" id="g8e-Gz-4ym">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reboot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a54-SQ-UqV">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -688,14 +689,14 @@
                             <tableViewSection id="GDI-VV-v0h">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="a2K-oO-Wx7">
-                                        <rect key="frame" x="0.0" y="207" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="187" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a2K-oO-Wx7" id="Xtc-Ea-Xea">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check New Firmware" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zS6-cZ-I1L">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.54901960780000003" blue="0.020276521379999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -727,6 +728,74 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xaS-Y6-uDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Fo9-aW-jhu" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Time Zone-->
+        <scene sceneID="WM8-DC-YW2">
+            <objects>
+                <viewController id="eWU-SD-bQe" customClass="TimeZoneSettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BfH-ky-TPl"/>
+                        <viewControllerLayoutGuide type="bottom" id="lES-JV-Ol8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lxe-Pf-YJR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7i-w9-OSs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the timezone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngr-cV-Ssd">
+                                        <rect key="frame" x="20" y="0.0" width="355" height="40"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Ngr-cV-Ssd" firstAttribute="top" secondItem="w7i-w9-OSs" secondAttribute="top" id="6iO-Zi-Fo0"/>
+                                    <constraint firstItem="Ngr-cV-Ssd" firstAttribute="leading" secondItem="w7i-w9-OSs" secondAttribute="leading" constant="20" id="CN7-KU-PA7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ngr-cV-Ssd" secondAttribute="bottom" id="SDO-JW-57Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ngr-cV-Ssd" secondAttribute="trailing" id="fhB-p1-VTz"/>
+                                    <constraint firstAttribute="height" constant="40" id="tFr-Te-rz1"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wy7-eT-n2u">
+                                <rect key="frame" x="0.0" y="40" width="375" height="563"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="eWU-SD-bQe" id="ZZa-Va-QGX"/>
+                                    <outlet property="delegate" destination="eWU-SD-bQe" id="9ld-Bo-ruu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Wy7-eT-n2u" firstAttribute="leading" secondItem="lxe-Pf-YJR" secondAttribute="leading" id="Cnw-Qi-hj4"/>
+                            <constraint firstItem="w7i-w9-OSs" firstAttribute="top" secondItem="BfH-ky-TPl" secondAttribute="bottom" id="UgM-Ly-sma"/>
+                            <constraint firstItem="w7i-w9-OSs" firstAttribute="leading" secondItem="lxe-Pf-YJR" secondAttribute="leading" id="WtD-WK-am4"/>
+                            <constraint firstItem="Wy7-eT-n2u" firstAttribute="top" secondItem="w7i-w9-OSs" secondAttribute="bottom" id="ZnE-Cb-dWJ"/>
+                            <constraint firstAttribute="trailing" secondItem="w7i-w9-OSs" secondAttribute="trailing" id="gr5-BT-kgH"/>
+                            <constraint firstAttribute="trailing" secondItem="Wy7-eT-n2u" secondAttribute="trailing" id="gvw-ol-rJz"/>
+                            <constraint firstItem="lES-JV-Ol8" firstAttribute="top" secondItem="Wy7-eT-n2u" secondAttribute="bottom" id="ndv-YE-KvQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Time Zone" id="eFR-OR-8wC">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="iOt-hd-VIZ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="ctK-Su-SQC" kind="unwind" unwindAction="TimeSettingViewController1UnwindSegue:" id="h8p-0D-UGX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="Wy7-eT-n2u" id="4UW-Xs-5ec"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1y-PW-XBu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ctK-Su-SQC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>

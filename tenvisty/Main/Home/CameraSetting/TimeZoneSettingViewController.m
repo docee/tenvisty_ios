@@ -8,10 +8,12 @@
 
 #import "TimeZoneSettingViewController.h"
 #import "TimeZoneModel.h"
+#import "DetailTableViewCell.h"
 
 @interface TimeZoneSettingViewController (){
     NSInteger timezoneIndex;
 }
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
 
@@ -23,18 +25,22 @@
     // Do any additional setup after loading the view.
 }
 -(void)setup{
+    [self.tableview registerNib:[UINib nibWithNibName:@"DetailTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Detail];
     [self getTimezone];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 -(void)getTimezone{
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;
     SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
     free(req);
 }
 
 -(void)setTimezone:(NSInteger)index{
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;
     SMsgAVIoctrlSetDstReq *req = malloc(sizeof(SMsgAVIoctrlSetDstReq));
     memset(req, 0, sizeof(SMsgAVIoctrlSetDstReq));
 //    if([[NSTimeZone localTimeZone] isDaylightSavingTime] && [[NSTimeZone localTimeZone] isDaylightSavingTimeForDate:[NSDate date]]){
@@ -66,31 +72,32 @@
     TimeZoneModel *model = (TimeZoneModel *)[[TimeZoneModel getAll] objectAtIndex:indexPath.row];
     NSString *id = TableViewCell_Detail;
     DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    cell.labTitle.text = model.area;
-    cell.labDesc.text = model.strGMT;
+    cell.labTitle.text = LOCALSTR(model.area);
+    cell.labDesc.text = LOCALSTR(model.strGMT);
     
     [cell setSelect:indexPath.row == timezoneIndex];
     
     return cell;
 }
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Main.width, 40)];
-    UILabel *labTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, Screen_Main.width, 20)];
-    labTitle.text = LOCALSTR(@"Select the timezone");
-    labTitle.font = [UIFont systemFontOfSize:14];
-    [view addSubview:labTitle];
-    return view;
-}
+//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Main.width, 80)];
+//    UILabel *labTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, Screen_Main.width, 20)];
+//    labTitle.text = LOCALSTR(@"Select the timezone");
+//    labTitle.font = [UIFont systemFontOfSize:14];
+//    [view addSubview:labTitle];
+//    return view;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self setTimezone:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40.0;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 80.0;
+//}
+
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
         case IOTYPE_USER_IPCAM_GET_ZONE_INFO_RESP:{
@@ -102,8 +109,8 @@
                     break;
                 }
             }
-            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-            [self.tableView reloadData];
+            [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+            [self.tableview reloadData];
             break;
             break;
         }

@@ -57,14 +57,9 @@
     if(indexPath.row == 0){
         NSString *id = TableViewCell_ListImg;
         ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.leftLabTitle.text = LOCALSTR(@"Sensitivity Setting");
-        cell.rightLabValue.text = currentSens;//LOCALSTR(@"Close");
-        if(currentSens != nil){
-            [cell.rightLabLoading setHidden:YES];
-        }
-        else{
-            [cell.rightLabLoading setHidden:NO];
-        }
+        cell.title = LOCALSTR(@"Sensitivity Setting");
+        cell.showValue = YES;
+        cell.value= currentSens;//LOCALSTR(@"Close");
         [cell setLeftImage:@"ic_sens"];
         return cell;
     }

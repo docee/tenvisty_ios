@@ -74,9 +74,15 @@
     return cell;
 }
 - (IBAction)save:(id)sender {
-    NSString *oldPassword =  ((TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).value;
-    NSString *newPassword = ((TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).value;
-    NSString *confirmPassword = ((TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).value;
+    TwsTableViewCell *cell0 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    TwsTableViewCell *cell1 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    TwsTableViewCell *cell2 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    [cell0 resignFirstResponder];
+    [cell1 resignFirstResponder];
+    [cell2 resignFirstResponder];
+    NSString *oldPassword =  cell0.value;
+    NSString *newPassword = cell1.value;
+    NSString *confirmPassword = cell2.value;
     if(oldPassword.length == 0 || newPassword.length == 0 || confirmPassword.length == 0){
         [[iToast makeText:LOCALSTR(@"Please complete each password.")] show];
     }
@@ -143,7 +149,7 @@
 }
 
 -(void)doModifyPassword:(NSString*)oldPassword newPwd:(NSString*)newPassword{
-    [TwsProgress showProgress];
+    [MBProgressHUD showMessag:LOCALSTR(@"Changing") toView:self.tableView].userInteractionEnabled = YES;
     SMsgAVIoctrlSetPasswdReq *req = malloc(sizeof(SMsgAVIoctrlSetPasswdReq));
     memset(req, 0, sizeof(SMsgAVIoctrlSetPasswdReq));
     memcpy(req->oldpasswd, [oldPassword UTF8String], oldPassword.length);
@@ -157,8 +163,9 @@
     switch (type) {
         case IOTYPE_USER_IPCAM_SETPASSWORD_RESP:
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[iToast makeText:LOCALSTR(@"Password changed successfully, device will reconnect soon.")] show];
-                [TwsProgress dismiss];
+                [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+               
+                [[[iToast makeText:LOCALSTR(@"Password changed successfully, device will reconnect soon.")] setDuration:1] show];
                 self.camera.pwd = newCameraPassword;
                 [GBase editCamera:self.camera];
                 [self.camera stop];

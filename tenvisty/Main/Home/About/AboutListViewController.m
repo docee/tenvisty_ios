@@ -31,9 +31,9 @@
 }
 -(NSArray *)listItems{
     if(!_listItems){
-        _listItems = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_menu_help" title:LOCALSTR(@"Help") loadingTxt:nil value:nil viewId:TableViewCell_ListImg],
-                      [ListImgTableViewCellModel initObj:@"ic_menu_privacypolicy" title:LOCALSTR(@"Privacy Policy") loadingTxt:nil value:nil viewId:TableViewCell_ListImg],
-                      [ListImgTableViewCellModel initObj:@"ic_menu_info" title:LOCALSTR(@"APP Version") loadingTxt:nil value:nil viewId:TableViewCell_ListImg], nil];
+        _listItems = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_menu_help" title:LOCALSTR(@"Help") showValue:NO value:nil viewId:TableViewCell_ListImg],
+                      [ListImgTableViewCellModel initObj:@"ic_menu_privacypolicy" title:LOCALSTR(@"Privacy Policy") showValue:NO value:nil viewId:TableViewCell_ListImg],
+                      [ListImgTableViewCellModel initObj:@"ic_menu_info" title:LOCALSTR(@"APP Version") showValue:NO value:nil viewId:TableViewCell_ListImg], nil];
         
         
     }
@@ -57,19 +57,9 @@
     if([vid isEqualToString:TableViewCell_ListImg]){
         ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
         [cell setLeftImage:model.titleImgName];
-        cell.leftLabTitle.text = model.titleText;
-        if(model.loadingText == nil){
-            [cell.rightLabLoading setHidden:YES];
-        }
-        else{
-            cell.rightLabLoading.text = model.loadingText;
-        }
-        if(model.titleValue != nil){
-            cell.rightLabValue.text = model.titleValue;
-        }
-        else{
-            [cell.rightLabValue setHidden:YES];
-        }
+        cell.title = model.titleText;
+        cell.showValue = model.showValue;
+        cell.value = model.titleValue;
         //        [cell setSeparatorInset:UIEdgeInsetsZero];
         //        [cell setLayoutMargins:UIEdgeInsetsZero];
         return cell;

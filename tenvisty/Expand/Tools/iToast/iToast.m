@@ -113,8 +113,10 @@ static iToastSettings *sharedSettings = nil;
 //    [[NSRunLoop mainRunLoop] addTimer:timer1 forMode:NSDefaultRunLoopMode];
     
     [window addSubview:v];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if(theSettings.duration == 0){
+        theSettings.duration = 1;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(theSettings.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [v removeFromSuperview];
     });
 
@@ -177,8 +179,10 @@ static iToastSettings *sharedSettings = nil;
     //    [[NSRunLoop mainRunLoop] addTimer:timer1 forMode:NSDefaultRunLoopMode];
     
     [window addSubview:v];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if(theSettings.duration == 0){
+        theSettings.duration = 1;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(theSettings.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [v removeFromSuperview];
     });
     
@@ -203,6 +207,13 @@ static iToastSettings *sharedSettings = nil;
     label.font = font;
     label.text = text;
     label.numberOfLines = 0;
+    //多行
+    if(textSize.size.height > 30){
+        [label setTextAlignment:NSTextAlignmentLeft];
+    }
+    else{
+        [label setTextAlignment:NSTextAlignmentCenter];
+    }
     //    label.shadowColor = LightBlueColor;
     //    label.shadowOffset = CGSizeMake(1, 1);
     
@@ -240,8 +251,10 @@ static iToastSettings *sharedSettings = nil;
     //    [[NSRunLoop mainRunLoop] addTimer:timer1 forMode:NSDefaultRunLoopMode];
     
     [window addSubview:v];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if(theSettings.duration == 0){
+        theSettings.duration = 1;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(theSettings.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [v removeFromSuperview];
     });
     

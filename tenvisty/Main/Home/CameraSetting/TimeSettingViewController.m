@@ -9,6 +9,7 @@
 #import "TimeSettingViewController.h"
 #import "SyncTimeTableViewCell.h"
 #import "TimeZoneModel.h"
+#import "BaseViewController.h"
 
 @interface TimeSettingViewController (){
     NSString *time;
@@ -107,16 +108,16 @@
         if(indexPath.row == 0){
             
             ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TableViewCell_ListImg forIndexPath:indexPath];
+            cell.showValue = YES;
             if(timezoneIndex == -1){
-                cell.rightLabValue.text = nil;
+                cell.value = nil;
             }
             else{
                 NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:timezoneIndex]).area;
-                cell.rightLabValue.text = LOCALSTR(timezoneId);
+                cell.value = LOCALSTR(timezoneId);
             }
-            [cell.rightLabLoading setHidden:timezoneIndex != -1];
             [cell setLeftImage:nil];
-            cell.leftLabTitle.text = LOCALSTR(@"Select time zone");
+            cell.title = LOCALSTR(@"Select time zone");
             return cell;
         }
         else{
@@ -134,8 +135,22 @@
     return nil;
 }
 
+-(void)setTimezoneDst:(BOOL)enable{
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    SMsgAVIoctrlSetDstReq *req = malloc(sizeof(SMsgAVIoctrlSetDstReq));
+    memset(req, 0, sizeof(SMsgAVIoctrlSetDstReq));
+    //    if([[NSTimeZone localTimeZone] isDaylightSavingTime] && [[NSTimeZone localTimeZone] isDaylightSavingTimeForDate:[NSDate date]]){
+    //        req->Enable = 1;
+    //    }
+    req->Enable = enable?1:0;
+    NSString *area = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:timezoneIndex]).area;
+    memcpy(req->DstDistId, [area UTF8String], area.length);
+    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetTimeReq)];
+    free(req);
+}
+
 -(void)clickSwitch:(UISwitch*)sender{
-    
+    [self setTimezoneDst:[sender isOn]];
 }
 
 //其他界面返回到此界面调用的方法
@@ -182,6 +197,16 @@
             }
             break;
         }
+        case IOTYPE_USER_IPCAM_SET_ZONE_INFO_RESP:{
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            SMsgAVIoctrlSetDstResp *resp = (SMsgAVIoctrlSetDstResp*)data;
+            if(resp->result == 0){
+                
+            }
+            else{
+                [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];
+            }
+        }
         default:
             break;
     }
@@ -207,6 +232,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[BaseTableViewController class]]){
         BaseTableViewController *controller= segue.destinationViewController;
+        controller.camera =  self.camera;
+    }
+    else if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
+        BaseViewController *controller= segue.destinationViewController;
         controller.camera =  self.camera;
     }
 }
