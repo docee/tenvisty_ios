@@ -7,7 +7,7 @@
 //
 
 #import "AddDeviceWirelessNoteViewController.h"
-#import <FLAnimatedImage/FLAnimatedImage.h>
+#import "FLAnimatedImage.h"
 #import "AddDeviceWirelessViewController.h"
 
 @interface AddDeviceWirelessNoteViewController ()

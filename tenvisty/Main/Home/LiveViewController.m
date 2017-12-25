@@ -450,6 +450,7 @@
 - (IBAction)goFolder:(id)sender {
 }
 - (IBAction)goEventList:(id)sender {
+    [self performSegueWithIdentifier:@"LiveView2EventList" sender:self];
 }
 - (IBAction)showPreset:(id)sender {
     [_viewPreset setHidden:![_viewPreset isHidden]];
@@ -529,6 +530,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
+        BaseViewController *controller= segue.destinationViewController;
+        controller.camera =  self.camera;
+    }
+}
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     dispatch_async(dispatch_get_main_queue(), ^{
         _labConnectState.text = [((MyCamera*)camera) strConnectState];

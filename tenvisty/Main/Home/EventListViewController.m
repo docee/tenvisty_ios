@@ -20,6 +20,7 @@
     NSDate *nowDate;
     NSDate *pastDate;
 }
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture_outerView;
 @property (weak, nonatomic) IBOutlet UILabel *labSearchTime;
 @property (weak, nonatomic) IBOutlet UILabel *labCurrentEventDate;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -102,7 +103,8 @@
 
 - (IBAction)clickSearchMenu:(id)sender {
     if(!isSearchingEvent){
-        [self.searchMenu toggleShow];
+        BOOL isShow = [self.searchMenu toggleShow];
+        [_tapGesture_outerView setEnabled:isShow];
     }
 }
 
@@ -119,6 +121,7 @@
         _timeoutTask = nil;
     }
     [self.searchMenu dismiss];
+    [_tapGesture_outerView setEnabled:NO];
 }
 
 -(void)click{
@@ -126,6 +129,7 @@
 }
 - (IBAction)tagOuterView:(id)sender {
     [self.searchMenu dismiss];
+    [_tapGesture_outerView setEnabled:NO];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
@@ -354,6 +358,10 @@
     return result;
 }
 -(void)didSelect:(NSInteger)index{
+    if(index == 4){
+        [self showCustomSearchView];
+        return;
+    }
     NSDate *now = [NSDate date];
     NSDate *from;
     
@@ -412,6 +420,9 @@
         return nil;
     }
 }
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"EventList2Playback"]){
         PlaybackViewController *controller = (PlaybackViewController*)segue.destinationViewController;
@@ -419,6 +430,27 @@
         controller.evt = [self.event_list objectAtIndex:[self.tableview indexPathForSelectedRow].row];
         controller.needCreateSnapshot = [self.camera remoteRecordImage: controller.evt.eventTime type:controller.evt.eventType] == nil;
     }
+}
+
+-(void)showCustomSearchView{
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_view_eventsearchcustom"];
+    controller.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:controller animated:YES completion:nil];
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALSTR(@"Search Event") message: nil preferredStyle:UIAlertControllerStyleAlert];
+//    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+//    [alertController.view addSubview:datePicker];
+//    
+//    UIAlertAction *actionNO = [UIAlertAction actionWithTitle:LOCALSTR(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        
+//    }];
+//    [alertController addAction:actionNO];
+//    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:LOCALSTR(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        
+//    }];
+//    
+//    [alertController addAction:actionOk];
+//    [self presentViewController:alertController animated:YES completion:NULL];
 }
 /*
 #pragma mark - Navigation

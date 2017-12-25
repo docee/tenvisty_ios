@@ -24,7 +24,6 @@
 		890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B41FB03CD500C1061A /* UIColor+Hex.m */; };
 		890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B61FB03CD500C1061A /* UIImage+Colors.m */; };
 		8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */; };
-		8912D4E81FF11A4C00C660AB /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8912D4031FF10F9A00C660AB /* IOTCamera.framework */; };
 		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
 		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
@@ -128,6 +127,8 @@
 		89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9951FDA2B280049F1E7 /* SearchLanAsync.m */; };
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
+		ED040F561FEE708400D2DD19 /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED040F551FEE708400D2DD19 /* IOTCamera.framework */; };
+		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
@@ -157,6 +158,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 8912D4761FF1120200C660AB;
 			remoteInfo = IOTCamera_T;
+		};
+		ED040F501FEE705F00D2DD19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 61EC09AC1599B9E800BE959E;
+			remoteInfo = IOTCamera;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -402,6 +410,9 @@
 		89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		89E6D99A1FDA61DC0049F1E7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		ED040F551FEE708400D2DD19 /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-hgdwhrvovyreqqcjuxfukgheohqw/Build/Intermediates.noindex/UninstalledProducts/iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
+		ED040F571FF1588C00D2DD19 /* EventSearchCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSearchCustomViewController.h; sourceTree = "<group>"; };
+		ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchCustomViewController.m; sourceTree = "<group>"; };
 		ED3D50691FD59D0300F0C658 /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
 		ED3D506A1FD59D0300F0C658 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
 		ED3E88B61FE6C012006754E8 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
@@ -420,7 +431,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8912D4E81FF11A4C00C660AB /* IOTCamera.framework in Frameworks */,
+				ED040F561FEE708400D2DD19 /* IOTCamera.framework in Frameworks */,
 				8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */,
 				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,
@@ -568,6 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				8912D4031FF10F9A00C660AB /* IOTCamera.framework */,
+				ED040F551FEE708400D2DD19 /* IOTCamera.framework */,
 				8912D4001FF10F4500C660AB /* IOTCamera */,
 				8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */,
 				89A0967A1FF1094D00E5EBAE /* FLAnimatedImage.framework */,
@@ -872,6 +884,8 @@
 				892ADB901FD7C5AA00BD8929 /* EventListViewController.m */,
 				892ADB951FD80AB600BD8929 /* PlaybackViewController.h */,
 				892ADB961FD80AB600BD8929 /* PlaybackViewController.m */,
+				ED040F571FF1588C00D2DD19 /* EventSearchCustomViewController.h */,
+				ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1014,6 +1028,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				ED040F511FEE705F00D2DD19 /* PBXTargetDependency */,
 			);
 			name = tenvisty;
 			productName = tenvisty;
@@ -1163,6 +1178,7 @@
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
+				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
 				892ADB691FD6909B00BD8929 /* EventSettingViewController.m in Sources */,
 				890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */,
 				894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */,
@@ -1215,6 +1231,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED040F511FEE705F00D2DD19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IOTCamera;
+			targetProxy = ED040F501FEE705F00D2DD19 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		894D7E551FAB01D900C58BB2 /* Main.storyboard */ = {
@@ -1373,7 +1397,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
-					"-all_load",
 					"-ObjC",
 					"-w",
 				);
@@ -1409,7 +1432,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
-					"-all_load",
 					"-ObjC",
 					"-w",
 				);

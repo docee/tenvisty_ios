@@ -12,7 +12,7 @@
 #define CONFIG_WIFI_WRONG_PWD (2)
 
 #import "AddDeviceWirelessSettingViewController.h"
-#import <FLAnimatedImage/FLAnimatedImage.h>
+#import "FLAnimatedImage.h"
 #import "WiFiConfigContext.h"
 
 @interface AddDeviceWirelessSettingViewController ()<WiFiConfigDelegate>{

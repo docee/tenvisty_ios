@@ -64,15 +64,18 @@
         }];
     }
 }
--(void)toggleShow{
+-(BOOL)toggleShow{
     if(self.tableview){
         if([self.tableview isHidden] || self.tableview.frame.size.height<=1){
             [self show];
+            return true;
         }
         else{
             [self dismiss];
+            return false;
         }
     }
+    return false;
 }
 -(void)show{
     if(self.tableview){

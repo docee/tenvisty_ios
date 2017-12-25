@@ -18,6 +18,6 @@
 @property (nonatomic,weak) id<EventCustomSearchDelegate> delegate;
 
 -(void)show;
--(void)toggleShow;
+-(BOOL)toggleShow;
 -(void)dismiss;
 @end
