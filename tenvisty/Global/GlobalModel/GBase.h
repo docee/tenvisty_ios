@@ -24,4 +24,5 @@
 +(NSInteger)getCameraIndex:(MyCamera*)camera;
 + (BOOL)savePictureForCamera:(MyCamera *)mycam image:(UIImage*)img;
 + (NSString*)saveRecordingForCamera:(Camera *)mycam;
++ (BOOL)saveRemoteRemotePictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime;
 @end

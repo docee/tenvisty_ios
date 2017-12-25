@@ -23,6 +23,8 @@
 		890B46AB1FB034C000C1061A /* MyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46AA1FB034C000C1061A /* MyCamera.m */; };
 		890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B41FB03CD500C1061A /* UIColor+Hex.m */; };
 		890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B61FB03CD500C1061A /* UIImage+Colors.m */; };
+		8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */; };
+		8912D4E81FF11A4C00C660AB /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8912D4031FF10F9A00C660AB /* IOTCamera.framework */; };
 		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
 		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
@@ -68,11 +70,9 @@
 		892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */; };
 		89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */; };
 		89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */; };
-		894871C11FDF6B7F008F15F2 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A8F4651FDE97D2003863B6 /* FLAnimatedImage.framework */; };
 		894871C51FDF6B93008F15F2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C41FDF6B93008F15F2 /* QuartzCore.framework */; };
 		894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C61FDF6B9B008F15F2 /* ImageIO.framework */; };
 		894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C81FDF6BA3008F15F2 /* MobileCoreServices.framework */; };
-		894871DE1FDF72B2008F15F2 /* FLAnimatedImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 894871DC1FDF6E07008F15F2 /* FLAnimatedImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		894D7E4E1FAB01D900C58BB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 894D7E4D1FAB01D900C58BB2 /* main.m */; };
 		894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 894D7E501FAB01D900C58BB2 /* AppDelegate.m */; };
 		894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 894D7E551FAB01D900C58BB2 /* Main.storyboard */; };
@@ -98,7 +98,6 @@
 		898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BA91FE0F66600062F04 /* FMDatabaseQueue.m */; };
 		898D8BB11FE0F66600062F04 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BAC1FE0F66600062F04 /* FMResultSet.m */; };
 		898D8BB41FE0F75B00062F04 /* GBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BB31FE0F75B00062F04 /* GBase.m */; };
-		899AD4EF1FCD3A38008ED303 /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4EE1FCD3A38008ED303 /* IOTCamera.framework */; };
 		899AD4F11FCD3AB7008ED303 /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4F01FCD3AB7008ED303 /* libIOTCAPIs_ALL.a */; };
 		899AD4F91FCD3B40008ED303 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4F81FCD3B40008ED303 /* CoreGraphics.framework */; };
 		899AD4FB1FCD3B52008ED303 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4FA1FCD3B52008ED303 /* UIKit.framework */; };
@@ -109,6 +108,9 @@
 		899AD5051FCD3C32008ED303 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5041FCD3C32008ED303 /* OpenAL.framework */; };
 		899AD5071FCD3CB0008ED303 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5061FCD3CB0008ED303 /* CoreVideo.framework */; };
 		899AD5091FCD3DAD008ED303 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
+		89A096821FF109C700E5EBAE /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A0967E1FF109C700E5EBAE /* FLAnimatedImage.m */; };
+		89A096831FF109C700E5EBAE /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A096801FF109C700E5EBAE /* FLAnimatedImageView.m */; };
+		89A096841FF109C700E5EBAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A096811FF109C700E5EBAE /* Info.plist */; };
 		89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89A7E93B1FECB30B00F12BFF /* Localizable.strings */; };
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
@@ -149,12 +151,12 @@
 			remoteGlobalIDString = 3E2A43D315FEEBE6000A2974;
 			remoteInfo = IOTCamera_MJ4;
 		};
-		894871DB1FDF6E07008F15F2 /* PBXContainerItemProxy */ = {
+		8912D4DF1FF1174800C660AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 894871D71FDF6E07008F15F2 /* FLAnimatedImage.xcodeproj */;
+			containerPortal = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 92C9BC0C1B199DC500D79B06;
-			remoteInfo = FLAnimatedImage;
+			remoteGlobalIDString = 8912D4761FF1120200C660AB;
+			remoteInfo = IOTCamera_T;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -165,7 +167,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				894871DE1FDF72B2008F15F2 /* FLAnimatedImage.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +207,9 @@
 		890B46B61FB03CD500C1061A /* UIImage+Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Colors.m"; sourceTree = "<group>"; };
 		890B46BC1FB050A900C1061A /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "tenvisty/lib/Debug-iphonesimulator/IOTCamera.framework"; sourceTree = "<group>"; };
 		890B47231FB0635400C1061A /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "tenvisty/lib/Debug-iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
+		8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8912D4001FF10F4500C660AB /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
+		8912D4031FF10F9A00C660AB /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates/UninstalledProducts/iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
 		892477941FE263F70021D8E6 /* TwsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsTableViewCell.h; sourceTree = "<group>"; };
 		892477951FE263F70021D8E6 /* TwsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsTableViewCell.m; sourceTree = "<group>"; };
 		8924779B1FE28AF60021D8E6 /* TwsViewTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsViewTools.h; sourceTree = "<group>"; };
@@ -291,7 +295,6 @@
 		894871C41FDF6B93008F15F2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		894871C61FDF6B9B008F15F2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		894871C81FDF6BA3008F15F2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		894871D71FDF6E07008F15F2 /* FLAnimatedImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FLAnimatedImage.xcodeproj; path = FLAnimatedImage/FLAnimatedImage.xcodeproj; sourceTree = "<group>"; };
 		894D7E491FAB01D900C58BB2 /* tenvisty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tenvisty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		894D7E4D1FAB01D900C58BB2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		894D7E4F1FAB01D900C58BB2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		896BA3DD1FD94DC500EE31AB /* AboutListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutListViewController.m; sourceTree = "<group>"; };
 		896BA3DF1FD950A200EE31AB /* ImageCameraListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCameraListViewController.h; sourceTree = "<group>"; };
 		896BA3E01FD950A200EE31AB /* ImageCameraListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCameraListViewController.m; sourceTree = "<group>"; };
+		896F638D1FF10212005E0E4A /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates.noindex/UninstalledProducts/iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
 		89870A221FDA83AA005207AB /* TwsTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsTools.h; sourceTree = "<group>"; };
 		89870A231FDA83AA005207AB /* TwsTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwsTools.m; sourceTree = "<group>"; };
 		89870A261FDA8EF2005207AB /* TwsProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsProgress.h; sourceTree = "<group>"; };
@@ -355,6 +359,12 @@
 		899AD5041FCD3C32008ED303 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		899AD5061FCD3CB0008ED303 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		89A0967A1FF1094D00E5EBAE /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAnimatedImage.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates.noindex/UninstalledProducts/iphoneos/FLAnimatedImage.framework"; sourceTree = "<group>"; };
+		89A0967D1FF109C700E5EBAE /* FLAnimatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImage.h; sourceTree = "<group>"; };
+		89A0967E1FF109C700E5EBAE /* FLAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
+		89A0967F1FF109C700E5EBAE /* FLAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImageView.h; sourceTree = "<group>"; };
+		89A096801FF109C700E5EBAE /* FLAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
+		89A096811FF109C700E5EBAE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89A7E9331FECB2CC00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		89A7E93A1FECB30B00F12BFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		89A7E93C1FECB31A00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -410,11 +420,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8912D4E81FF11A4C00C660AB /* IOTCamera.framework in Frameworks */,
+				8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */,
 				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,
 				894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */,
 				894871C51FDF6B93008F15F2 /* QuartzCore.framework in Frameworks */,
-				894871C11FDF6B7F008F15F2 /* FLAnimatedImage.framework in Frameworks */,
 				899AD5091FCD3DAD008ED303 /* libstdc++.6.0.9.tbd in Frameworks */,
 				899AD5071FCD3CB0008ED303 /* CoreVideo.framework in Frameworks */,
 				899AD5051FCD3C32008ED303 /* OpenAL.framework in Frameworks */,
@@ -425,7 +436,6 @@
 				899AD4FB1FCD3B52008ED303 /* UIKit.framework in Frameworks */,
 				899AD4F91FCD3B40008ED303 /* CoreGraphics.framework in Frameworks */,
 				899AD4F11FCD3AB7008ED303 /* libIOTCAPIs_ALL.a in Frameworks */,
-				899AD4EF1FCD3A38008ED303 /* IOTCamera.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +507,7 @@
 			children = (
 				890B46A41FB032A400C1061A /* IOTCamera.framework */,
 				890B46A61FB032A400C1061A /* IOTCamera_MJ4.framework */,
+				8912D4E01FF1174800C660AB /* IOTCamera_T.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -519,6 +530,7 @@
 		890B46B01FB03CD500C1061A /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				89A0967C1FF109C700E5EBAE /* FLAnimatedImage */,
 				ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */,
 				89E6D9971FDA61DC0049F1E7 /* MBProgressHUD */,
 				890B46B11FB03CD500C1061A /* Tools */,
@@ -555,6 +567,11 @@
 		890B46BB1FB050A800C1061A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8912D4031FF10F9A00C660AB /* IOTCamera.framework */,
+				8912D4001FF10F4500C660AB /* IOTCamera */,
+				8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */,
+				89A0967A1FF1094D00E5EBAE /* FLAnimatedImage.framework */,
+				896F638D1FF10212005E0E4A /* IOTCamera.framework */,
 				89E171171FDFD26C004AAD3D /* libavconVoiceRecognize.a */,
 				89E170AF1FDFB619004AAD3D /* libAudioVoicePair.a */,
 				894871C81FDF6BA3008F15F2 /* MobileCoreServices.framework */,
@@ -664,18 +681,9 @@
 			path = Scan;
 			sourceTree = "<group>";
 		};
-		894871D81FDF6E07008F15F2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				894871DC1FDF6E07008F15F2 /* FLAnimatedImage.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		894D7E401FAB01D900C58BB2 = {
 			isa = PBXGroup;
 			children = (
-				894871D71FDF6E07008F15F2 /* FLAnimatedImage.xcodeproj */,
 				890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */,
 				894D7E4B1FAB01D900C58BB2 /* tenvisty */,
 				894D7E4A1FAB01D900C58BB2 /* Products */,
@@ -868,6 +876,18 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		89A0967C1FF109C700E5EBAE /* FLAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				89A0967D1FF109C700E5EBAE /* FLAnimatedImage.h */,
+				89A0967E1FF109C700E5EBAE /* FLAnimatedImage.m */,
+				89A0967F1FF109C700E5EBAE /* FLAnimatedImageView.h */,
+				89A096801FF109C700E5EBAE /* FLAnimatedImageView.m */,
+				89A096811FF109C700E5EBAE /* Info.plist */,
+			);
+			path = FLAnimatedImage;
+			sourceTree = "<group>";
+		};
 		89D8697E1FDE412000B91D5B /* WiFiSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -988,8 +1008,8 @@
 			buildPhases = (
 				894D7E461FAB01D900C58BB2 /* Frameworks */,
 				894D7E451FAB01D900C58BB2 /* Sources */,
-				890B46CF1FB0553B00C1061A /* Embed Frameworks */,
 				894D7E471FAB01D900C58BB2 /* Resources */,
+				890B46CF1FB0553B00C1061A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1030,10 +1050,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 894871D81FDF6E07008F15F2 /* Products */;
-					ProjectRef = 894871D71FDF6E07008F15F2 /* FLAnimatedImage.xcodeproj */;
-				},
-				{
 					ProductGroup = 890B469C1FB032A300C1061A /* Products */;
 					ProjectRef = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
 				},
@@ -1060,11 +1076,11 @@
 			remoteRef = 890B46A51FB032A400C1061A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		894871DC1FDF6E07008F15F2 /* FLAnimatedImage.framework */ = {
+		8912D4E01FF1174800C660AB /* IOTCamera_T.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = FLAnimatedImage.framework;
-			remoteRef = 894871DB1FDF6E07008F15F2 /* PBXContainerItemProxy */;
+			path = IOTCamera_T.framework;
+			remoteRef = 8912D4DF1FF1174800C660AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1084,6 +1100,7 @@
 				892CE0CB1FD126F200942E28 /* PasswordFieldTableViewCell.xib in Resources */,
 				892CE0CF1FD12D3600942E28 /* DetailTableViewCell.xib in Resources */,
 				EDF1C1871FD5AA6B00DAE334 /* ListImgTableViewCell.xib in Resources */,
+				89A096841FF109C700E5EBAE /* Info.plist in Resources */,
 				892CE0C91FD126D900942E28 /* TextFieldImgTableViewCell.xib in Resources */,
 				892CE0C71FD126C300942E28 /* TextFieldTableViewCell.xib in Resources */,
 				892CE0CD1FD1271300942E28 /* TextFieldDisableTableViewCell.xib in Resources */,
@@ -1180,6 +1197,7 @@
 				89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */,
 				892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */,
 				898D8BB11FE0F66600062F04 /* FMResultSet.m in Sources */,
+				89A096821FF109C700E5EBAE /* FLAnimatedImage.m in Sources */,
 				890B40741FAFFA6200C1061A /* HomeViewController.m in Sources */,
 				892ADB601FD6691100BD8929 /* ChangeCameraPasswordViewController.m in Sources */,
 				89D946691FDF7D90000ABB0A /* GNetworkStates.m in Sources */,
@@ -1192,6 +1210,7 @@
 				892ADB791FD6A70400BD8929 /* RecordSettingViewController.m in Sources */,
 				89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */,
 				892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */,
+				89A096831FF109C700E5EBAE /* FLAnimatedImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1387,7 +1406,7 @@
 				INFOPLIST_FILE = tenvisty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/tenvisty/lib";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
 					"-all_load",

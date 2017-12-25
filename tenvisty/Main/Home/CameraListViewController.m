@@ -235,6 +235,20 @@
 }
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+    
+    if(row >= 0){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+            if(cell){
+                LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
+                [cell refreshState];
+            }
+        });
+    }
+}
+
+- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+    NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
     if(status == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
         [self showChangePasswordStrict:(MyCamera*)camera];
     }

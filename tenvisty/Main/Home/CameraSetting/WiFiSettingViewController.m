@@ -68,7 +68,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    dispatch_block_cancel(self.timeoutTask);
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
 }
 
 -(void)getWiFiList{
@@ -164,7 +167,10 @@
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
         case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:
-            dispatch_block_cancel(self.timeoutTask);
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
             isRefreshing = NO;
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             memset(wifiSSIDList, 0, sizeof(wifiSSIDList));

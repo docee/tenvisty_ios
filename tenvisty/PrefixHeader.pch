@@ -138,6 +138,7 @@
 #define Color_Gray  (RGBA_COLOR(149, 149, 149,1))
 #define Color_Gray_alpha  (RGBA_COLOR(149, 149, 149,0.4))
 #define Color_GrayDark  (RGBA_COLOR(100,100, 100,1))
+#define Color_GrayDarkless  (RGBA_COLOR(170,170, 170,1))
 #define Color_GrayDark_alpha  (RGBA_COLOR(100,100, 100,0.9))
 #define Color_Transparent  (RGBA_COLOR(0, 0, 0,0))
 #define Color_Black_alpha_4  (RGBA_COLOR(0, 0, 0,0.4))

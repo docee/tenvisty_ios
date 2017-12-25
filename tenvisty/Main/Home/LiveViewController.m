@@ -533,6 +533,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         _labConnectState.text = [((MyCamera*)camera) strConnectState];
     });
+}
+
+- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _labConnectState.text = [((MyCamera*)camera) strConnectState];
+    });
     if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
         [self changeStream:self.camera.videoQuality];
         if(isListening){

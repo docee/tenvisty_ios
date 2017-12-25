@@ -62,7 +62,10 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-    dispatch_block_cancel(self.timeoutTask);
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
 }
 
 -(void)setup{
@@ -256,7 +259,10 @@
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
         case IOTYPE_USER_IPCAM_REBOOT_RESP:{
-            dispatch_block_cancel(self.timeoutTask);
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
             //重启成功
@@ -271,7 +277,10 @@
             break;
         }
         case IOTYPE_USER_IPCAM_RESET_DEFAULT_RESP:{
-            dispatch_block_cancel(self.timeoutTask);
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
             //复位成功
@@ -321,13 +330,19 @@
             else{
                 [TwsTools presentAlertMsg:self message:LOCALSTR(@"Get firmware info failed, please try again later.") ];
                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-                dispatch_block_cancel(self.timeoutTask);
+                if(_timeoutTask != nil){
+                    dispatch_block_cancel(_timeoutTask);
+                    _timeoutTask = nil;
+                }
             }
             break;
         }
         case IOTYPE_USER_IPCAM_SET_UPRADE_RESP:{
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-            dispatch_block_cancel(self.timeoutTask);
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
             SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp *)data;
             if(resp->result == 0){
                 updateState =1;

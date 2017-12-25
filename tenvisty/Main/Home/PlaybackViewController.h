@@ -6,8 +6,12 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "Event.h"
 
-@interface PlaybackViewController : UIViewController
+@interface PlaybackViewController : BaseViewController
 
+@property (nonatomic,strong) Event *evt;
+
+@property (nonatomic,assign) BOOL needCreateSnapshot;
 @end

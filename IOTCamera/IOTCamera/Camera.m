@@ -709,8 +709,8 @@ int bLocalSearch = 0;
         
         [arrayAVChannel removeObject:stoppedChannel];
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-        [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_DISCONNECTED];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeChannelStatus:ChannelStatus:)])
+        [self.delegate camera:self didChangeChannelStatus:channel ChannelStatus:CONNECTION_STATE_DISCONNECTED];
 }
 
 - (Boolean)isStarting:(NSInteger)channel
@@ -1212,12 +1212,12 @@ int bLocalSearch = 0;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        channel.connectionState = CONNECTION_STATE_CONNECTED;
-                        if (self.sessionState != CONNECTION_STATE_CONNECTED) {
+                        if (channel.connectionState != CONNECTION_STATE_CONNECTED) {
+                            channel.connectionState = CONNECTION_STATE_CONNECTED;
                             self.sessionState = CONNECTION_STATE_CONNECTED;
                             
-                            if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                                [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_CONNECTED];
+                            if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeChannelStatus:ChannelStatus:)])
+                                [self.delegate camera:self didChangeChannelStatus:channel.avChannel ChannelStatus:channel.connectionState];
                         }
                         
                     });
@@ -1229,9 +1229,8 @@ int bLocalSearch = 0;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         channel.connectionState = CONNECTION_STATE_WRONG_PASSWORD;
-                        
-                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                            [self.delegate camera:self didChangeSessionStatus:CONNECTION_STATE_WRONG_PASSWORD];
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeChannelStatus:ChannelStatus:)])
+                            [self.delegate camera:self didChangeChannelStatus:channel.avChannel ChannelStatus:channel.connectionState];
                     });
                     [thread sleep];
                     
@@ -1239,8 +1238,8 @@ int bLocalSearch = 0;
                         
                         channel.connectionState = CONNECTION_STATE_CONNECTING;
                         self.sessionState = CONNECTION_STATE_CONNECTING;
-                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
-                            [self.delegate camera:self didChangeSessionStatus:channel.connectionState];
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeChannelStatus:ChannelStatus:)])
+                            [self.delegate camera:self didChangeChannelStatus:channel.avChannel ChannelStatus:channel.connectionState];
                     });
                     //break;
                     

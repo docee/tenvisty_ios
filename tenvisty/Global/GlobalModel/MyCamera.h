@@ -109,5 +109,8 @@
 -(NSString*)strConnectState;
 - (NSInteger)direction:(CGPoint)translation;
 -(void)stopVideoAsync:(void (^)(void))block;
+- (UIImage *)remoteRecordImage:(NSInteger)time type:(NSInteger)tp;
+- (NSString *)remoteRecordThumbName:(NSInteger)recordId type:(NSInteger)tp;
+-(void)startAudio:(NSInteger)channel;
 @end
 

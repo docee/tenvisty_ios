@@ -12,7 +12,7 @@
 
 #define SQLCMD_CREATE_TABLE_DEVICE @"CREATE TABLE IF NOT EXISTS device(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_nickname TEXT, dev_name TEXT, dev_pwd TEXT, view_acc TEXT, view_pwd TEXT, ask_format_sdcard INTEGER, channel INTEGER, video_quality INTEGER, event_notification INTEGER)"
 
-#define SQLCMD_CREATE_TABLE_SNAPSHOT @"CREATE TABLE IF NOT EXISTS snapshot(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, file_path TEXT, time REAL)"
+#define SQLCMD_CREATE_TABLE_SNAPSHOT @"CREATE TABLE IF NOT EXISTS snapshot(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, file_path TEXT, time REAL, snapshot_type INTEGER)"
 
 #define SQLCMD_CREATE_TABLE_ALARM @"CREATE TABLE IF NOT EXISTS alarm(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, type INTEGER, time INTEGER)"
 
@@ -159,14 +159,37 @@ static GBase *base = nil;
     [base saveImageToFile:img imageName:imgName];
     
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path, time) VALUES(?,?,?)", mycam.uid, imgName, [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+        if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path,snapshot_type, time) VALUES(?,?,?)", mycam.uid, imgName,[NSNumber numberWithInteger:0], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
             NSLog(@"Fail to add snapshot to database.");
             return NO;
         }
     }
     
     return YES;
+}
+
++ (BOOL)saveRemoteRemotePictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime {
     
+    GBase *base = [GBase sharedInstance];
+    
+    NSString *imgName =[mycam remoteRecordThumbName:evtTime type:evtType];
+    //NSString *imgPath = [base imgFilePathWithImgName:imgName];
+    
+    //NSLog(@"imgPath:%@", imgName);
+    
+    if (img == nil) {
+        return NO;
+    }
+    [base saveImageToFile:img imageName:imgName];
+    
+    if (base.db != NULL) {
+        if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path,snapshot_type, time) VALUES(?,?,?)", mycam.uid, imgName,[NSNumber numberWithInteger:evtType+10], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+            NSLog(@"Fail to add snapshot to database.");
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (NSString *)Documents {
@@ -365,7 +388,6 @@ static GBase *base = nil;
     }
     
     return recordFilePath;
-    
 }
 
 @end

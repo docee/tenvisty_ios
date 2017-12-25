@@ -187,6 +187,7 @@
         self.btnPlay.tag = index;
         self.btnReconnect.tag = index;
         self.btnModifyPassword.tag = index;
+        self.btnCameraEvent.tag = index;
         
     }
 }

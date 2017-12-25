@@ -6,13 +6,17 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
+#define SEARCHEVENT_WAIT_TIMEOUT 18
+
 #import "EventListViewController.h"
 #import "EventItemTableViewCell.h"
 #import "Event.h"
 #import "EventCustomSearchSource.h"
+#import "PlaybackViewController.h"
 
 @interface EventListViewController ()<EventCustomSearchDelegate>{
     BOOL isSearchingEvent;
+    BOOL isSearchingTimeout;
     NSDate *nowDate;
     NSDate *pastDate;
 }
@@ -24,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview_customSearchMenu;
 @property (nonatomic,strong) NSMutableArray *event_list;
 @property (nonatomic,strong) EventCustomSearchSource *searchMenu;
+@property (nonatomic,copy) dispatch_block_t timeoutTask;
 @end
 
 @implementation EventListViewController
@@ -49,6 +54,11 @@
     return _searchMenu;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableview reloadData];
+}
+
 -(NSMutableArray *)event_list{
     if(!_event_list){
         _event_list = [[NSMutableArray alloc] init];
@@ -60,13 +70,36 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [_labCurrentEventDate setHidden:YES];
+    [_labCurrentEventDate.superview setHidden:YES];
     [self.btnSelectSearchTime setBackgroundImage:[EventListViewController imageWithColor:Color_Gray_alpha] forState:UIControlStateHighlighted];
     self.searchMenu.delegate = self;
     self.tableview_customSearchMenu.delegate = self.searchMenu;
     self.tableview_customSearchMenu.dataSource = self.searchMenu;
     [self beginSearch];
 }
+
+-(dispatch_block_t)timeoutTask{
+    if(_timeoutTask == nil){
+        _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            if(isSearchingEvent){
+                isSearchingEvent = NO;
+                isSearchingTimeout = YES;
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [[[iToast makeText:LOCALSTR(@"Connection timeout, please try again.")] setDuration:1] show];
+                [self.tableview reloadData];
+            }
+        });
+    }
+    return _timeoutTask;
+}
+-(dispatch_block_t)newTimeoutTask{
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+    }
+    _timeoutTask = nil;
+    return self.timeoutTask;
+}
+
 - (IBAction)clickSearchMenu:(id)sender {
     if(!isSearchingEvent){
         [self.searchMenu toggleShow];
@@ -78,12 +111,21 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
+    [self.searchMenu dismiss];
 }
 
 -(void)click{
     NSLog(@"实现点击效果");
+}
+- (IBAction)tagOuterView:(id)sender {
+    [self.searchMenu dismiss];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
@@ -106,6 +148,30 @@
     else{
         cell.constraint_centerY_img_eventTypeIcon.constant = 0;
     }
+    UIImage *thumb = [self.camera remoteRecordImage:model.eventTime type:model.eventType];
+    //已读
+    if(model.eventStatus == EVENT_READED || thumb != nil){
+        //移动侦测
+        if(model.eventType == AVIOCTRL_EVENT_MOTIONDECT){
+            [cell.img_eventTypeIcon setImage: [UIImage imageNamed:@"ic_motion_detection_read"]];
+        }
+        else{
+            [cell.img_eventTypeIcon setImage: [UIImage imageNamed:@"ic_time_record_read"]];
+        }
+    }
+    else{
+        if(model.eventType == AVIOCTRL_EVENT_MOTIONDECT){
+            [cell.img_eventTypeIcon setImage: [UIImage imageNamed:@"ic_motion_detection_unread"]];
+        }
+        else{
+            [cell.img_eventTypeIcon setImage: [UIImage imageNamed:@"ic_time_record_unread"]];
+        }
+    }
+    
+    if(thumb == nil){
+        thumb = [UIImage imageNamed:@"view_event_record"];
+    }
+    [cell.imgEventThumb setImage:thumb];
     return cell;
 }
 
@@ -118,19 +184,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([_labCurrentEventDate isHidden]){
+    if([_labCurrentEventDate.superview isHidden]){
         if([tableView visibleCells].count>0&& [[[tableView visibleCells] objectAtIndex:0] isKindOfClass:[EventItemTableViewCell class]]){
             EventItemTableViewCell* ec = (EventItemTableViewCell*)[[tableView visibleCells] objectAtIndex:0];
-            [_labCurrentEventDate setHidden:NO];
+            [_labCurrentEventDate.superview setHidden:NO];
             _labCurrentEventDate.text = ec.labEventDate.text;
         }
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
     [self performSegueWithIdentifier:@"EventList2Playback" sender:self];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 //其他界面返回到此界面调用的方法
@@ -143,8 +208,8 @@
     if([_tableview visibleCells].count>0&& [[[_tableview visibleCells] objectAtIndex:0] isKindOfClass:[EventItemTableViewCell class]]){
         EventItemTableViewCell* ec = (EventItemTableViewCell*)[[_tableview visibleCells] objectAtIndex:0];
         //if(ec.labEventDate.text > _labCurrentEventDate.text){
-        if([_labCurrentEventDate isHidden]){
-            [_labCurrentEventDate setHidden:NO];
+        if([_labCurrentEventDate.superview isHidden]){
+            [_labCurrentEventDate.superview setHidden:NO];
         }
         _labCurrentEventDate.text = ec.labEventDate.text;
         //        CGpoint contentPoint = tableView.contentOffset; //获取contentOffset的坐标(x,y)
@@ -155,7 +220,7 @@
         //}
     }
     else{
-        [_labCurrentEventDate setHidden:YES];
+        [_labCurrentEventDate.superview setHidden:YES];
     }
 }
 
@@ -188,8 +253,15 @@
     if(isSearchingEvent){
         return;
     }
-    [_labCurrentEventDate setHidden:YES];
-    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
+    if(self.camera.connectState != CONNECTION_STATE_CONNECTED){
+        [[iToast makeText:LOCALSTR(@"connection dropped")] show];
+        return;
+    }
+    isSearchingEvent = true;
+    isSearchingTimeout = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SEARCHEVENT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
+    [_labCurrentEventDate.superview setHidden:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES].userInteractionEnabled = YES;
     //[MBProgressHUD showMessag:LOCALSTR(@"loading...") toView:self.tableview].userInteractionEnabled = YES;
     [self.event_list removeAllObjects];
     [self.tableview reloadData];
@@ -197,7 +269,6 @@
     start = [Event getTimeDay:past];
     stop = [Event getTimeDay:now];
     
-    isSearchingEvent = true;
     
     SMsgAVIoctrlListEventReq *req = (SMsgAVIoctrlListEventReq *) malloc(sizeof(SMsgAVIoctrlListEventReq));
     memset(req, 0, sizeof(SMsgAVIoctrlListEventReq));
@@ -219,12 +290,6 @@
     [formatter setDateFormat:@"dd/MM/yyyy HH:mm"];
     _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:pastDate],[formatter stringFromDate:nowDate]);
     //dropboxVideo.delegate = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        
-        if (isSearchingEvent) {
-            
-        }
-    });
 }
 
 
@@ -259,8 +324,12 @@
 //                }
 //            }
             isSearchingEvent = false;
-            [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
             [self.tableview reloadData];
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }
     }
 }
@@ -304,14 +373,58 @@
     [self searchEventFrom:[now timeIntervalSince1970] To:[from timeIntervalSince1970]];
     [self.searchMenu toggleShow];
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if(self.event_list.count == 0){
+        return 50.0f;
+    }
+    else{
+        return 0.1f;
+    }
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if(self.event_list.count == 0){
+        NSString *vid = @"tableviewCellSearchEventProcess";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid];
+            for(UIView *view in cell.contentView.subviews){
+                if([view isKindOfClass:[UILabel class]]){
+                    UILabel *labDesc = (UILabel*)view;
+                    if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
+                         if(isSearchingEvent){
+                             labDesc.text = LOCALSTR(@"loading...");
+                         }
+                         else if(isSearchingTimeout){
+                             labDesc.text = LOCALSTR(@"Connection timeout");
+                         }
+                        else{
+                             labDesc.text = LOCALSTR(@"No result found.");
+                         }
+                    }
+                    else{
+                        labDesc.text = LOCALSTR(@"Camera offline");
+                    }
+            }
+        }
+        return cell.contentView;
+    }
+    else{
+        return nil;
+    }
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"EventList2Playback"]){
+        PlaybackViewController *controller = (PlaybackViewController*)segue.destinationViewController;
+        controller.camera = self.camera;
+        controller.evt = [self.event_list objectAtIndex:[self.tableview indexPathForSelectedRow].row];
+        controller.needCreateSnapshot = [self.camera remoteRecordImage: controller.evt.eventTime type:controller.evt.eventType] == nil;
+    }
+}
 /*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
+
 */
 
 @end

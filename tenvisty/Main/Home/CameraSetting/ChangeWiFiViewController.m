@@ -73,8 +73,14 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    dispatch_block_cancel(self.delayTask);
-    dispatch_block_cancel(self.timeoutTask);
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
+    if(_delayTask != nil){
+        dispatch_block_cancel(_delayTask);
+        _delayTask = nil;
+    }
 }
 
 -(void)doGetWifiList{
@@ -157,7 +163,10 @@
     switch (type) {
         case IOTYPE_USER_IPCAM_SETWIFI_RESP:{
             SMsgAVIoctrlSetWifiResp *resp = (SMsgAVIoctrlSetWifiResp*)data;
-            dispatch_block_cancel(self.timeoutTask);
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
             if(resp->result == 0){
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRED * NSEC_PER_SEC)), dispatch_get_main_queue(),self.delayTask);
             }
@@ -169,7 +178,10 @@
         case IOTYPE_USER_IPCAM_UPDATE_WIFI_STATUS:{
             SMsgAVIoctrlUpdateWifiStatus *resp = (SMsgAVIoctrlUpdateWifiStatus*)data;
             if([[NSString stringWithUTF8String: resp->ssid] isEqualToString:self.wifiSsid]){
-                dispatch_block_cancel(self.delayTask);
+                if(_delayTask != nil){
+                    dispatch_block_cancel(_delayTask);
+                    _delayTask = nil;
+                }
                 [self doGetWifiList];
                 if(isSetting){
                     isSetting = NO;
@@ -234,15 +246,20 @@
     }
 }
 - (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
-    if(status == CONNECTION_STATE_CONNECTED){
-        if(isSetting){
-            dispatch_block_cancel(self.delayTask);
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRELESS* NSEC_PER_SEC)), dispatch_get_main_queue(),[self newDelayTask] );
-        }
-    }
-    else if(status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_UNSUPPORTED || status == CONNECTION_STATE_CONNECT_FAILED || status == CONNECTION_STATE_NETWORK_FAILED){
+    if(status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_UNSUPPORTED || status == CONNECTION_STATE_CONNECT_FAILED || status == CONNECTION_STATE_NETWORK_FAILED){
         [camera stop];
         [camera start];
+    }
+}
+- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+    if(status == CONNECTION_STATE_CONNECTED){
+        if(isSetting){
+            if(_delayTask != nil){
+                dispatch_block_cancel(_delayTask);
+                _delayTask = nil;
+            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRELESS* NSEC_PER_SEC)), dispatch_get_main_queue(),[self newDelayTask] );
+        }
     }
 }
 /*

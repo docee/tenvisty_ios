@@ -49,7 +49,9 @@
 
 -(NSArray *)listItems{
     if(!_listItems){
+        _listItems = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Time Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
         [ListImgTableViewCellModel initObj:@"ic_reverse" title:LOCALSTR(@"Mirror") showValue:YES value:nil viewId:TableViewCell_Switch],
+        [ListImgTableViewCellModel initObj:@"ic_inverse" title:LOCALSTR(@"Flip") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_sd" title:LOCALSTR(@"SD Card") showValue:NO value:nil viewId:TableViewCell_ListImg],
         [ListImgTableViewCellModel initObj:@"ic_info" title:LOCALSTR(@"Device Infomation") showValue:NO value:nil viewId:TableViewCell_ListImg], nil];
        
@@ -92,7 +94,6 @@
         SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
         [cell setLeftImage:model.titleImgName];
         cell.leftLabTitle.text = model.titleText;
-        [cell.rightSwitch setEnabled:model.loadingText == nil];
         cell.rightLabLoading.text = LOCALSTR(@"loading...");
         [cell.rightLabLoading setHidden:model.titleValue != nil];
         [cell.rightSwitch setEnabled:model.titleValue != nil];

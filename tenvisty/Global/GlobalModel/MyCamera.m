@@ -217,7 +217,10 @@
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     [self startSoundToPhone:0];
 }
-
+-(void)startAudio:(NSInteger)channel{
+    NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
+    [self startSoundToPhone:channel];
+}
 -(void)stopAudio{
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     [self stopSoundToPhone:0];
@@ -351,31 +354,9 @@
 - (void)camera:(Camera *)camera didChangeSessionStatus:(NSInteger)status
 {
     
-    if (self.sessionState == CONNECTION_STATE_UNKNOWN_DEVICE ||
-        self.sessionState == CONNECTION_STATE_UNSUPPORTED ||
-        self.sessionState == CONNECTION_STATE_CONNECT_FAILED) {
-        
-    }
-    else if(status == CONNECTION_STATE_CONNECTED){
-        _connectTimeoutBeginTime = 0;
-        SMsgAVIoctrlGetAudioOutFormatReq *s = (SMsgAVIoctrlGetAudioOutFormatReq *)malloc(sizeof(SMsgAVIoctrlGetAudioOutFormatReq));
-        s->channel = 0;
-        [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
-        free(s);
-    }
-    
-    if(status == CONNECTION_STATE_CONNECTED && self.processState != CAMERASTATE_WILLUPGRADING && self.processState != CAMERASTATE_WILLREBOOTING && self.processState != CAMERASTATE_WILLRESETING){
-        self.processState = CAMERASTATE_NONE;
-    }
-    else if(status == CONNECTION_STATE_WRONG_PASSWORD){
-        if(self.processState == CAMERASTATE_RESETING){
-            [self setPwd:DEFAULT_PASSWORD];
-            [GBase editCamera:self];
-            [self start:0];
-        }
-    }
+
     //手动调用stop接口才是CONNECTION_STATE_DISCONNECTED ||
-    else if(status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_CONNECT_FAILED ||  status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_NETWORK_FAILED){
+    if(status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_CONNECT_FAILED ||  status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_NETWORK_FAILED){
         if(self.processState == CAMERASTATE_WILLREBOOTING){
             self.processState = CAMERASTATE_REBOOTING;
             _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
@@ -422,7 +403,19 @@
 
 - (void)camera:(Camera *)camera didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status
 {
-    self.connectState = status;
+    if(status == CONNECTION_STATE_CONNECTED && self.processState != CAMERASTATE_WILLUPGRADING && self.processState != CAMERASTATE_WILLREBOOTING && self.processState != CAMERASTATE_WILLRESETING){
+        self.processState = CAMERASTATE_NONE;
+    }
+    else if(status == CONNECTION_STATE_WRONG_PASSWORD){
+        if(self.processState == CAMERASTATE_RESETING){
+            [self setPwd:DEFAULT_PASSWORD];
+            [GBase editCamera:self];
+            [self start:0];
+        }
+    }
+    if(channel == 0){
+        self.connectState = status;
+    }
     if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
         [self.delegate2 camera:self _didChangeChannelStatus:channel ChannelStatus:status];
     }
@@ -544,6 +537,35 @@
     NSString *fileName = [NSString stringWithFormat:@"%@.jpg", self.uid];
     NSString *filePath = [[self documents] stringByAppendingPathComponent:fileName];
     return filePath;
+}
+
+//获取截图
+- (UIImage *)remoteRecordImage:(NSInteger)time type:(NSInteger)tp{
+    if ([self fileExistsAtPath:[self remoteRecordImagePath:time type:tp]]) {
+        return [UIImage imageWithContentsOfFile:[self remoteRecordImagePath:time type:tp]];
+    }
+    else {
+        return nil;
+    }
+}
+
+
+////保存截图至沙盒
+//- (void)saveRemoteRecordImage:(UIImage *)image recordId:(NSInteger)time type:(NSInteger)tp {
+//    //[UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+//    [UIImagePNGRepresentation(image) writeToFile:[self remoteRecordImagePath:time type:tp] atomically:YES];
+//}
+//
+//保存图片沙盒路径
+- (NSString *)remoteRecordImagePath:(NSInteger)recordId type:(NSInteger)tp{
+    NSString *fileName = [self remoteRecordThumbName:recordId type:tp];
+    NSString *filePath = [[self documents] stringByAppendingPathComponent:fileName];
+    return filePath;
+}
+
+- (NSString *)remoteRecordThumbName:(NSInteger)recordId type:(NSInteger)tp{
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld.jpg", self.uid,(int)tp,(long)recordId];
+    return fileName;
 }
 
 //Documents
