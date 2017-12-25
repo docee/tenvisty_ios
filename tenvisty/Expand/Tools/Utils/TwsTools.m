@@ -145,15 +145,15 @@
 + (void)presentMessage:(NSString *)message atDeviceOrientation:(DeviceOrientation)orientation {
     
     if (orientation == DeviceOrientationPortrait) {
-        [[iToast makeText:message] show];
+        [[[iToast makeText:message]setDuration:1] show];
     }
     
     if (orientation == DeviceOrientationLandscapeLeft) {
-        [[iToast makeText:message] showRota];
+        [[[iToast makeText:message] setDuration:1] showRota];
     }
     
     if (orientation == DeviceOrientationLandscapeRight) {
-        [[iToast makeText:message] showUnRota];
+        [[[iToast makeText:message] setDuration:1] showUnRota];
     }
 }
 

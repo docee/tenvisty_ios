@@ -113,7 +113,7 @@ static iToastSettings *sharedSettings = nil;
 //    [[NSRunLoop mainRunLoop] addTimer:timer1 forMode:NSDefaultRunLoopMode];
     
     [window addSubview:v];
-    if(theSettings.duration == 0){
+    if(theSettings.duration <= 0 || theSettings.duration>5){
         theSettings.duration = 1;
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(theSettings.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -179,7 +179,7 @@ static iToastSettings *sharedSettings = nil;
     //    [[NSRunLoop mainRunLoop] addTimer:timer1 forMode:NSDefaultRunLoopMode];
     
     [window addSubview:v];
-    if(theSettings.duration == 0){
+       if(theSettings.duration <= 0 || theSettings.duration>5){
         theSettings.duration = 1;
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(theSettings.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -196,7 +196,6 @@ static iToastSettings *sharedSettings = nil;
     if (!theSettings) {
         theSettings = [iToastSettings getSharedSettings];
     }
-    
     UIFont *font = [UIFont systemFontOfSize:16];
     //CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
     CGRect textSize = [self rectOfText:text WithFont:nil];
@@ -251,7 +250,7 @@ static iToastSettings *sharedSettings = nil;
     //    [[NSRunLoop mainRunLoop] addTimer:timer1 forMode:NSDefaultRunLoopMode];
     
     [window addSubview:v];
-    if(theSettings.duration == 0){
+    if(theSettings.duration <= 0 || theSettings.duration>5){
         theSettings.duration = 1;
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(theSettings.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

@@ -9,8 +9,9 @@
 #import "EventListViewController.h"
 #import "EventItemTableViewCell.h"
 #import "Event.h"
+#import "EventCustomSearchSource.h"
 
-@interface EventListViewController (){
+@interface EventListViewController ()<EventCustomSearchDelegate>{
     BOOL isSearchingEvent;
     NSDate *nowDate;
     NSDate *pastDate;
@@ -20,7 +21,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *btnSelectSearchTime;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *swich_eventType;
+@property (weak, nonatomic) IBOutlet UITableView *tableview_customSearchMenu;
 @property (nonatomic,strong) NSMutableArray *event_list;
+@property (nonatomic,strong) EventCustomSearchSource *searchMenu;
 @end
 
 @implementation EventListViewController
@@ -39,6 +42,12 @@
     
     return image;
 }
+-(EventCustomSearchSource*)searchMenu{
+    if(!_searchMenu){
+        _searchMenu = [[EventCustomSearchSource alloc] init];
+    }
+    return _searchMenu;
+}
 
 -(NSMutableArray *)event_list{
     if(!_event_list){
@@ -53,34 +62,17 @@
     
     [_labCurrentEventDate setHidden:YES];
     [self.btnSelectSearchTime setBackgroundImage:[EventListViewController imageWithColor:Color_Gray_alpha] forState:UIControlStateHighlighted];
+    self.searchMenu.delegate = self;
+    self.tableview_customSearchMenu.delegate = self.searchMenu;
+    self.tableview_customSearchMenu.dataSource = self.searchMenu;
+    [self beginSearch];
 }
-#pragma mark - ActionSheet Delegate Methods
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSDate *now = [NSDate date];
-    NSDate *from;
-    
-    if (buttonIndex == 0) {
-        
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60)];
-        
-        [self searchEventFrom:now To:from];
-    }
-    else if (buttonIndex == 1) {
-        
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 12)];
-        [self searchEventFrom:now To:from];    }
-    else if (buttonIndex == 2) {
-        
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24)];
-        [self searchEventFrom:now To:from];
-    }
-    else if (buttonIndex == 3) {
-        
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24 * 7)];
-        [self searchEventFrom:now To:from];
+- (IBAction)clickSearchMenu:(id)sender {
+    if(!isSearchingEvent){
+        [self.searchMenu toggleShow];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -105,10 +97,10 @@
     cell.labEventDate.text = [dateFormatter stringFromDate:date];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
     cell.labEventTime.text = [dateFormatter stringFromDate:date];
-    [cell.labEventDate setHidden:!model.isDateFirstItem];
+    [cell.labEventDate setHidden:!(indexPath.row == 0 || model.dateTimeInterval != ((Event*)[_event_list objectAtIndex:(indexPath.row-1)]).dateTimeInterval)];
     cell.labCameraName.text = self.camera.nickName;
     cell.labEventType.text = [Event getEventTypeName:model.eventType];
-    if(model.isDateFirstItem){
+    if(![cell.labEventDate isHidden]){
         cell.constraint_centerY_img_eventTypeIcon.constant = 20;
     }
     else{
@@ -169,10 +161,21 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return indexPath.row%3 == 0?130.0:90.0;
+    Event *model = [_event_list objectAtIndex:indexPath.row];
+    if(!(indexPath.row == 0 || model.dateTimeInterval != ((Event*)[_event_list objectAtIndex:(indexPath.row-1)]).dateTimeInterval)){
+        return 90.0;
+    }
+    else{
+        return 130.0;
+    }
 }
 - (IBAction)clickEventTypeChange:(UISegmentedControl *)sender {
-    [self beginSearch];
+    if(!isSearchingEvent){
+        [self beginSearch];
+    }
+    else{
+        [sender setSelectedSegmentIndex:abs((int)sender.selectedSegmentIndex - 1)];
+    }
 }
 
 -(void)beginSearch{
@@ -185,7 +188,9 @@
     if(isSearchingEvent){
         return;
     }
-    [MBProgressHUD showMessag:LOCALSTR(@"loading...") toView:self.tableview];
+    [_labCurrentEventDate setHidden:YES];
+    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
+    //[MBProgressHUD showMessag:LOCALSTR(@"loading...") toView:self.tableview].userInteractionEnabled = YES;
     [self.event_list removeAllObjects];
     [self.tableview reloadData];
     STimeDay start, stop;
@@ -209,6 +214,10 @@
     NSLog(@"load TF card video list...%d/%d/%d -> %d/%d/%d", start.year, start.month, start.day,stop.year, stop.month, stop.day);
     nowDate = [[NSDate alloc] initWithTimeIntervalSince1970:now];
     pastDate = [[NSDate alloc] initWithTimeIntervalSince1970:past];
+  
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd/MM/yyyy HH:mm"];
+    _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:pastDate],[formatter stringFromDate:nowDate]);
     //dropboxVideo.delegate = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         
@@ -232,18 +241,23 @@
                 double timeInMillis = [self getTimeInMillis:saEvt.stTime];
                 NSLog(@"<<< Get Event(%d): %d/%d/%d %d:%2d:%2d (%f)", saEvt.status, saEvt.stTime.year, saEvt.stTime.month, saEvt.stTime.day, (int)saEvt.stTime.hour, (int)saEvt.stTime.minute, (int)saEvt.stTime.second, timeInMillis);
                 Event *evt = [[Event alloc] initWithEventType:saEvt.event EventTime:[self getTimeInMillis:saEvt.stTime] EventStatus:saEvt.status];
-                if(self.event_list.count == 0){
-                    evt.isDateFirstItem = YES;
-                }
-                else{
-                    Event *lastEvt =[self.event_list objectAtIndex:self.event_list.count-1];
-                    evt.isDateFirstItem = lastEvt.dateTimeInterval != evt.dateTimeInterval;
-                }
                 [self.event_list addObject:evt];
             }
         }
         
         if(s -> endflag == 1){
+            [self.event_list sortUsingComparator:^NSComparisonResult(Event *obj1, Event  *obj2) {
+                return obj1.eventTime > obj2.eventTime?-1:(obj1.eventTime == obj2.eventTime?0:1);
+            }];
+//            for(int i=0;i<self.event_list.count;i++){
+//                Event* e1 = self.event_list[i];
+//                if(i==0 ||  e1.dateTimeInterval != ((Event*)self.event_list[i-1]).dateTimeInterval){
+//                    e1.isDateFirstItem = YES;
+//                }
+//                else{
+//                    e1.isDateFirstItem = NO;
+//                }
+//            }
             isSearchingEvent = false;
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
             [self.tableview reloadData];
@@ -269,6 +283,26 @@
     NSDate *date = [cal dateFromComponents:comps];
     result = [date timeIntervalSince1970];
     return result;
+}
+-(void)didSelect:(NSInteger)index{
+    NSDate *now = [NSDate date];
+    NSDate *from;
+    
+    if (index == 0) {
+        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60)];
+    }
+    else if (index == 1) {
+        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 12)];
+        
+    }
+    else if (index == 2) {
+        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24)];
+    }
+    else if (index == 3) {
+        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24 * 7)];
+    }
+    [self searchEventFrom:[now timeIntervalSince1970] To:[from timeIntervalSince1970]];
+    [self.searchMenu toggleShow];
 }
 /*
 #pragma mark - Navigation

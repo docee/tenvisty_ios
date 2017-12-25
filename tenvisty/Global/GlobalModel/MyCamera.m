@@ -506,7 +506,7 @@
         if(resp->p>=100){
             self.processState = CAMERASTATE_WILLREBOOTING;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [iToast makeText:LOCALSTR(@"Firmware update success, camera will reboot later, please wait a moment.")];
+                [[[iToast makeText:LOCALSTR(@"Firmware update success, camera will reboot later, please wait a moment.")] setDuration:2] show];
             });
         }
     }

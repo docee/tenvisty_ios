@@ -129,6 +129,7 @@
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
+		EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */; };
 		EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1C1841FD5A99D00DAE334 /* CameraSettingViewController.m */; };
 		EDF1C1871FD5AA6B00DAE334 /* ListImgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1C1861FD5AA6B00DAE334 /* ListImgTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -397,6 +398,8 @@
 		ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFDevice.m"; sourceTree = "<group>"; };
 		ED8CA6861FD40A29005858CC /* LiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		ED8CA6871FD40A29005858CC /* LiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
+		EDB075EE1FEE331B00B3EE23 /* EventCustomSearchSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCustomSearchSource.h; sourceTree = "<group>"; };
+		EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCustomSearchSource.m; sourceTree = "<group>"; };
 		EDF1C1831FD5A99D00DAE334 /* CameraSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSettingViewController.h; sourceTree = "<group>"; };
 		EDF1C1841FD5A99D00DAE334 /* CameraSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSettingViewController.m; sourceTree = "<group>"; };
 		EDF1C1861FD5AA6B00DAE334 /* ListImgTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListImgTableViewCell.xib; sourceTree = "<group>"; };
@@ -747,6 +750,8 @@
 				89A7E93E1FED108200F12BFF /* Event.m */,
 				895141D71FE7780100905355 /* LocalVideoInfo.h */,
 				895141D81FE7780100905355 /* LocalVideoInfo.m */,
+				EDB075EE1FEE331B00B3EE23 /* EventCustomSearchSource.h */,
+				EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -1131,6 +1136,7 @@
 				89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */,
 				89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */,
 				890B408D1FB02F5300C1061A /* TwsViewController.m in Sources */,
+				EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */,
 				890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */,
 				890B407E1FB006C600C1061A /* AboutViewController.m in Sources */,
 				892ADB851FD78E5400BD8929 /* TimeZoneModel.m in Sources */,

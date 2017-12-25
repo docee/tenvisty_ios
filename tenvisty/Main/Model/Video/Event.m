@@ -126,7 +126,7 @@
         self.eventType = type;
         self.eventTime = time;
         self.eventStatus = status;
-        [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:time]];
+        self.dateTimeInterval = [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:time]];
         
     }
     
