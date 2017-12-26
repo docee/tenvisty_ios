@@ -201,6 +201,10 @@
     }];
     [alertController addAction:actionNO];
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:LOCALSTR(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *pwd = alertController.textFields.firstObject.text;
+        if(pwd.length == 0){
+            return;
+        }
         isShowingModifyPassword = NO;
         camera.pwd = alertController.textFields.firstObject.text;
         [GBase editCamera:camera];

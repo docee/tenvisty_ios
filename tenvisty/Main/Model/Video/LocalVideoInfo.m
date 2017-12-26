@@ -30,10 +30,11 @@
 //    return self;
 //}
 
-- (id)initWithRecordingName:(NSString *)name time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath {
+- (id)initWithRecordingName:(NSString *)name path:(NSString*)path time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath {
     if (self = [super init]) {
         
-        self.path = name;
+        self.path = path;
+        self.name = name;
         self.time = time;
         self.type = type;
         self.thumbPath = thumbPath;

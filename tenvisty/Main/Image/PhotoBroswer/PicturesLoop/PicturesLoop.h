@@ -25,5 +25,5 @@
 - (void)setpagecontrolFrame:(CGRect)frame;
 - (void)setPagecontrolIndicatorTintColor:(UIColor *)color;
 - (void)setPagecontrolCurrentPageIndicatorTintColor:(UIColor *)color;
-
+-(void)initView:(NSArray *)imageArray WithTitle:(NSArray *)titleArray currentIndex:(NSInteger)index;
 @end

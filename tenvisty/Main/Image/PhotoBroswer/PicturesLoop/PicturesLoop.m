@@ -37,7 +37,6 @@ typedef NS_ENUM(NSInteger, UIScrollViewTag) {
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSArray *titlearray;
 @property (strong, nonatomic) NSArray *detailarray;
-@property (strong, nonatomic) UILabel *countLable;
 @property (strong, nonatomic) UILabel *detailLable;
 
 @property (nonatomic, strong) UIScrollView *scrollViewImage;
@@ -140,13 +139,6 @@ typedef NS_ENUM(NSInteger, UIScrollViewTag) {
     self.scrollView.contentSize = CGSizeMake(screenW*self.imagearray.count, 0);
     self.scrollView.pagingEnabled = YES;
     
-    
-    self.countLable = [[UILabel alloc] initWithFrame:CGRectMake(lableX, lableY + 60, lableW, lableH)];
-    //    lable.backgroundColor = [UIColor redColor];
-    [self addSubview:self.countLable];
-    self.countLable.text = [NSString stringWithFormat:@"%d/%d", 1, (int)self.imagearray.count];
-    self.countLable.textAlignment = NSTextAlignmentCenter;
-    self.countLable.textColor     = [UIColor blackColor];
     
     
 //    self.detailLable = [[UILabel alloc] initWithFrame:CGRectMake(detailX, detailY, detailW, detailH)];
@@ -737,9 +729,6 @@ typedef NS_ENUM(NSInteger, UIScrollViewTag) {
     
     self.currentPage = mainIndex;// [self.imagearray indexOfObject:filename] ;//self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
     [self.scrollView scrollRectToVisible:CGRectMake(imageRect.size.width, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:NO];
-    self.countLable.text = [NSString stringWithFormat:@"%d/%d", self.currentPage + 1, (int)self.imagearray.count];
-    self.countLable.textAlignment = NSTextAlignmentCenter;
-    self.countLable.textColor     = [UIColor blackColor];
     
 }
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)aScrollView {

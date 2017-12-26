@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment_type;
 @property (nonatomic,strong) NSMutableArray *sourceList;
-
+@property (nonatomic,strong) NSMutableArray *originSourceList;
 @property (nonatomic,strong) LocalPictureInfo *selectPic;
 
 @end
@@ -67,9 +67,9 @@
         _sourceList = [[NSMutableArray alloc] init];
         //图片
         if(self.segment_type.selectedSegmentIndex == 0){
-            NSMutableArray *pics = [GBase picturesForCamera:self.camera];
-            for (int i =0; i<pics.count; i++) {
-                LocalPictureInfo *pic = pics[i];
+            _originSourceList = [GBase picturesForCamera:self.camera];
+            for (int i =0; i<_originSourceList.count; i++) {
+                LocalPictureInfo *pic = _originSourceList[i];
                 NSMutableArray *cellList = nil;
                 if(_sourceList.count > 0){
                     cellList = _sourceList[_sourceList.count-1];
@@ -81,14 +81,14 @@
                    cellList =  [[NSMutableArray alloc] init];
                     [_sourceList addObject:cellList];
                 }
-                [cellList addObject:pics[i]];
+                [cellList addObject:_originSourceList[i]];
             }
         }
         //录像
         else{
-            NSMutableArray *recordings = [GBase recordingsForCamera:self.camera];
-            for (int i =0; i<recordings.count; i++) {
-                LocalVideoInfo *recording = [recordings objectAtIndex:i];
+            _originSourceList = [GBase recordingsForCamera:self.camera];
+            for (int i =0; i<_originSourceList.count; i++) {
+                LocalVideoInfo *recording = _originSourceList[i];
                 NSMutableArray *cellList = nil;
                 if(_sourceList.count > 0){
                     cellList = _sourceList[_sourceList.count-1];
@@ -100,7 +100,7 @@
                     cellList =  [[NSMutableArray alloc] init];
                     [_sourceList addObject:cellList];
                 }
-                [cellList addObject:recordings[i]];
+                [cellList addObject:_originSourceList[i]];
             }
         }
     }
@@ -224,6 +224,7 @@
         ShowImageViewController *controller= segue.destinationViewController;
         controller.camera = self.camera;
         controller.selectPic = self.selectPic;
+        controller.images = _originSourceList;
     }
 }
 /*

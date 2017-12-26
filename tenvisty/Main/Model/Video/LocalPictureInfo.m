@@ -13,11 +13,12 @@
 @end
 
 @implementation LocalPictureInfo
-- (id)initWithName:(NSString *)name time:(NSInteger)time{
+- (id)initWithName:(NSString *)name path:(NSString*)path time:(NSInteger)time{
     if (self = [super init]) {
-        self.thumbPath = name;
+        self.thumbPath = path;
         self.time = time;
-        self.path = name;
+        self.path = path;
+        self.name = name;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MM-dd-yyyy"];
         self.date = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:time]];

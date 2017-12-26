@@ -125,7 +125,7 @@
         <!--Camera Name-->
         <scene sceneID="NaM-Jg-mV0">
             <objects>
-                <viewController id="JpH-1X-1n7" customClass="ImageCollectionViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="JpH-1X-1n7" customClass="ImageCollectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T8z-Kz-PhX"/>
                         <viewControllerLayoutGuide type="bottom" id="L2L-5K-Q7Z"/>
@@ -307,10 +307,10 @@
                 <exit id="Myh-YX-ZIe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
-        <!--20171207031206.jpg-->
+        <!--Local Snapshot(1/10)-->
         <scene sceneID="fkp-4h-Gza">
             <objects>
-                <viewController id="YMp-xc-vdq" customClass="ShowImageViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="YMp-xc-vdq" customClass="ShowImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SbQ-vh-BMD"/>
                         <viewControllerLayoutGuide type="bottom" id="eAv-CL-C9q"/>
@@ -318,55 +318,20 @@
                     <view key="view" contentMode="scaleToFill" id="r8c-Qp-x7m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vyo-sU-VRw">
-                                <rect key="frame" x="0.0" y="191.5" width="375" height="220"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="220" id="Pye-8k-yQ2"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Vyo-sU-VRw" firstAttribute="leading" secondItem="r8c-Qp-x7m" secondAttribute="leading" id="7vQ-jK-o3h"/>
-                            <constraint firstAttribute="trailing" secondItem="Vyo-sU-VRw" secondAttribute="trailing" id="JnS-WH-Gz3"/>
-                            <constraint firstItem="Vyo-sU-VRw" firstAttribute="centerY" secondItem="r8c-Qp-x7m" secondAttribute="centerY" id="la6-Na-NyZ"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="20171207031206.jpg" id="fXk-pK-ZUD">
+                    <navigationItem key="navigationItem" title="Local Snapshot(1/10)" id="fXk-pK-ZUD">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="09M-Ug-UNk">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="FfH-0R-QDw" kind="unwind" unwindAction="ImageCollectionViewController1UnwindSegue:" id="Qzr-lk-Bpx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="FCs-ac-18Q">
-                            <view key="customView" contentMode="scaleToFill" id="Hde-Ia-7tv">
-                                <rect key="frame" x="276" y="5.5" width="83" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUY-Ny-tNk">
-                                        <rect key="frame" x="41.5" y="0.0" width="41.5" height="33"/>
-                                        <state key="normal" image="ic_menu_delete"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej5-m6-zVY">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="33"/>
-                                        <state key="normal" image="ic_menu_share"/>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="OUY-Ny-tNk" secondAttribute="trailing" id="5Ov-dO-0nq"/>
-                                    <constraint firstItem="OUY-Ny-tNk" firstAttribute="height" secondItem="ej5-m6-zVY" secondAttribute="height" id="TUX-k2-YG7"/>
-                                    <constraint firstItem="ej5-m6-zVY" firstAttribute="top" secondItem="Hde-Ia-7tv" secondAttribute="top" id="ZGN-4h-eKI"/>
-                                    <constraint firstItem="OUY-Ny-tNk" firstAttribute="top" secondItem="Hde-Ia-7tv" secondAttribute="top" id="cdi-Ip-pqU"/>
-                                    <constraint firstItem="OUY-Ny-tNk" firstAttribute="width" secondItem="ej5-m6-zVY" secondAttribute="width" id="cw4-7V-py4"/>
-                                    <constraint firstAttribute="bottom" secondItem="OUY-Ny-tNk" secondAttribute="bottom" id="jGS-Pu-XAz"/>
-                                    <constraint firstAttribute="bottom" secondItem="ej5-m6-zVY" secondAttribute="bottom" id="mKq-Ov-2Gg"/>
-                                    <constraint firstItem="OUY-Ny-tNk" firstAttribute="leading" secondItem="ej5-m6-zVY" secondAttribute="trailing" id="uuP-hv-d8j"/>
-                                    <constraint firstItem="ej5-m6-zVY" firstAttribute="leading" secondItem="Hde-Ia-7tv" secondAttribute="leading" id="y8N-gS-dni"/>
-                                </constraints>
-                            </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="OcB-og-a7E">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="clickAction:" destination="YMp-xc-vdq" id="j5N-05-jr5"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -376,8 +341,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_menu_delete" width="20" height="27"/>
-        <image name="ic_menu_share" width="20" height="21"/>
         <image name="navBack" width="30" height="30"/>
     </resources>
 </document>

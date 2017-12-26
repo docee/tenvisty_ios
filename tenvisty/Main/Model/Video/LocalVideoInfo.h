@@ -12,7 +12,7 @@
 @interface LocalVideoInfo : LocalPictureInfo
 
 //- (id)initWithID:(NSString*)path Time:(NSInteger)time;
-- (id)initWithRecordingName:(NSString *)name time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath;
+- (id)initWithRecordingName:(NSString *)name path:(NSString*)path time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath;
 
 
 @property (nonatomic, copy) NSString *path; // 对应recordingName

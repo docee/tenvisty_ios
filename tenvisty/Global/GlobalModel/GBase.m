@@ -476,7 +476,7 @@ static GBase *base = nil;
         NSString *thumbFilePath = [rs stringForColumn:@"small_file_path"];
         
         LOG(@"FMResultSet_filePath : %@ type:%d", filePath, (int)type);
-        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:[base recordingPathWithCamera:mycam recordingName:filePath] time:time type:type thumbPath:[base recordingPathWithCamera:mycam recordingName:thumbFilePath] ];
+        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:filePath path:[base recordingPathWithCamera:mycam recordingName:filePath] time:time type:type thumbPath:[base recordingPathWithCamera:mycam recordingName:thumbFilePath] ];
         
         [recordings addObject:vi];
     }
@@ -540,7 +540,7 @@ static GBase *base = nil;
         
         NSString *imageName = [rs stringForColumn:@"file_path"];
         NSInteger time = [rs doubleForColumn:@"time"];
-        LocalPictureInfo* vi = [[LocalPictureInfo alloc] initWithName:[base snapshotPathWithCamera:mycam imgName:imageName] time:time];
+        LocalPictureInfo* vi = [[LocalPictureInfo alloc] initWithName:imageName path:[base snapshotPathWithCamera:mycam imgName:imageName]  time:time];
         [pictures addObject:vi];
         
         //NSLog(@"imagePath :%@", imageName);
