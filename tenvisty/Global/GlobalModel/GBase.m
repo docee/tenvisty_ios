@@ -220,6 +220,7 @@ static GBase *base = nil;
 }
 +(NSString*)thumbPath:(MyCamera*)camera{
     NSString *path = nil;
+    NSString *fullPath = nil;
     GBase *base = [GBase sharedInstance];
     if([self countSnapshot:camera.uid] > 0){
         if (base.db != NULL) {
@@ -231,36 +232,35 @@ static GBase *base = nil;
             [rs close];
         }
         if(path != nil){
-            if(![[base gFileManager] fileExistsAtPath: [base snapshotPathWithCamera:camera imgName:path]]){
+            fullPath = [base snapshotPathWithCamera:camera imgName:path];
+            if(![[base gFileManager] fileExistsAtPath: fullPath]){
                  if (![base.db executeUpdate:@"DELETE FROM snapshot where file_path=?", path]){
                  }
-                path = nil;
+                fullPath = nil;
             }
         }
     }
-    if(path == nil){
+    if(fullPath == nil){
         if([self countVideo:camera.uid] > 0){
             if (base.db != NULL) {
-                FMResultSet *rs = [base.db executeQuery:@"SELECT file_path FROM video WHERE dev_uid=? and recording_type=0 order by id desc limit 1", camera.uid];
+                FMResultSet *rs = [base.db executeQuery:@"SELECT small_file_path FROM video WHERE dev_uid=? and recording_type=0 order by id desc limit 1", camera.uid];
                 while([rs next]) {
-                    path =  [rs stringForColumn:@"file_path"];
+                    path =  [rs stringForColumn:@"small_file_path"];
                     break;
                 }
                 [rs close];
             }
             if(path != nil){
-                if(![[base gFileManager] fileExistsAtPath:[base recordingPathWithCamera:camera recordingName:path]]){
-                    if (![base.db executeUpdate:@"DELETE FROM video where file_path=?", path]){
+                fullPath = [base recordingPathWithCamera:camera recordingName:path];
+                if(![[base gFileManager] fileExistsAtPath:fullPath]){
+                    if (![base.db executeUpdate:@"DELETE FROM video where small_file_path=?", path]){
                     }
-                    path = nil;
+                    fullPath = nil;
                 }
             }
         }
     }
-    if(path != nil){
-        path =  [base snapshotPathWithCamera:camera imgName:path];
-    }
-    return path;
+    return fullPath;
 }
 +(NSInteger)countSnapshot:(NSString*)uid{
     int count = 0;
@@ -301,8 +301,14 @@ static GBase *base = nil;
 
 - (void)saveImageToFile:(UIImage *)image imageName:(NSString *)fileName {
     
-    NSData *imgData = UIImageJPEGRepresentation(image, 1.0f);
-    
+    NSData *imgData = nil;
+    NSString *extension = [[[fileName componentsSeparatedByString:@"."] lastObject] lowercaseString];
+    if([extension isEqualToString:@"png"]){
+        imgData = UIImagePNGRepresentation(image);
+    }
+    else{
+        imgData = UIImageJPEGRepresentation(image, 0.5f);
+    }
     //NSString *imgFullName = [self pathForDocumentsResource:fileName];
     NSString *imgFullName = [self documentsWithFileName:fileName];
     
@@ -312,8 +318,14 @@ static GBase *base = nil;
 }
 
 - (void)saveImageToFileFullPath:(UIImage *)image filePath:(NSString *)filePath {
-    
-    NSData *imgData = UIImageJPEGRepresentation(image, 1.0f);
+    NSData *imgData = nil;
+    NSString *extension = [[[filePath componentsSeparatedByString:@"."] lastObject] lowercaseString];
+    if([extension isEqualToString:@"png"]){
+        imgData = UIImagePNGRepresentation(image);
+    }
+    else{
+        imgData = UIImageJPEGRepresentation(image, 0.5f);
+    }
     
     //NSLog(@"imgFullName:%@", imgFullName);
     
@@ -486,10 +498,10 @@ static GBase *base = nil;
     [rs close];
     [recordings sortUsingComparator:^NSComparisonResult(LocalVideoInfo *obj1, LocalVideoInfo *obj2) {
         if(obj1.time > obj2.time){
-            return 1;
+            return -1;
         }
         else if(obj1.time < obj2.time){
-            return -1;
+            return 1;
         }
         else{
             return 0;
@@ -550,10 +562,10 @@ static GBase *base = nil;
     [rs close];
     [pictures sortUsingComparator:^NSComparisonResult(LocalPictureInfo *obj1, LocalPictureInfo *obj2) {
         if(obj1.time > obj2.time){
-            return 1;
+            return -1;
         }
         else if(obj1.time < obj2.time){
-            return -1;
+            return 1;
         }
         else{
             return 0;

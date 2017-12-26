@@ -125,7 +125,7 @@
         <!--Camera Name-->
         <scene sceneID="NaM-Jg-mV0">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="JpH-1X-1n7" customClass="ImageCollectionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="storyboard_imagecollection" hidesBottomBarWhenPushed="YES" id="JpH-1X-1n7" customClass="ImageCollectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T8z-Kz-PhX"/>
                         <viewControllerLayoutGuide type="bottom" id="L2L-5K-Q7Z"/>
@@ -451,7 +451,7 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="sMP-lr-1JO">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="Myh-YX-ZIe" kind="unwind" unwindAction="ImageViewController1UnwindSegue:" id="jnV-2i-q7Q"/>
+                                <action selector="goBack:" destination="JpH-1X-1n7" id="agK-fJ-fgr"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="DGe-fU-Eup">
@@ -472,7 +472,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pit-oA-yTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Myh-YX-ZIe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1917.5999999999999" y="-240.88669950738918"/>
         </scene>

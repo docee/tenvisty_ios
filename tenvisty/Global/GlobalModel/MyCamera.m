@@ -521,8 +521,13 @@
 
 //保存截图至沙盒
 - (void)saveImage:(UIImage *)image {
-    //[UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
-    [UIImageJPEGRepresentation(image, 1) writeToFile:self.imagePath atomically:YES];
+     NSString *extension = [[[self.imagePath componentsSeparatedByString:@"."] lastObject] lowercaseString];
+    if([extension isEqualToString:@"png"]){
+        [UIImagePNGRepresentation(image) writeToFile:self.imagePath atomically:YES];
+    }
+    else{
+        [UIImageJPEGRepresentation(image, 0.5) writeToFile:self.imagePath atomically:YES];
+    }
 }
 
 //判断一个文件是否存在

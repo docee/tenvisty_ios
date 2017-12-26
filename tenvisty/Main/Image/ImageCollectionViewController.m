@@ -167,13 +167,16 @@
     }
     return _directoryPath;
 }
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)emailPhoto:(NSMutableArray*)souces {
     MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
     if(_segment_type.selectedSegmentIndex == 0){
-        [mailer setSubject:[NSString stringWithFormat:@"Photos"]];
+        [mailer setSubject:[NSString stringWithFormat:@"%@ - Photos",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]]];
     }
     else{
-        [mailer setSubject:[NSString stringWithFormat:@"Videos"]];
+        [mailer setSubject:[NSString stringWithFormat:@"%@ - Videos",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]]];
     }
    for(LocalPictureInfo *model in souces){
         if ([MFMailComposeViewController canSendMail]) {
@@ -184,9 +187,9 @@
                 if ([extension isEqualToString:@"png"]) {
                     attachmentData = UIImagePNGRepresentation([UIImage imageWithContentsOfFile:model.path]);
                 }else if ([extension isEqualToString:@"jpg"]) {
-                    attachmentData = UIImageJPEGRepresentation([UIImage imageWithContentsOfFile:model.path], 1.0);
+                    attachmentData = UIImageJPEGRepresentation([UIImage imageWithContentsOfFile:model.path], 0.5);
                 }
-                [mailer addAttachmentData:attachmentData mimeType:[NSString stringWithFormat:@"image/%@",extension] fileName: model.path];
+                [mailer addAttachmentData:attachmentData mimeType:[NSString stringWithFormat:@"image/%@",[extension isEqualToString:@"jpg"]?@"jpeg":extension] fileName: model.name];
                 [mailer setMessageBody:[NSString stringWithString:[NSString stringWithFormat:@"Photo - %@", model.path]] isHTML:NO];
             }
             else{

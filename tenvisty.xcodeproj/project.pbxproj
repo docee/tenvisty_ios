@@ -92,7 +92,6 @@
 		8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC301FF2203C004989A9 /* LocalPictureInfo.m */; };
 		8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */; };
 		8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC371FF262CD004989A9 /* PicturesLoop.m */; };
-		8989EC401FF33113004989A9 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
 		898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 898D8B921FE0CDA900062F04 /* Documentation.html */; };
 		898D8B9B1FE0CDA900062F04 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */; };
 		898D8B9C1FE0CDA900062F04 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B961FE0CDA900062F04 /* GCDAsyncUdpSocket.m */; };
@@ -133,6 +132,7 @@
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
+		ED04107C1FF3F19500D2DD19 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = ED040F601FF292C000D2DD19 /* IOTCamera */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
@@ -426,6 +426,237 @@
 		ED040F571FF1588C00D2DD19 /* EventSearchCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSearchCustomViewController.h; sourceTree = "<group>"; };
 		ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchCustomViewController.m; sourceTree = "<group>"; };
 		ED040F601FF292C000D2DD19 /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-hgdwhrvovyreqqcjuxfukgheohqw/Build/Intermediates.noindex/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
+		ED040F691FF3F19500D2DD19 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ED040F6A1FF3F19500D2DD19 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ED040F6B1FF3F19500D2DD19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED040F6D1FF3F19500D2DD19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ED040F6F1FF3F19500D2DD19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED040F721FF3F19500D2DD19 /* FLAnimatedImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImage.h; sourceTree = "<group>"; };
+		ED040F731FF3F19500D2DD19 /* FLAnimatedImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
+		ED040F741FF3F19500D2DD19 /* FLAnimatedImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImageView.h; sourceTree = "<group>"; };
+		ED040F751FF3F19500D2DD19 /* FLAnimatedImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
+		ED040F761FF3F19500D2DD19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED040F781FF3F19500D2DD19 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
+		ED040F791FF3F19500D2DD19 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
+		ED040F7A1FF3F19500D2DD19 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		ED040F7B1FF3F19500D2DD19 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		ED040F7E1FF3F19500D2DD19 /* UIColor+Hex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		ED040F7F1FF3F19500D2DD19 /* UIColor+Hex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		ED040F801FF3F19500D2DD19 /* UIImage+Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Colors.h"; sourceTree = "<group>"; };
+		ED040F811FF3F19500D2DD19 /* UIImage+Colors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Colors.m"; sourceTree = "<group>"; };
+		ED040F831FF3F19500D2DD19 /* FMDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		ED040F841FF3F19500D2DD19 /* FMDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		ED040F851FF3F19500D2DD19 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		ED040F861FF3F19500D2DD19 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		ED040F871FF3F19500D2DD19 /* FMDatabasePool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		ED040F881FF3F19500D2DD19 /* FMDatabasePool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		ED040F891FF3F19500D2DD19 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		ED040F8A1FF3F19500D2DD19 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		ED040F8B1FF3F19500D2DD19 /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		ED040F8C1FF3F19500D2DD19 /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		ED040F8D1FF3F19500D2DD19 /* FMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		ED040F8F1FF3F19500D2DD19 /* Documentation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		ED040F901FF3F19500D2DD19 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		ED040F911FF3F19500D2DD19 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		ED040F921FF3F19500D2DD19 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		ED040F931FF3F19500D2DD19 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		ED040F951FF3F19500D2DD19 /* GNetworkStates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GNetworkStates.h; sourceTree = "<group>"; };
+		ED040F961FF3F19500D2DD19 /* GNetworkStates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GNetworkStates.m; sourceTree = "<group>"; };
+		ED040F971FF3F19500D2DD19 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		ED040F981FF3F19500D2DD19 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		ED040F9A1FF3F19500D2DD19 /* iToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		ED040F9B1FF3F19500D2DD19 /* iToast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
+		ED040F9D1FF3F19500D2DD19 /* TwsProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsProgress.h; sourceTree = "<group>"; };
+		ED040F9E1FF3F19500D2DD19 /* TwsProgress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsProgress.m; sourceTree = "<group>"; };
+		ED040FA01FF3F19500D2DD19 /* TwsTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsTools.h; sourceTree = "<group>"; };
+		ED040FA11FF3F19500D2DD19 /* TwsTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsTools.m; sourceTree = "<group>"; };
+		ED040FA21FF3F19500D2DD19 /* TwsViewTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsViewTools.h; sourceTree = "<group>"; };
+		ED040FA31FF3F19500D2DD19 /* TwsViewTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsViewTools.m; sourceTree = "<group>"; };
+		ED040FA51FF3F19500D2DD19 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
+		ED040FA61FF3F19500D2DD19 /* UIDevice+TFDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFDevice.m"; sourceTree = "<group>"; };
+		ED040FA71FF3F19500D2DD19 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED040FA91FF3F19500D2DD19 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		ED040FAC1FF3F19500D2DD19 /* BaseWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseWiFiConfig.h; sourceTree = "<group>"; };
+		ED040FAD1FF3F19500D2DD19 /* BaseWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseWiFiConfig.m; sourceTree = "<group>"; };
+		ED040FAE1FF3F19500D2DD19 /* FaceberAudioConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceberAudioConfig.h; sourceTree = "<group>"; };
+		ED040FAF1FF3F19500D2DD19 /* FaceberAudioConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceberAudioConfig.m; sourceTree = "<group>"; };
+		ED040FB11FF3F19500D2DD19 /* voiceEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = voiceEncoder.h; sourceTree = "<group>"; };
+		ED040FB21FF3F19500D2DD19 /* WiFiConfigContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WiFiConfigContext.h; sourceTree = "<group>"; };
+		ED040FB31FF3F19500D2DD19 /* WiFiConfigContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WiFiConfigContext.m; sourceTree = "<group>"; };
+		ED040FB51FF3F19500D2DD19 /* TimeScheduleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeScheduleViewController.h; sourceTree = "<group>"; };
+		ED040FB61FF3F19500D2DD19 /* TimeScheduleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeScheduleViewController.m; sourceTree = "<group>"; };
+		ED040FB71FF3F19500D2DD19 /* TwsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsViewController.h; sourceTree = "<group>"; };
+		ED040FB81FF3F19500D2DD19 /* TwsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsViewController.m; sourceTree = "<group>"; };
+		ED040FB91FF3F19500D2DD19 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		ED040FBA1FF3F19500D2DD19 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ED040FBC1FF3F19500D2DD19 /* GBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBase.h; sourceTree = "<group>"; };
+		ED040FBD1FF3F19500D2DD19 /* GBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBase.m; sourceTree = "<group>"; };
+		ED040FBE1FF3F19500D2DD19 /* ListImgTableViewCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListImgTableViewCellModel.h; sourceTree = "<group>"; };
+		ED040FBF1FF3F19500D2DD19 /* ListImgTableViewCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListImgTableViewCellModel.m; sourceTree = "<group>"; };
+		ED040FC01FF3F19500D2DD19 /* MyCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCamera.h; sourceTree = "<group>"; };
+		ED040FC11FF3F19500D2DD19 /* MyCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCamera.m; sourceTree = "<group>"; };
+		ED040FC21FF3F19500D2DD19 /* TimeZoneModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeZoneModel.h; sourceTree = "<group>"; };
+		ED040FC31FF3F19500D2DD19 /* TimeZoneModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeZoneModel.m; sourceTree = "<group>"; };
+		ED040FC51FF3F19500D2DD19 /* SelectTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTime.h; sourceTree = "<group>"; };
+		ED040FC61FF3F19500D2DD19 /* SelectTime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTime.m; sourceTree = "<group>"; };
+		ED040FC71FF3F19500D2DD19 /* TwsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsCell.h; sourceTree = "<group>"; };
+		ED040FC81FF3F19500D2DD19 /* TwsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsCell.m; sourceTree = "<group>"; };
+		ED040FC91FF3F19500D2DD19 /* VideoSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoSetCell.h; sourceTree = "<group>"; };
+		ED040FCA1FF3F19500D2DD19 /* VideoSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoSetCell.m; sourceTree = "<group>"; };
+		ED040FCB1FF3F19500D2DD19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED040FCE1FF3F19500D2DD19 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = "<group>"; };
+		ED040FCF1FF3F19500D2DD19 /* FLAnimatedImage.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = FLAnimatedImage.framework.dSYM; sourceTree = "<group>"; };
+		ED040FD01FF3F19500D2DD19 /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera.framework; sourceTree = "<group>"; };
+		ED040FD11FF3F19500D2DD19 /* IOTCamera_MJ4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera_MJ4.framework; sourceTree = "<group>"; };
+		ED040FD21FF3F19500D2DD19 /* IOTCamera_T.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera_T.framework; sourceTree = "<group>"; };
+		ED040FD41FF3F19500D2DD19 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = "<group>"; };
+		ED040FD51FF3F19500D2DD19 /* FLAnimatedImage.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = FLAnimatedImage.framework.dSYM; sourceTree = "<group>"; };
+		ED040FD61FF3F19500D2DD19 /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera.framework; sourceTree = "<group>"; };
+		ED040FD71FF3F19500D2DD19 /* libavconVoiceRecognize.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavconVoiceRecognize.a; sourceTree = "<group>"; };
+		ED040FD81FF3F19500D2DD19 /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
+		ED040FD91FF3F19500D2DD19 /* libZXingWidget.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZXingWidget.a; sourceTree = "<group>"; };
+		ED040FDB1FF3F19500D2DD19 /* 08A8B0C5-4CF9-34F6-B100-112F4415A4C9.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "08A8B0C5-4CF9-34F6-B100-112F4415A4C9.bcsymbolmap"; sourceTree = "<group>"; };
+		ED040FDC1FF3F19500D2DD19 /* 6503FD3E-FCAF-3500-92EA-4D9A02E795EC.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "6503FD3E-FCAF-3500-92EA-4D9A02E795EC.bcsymbolmap"; sourceTree = "<group>"; };
+		ED040FDF1FF3F19500D2DD19 /* About.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		ED040FE01FF3F19500D2DD19 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		ED040FE11FF3F19500D2DD19 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		ED040FE31FF3F19500D2DD19 /* BaseFragmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseFragmentViewController.h; sourceTree = "<group>"; };
+		ED040FE41FF3F19500D2DD19 /* BaseFragmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseFragmentViewController.m; sourceTree = "<group>"; };
+		ED040FE51FF3F19500D2DD19 /* BaseTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
+		ED040FE61FF3F19500D2DD19 /* BaseTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
+		ED040FE71FF3F19500D2DD19 /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		ED040FE81FF3F19500D2DD19 /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		ED040FE91FF3F19500D2DD19 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		ED040FEA1FF3F19500D2DD19 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		ED040FEC1FF3F19500D2DD19 /* ImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewCell.h; sourceTree = "<group>"; };
+		ED040FED1FF3F19500D2DD19 /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewCell.m; sourceTree = "<group>"; };
+		ED040FEF1FF3F19500D2DD19 /* DetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
+		ED040FF01FF3F19500D2DD19 /* DetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
+		ED040FF11FF3F19500D2DD19 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
+		ED040FF21FF3F19500D2DD19 /* EventItemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventItemTableViewCell.h; sourceTree = "<group>"; };
+		ED040FF31FF3F19500D2DD19 /* EventItemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventItemTableViewCell.m; sourceTree = "<group>"; };
+		ED040FF41FF3F19500D2DD19 /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
+		ED040FF51FF3F19500D2DD19 /* ImageCollectionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionTableViewCell.m; sourceTree = "<group>"; };
+		ED040FF61FF3F19500D2DD19 /* ImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
+		ED040FF71FF3F19500D2DD19 /* ImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
+		ED040FF81FF3F19500D2DD19 /* ListImgTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListImgTableViewCell.h; sourceTree = "<group>"; };
+		ED040FF91FF3F19500D2DD19 /* ListImgTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListImgTableViewCell.m; sourceTree = "<group>"; };
+		ED040FFA1FF3F19500D2DD19 /* ListImgTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListImgTableViewCell.xib; sourceTree = "<group>"; };
+		ED040FFB1FF3F19500D2DD19 /* PasswordFieldTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasswordFieldTableViewCell.h; sourceTree = "<group>"; };
+		ED040FFC1FF3F19500D2DD19 /* PasswordFieldTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasswordFieldTableViewCell.m; sourceTree = "<group>"; };
+		ED040FFD1FF3F19500D2DD19 /* PasswordFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordFieldTableViewCell.xib; sourceTree = "<group>"; };
+		ED040FFE1FF3F19500D2DD19 /* SelectItemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectItemTableViewCell.h; sourceTree = "<group>"; };
+		ED040FFF1FF3F19500D2DD19 /* SelectItemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectItemTableViewCell.m; sourceTree = "<group>"; };
+		ED0410001FF3F19500D2DD19 /* SelectItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectItemTableViewCell.xib; sourceTree = "<group>"; };
+		ED0410011FF3F19500D2DD19 /* SwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchTableViewCell.h; sourceTree = "<group>"; };
+		ED0410021FF3F19500D2DD19 /* SwitchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchTableViewCell.m; sourceTree = "<group>"; };
+		ED0410031FF3F19500D2DD19 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
+		ED0410041FF3F19500D2DD19 /* SyncTimeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncTimeTableViewCell.h; sourceTree = "<group>"; };
+		ED0410051FF3F19500D2DD19 /* SyncTimeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncTimeTableViewCell.m; sourceTree = "<group>"; };
+		ED0410061FF3F19500D2DD19 /* TextFieldDisableTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldDisableTableViewCell.h; sourceTree = "<group>"; };
+		ED0410071FF3F19500D2DD19 /* TextFieldDisableTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextFieldDisableTableViewCell.m; sourceTree = "<group>"; };
+		ED0410081FF3F19500D2DD19 /* TextFieldDisableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldDisableTableViewCell.xib; sourceTree = "<group>"; };
+		ED0410091FF3F19500D2DD19 /* TextFieldImgTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldImgTableViewCell.h; sourceTree = "<group>"; };
+		ED04100A1FF3F19500D2DD19 /* TextFieldImgTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextFieldImgTableViewCell.m; sourceTree = "<group>"; };
+		ED04100B1FF3F19500D2DD19 /* TextFieldImgTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldImgTableViewCell.xib; sourceTree = "<group>"; };
+		ED04100C1FF3F19500D2DD19 /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
+		ED04100D1FF3F19500D2DD19 /* TextFieldTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableViewCell.m; sourceTree = "<group>"; };
+		ED04100E1FF3F19500D2DD19 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		ED04100F1FF3F19500D2DD19 /* TwsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsTableViewCell.h; sourceTree = "<group>"; };
+		ED0410101FF3F19500D2DD19 /* TwsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsTableViewCell.m; sourceTree = "<group>"; };
+		ED0410121FF3F19500D2DD19 /* SearchLanAsync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchLanAsync.h; sourceTree = "<group>"; };
+		ED0410131FF3F19500D2DD19 /* SearchLanAsync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchLanAsync.m; sourceTree = "<group>"; };
+		ED0410161FF3F19500D2DD19 /* AboutListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutListViewController.h; sourceTree = "<group>"; };
+		ED0410171FF3F19500D2DD19 /* AboutListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutListViewController.m; sourceTree = "<group>"; };
+		ED0410191FF3F19500D2DD19 /* AddCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCameraViewController.h; sourceTree = "<group>"; };
+		ED04101A1FF3F19500D2DD19 /* AddCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCameraViewController.m; sourceTree = "<group>"; };
+		ED04101B1FF3F19500D2DD19 /* SaveCameraTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveCameraTableViewController.h; sourceTree = "<group>"; };
+		ED04101C1FF3F19500D2DD19 /* SaveCameraTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveCameraTableViewController.m; sourceTree = "<group>"; };
+		ED04101E1FF3F19500D2DD19 /* OCScanLifeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCScanLifeViewController.h; sourceTree = "<group>"; };
+		ED04101F1FF3F19500D2DD19 /* OCScanLifeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCScanLifeViewController.m; sourceTree = "<group>"; };
+		ED0410201FF3F19500D2DD19 /* SearchCameraTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCameraTableViewController.h; sourceTree = "<group>"; };
+		ED0410211FF3F19500D2DD19 /* SearchCameraTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCameraTableViewController.m; sourceTree = "<group>"; };
+		ED0410231FF3F19500D2DD19 /* AddDeviceWirelessNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessNoteViewController.h; sourceTree = "<group>"; };
+		ED0410241FF3F19500D2DD19 /* AddDeviceWirelessNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessNoteViewController.m; sourceTree = "<group>"; };
+		ED0410251FF3F19500D2DD19 /* AddDeviceWirelessSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessSettingViewController.h; sourceTree = "<group>"; };
+		ED0410261FF3F19500D2DD19 /* AddDeviceWirelessSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessSettingViewController.m; sourceTree = "<group>"; };
+		ED0410271FF3F19500D2DD19 /* AddDeviceWirelessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessViewController.h; sourceTree = "<group>"; };
+		ED0410281FF3F19500D2DD19 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
+		ED0410291FF3F19500D2DD19 /* CameraListItemTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraListItemTableViewCell.h; sourceTree = "<group>"; };
+		ED04102A1FF3F19500D2DD19 /* CameraListItemTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraListItemTableViewCell.m; sourceTree = "<group>"; };
+		ED04102B1FF3F19500D2DD19 /* CameraListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraListViewController.h; sourceTree = "<group>"; };
+		ED04102C1FF3F19500D2DD19 /* CameraListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraListViewController.m; sourceTree = "<group>"; };
+		ED04102E1FF3F19500D2DD19 /* CameraSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraSetting.storyboard; sourceTree = "<group>"; };
+		ED04102F1FF3F19500D2DD19 /* CameraSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraSettingViewController.h; sourceTree = "<group>"; };
+		ED0410301FF3F19500D2DD19 /* CameraSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraSettingViewController.m; sourceTree = "<group>"; };
+		ED0410311FF3F19500D2DD19 /* ChangeCameraNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCameraNameViewController.h; sourceTree = "<group>"; };
+		ED0410321FF3F19500D2DD19 /* ChangeCameraNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCameraNameViewController.m; sourceTree = "<group>"; };
+		ED0410331FF3F19500D2DD19 /* ChangeCameraPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCameraPasswordViewController.h; sourceTree = "<group>"; };
+		ED0410341FF3F19500D2DD19 /* ChangeCameraPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCameraPasswordViewController.m; sourceTree = "<group>"; };
+		ED0410351FF3F19500D2DD19 /* ChangeWiFiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeWiFiViewController.h; sourceTree = "<group>"; };
+		ED0410361FF3F19500D2DD19 /* ChangeWiFiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeWiFiViewController.m; sourceTree = "<group>"; };
+		ED0410371FF3F19500D2DD19 /* DeviceInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceInfoViewController.h; sourceTree = "<group>"; };
+		ED0410381FF3F19500D2DD19 /* DeviceInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoViewController.m; sourceTree = "<group>"; };
+		ED0410391FF3F19500D2DD19 /* EventSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSettingViewController.h; sourceTree = "<group>"; };
+		ED04103A1FF3F19500D2DD19 /* EventSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSettingViewController.m; sourceTree = "<group>"; };
+		ED04103B1FF3F19500D2DD19 /* OtherSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherSettingViewController.h; sourceTree = "<group>"; };
+		ED04103C1FF3F19500D2DD19 /* OtherSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherSettingViewController.m; sourceTree = "<group>"; };
+		ED04103D1FF3F19500D2DD19 /* RecordSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordSettingViewController.h; sourceTree = "<group>"; };
+		ED04103E1FF3F19500D2DD19 /* RecordSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordSettingViewController.m; sourceTree = "<group>"; };
+		ED04103F1FF3F19500D2DD19 /* SDCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCardViewController.h; sourceTree = "<group>"; };
+		ED0410401FF3F19500D2DD19 /* SDCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCardViewController.m; sourceTree = "<group>"; };
+		ED0410411FF3F19500D2DD19 /* SensSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensSettingViewController.h; sourceTree = "<group>"; };
+		ED0410421FF3F19500D2DD19 /* SensSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensSettingViewController.m; sourceTree = "<group>"; };
+		ED0410431FF3F19500D2DD19 /* SystemSettingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemSettingTableViewController.h; sourceTree = "<group>"; };
+		ED0410441FF3F19500D2DD19 /* SystemSettingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemSettingTableViewController.m; sourceTree = "<group>"; };
+		ED0410451FF3F19500D2DD19 /* TimeSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeSettingViewController.h; sourceTree = "<group>"; };
+		ED0410461FF3F19500D2DD19 /* TimeSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeSettingViewController.m; sourceTree = "<group>"; };
+		ED0410471FF3F19500D2DD19 /* TimeZoneSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeZoneSettingViewController.h; sourceTree = "<group>"; };
+		ED0410481FF3F19500D2DD19 /* TimeZoneSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeZoneSettingViewController.m; sourceTree = "<group>"; };
+		ED0410491FF3F19500D2DD19 /* WiFiSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WiFiSettingViewController.h; sourceTree = "<group>"; };
+		ED04104A1FF3F19500D2DD19 /* WiFiSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WiFiSettingViewController.m; sourceTree = "<group>"; };
+		ED04104B1FF3F19500D2DD19 /* EventListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
+		ED04104C1FF3F19500D2DD19 /* EventListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventListViewController.m; sourceTree = "<group>"; };
+		ED04104D1FF3F19500D2DD19 /* EventSearchCustom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchCustom.xib; sourceTree = "<group>"; };
+		ED04104E1FF3F19500D2DD19 /* EventSearchCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSearchCustomViewController.h; sourceTree = "<group>"; };
+		ED04104F1FF3F19500D2DD19 /* EventSearchCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchCustomViewController.m; sourceTree = "<group>"; };
+		ED0410501FF3F19500D2DD19 /* LiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
+		ED0410511FF3F19500D2DD19 /* LiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
+		ED0410521FF3F19500D2DD19 /* ModifyCameraNameTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModifyCameraNameTableViewController.h; sourceTree = "<group>"; };
+		ED0410531FF3F19500D2DD19 /* ModifyCameraNameTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModifyCameraNameTableViewController.m; sourceTree = "<group>"; };
+		ED0410541FF3F19500D2DD19 /* PlaybackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
+		ED0410551FF3F19500D2DD19 /* PlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		ED0410561FF3F19500D2DD19 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		ED0410571FF3F19500D2DD19 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		ED0410581FF3F19500D2DD19 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		ED04105A1FF3F19500D2DD19 /* ImageCameraListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCameraListViewController.h; sourceTree = "<group>"; };
+		ED04105B1FF3F19500D2DD19 /* ImageCameraListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCameraListViewController.m; sourceTree = "<group>"; };
+		ED04105C1FF3F19500D2DD19 /* ImageCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
+		ED04105D1FF3F19500D2DD19 /* ImageCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
+		ED04105F1FF3F19500D2DD19 /* PhotoBroswerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoBroswerViewController.h; sourceTree = "<group>"; };
+		ED0410601FF3F19500D2DD19 /* PhotoBroswerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoBroswerViewController.m; sourceTree = "<group>"; };
+		ED0410621FF3F19500D2DD19 /* PicturesLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturesLoop.h; sourceTree = "<group>"; };
+		ED0410631FF3F19500D2DD19 /* PicturesLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicturesLoop.m; sourceTree = "<group>"; };
+		ED0410641FF3F19500D2DD19 /* ShowImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowImageViewController.h; sourceTree = "<group>"; };
+		ED0410651FF3F19500D2DD19 /* ShowImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowImageViewController.m; sourceTree = "<group>"; };
+		ED0410661FF3F19500D2DD19 /* Image.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Image.storyboard; sourceTree = "<group>"; };
+		ED0410671FF3F19500D2DD19 /* ImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		ED0410681FF3F19500D2DD19 /* ImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		ED0410691FF3F19500D2DD19 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		ED04106A1FF3F19500D2DD19 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		ED04106D1FF3F19500D2DD19 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		ED04106E1FF3F19500D2DD19 /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		ED04106F1FF3F19500D2DD19 /* EventCustomSearchSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCustomSearchSource.h; sourceTree = "<group>"; };
+		ED0410701FF3F19500D2DD19 /* EventCustomSearchSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCustomSearchSource.m; sourceTree = "<group>"; };
+		ED0410711FF3F19500D2DD19 /* LocalPictureInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalPictureInfo.h; sourceTree = "<group>"; };
+		ED0410721FF3F19500D2DD19 /* LocalPictureInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalPictureInfo.m; sourceTree = "<group>"; };
+		ED0410731FF3F19500D2DD19 /* LocalVideoInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalVideoInfo.h; sourceTree = "<group>"; };
+		ED0410741FF3F19500D2DD19 /* LocalVideoInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalVideoInfo.m; sourceTree = "<group>"; };
+		ED0410761FF3F19500D2DD19 /* SwitchVideoQualityDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchVideoQualityDialog.h; sourceTree = "<group>"; };
+		ED0410771FF3F19500D2DD19 /* SwitchVideoQualityDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchVideoQualityDialog.m; sourceTree = "<group>"; };
+		ED0410781FF3F19500D2DD19 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ED0410791FF3F19500D2DD19 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		ED04107B1FF3F19500D2DD19 /* tenvisty.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tenvisty.xcdatamodel; sourceTree = "<group>"; };
 		ED3D50691FD59D0300F0C658 /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
 		ED3D506A1FD59D0300F0C658 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
 		ED3E88B61FE6C012006754E8 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
@@ -444,7 +675,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8989EC401FF33113004989A9 /* IOTCamera in Frameworks */,
+				ED04107C1FF3F19500D2DD19 /* IOTCamera in Frameworks */,
 				8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */,
 				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,
@@ -591,6 +822,7 @@
 		890B46BB1FB050A800C1061A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED040F681FF3F19500D2DD19 /* tenvisty */,
 				8989EC2B1FF1E19A004989A9 /* IOTCamera */,
 				ED040F601FF292C000D2DD19 /* IOTCamera */,
 				8912D4031FF10F9A00C660AB /* IOTCamera.framework */,
@@ -1006,6 +1238,563 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		ED040F681FF3F19500D2DD19 /* tenvisty */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F691FF3F19500D2DD19 /* AppDelegate.h */,
+				ED040F6A1FF3F19500D2DD19 /* AppDelegate.m */,
+				ED040F6B1FF3F19500D2DD19 /* Assets.xcassets */,
+				ED040F6C1FF3F19500D2DD19 /* Main.storyboard */,
+				ED040F6E1FF3F19500D2DD19 /* Localizable.strings */,
+				ED040F701FF3F19500D2DD19 /* Expand */,
+				ED040FA81FF3F19500D2DD19 /* Main.strings */,
+				ED040FAA1FF3F19500D2DD19 /* Global */,
+				ED040FCB1FF3F19500D2DD19 /* Info.plist */,
+				ED040FCC1FF3F19500D2DD19 /* lib */,
+				ED040FDE1FF3F19500D2DD19 /* Main */,
+				ED0410781FF3F19500D2DD19 /* main.m */,
+				ED0410791FF3F19500D2DD19 /* PrefixHeader.pch */,
+				ED04107A1FF3F19500D2DD19 /* tenvisty.xcdatamodeld */,
+			);
+			path = tenvisty;
+			sourceTree = "<group>";
+		};
+		ED040F701FF3F19500D2DD19 /* Expand */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F711FF3F19500D2DD19 /* FLAnimatedImage */,
+				ED040F771FF3F19500D2DD19 /* MBProgressHUD */,
+				ED040F7C1FF3F19500D2DD19 /* Tools */,
+				ED040FA41FF3F19500D2DD19 /* UIDevice+TFDevice */,
+			);
+			path = Expand;
+			sourceTree = "<group>";
+		};
+		ED040F711FF3F19500D2DD19 /* FLAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F721FF3F19500D2DD19 /* FLAnimatedImage.h */,
+				ED040F731FF3F19500D2DD19 /* FLAnimatedImage.m */,
+				ED040F741FF3F19500D2DD19 /* FLAnimatedImageView.h */,
+				ED040F751FF3F19500D2DD19 /* FLAnimatedImageView.m */,
+				ED040F761FF3F19500D2DD19 /* Info.plist */,
+			);
+			path = FLAnimatedImage;
+			sourceTree = "<group>";
+		};
+		ED040F771FF3F19500D2DD19 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F781FF3F19500D2DD19 /* MBProgressHUD+Add.h */,
+				ED040F791FF3F19500D2DD19 /* MBProgressHUD+Add.m */,
+				ED040F7A1FF3F19500D2DD19 /* MBProgressHUD.h */,
+				ED040F7B1FF3F19500D2DD19 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		ED040F7C1FF3F19500D2DD19 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F7D1FF3F19500D2DD19 /* Category */,
+				ED040F821FF3F19500D2DD19 /* fmdb */,
+				ED040F8E1FF3F19500D2DD19 /* GCD */,
+				ED040F941FF3F19500D2DD19 /* GNetworkStates */,
+				ED040F991FF3F19500D2DD19 /* iToast */,
+				ED040F9C1FF3F19500D2DD19 /* Progress */,
+				ED040F9F1FF3F19500D2DD19 /* Utils */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		ED040F7D1FF3F19500D2DD19 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F7E1FF3F19500D2DD19 /* UIColor+Hex.h */,
+				ED040F7F1FF3F19500D2DD19 /* UIColor+Hex.m */,
+				ED040F801FF3F19500D2DD19 /* UIImage+Colors.h */,
+				ED040F811FF3F19500D2DD19 /* UIImage+Colors.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		ED040F821FF3F19500D2DD19 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F831FF3F19500D2DD19 /* FMDatabase.h */,
+				ED040F841FF3F19500D2DD19 /* FMDatabase.m */,
+				ED040F851FF3F19500D2DD19 /* FMDatabaseAdditions.h */,
+				ED040F861FF3F19500D2DD19 /* FMDatabaseAdditions.m */,
+				ED040F871FF3F19500D2DD19 /* FMDatabasePool.h */,
+				ED040F881FF3F19500D2DD19 /* FMDatabasePool.m */,
+				ED040F891FF3F19500D2DD19 /* FMDatabaseQueue.h */,
+				ED040F8A1FF3F19500D2DD19 /* FMDatabaseQueue.m */,
+				ED040F8B1FF3F19500D2DD19 /* FMDB.h */,
+				ED040F8C1FF3F19500D2DD19 /* FMResultSet.h */,
+				ED040F8D1FF3F19500D2DD19 /* FMResultSet.m */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
+		ED040F8E1FF3F19500D2DD19 /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F8F1FF3F19500D2DD19 /* Documentation.html */,
+				ED040F901FF3F19500D2DD19 /* GCDAsyncSocket.h */,
+				ED040F911FF3F19500D2DD19 /* GCDAsyncSocket.m */,
+				ED040F921FF3F19500D2DD19 /* GCDAsyncUdpSocket.h */,
+				ED040F931FF3F19500D2DD19 /* GCDAsyncUdpSocket.m */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
+		ED040F941FF3F19500D2DD19 /* GNetworkStates */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F951FF3F19500D2DD19 /* GNetworkStates.h */,
+				ED040F961FF3F19500D2DD19 /* GNetworkStates.m */,
+				ED040F971FF3F19500D2DD19 /* Reachability.h */,
+				ED040F981FF3F19500D2DD19 /* Reachability.m */,
+			);
+			path = GNetworkStates;
+			sourceTree = "<group>";
+		};
+		ED040F991FF3F19500D2DD19 /* iToast */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F9A1FF3F19500D2DD19 /* iToast.h */,
+				ED040F9B1FF3F19500D2DD19 /* iToast.m */,
+			);
+			path = iToast;
+			sourceTree = "<group>";
+		};
+		ED040F9C1FF3F19500D2DD19 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				ED040F9D1FF3F19500D2DD19 /* TwsProgress.h */,
+				ED040F9E1FF3F19500D2DD19 /* TwsProgress.m */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		ED040F9F1FF3F19500D2DD19 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FA01FF3F19500D2DD19 /* TwsTools.h */,
+				ED040FA11FF3F19500D2DD19 /* TwsTools.m */,
+				ED040FA21FF3F19500D2DD19 /* TwsViewTools.h */,
+				ED040FA31FF3F19500D2DD19 /* TwsViewTools.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		ED040FA41FF3F19500D2DD19 /* UIDevice+TFDevice */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FA51FF3F19500D2DD19 /* UIDevice+TFDevice.h */,
+				ED040FA61FF3F19500D2DD19 /* UIDevice+TFDevice.m */,
+			);
+			path = "UIDevice+TFDevice";
+			sourceTree = "<group>";
+		};
+		ED040FAA1FF3F19500D2DD19 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FAB1FF3F19500D2DD19 /* ConfigWiFi */,
+				ED040FB41FF3F19500D2DD19 /* GlobalController */,
+				ED040FBB1FF3F19500D2DD19 /* GlobalModel */,
+				ED040FC41FF3F19500D2DD19 /* GlobalView */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		ED040FAB1FF3F19500D2DD19 /* ConfigWiFi */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FAC1FF3F19500D2DD19 /* BaseWiFiConfig.h */,
+				ED040FAD1FF3F19500D2DD19 /* BaseWiFiConfig.m */,
+				ED040FAE1FF3F19500D2DD19 /* FaceberAudioConfig.h */,
+				ED040FAF1FF3F19500D2DD19 /* FaceberAudioConfig.m */,
+				ED040FB01FF3F19500D2DD19 /* Source */,
+				ED040FB21FF3F19500D2DD19 /* WiFiConfigContext.h */,
+				ED040FB31FF3F19500D2DD19 /* WiFiConfigContext.m */,
+			);
+			path = ConfigWiFi;
+			sourceTree = "<group>";
+		};
+		ED040FB01FF3F19500D2DD19 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FB11FF3F19500D2DD19 /* voiceEncoder.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		ED040FB41FF3F19500D2DD19 /* GlobalController */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FB51FF3F19500D2DD19 /* TimeScheduleViewController.h */,
+				ED040FB61FF3F19500D2DD19 /* TimeScheduleViewController.m */,
+				ED040FB71FF3F19500D2DD19 /* TwsViewController.h */,
+				ED040FB81FF3F19500D2DD19 /* TwsViewController.m */,
+				ED040FB91FF3F19500D2DD19 /* ViewController.h */,
+				ED040FBA1FF3F19500D2DD19 /* ViewController.m */,
+			);
+			path = GlobalController;
+			sourceTree = "<group>";
+		};
+		ED040FBB1FF3F19500D2DD19 /* GlobalModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FBC1FF3F19500D2DD19 /* GBase.h */,
+				ED040FBD1FF3F19500D2DD19 /* GBase.m */,
+				ED040FBE1FF3F19500D2DD19 /* ListImgTableViewCellModel.h */,
+				ED040FBF1FF3F19500D2DD19 /* ListImgTableViewCellModel.m */,
+				ED040FC01FF3F19500D2DD19 /* MyCamera.h */,
+				ED040FC11FF3F19500D2DD19 /* MyCamera.m */,
+				ED040FC21FF3F19500D2DD19 /* TimeZoneModel.h */,
+				ED040FC31FF3F19500D2DD19 /* TimeZoneModel.m */,
+			);
+			path = GlobalModel;
+			sourceTree = "<group>";
+		};
+		ED040FC41FF3F19500D2DD19 /* GlobalView */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FC51FF3F19500D2DD19 /* SelectTime.h */,
+				ED040FC61FF3F19500D2DD19 /* SelectTime.m */,
+				ED040FC71FF3F19500D2DD19 /* TwsCell.h */,
+				ED040FC81FF3F19500D2DD19 /* TwsCell.m */,
+				ED040FC91FF3F19500D2DD19 /* VideoSetCell.h */,
+				ED040FCA1FF3F19500D2DD19 /* VideoSetCell.m */,
+			);
+			path = GlobalView;
+			sourceTree = "<group>";
+		};
+		ED040FCC1FF3F19500D2DD19 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FCD1FF3F19500D2DD19 /* Debug-iphoneos */,
+				ED040FD31FF3F19500D2DD19 /* Debug-iphonesimulator */,
+				ED040FD71FF3F19500D2DD19 /* libavconVoiceRecognize.a */,
+				ED040FD81FF3F19500D2DD19 /* libIOTCAPIs_ALL.a */,
+				ED040FD91FF3F19500D2DD19 /* libZXingWidget.a */,
+				ED040FDA1FF3F19500D2DD19 /* Release-iphoneos */,
+				ED040FDD1FF3F19500D2DD19 /* Release-iphonesimulator */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		ED040FCD1FF3F19500D2DD19 /* Debug-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FCE1FF3F19500D2DD19 /* FLAnimatedImage.framework */,
+				ED040FCF1FF3F19500D2DD19 /* FLAnimatedImage.framework.dSYM */,
+				ED040FD01FF3F19500D2DD19 /* IOTCamera.framework */,
+				ED040FD11FF3F19500D2DD19 /* IOTCamera_MJ4.framework */,
+				ED040FD21FF3F19500D2DD19 /* IOTCamera_T.framework */,
+			);
+			path = "Debug-iphoneos";
+			sourceTree = "<group>";
+		};
+		ED040FD31FF3F19500D2DD19 /* Debug-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FD41FF3F19500D2DD19 /* FLAnimatedImage.framework */,
+				ED040FD51FF3F19500D2DD19 /* FLAnimatedImage.framework.dSYM */,
+				ED040FD61FF3F19500D2DD19 /* IOTCamera.framework */,
+			);
+			path = "Debug-iphonesimulator";
+			sourceTree = "<group>";
+		};
+		ED040FDA1FF3F19500D2DD19 /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FDB1FF3F19500D2DD19 /* 08A8B0C5-4CF9-34F6-B100-112F4415A4C9.bcsymbolmap */,
+				ED040FDC1FF3F19500D2DD19 /* 6503FD3E-FCAF-3500-92EA-4D9A02E795EC.bcsymbolmap */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		ED040FDD1FF3F19500D2DD19 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
+		ED040FDE1FF3F19500D2DD19 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FDF1FF3F19500D2DD19 /* About.storyboard */,
+				ED040FE01FF3F19500D2DD19 /* AboutViewController.h */,
+				ED040FE11FF3F19500D2DD19 /* AboutViewController.m */,
+				ED040FE21FF3F19500D2DD19 /* Base */,
+				ED0410111FF3F19500D2DD19 /* Extend */,
+				ED0410141FF3F19500D2DD19 /* Home */,
+				ED0410561FF3F19500D2DD19 /* Home.storyboard */,
+				ED0410571FF3F19500D2DD19 /* HomeViewController.h */,
+				ED0410581FF3F19500D2DD19 /* HomeViewController.m */,
+				ED0410591FF3F19500D2DD19 /* Image */,
+				ED0410661FF3F19500D2DD19 /* Image.storyboard */,
+				ED0410671FF3F19500D2DD19 /* ImageViewController.h */,
+				ED0410681FF3F19500D2DD19 /* ImageViewController.m */,
+				ED0410691FF3F19500D2DD19 /* MainTabBarController.h */,
+				ED04106A1FF3F19500D2DD19 /* MainTabBarController.m */,
+				ED04106B1FF3F19500D2DD19 /* Model */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		ED040FE21FF3F19500D2DD19 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FE31FF3F19500D2DD19 /* BaseFragmentViewController.h */,
+				ED040FE41FF3F19500D2DD19 /* BaseFragmentViewController.m */,
+				ED040FE51FF3F19500D2DD19 /* BaseTableView.h */,
+				ED040FE61FF3F19500D2DD19 /* BaseTableView.m */,
+				ED040FE71FF3F19500D2DD19 /* BaseTableViewController.h */,
+				ED040FE81FF3F19500D2DD19 /* BaseTableViewController.m */,
+				ED040FE91FF3F19500D2DD19 /* BaseViewController.h */,
+				ED040FEA1FF3F19500D2DD19 /* BaseViewController.m */,
+				ED040FEB1FF3F19500D2DD19 /* CollectionCell */,
+				ED040FEE1FF3F19500D2DD19 /* TabelCell */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		ED040FEB1FF3F19500D2DD19 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FEC1FF3F19500D2DD19 /* ImageCollectionViewCell.h */,
+				ED040FED1FF3F19500D2DD19 /* ImageCollectionViewCell.m */,
+			);
+			path = CollectionCell;
+			sourceTree = "<group>";
+		};
+		ED040FEE1FF3F19500D2DD19 /* TabelCell */ = {
+			isa = PBXGroup;
+			children = (
+				ED040FEF1FF3F19500D2DD19 /* DetailTableViewCell.h */,
+				ED040FF01FF3F19500D2DD19 /* DetailTableViewCell.m */,
+				ED040FF11FF3F19500D2DD19 /* DetailTableViewCell.xib */,
+				ED040FF21FF3F19500D2DD19 /* EventItemTableViewCell.h */,
+				ED040FF31FF3F19500D2DD19 /* EventItemTableViewCell.m */,
+				ED040FF41FF3F19500D2DD19 /* ImageCollectionTableViewCell.h */,
+				ED040FF51FF3F19500D2DD19 /* ImageCollectionTableViewCell.m */,
+				ED040FF61FF3F19500D2DD19 /* ImageTableViewCell.h */,
+				ED040FF71FF3F19500D2DD19 /* ImageTableViewCell.m */,
+				ED040FF81FF3F19500D2DD19 /* ListImgTableViewCell.h */,
+				ED040FF91FF3F19500D2DD19 /* ListImgTableViewCell.m */,
+				ED040FFA1FF3F19500D2DD19 /* ListImgTableViewCell.xib */,
+				ED040FFB1FF3F19500D2DD19 /* PasswordFieldTableViewCell.h */,
+				ED040FFC1FF3F19500D2DD19 /* PasswordFieldTableViewCell.m */,
+				ED040FFD1FF3F19500D2DD19 /* PasswordFieldTableViewCell.xib */,
+				ED040FFE1FF3F19500D2DD19 /* SelectItemTableViewCell.h */,
+				ED040FFF1FF3F19500D2DD19 /* SelectItemTableViewCell.m */,
+				ED0410001FF3F19500D2DD19 /* SelectItemTableViewCell.xib */,
+				ED0410011FF3F19500D2DD19 /* SwitchTableViewCell.h */,
+				ED0410021FF3F19500D2DD19 /* SwitchTableViewCell.m */,
+				ED0410031FF3F19500D2DD19 /* SwitchTableViewCell.xib */,
+				ED0410041FF3F19500D2DD19 /* SyncTimeTableViewCell.h */,
+				ED0410051FF3F19500D2DD19 /* SyncTimeTableViewCell.m */,
+				ED0410061FF3F19500D2DD19 /* TextFieldDisableTableViewCell.h */,
+				ED0410071FF3F19500D2DD19 /* TextFieldDisableTableViewCell.m */,
+				ED0410081FF3F19500D2DD19 /* TextFieldDisableTableViewCell.xib */,
+				ED0410091FF3F19500D2DD19 /* TextFieldImgTableViewCell.h */,
+				ED04100A1FF3F19500D2DD19 /* TextFieldImgTableViewCell.m */,
+				ED04100B1FF3F19500D2DD19 /* TextFieldImgTableViewCell.xib */,
+				ED04100C1FF3F19500D2DD19 /* TextFieldTableViewCell.h */,
+				ED04100D1FF3F19500D2DD19 /* TextFieldTableViewCell.m */,
+				ED04100E1FF3F19500D2DD19 /* TextFieldTableViewCell.xib */,
+				ED04100F1FF3F19500D2DD19 /* TwsTableViewCell.h */,
+				ED0410101FF3F19500D2DD19 /* TwsTableViewCell.m */,
+			);
+			path = TabelCell;
+			sourceTree = "<group>";
+		};
+		ED0410111FF3F19500D2DD19 /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410121FF3F19500D2DD19 /* SearchLanAsync.h */,
+				ED0410131FF3F19500D2DD19 /* SearchLanAsync.m */,
+			);
+			path = Extend;
+			sourceTree = "<group>";
+		};
+		ED0410141FF3F19500D2DD19 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410151FF3F19500D2DD19 /* About */,
+				ED0410181FF3F19500D2DD19 /* AddCamera */,
+				ED0410291FF3F19500D2DD19 /* CameraListItemTableViewCell.h */,
+				ED04102A1FF3F19500D2DD19 /* CameraListItemTableViewCell.m */,
+				ED04102B1FF3F19500D2DD19 /* CameraListViewController.h */,
+				ED04102C1FF3F19500D2DD19 /* CameraListViewController.m */,
+				ED04102D1FF3F19500D2DD19 /* CameraSetting */,
+				ED04104B1FF3F19500D2DD19 /* EventListViewController.h */,
+				ED04104C1FF3F19500D2DD19 /* EventListViewController.m */,
+				ED04104D1FF3F19500D2DD19 /* EventSearchCustom.xib */,
+				ED04104E1FF3F19500D2DD19 /* EventSearchCustomViewController.h */,
+				ED04104F1FF3F19500D2DD19 /* EventSearchCustomViewController.m */,
+				ED0410501FF3F19500D2DD19 /* LiveViewController.h */,
+				ED0410511FF3F19500D2DD19 /* LiveViewController.m */,
+				ED0410521FF3F19500D2DD19 /* ModifyCameraNameTableViewController.h */,
+				ED0410531FF3F19500D2DD19 /* ModifyCameraNameTableViewController.m */,
+				ED0410541FF3F19500D2DD19 /* PlaybackViewController.h */,
+				ED0410551FF3F19500D2DD19 /* PlaybackViewController.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ED0410151FF3F19500D2DD19 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410161FF3F19500D2DD19 /* AboutListViewController.h */,
+				ED0410171FF3F19500D2DD19 /* AboutListViewController.m */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		ED0410181FF3F19500D2DD19 /* AddCamera */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410191FF3F19500D2DD19 /* AddCameraViewController.h */,
+				ED04101A1FF3F19500D2DD19 /* AddCameraViewController.m */,
+				ED04101B1FF3F19500D2DD19 /* SaveCameraTableViewController.h */,
+				ED04101C1FF3F19500D2DD19 /* SaveCameraTableViewController.m */,
+				ED04101D1FF3F19500D2DD19 /* Scan */,
+				ED0410201FF3F19500D2DD19 /* SearchCameraTableViewController.h */,
+				ED0410211FF3F19500D2DD19 /* SearchCameraTableViewController.m */,
+				ED0410221FF3F19500D2DD19 /* WiFiSetting */,
+			);
+			path = AddCamera;
+			sourceTree = "<group>";
+		};
+		ED04101D1FF3F19500D2DD19 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				ED04101E1FF3F19500D2DD19 /* OCScanLifeViewController.h */,
+				ED04101F1FF3F19500D2DD19 /* OCScanLifeViewController.m */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		ED0410221FF3F19500D2DD19 /* WiFiSetting */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410231FF3F19500D2DD19 /* AddDeviceWirelessNoteViewController.h */,
+				ED0410241FF3F19500D2DD19 /* AddDeviceWirelessNoteViewController.m */,
+				ED0410251FF3F19500D2DD19 /* AddDeviceWirelessSettingViewController.h */,
+				ED0410261FF3F19500D2DD19 /* AddDeviceWirelessSettingViewController.m */,
+				ED0410271FF3F19500D2DD19 /* AddDeviceWirelessViewController.h */,
+				ED0410281FF3F19500D2DD19 /* AddDeviceWirelessViewController.m */,
+			);
+			path = WiFiSetting;
+			sourceTree = "<group>";
+		};
+		ED04102D1FF3F19500D2DD19 /* CameraSetting */ = {
+			isa = PBXGroup;
+			children = (
+				ED04102E1FF3F19500D2DD19 /* CameraSetting.storyboard */,
+				ED04102F1FF3F19500D2DD19 /* CameraSettingViewController.h */,
+				ED0410301FF3F19500D2DD19 /* CameraSettingViewController.m */,
+				ED0410311FF3F19500D2DD19 /* ChangeCameraNameViewController.h */,
+				ED0410321FF3F19500D2DD19 /* ChangeCameraNameViewController.m */,
+				ED0410331FF3F19500D2DD19 /* ChangeCameraPasswordViewController.h */,
+				ED0410341FF3F19500D2DD19 /* ChangeCameraPasswordViewController.m */,
+				ED0410351FF3F19500D2DD19 /* ChangeWiFiViewController.h */,
+				ED0410361FF3F19500D2DD19 /* ChangeWiFiViewController.m */,
+				ED0410371FF3F19500D2DD19 /* DeviceInfoViewController.h */,
+				ED0410381FF3F19500D2DD19 /* DeviceInfoViewController.m */,
+				ED0410391FF3F19500D2DD19 /* EventSettingViewController.h */,
+				ED04103A1FF3F19500D2DD19 /* EventSettingViewController.m */,
+				ED04103B1FF3F19500D2DD19 /* OtherSettingViewController.h */,
+				ED04103C1FF3F19500D2DD19 /* OtherSettingViewController.m */,
+				ED04103D1FF3F19500D2DD19 /* RecordSettingViewController.h */,
+				ED04103E1FF3F19500D2DD19 /* RecordSettingViewController.m */,
+				ED04103F1FF3F19500D2DD19 /* SDCardViewController.h */,
+				ED0410401FF3F19500D2DD19 /* SDCardViewController.m */,
+				ED0410411FF3F19500D2DD19 /* SensSettingViewController.h */,
+				ED0410421FF3F19500D2DD19 /* SensSettingViewController.m */,
+				ED0410431FF3F19500D2DD19 /* SystemSettingTableViewController.h */,
+				ED0410441FF3F19500D2DD19 /* SystemSettingTableViewController.m */,
+				ED0410451FF3F19500D2DD19 /* TimeSettingViewController.h */,
+				ED0410461FF3F19500D2DD19 /* TimeSettingViewController.m */,
+				ED0410471FF3F19500D2DD19 /* TimeZoneSettingViewController.h */,
+				ED0410481FF3F19500D2DD19 /* TimeZoneSettingViewController.m */,
+				ED0410491FF3F19500D2DD19 /* WiFiSettingViewController.h */,
+				ED04104A1FF3F19500D2DD19 /* WiFiSettingViewController.m */,
+			);
+			path = CameraSetting;
+			sourceTree = "<group>";
+		};
+		ED0410591FF3F19500D2DD19 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				ED04105A1FF3F19500D2DD19 /* ImageCameraListViewController.h */,
+				ED04105B1FF3F19500D2DD19 /* ImageCameraListViewController.m */,
+				ED04105C1FF3F19500D2DD19 /* ImageCollectionViewController.h */,
+				ED04105D1FF3F19500D2DD19 /* ImageCollectionViewController.m */,
+				ED04105E1FF3F19500D2DD19 /* PhotoBroswer */,
+				ED0410641FF3F19500D2DD19 /* ShowImageViewController.h */,
+				ED0410651FF3F19500D2DD19 /* ShowImageViewController.m */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		ED04105E1FF3F19500D2DD19 /* PhotoBroswer */ = {
+			isa = PBXGroup;
+			children = (
+				ED04105F1FF3F19500D2DD19 /* PhotoBroswerViewController.h */,
+				ED0410601FF3F19500D2DD19 /* PhotoBroswerViewController.m */,
+				ED0410611FF3F19500D2DD19 /* PicturesLoop */,
+			);
+			path = PhotoBroswer;
+			sourceTree = "<group>";
+		};
+		ED0410611FF3F19500D2DD19 /* PicturesLoop */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410621FF3F19500D2DD19 /* PicturesLoop.h */,
+				ED0410631FF3F19500D2DD19 /* PicturesLoop.m */,
+			);
+			path = PicturesLoop;
+			sourceTree = "<group>";
+		};
+		ED04106B1FF3F19500D2DD19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED04106C1FF3F19500D2DD19 /* Video */,
+				ED0410751FF3F19500D2DD19 /* View */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED04106C1FF3F19500D2DD19 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				ED04106D1FF3F19500D2DD19 /* Event.h */,
+				ED04106E1FF3F19500D2DD19 /* Event.m */,
+				ED04106F1FF3F19500D2DD19 /* EventCustomSearchSource.h */,
+				ED0410701FF3F19500D2DD19 /* EventCustomSearchSource.m */,
+				ED0410711FF3F19500D2DD19 /* LocalPictureInfo.h */,
+				ED0410721FF3F19500D2DD19 /* LocalPictureInfo.m */,
+				ED0410731FF3F19500D2DD19 /* LocalVideoInfo.h */,
+				ED0410741FF3F19500D2DD19 /* LocalVideoInfo.m */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		ED0410751FF3F19500D2DD19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED0410761FF3F19500D2DD19 /* SwitchVideoQualityDialog.h */,
+				ED0410771FF3F19500D2DD19 /* SwitchVideoQualityDialog.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */ = {
 			isa = PBXGroup;
 			children = (
@@ -1301,6 +2090,31 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		ED040F6C1FF3F19500D2DD19 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED040F6D1FF3F19500D2DD19 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ED040F6E1FF3F19500D2DD19 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED040F6F1FF3F19500D2DD19 /* en */,
+				ED040FA71FF3F19500D2DD19 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		ED040FA81FF3F19500D2DD19 /* Main.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED040FA91FF3F19500D2DD19 /* fr */,
+			);
+			name = Main.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1514,6 +2328,16 @@
 				894D7E591FAB01D900C58BB2 /* tenvisty.xcdatamodel */,
 			);
 			currentVersion = 894D7E591FAB01D900C58BB2 /* tenvisty.xcdatamodel */;
+			path = tenvisty.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		ED04107A1FF3F19500D2DD19 /* tenvisty.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ED04107B1FF3F19500D2DD19 /* tenvisty.xcdatamodel */,
+			);
+			currentVersion = ED04107B1FF3F19500D2DD19 /* tenvisty.xcdatamodel */;
 			path = tenvisty.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

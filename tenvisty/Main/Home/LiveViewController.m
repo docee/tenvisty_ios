@@ -450,6 +450,10 @@
     [_viewSwitchVideoQuality_port setHidden:![_viewSwitchVideoQuality_port isHidden]];
 }
 - (IBAction)goFolder:(id)sender {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Image" bundle:nil];
+    BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_imagecollection"];  //test2为viewcontroller的StoryboardId
+    test2obj.camera = self.camera;
+    [self.navigationController pushViewController:test2obj animated:YES];
 }
 - (IBAction)goEventList:(id)sender {
     [self performSegueWithIdentifier:@"LiveView2EventList" sender:self];

@@ -125,7 +125,7 @@
         if ([extension isEqualToString:@"png"]) {
             attachmentData = UIImagePNGRepresentation([UIImage imageWithContentsOfFile:model.path]);
         }else {
-            attachmentData = UIImageJPEGRepresentation([UIImage imageWithContentsOfFile:model.path], 1.0);
+            attachmentData = UIImageJPEGRepresentation([UIImage imageWithContentsOfFile:model.path], 0.5);
         }
         
         [mailer addAttachmentData:attachmentData mimeType:[NSString stringWithFormat:@"image/%@",extension] fileName: model.path];
