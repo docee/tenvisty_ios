@@ -23,6 +23,14 @@
 + (MyCamera*)getCamera:(NSInteger)index;
 +(NSInteger)getCameraIndex:(MyCamera*)camera;
 + (BOOL)savePictureForCamera:(MyCamera *)mycam image:(UIImage*)img;
-+ (NSString*)saveRecordingForCamera:(Camera *)mycam;
-+ (BOOL)saveRemoteRemotePictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime;
++ (NSString*)saveRecordingForCamera:(Camera *)mycam thumb:(UIImage*)img;
++ (BOOL)saveRemoteRecordPictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime;
++(NSInteger)countSnapshot:(NSString*)uid;
++(NSInteger)countVideo:(NSString*)uid;
++(NSString*)thumbPath:(MyCamera*)uid;
+// 屏幕快照
++ (NSMutableArray *)picturesForCamera:(Camera *)mycam;
+// 摄像机本地录像
++ (NSMutableArray *)recordingsForCamera:(Camera *)mycam;
++ (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName;
 @end

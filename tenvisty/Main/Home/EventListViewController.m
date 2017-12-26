@@ -13,12 +13,11 @@
 #import "Event.h"
 #import "EventCustomSearchSource.h"
 #import "PlaybackViewController.h"
+#import "EventSearchCustomViewController.h"
 
 @interface EventListViewController ()<EventCustomSearchDelegate>{
     BOOL isSearchingEvent;
     BOOL isSearchingTimeout;
-    NSDate *nowDate;
-    NSDate *pastDate;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture_outerView;
 @property (weak, nonatomic) IBOutlet UILabel *labSearchTime;
@@ -30,6 +29,8 @@
 @property (nonatomic,strong) NSMutableArray *event_list;
 @property (nonatomic,strong) EventCustomSearchSource *searchMenu;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
+@property (nonatomic,strong) NSDate *toDate;
+@property (nonatomic,strong) NSDate *fromDate;
 @end
 
 @implementation EventListViewController
@@ -204,7 +205,14 @@
 
 //其他界面返回到此界面调用的方法
 - (IBAction)EventListViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
-    
+    if([unwindSegue.identifier isEqualToString:@"EventSearchCustomBack2EventList"]){
+        EventSearchCustomViewController * controller = (EventSearchCustomViewController*) unwindSegue.sourceViewController;
+        if(controller.dateTo&&controller.dateFrom){
+            _fromDate = controller.dateFrom;
+            _toDate = controller.dateTo;
+            [self searchEventFrom:_fromDate To:_toDate];
+        }
+    }
 }
 
 
@@ -240,20 +248,20 @@
 }
 - (IBAction)clickEventTypeChange:(UISegmentedControl *)sender {
     if(!isSearchingEvent){
-        [self beginSearch];
+        [self searchEventFrom:_fromDate To:_toDate];
     }
     else{
         [sender setSelectedSegmentIndex:abs((int)sender.selectedSegmentIndex - 1)];
     }
 }
-
+//首次打开搜索当天录像
 -(void)beginSearch{
     NSDate *now = [NSDate date];
-    NSDate *from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24)];
-    [self searchEventFrom:[now timeIntervalSince1970] To:[from timeIntervalSince1970]];
+    NSDate *from = [TwsTools zeroOfDateTime:[NSDate date]];
+    [self searchEventFrom:from To:now];
 }
 
-- (void)searchEventFrom:(long) now To:(long) past {
+- (void)searchEventFrom:(NSDate*)from  To:(NSDate*) to {
     if(isSearchingEvent){
         return;
     }
@@ -270,8 +278,8 @@
     [self.event_list removeAllObjects];
     [self.tableview reloadData];
     STimeDay start, stop;
-    start = [Event getTimeDay:past];
-    stop = [Event getTimeDay:now];
+    start = [Event getTimeDay:[from timeIntervalSince1970]];
+    stop = [Event getTimeDay:[to timeIntervalSince1970]];
     
     
     SMsgAVIoctrlListEventReq *req = (SMsgAVIoctrlListEventReq *) malloc(sizeof(SMsgAVIoctrlListEventReq));
@@ -287,12 +295,12 @@
     
     free(req);
     NSLog(@"load TF card video list...%d/%d/%d -> %d/%d/%d", start.year, start.month, start.day,stop.year, stop.month, stop.day);
-    nowDate = [[NSDate alloc] initWithTimeIntervalSince1970:now];
-    pastDate = [[NSDate alloc] initWithTimeIntervalSince1970:past];
+    _fromDate = from;
+    _toDate = to;
   
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd/MM/yyyy HH:mm"];
-    _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:pastDate],[formatter stringFromDate:nowDate]);
+    _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:_fromDate],[formatter stringFromDate:_toDate]);
     //dropboxVideo.delegate = self;
 }
 
@@ -378,7 +386,7 @@
     else if (index == 3) {
         from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24 * 7)];
     }
-    [self searchEventFrom:[now timeIntervalSince1970] To:[from timeIntervalSince1970]];
+    [self searchEventFrom:from To:now];
     [self.searchMenu toggleShow];
 }
 
@@ -433,24 +441,40 @@
 }
 
 -(void)showCustomSearchView{
-    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_view_eventsearchcustom"];
-    controller.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:controller animated:YES completion:nil];
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALSTR(@"Search Event") message: nil preferredStyle:UIAlertControllerStyleAlert];
-//    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-//    [alertController.view addSubview:datePicker];
-//    
-//    UIAlertAction *actionNO = [UIAlertAction actionWithTitle:LOCALSTR(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//        
+    //UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_view_eventsearchcustom"];
+//    controller.modalPresentationStyle = UIModalPresentationFormSheet;
+//    [self presentViewController:controller animated:YES completion:nil];
+
+    
+    [self performSegueWithIdentifier:@"EventList2EventSearchCustom" sender:self];
+    [self.searchMenu dismiss];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Search Event\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    UILabel *labFrom = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, alert.view.frame.size.width -10, 20)];
+//    labFrom.text = LOCALSTR(@"From");
+//    labFrom.textAlignment = NSTextAlignmentLeft;
+//    labFrom.numberOfLines = 1;
+//    labFrom.font = [UIFont fontWithName:@"Helvetica Neue" size:17];
+//
+//    UIDatePicker *datePickerFrom = [[UIDatePicker alloc] init];
+//    datePickerFrom.datePickerMode = UIDatePickerModeDateAndTime;
+//    datePickerFrom.frame = CGRectMake(0, 55, 250, 150);
+//    [alert.view addSubview:labFrom];
+//    [alert.view addSubview:datePickerFrom];
+//
+//    //[[[NSBundle mainBundle] loadNibNamed:@"EventSearchCustom" owner:self options:nil] lastObject]
+//    //datePicker.frame = CGRectMake(0, 50, Screen_Main.width*0.6, 120);
+//    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+//        //实例化一个NSDateFormatter对象
+//        //[dateFormat setDateFormat:@"yyyy-MM-dd"];//设定时间格式
+//       // NSString *dateString = [dateFormat stringFromDate:datePicker.date];
+//        //求出当天的时间字符串
+//        NSLog(@"%@",@"11");
 //    }];
-//    [alertController addAction:actionNO];
-//    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:LOCALSTR(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        
-//    }];
-//    
-//    [alertController addAction:actionOk];
-//    [self presentViewController:alertController animated:YES completion:NULL];
+//    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) { }];
+//    [alert addAction:ok];
+//    [alert addAction:cancel];
+//    [self presentViewController:alert animated:YES completion:^{ }];
 }
 /*
 #pragma mark - Navigation

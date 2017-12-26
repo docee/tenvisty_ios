@@ -266,7 +266,7 @@
 - (void)camera:(NSCamera *)camera _didReceiveRawDataFrame:(const char *)imgData VideoWidth:(NSInteger)width VideoHeight:(NSInteger)height{
     if(_needCreateSnapshot && _monitor.image){
         _needCreateSnapshot = NO;
-        [GBase saveRemoteRemotePictureForCamera:self.camera image:_monitor.image eventType:self.evt.eventType eventTime:self.evt.eventTime];
+        [GBase saveRemoteRecordPictureForCamera:self.camera image:_monitor.image eventType:self.evt.eventType eventTime:self.evt.eventTime];
     }
     if(waitResize){
         waitResize = NO;

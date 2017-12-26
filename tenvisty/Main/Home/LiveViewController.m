@@ -365,12 +365,14 @@
     _btnRecord_land.selected = YES;
     _btnRecord_port.selected = YES;
     isRecording = YES;
-    NSString *recordNameString =  [GBase saveRecordingForCamera:self.camera];
-    [self.camera startRecordVideo:recordNameString];
-    [_viewRecordTime setHidden:NO];
-    [_labRecordTime setText:@"00:00"];
-    _labRecordTime.tag = 0;
-    recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshRecordTime) userInfo:NULL repeats:YES];
+    NSString *recordNameString =  [GBase saveRecordingForCamera:self.camera thumb:self.videoMonitor.image];
+    if(recordNameString != nil){
+        [self.camera startRecordVideo:recordNameString];
+        [_viewRecordTime setHidden:NO];
+        [_labRecordTime setText:@"00:00"];
+        _labRecordTime.tag = 0;
+        recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshRecordTime) userInfo:NULL repeats:YES];
+    }
 }
 
 -(void)stopRecord{

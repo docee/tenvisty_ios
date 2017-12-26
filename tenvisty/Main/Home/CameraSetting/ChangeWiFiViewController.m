@@ -210,7 +210,8 @@
                 NSString* password =  [NSString stringWithUTF8String: (const char*)resp->password];
                 if([ssid isEqualToString:self.wifiSsid] && [password isEqualToString:wifiPassword]){
                     [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    self.hasChangedWiFi = YES;
+                    [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
                 }
                 else{
                     [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
@@ -230,7 +231,8 @@
                     if([[NSString stringWithUTF8String:ap.ssid] isEqualToString:self.wifiSsid]){
                         if(ap.status == 1 || ap.status == 4){
                             [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
-                            [self.navigationController popViewControllerAnimated:YES];
+                            self.hasChangedWiFi = YES;
+                            [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
                         }
                         else if(ap.status == 2){
                             [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];

@@ -8,8 +8,10 @@
 
 #import "ImageCameraListViewController.h"
 #import "ImageTableViewCell.h"
+#import "BaseViewController.h"
 
 @interface ImageCameraListViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
 
@@ -20,6 +22,10 @@
     
     // Do any additional setup after loading the view.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableview reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -28,7 +34,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [GBase sharedInstance].cameras.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -38,10 +44,18 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
+    MyCamera *camera = [GBase getCamera:indexPath.row];
     NSString *vid = @"tableviewCellImage";
     ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-    
-    
+    cell.rightLabCameraName.text = camera.nickName;
+    cell.rightLabDesc.text = FORMAT(@"%d photos, %d videos",(int)[GBase countSnapshot:camera.uid],(int)[GBase countVideo:camera.uid]);
+    NSString *thumbPath = [GBase thumbPath:camera];
+    if(thumbPath == nil){
+        [cell.leftImg setImage:[UIImage imageNamed:@"default_img"]];
+    }
+    else{
+        [cell.leftImg setImage:[UIImage imageWithContentsOfFile:thumbPath]];
+    }
     return cell;
 }
 
@@ -49,11 +63,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [self performSegueWithIdentifier:@"Image2ImageCollection" sender:self];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 //其他界面返回到此界面调用的方法
 - (IBAction)ImageViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
+        BaseViewController *controller= segue.destinationViewController;
+        controller.camera =  [GBase getCamera:[self.tableview indexPathForSelectedRow].row];
+    }
 }
 /*
  #pragma mark - Navigation

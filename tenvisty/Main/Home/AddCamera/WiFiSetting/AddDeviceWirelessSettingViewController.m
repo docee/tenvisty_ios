@@ -41,7 +41,7 @@
     [[WiFiConfigContext sharedInstance] setData:self.wifiSsid password:self.wifiPassword auth:self.wifiAuthMode];
     [[WiFiConfigContext sharedInstance] setReceiveListner:self];
     [self setTimerInterval:SMART_WIFI_TIME/100.0f];
-    self.camera = [[MyCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"MyCamera") UserName:@"admin" Password:@"admin"];
+    self.camera = [[MyCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
     
     // Do any additional setup after loading the view.
 }
@@ -79,12 +79,12 @@
         }
         else{
             if(self.configWifiResult == CONFIG_WIFI_SUCCESS){
-                [self go2List];
                 [self saveCamera];
+                [self go2List];
             }
             else if(self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
-                [self go2List];
                 [self saveCamera];
+                [self go2List];
             }
             else{
                 [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Configure Wi-Fi failed, please check your Wi-Fi password") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Retry") actionDefaultBlock:^{
@@ -108,6 +108,7 @@
     if(!isExist){
         [GBase addCamera:self.camera];
     }
+    [self.camera start];
 }
 
 

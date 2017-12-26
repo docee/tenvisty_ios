@@ -615,7 +615,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		//Gradient colours
 		size_t gradLocationsNum = 2;
 		CGFloat gradLocations[2] = {0.0f, 1.0f};
-		CGFloat gradColors[8] = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.75f};
+		CGFloat gradColors[8] = {0.5f,0.5f,0.5f,0.5f,0.5f,0.5f,0.5f,0.75f};
 		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 		CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradColors, gradLocations, gradLocationsNum);
 		CGColorSpaceRelease(colorSpace);

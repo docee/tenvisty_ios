@@ -111,17 +111,17 @@
 -(void) stopSearch{
     if(self.state == SEARCHING){
         self.state = STOPPING;
+        if(self.searchThread != nil){
+            if(self.delegate != nil &&  [self.delegate respondsToSelector:@selector(onReceiveSearchResult:status:)]){
+                [self.delegate onReceiveSearchResult:nil status:0];
+            }
+        }
     }
     if(self.searchThreadLock != nil){
         [self.searchThreadLock lockWhenCondition:DONE];
         [self.searchThreadLock unlock];
     }
-    if(self.searchThread != nil){
-        self.searchThread = nil;
-        if(self.delegate != nil &&  [self.delegate respondsToSelector:@selector(onReceiveSearchResult:status:)]){
-            [self.delegate onReceiveSearchResult:nil status:0];
-        }
-    }
+    self.searchThread = nil;
 }
 
 -(NSInteger) getState{

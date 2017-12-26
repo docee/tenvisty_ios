@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ImageCollectionViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ImageCollectionViewController : BaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @end

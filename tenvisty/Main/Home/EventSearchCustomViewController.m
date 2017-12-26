@@ -9,7 +9,12 @@
 #import "EventSearchCustomViewController.h"
 
 @interface EventSearchCustomViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *labFrom;
+@property (weak, nonatomic) IBOutlet UILabel *labTo;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datepicker_from;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datepicker_to;
+@property (nonatomic,strong)  NSDate *dateFrom;
+@property (nonatomic,strong)  NSDate *dateTo;
 @end
 
 @implementation EventSearchCustomViewController
@@ -22,6 +27,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)clickSearch:(id)sender {
+    self.dateFrom = _datepicker_from.date;
+    self.dateTo = _datepicker_to.date;
+    [self performSegueWithIdentifier:@"EventSearchCustomBack2EventList" sender:self];
 }
 
 /*

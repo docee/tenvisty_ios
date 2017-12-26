@@ -59,9 +59,17 @@
     return cell;
 }
 - (IBAction)save:(id)sender {
-    self.camera.nickName = [self getRowCell:1].value;
+    NSString *nickName = [self getRowCell:1].value;
+    // 用于过滤空格和Tab换行符
+    NSCharacterSet *characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    nickName = [nickName stringByTrimmingCharactersInSet:characterSet];
+    if(nickName.length ==0){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"[Camera name] must be entered.")];
+        return;
+    }
+    self.camera.nickName = nickName;
     [GBase editCamera:self.camera];
-    //[self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

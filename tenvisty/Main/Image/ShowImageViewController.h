@@ -6,8 +6,11 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "LocalPictureInfo.h"
 
-@interface ShowImageViewController : UIViewController
+@interface ShowImageViewController : BaseViewController
 
+@property (nonatomic,strong) LocalPictureInfo *selectPic;
+@property (nonatomic, strong) NSMutableArray *images;
 @end

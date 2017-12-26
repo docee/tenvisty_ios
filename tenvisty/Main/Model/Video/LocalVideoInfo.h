@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LocalPictureInfo.h"
 
-@interface LocalVideoInfo : NSObject
+@interface LocalVideoInfo : LocalPictureInfo
 
 //- (id)initWithID:(NSString*)path Time:(NSInteger)time;
-- (id)initWithRecordingName:(NSString *)name time:(NSInteger)time type:(NSInteger)type;
+- (id)initWithRecordingName:(NSString *)name time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath;
 
 
 @property (nonatomic, copy) NSString *path; // 对应recordingName
@@ -19,5 +20,7 @@
 @property (nonatomic, assign) NSInteger type;   // 对应的录像类型（下载／本地录制）
 @property (nonatomic, copy) NSString *videoType;    // mp4/avi/其他
 @property (nonatomic, copy) NSString *videoName;
+@property (nonatomic, copy) NSString *thumbPath;//缩略图
+@property (nonatomic,strong,readonly) NSString *date;
 
 @end

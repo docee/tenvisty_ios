@@ -159,15 +159,15 @@
 
 + (BOOL)checkPasswordFormat:(NSString*)pwd{
     if(pwd!=nil){
-        NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:@"[0-9A-Za-z\\.@_~!$%^(),|/\\*\\-]{6,12}" options:NSRegularExpressionCaseInsensitive error:nil];
+        NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:@"[0-9A-Za-z\\.@_~!$%^(),|/\\*\\-]{6,12}" options:0 error:nil];
         if([regular numberOfMatchesInString:pwd options:0 range:NSMakeRange(0, pwd.length)] > 0){
-            regular = [[NSRegularExpression alloc] initWithPattern:@"^[0-9]{6,12}$" options:NSRegularExpressionCaseInsensitive error:nil];
+            regular = [[NSRegularExpression alloc] initWithPattern:@"^[0-9]{6,12}$" options:0 error:nil];
             if([regular numberOfMatchesInString:pwd options:0 range:NSMakeRange(0, pwd.length)] == 0){
-                regular = [[NSRegularExpression alloc] initWithPattern:@"^[A-Z]{6,12}$" options:NSRegularExpressionCaseInsensitive error:nil];
+                regular = [[NSRegularExpression alloc] initWithPattern:@"^[A-Z]{6,12}$" options:0 error:nil];
                 if([regular numberOfMatchesInString:pwd options:0 range:NSMakeRange(0, pwd.length)] == 0){
-                    regular = [[NSRegularExpression alloc] initWithPattern:@"^[a-z]{6,12}$" options:NSRegularExpressionCaseInsensitive error:nil];
+                    regular = [[NSRegularExpression alloc] initWithPattern:@"^[a-z]{6,12}$" options:0 error:nil];
                     if([regular numberOfMatchesInString:pwd options:0 range:NSMakeRange(0, pwd.length)] == 0){
-                        regular = [[NSRegularExpression alloc] initWithPattern:@"^[\\.@_~!$%^(),|\\*/\\-]{6,12}$" options:NSRegularExpressionCaseInsensitive error:nil];
+                        regular = [[NSRegularExpression alloc] initWithPattern:@"^[\\.@_~!$%^(),|\\*/\\-]{6,12}$" options:0 error:nil];
                         if([regular numberOfMatchesInString:pwd options:0 range:NSMakeRange(0, pwd.length)] == 0){
                             return YES;
                         }
@@ -177,5 +177,15 @@
         }
     }
     return NO;
+}
+
++ (NSDate*)zeroOfDateTime:(NSDate*)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSUIntegerMax fromDate:date];
+    components.hour = 0;
+    components.minute = 0;
+    components.second = 0;
+    return [calendar dateFromComponents:components];
 }
 @end

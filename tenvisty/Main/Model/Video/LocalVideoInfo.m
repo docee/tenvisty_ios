@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSDateFormatter *formatter;
 
+@property (nonatomic,strong) NSString *date;
 @end
 
 @implementation LocalVideoInfo
@@ -29,15 +30,21 @@
 //    return self;
 //}
 
-- (id)initWithRecordingName:(NSString *)name time:(NSInteger)time type:(NSInteger)type {
+- (id)initWithRecordingName:(NSString *)name time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath {
     if (self = [super init]) {
         
         self.path = name;
         self.time = time;
         self.type = type;
+        self.thumbPath = thumbPath;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        self.date = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:time]];
+        
     }
     return self;
 }
+
 
 
 - (NSString *)videoType {

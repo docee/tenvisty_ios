@@ -29,6 +29,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.lanSearcher = [[SearchLanAsync alloc] init];
+    self.lanSearcher.delegate = self;
     [self.lanSearcher beginSearch];
 }
 
@@ -79,6 +80,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideAllHUDsForView:self.viewSubLoading animated:YES];
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            if(self.searchResults.count == 0){
+                [[iToast makeText:@"No Device on LAN"] show];
+            }
         });
     }
     
@@ -106,11 +110,34 @@
         LANSearchDevice *result = [self.searchResults objectAtIndex:row];
         cell.labDesc.text = result.ip;
         cell.labTitle.text = result.uid;
+        BOOL hasAdded = NO;
+        for(MyCamera *camera in [GBase sharedInstance].cameras){
+            if([camera.uid isEqualToString:result.uid]){
+                hasAdded = YES;
+                break;
+            }
+        }
+        if(hasAdded){
+            [cell.labDesc setTextColor:RGB_COLOR(206, 206, 206)];
+            [cell.labTitle setTextColor:RGB_COLOR(206, 206, 206)];
+        }
+        else{
+            [cell.labDesc setTextColor:RGB_COLOR(153, 153, 153)];
+            [cell.labTitle setTextColor:RGB_COLOR(122, 122, 122)];
+        }
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString* uid = ((LANSearchDevice*)[self.searchResults objectAtIndex:[self.tableView indexPathForSelectedRow].row]).uid;
+    for(MyCamera *camera in [GBase sharedInstance].cameras){
+        if([camera.uid isEqualToString:uid]){
+            [[iToast makeText:LOCALSTR(@"this camera is in your camera list, please tap other camera.")] show];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            return;
+        }
+    }
   self.lanSearcher.delegate = nil;
   [self.lanSearcher stopSearch];
   [self performSegueWithIdentifier:@"SearchCamera2SaveCamera" sender:self];

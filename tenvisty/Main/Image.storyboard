@@ -40,7 +40,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UeS-D3-YDF">
                                                     <rect key="frame" x="5" y="10" width="100" height="65"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="65" id="0Ah-KO-rgf"/>
                                                         <constraint firstAttribute="width" constant="100" id="QJ7-0Z-aTx"/>
@@ -92,6 +92,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Image" id="xiX-UA-adY"/>
                     <connections>
+                        <outlet property="tableview" destination="bRG-vQ-ESn" id="WDa-6t-1tu"/>
                         <segue destination="JpH-1X-1n7" kind="show" identifier="Image2ImageCollection" id="Cxm-xH-KaU"/>
                     </connections>
                 </viewController>
@@ -143,6 +144,9 @@
                                     <segment title="PHOTOS"/>
                                     <segment title="VIDEOS"/>
                                 </segments>
+                                <connections>
+                                    <action selector="clickTypeChange:" destination="JpH-1X-1n7" eventType="valueChanged" id="Yc4-P5-oKM"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="240" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ipi-CZ-xej">
                                 <rect key="frame" x="0.0" y="60" width="375" height="543"/>
@@ -180,7 +184,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gxs-f1-FYX">
-                                                    <rect key="frame" x="39" y="40" width="953" height="189.5"/>
+                                                    <rect key="frame" x="39" y="40" width="328" height="189.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S3X-3m-FEd">
                                                         <size key="itemSize" width="50" height="50"/>
@@ -294,6 +298,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="labCurrentDate" destination="u4B-5e-76C" id="V06-qi-etw"/>
+                        <outlet property="segment_type" destination="VlN-sf-CBM" id="T2p-FD-iLe"/>
                         <outlet property="tableview" destination="ipi-CZ-xej" id="ko6-cp-fGS"/>
                         <segue destination="YMp-xc-vdq" kind="show" identifier="ImageCollection2ShowImage" id="ECe-ZF-Vzp"/>
                     </connections>

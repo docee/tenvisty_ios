@@ -9,6 +9,7 @@
 #import "GBase.h"
 #import "FMDB.h"
 #import "LocalVideoInfo.h"
+#import "LocalPictureInfo.h"
 
 #define SQLCMD_CREATE_TABLE_DEVICE @"CREATE TABLE IF NOT EXISTS device(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_nickname TEXT, dev_name TEXT, dev_pwd TEXT, view_acc TEXT, view_pwd TEXT, ask_format_sdcard INTEGER, channel INTEGER, video_quality INTEGER, event_notification INTEGER)"
 
@@ -156,10 +157,10 @@ static GBase *base = nil;
     if (img == nil) {
         return NO;
     }
-    [base saveImageToFile:img imageName:imgName];
-    
+    NSString *imgPath = [base snapshotPathWithCamera:mycam imgName:imgName];
+    [base saveImageToFileFullPath:img filePath:imgPath];
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path,snapshot_type, time) VALUES(?,?,?)", mycam.uid, imgName,[NSNumber numberWithInteger:0], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+        if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path,snapshot_type, time) VALUES(?,?,?,?)", mycam.uid, imgName,[NSNumber numberWithInteger:0], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
             NSLog(@"Fail to add snapshot to database.");
             return NO;
         }
@@ -168,7 +169,7 @@ static GBase *base = nil;
     return YES;
 }
 
-+ (BOOL)saveRemoteRemotePictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime {
++ (BOOL)saveRemoteRecordPictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime {
     
     GBase *base = [GBase sharedInstance];
     
@@ -183,13 +184,115 @@ static GBase *base = nil;
     [base saveImageToFile:img imageName:imgName];
     
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"INSERT INTO snapshot(dev_uid, file_path,snapshot_type, time) VALUES(?,?,?)", mycam.uid, imgName,[NSNumber numberWithInteger:evtType+10], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
-            NSLog(@"Fail to add snapshot to database.");
+        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path,small_file_path, recording_type, time) VALUES(?,?,?,?,?)", mycam.uid, FORMAT(@"%ld",(long)evtTime),imgName,  [NSNumber numberWithInteger:10+evtType], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+            NSLog(@"Fail to save recording to database.");
             return NO;
         }
     }
     
     return YES;
+}
+
+//删除照片
++ (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName {
+    GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        
+        FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM snapshot WHERE file_path=?", pictureName];
+        
+        
+        while([rs next]) {
+            
+            NSString *filePath = [rs stringForColumn:@"file_path"];
+            
+            
+            [base.gFileManager removeItemAtPath:[base snapshotPathWithCamera:camera imgName:pictureName] error:NULL];
+            
+            LOG(@"delete_pictureName : %@", pictureName);
+            //NSLog(@"delete -> picturePath:%@", [base documentsWithFileName:filePath]);
+            
+        }
+        
+        [rs close];
+        
+        [base.db executeUpdate:@"DELETE FROM snapshot WHERE file_path=?", pictureName];
+    }
+}
++(NSString*)thumbPath:(MyCamera*)camera{
+    NSString *path = nil;
+    GBase *base = [GBase sharedInstance];
+    if([self countSnapshot:camera.uid] > 0){
+        if (base.db != NULL) {
+            FMResultSet *rs = [base.db executeQuery:@"SELECT file_path FROM snapshot WHERE dev_uid=? and snapshot_type=0 order by id desc limit 1", camera.uid];
+            while([rs next]) {
+                path =  [rs stringForColumn:@"file_path"];
+                break;
+            }
+            [rs close];
+        }
+        if(path != nil){
+            if(![[base gFileManager] fileExistsAtPath: [base snapshotPathWithCamera:camera imgName:path]]){
+                 if (![base.db executeUpdate:@"DELETE FROM snapshot where file_path=?", path]){
+                 }
+                path = nil;
+            }
+        }
+    }
+    if(path == nil){
+        if([self countVideo:camera.uid] > 0){
+            if (base.db != NULL) {
+                FMResultSet *rs = [base.db executeQuery:@"SELECT file_path FROM video WHERE dev_uid=? and recording_type=0 order by id desc limit 1", camera.uid];
+                while([rs next]) {
+                    path =  [rs stringForColumn:@"file_path"];
+                    break;
+                }
+                [rs close];
+            }
+            if(path != nil){
+                if(![[base gFileManager] fileExistsAtPath:[base recordingPathWithCamera:camera recordingName:path]]){
+                    if (![base.db executeUpdate:@"DELETE FROM video where file_path=?", path]){
+                    }
+                    path = nil;
+                }
+            }
+        }
+    }
+    if(path != nil){
+        path =  [base snapshotPathWithCamera:camera imgName:path];
+    }
+    return path;
+}
++(NSInteger)countSnapshot:(NSString*)uid{
+    int count = 0;
+    GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        FMResultSet *rs = [base.db executeQuery:@"SELECT count(*) FROM snapshot WHERE dev_uid=? and snapshot_type=0", uid];
+        while([rs next]) {
+            count =  [rs intForColumnIndex:0];
+            LOG(@"uid:%@ snapshotCount:%d", uid,count);
+        }
+        [rs close];
+    }
+    return count;
+}
++(NSInteger)countVideo:(NSString*)uid{
+    int count = 0;
+    GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        
+        FMResultSet *rs = [base.db executeQuery:@"SELECT count(*) FROM video WHERE dev_uid=? and recording_type=0", uid];
+        while([rs next]) {
+            count =  [rs intForColumnIndex:0];
+            LOG(@"uid:%@ snapshotCount:%d", uid,count);
+        }
+        [rs close];
+    }
+    return count;
+}
+
+#pragma mark - NSFileManager
+- (NSFileManager *)gFileManager {
+    return [NSFileManager defaultManager];
 }
 
 - (NSString *)Documents {
@@ -206,6 +309,15 @@ static GBase *base = nil;
     //NSLog(@"imgFullName:%@", imgFullName);
     
     [imgData writeToFile:imgFullName atomically:YES];
+}
+
+- (void)saveImageToFileFullPath:(UIImage *)image filePath:(NSString *)filePath {
+    
+    NSData *imgData = UIImageJPEGRepresentation(image, 1.0f);
+    
+    //NSLog(@"imgFullName:%@", imgFullName);
+    
+    [imgData writeToFile:filePath atomically:YES];
 }
 
 - (NSString *)documentsWithFileName:(NSString *)fileName {
@@ -337,48 +449,73 @@ static GBase *base = nil;
     return [document_uid stringByAppendingPathComponent:recordingName];
 }
 
+// 本地抓拍存储路径 Documents/uid/
+- (NSString *)snapshotPathWithCamera:(Camera *)mycam imgName:(NSString *)imgName {
+    
+    NSString *document_uid = [self.Documents stringByAppendingPathComponent:mycam.uid];
+    [[NSFileManager defaultManager] createDirectoryAtPath:document_uid withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *document_uid_snapshot = [document_uid stringByAppendingPathComponent:@"snapshot"];
+    [[NSFileManager defaultManager] createDirectoryAtPath:document_uid_snapshot withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    return [document_uid_snapshot stringByAppendingPathComponent:imgName];
+}
+
 + (NSMutableArray *)recordingsForCamera:(Camera *)mycam {
     
     GBase *base = [GBase sharedInstance];
     
     NSMutableArray *recordings = [[NSMutableArray alloc] initWithCapacity:0];
     
-    FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM video WHERE dev_uid=?", mycam.uid];
+    FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM video WHERE dev_uid=? and recording_type=0", mycam.uid];
     
     while([rs next]) {
         
         NSString *filePath = [rs stringForColumn:@"file_path"];
         NSInteger time = [rs doubleForColumn:@"time"];
         NSInteger type = [rs intForColumn:@"recording_type"];
+        NSString *thumbFilePath = [rs stringForColumn:@"small_file_path"];
         
         LOG(@"FMResultSet_filePath : %@ type:%d", filePath, (int)type);
-        // 兼容Goke机器之前版本录像
-        if ([filePath rangeOfString:@".mp4"].location == NSNotFound) {
-            if ([filePath rangeOfString:@".avi"].location == NSNotFound) {
-                filePath = [filePath stringByAppendingString:@".mp4"];
-            }
-        }
-        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:filePath time:time type:type];
+        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:[base recordingPathWithCamera:mycam recordingName:filePath] time:time type:type thumbPath:[base recordingPathWithCamera:mycam recordingName:thumbFilePath] ];
         
         [recordings addObject:vi];
     }
     
     [rs close];
-    
+    [recordings sortUsingComparator:^NSComparisonResult(LocalVideoInfo *obj1, LocalVideoInfo *obj2) {
+        if(obj1.time > obj2.time){
+            return 1;
+        }
+        else if(obj1.time < obj2.time){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }];
     return recordings;
 }
 
 //保存录像
-+ (NSString*)saveRecordingForCamera:(Camera *)mycam {
++ (NSString*)saveRecordingForCamera:(Camera *)mycam thumb:(UIImage *)img {
     
     GBase *base = [GBase sharedInstance];
     
+    NSString *imgName = [NSString stringWithFormat:@"%f.jpg", [[NSDate date] timeIntervalSince1970]];
+    //NSString *imgPath = [base imgFilePathWithImgName:imgName];
     
+    //NSLog(@"imgPath:%@", imgName);
+    
+    if (img == nil) {
+        return nil;
+    }
+    NSString *thumbPath = [base recordingPathWithCamera:mycam recordingName:imgName];
+    [base saveImageToFileFullPath:img filePath:thumbPath];
     NSString *recordFileName = [base recordingNameWithCamera:mycam];
     
     NSString *recordFilePath = [base recordingPathWithCamera:mycam recordingName:recordFileName];
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path, recording_type, time) VALUES(?,?,?,?)", mycam.uid, recordFileName, [NSNumber numberWithInteger:0], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path,small_file_path,recording_type, time) VALUES(?,?,?,?,?)", mycam.uid, recordFileName,imgName, [NSNumber numberWithInteger:0], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
             NSLog(@"Fail to save recording to database.");
             return nil;
         }
@@ -388,6 +525,39 @@ static GBase *base = nil;
     }
     
     return recordFilePath;
+}
+
++ (NSMutableArray *)picturesForCamera:(MyCamera *)mycam {
+    
+    GBase *base = [GBase sharedInstance];
+    
+    NSMutableArray *pictures = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    
+    FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM snapshot WHERE dev_uid=? and snapshot_type=0", mycam.uid];
+    
+    while([rs next]) {
+        
+        NSString *imageName = [rs stringForColumn:@"file_path"];
+        NSInteger time = [rs doubleForColumn:@"time"];
+        LocalPictureInfo* vi = [[LocalPictureInfo alloc] initWithName:[base snapshotPathWithCamera:mycam imgName:imageName] time:time];
+        [pictures addObject:vi];
+        
+        //NSLog(@"imagePath :%@", imageName);
+    }
+    [rs close];
+    [pictures sortUsingComparator:^NSComparisonResult(LocalPictureInfo *obj1, LocalPictureInfo *obj2) {
+        if(obj1.time > obj2.time){
+            return 1;
+        }
+        else if(obj1.time < obj2.time){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }];
+    return pictures;
 }
 
 @end

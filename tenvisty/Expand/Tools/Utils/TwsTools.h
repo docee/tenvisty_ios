@@ -33,4 +33,5 @@ typedef NS_ENUM(NSInteger, DeviceOrientation) {
 
 + (void)presentMessage:(NSString *)message atDeviceOrientation:(DeviceOrientation)orientation;
 + (BOOL)checkPasswordFormat:(NSString*)pwd;
++ (NSDate*)zeroOfDateTime:(NSDate*)date;
 @end

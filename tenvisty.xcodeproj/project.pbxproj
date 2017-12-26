@@ -88,6 +88,11 @@
 		896BA3E11FD950A200EE31AB /* ImageCameraListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3E01FD950A200EE31AB /* ImageCameraListViewController.m */; };
 		89870A241FDA83AA005207AB /* TwsTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 89870A231FDA83AA005207AB /* TwsTools.m */; };
 		89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 89870A271FDA8EF2005207AB /* TwsProgress.m */; };
+		8989EC2C1FF1E19B004989A9 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
+		8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8989EC2D1FF1E9BA004989A9 /* EventSearchCustom.xib */; };
+		8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC301FF2203C004989A9 /* LocalPictureInfo.m */; };
+		8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */; };
+		8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC371FF262CD004989A9 /* PicturesLoop.m */; };
 		898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 898D8B921FE0CDA900062F04 /* Documentation.html */; };
 		898D8B9B1FE0CDA900062F04 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */; };
 		898D8B9C1FE0CDA900062F04 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B961FE0CDA900062F04 /* GCDAsyncUdpSocket.m */; };
@@ -127,7 +132,6 @@
 		89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9951FDA2B280049F1E7 /* SearchLanAsync.m */; };
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
-		ED040F561FEE708400D2DD19 /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED040F551FEE708400D2DD19 /* IOTCamera.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
@@ -334,6 +338,14 @@
 		89870A231FDA83AA005207AB /* TwsTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwsTools.m; sourceTree = "<group>"; };
 		89870A261FDA8EF2005207AB /* TwsProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsProgress.h; sourceTree = "<group>"; };
 		89870A271FDA8EF2005207AB /* TwsProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwsProgress.m; sourceTree = "<group>"; };
+		8989EC2B1FF1E19A004989A9 /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates.noindex/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
+		8989EC2D1FF1E9BA004989A9 /* EventSearchCustom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchCustom.xib; sourceTree = "<group>"; };
+		8989EC2F1FF2203C004989A9 /* LocalPictureInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalPictureInfo.h; sourceTree = "<group>"; };
+		8989EC301FF2203C004989A9 /* LocalPictureInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalPictureInfo.m; sourceTree = "<group>"; };
+		8989EC331FF262CD004989A9 /* PhotoBroswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBroswerViewController.h; sourceTree = "<group>"; };
+		8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBroswerViewController.m; sourceTree = "<group>"; };
+		8989EC361FF262CD004989A9 /* PicturesLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicturesLoop.h; sourceTree = "<group>"; };
+		8989EC371FF262CD004989A9 /* PicturesLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicturesLoop.m; sourceTree = "<group>"; };
 		898D8B921FE0CDA900062F04 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
 		898D8B931FE0CDA900062F04 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
@@ -431,7 +443,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED040F561FEE708400D2DD19 /* IOTCamera.framework in Frameworks */,
+				8989EC2C1FF1E19B004989A9 /* IOTCamera in Frameworks */,
 				8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */,
 				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,
@@ -578,6 +590,7 @@
 		890B46BB1FB050A800C1061A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8989EC2B1FF1E19A004989A9 /* IOTCamera */,
 				8912D4031FF10F9A00C660AB /* IOTCamera.framework */,
 				ED040F551FEE708400D2DD19 /* IOTCamera.framework */,
 				8912D4001FF10F4500C660AB /* IOTCamera */,
@@ -772,6 +785,8 @@
 				895141D81FE7780100905355 /* LocalVideoInfo.m */,
 				EDB075EE1FEE331B00B3EE23 /* EventCustomSearchSource.h */,
 				EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */,
+				8989EC2F1FF2203C004989A9 /* LocalPictureInfo.h */,
+				8989EC301FF2203C004989A9 /* LocalPictureInfo.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -788,6 +803,7 @@
 		896BA3CB1FD9255500EE31AB /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8989EC321FF262CC004989A9 /* PhotoBroswer */,
 				896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */,
 				896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */,
 				896BA3D81FD9375400EE31AB /* ShowImageViewController.h */,
@@ -834,6 +850,25 @@
 				89870A271FDA8EF2005207AB /* TwsProgress.m */,
 			);
 			path = Progress;
+			sourceTree = "<group>";
+		};
+		8989EC321FF262CC004989A9 /* PhotoBroswer */ = {
+			isa = PBXGroup;
+			children = (
+				8989EC331FF262CD004989A9 /* PhotoBroswerViewController.h */,
+				8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */,
+				8989EC351FF262CD004989A9 /* PicturesLoop */,
+			);
+			path = PhotoBroswer;
+			sourceTree = "<group>";
+		};
+		8989EC351FF262CD004989A9 /* PicturesLoop */ = {
+			isa = PBXGroup;
+			children = (
+				8989EC361FF262CD004989A9 /* PicturesLoop.h */,
+				8989EC371FF262CD004989A9 /* PicturesLoop.m */,
+			);
+			path = PicturesLoop;
 			sourceTree = "<group>";
 		};
 		898D8B911FE0CDA900062F04 /* GCD */ = {
@@ -886,6 +921,7 @@
 				892ADB961FD80AB600BD8929 /* PlaybackViewController.m */,
 				ED040F571FF1588C00D2DD19 /* EventSearchCustomViewController.h */,
 				ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */,
+				8989EC2D1FF1E9BA004989A9 /* EventSearchCustom.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1118,6 +1154,7 @@
 				89A096841FF109C700E5EBAE /* Info.plist in Resources */,
 				892CE0C91FD126D900942E28 /* TextFieldImgTableViewCell.xib in Resources */,
 				892CE0C71FD126C300942E28 /* TextFieldTableViewCell.xib in Resources */,
+				8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */,
 				892CE0CD1FD1271300942E28 /* TextFieldDisableTableViewCell.xib in Resources */,
 				89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */,
 				898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */,
@@ -1132,10 +1169,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */,
 				ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */,
 				896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */,
 				892ADB881FD7A0F400BD8929 /* SDCardViewController.m in Sources */,
 				ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */,
+				8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */,
 				890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */,
 				89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */,
 				896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */,
@@ -1158,6 +1197,7 @@
 				898D8BB41FE0F75B00062F04 /* GBase.m in Sources */,
 				895141D01FE763BD00905355 /* iToast.m in Sources */,
 				8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */,
+				8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */,
 				892ADB9A1FD8F83000BD8929 /* ImageTableViewCell.m in Sources */,
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
