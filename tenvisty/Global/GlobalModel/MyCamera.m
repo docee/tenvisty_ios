@@ -580,11 +580,35 @@
 
 
 -(void)openPush{
+    NSString *timestamp = FORMAT(@"%ld",(long)[[NSDate date] timeIntervalSince1970]);
+    NSString *appid = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    NSString *key = @"tenvisapp";
+    NSString *uid = self.uid;
+    NSString *token = [GBase getPushToken];
+    NSString *sign = [TwsTools createSign:@[appid,key,uid,token,timestamp]];
+    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",@"",@"",uid,timestamp,appid,sign);
+    [self getHttpResp:url];
+    self.eventNotification = 1;
     
 }
-
+-(NSString*)getHttpResp:(NSString*)url{
+    NSString* webStringURL = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL* url1 = [NSURL URLWithString:webStringURL];
+    NSLog(@"webStringURL = %@", webStringURL);
+    //創建一個請求
+    NSURLRequest * pRequest = [NSURLRequest requestWithURL:url1 cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //建立連接
+    NSURLResponse * pResponse = nil;
+    NSError * pError = nil;
+    //向伺服器發起請求（發出後線程就會一直等待伺服器響應，知道超出最大響應事件），獲取數據後，轉換為NSData類型數據
+    NSData * pData = [NSURLConnection sendSynchronousRequest:pRequest returningResponse:&pResponse error:&pError];
+    //輸出數據，查看，??後期還可以解析數據
+    NSString *responseStr = [[NSString alloc] initWithData:pData encoding:NSUTF8StringEncoding];
+    NSLog(@"htmlString = %@", responseStr);
+    return responseStr;
+}
 -(void)closePush{
-    
+    self.eventNotification = 0;
 }
 
 -(BOOL)isDisconnected{

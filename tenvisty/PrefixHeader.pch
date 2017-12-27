@@ -9,6 +9,7 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#import "NSString+MD5.h"
 #import "MyCamera.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Colors.h"

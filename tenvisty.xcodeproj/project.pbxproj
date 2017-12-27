@@ -133,6 +133,7 @@
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED04107C1FF3F19500D2DD19 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = ED040F601FF292C000D2DD19 /* IOTCamera */; };
+		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
@@ -657,6 +658,8 @@
 		ED0410781FF3F19500D2DD19 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED0410791FF3F19500D2DD19 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		ED04107B1FF3F19500D2DD19 /* tenvisty.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tenvisty.xcdatamodel; sourceTree = "<group>"; };
+		ED04107E1FF3F19500D2DD19 /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		ED3D50691FD59D0300F0C658 /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
 		ED3D506A1FD59D0300F0C658 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
 		ED3E88B61FE6C012006754E8 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
@@ -785,6 +788,7 @@
 		890B46B01FB03CD500C1061A /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				ED04107D1FF3F19500D2DD19 /* NSString+MD5 */,
 				89A0967C1FF109C700E5EBAE /* FLAnimatedImage */,
 				ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */,
 				89E6D9971FDA61DC0049F1E7 /* MBProgressHUD */,
@@ -1795,6 +1799,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ED04107D1FF3F19500D2DD19 /* NSString+MD5 */ = {
+			isa = PBXGroup;
+			children = (
+				ED04107E1FF3F19500D2DD19 /* NSString+MD5.h */,
+				ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */,
+			);
+			path = "NSString+MD5";
+			sourceTree = "<group>";
+		};
 		ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */ = {
 			isa = PBXGroup;
 			children = (
@@ -2008,6 +2021,7 @@
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
+				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
 				892ADB691FD6909B00BD8929 /* EventSettingViewController.m in Sources */,

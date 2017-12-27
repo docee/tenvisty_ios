@@ -5,7 +5,7 @@
 //  Created by Tenvis on 17/12/8.
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
-
+#define CC_MD5_DIGEST_LENGTH 16
 #import "TwsTools.h"
 
 @implementation TwsTools
@@ -187,6 +187,14 @@
     components.minute = 0;
     components.second = 0;
     return [calendar dateFromComponents:components];
+}
+
++(NSString*)createSign:(NSArray*)arr{
+    arr = [arr sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        return [obj1 compare:obj2];
+    }];
+    NSString *origin = [arr componentsJoinedByString:@""];
+    return [origin MD5];
 }
 
 @end

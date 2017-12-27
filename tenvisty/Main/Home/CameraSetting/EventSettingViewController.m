@@ -78,10 +78,10 @@
 
 -(void)clickPush:(UISwitch *)sender{
     if([sender isOn]){
-        self.camera.eventNotification = 1;
+        [self.camera openPush];
     }
     else{
-        self.camera.eventNotification = 0;
+        [self.camera closePush];
     }
     [GBase editCamera:self.camera];
 }

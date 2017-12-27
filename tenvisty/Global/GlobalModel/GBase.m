@@ -6,10 +6,13 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
+#define PUSH_TOKEN (@"push_token")
+
 #import "GBase.h"
 #import "FMDB.h"
 #import "LocalVideoInfo.h"
 #import "LocalPictureInfo.h"
+
 
 #define SQLCMD_CREATE_TABLE_DEVICE @"CREATE TABLE IF NOT EXISTS device(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_nickname TEXT, dev_name TEXT, dev_pwd TEXT, view_acc TEXT, view_pwd TEXT, ask_format_sdcard INTEGER, channel INTEGER, video_quality INTEGER, event_notification INTEGER)"
 
@@ -22,7 +25,7 @@
 
 //#define SQLCMD_CREATE_TABLE_DEVICE_FUNCTION @"CREATE TABLE IF NOT EXISTS device_function(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_function TEXT)"
 //
-//#define SQLCMD_CREATE_TABLE_DEVICE_DICTION @"CREATE TABLE IF NOT EXISTS device_diction(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_key TEXT, dev_value TEXT)"
+#define SQLCMD_CREATE_TABLE_DEVICE_DICTION @"CREATE TABLE IF NOT EXISTS device_diction(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_key TEXT, dev_value TEXT)"
 @interface GBase()
 @property (atomic,strong) FMDatabase *db;
 @end
@@ -70,6 +73,8 @@ static GBase *base = nil;
             if (![self.db executeUpdate:SQLCMD_CREATE_TABLE_DEVICE]) LOG(@"Can not create table device");
             if (![self.db executeUpdate:SQLCMD_CREATE_TABLE_SNAPSHOT]) LOG(@"Can not create table snapshot");
             if (![self.db executeUpdate:SQLCMD_CREATE_TABLE_VIDEO]) LOG(@"Can not create table video");
+            if (![self.db executeUpdate:SQLCMD_CREATE_TABLE_DEVICE_DICTION]) LOG(@"Can not create table dic");
+            
         }
         
     }
@@ -572,6 +577,30 @@ static GBase *base = nil;
         }
     }];
     return pictures;
+}
+
++ (void)setPushToken:(NSString*)token{
+    GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        if (![base.db executeUpdate:@"UPDATE device_diction SET dev_value=? WHERE dev_key=?", token , PUSH_TOKEN]) {
+            NSLog(@"Fail_to_update_ push token _to_database.");
+            if (![base.db executeUpdate:@"INSERT INTO device_diction (dev_value,dev_key) VALUES(?,?)", token , PUSH_TOKEN]) {
+                NSLog(@"Fail_to_insert push token to_database.");
+            }
+        }
+    }
+}
++ (NSString*)getPushToken{
+    NSString *token = @"";
+    GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM device_diction WHERE dev_key=?", PUSH_TOKEN];
+        while([rs next]) {
+            token = [rs stringForColumn:@"dev_value"];
+        }
+        [rs close];
+    }
+    return token;
 }
 
 @end
