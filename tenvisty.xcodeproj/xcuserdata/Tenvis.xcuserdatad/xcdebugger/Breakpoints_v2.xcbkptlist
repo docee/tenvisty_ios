@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/PlaybackViewController.m"
-            timestampString = "535979568.326074"
+            timestampString = "536046026.967461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/PlaybackViewController.m"
-            timestampString = "535979568.326137"
+            timestampString = "536046026.967528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "198"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/PlaybackViewController.m"
-            timestampString = "535979568.326184"
+            timestampString = "536046026.967575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/PlaybackViewController.m"
-            timestampString = "535979568.326227"
+            timestampString = "536046026.967617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/PlaybackViewController.m"
-            timestampString = "535979568.326268"
+            timestampString = "536046026.967659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/EventListViewController.m"
-            timestampString = "535979568.32637"
+            timestampString = "536046026.967779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-EventListViewController1UnwindSegue:"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/LiveViewController.m"
-            timestampString = "535979568.32642"
+            timestampString = "536046026.967829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "322"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/GBase.m"
-            timestampString = "535979568.326472"
+            timestampString = "536067619.796323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/AddCamera/SearchCameraTableViewController.m"
-            timestampString = "535979568.326539"
+            timestampString = "536046026.96792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Extend/SearchLanAsync.m"
-            timestampString = "535979568.326593"
+            timestampString = "536046026.96797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Extend/SearchLanAsync.m"
-            timestampString = "535979568.326641"
+            timestampString = "536046026.968017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/AddCamera/SearchCameraTableViewController.m"
-            timestampString = "535979568.326686"
+            timestampString = "536046026.96806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCameraListViewController.m"
-            timestampString = "535979568.326736"
+            timestampString = "536063869.440092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/GBase.m"
-            timestampString = "535979568.326793"
+            timestampString = "536067619.796469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/GBase.m"
-            timestampString = "535979568.326851"
+            timestampString = "536067619.796518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "266"
@@ -262,15 +262,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.326912"
+            timestampString = "536067619.796565"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "458"
+            endingLineNumber = "458"
             landmarkName = "-collectionView:numberOfItemsInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.326984"
+            timestampString = "536067619.797116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "447"
+            endingLineNumber = "447"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327049"
+            timestampString = "536067619.797519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327128"
+            timestampString = "536067619.797911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
             landmarkName = "-collectionView:didSelectItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,7 +330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/GBase.m"
-            timestampString = "535979568.327211"
+            timestampString = "536067619.79831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "225"
@@ -346,7 +346,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/GBase.m"
-            timestampString = "535979568.327263"
+            timestampString = "536067619.79836"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "241"
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327311"
+            timestampString = "536067619.798404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327369"
+            timestampString = "536067619.79879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
             landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327422"
+            timestampString = "536067619.799181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327475"
+            timestampString = "536067619.799566"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327525"
+            timestampString = "536067619.799949"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "545"
+            endingLineNumber = "545"
             landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCameraListViewController.m"
-            timestampString = "535979568.327576"
+            timestampString = "536063869.443891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -458,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327622"
+            timestampString = "536067619.800361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "-sourceList"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327669"
+            timestampString = "536067619.800763"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "-sourceList"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Expand/Tools/Utils/TwsTools.m"
-            timestampString = "535979568.327765"
+            timestampString = "536046026.971807"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "161"
@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327901"
+            timestampString = "536067619.801248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "-sourceList"
             landmarkType = "7">
          </BreakpointContent>
@@ -582,15 +582,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327949"
+            timestampString = "536067619.801643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "-sourceList"
             landmarkType = "7">
          </BreakpointContent>
@@ -598,15 +598,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.327994"
+            timestampString = "536067619.802152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -614,15 +614,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.328038"
+            timestampString = "536067619.802544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "540"
+            endingLineNumber = "540"
             landmarkName = "-collectionView:layout:sizeForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -630,16 +630,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.328081"
+            timestampString = "536067619.802938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.803325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Base/CollectionCell/ImageCollectionViewCell.m"
+            timestampString = "536067619.803716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "-awakeFromNib"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.803764"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-clickEdit:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.804137"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
+            landmarkName = "-clickMask:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.804527"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "-btnLong:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.804916"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
+            landmarkName = "-btnLong:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.805304"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "521"
+            endingLineNumber = "521"
+            landmarkName = "-clickMask:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -650,12 +762,188 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
-            timestampString = "535979568.328125"
+            timestampString = "536067619.805654"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
+            landmarkName = "-btnLong:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.805996"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
+            landmarkName = "-btnLong:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.806328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-clickEdit:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.806663"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "-toggleEditMode:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.807002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-toggleEditMode:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.807319"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "-toggleEditMode:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ShowImageViewController.m"
+            timestampString = "536062503.640737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-emailPhoto"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/GBase.m"
+            timestampString = "536067619.807664"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "+deleteRecording:thumbPath:camera:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.807716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
+            landmarkName = "-tableView:viewForFooterInSection:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.807988"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "-saveVideo:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.808249"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-savedPhotoImage:didFinishSavingWithError:contextInfo:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Image/ImageCollectionViewController.m"
+            timestampString = "536067619.808508"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "-emailPhoto:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

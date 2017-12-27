@@ -12,6 +12,8 @@
 #import "LocalPictureInfo.h"
 #import "LocalVideoInfo.h"
 #import "ShowImageViewController.h"
+#import "MediaPlayer/MediaPlayer.h"
+#import <MessageUI/MessageUI.h>
 
 #define Offx        (5)
 #define Offy        (5)
@@ -20,13 +22,22 @@
 #define OffLeft     (5)
 #define OffRight    (5)
 
-@interface ImageCollectionViewController ()
+@interface ImageCollectionViewController ()<MFMailComposeViewControllerDelegate>{
+    BOOL isEdit;
+    NSInteger longPressIndex;
+}
+@property (weak, nonatomic) IBOutlet UIView *viewToolbarBottom;
 @property (weak, nonatomic) IBOutlet UILabel *labCurrentDate;
+@property (weak, nonatomic) IBOutlet UILabel *labCurrentDesc;
+@property (weak, nonatomic) IBOutlet UIButton *btnCurrentSelectAll;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment_type;
 @property (nonatomic,strong) NSMutableArray *sourceList;
 @property (nonatomic,strong) NSMutableArray *originSourceList;
 @property (nonatomic,strong) LocalPictureInfo *selectPic;
+@property (nonatomic, strong)MPMoviePlayerViewController *movieController;
+@property (nonatomic, strong) NSString *directoryPath;
+
 
 @end
 
@@ -34,7 +45,250 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    longPressIndex = -1;
     // Do any additional setup after loading the view.
+}
+- (IBAction)clickSelectAll:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    for(LocalPictureInfo *pic in self.sourceList[sender.tag]){
+        pic.isChecked = sender.selected;
+    }
+    [self.tableview reloadData];
+}
+- (IBAction)clickEdit:(UIBarButtonItem *)sender {
+    [self toggleEditMode:YES];
+}
+- (IBAction)clickEmail:(id)sender {
+    NSMutableArray *checkedSource = [[NSMutableArray alloc] init];
+    for (LocalPictureInfo *pic in self.originSourceList) {
+        if(pic.isChecked){
+            [checkedSource addObject:pic];
+        }
+    }
+    if(checkedSource.count>0){
+        [self emailPhoto:checkedSource];
+        [self refresh];
+    }
+    else{
+        if(_segment_type.selectedSegmentIndex == 0){
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the picture")];
+        }
+        else{
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the video")];
+        }
+    }
+}
+- (IBAction)clickSave:(id)sender {
+    NSMutableArray *checkedSource = [[NSMutableArray alloc] init];
+    for (LocalPictureInfo *pic in self.originSourceList) {
+        if(pic.isChecked){
+            [checkedSource addObject:pic];
+        }
+    }
+    if(checkedSource.count>0){
+        [self savePhotoToCameraRoll:checkedSource];
+        [self refresh];
+    }
+    else{
+        if(_segment_type.selectedSegmentIndex == 0){
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the picture")];
+        }
+        else{
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the video")];
+        }
+    }
+    
+    
+}
+- (void)savePhotoToCameraRoll:(NSMutableArray*)sources {
+    if(_segment_type.selectedSegmentIndex == 0){
+        for(LocalPictureInfo *model in sources){
+            UIImage *image = [UIImage imageWithContentsOfFile:model.path];
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
+    else{
+        for(LocalPictureInfo *model in sources){
+            [self saveVideo:model.path];
+        }
+    }
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    // Was there an error?
+    if (error != NULL) {
+        [TwsTools presentAlertTitle:self title:nil message:[NSString stringWithFormat:LOCALSTR(@"Please enable \"%@\" in Mobile \"Set-Privacy-Photos\""),[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]] alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+            [TwsTools goPhoneSettingPage:@"prefs:root=NOTIFICATIONS_ID"];
+            
+        } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+            
+        }];
+        //[HXProgress showText:error.domain];
+    }
+    else {// No errors
+        [TwsProgress showText:LOCALSTR(@"Save success")];
+    }
+}
+//videoPath为视频下载到本地之后的本地路径
+- (void)saveVideo:(NSString *)videoPath{
+    if (videoPath) {
+        
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(videoPath)) {
+            //保存相册核心代码
+            UISaveVideoAtPathToSavedPhotosAlbum(videoPath, self, @selector(savedPhotoImage:didFinishSavingWithError:contextInfo:), nil);
+        }
+        
+    }
+    
+}
+//保存视频完成之后的回调
+- (void) savedPhotoImage:(UIImage*)image didFinishSavingWithError: (NSError *)error contextInfo: (void *)contextInfo {
+    if (error) {
+        [TwsTools presentAlertTitle:self title:nil message:[NSString stringWithFormat:LOCALSTR(@"Please enable \"%@\" in Mobile \"Set-Privacy-Photos\""),[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]] alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+            [TwsTools goPhoneSettingPage:@"prefs:root=NOTIFICATIONS_ID"];
+            
+        } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+            
+        }];
+    }
+    else {
+        [TwsProgress showText:LOCALSTR(@"Save success")];
+    }
+    
+}
+
+
+- (NSString *)directoryPath {
+    
+    if (!_directoryPath) {
+        
+        //directoryPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Library"];
+        NSArray* dirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        _directoryPath = [dirs objectAtIndex:0];
+    }
+    return _directoryPath;
+}
+- (void)emailPhoto:(NSMutableArray*)souces {
+    MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+    if(_segment_type.selectedSegmentIndex == 0){
+        [mailer setSubject:[NSString stringWithFormat:@"Photos"]];
+    }
+    else{
+        [mailer setSubject:[NSString stringWithFormat:@"Videos"]];
+    }
+   for(LocalPictureInfo *model in souces){
+        if ([MFMailComposeViewController canSendMail]) {
+            NSString *extension = [[[model.path componentsSeparatedByString:@"."] lastObject] lowercaseString];
+            mailer.mailComposeDelegate = self;
+            NSData *attachmentData = nil;
+            if([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpg"]){
+                if ([extension isEqualToString:@"png"]) {
+                    attachmentData = UIImagePNGRepresentation([UIImage imageWithContentsOfFile:model.path]);
+                }else if ([extension isEqualToString:@"jpg"]) {
+                    attachmentData = UIImageJPEGRepresentation([UIImage imageWithContentsOfFile:model.path], 1.0);
+                }
+                [mailer addAttachmentData:attachmentData mimeType:[NSString stringWithFormat:@"image/%@",extension] fileName: model.path];
+                [mailer setMessageBody:[NSString stringWithString:[NSString stringWithFormat:@"Photo - %@", model.path]] isHTML:NO];
+            }
+            else{
+                //添加一个视频
+                NSData *video = [NSData dataWithContentsOfFile:model.path];
+                [mailer addAttachmentData:video mimeType: @"video/mp4" fileName:model.name];
+                [mailer setMessageBody:[NSString stringWithString:[NSString stringWithFormat:@"Video - %@", model.path]] isHTML:NO];
+            }
+            
+            
+        }else {
+            
+        }
+   }
+    
+    [self presentViewController:mailer animated:YES completion:^{
+        
+    }];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSString *msg = nil;
+        if (error != NULL) {
+            [TwsProgress showText:FORMAT(@"%d",(int)error.code)];
+        }
+        else{
+            switch (result) {
+                case MFMailComposeResultCancelled:
+                    msg = @"用户取消编辑邮件";
+                    break;
+                case MFMailComposeResultSaved:
+                    msg = @"用户成功保存邮件";
+                    break;
+                case MFMailComposeResultSent:
+                    msg = @"Send success";
+                    [TwsProgress showText:msg];
+                    break;
+                case MFMailComposeResultFailed:
+                    msg = @"用户试图保存或者发送邮件失败";
+                    break;
+                default:
+                    msg = @"";
+                    break;
+            }
+        }
+        LOG(@"%@",msg);
+        
+    }];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    self.tableview.translatesAutoresizingMaskIntoConstraints = YES;
+    self.viewToolbarBottom.translatesAutoresizingMaskIntoConstraints = YES;
+    if(self.bottomLayoutGuide){
+        self.viewToolbarBottom.frame = CGRectMake(self.viewToolbarBottom.frame.origin.x, self.viewToolbarBottom.frame.origin.y, self.viewToolbarBottom.frame.size.width, 94);
+    }
+}
+
+-(void)toggleEditMode:(BOOL)reloadData{
+    isEdit = !isEdit;
+    self.navigationItem.rightBarButtonItem.title = isEdit?LOCALSTR(@"Done"):LOCALSTR(@"Edit");
+    if(!isEdit){
+        for(LocalPictureInfo *pic in self.originSourceList){
+            pic.isChecked = NO;
+        }
+    }
+    else{
+//        self.tableview.translatesAutoresizingMaskIntoConstraints = YES;
+//        self.viewToolbarBottom.translatesAutoresizingMaskIntoConstraints = YES;
+    }
+    if([self.viewToolbarBottom isHidden]){
+        [self.viewToolbarBottom setHidden:NO];
+    }
+    if(isEdit){
+        __block CGRect currentToolbarFrame = self.viewToolbarBottom.frame;
+        __block CGRect currentTableFrame = self.tableview.frame;
+        __weak typeof(self) weakSelf = self;
+    
+        [UIView animateWithDuration:0.5 animations:^{
+            currentToolbarFrame.origin.y = self.view.frame.size.height - currentToolbarFrame.size.height;
+            weakSelf.viewToolbarBottom.frame = currentToolbarFrame;
+            currentTableFrame.size.height -= currentToolbarFrame.size.height;
+            weakSelf.tableview.frame = currentTableFrame;
+        }];
+    }
+    else{
+        __block CGRect currentToolbarFrame = self.viewToolbarBottom.frame;
+        __block CGRect currentTableFrame = self.tableview.frame;
+        __weak typeof(self) weakSelf = self;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+             currentToolbarFrame.origin.y += 2*currentToolbarFrame.size.height;
+            weakSelf.viewToolbarBottom.frame = currentToolbarFrame;
+            currentTableFrame.size.height += currentToolbarFrame.size.height;
+            weakSelf.tableview.frame = currentTableFrame;
+        }];
+    }
+    if(reloadData){
+        [self.tableview reloadData];
+    }
 }
 
 -(void)setup{
@@ -43,6 +297,7 @@
     [self refresh];
  
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -53,11 +308,13 @@
 -(void)refresh{
     _sourceList = nil;
     if(self.sourceList.count == 0){
-        [_labCurrentDate setHidden:YES];
+        [_labCurrentDate.superview setHidden:YES];
     }
     else{
-         [_labCurrentDate setHidden:NO];
+         [_labCurrentDate.superview setHidden:NO];
         [_labCurrentDate setText:((LocalPictureInfo*)(self.sourceList[0][0])).date];
+        [_labCurrentDesc setText:((LocalPictureInfo*)(self.sourceList[0][0])).desc];
+        _btnCurrentSelectAll.selected =((LocalPictureInfo*)(self.sourceList[0][0])).isChecked;
     }
     [self.tableview reloadData];
 }
@@ -116,6 +373,9 @@
     return self.sourceList.count;
 }
 - (IBAction)clickTypeChange:(id)sender {
+    if(isEdit){
+        [self toggleEditMode:NO];
+    }
     [self refresh];
 }
 
@@ -131,6 +391,7 @@
     ImageCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
     LocalPictureInfo* model = rowSouce[0];
     cell.labDate.text = model.date;
+    cell.labDesc.text = model.desc;
     cell.collectionImages.tag = indexPath.row;
     if(cell.collectionImages.delegate){
         [cell.collectionImages reloadData];
@@ -139,6 +400,11 @@
         cell.collectionImages.delegate = self;
         cell.collectionImages.dataSource = self;
     }
+    cell.btnSelectAll.tag = indexPath.row;
+    [cell.btnSelectAll removeTarget:self action:@selector(clickSelectAll:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.btnSelectAll addTarget:self action:@selector(clickSelectAll:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.btnSelectAll setHidden:!isEdit];
+    [_btnCurrentSelectAll setHidden:!isEdit];
     //[cell.labDate setHidden:indexPath.row %3!=0];
     return cell;
 }
@@ -147,7 +413,7 @@
     NSMutableArray *rowSouce = self.sourceList[indexPath.row];
     NSInteger column = 3;
     NSInteger row = ceil((float)rowSouce.count/column);
-    CGFloat w = self.view.frame.size.width - 47;
+    CGFloat w = self.view.frame.size.width - 77;
     //itemw ＝ 总长度－缩进的宽度 － 列间距
     CGFloat itemw = (w - OffLeft - OffRight - Offx*(column-1))/column;
     CGFloat itemh = itemw*9/16;
@@ -160,10 +426,12 @@
     if([_tableview visibleCells].count>0&& [[[_tableview visibleCells] objectAtIndex:0] isKindOfClass:[ImageCollectionTableViewCell class]]){
         ImageCollectionTableViewCell* ec = (ImageCollectionTableViewCell*)[[_tableview visibleCells] objectAtIndex:0];
         //if(ec.labEventDate.text > _labCurrentEventDate.text){
-        if([_labCurrentDate isHidden]){
-            [_labCurrentDate setHidden:NO];
+        if([_labCurrentDate.superview isHidden]){
+            [_labCurrentDate.superview setHidden:NO];
         }
         _labCurrentDate.text = ec.labDate.text;
+        _labCurrentDesc.text = ec.labDesc.text;
+        _btnCurrentSelectAll.selected = ec.btnSelectAll.selected;
         //        CGpoint contentPoint = tableView.contentOffset; //获取contentOffset的坐标(x,y)
         //        CGFloat x = tableView.contentOffset.x;  //获取contentOffset的x坐标
         //        CGFloat y = tableView.contentOffset.y;  //获取contentOffset的y坐标
@@ -172,15 +440,17 @@
         //}
     }
     else{
-        [_labCurrentDate setHidden:YES];
+        [_labCurrentDate.superview setHidden:YES];
     }
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([_labCurrentDate isHidden]){
+    if([_labCurrentDate.superview isHidden]){
         if([tableView visibleCells].count>0&& [[[tableView visibleCells] objectAtIndex:0] isKindOfClass:[ImageCollectionTableViewCell class]]){
             ImageCollectionTableViewCell* ec = (ImageCollectionTableViewCell*)[[tableView visibleCells] objectAtIndex:0];
-            [_labCurrentDate setHidden:NO];
+            [_labCurrentDate.superview setHidden:NO];
             _labCurrentDate.text = ec.labDate.text;
+            _labCurrentDesc.text = ec.labDesc.text;
+            _btnCurrentSelectAll.selected = ec.btnSelectAll.selected;
         }
     }
 }
@@ -195,7 +465,75 @@
     NSString *vid = @"collectionviewCellImage";
     ImageCollectionViewCell *cell= [collectionView dequeueReusableCellWithReuseIdentifier:vid forIndexPath:indexPath];
     [cell.imgThumb setImage:[UIImage imageWithContentsOfFile:model.thumbPath]];
+    
+    cell.btnMask.tag = [self.originSourceList indexOfObject:model];// collectionView.tag * 1000 + indexPath.row;
+    cell.btnMask.selected = NO;
+    if(isEdit){
+        [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Primary_alpha_3 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateSelected];
+        [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Black_alpha_2 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+        [cell.btnMask setBackgroundImage:nil forState:UIControlStateHighlighted];
+        [cell.btnMask setImage:[UIImage imageNamed:@"checkbox_uncheck"] forState:UIControlStateNormal];
+        [cell.btnMask setImage:[UIImage imageNamed:@"checkbox_checked"] forState:UIControlStateSelected];
+        [cell.btnMask setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+        [cell.btnMask setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        for(UILongPressGestureRecognizer *ges  in cell.btnMask.gestureRecognizers){
+            [cell.btnMask removeGestureRecognizer:ges];
+        }
+        cell.btnMask.selected = model.isChecked;
+    }
+    else{
+        [cell.btnMask setBackgroundImage:nil  forState:UIControlStateSelected];
+        [cell.btnMask setBackgroundImage:nil forState:UIControlStateNormal];
+        [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Black_alpha_3 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+        [cell.btnMask setImage:nil forState:UIControlStateSelected];
+        //图片
+        if([model.path isEqualToString:model.thumbPath]){
+            [cell.btnMask setImage:nil forState:UIControlStateNormal];
+        }
+        //视频
+        else{
+            [cell.btnMask setImage:[UIImage imageNamed:@"ic_menu_play"] forState:UIControlStateNormal];
+        }
+        [cell.btnMask setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+        [cell.btnMask setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        
+        UILongPressGestureRecognizer *gestureLongpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
+        [cell.btnMask addGestureRecognizer:gestureLongpress];
+    }
+    [cell.btnMask removeTarget:self action:@selector(clickMask:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.btnMask addTarget:self action:@selector(clickMask:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+-(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
+      if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+          if(!isEdit){
+              if([gestureRecognizer.view isKindOfClass:[UIButton class]]){
+                  UIButton *btn = (UIButton *)gestureRecognizer.view;
+                  ((LocalPictureInfo*)self.originSourceList[btn.tag]).isChecked = YES;
+              }
+              [self clickEdit:nil];
+        }
+    }
+}
+- (IBAction)clickMask:(UIButton*)sender {
+    if(isEdit){
+        sender.selected = !sender.selected;
+        ((LocalPictureInfo*)(self.originSourceList[sender.tag])).isChecked = sender.selected;
+    }
+    else{
+        self.selectPic = self.originSourceList[sender.tag];
+        //点击图片
+        if([self.selectPic isKindOfClass:[LocalVideoInfo class]]){
+            _movieController = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:self.selectPic.path]];
+            [self presentMoviePlayerViewControllerAnimated:_movieController];
+            [_movieController.moviePlayer play];
+        }
+        //点击视频
+        else{
+            [self performSegueWithIdentifier:@"ImageCollection2ShowImage" sender:self];
+        }
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -226,6 +564,75 @@
         controller.selectPic = self.selectPic;
         controller.images = _originSourceList;
     }
+}
+- (IBAction)clickShare:(id)sender {
+}
+- (IBAction)clickDelete:(id)sender {
+    NSMutableArray *checkedSource = [[NSMutableArray alloc] init];
+    for (LocalPictureInfo *pic in self.originSourceList) {
+        if(pic.isChecked){
+            [checkedSource addObject:pic];
+        }
+    }
+    if(checkedSource.count>0){
+        [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to delete?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+            [self deletePicture:checkedSource];
+            [self refresh];
+        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+    }
+    else{
+        if(_segment_type.selectedSegmentIndex == 0){
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the picture")];
+        }
+        else{
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the video")];
+        }
+    }
+
+}
+
+
+- (void)deletePicture:(NSMutableArray*)sources {
+    for (LocalPictureInfo *model in sources) {
+        if (model.isChecked) {
+            NSLog(@"model.imgPath:%@", model.path);
+            if(_segment_type.selectedSegmentIndex == 0){
+                [GBase deletePicture:self.camera name:model.name];
+            }
+            else{
+                [GBase deleteRecording:model.name thumbPath:model.thumbName camera:self.camera];
+            }
+        }
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if(self.sourceList.count == 0){
+        return 200.0;
+    }
+    else{
+        return 0.1f;
+    }
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+     if(self.sourceList.count == 0){
+         NSString *vid = @"tableviewcell_noimage";
+         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid];
+         if([[cell.contentView.subviews objectAtIndex:0] isKindOfClass:[UIImageView class]]){
+             UIImageView *imgV = [cell.contentView.subviews objectAtIndex:0];
+             [imgV setImage:[UIImage imageNamed:(_segment_type.selectedSegmentIndex == 0? @"ic_photos" :@"ic_videos")] ];
+         }
+         if([[cell.contentView.subviews objectAtIndex:1] isKindOfClass:[UILabel class]]){
+             UILabel *ilabV = [cell.contentView.subviews objectAtIndex:1];
+             [ilabV setText:(_segment_type.selectedSegmentIndex == 0?LOCALSTR(@"No Photos") : LOCALSTR(@"No Videos"))];
+         }
+         return cell.contentView;
+     }
+     else{
+         return nil;
+     }
 }
 /*
 #pragma mark - Navigation

@@ -33,4 +33,5 @@
 // 摄像机本地录像
 + (NSMutableArray *)recordingsForCamera:(Camera *)mycam;
 + (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName;
++ (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(Camera *)mycam;
 @end

@@ -92,6 +92,7 @@
 		8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC301FF2203C004989A9 /* LocalPictureInfo.m */; };
 		8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */; };
 		8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC371FF262CD004989A9 /* PicturesLoop.m */; };
+		8989EC401FF33113004989A9 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
 		898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 898D8B921FE0CDA900062F04 /* Documentation.html */; };
 		898D8B9B1FE0CDA900062F04 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */; };
 		898D8B9C1FE0CDA900062F04 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B961FE0CDA900062F04 /* GCDAsyncUdpSocket.m */; };
@@ -132,7 +133,6 @@
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
-		ED040F611FF292C000D2DD19 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = ED040F601FF292C000D2DD19 /* IOTCamera */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
@@ -444,7 +444,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED040F611FF292C000D2DD19 /* IOTCamera in Frameworks */,
+				8989EC401FF33113004989A9 /* IOTCamera in Frameworks */,
 				8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */,
 				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,

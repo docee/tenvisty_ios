@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSDateFormatter *formatter;
 
 @property (nonatomic,strong) NSString *date;
+@property (nonatomic,strong) NSString *desc;
 @end
 
 @implementation LocalVideoInfo
@@ -30,7 +31,7 @@
 //    return self;
 //}
 
-- (id)initWithRecordingName:(NSString *)name path:(NSString*)path time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath {
+- (id)initWithRecordingName:(NSString *)name path:(NSString*)path time:(NSInteger)time type:(NSInteger)type thumbPath:(NSString *)thumbPath thumbName:(NSString *)thumbName {
     if (self = [super init]) {
         
         self.path = path;
@@ -38,9 +39,12 @@
         self.time = time;
         self.type = type;
         self.thumbPath = thumbPath;
+        self.thumbName = thumbName;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        [dateFormatter setDateFormat:@"MM/dd"];
         self.date = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:time]];
+        [dateFormatter setDateFormat:@"yyyyMMdd"];
+        self.desc = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:time]];
         
     }
     return self;

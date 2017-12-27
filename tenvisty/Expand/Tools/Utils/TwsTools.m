@@ -188,4 +188,5 @@
     components.second = 0;
     return [calendar dateFromComponents:components];
 }
+
 @end

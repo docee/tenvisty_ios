@@ -118,6 +118,7 @@
 
 #define Color_Primary   (RGBA_COLOR(0, 140, 214,1))
 #define Color_Primary_alpha   (RGBA_COLOR(0, 140, 214,0.4))
+#define Color_Primary_alpha_3   (RGBA_COLOR(0, 140, 214,0.3))
 #define Color_PrimaryDark   (RGBA_COLOR(0, 140, 214,1))
 #define Color_PrimaryDarkest   (RGBA_COLOR(2, 115, 175,1))
 #define Color_Accent   (RGBA_COLOR(255, 64, 129,1))

@@ -154,7 +154,7 @@
             // Was there an error?
             if (error != NULL) {
                 
-                [TwsProgress showText:error.domain];
+                [TwsProgress showText:FORMAT(@"%d",(int)error.code)];
             }
             else {// No errors
                 [TwsProgress showText:LOCALSTR(@"Send success")];

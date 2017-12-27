@@ -35,20 +35,7 @@
 
 @implementation EventListViewController
 
-+ (UIImage *)imageWithColor:(UIColor *)color
-{
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
+
 -(EventCustomSearchSource*)searchMenu{
     if(!_searchMenu){
         _searchMenu = [[EventCustomSearchSource alloc] init];
@@ -73,7 +60,7 @@
     // Do any additional setup after loading the view.
     
     [_labCurrentEventDate.superview setHidden:YES];
-    [self.btnSelectSearchTime setBackgroundImage:[EventListViewController imageWithColor:Color_Gray_alpha] forState:UIControlStateHighlighted];
+    [self.btnSelectSearchTime setBackgroundImage:[UIImage imageWithColor:Color_Gray_alpha wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
     self.searchMenu.delegate = self;
     self.tableview_customSearchMenu.delegate = self.searchMenu;
     self.tableview_customSearchMenu.dataSource = self.searchMenu;

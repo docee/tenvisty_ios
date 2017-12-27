@@ -20,37 +20,24 @@
 
 @implementation CameraListItemTableViewCell
 
-+ (UIImage *)imageWithColor:(UIColor *)color
-{
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
 
     [[self labCameraConnectState] setBackgroundColor:Color_GreenDark];
     [self.labCameraName setTextColor:Color_GrayDark];
     
-    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_White_alpha] forState:UIControlStateNormal];
-    [self.btnCameraEvent setBackgroundImage:[CameraListItemTableViewCell imageWithColor:[UIColor clearColor]] forState:UIControlStateDisabled];
+    [self.btnCameraEvent setBackgroundImage:[UIImage imageWithColor:Color_Primary wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [self.btnCameraEvent setBackgroundImage:[UIImage imageWithColor:Color_White_alpha wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [self.btnCameraEvent setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] wihtSize:CGSizeMake(1, 1)] forState:UIControlStateDisabled];
 
-    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_White_alpha] forState:UIControlStateNormal];
-    [self.btnCameraSetting setBackgroundImage:[CameraListItemTableViewCell imageWithColor:[UIColor clearColor]] forState:UIControlStateDisabled];
+    [self.btnCameraSetting setBackgroundImage:[UIImage imageWithColor:Color_Primary wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [self.btnCameraSetting setBackgroundImage:[UIImage imageWithColor:Color_White_alpha wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [self.btnCameraSetting setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] wihtSize:CGSizeMake(1, 1)] forState:UIControlStateDisabled];
     
-    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_Primary] forState:UIControlStateHighlighted];
-    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:Color_White_alpha] forState:UIControlStateNormal];
-    [self.btnCameraDelete setBackgroundImage:[CameraListItemTableViewCell imageWithColor:[UIColor clearColor]] forState:UIControlStateDisabled];
+    [self.btnCameraDelete setBackgroundImage:[UIImage imageWithColor:Color_Primary wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [self.btnCameraDelete setBackgroundImage:[UIImage imageWithColor:Color_White_alpha wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [self.btnCameraDelete setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor] wihtSize:CGSizeMake(1, 1)] forState:UIControlStateDisabled];
     
     // Initialization code
 }

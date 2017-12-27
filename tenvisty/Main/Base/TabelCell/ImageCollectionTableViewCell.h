@@ -11,5 +11,7 @@
 @interface ImageCollectionTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
+@property (weak, nonatomic) IBOutlet UILabel *labDesc;
+@property (weak, nonatomic) IBOutlet UIButton *btnSelectAll;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionImages;
 @end

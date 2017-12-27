@@ -15,6 +15,9 @@
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *thumbPath; // 对应recordingName
+@property (nonatomic, copy) NSString *thumbName; // 对应recordingName
 @property (nonatomic, assign) NSInteger time;
 @property (nonatomic,strong,readonly) NSString *date;
+@property (nonatomic,strong,readonly) NSString *desc;
+@property (nonatomic, assign) BOOL isChecked;
 @end

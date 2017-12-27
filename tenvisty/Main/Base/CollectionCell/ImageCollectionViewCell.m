@@ -8,6 +8,20 @@
 
 #import "ImageCollectionViewCell.h"
 
+@interface ImageCollectionViewCell(){
+    
+}
+
+@end
 @implementation ImageCollectionViewCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    //[self.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Primary_alpha_3 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+
+}
+
+
+- (IBAction)btnSelectAll:(UIButton *)sender {
+}
 @end

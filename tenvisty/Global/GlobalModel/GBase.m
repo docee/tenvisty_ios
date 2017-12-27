@@ -339,21 +339,23 @@ static GBase *base = nil;
 
 
 //删除录像
-+ (void)deleteRecording:(NSString *)recordingPath camera:(Camera *)mycam {
++ (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(Camera *)mycam {
     
     GBase *base = [GBase sharedInstance];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];//去处需要的路径
-    
-    NSString *strPath = [documentsDirectory stringByAppendingPathComponent:mycam.uid];
-    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];//去处需要的路径
+//
+//    NSString *strPath = [documentsDirectory stringByAppendingPathComponent:mycam.uid];
+//    NSString *fullPath_video = [base recordingFilePath:mycam fileName:recordingPath];
+//    NSString *fullPath_thumb = [base recordingFilePath:mycam fileName:thumbPath];
     //更改到待操作的目录下
-    [fileManager changeCurrentDirectoryPath: strPath];
+    [fileManager changeCurrentDirectoryPath: [base recordingFilePath:mycam fileName:@""]];
     //删除
-    [fileManager removeItemAtPath:[ NSString stringWithFormat:@"%@.mp4", recordingPath] error:nil];
+    [fileManager removeItemAtPath:recordingPath error:nil];
+    [fileManager removeItemAtPath:thumbPath error:nil];
     
     
     
@@ -476,7 +478,7 @@ static GBase *base = nil;
         NSString *thumbFilePath = [rs stringForColumn:@"small_file_path"];
         
         LOG(@"FMResultSet_filePath : %@ type:%d", filePath, (int)type);
-        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:filePath path:[base recordingPathWithCamera:mycam recordingName:filePath] time:time type:type thumbPath:[base recordingPathWithCamera:mycam recordingName:thumbFilePath] ];
+        LocalVideoInfo* vi = [[LocalVideoInfo alloc] initWithRecordingName:filePath path:[base recordingPathWithCamera:mycam recordingName:filePath] time:time type:type thumbPath:[base recordingPathWithCamera:mycam recordingName:thumbFilePath] thumbName:thumbFilePath ];
         
         [recordings addObject:vi];
     }
