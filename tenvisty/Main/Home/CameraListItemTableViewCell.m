@@ -151,7 +151,7 @@
 
 -(void)refreshAlarmState{
     if(self.camera){
-        [self.imgAlarm setHidden:self.camera.eventNotification<1];
+        [self.imgAlarm setHidden:self.camera.remoteNotifications<=1];
     }
 }
 

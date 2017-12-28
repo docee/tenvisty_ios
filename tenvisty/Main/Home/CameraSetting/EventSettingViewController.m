@@ -69,7 +69,7 @@
         cell.leftLabTitle.text = LOCALSTR(@"Alarm Push");
         [cell setLeftImage:@"ic_push"];
         [cell.rightLabLoading setHidden:YES];
-        [cell.rightSwitch setOn:self.camera.eventNotification>0];
+        [cell.rightSwitch setOn:self.camera.remoteNotifications>0];
         [cell.rightSwitch addTarget:self action:@selector(clickPush:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
@@ -77,11 +77,35 @@
 }
 
 -(void)clickPush:(UISwitch *)sender{
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:NO];
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     if([sender isOn]){
-        [self.camera openPush];
+        [self.camera openPush:^(NSInteger code) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                if(code == 0){
+                    [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+                }
+                else{
+                    [sender setOn:NO];
+                    [[iToast makeText:LOCALSTR(@"Setting Failed")] show];
+                }
+            });
+        }];
     }
     else{
-        [self.camera closePush];
+        [self.camera closePush:^(NSInteger code) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                if(code == 0){
+                    [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+                }
+                else{
+                    [sender setOn:NO];
+                    [[iToast makeText:LOCALSTR(@"Setting Failed")] show];
+                }
+            });
+        }];
     }
     [GBase editCamera:self.camera];
 }

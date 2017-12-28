@@ -35,6 +35,4 @@
 + (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName;
 + (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(Camera *)mycam;
 
-+ (void)setPushToken:(NSString*)token;
-+ (NSString*)getPushToken;
 @end

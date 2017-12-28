@@ -6,7 +6,6 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
-#define PUSH_TOKEN (@"push_token")
 
 #import "GBase.h"
 #import "FMDB.h"
@@ -104,7 +103,7 @@ static GBase *base = nil;
             NSInteger eventNotification = [rs intForColumn:@"event_notification"];
             MyCamera *mycam = [[MyCamera alloc] initWithUid:tuid Name:tname UserName:tuser Password:tpwd];
             mycam.videoQuality = tvideoQuality;
-            mycam.eventNotification = eventNotification;
+            mycam.remoteNotifications = eventNotification;
             [base.cameras addObject:mycam];
             
             LOG(@">>>Load_Camera (%@)", mycam);
@@ -144,7 +143,7 @@ static GBase *base = nil;
     GBase *base = [GBase sharedInstance];
     
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"UPDATE device SET dev_nickname=?, view_pwd=? ,view_acc=? ,video_quality=? ,event_notification=? WHERE dev_uid=?", mycam.nickName, mycam.pwd, mycam.user , [NSNumber numberWithInteger:mycam.videoQuality],[NSNumber numberWithInteger:mycam.eventNotification], mycam.uid]) {
+        if (![base.db executeUpdate:@"UPDATE device SET dev_nickname=?, view_pwd=? ,view_acc=? ,video_quality=? ,event_notification=? WHERE dev_uid=?", mycam.nickName, mycam.pwd, mycam.user , [NSNumber numberWithInteger:mycam.videoQuality],[NSNumber numberWithInteger:mycam.remoteNotifications], mycam.uid]) {
             NSLog(@"Fail_to_update_device_to_database.");
         }
     }
@@ -450,7 +449,7 @@ static GBase *base = nil;
     
     NSDate* date = [NSDate date];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd_HH-mm-ss"];
+    [formatter setDateFormat:@"yyyy_MM-dd_HH-mm-ss"];
     NSString* strDateTime = [formatter stringFromDate:date];
     
     NSString *strFileName = [NSString stringWithFormat:@"%@_%@.mp4", mycam.uid, strDateTime];
@@ -577,30 +576,6 @@ static GBase *base = nil;
         }
     }];
     return pictures;
-}
-
-+ (void)setPushToken:(NSString*)token{
-    GBase *base = [GBase sharedInstance];
-    if (base.db != NULL) {
-        if (![base.db executeUpdate:@"UPDATE device_diction SET dev_value=? WHERE dev_key=?", token , PUSH_TOKEN]) {
-            NSLog(@"Fail_to_update_ push token _to_database.");
-            if (![base.db executeUpdate:@"INSERT INTO device_diction (dev_value,dev_key) VALUES(?,?)", token , PUSH_TOKEN]) {
-                NSLog(@"Fail_to_insert push token to_database.");
-            }
-        }
-    }
-}
-+ (NSString*)getPushToken{
-    NSString *token = @"";
-    GBase *base = [GBase sharedInstance];
-    if (base.db != NULL) {
-        FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM device_diction WHERE dev_key=?", PUSH_TOKEN];
-        while([rs next]) {
-            token = [rs stringForColumn:@"dev_value"];
-        }
-        [rs close];
-    }
-    return token;
 }
 
 @end

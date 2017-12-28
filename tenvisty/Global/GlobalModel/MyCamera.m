@@ -15,6 +15,8 @@
 @property (nonatomic,assign) NSInteger beginRebootTime;
 @property (nonatomic,assign) NSInteger rebootTimeout;
 @property (nonatomic,assign) NSInteger connectTimeoutBeginTime;
+@property (nonatomic, strong) NSUserDefaults *camDefaults;
+@property (nonatomic, strong) NSString *pushToken;
 @end
 
 @implementation MyCamera
@@ -317,16 +319,25 @@
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time
 {
     NSLog(@"setRemoteNotification %@ %@ %s %d",[self class],[self.delegate2 class],__func__,__LINE__);
-    remoteNotifications++;
-    //NSString dname = [NSString stringWithUTF8String:object_getClassName(self.delegate2)];
-    if (self.delegate2 != nil && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]) {
-        [self.delegate2 camera:self _didReceiveRemoteNotification:type EventTime:time];
+    if(self.remoteNotifications > 0){
+        remoteNotifications++;
+        [GBase editCamera:self];
+        //NSString dname = [NSString stringWithUTF8String:object_getClassName(self.delegate2)];
+        if (self.delegate2 != nil && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]) {
+            [self.delegate2 camera:self _didReceiveRemoteNotification:type EventTime:time];
+        }
     }
 }
 
 - (void)clearRemoteNotifications
 {
-    remoteNotifications = 0;
+    if(remoteNotifications > 0){
+        remoteNotifications = 1;
+    }
+    else{
+        remoteNotifications = 0;
+    }
+    [GBase editCamera:self];
 }
 
 #pragma mark - CameraDelegate Methods
@@ -579,16 +590,49 @@
 }
 
 
--(void)openPush{
+-(void)openPush:(void (^)(NSInteger code))successlock{
+    if(!self.pushToken){
+        if(successlock != nil){
+            successlock(0x11);
+        }
+        return;
+    }
+    if(!self.uid){
+        if(successlock != nil){
+            successlock(0x12);
+        }
+        return;
+    }
+    
     NSString *timestamp = FORMAT(@"%ld",(long)[[NSDate date] timeIntervalSince1970]);
     NSString *appid = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
     NSString *key = @"tenvisapp";
     NSString *uid = self.uid;
-    NSString *token = [GBase getPushToken];
-    NSString *sign = [TwsTools createSign:@[appid,key,uid,token,timestamp]];
-    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",@"",@"",uid,timestamp,appid,sign);
-    [self getHttpResp:url];
-    self.eventNotification = 1;
+    NSString *token1 = self.pushToken;
+    NSString *token2 = @"";
+    NSString *sign = [TwsTools createSign:@[appid,key,uid,token1,token2,timestamp]];
+    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,uid,timestamp,appid,sign);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       NSInteger respCode = -1;
+       NSString *result = [self getHttpResp:url];
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        
+        if(jsonObj != nil && [jsonObj isKindOfClass:[NSDictionary class]]){
+            NSDictionary *jsonDic = (NSDictionary *)jsonObj;
+            NSNumber *numberCode = [jsonDic objectForKey:@"ret_code"];
+            if(numberCode){
+                if(numberCode.intValue == 0){
+                    self.remoteNotifications = 1;
+                    [GBase editCamera:self];
+                }
+                respCode = numberCode.intValue;
+            }
+        }
+        if(successlock != nil){
+            successlock(respCode);
+        }
+    });
+   
     
 }
 -(NSString*)getHttpResp:(NSString*)url{
@@ -607,8 +651,47 @@
     NSLog(@"htmlString = %@", responseStr);
     return responseStr;
 }
--(void)closePush{
-    self.eventNotification = 0;
+-(void)closePush:(void (^)(NSInteger code))successlock{
+    if(!self.pushToken){
+        if(successlock != nil){
+            successlock(0x11);
+        }
+        return;
+    }
+    if(!self.uid){
+        if(successlock != nil){
+            successlock(0x12);
+        }
+        return;
+    }
+    NSString *timestamp = FORMAT(@"%ld",(long)[[NSDate date] timeIntervalSince1970]);
+    NSString *appid = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    NSString *key = @"tenvisapp";
+    NSString *uid = self.uid;
+    NSString *token1 = self.pushToken;
+    NSString *token2 = @"";
+    NSString *sign = [TwsTools createSign:@[appid,key,uid,token1,token2,timestamp]];
+    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/close?token1=%@&token2=&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,uid,timestamp,appid,sign);
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        NSInteger respCode = -1;
+        NSString *result = [self getHttpResp:url];
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        
+        if(jsonObj != nil && [jsonObj isKindOfClass:[NSDictionary class]]){
+            NSDictionary *jsonDic = (NSDictionary *)jsonObj;
+            NSNumber *numberCode = [jsonDic objectForKey:@"ret_code"];
+            if(numberCode){
+                if(numberCode.intValue == 0){
+                    self.remoteNotifications = 0;
+                    [GBase editCamera:self];
+                }
+                respCode = numberCode.intValue;
+            }
+        }
+        if(successlock != nil){
+            successlock(respCode);
+        }
+    });
 }
 
 -(BOOL)isDisconnected{
@@ -658,5 +741,15 @@
     else {
         return translation.y > 0.0 ? AVIOCTRL_PTZ_UP:AVIOCTRL_PTZ_DOWN;
     }
+}
+
+-(NSString*)pushToken{
+    return [self.camDefaults objectForKey:@"push_deviceToken"];
+}
+- (NSUserDefaults *)camDefaults {
+    if (!_camDefaults) {
+        _camDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _camDefaults;
 }
 @end

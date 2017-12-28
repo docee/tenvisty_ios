@@ -47,13 +47,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUV-iO-JRM">
-                                                    <rect key="frame" x="115" y="21.666666666666668" width="110" height="20.000000000000004"/>
+                                                    <rect key="frame" x="115" y="19.333333333333332" width="110" height="19.999999999999996"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 photos, 0 videos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgL-Cc-ovs">
-                                                    <rect key="frame" x="114.99999999999999" y="44" width="132.66666666666663" height="19"/>
+                                                    <rect key="frame" x="114.99999999999999" y="46" width="132.66666666666663" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -63,9 +63,9 @@
                                                 <constraint firstItem="UeS-D3-YDF" firstAttribute="leading" secondItem="kFk-34-xDN" secondAttribute="leading" constant="5" id="5nQ-Re-znI"/>
                                                 <constraint firstItem="UeS-D3-YDF" firstAttribute="centerY" secondItem="kFk-34-xDN" secondAttribute="centerY" id="GEq-ke-G3g"/>
                                                 <constraint firstItem="KUV-iO-JRM" firstAttribute="leading" secondItem="UeS-D3-YDF" secondAttribute="trailing" constant="10" id="OTd-Zw-N0v"/>
-                                                <constraint firstItem="WgL-Cc-ovs" firstAttribute="centerY" secondItem="kFk-34-xDN" secondAttribute="centerY" constant="11" id="PaZ-5B-gON"/>
+                                                <constraint firstItem="WgL-Cc-ovs" firstAttribute="centerY" secondItem="kFk-34-xDN" secondAttribute="centerY" constant="13" id="PaZ-5B-gON"/>
                                                 <constraint firstItem="WgL-Cc-ovs" firstAttribute="leading" secondItem="KUV-iO-JRM" secondAttribute="leading" id="RHv-hh-Tj6"/>
-                                                <constraint firstItem="KUV-iO-JRM" firstAttribute="centerY" secondItem="kFk-34-xDN" secondAttribute="centerY" constant="-11" id="hGd-dd-QTX"/>
+                                                <constraint firstItem="KUV-iO-JRM" firstAttribute="centerY" secondItem="kFk-34-xDN" secondAttribute="centerY" constant="-13" id="hGd-dd-QTX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -144,6 +144,7 @@
                                     <segment title="PHOTOS"/>
                                     <segment title="VIDEOS"/>
                                 </segments>
+                                <color key="tintColor" red="0.0" green="0.5490196078431373" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="clickTypeChange:" destination="JpH-1X-1n7" eventType="valueChanged" id="Yc4-P5-oKM"/>
                                 </connections>

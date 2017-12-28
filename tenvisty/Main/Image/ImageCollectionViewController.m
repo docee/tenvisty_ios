@@ -46,6 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     longPressIndex = -1;
+    self.title = self.camera.nickName;
     // Do any additional setup after loading the view.
 }
 - (IBAction)clickSelectAll:(UIButton*)sender {
@@ -245,7 +246,7 @@
     
     self.tableview.translatesAutoresizingMaskIntoConstraints = YES;
     self.viewToolbarBottom.translatesAutoresizingMaskIntoConstraints = YES;
-    if(self.bottomLayoutGuide){
+    if(((UIView*)self.bottomLayoutGuide).frame.size.height > 0){
         self.viewToolbarBottom.frame = CGRectMake(self.viewToolbarBottom.frame.origin.x, self.viewToolbarBottom.frame.origin.y, self.viewToolbarBottom.frame.size.width, 94);
     }
 }

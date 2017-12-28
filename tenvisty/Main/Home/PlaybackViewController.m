@@ -46,7 +46,7 @@
     _labEventType.text = [Event getEventTypeName:self.evt.eventType];
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:self.evt.eventTime];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
     _labEventTime.text = [dateFormatter stringFromDate:date];
     [self startPlayback];
 }

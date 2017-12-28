@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1587,6 +1586,7 @@
                                             <segment title="EVENT RECORD"/>
                                             <segment title="TIMING RECORD"/>
                                         </segments>
+                                        <color key="tintColor" red="0.0" green="0.5490196078431373" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="clickEventTypeChange:" destination="KYR-hL-4XR" eventType="valueChanged" id="rTq-oD-ox3"/>
                                         </connections>

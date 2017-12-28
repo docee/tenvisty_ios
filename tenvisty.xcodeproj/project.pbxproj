@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CEFFE3851C7E3AF4A685934 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830C439DBD401823352A1DF5 /* CoreTelephony.framework */; };
+		6DFDF327E775ECBE5248F54D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A259C50E727727C3F0BF3358 /* CFNetwork.framework */; };
+		82FDA8D0F56E249D5F3EF18B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6BADCDD1A2EA163E874EAF /* libz.tbd */; };
+		8900738E1FF4AC3800FB36B1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8900738D1FF4AC3800FB36B1 /* UserNotifications.framework */; };
+		890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */; };
+		890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */; };
+		890073931FF4BB7300FB36B1 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C619B2F4C13D3363B531E97 /* libXG-SDK.a */; };
+		890073BF1FF4C97900FB36B1 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
 		890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B406E1FAFF9FE00C1061A /* MainTabBarController.m */; };
 		890B40711FAFFA3600C1061A /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890B40701FAFFA3600C1061A /* Home.storyboard */; };
 		890B40741FAFFA6200C1061A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B40731FAFFA6200C1061A /* HomeViewController.m */; };
@@ -23,7 +31,6 @@
 		890B46AB1FB034C000C1061A /* MyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46AA1FB034C000C1061A /* MyCamera.m */; };
 		890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B41FB03CD500C1061A /* UIColor+Hex.m */; };
 		890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B61FB03CD500C1061A /* UIImage+Colors.m */; };
-		8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */; };
 		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
 		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
@@ -131,8 +138,8 @@
 		89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9951FDA2B280049F1E7 /* SearchLanAsync.m */; };
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
+		C6D1F8203E76628784C971FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E58AE4DC4897602AE9CF48 /* Security.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
-		ED04107C1FF3F19500D2DD19 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = ED040F601FF292C000D2DD19 /* IOTCamera */; };
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
@@ -187,6 +194,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D6BADCDD1A2EA163E874EAF /* libz.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd; sourceTree = "<group>"; };
+		37A51A7BB4CA4B3DA459AD63 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
+		6C619B2F4C13D3363B531E97 /* libXG-SDK.a */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
+		830C439DBD401823352A1DF5 /* CoreTelephony.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = "<group>"; };
+		8900737E1FF483D700FB36B1 /* tenvisty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tenvisty.entitlements; sourceTree = "<group>"; };
+		8900738D1FF4AC3800FB36B1 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		890B406D1FAFF9FE00C1061A /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		890B406E1FAFF9FE00C1061A /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		890B40701FAFFA3600C1061A /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -423,6 +438,9 @@
 		89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		89E6D99A1FDA61DC0049F1E7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		8D671A28AAADB2741242114D /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
+		A259C50E727727C3F0BF3358 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = "<group>"; };
+		C4E58AE4DC4897602AE9CF48 /* Security.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<group>"; };
 		ED040F551FEE708400D2DD19 /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-hgdwhrvovyreqqcjuxfukgheohqw/Build/Intermediates.noindex/UninstalledProducts/iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
 		ED040F571FF1588C00D2DD19 /* EventSearchCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSearchCustomViewController.h; sourceTree = "<group>"; };
 		ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchCustomViewController.m; sourceTree = "<group>"; };
@@ -678,8 +696,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED04107C1FF3F19500D2DD19 /* IOTCamera in Frameworks */,
-				8912D3FD1FF10BBA00C660AB /* libsqlite3.tbd in Frameworks */,
+				890073BF1FF4C97900FB36B1 /* IOTCamera in Frameworks */,
+				890073931FF4BB7300FB36B1 /* libXG-SDK.a in Frameworks */,
+				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
+				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
+				8900738E1FF4AC3800FB36B1 /* UserNotifications.framework in Frameworks */,
 				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,
 				894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */,
@@ -694,12 +715,25 @@
 				899AD4FB1FCD3B52008ED303 /* UIKit.framework in Frameworks */,
 				899AD4F91FCD3B40008ED303 /* CoreGraphics.framework in Frameworks */,
 				899AD4F11FCD3AB7008ED303 /* libIOTCAPIs_ALL.a in Frameworks */,
+				82FDA8D0F56E249D5F3EF18B /* libz.tbd in Frameworks */,
+				6DFDF327E775ECBE5248F54D /* CFNetwork.framework in Frameworks */,
+				5CEFFE3851C7E3AF4A685934 /* CoreTelephony.framework in Frameworks */,
+				C6D1F8203E76628784C971FF /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6242B82EC6721A78E245FDA3 /* XG */ = {
+			isa = PBXGroup;
+			children = (
+				6C619B2F4C13D3363B531E97 /* libXG-SDK.a */,
+				37A51A7BB4CA4B3DA459AD63 /* XGPush.h */,
+			);
+			path = XG;
+			sourceTree = "<group>";
+		};
 		890B40671FAFF99400C1061A /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +860,9 @@
 		890B46BB1FB050A800C1061A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */,
+				8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */,
+				8900738D1FF4AC3800FB36B1 /* UserNotifications.framework */,
 				ED040F681FF3F19500D2DD19 /* tenvisty */,
 				8989EC2B1FF1E19A004989A9 /* IOTCamera */,
 				ED040F601FF292C000D2DD19 /* IOTCamera */,
@@ -858,6 +895,11 @@
 				899AD4D81FC7F471008ED303 /* libH264Dec.a */,
 				890B47231FB0635400C1061A /* IOTCamera.framework */,
 				890B46BC1FB050A900C1061A /* IOTCamera.framework */,
+				0D6BADCDD1A2EA163E874EAF /* libz.tbd */,
+				A259C50E727727C3F0BF3358 /* CFNetwork.framework */,
+				8D671A28AAADB2741242114D /* SystemConfiguration.framework */,
+				830C439DBD401823352A1DF5 /* CoreTelephony.framework */,
+				C4E58AE4DC4897602AE9CF48 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -951,6 +993,7 @@
 				894D7E4B1FAB01D900C58BB2 /* tenvisty */,
 				894D7E4A1FAB01D900C58BB2 /* Products */,
 				890B46BB1FB050A800C1061A /* Frameworks */,
+				6242B82EC6721A78E245FDA3 /* XG */,
 			);
 			sourceTree = "<group>";
 		};
@@ -965,6 +1008,7 @@
 		894D7E4B1FAB01D900C58BB2 /* tenvisty */ = {
 			isa = PBXGroup;
 			children = (
+				8900737E1FF483D700FB36B1 /* tenvisty.entitlements */,
 				890B46B01FB03CD500C1061A /* Expand */,
 				890B40801FB02F1A00C1061A /* Global */,
 				890B40671FAFF99400C1061A /* Main */,
@@ -1887,7 +1931,18 @@
 					894D7E481FAB01D900C58BB2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 6HDH3DS77K;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -2248,6 +2303,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2263,15 +2320,17 @@
 				HEADER_SEARCH_PATHS = IOTCamera/IOTCamera;
 				INFOPLIST_FILE = tenvisty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/tenvisty/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/tenvisty/lib",
+					"$(PROJECT_DIR)/XG",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-fembed-bitcode";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-w",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "65587f99-3c79-4144-8a90-c523f45f6186";
+				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_profile_20171228;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2283,6 +2342,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2298,15 +2359,17 @@
 				HEADER_SEARCH_PATHS = IOTCamera/IOTCamera;
 				INFOPLIST_FILE = tenvisty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/tenvisty/lib";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/tenvisty/lib",
+					"$(PROJECT_DIR)/XG",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-w",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "65587f99-3c79-4144-8a90-c523f45f6186";
+				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_profile_20171228;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

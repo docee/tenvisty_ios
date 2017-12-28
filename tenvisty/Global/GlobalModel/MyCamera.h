@@ -39,7 +39,6 @@
 @property NSInteger lastChannel;
 @property (nonatomic,assign) NSInteger videoQuality;
 @property (nonatomic,strong) NSString* nickName;
-@property (nonatomic,assign) NSInteger eventNotification;
 @property (nonatomic,assign) NSInteger processState;
 @property (nonatomic,assign) NSInteger upgradePercent;
 
@@ -103,8 +102,8 @@
 - (void)saveImage:(UIImage *)image;
 - (UIImage *)image;
 
--(void)openPush;
--(void)closePush;
+-(void)openPush:(void (^)(NSInteger code))successlock;
+-(void)closePush:(void (^)(NSInteger code))successlock;
 -(BOOL)isDisconnected;
 -(NSString*)strConnectState;
 - (NSInteger)direction:(CGPoint)translation;

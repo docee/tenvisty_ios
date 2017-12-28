@@ -28,6 +28,7 @@
     double ptz_ctrl_time;
     double receiveVideoTime;
     double lostVideoTime;
+    NSInteger videoFps;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollviewVideo;
 @property (weak, nonatomic) IBOutlet UIView *viewSwitchVideoQuality_port;
@@ -75,9 +76,11 @@
     appDelegate.allowRotation = YES;
     _viewPopDown_port.tintColor = Color_Primary;
     if(zkDevice_IsiPhoneXOrBigger){
-        _constraint_bottom_viewtoolbarbottom.constant = 30;\
+        _constraint_bottom_viewtoolbarbottom.constant = 30;
     }
-    
+    if(self.camera.remoteNotifications > 1){
+        [self.camera clearRemoteNotifications];
+    }
 }
 
 -(void)doChangeVideoQuality:(NSInteger)index t:(NSString*)title{
@@ -187,6 +190,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = YES;
     _labConnectState.text = [(self.camera) strConnectState];
     [_videoMonitor attachCamera:self.camera];
     [_viewLoading setHidden:NO];
@@ -197,8 +202,7 @@
         });
     }
     
-    [_btnRecord_land setEnabled:NO];
-    [_btnRecord_port setEnabled:NO];
+    videoFps = 0;
     //注册通知，进入后台时退回主界面
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -355,7 +359,12 @@
 }
 - (IBAction)doRecord:(UIButton*)sender {
     if (!sender.selected) {
-        [self startRecord];
+        if(videoFps <1){
+            [[iToast makeText:LOCALSTR(@"Please wait the camera connected")] show];
+        }
+        else{
+            [self startRecord];
+        }
     }else{
         [self stopRecord];
     }
@@ -563,21 +572,18 @@
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
+    videoFps = fps;
     dispatch_async(dispatch_get_main_queue(), ^{
         if(fps > 1 ){
             receiveVideoTime = [[NSDate date] timeIntervalSinceReferenceDate];
             [_viewLoading setHidden:YES];
-            [_btnRecord_land setEnabled:YES];
-            [_btnRecord_port setEnabled:YES];
         }
         else{
             lostVideoTime = [[NSDate date] timeIntervalSinceReferenceDate];
             if(!receiveVideoTime || lostVideoTime - receiveVideoTime > RECORD_TIMEOUT){
-                if(!isRecording){
-                    [_btnRecord_land setEnabled:NO];
-                    [_btnRecord_port setEnabled:NO];
-                }else{
+                if(isRecording){
                     [self stopRecord];
+                    [[iToast makeText:LOCALSTR(@"recording stopped")] show];
                 }
             }
             [_viewLoading setHidden:NO];

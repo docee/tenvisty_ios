@@ -152,6 +152,7 @@
         wifiPassword = cell.value;
         if(self.wifiEnctype != 1&& wifiPassword.length == 0){
             [[[iToast makeText:LOCALSTR(@"wifi password is not entered.")] setDuration:1] show];
+             isSetting = YES;
             return;
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SET_WIFI_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);

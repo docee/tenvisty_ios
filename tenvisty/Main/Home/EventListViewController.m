@@ -127,7 +127,7 @@
     EventItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:model.eventTime];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     cell.labEventDate.text = [dateFormatter stringFromDate:date];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
     cell.labEventTime.text = [dateFormatter stringFromDate:date];
@@ -286,7 +286,7 @@
     _toDate = to;
   
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy HH:mm"];
+    [formatter setDateFormat:@"yyyy/MM/dd HH:mm"];
     _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:_fromDate],[formatter stringFromDate:_toDate]);
     //dropboxVideo.delegate = self;
 }

@@ -132,10 +132,12 @@
     [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to remove this camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
         MyCamera *camera = [GBase getCamera:row];
         if(camera){
+            [camera closePush:^(NSInteger code) {
+                
+            }];
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 // 处理耗时操作的代码块...
                 [camera stop];
-                [camera closePush];
                 //通知主线程刷新
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //回调或者说是通知主线程刷新，
@@ -289,6 +291,17 @@
             }
         });
     }
+}
+
+- (void)camera:(NSCamera *)camera _didReceiveRemoteNotification:(NSInteger)eventType EventTime:(long)eventTime{
+      NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+        dispatch_async(dispatch_get_main_queue(), ^{
+        CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+        if(cell){
+            LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
+            [cell refreshState];
+        }
+        });
 }
 
 
