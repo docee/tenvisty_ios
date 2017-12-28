@@ -13,7 +13,6 @@
 		8900738E1FF4AC3800FB36B1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8900738D1FF4AC3800FB36B1 /* UserNotifications.framework */; };
 		890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */; };
 		890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */; };
-		890073931FF4BB7300FB36B1 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C619B2F4C13D3363B531E97 /* libXG-SDK.a */; };
 		890073BF1FF4C97900FB36B1 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
 		890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B406E1FAFF9FE00C1061A /* MainTabBarController.m */; };
 		890B40711FAFFA3600C1061A /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890B40701FAFFA3600C1061A /* Home.storyboard */; };
@@ -33,6 +32,7 @@
 		890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B61FB03CD500C1061A /* UIImage+Colors.m */; };
 		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
 		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
+		8924E0D81FF508E9001E689E /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C619B2F4C13D3363B531E97 /* libXG-SDK.a */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
 		892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB571FD63CEA00BD8929 /* ListImgTableViewCellModel.m */; };
 		892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892ADB591FD64CC000BD8929 /* CameraSetting.storyboard */; };
@@ -696,8 +696,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8924E0D81FF508E9001E689E /* libXG-SDK.a in Frameworks */,
 				890073BF1FF4C97900FB36B1 /* IOTCamera in Frameworks */,
-				890073931FF4BB7300FB36B1 /* libXG-SDK.a in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
 				8900738E1FF4AC3800FB36B1 /* UserNotifications.framework in Frameworks */,

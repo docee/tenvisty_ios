@@ -194,6 +194,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     });
+    dispatch_block_cancel(_timeoutTask);
     if(systemTypeVersion == nil || systemCheck == nil|| webCheck == nil|| usrCheck == nil|| customTypeVersion == nil|| customTypeCheck == nil|| vendorTypeVersion == nil|| vendorTypeCheck == nil){
         [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
         return;

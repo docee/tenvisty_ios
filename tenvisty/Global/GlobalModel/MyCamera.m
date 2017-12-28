@@ -320,7 +320,7 @@
 {
     NSLog(@"setRemoteNotification %@ %@ %s %d",[self class],[self.delegate2 class],__func__,__LINE__);
     if(self.remoteNotifications > 0){
-        remoteNotifications++;
+        self.remoteNotifications++;
         [GBase editCamera:self];
         //NSString dname = [NSString stringWithUTF8String:object_getClassName(self.delegate2)];
         if (self.delegate2 != nil && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]) {
@@ -331,11 +331,11 @@
 
 - (void)clearRemoteNotifications
 {
-    if(remoteNotifications > 0){
-        remoteNotifications = 1;
+    if(self.remoteNotifications > 0){
+        self.remoteNotifications = 1;
     }
     else{
-        remoteNotifications = 0;
+        self.remoteNotifications = 0;
     }
     [GBase editCamera:self];
 }

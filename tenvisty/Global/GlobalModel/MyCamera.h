@@ -27,7 +27,6 @@
 {
     
     NSInteger lastChannel;
-    NSInteger remoteNotifications;
     NSMutableArray *arrayStreamChannel;
     NSString *viewAcc;
     NSString *viewPwd;

@@ -299,7 +299,7 @@
         CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
         if(cell){
             LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
-            [cell refreshState];
+            [cell refreshAlarmState];
         }
         });
 }

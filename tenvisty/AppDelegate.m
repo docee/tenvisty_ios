@@ -22,7 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    
+    [[XGPush defaultManager] startXGWithAppID:2200274193 appKey:@"IX15RLJ3U94V" delegate:self];
+    //[[XGPush defaultManager] reportXGNotificationInfo:launchOptions];
     // Override point for customization after application launch.
     NSLog(@"%@ %s %d",[self class],__func__,__LINE__);
     NSLog(@"%@",[NSString stringWithFormat:@"IOTCAPIs %@", [Camera getIOTCAPIsVerion]]);
@@ -78,7 +79,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 //    isEnterBackground = NO;
-
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 
@@ -154,6 +155,30 @@
     
 }
 
+-(void)checkAlarmEventByUID:(NSString*) uid {
+    if(uid && uid.length == 20){
+        BOOL isNotExist = YES;
+        for (MyCamera *cam in [GBase sharedInstance].cameras) {
+            // [HXProgress showText:cam.uid];
+            if ([cam.uid isEqualToString:uid]) {
+                isNotExist = NO;
+                if(cam.remoteNotifications > 0){
+                    [cam setRemoteNotification:1 EventTime:[[NSDate date] timeIntervalSince1970]];
+                }
+                else{
+                    [cam closePush:nil];
+                }
+                
+            }//@isEqualToString
+            
+        }// @for
+        if(isNotExist){
+            MyCamera *cam = [[MyCamera alloc] initWithUid:uid Name:@"camera name" UserName:@"admin" Password:@"admin"];
+            [cam closePush:nil];
+        }
+    }
+}
+
 #pragma mark - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;
@@ -213,6 +238,67 @@
 {
     return true;
 }
+
+
+
+// 此方法是必须要有实现，否则SDK将无法处理应用注册的Token，推送也就不会成功
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    //    [[XGPushTokenManager defaultManager] registerDeviceToken:deviceToken]; // 此方法可以不需要调用，SDK已经在内部处理
+    NSString *token =  [[XGPushTokenManager defaultTokenManager] deviceTokenString];
+    NSLog(@"[XGDemo] device token is %@", token);
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"push_deviceToken"];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+}
+
+
+/**
+ 收到通知的回调
+ 
+ @param application  UIApplication 实例
+ @param userInfo 推送时指定的参数
+ */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    //[[XGPush defaultManager] reportXGNotificationInfo:userInfo];
+    [self checkAlarmEvent:userInfo];
+}
+
+
+/**
+ 收到静默推送的回调
+ 
+ @param application  UIApplication 实例
+ @param userInfo 推送时指定的参数
+ @param completionHandler 完成回调
+ */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    //[[XGPush defaultManager] reportXGNotificationInfo:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+    [self checkAlarmEvent:userInfo];
+}
+
+// iOS 10 新增 API
+// iOS 10 会走新 API, iOS 10 以前会走到老 API
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+// App 用户点击通知的回调
+// 无论本地推送还是远程推送都会走这个回调
+- (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    //[[XGPush defaultManager] reportXGNotificationInfo:response.notification.request.content.userInfo];
+    
+    completionHandler();
+    [self checkAlarmEventByUID:response.notification.request.content.title];
+}
+
+// App 在前台弹通知需要调用这个接口
+- (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    //[[XGPush defaultManager] reportXGNotificationInfo:notification.request.content.userInfo];
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
+    [self checkAlarmEventByUID:notification.request.content.title];
+    
+}
+#endif
 
 @end
 

@@ -89,7 +89,7 @@
         if(self.uid != nil && ![self.uid isEqualToString:NO_USE_UID]){
             cell.value = self.uid;
         }
-        cell.title = LOCALSTR(@"Name");
+        cell.title = LOCALSTR(@"UID");
         cell.rightImage = @"btnQRCode";
         cell.action = @selector(go2ScanQRCode);
         cell.actionOwner = self;
@@ -99,6 +99,7 @@
         PasswordFieldTableViewCell *cell = nil;
         id =  TableViewCell_TextField_Password;
         cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+        cell.title = LOCALSTR(@"Password");
         //[cell.midPasswordField becomeFirstResponder];
         return cell;
     }
@@ -106,6 +107,7 @@
         TextFieldTableViewCell *cell = nil;
         id = TableViewCell_TextField_Normal;
         cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
+        cell.title = LOCALSTR(@"Name");
         return cell;
     }
     return nil;
