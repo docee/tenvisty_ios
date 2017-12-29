@@ -608,10 +608,10 @@
     NSString *appid = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
     NSString *key = @"tenvisapp";
     NSString *uid = self.uid;
-    NSString *token1 = self.pushToken;
-    NSString *token2 = @"";
+    NSString *token2 = self.pushToken;
+    NSString *token1 = @"";
     NSString *sign = [TwsTools createSign:@[appid,key,uid,token1,token2,timestamp]];
-    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,uid,timestamp,appid,sign);
+    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=%@&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,token2,uid,timestamp,appid,sign);
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
        NSInteger respCode = -1;
        NSString *result = [self getHttpResp:url];
@@ -668,10 +668,10 @@
     NSString *appid = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
     NSString *key = @"tenvisapp";
     NSString *uid = self.uid;
-    NSString *token1 = self.pushToken;
-    NSString *token2 = @"";
+    NSString *token1 = @"";
+    NSString *token2 = self.pushToken;
     NSString *sign = [TwsTools createSign:@[appid,key,uid,token1,token2,timestamp]];
-    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/close?token1=%@&token2=&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,uid,timestamp,appid,sign);
+    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/close?token1=%@&token2=%@&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,token2,uid,timestamp,appid,sign);
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         NSInteger respCode = -1;
         NSString *result = [self getHttpResp:url];
