@@ -18,7 +18,7 @@
 @interface AddDeviceWirelessSettingViewController ()<WiFiConfigDelegate>{
     
 }
-@property (weak, nonatomic) IBOutlet FLAnimatedImageView *gifView;
+//@property (weak, nonatomic) IBOutlet FLAnimatedImageView *gifView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_pop;
 @property (weak, nonatomic) IBOutlet UILabel *labProcess;
@@ -31,10 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.configWifiResult = CONFIG_WIFI_FAIL;
-    NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"configwifi_setting" withExtension:@"gif"];
-    NSData *data1 = [NSData dataWithContentsOfURL:url1];
-    FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
-    self.gifView.animatedImage = animatedImage1;
+//    NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"configwifi_setting" withExtension:@"gif"];
+//    NSData *data1 = [NSData dataWithContentsOfURL:url1];
+//    FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
+//    self.gifView.animatedImage = animatedImage1;
     self.progressView.progress = .0;
 //    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.0f);
 //    self.progressView.transform = transform;

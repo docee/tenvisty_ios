@@ -11,7 +11,7 @@
 #import "AddDeviceWirelessViewController.h"
 
 @interface AddDeviceWirelessNoteViewController ()
-@property (weak, nonatomic) IBOutlet FLAnimatedImageView *gifView;
+//@property (weak, nonatomic) IBOutlet FLAnimatedImageView *gifView;
 
 @end
 
@@ -22,10 +22,10 @@
     // Do any additional setup after loading the view.
 
     
-    NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"configwifi_note" withExtension:@"gif"];
-    NSData *data1 = [NSData dataWithContentsOfURL:url1];
-    FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
-    self.gifView.animatedImage = animatedImage1;
+//    NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"configwifi_note2" withExtension:@"gif"];
+//    NSData *data1 = [NSData dataWithContentsOfURL:url1];
+//    FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
+//    self.gifView.animatedImage = animatedImage1;
 }
 
 - (void)didReceiveMemoryWarning {

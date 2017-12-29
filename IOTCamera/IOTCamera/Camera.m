@@ -1193,12 +1193,12 @@ int bLocalSearch = 0;
         
             if (avIndex < 0) {
                 
-                if(self.sessionMode == CONNECTION_MODE_LAN){
-                    avIndex = avClientStart((int)sessionID, (char *)[channel.viewAcc UTF8String], (char *)[channel.viewPwd UTF8String], 30, &serverType, channel.avChannel);
-                }
-                else{
+//                if(self.sessionMode == CONNECTION_MODE_LAN){
+//                    avIndex = avClientStart((int)sessionID, (char *)[channel.viewAcc UTF8String], (char *)[channel.viewPwd UTF8String], 30, &serverType, channel.avChannel);
+//                }
+//                else{
                     avIndex = avClientStart2((int)sessionID, (char *)[channel.viewAcc UTF8String], (char *)[channel.viewPwd UTF8String], 30, &serverType, channel.avChannel,&reSend);
-                }
+                //}
                 LOG(@"avClientStart(%@, %d, %s, %s, 60, %d) : %d",
                     self.uid, (int)sessionID, [channel.viewAcc UTF8String], [channel.viewPwd UTF8String], (int)channel.avChannel, avIndex);
                 

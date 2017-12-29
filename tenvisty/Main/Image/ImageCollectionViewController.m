@@ -18,7 +18,7 @@
 #define Offx        (5)
 #define Offy        (5)
 #define OffTop      (5)
-#define OffBottom   (0)
+#define OffBottom   (5)
 #define OffLeft     (5)
 #define OffRight    (5)
 
@@ -37,6 +37,9 @@
 @property (nonatomic,strong) LocalPictureInfo *selectPic;
 @property (nonatomic, strong)MPMoviePlayerViewController *movieController;
 @property (nonatomic, strong) NSString *directoryPath;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnEmail;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnSave;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnDelete;
 
 
 @end
@@ -47,6 +50,12 @@
     [super viewDidLoad];
     longPressIndex = -1;
     self.title = self.camera.nickName;
+    [self.btnEmail setBackgroundImage:[UIImage imageWithColor:Color_Primary wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [self.btnSave setBackgroundImage:[UIImage imageWithColor:Color_Primary wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [self.btnDelete setBackgroundImage:[UIImage imageWithColor:Color_Primary wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
+    [self.btnEmail setBackgroundImage:[UIImage imageWithColor:Color_GrayLight wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [self.btnSave setBackgroundImage:[UIImage imageWithColor:Color_GrayLight wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [self.btnDelete setBackgroundImage:[UIImage imageWithColor:Color_GrayLight wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
 }
 - (IBAction)clickSelectAll:(UIButton*)sender {
@@ -417,11 +426,12 @@
     NSMutableArray *rowSouce = self.sourceList[indexPath.row];
     NSInteger column = 3;
     NSInteger row = ceil((float)rowSouce.count/column);
-    CGFloat w = self.view.frame.size.width - 77;
+    CGFloat w = tableView.frame.size.width - 67;
     //itemw ＝ 总长度－缩进的宽度 － 列间距
-    CGFloat itemw = (w - OffLeft - OffRight - Offx*(column-1))/column;
+    CGFloat itemw = ceil((w - OffLeft - OffRight - Offx*(column-1))/column);
     CGFloat itemh = itemw*9/16;
-    return Offy*row + OffBottom + OffTop + (row)*itemh + 80 + 10;
+    CGFloat height = Offy+( OffBottom + OffTop)*row + (row)*itemh +30;
+    return height;
     //return indexPath.row%3 == 0?((indexPath.row+1)*160.0):(((indexPath.row+1)*160.0)+30);
 }
 
@@ -476,14 +486,15 @@
         [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Primary_alpha_3 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateSelected];
         [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Black_alpha_2 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
         [cell.btnMask setBackgroundImage:nil forState:UIControlStateHighlighted];
-        [cell.btnMask setImage:[UIImage imageNamed:@"checkbox_uncheck"] forState:UIControlStateNormal];
-        [cell.btnMask setImage:[UIImage imageNamed:@"checkbox_checked"] forState:UIControlStateSelected];
+        [cell.btnMask setImage:[UIImage imageNamed:@"ic_unselected"] forState:UIControlStateNormal];
+        [cell.btnMask setImage:[UIImage imageNamed:@"ic_selected"] forState:UIControlStateSelected];
         [cell.btnMask setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
         [cell.btnMask setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         for(UILongPressGestureRecognizer *ges  in cell.btnMask.gestureRecognizers){
             [cell.btnMask removeGestureRecognizer:ges];
         }
         cell.btnMask.selected = model.isChecked;
+        //[cell.btnMask setContentMode:UIViewContentModeCenter];
     }
     else{
         [cell.btnMask setBackgroundImage:nil  forState:UIControlStateSelected];
@@ -544,7 +555,7 @@
     NSInteger row = 3;
     CGFloat w = collectionView.frame.size.width;
     //itemw ＝ 总长度－缩进的宽度 － 列间距
-    CGFloat itemw = (w - OffLeft - OffRight - Offx*(row-1))/row;
+    CGFloat itemw =ceil((w - OffLeft - OffRight - Offx*(row-1))/row);
     CGFloat itemh = itemw*9/16;
     return CGSizeMake(itemw, itemh);
 }

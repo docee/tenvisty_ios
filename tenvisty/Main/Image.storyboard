@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,14 +39,14 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UeS-D3-YDF">
                                                     <rect key="frame" x="5" y="10" width="100" height="65"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="65" id="0Ah-KO-rgf"/>
                                                         <constraint firstAttribute="width" constant="100" id="QJ7-0Z-aTx"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUV-iO-JRM">
-                                                    <rect key="frame" x="115" y="19.333333333333332" width="110" height="19.999999999999996"/>
+                                                    <rect key="frame" x="115" y="19.666666666666668" width="110" height="20.000000000000004"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -190,15 +189,15 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="py9-ez-Bxt">
-                                                            <rect key="frame" x="343" y="0.0" width="32" height="20"/>
+                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="py9-ez-Bxt">
+                                                            <rect key="frame" x="335" y="0.0" width="40" height="20"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="32" id="bAo-qf-QQO"/>
+                                                                <constraint firstAttribute="width" constant="40" id="bAo-qf-QQO"/>
                                                                 <constraint firstAttribute="height" constant="20" id="xQh-VZ-OxN"/>
                                                             </constraints>
                                                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <state key="normal" image="checkbox_uncheck"/>
-                                                            <state key="selected" image="checkbox_checked"/>
+                                                            <state key="normal" image="ic_unselected2"/>
+                                                            <state key="selected" image="ic_selected2"/>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -232,7 +231,7 @@
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bn-Ip-NZh">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                     </imageView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5i-7H-DE9">
+                                                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5i-7H-DE9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <state key="normal" image="checkbox_checked"/>
@@ -288,10 +287,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photos" highlightedImage="tableviewcell_noimage" translatesAutoresizingMaskIntoConstraints="NO" id="pEC-eU-5N8">
-                                                    <rect key="frame" x="166" y="104.33333333333333" width="42" height="30.999999999999986"/>
+                                                    <rect key="frame" x="166" y="104.66666666666667" width="42" height="31.000000000000014"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfg-A6-Fm3">
-                                                    <rect key="frame" x="147" y="145.33333333333334" width="80.666666666666686" height="20"/>
+                                                    <rect key="frame" x="147" y="145.66666666666666" width="81" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -342,15 +341,15 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE2-fm-F3E">
-                                        <rect key="frame" x="343" y="0.0" width="32" height="20"/>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE2-fm-F3E">
+                                        <rect key="frame" x="335" y="0.0" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="DmO-WF-ofb"/>
-                                            <constraint firstAttribute="width" constant="32" id="u4V-9a-PnL"/>
+                                            <constraint firstAttribute="width" constant="40" id="u4V-9a-PnL"/>
                                         </constraints>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="checkbox_uncheck"/>
-                                        <state key="selected" image="checkbox_checked"/>
+                                        <state key="normal" image="ic_unselected2"/>
+                                        <state key="selected" image="ic_selected2"/>
                                         <connections>
                                             <action selector="clickSelectAll:" destination="JpH-1X-1n7" eventType="touchUpInside" id="oSh-Au-oZY"/>
                                         </connections>
@@ -381,7 +380,8 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9Z-YC-hM1">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="60"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <state key="normal" title="Email">
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="ic_mail">
                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -389,28 +389,47 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNM-OF-HMs">
-                                                <rect key="frame" x="250" y="0.0" width="125" height="60"/>
-                                                <state key="normal" image="ic_menu_delete"/>
+                                                <rect key="frame" x="249.66666666666666" y="0.0" width="125.33333333333334" height="60"/>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="ic_delete"/>
                                                 <connections>
                                                     <action selector="clickDelete:" destination="JpH-1X-1n7" eventType="touchUpInside" id="kQa-u6-nsB"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNL-hv-DSb">
-                                                <rect key="frame" x="125" y="0.0" width="125" height="60"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                <state key="normal" title="Save"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNL-hv-DSb">
+                                                <rect key="frame" x="125" y="0.0" width="124.66666666666669" height="60"/>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="ic_save"/>
                                                 <connections>
                                                     <action selector="clickSave:" destination="JpH-1X-1n7" eventType="touchUpInside" id="AuL-Yh-6C4"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4FX-jy-rTi">
+                                                <rect key="frame" x="249.33333333333334" y="15" width="1" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="1" id="JYQ-bs-jjj"/>
+                                                    <constraint firstAttribute="height" constant="30" id="aGr-ea-nbN"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keE-85-2nl">
+                                                <rect key="frame" x="123.66666666666667" y="15" width="1" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="X58-TF-5iK"/>
+                                                    <constraint firstAttribute="width" constant="1" id="bKp-ta-NtF"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="YNL-hv-DSb" secondAttribute="bottom" id="9Lb-Hc-LVE"/>
                                             <constraint firstAttribute="bottom" secondItem="gNM-OF-HMs" secondAttribute="bottom" id="CCo-Vf-XkP"/>
+                                            <constraint firstItem="YNL-hv-DSb" firstAttribute="leading" secondItem="keE-85-2nl" secondAttribute="trailing" id="CyH-1y-GpS"/>
                                             <constraint firstItem="gNM-OF-HMs" firstAttribute="width" secondItem="T9Z-YC-hM1" secondAttribute="width" id="HnN-Te-BnK"/>
                                             <constraint firstItem="T9Z-YC-hM1" firstAttribute="leading" secondItem="Csy-1A-UBO" secondAttribute="leading" id="JGn-9i-UQu"/>
                                             <constraint firstItem="gNM-OF-HMs" firstAttribute="height" secondItem="T9Z-YC-hM1" secondAttribute="height" id="KYW-hI-Ze9"/>
                                             <constraint firstItem="YNL-hv-DSb" firstAttribute="top" secondItem="Csy-1A-UBO" secondAttribute="top" id="Niw-Y8-whJ"/>
+                                            <constraint firstItem="4FX-jy-rTi" firstAttribute="centerY" secondItem="Csy-1A-UBO" secondAttribute="centerY" id="O0h-kt-Jt6"/>
                                             <constraint firstItem="YNL-hv-DSb" firstAttribute="width" secondItem="T9Z-YC-hM1" secondAttribute="width" id="QnG-GX-Zop"/>
                                             <constraint firstAttribute="height" constant="60" id="WLq-FN-Qm5"/>
                                             <constraint firstItem="YNL-hv-DSb" firstAttribute="height" secondItem="T9Z-YC-hM1" secondAttribute="height" id="Y5s-h8-LIH"/>
@@ -418,12 +437,13 @@
                                             <constraint firstAttribute="bottom" secondItem="T9Z-YC-hM1" secondAttribute="bottom" id="j8T-C8-hid"/>
                                             <constraint firstItem="gNM-OF-HMs" firstAttribute="top" secondItem="Csy-1A-UBO" secondAttribute="top" id="jlO-dM-8yi"/>
                                             <constraint firstItem="T9Z-YC-hM1" firstAttribute="top" secondItem="Csy-1A-UBO" secondAttribute="top" id="mCT-g8-Sze"/>
+                                            <constraint firstItem="keE-85-2nl" firstAttribute="centerY" secondItem="Csy-1A-UBO" secondAttribute="centerY" id="qAn-Xn-c1E"/>
                                             <constraint firstAttribute="trailing" secondItem="gNM-OF-HMs" secondAttribute="trailing" id="vNG-HF-VB7"/>
+                                            <constraint firstItem="4FX-jy-rTi" firstAttribute="leading" secondItem="YNL-hv-DSb" secondAttribute="trailing" id="wNh-at-Khh"/>
                                             <constraint firstItem="gNM-OF-HMs" firstAttribute="leading" secondItem="YNL-hv-DSb" secondAttribute="trailing" id="xHx-eY-nt1"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.59999999999999998" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Csy-1A-UBO" firstAttribute="leading" secondItem="trp-Rp-FrY" secondAttribute="leading" id="Eud-cI-m6A"/>
                                     <constraint firstAttribute="height" constant="60" id="Scf-28-YoV"/>
@@ -464,6 +484,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnCurrentSelectAll" destination="YE2-fm-F3E" id="xOp-CB-Fk3"/>
+                        <outlet property="btnDelete" destination="gNM-OF-HMs" id="CD0-IC-soP"/>
+                        <outlet property="btnEmail" destination="T9Z-YC-hM1" id="tVn-Pv-3cI"/>
+                        <outlet property="btnSave" destination="YNL-hv-DSb" id="Lxd-Ab-7Ck"/>
                         <outlet property="labCurrentDate" destination="qcq-Tf-HI2" id="ZS7-RX-1Dj"/>
                         <outlet property="labCurrentDesc" destination="qZh-z8-dbR" id="FQP-th-bFV"/>
                         <outlet property="segment_type" destination="VlN-sf-CBM" id="T2p-FD-iLe"/>
@@ -511,10 +534,13 @@
     </scenes>
     <resources>
         <image name="checkbox_checked" width="16" height="16"/>
-        <image name="checkbox_uncheck" width="16" height="16"/>
+        <image name="ic_delete" width="30" height="30"/>
         <image name="ic_dot_circle" width="10" height="10"/>
-        <image name="ic_menu_delete" width="20" height="27"/>
+        <image name="ic_mail" width="30" height="30"/>
         <image name="ic_photos" width="42" height="31"/>
+        <image name="ic_save" width="30" height="30"/>
+        <image name="ic_selected2" width="37" height="20"/>
+        <image name="ic_unselected2" width="37" height="20"/>
         <image name="navBack" width="30" height="30"/>
         <image name="tableviewcell_noimage" width="16" height="16"/>
     </resources>

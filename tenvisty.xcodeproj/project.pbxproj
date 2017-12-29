@@ -74,6 +74,7 @@
 		892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */; };
 		89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */; };
 		89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */; };
+		8936B9F21FF621F800F72595 /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E171171FDFD26C004AAD3D /* libavconVoiceRecognize.a */; };
 		893E6BD51FF5F3D700502F55 /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
 		893E6BD61FF5F3ED00502F55 /* IOTCamera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		893E6BEC1FF5FD0F00502F55 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E6BEA1FF5FD0F00502F55 /* libUMessage_Sdk_1.5.0a.a */; };
@@ -126,10 +127,11 @@
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
+		89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811151FF63FEB00679B39 /* AppVersionController.m */; };
+		89D8111C1FF63FEB00679B39 /* WebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811171FF63FEB00679B39 /* WebBrowserController.m */; };
 		89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D869821FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m */; };
 		89D946691FDF7D90000ABB0A /* GNetworkStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946661FDF7D90000ABB0A /* GNetworkStates.m */; };
 		89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946681FDF7D90000ABB0A /* Reachability.m */; };
-		89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E171171FDFD26C004AAD3D /* libavconVoiceRecognize.a */; };
 		89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171201FDFD48F004AAD3D /* BaseWiFiConfig.m */; };
 		89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171231FDFD7F0004AAD3D /* FaceberAudioConfig.m */; };
 		89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E1712A1FDFF126004AAD3D /* WiFiConfigContext.m */; };
@@ -413,6 +415,10 @@
 		89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
 		89D2B4EC1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessSettingViewController.h; sourceTree = "<group>"; };
 		89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessSettingViewController.m; sourceTree = "<group>"; };
+		89D811141FF63FEB00679B39 /* AppVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppVersionController.h; sourceTree = "<group>"; };
+		89D811151FF63FEB00679B39 /* AppVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppVersionController.m; sourceTree = "<group>"; };
+		89D811161FF63FEB00679B39 /* WebBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebBrowserController.h; sourceTree = "<group>"; };
+		89D811171FF63FEB00679B39 /* WebBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebBrowserController.m; sourceTree = "<group>"; };
 		89D869811FDE416000B91D5B /* AddDeviceWirelessNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessNoteViewController.h; sourceTree = "<group>"; };
 		89D869821FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessNoteViewController.m; sourceTree = "<group>"; };
 		89D946651FDF7D90000ABB0A /* GNetworkStates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNetworkStates.h; sourceTree = "<group>"; };
@@ -698,11 +704,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8936B9F21FF621F800F72595 /* libavconVoiceRecognize.a in Frameworks */,
 				893E6BD51FF5F3D700502F55 /* IOTCamera.framework in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
 				8900738E1FF4AC3800FB36B1 /* UserNotifications.framework in Frameworks */,
-				89E171181FDFD26D004AAD3D /* libavconVoiceRecognize.a in Frameworks */,
 				894871C91FDF6BA3008F15F2 /* MobileCoreServices.framework in Frameworks */,
 				894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */,
 				894871C51FDF6B93008F15F2 /* QuartzCore.framework in Frameworks */,
@@ -730,6 +736,7 @@
 		890B40671FAFF99400C1061A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				89D811111FF63FEB00679B39 /* About */,
 				895141D51FE7780100905355 /* Model */,
 				89E6D9931FDA2B0B0049F1E7 /* Extend */,
 				896BA3CB1FD9255500EE31AB /* Image */,
@@ -1220,6 +1227,17 @@
 				89A096811FF109C700E5EBAE /* Info.plist */,
 			);
 			path = FLAnimatedImage;
+			sourceTree = "<group>";
+		};
+		89D811111FF63FEB00679B39 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				89D811141FF63FEB00679B39 /* AppVersionController.h */,
+				89D811151FF63FEB00679B39 /* AppVersionController.m */,
+				89D811161FF63FEB00679B39 /* WebBrowserController.h */,
+				89D811171FF63FEB00679B39 /* WebBrowserController.m */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		89D8697E1FDE412000B91D5B /* WiFiSetting */ = {
@@ -1933,7 +1951,7 @@
 					894D7E481FAB01D900C58BB2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 6HDH3DS77K;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2052,6 +2070,7 @@
 				89E4E9721FCE7EC1007EA336 /* CameraListItemTableViewCell.m in Sources */,
 				89E6D98C1FDA25F30049F1E7 /* BaseViewController.m in Sources */,
 				892ADB6E1FD692B500BD8929 /* SwitchTableViewCell.m in Sources */,
+				89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */,
 				89E4E96D1FCE67CA007EA336 /* CameraListViewController.m in Sources */,
 				892ADB971FD80AB600BD8929 /* PlaybackViewController.m in Sources */,
 				89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */,
@@ -2072,6 +2091,7 @@
 				EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */,
 				890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */,
 				890B407E1FB006C600C1061A /* AboutViewController.m in Sources */,
+				89D8111C1FF63FEB00679B39 /* WebBrowserController.m in Sources */,
 				892ADB851FD78E5400BD8929 /* TimeZoneModel.m in Sources */,
 				898D8BAD1FE0F66600062F04 /* FMDatabase.m in Sources */,
 				892CE0BB1FD1014000942E28 /* TextFieldImgTableViewCell.m in Sources */,
@@ -2306,8 +2326,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6HDH3DS77K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2335,8 +2356,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "65587f99-3c79-4144-8a90-c523f45f6186";
-				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_profile_20171228;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2349,8 +2370,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6HDH3DS77K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2378,8 +2400,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "65587f99-3c79-4144-8a90-c523f45f6186";
-				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_profile_20171228;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

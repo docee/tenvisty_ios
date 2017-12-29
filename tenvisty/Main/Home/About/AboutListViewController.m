@@ -9,6 +9,7 @@
 #import "AboutListViewController.h"
 #import "ListImgTableViewCellModel.h"
 #import "ListImgTableViewCell.h"
+#import "WebBrowserController.h"
 
 @interface AboutListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -68,10 +69,37 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if(indexPath.row == 0){
+        [self performSegueWithIdentifier:@"AboutList2Help" sender:self];
+    }
+    else if(indexPath.row == 1){
+        [self performSegueWithIdentifier:@"AboutList2Privacy" sender:self];
+    }
+    else if(indexPath.row == 2){
+        [self performSegueWithIdentifier:@"AboutList2AppVersion" sender:self];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    // App Name
+    
+    if([segue.identifier isEqualToString:@"AboutList2Privacy"]){
+        WebBrowserController *controller= segue.destinationViewController;
+        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        controller.Url = FORMAT(@"http://p.webgoodcam.com/%@/touch/camerafaq/detail_wireless_install.html",appName);
+    }
+    else if([segue.identifier isEqualToString:@"AboutList2Help"]){
+        WebBrowserController *controller= segue.destinationViewController;
+        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        controller.Url = FORMAT(@"http://p.webgoodcam.com/%@/ysxy.html",appName);
+    }
+}
+//其他界面返回到此界面调用的方法
+- (IBAction)AboutListViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
+    
+}
 /*
  #pragma mark - Navigation
  

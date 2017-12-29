@@ -38,14 +38,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *id = TableViewCell_TextField_Disable;
     TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    if(indexPath.row == 0){
+    if(indexPath.row == 1){
         cell.title = LOCALSTR(@"Version");
         if(fmVersion == nil){
             cell.value = LOCALSTR(@"loading...");
@@ -53,6 +53,10 @@
             cell.value = fmVersion;
         }
        
+    }
+    else if(indexPath.row == 0){
+        cell.title = LOCALSTR(@"UID");
+        cell.value = self.camera.uid;
     }
     return cell;
 }
@@ -62,7 +66,6 @@
         case IOTYPE_USER_IPCAM_DEVINFO_RESP:{
             SMsgAVIoctrlDeviceInfoResp *resp = (SMsgAVIoctrlDeviceInfoResp*)data;
             unsigned char v[4] = {0};
-            
             v[3] = (char)resp->version;
             v[2] = (char)(resp->version >> 8);
             v[1] = (char)(resp->version >> 16);

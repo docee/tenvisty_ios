@@ -52,9 +52,11 @@
     NSString *thumbPath = [GBase thumbPath:camera];
     if(thumbPath == nil){
         [cell.leftImg setImage:[UIImage imageNamed:@"default_img"]];
+        [cell.leftImg setContentMode:UIViewContentModeCenter];
     }
     else{
         [cell.leftImg setImage:[UIImage imageWithContentsOfFile:thumbPath]];
+        [cell.leftImg setContentMode:UIViewContentModeScaleToFill];
     }
     return cell;
 }

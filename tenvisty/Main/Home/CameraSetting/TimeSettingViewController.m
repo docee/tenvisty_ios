@@ -163,7 +163,7 @@
         case IOTYPE_USER_IPCAM_GET_TIME_INFO_RESP:{
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlGetTimeResp *resp = (SMsgAVIoctrlGetTimeResp*)data;
-            time = FORMAT(@"%d/%d/%d %d:%d:%d",resp->TimeInfo.month,resp->TimeInfo.day,resp->TimeInfo.year,resp->TimeInfo.hour,resp->TimeInfo.minute,resp->TimeInfo.second);
+            time = FORMAT(@"%d-%d-%d %d:%d:%d",resp->TimeInfo.year,resp->TimeInfo.month,resp->TimeInfo.day,resp->TimeInfo.hour,resp->TimeInfo.minute,resp->TimeInfo.second);
             [self.tableView reloadData];
             break;
         }

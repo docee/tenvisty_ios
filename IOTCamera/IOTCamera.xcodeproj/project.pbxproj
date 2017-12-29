@@ -775,6 +775,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2111FE217F8028700BF0C0C /* H264iPhone.h in Headers */,
 				899AD4B81FC7CD32008ED303 /* fifo.h in Headers */,
 				899AD4A81FC7CD32008ED303 /* avformat.h in Headers */,
 				614AF7D415A667AD009869D3 /* Camera.h in Headers */,
@@ -787,7 +788,6 @@
 				61B9490815A66B210000BCF8 /* AVIOCTRLDEFs.h in Headers */,
 				899AD4BA1FC7CD32008ED303 /* intfloat_readwrite.h in Headers */,
 				899AD4B61FC7CD32008ED303 /* crc.h in Headers */,
-				B2111FE217F8028700BF0C0C /* H264iPhone.h in Headers */,
 				899AD4B21FC7CD32008ED303 /* base64.h in Headers */,
 				B2CC0AF717F924FD008EDC4C /* CameraProtocol.h in Headers */,
 				899AD4AC1FC7CD32008ED303 /* adler32.h in Headers */,
