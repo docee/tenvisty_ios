@@ -75,8 +75,6 @@
 		89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */; };
 		89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */; };
 		8936B9F21FF621F800F72595 /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E171171FDFD26C004AAD3D /* libavconVoiceRecognize.a */; };
-		893E6BD51FF5F3D700502F55 /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
-		893E6BD61FF5F3ED00502F55 /* IOTCamera.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		893E6BEC1FF5FD0F00502F55 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E6BEA1FF5FD0F00502F55 /* libUMessage_Sdk_1.5.0a.a */; };
 		894871C51FDF6B93008F15F2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C41FDF6B93008F15F2 /* QuartzCore.framework */; };
 		894871C71FDF6B9B008F15F2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894871C61FDF6B9B008F15F2 /* ImageIO.framework */; };
@@ -101,7 +99,6 @@
 		8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC301FF2203C004989A9 /* LocalPictureInfo.m */; };
 		8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */; };
 		8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989EC371FF262CD004989A9 /* PicturesLoop.m */; };
-		898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 898D8B921FE0CDA900062F04 /* Documentation.html */; };
 		898D8B9B1FE0CDA900062F04 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */; };
 		898D8B9C1FE0CDA900062F04 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8B961FE0CDA900062F04 /* GCDAsyncUdpSocket.m */; };
 		898D8BAD1FE0F66600062F04 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BA31FE0F66600062F04 /* FMDatabase.m */; };
@@ -146,6 +143,7 @@
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
+		ED6C474A1FF78CC800262F52 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C47491FF78CC800262F52 /* IOTCamera */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
 		EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */; };
 		EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1C1841FD5A99D00DAE334 /* CameraSettingViewController.m */; };
@@ -167,13 +165,6 @@
 			remoteGlobalIDString = 3E2A43D315FEEBE6000A2974;
 			remoteInfo = IOTCamera_MJ4;
 		};
-		8912D4DF1FF1174800C660AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8912D4761FF1120200C660AB;
-			remoteInfo = IOTCamera_T;
-		};
 		893E6BD31FF5F3A000502F55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
@@ -190,7 +181,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				893E6BD61FF5F3ED00502F55 /* IOTCamera.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +356,6 @@
 		8989EC341FF262CD004989A9 /* PhotoBroswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBroswerViewController.m; sourceTree = "<group>"; };
 		8989EC361FF262CD004989A9 /* PicturesLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicturesLoop.h; sourceTree = "<group>"; };
 		8989EC371FF262CD004989A9 /* PicturesLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicturesLoop.m; sourceTree = "<group>"; };
-		898D8B921FE0CDA900062F04 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
 		898D8B931FE0CDA900062F04 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		898D8B951FE0CDA900062F04 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
@@ -690,6 +679,20 @@
 		ED3D506A1FD59D0300F0C658 /* BaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableView.m; sourceTree = "<group>"; };
 		ED3E88B61FE6C012006754E8 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
 		ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFDevice.m"; sourceTree = "<group>"; };
+		ED6C47391FF78CBD00262F52 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = "<group>"; };
+		ED6C473A1FF78CBD00262F52 /* FLAnimatedImage.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = FLAnimatedImage.framework.dSYM; sourceTree = "<group>"; };
+		ED6C473B1FF78CBD00262F52 /* IOTCamera_MJ4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera_MJ4.framework; sourceTree = "<group>"; };
+		ED6C473C1FF78CBD00262F52 /* IOTCamera_T.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera_T.framework; sourceTree = "<group>"; };
+		ED6C473E1FF78CBD00262F52 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = "<group>"; };
+		ED6C473F1FF78CBD00262F52 /* FLAnimatedImage.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = FLAnimatedImage.framework.dSYM; sourceTree = "<group>"; };
+		ED6C47401FF78CBD00262F52 /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera.framework; sourceTree = "<group>"; };
+		ED6C47411FF78CBD00262F52 /* libavconVoiceRecognize.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavconVoiceRecognize.a; sourceTree = "<group>"; };
+		ED6C47421FF78CBD00262F52 /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
+		ED6C47431FF78CBD00262F52 /* libZXingWidget.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZXingWidget.a; sourceTree = "<group>"; };
+		ED6C47451FF78CBD00262F52 /* 08A8B0C5-4CF9-34F6-B100-112F4415A4C9.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "08A8B0C5-4CF9-34F6-B100-112F4415A4C9.bcsymbolmap"; sourceTree = "<group>"; };
+		ED6C47461FF78CBD00262F52 /* 6503FD3E-FCAF-3500-92EA-4D9A02E795EC.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "6503FD3E-FCAF-3500-92EA-4D9A02E795EC.bcsymbolmap"; sourceTree = "<group>"; };
+		ED6C47471FF78CBD00262F52 /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IOTCamera.framework; sourceTree = "<group>"; };
+		ED6C47491FF78CC800262F52 /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-hgdwhrvovyreqqcjuxfukgheohqw/Build/Intermediates.noindex/ArchiveIntermediates/tenvisty/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
 		ED8CA6861FD40A29005858CC /* LiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		ED8CA6871FD40A29005858CC /* LiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
 		EDB075EE1FEE331B00B3EE23 /* EventCustomSearchSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCustomSearchSource.h; sourceTree = "<group>"; };
@@ -704,8 +707,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED6C474A1FF78CC800262F52 /* IOTCamera in Frameworks */,
 				8936B9F21FF621F800F72595 /* libavconVoiceRecognize.a in Frameworks */,
-				893E6BD51FF5F3D700502F55 /* IOTCamera.framework in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
 				8900738E1FF4AC3800FB36B1 /* UserNotifications.framework in Frameworks */,
@@ -799,7 +802,6 @@
 			children = (
 				890B46A41FB032A400C1061A /* IOTCamera.framework */,
 				890B46A61FB032A400C1061A /* IOTCamera_MJ4.framework */,
-				8912D4E01FF1174800C660AB /* IOTCamera_T.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -834,7 +836,6 @@
 		890B46B11FB03CD500C1061A /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				895141D11FE7761300905355 /* FileHelper */,
 				895141CA1FE763BD00905355 /* iToast */,
 				898D8BA11FE0F66600062F04 /* fmdb */,
 				898D8B911FE0CDA900062F04 /* GCD */,
@@ -860,6 +861,8 @@
 		890B46BB1FB050A800C1061A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED6C47491FF78CC800262F52 /* IOTCamera */,
+				ED6C47371FF78CBD00262F52 /* lib */,
 				890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */,
 				8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */,
 				8900738D1FF4AC3800FB36B1 /* UserNotifications.framework */,
@@ -1051,13 +1054,6 @@
 			path = iToast;
 			sourceTree = "<group>";
 		};
-		895141D11FE7761300905355 /* FileHelper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FileHelper;
-			sourceTree = "<group>";
-		};
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1165,7 +1161,6 @@
 		898D8B911FE0CDA900062F04 /* GCD */ = {
 			isa = PBXGroup;
 			children = (
-				898D8B921FE0CDA900062F04 /* Documentation.html */,
 				898D8B931FE0CDA900062F04 /* GCDAsyncSocket.h */,
 				898D8B941FE0CDA900062F04 /* GCDAsyncSocket.m */,
 				898D8B951FE0CDA900062F04 /* GCDAsyncUdpSocket.h */,
@@ -1881,6 +1876,59 @@
 			path = "UIDevice+TFDevice";
 			sourceTree = "<group>";
 		};
+		ED6C47371FF78CBD00262F52 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C47381FF78CBD00262F52 /* Debug-iphoneos */,
+				ED6C473D1FF78CBD00262F52 /* Debug-iphonesimulator */,
+				ED6C47411FF78CBD00262F52 /* libavconVoiceRecognize.a */,
+				ED6C47421FF78CBD00262F52 /* libIOTCAPIs_ALL.a */,
+				ED6C47431FF78CBD00262F52 /* libZXingWidget.a */,
+				ED6C47441FF78CBD00262F52 /* Release-iphoneos */,
+				ED6C47481FF78CBD00262F52 /* Release-iphonesimulator */,
+			);
+			name = lib;
+			path = tenvisty/lib;
+			sourceTree = "<group>";
+		};
+		ED6C47381FF78CBD00262F52 /* Debug-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C47391FF78CBD00262F52 /* FLAnimatedImage.framework */,
+				ED6C473A1FF78CBD00262F52 /* FLAnimatedImage.framework.dSYM */,
+				ED6C473B1FF78CBD00262F52 /* IOTCamera_MJ4.framework */,
+				ED6C473C1FF78CBD00262F52 /* IOTCamera_T.framework */,
+			);
+			path = "Debug-iphoneos";
+			sourceTree = "<group>";
+		};
+		ED6C473D1FF78CBD00262F52 /* Debug-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C473E1FF78CBD00262F52 /* FLAnimatedImage.framework */,
+				ED6C473F1FF78CBD00262F52 /* FLAnimatedImage.framework.dSYM */,
+				ED6C47401FF78CBD00262F52 /* IOTCamera.framework */,
+			);
+			path = "Debug-iphonesimulator";
+			sourceTree = "<group>";
+		};
+		ED6C47441FF78CBD00262F52 /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C47451FF78CBD00262F52 /* 08A8B0C5-4CF9-34F6-B100-112F4415A4C9.bcsymbolmap */,
+				ED6C47461FF78CBD00262F52 /* 6503FD3E-FCAF-3500-92EA-4D9A02E795EC.bcsymbolmap */,
+				ED6C47471FF78CBD00262F52 /* IOTCamera.framework */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		ED6C47481FF78CBD00262F52 /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Release-iphonesimulator";
+			sourceTree = "<group>";
+		};
 		EDF1C17F1FD5A48800DAE334 /* CameraSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -2006,13 +2054,6 @@
 			remoteRef = 890B46A51FB032A400C1061A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8912D4E01FF1174800C660AB /* IOTCamera_T.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = IOTCamera_T.framework;
-			remoteRef = 8912D4DF1FF1174800C660AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -2036,7 +2077,6 @@
 				8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */,
 				892CE0CD1FD1271300942E28 /* TextFieldDisableTableViewCell.xib in Resources */,
 				89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */,
-				898D8B9A1FE0CDA900062F04 /* Documentation.html in Resources */,
 				892ADB6B1FD6928A00BD8929 /* SwitchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2332,11 +2372,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/IOTCamera/Build/Products/Debug-iphoneos",
-					"$(PROJECT_DIR)/IOTCamera/Build/Products/Release-iphoneos",
-					"$(PROJECT_DIR)/IOTCamera/Build/Products/Release-iphonesimulator",
-					"$(PROJECT_DIR)/tenvisty/lib/Debug-iphonesimulator",
-					"$(PROJECT_DIR)/tenvisty/lib/Debug-iphoneos",
 					"$(PROJECT_DIR)/tenvisty/lib/Release-iphoneos",
 				);
 				GCC_PREFIX_HEADER = tenvisty/PrefixHeader.pch;
@@ -2376,11 +2411,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/IOTCamera/Build/Products/Debug-iphoneos",
-					"$(PROJECT_DIR)/IOTCamera/Build/Products/Release-iphoneos",
-					"$(PROJECT_DIR)/IOTCamera/Build/Products/Release-iphonesimulator",
-					"$(PROJECT_DIR)/tenvisty/lib/Debug-iphonesimulator",
-					"$(PROJECT_DIR)/tenvisty/lib/Debug-iphoneos",
 					"$(PROJECT_DIR)/tenvisty/lib/Release-iphoneos",
 				);
 				GCC_PREFIX_HEADER = tenvisty/PrefixHeader.pch;
