@@ -10,6 +10,7 @@
 #define ZOOM_MAX_SCALE 5.0
 #define ZOOM_MIN_SCALE 1.0
 #define RECORD_TIMEOUT (5)
+#define DEFAULT_VIDEO_RATIO 16/9
 
 #import "LiveViewController.h"
 #import <IOTCamera/Monitor.h>
@@ -38,7 +39,6 @@
 @property (weak, nonatomic) IBOutlet UIView *toolbtns_portrait;
 @property (weak, nonatomic) IBOutlet UIView *video_wrapper;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_status_height;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_videowrapper_height;
 @property (nonatomic,assign) Boolean isFullscreen;
 @property (weak, nonatomic) IBOutlet UILabel *labConnectState;
 @property (weak, nonatomic) IBOutlet Monitor *videoMonitor;
@@ -59,6 +59,9 @@
 @property (weak, nonatomic) IBOutlet UIView *viewToolbarTop;
 @property (weak, nonatomic) IBOutlet UIView *viewToolbarBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_viewtoolbarbottom;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_xcenter_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_leading_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_trailing_videowrapper;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
@@ -83,6 +86,11 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
 -(void)doChangeVideoQuality:(NSInteger)index t:(NSString*)title{
     
 }
@@ -102,7 +110,9 @@
     self.scrollviewVideo.maximumZoomScale = ZOOM_MAX_SCALE;
     self.scrollviewVideo.contentMode = UIViewContentModeScaleAspectFit;
     self.scrollviewVideo.contentSize = self.videoMonitor.frame.size;
+    [self resizeMonitor:self.camera.videoRatio];
 }
+
 #pragma mark - ScrollView Delegate
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
         return self.videoMonitor;
@@ -286,26 +296,35 @@
         [self.constraint_toolbar_portrait_height setConstant:0];
         [self.toolbtns_portrait setHidden:YES];
         self.navigationController.navigationBar.hidden=YES;
-        [self.constraint_videowrapper_height setConstant:width+300];
         _isFullscreen = YES;
         [_btnTalk_land setHidden:!isListening];
         [_constraint_width_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
+        _constraint_leading_videowrapper.priority = 700;
+        _constraint_trailing_videowrapper.priority = 700;
+        _constraint_xcenter_videowrapper.priority = 800;
     }
     else{
-        
+        _constraint_leading_videowrapper.priority = 800;
+        _constraint_trailing_videowrapper.priority = 800;
+        _constraint_xcenter_videowrapper.priority = 700;
         [self toggleTools:YES];
         [self.constraint_status_height setConstant:40];
         [self.constraint_toolbar_portrait_height setConstant:40];
         [self.toolbtns_portrait setHidden:NO];
         self.navigationController.navigationBar.hidden=NO;
-        [self.constraint_videowrapper_height setConstant:width*9/16];
         _isFullscreen = NO;
         [_constraint_width_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_viewPreset setHidden:YES];
+//        for(NSLayoutConstraint *constraint in self.video_wrapper.constraints){
+//            if([constraint.identifier isEqualToString:@"videowrapper_ratio"]){
+//                existConstraint = constraint;
+//                break;
+//            }
+//        }
       //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
@@ -592,7 +611,35 @@
     });
 }
 
+-(void)resizeMonitor:(CGFloat)ratio{
+    NSLayoutConstraint *existConstraint = nil;
+    for(NSLayoutConstraint *constraint in self.video_wrapper.constraints){
+        if([constraint.identifier isEqualToString:@"videowrapper_ratio"]){
+            existConstraint = constraint;
+            break;
+        }
+    }
+    
+    //if(existConstraint == nil){
+    NSLayoutConstraint *myConstraint =[NSLayoutConstraint
+                                       constraintWithItem:self.video_wrapper //子试图
+                                       attribute:NSLayoutAttributeWidth //子试图的约束属性
+                                       relatedBy:0 //属性间的关系
+                                       toItem:self.video_wrapper//相对于父试图
+                                       attribute:NSLayoutAttributeHeight//父试图的约束属性
+                                       multiplier:ratio
+                                       constant:0.0];// 固定距离
+    myConstraint.identifier = @"videowrapper_ratio";
+    [self.video_wrapper removeConstraint:existConstraint];//在父试图上将iSinaButton距离屏幕左边的约束删除
+    [self.video_wrapper addConstraint: myConstraint];
+}
+
 - (void)camera:(NSCamera *)camera _didReceiveRawDataFrame:(const char *)imgData VideoWidth:(NSInteger)width VideoHeight:(NSInteger)height{
+    if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
+        self.camera.videoRatio = (CGFloat)width/height;
+        [self resizeMonitor:self.camera.videoRatio];
+
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
             [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];

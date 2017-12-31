@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet Monitor *monitor;
 @property (weak, nonatomic) IBOutlet UILabel *labEventType;
 @property (weak, nonatomic) IBOutlet UILabel *labEventTime;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_ratio_videowrapper;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
 @end
 
@@ -48,6 +49,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
     _labEventTime.text = [dateFormatter stringFromDate:date];
+    [self resizeMonitor:self.camera.videoRatio];
     [self startPlayback];
 }
 -(dispatch_block_t)timeoutTask{
@@ -268,21 +270,50 @@
         _needCreateSnapshot = NO;
         [GBase saveRemoteRecordPictureForCamera:self.camera image:_monitor.image eventType:self.evt.eventType eventTime:self.evt.eventTime];
     }
-    if(waitResize){
-        waitResize = NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.scrollview_video.translatesAutoresizingMaskIntoConstraints = YES;
-            if(fabs(self.scrollview_video.frame.size.width/self.scrollview_video.frame.size.height - width/height) > 0.2){
-                __block CGRect currentframe = self.scrollview_video.frame;
-                __weak typeof(self) weakSelf = self;
-                [UIView animateWithDuration:0.3 animations:^{
-                    currentframe.size.height = currentframe.size.width * height/width;
-                    weakSelf.scrollview_video.frame = CGRectMake(currentframe.origin.x, currentframe.origin.y, currentframe.size.width, currentframe.size.height);
-                }];
-            }
-        });
+    if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
+        self.camera.videoRatio = (CGFloat)width/height;
+        [self resizeMonitor:self.camera.videoRatio];
+        
     }
+//    if(waitResize){
+//        waitResize = NO;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.scrollview_video.translatesAutoresizingMaskIntoConstraints = YES;
+//            if(fabs(self.scrollview_video.frame.size.width/self.scrollview_video.frame.size.height - width/height) > 0.2){
+//                __block CGRect currentframe = self.scrollview_video.frame;
+//                __weak typeof(self) weakSelf = self;
+//                [UIView animateWithDuration:0.3 animations:^{
+//                    currentframe.size.height = currentframe.size.width * height/width;
+//                    weakSelf.scrollview_video.frame = CGRectMake(currentframe.origin.x, currentframe.origin.y, currentframe.size.width, currentframe.size.height);
+//                }];
+//            }
+//        });
+//    }
 }
+
+-(void)resizeMonitor:(CGFloat)ratio{
+    NSLayoutConstraint *existConstraint = nil;
+    for(NSLayoutConstraint *constraint in self.scrollview_video.constraints){
+        if([constraint.identifier isEqualToString:@"videowrapper_ratio"]){
+            existConstraint = constraint;
+            break;
+        }
+    }
+    
+    //if(existConstraint == nil){
+    NSLayoutConstraint *myConstraint =[NSLayoutConstraint
+                                       constraintWithItem:self.scrollview_video //子试图
+                                       attribute:NSLayoutAttributeWidth //子试图的约束属性
+                                       relatedBy:0 //属性间的关系
+                                       toItem:self.scrollview_video//相对于父试图
+                                       attribute:NSLayoutAttributeHeight//父试图的约束属性
+                                       multiplier:ratio
+                                       constant:0.0];// 固定距离
+    myConstraint.identifier = @"videowrapper_ratio";
+    [self.scrollview_video removeConstraint:existConstraint];//在父试图上将iSinaButton距离屏幕左边的约束删除
+    [self.scrollview_video addConstraint: myConstraint];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

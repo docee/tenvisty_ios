@@ -34,5 +34,6 @@
 + (NSMutableArray *)recordingsForCamera:(Camera *)mycam;
 + (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName;
 + (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(Camera *)mycam;
-
++(CGFloat)getCameraVideoRatio:(MyCamera *)mycam;
++(void)setCameraVideoRatio:(MyCamera*)mycam ratio:(CGFloat)ratio;
 @end

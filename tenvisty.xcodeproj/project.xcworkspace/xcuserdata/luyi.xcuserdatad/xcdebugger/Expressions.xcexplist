@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[LiveViewController rotateOrientation:]:LiveViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "constraint.identifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[SaveCameraTableViewController saveCamera:]:SaveCameraTableViewController.m">
          <PersistentStrings>
             <PersistentString

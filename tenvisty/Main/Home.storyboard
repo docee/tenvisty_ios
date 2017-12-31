@@ -519,18 +519,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="lFG-sW-s6a">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lFG-sW-s6a">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera On LAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aws-Ae-pPR">
-                                    <rect key="frame" x="20" y="-8.5" width="104" height="17"/>
+                                    <rect key="frame" x="20" y="9" width="104" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQ4-0Q-4BU">
-                                    <rect key="frame" x="129" y="-10" width="20" height="20"/>
+                                    <rect key="frame" x="129" y="7.5" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="CXQ-EY-o2l"/>
                                         <constraint firstAttribute="height" constant="20" id="ZVJ-BT-7m8"/>
@@ -874,9 +874,9 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="jEH-rg-a1Z" secondAttribute="trailing" id="2td-aw-J28"/>
+                                    <constraint firstAttribute="trailing" secondItem="jEH-rg-a1Z" secondAttribute="trailing" identifier="videowrapper_trailing" id="2td-aw-J28"/>
                                     <constraint firstAttribute="bottom" secondItem="6pH-cP-QwW" secondAttribute="bottom" id="3dU-H0-yll"/>
                                     <constraint firstItem="BhT-Sb-LI5" firstAttribute="centerX" secondItem="HEB-va-RUZ" secondAttribute="centerX" id="5cN-6K-KBh"/>
                                     <constraint firstItem="jEH-rg-a1Z" firstAttribute="top" secondItem="HEB-va-RUZ" secondAttribute="top" id="7cf-dp-tl4"/>
@@ -885,7 +885,7 @@
                                     <constraint firstItem="Ubj-6M-Oic" firstAttribute="leading" secondItem="HEB-va-RUZ" secondAttribute="leading" id="Nx3-4r-OSm"/>
                                     <constraint firstItem="Ubj-6M-Oic" firstAttribute="top" secondItem="HEB-va-RUZ" secondAttribute="top" id="RuI-Yz-eJe"/>
                                     <constraint firstAttribute="bottom" secondItem="jEH-rg-a1Z" secondAttribute="bottom" id="SY4-Zv-krZ"/>
-                                    <constraint firstAttribute="width" secondItem="HEB-va-RUZ" secondAttribute="height" multiplier="16:9" id="YIu-I0-89t"/>
+                                    <constraint firstAttribute="width" secondItem="HEB-va-RUZ" secondAttribute="height" multiplier="16:9" identifier="videowrapper_ratio" id="YIu-I0-89t"/>
                                     <constraint firstAttribute="bottom" secondItem="4kE-U2-S3h" secondAttribute="bottom" constant="60" id="gJ1-8a-fDH"/>
                                     <constraint firstItem="nD4-hg-e9M" firstAttribute="centerY" secondItem="HEB-va-RUZ" secondAttribute="centerY" multiplier="3/4" id="hv7-dx-HcQ"/>
                                     <constraint firstItem="jEH-rg-a1Z" firstAttribute="leading" secondItem="HEB-va-RUZ" secondAttribute="leading" id="krP-sN-oT4"/>
@@ -1424,10 +1424,9 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="HEB-va-RUZ" firstAttribute="leading" secondItem="Bpq-F5-tPb" secondAttribute="leading" id="1Ei-ZK-7ML"/>
                             <constraint firstItem="g1R-DX-BLd" firstAttribute="centerX" secondItem="fhj-bf-m19" secondAttribute="centerX" id="4y5-9T-DD2"/>
                             <constraint firstAttribute="trailing" secondItem="ZAP-Xc-HbE" secondAttribute="trailing" id="87x-iJ-Ap3"/>
                             <constraint firstItem="orD-Hb-W61" firstAttribute="top" secondItem="Dvh-31-9Y4" secondAttribute="top" priority="800" constant="92" id="Bxe-Hz-mGw"/>
@@ -1435,13 +1434,15 @@
                             <constraint firstAttribute="bottom" secondItem="ZAP-Xc-HbE" secondAttribute="bottom" id="EsE-QA-thk"/>
                             <constraint firstItem="ChE-Oy-vbq" firstAttribute="top" secondItem="Dvh-31-9Y4" secondAttribute="top" priority="700" constant="86" id="L4Q-N0-osT"/>
                             <constraint firstItem="orD-Hb-W61" firstAttribute="centerX" secondItem="Dvh-31-9Y4" secondAttribute="centerX" priority="800" id="SdR-qY-R36"/>
+                            <constraint firstItem="HEB-va-RUZ" firstAttribute="leading" secondItem="Bpq-F5-tPb" secondAttribute="leading" identifier="videowrapper_leading" id="VJ8-4f-eXq"/>
                             <constraint firstItem="ZAP-Xc-HbE" firstAttribute="leading" secondItem="Bpq-F5-tPb" secondAttribute="leading" id="W1W-nY-giU"/>
                             <constraint firstItem="g1R-DX-BLd" firstAttribute="centerX" secondItem="fhj-bf-m19" secondAttribute="centerX" id="WO0-9d-Wwk"/>
                             <constraint firstItem="ZAP-Xc-HbE" firstAttribute="top" secondItem="HEB-va-RUZ" secondAttribute="bottom" id="Wsc-W6-cAa"/>
-                            <constraint firstAttribute="trailing" secondItem="HEB-va-RUZ" secondAttribute="trailing" id="YQ0-kM-2uR"/>
+                            <constraint firstAttribute="trailing" secondItem="HEB-va-RUZ" secondAttribute="trailing" identifier="videowrapper_trailing" id="YQ0-kM-2uR"/>
                             <constraint firstItem="2Di-zb-hug" firstAttribute="top" secondItem="x3u-p2-xzP" secondAttribute="bottom" id="ilK-32-9Aj"/>
                             <constraint firstAttribute="trailing" secondItem="2Di-zb-hug" secondAttribute="trailing" id="kCQ-bI-EcP"/>
                             <constraint firstItem="orD-Hb-W61" firstAttribute="width" secondItem="Dvh-31-9Y4" secondAttribute="width" priority="800" id="kbP-Oj-KSk"/>
+                            <constraint firstItem="HEB-va-RUZ" firstAttribute="centerX" secondItem="Bpq-F5-tPb" secondAttribute="centerX" priority="800" id="nXl-7s-F5l"/>
                             <constraint firstItem="2Di-zb-hug" firstAttribute="leading" secondItem="Bpq-F5-tPb" secondAttribute="leading" id="oBU-dH-sZb"/>
                             <constraint firstItem="g1R-DX-BLd" firstAttribute="top" secondItem="2Di-zb-hug" secondAttribute="bottom" constant="60" id="ood-7Y-Xo3"/>
                             <constraint firstItem="Dvh-31-9Y4" firstAttribute="centerX" secondItem="Bpq-F5-tPb" secondAttribute="centerX" priority="700" id="pdY-I6-ZXQ"/>
@@ -1469,10 +1470,13 @@
                         <outlet property="btnTalk_land" destination="4kE-U2-S3h" id="dJt-Ui-ePX"/>
                         <outlet property="connectStatus_port" destination="2Di-zb-hug" id="uaA-SZ-9xk"/>
                         <outlet property="constraint_bottom_viewtoolbarbottom" destination="3dU-H0-yll" id="MGM-vB-7gx"/>
+                        <outlet property="constraint_leading_videowrapper" destination="VJ8-4f-eXq" id="h3y-UZ-UZi"/>
                         <outlet property="constraint_status_height" destination="4OC-13-FiM" id="cT6-uI-1r6"/>
                         <outlet property="constraint_toolbar_portrait_height" destination="PRR-dw-VfX" id="dZV-dg-gm0"/>
                         <outlet property="constraint_top_viewSwitchVideoQuality_land" destination="Bxe-Hz-mGw" id="FXt-dJ-jMt"/>
+                        <outlet property="constraint_trailing_videowrapper" destination="YQ0-kM-2uR" id="A7j-oV-ZQE"/>
                         <outlet property="constraint_x_viewSwitchVideoQuality_land" destination="SdR-qY-R36" id="xNB-tw-jnD"/>
+                        <outlet property="constraint_xcenter_videowrapper" destination="nXl-7s-F5l" id="usC-yj-AND"/>
                         <outlet property="labConnectState" destination="C4W-14-BpJ" id="AJA-hf-KvK"/>
                         <outlet property="labRecordTime" destination="K3E-Tk-PWz" id="M59-th-7Dr"/>
                         <outlet property="scrollviewVideo" destination="jEH-rg-a1Z" id="AAo-ze-TGs"/>
@@ -2028,7 +2032,7 @@
                                     <constraint firstAttribute="trailing" secondItem="O18-ti-FGr" secondAttribute="trailing" id="ZJU-6H-dvv"/>
                                     <constraint firstItem="O18-ti-FGr" firstAttribute="centerY" secondItem="dna-kz-yon" secondAttribute="centerY" id="lx6-Gz-525"/>
                                     <constraint firstItem="O18-ti-FGr" firstAttribute="centerX" secondItem="dna-kz-yon" secondAttribute="centerX" id="pzc-6N-SFO"/>
-                                    <constraint firstAttribute="width" secondItem="dna-kz-yon" secondAttribute="height" multiplier="16:9" id="qio-10-Zby"/>
+                                    <constraint firstAttribute="width" secondItem="dna-kz-yon" secondAttribute="height" multiplier="16:9" identifier="videowrapper_ratio" id="qio-10-Zby"/>
                                     <constraint firstItem="FeL-Qm-GuK" firstAttribute="centerX" secondItem="dna-kz-yon" secondAttribute="centerX" id="r5B-kn-7TF"/>
                                     <constraint firstItem="O18-ti-FGr" firstAttribute="leading" secondItem="dna-kz-yon" secondAttribute="leading" id="rAf-Jc-IuD"/>
                                     <constraint firstItem="O18-ti-FGr" firstAttribute="top" secondItem="dna-kz-yon" secondAttribute="top" id="veY-tq-QwL"/>
@@ -2058,6 +2062,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnPlay" destination="mHZ-3N-d9N" id="re7-yY-NuI"/>
+                        <outlet property="constraint_ratio_videowrapper" destination="qio-10-Zby" id="eMn-Ls-4JY"/>
                         <outlet property="indicator_loading" destination="FeL-Qm-GuK" id="ncD-cg-EPO"/>
                         <outlet property="labEventTime" destination="j2X-Nl-bhc" id="2Di-gO-mNf"/>
                         <outlet property="labEventType" destination="a9C-fk-2wp" id="6dS-pn-ksf"/>
@@ -2591,7 +2596,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="RXW-4V-Fd1"/>
         <segue reference="u2h-rS-5ub"/>
-        <segue reference="Ekd-dn-ODp"/>
+        <segue reference="wsG-cn-sSa"/>
         <segue reference="wkI-hP-L0S"/>
         <segue reference="Y28-Yq-DHg"/>
         <segue reference="p9E-YF-VbO"/>

@@ -429,7 +429,7 @@
     CGFloat w = tableView.frame.size.width - 67;
     //itemw ＝ 总长度－缩进的宽度 － 列间距
     CGFloat itemw = ceil((w - OffLeft - OffRight - Offx*(column-1))/column);
-    CGFloat itemh = itemw*9/16;
+    CGFloat itemh = itemw/self.camera.videoRatio;
     CGFloat height = Offy+( OffBottom + OffTop)*row + (row)*itemh +30;
     return height;
     //return indexPath.row%3 == 0?((indexPath.row+1)*160.0):(((indexPath.row+1)*160.0)+30);
@@ -556,7 +556,7 @@
     CGFloat w = collectionView.frame.size.width;
     //itemw ＝ 总长度－缩进的宽度 － 列间距
     CGFloat itemw =ceil((w - OffLeft - OffRight - Offx*(row-1))/row);
-    CGFloat itemh = itemw*9/16;
+    CGFloat itemh = itemw/self.camera.videoRatio;
     return CGSizeMake(itemw, itemh);
 }
 

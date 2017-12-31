@@ -12,13 +12,16 @@
     NSString *currentSens;
     NSInteger currentPush;
 }
-
+@property (nonatomic,strong) NSArray *sensValueDesc;
+@property (nonatomic,strong) NSArray *sensValue;
 @end
 
 @implementation EventSettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _sensValue = @[@90,@70,@50,@30,@0];
+    _sensValueDesc = @[LOCALSTR(@"Highest"),LOCALSTR(@"High"),LOCALSTR(@"General"),LOCALSTR(@"Low"),LOCALSTR(@"Close")];
     // Do any additional setup after loading the view.
 }
 
@@ -126,20 +129,11 @@
     switch (type) {
         case IOTYPE_USER_IPCAM_GETMOTIONDETECT_RESP:{
             SMsgAVIoctrlGetMotionDetectResp *resp = (SMsgAVIoctrlGetMotionDetectResp*)data;
-            if(resp->sensitivity == 0){
-                currentSens = LOCALSTR(@"Close");
-            }
-            else if(resp->sensitivity <= 30){
-                currentSens = LOCALSTR(@"Low");
-            }
-            else if(resp->sensitivity <= 60){
-                currentSens = LOCALSTR(@"General");
-            }
-            else if(resp->sensitivity <= 80){
-                currentSens = LOCALSTR(@"High");
-            }
-            else{
-                currentSens = LOCALSTR(@"Highest");
+            for(int i=0;i<_sensValue.count;i++){
+                if(resp->sensitivity >= (int)_sensValue[i]){
+                    currentSens = _sensValueDesc[i];
+                    break;
+                }
             }
             [self.tableView reloadData];
             break;

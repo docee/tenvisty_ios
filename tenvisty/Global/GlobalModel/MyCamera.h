@@ -40,6 +40,7 @@
 @property (nonatomic,strong) NSString* nickName;
 @property (nonatomic,assign) NSInteger processState;
 @property (nonatomic,assign) NSInteger upgradePercent;
+@property (nonatomic,assign) CGFloat videoRatio;
 
 //  ---- 传感器 ---- //
 

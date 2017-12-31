@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 
+#define VIDEO_RATIO (@"VIDEO_RATIO")
 
 #import "GBase.h"
 #import "FMDB.h"
@@ -576,6 +577,32 @@ static GBase *base = nil;
         }
     }];
     return pictures;
+}
+
++(CGFloat)getCameraVideoRatio:(MyCamera *)mycam{
+    GBase *base = [GBase sharedInstance];
+    CGFloat ratio = 16.0/9;
+    if(base.db){
+        FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM device_diction WHERE dev_uid=? and dev_key=?", mycam.uid,VIDEO_RATIO];
+        
+        while([rs next]) {
+            ratio = [rs doubleForColumn:@"dev_value"];
+            break;
+            //NSLog(@"imagePath :%@", imageName);
+        }
+        [rs close];
+    }
+    return ratio;
+}
+
++(void)setCameraVideoRatio:(MyCamera*)mycam ratio:(CGFloat)ratio{
+     GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        [base.db executeUpdate:@"DELETE FROM device_diction WHERE dev_uid=? and dev_key=?", mycam.uid,VIDEO_RATIO];
+        if (![base.db executeUpdate:@"INSERT INTO device_diction(dev_uid, dev_key,dev_value) VALUES(?,?,?)", mycam.uid, VIDEO_RATIO,[NSNumber numberWithFloat:ratio]]) {
+            NSLog(@"Fail to insert video ratio to database.");
+        }
+    }
 }
 
 @end

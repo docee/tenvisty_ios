@@ -11,6 +11,7 @@
 @interface SensSettingViewController (){
     NSInteger sensLevel;
 }
+@property (nonatomic,strong) NSArray *sensValue;
 @property (strong,nonatomic) NSArray *items;
 @end
 
@@ -23,6 +24,7 @@
 }
 
 -(void)setup{
+    _sensValue = @[@90,@70,@50,@30,@0];
     [self doGetEventSetting];
 }
 
@@ -75,38 +77,15 @@
 }
 
 -(NSInteger)getLevel:(NSInteger)sens{
-    if(sens== 0){
-        return 4;
+    for(int i=0;i<_sensValue.count;i++){
+        if(sens >= (int)_sensValue[i]){
+            return i;
+        }
     }
-    else if(sens <= 30){
-        return 3;
-    }
-    else if(sens <= 60){
-        return 2;
-    }
-    else if(sens <= 80){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return 0;
 }
 -(NSInteger)getSens:(NSInteger)level{
-    if(level== 0){
-        return 100;
-    }
-    else if(level == 1){
-        return 80;
-    }
-    else if(level == 2){
-        return 60;
-    }
-    else if(level == 3){
-        return 30;
-    }
-    else{
-        return 0;
-    }
+    return (NSInteger)_sensValue[level];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

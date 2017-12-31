@@ -17,6 +17,7 @@
 @property (nonatomic,assign) NSInteger connectTimeoutBeginTime;
 @property (nonatomic, strong) NSUserDefaults *camDefaults;
 @property (nonatomic, strong) NSString *pushToken;
+@property (nonatomic,assign) CGFloat vRatio;
 @end
 
 @implementation MyCamera
@@ -751,5 +752,16 @@
         _camDefaults = [NSUserDefaults standardUserDefaults];
     }
     return _camDefaults;
+}
+
+-(CGFloat)videoRatio{
+    if(!_vRatio){
+        _vRatio = [GBase getCameraVideoRatio:self];
+    }
+    return _vRatio;
+}
+-(void)setVideoRatio:(CGFloat)videoRatio{
+    _vRatio = videoRatio;
+    [GBase setCameraVideoRatio:self ratio:videoRatio];
 }
 @end
