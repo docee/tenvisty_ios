@@ -62,6 +62,9 @@
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_xcenter_videowrapper;
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_leading_videowrapper;
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_trailing_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_ycenter_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_top_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_videowrapper;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
@@ -88,6 +91,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.camera.isPlaying = YES;
     
 }
 
@@ -231,6 +235,7 @@
     }
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = NO;
+    self.camera.isPlaying = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
@@ -285,7 +290,8 @@
 
 
 -(void) rotateOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    CGFloat width = Screen_Main.width>Screen_Main.height?Screen_Main.height:Screen_Main.width;
+    CGFloat height = Screen_Main.width>Screen_Main.height?Screen_Main.height:Screen_Main.width;
+    CGFloat width = Screen_Main.width>Screen_Main.height?Screen_Main.width:Screen_Main.height;
     if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
        
        toInterfaceOrientation == UIInterfaceOrientationLandscapeRight ){
@@ -301,14 +307,31 @@
         [_constraint_width_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
-        _constraint_leading_videowrapper.priority = 700;
-        _constraint_trailing_videowrapper.priority = 700;
-        _constraint_xcenter_videowrapper.priority = 800;
+        if(width/height < self.camera.videoRatio){
+            _constraint_ycenter_videowrapper.priority = 800;
+            _constraint_bottom_videowrapper.priority = 700;
+            _constraint_top_videowrapper.priority = 700;
+            _constraint_leading_videowrapper.priority = 800;
+            _constraint_trailing_videowrapper.priority = 800;
+            _constraint_xcenter_videowrapper.priority = 700;
+        }
+        else{
+            _constraint_leading_videowrapper.priority = 700;
+            _constraint_trailing_videowrapper.priority = 700;
+            _constraint_xcenter_videowrapper.priority = 800;
+            _constraint_ycenter_videowrapper.priority = 700;
+            _constraint_bottom_videowrapper.priority = 800;
+            _constraint_top_videowrapper.priority = 800;
+        }
     }
     else{
+        _constraint_ycenter_videowrapper.priority = 700;
+        _constraint_bottom_videowrapper.priority = 800;
+        _constraint_top_videowrapper.priority = 800;
         _constraint_leading_videowrapper.priority = 800;
         _constraint_trailing_videowrapper.priority = 800;
         _constraint_xcenter_videowrapper.priority = 700;
+
         [self toggleTools:YES];
         [self.constraint_status_height setConstant:40];
         [self.constraint_toolbar_portrait_height setConstant:40];

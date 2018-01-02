@@ -130,7 +130,7 @@
         case IOTYPE_USER_IPCAM_GETMOTIONDETECT_RESP:{
             SMsgAVIoctrlGetMotionDetectResp *resp = (SMsgAVIoctrlGetMotionDetectResp*)data;
             for(int i=0;i<_sensValue.count;i++){
-                if(resp->sensitivity >= (int)_sensValue[i]){
+                if(resp->sensitivity >= [(NSNumber*)_sensValue[i] intValue]){
                     currentSens = _sensValueDesc[i];
                     break;
                 }

@@ -19,6 +19,7 @@
     self.tableview = tableView;
     hideFrame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, 0.1);
     showFrame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, tableView.frame.size.height);
+    self.tableview.backgroundColor = Color_Primary;
     return 5;
 }
 
@@ -43,6 +44,7 @@
     else if(indexPath.row == 4){
         labTitle.text = LOCALSTR(@"Custom");
     }
+    [cell setBackgroundColor:Color_Primary];
     return cell;
 }
 

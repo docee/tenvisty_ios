@@ -98,6 +98,7 @@
 -(NSString *)getCameraStatus;
 
 @property (nonatomic,assign) NSInteger connectState;
+@property (nonatomic,assign) BOOL isPlaying;
 
 - (void)saveImage:(UIImage *)image;
 - (UIImage *)image;

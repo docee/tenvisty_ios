@@ -35,14 +35,26 @@
 }
 
 - (IBAction)togglePassword:(UIButton *)sender {
+    BOOL wasFirstResponder;
+    if ((wasFirstResponder = [_midPasswordField isFirstResponder])) {
+        [_midPasswordField resignFirstResponder];
+    }
+    
     if(_midPasswordField.isSecureTextEntry){
         sender.selected = YES;
-        [_midPasswordField setSecureTextEntry:NO];
+       // [_midPasswordField setSecureTextEntry:NO];
     }
     else{
-         sender.selected = NO;
-        [_midPasswordField setSecureTextEntry:YES];
+        sender.selected = NO;
+        //[_midPasswordField setSecureTextEntry:YES];
     }
+    // 这里改变该属性最好使用以下的方法，而不要使用类似[textField setSecureTextEntry:![textField isSecureTextEntry]]的方式，因为会改变占位文字的大小
+    _midPasswordField.secureTextEntry = !_midPasswordField.secureTextEntry;
+    
+    if (wasFirstResponder) {
+        [_midPasswordField becomeFirstResponder];
+    }
+    
 }
 -(void)hideImgBtn{
     [_btnShowHidePassword setImage:nil forState:UIControlStateNormal];

@@ -78,14 +78,14 @@
 
 -(NSInteger)getLevel:(NSInteger)sens{
     for(int i=0;i<_sensValue.count;i++){
-        if(sens >= (int)_sensValue[i]){
+        if(sens >= [(NSNumber*)_sensValue[i] intValue]){
             return i;
         }
     }
     return 0;
 }
 -(NSInteger)getSens:(NSInteger)level{
-    return (NSInteger)_sensValue[level];
+    return [(NSNumber*)_sensValue[level] integerValue];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

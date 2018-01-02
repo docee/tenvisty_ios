@@ -47,7 +47,7 @@
 -(void)registerUMPush:(NSDictionary *)launchOptions{
     //设置 AppKey 及 LaunchOptions
     [UMessage startWithAppkey:@"5a45c144b27b0a10ed000155" launchOptions:launchOptions httpsEnable:YES ];
-    [UMessage openDebugMode:YES];
+    [UMessage openDebugMode:NO];
     UIStoryboard *board=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [UMessage addLaunchMessageWithWindow:self.window finishViewController:[board instantiateInitialViewController]];
     //注册通知
@@ -109,7 +109,7 @@
     //for log
     // [UMessage setAutoAlert:NO];
     
-    [UMessage setLogEnabled:YES];
+    //[UMessage setLogEnabled:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -169,21 +169,21 @@
         return;
     }
     
-    NSString *responseString = (NSString*)[dic objectForKey:@"tws"];
-    NSLog(@"checkAlarmEvent:%@",responseString);
+    id jsonObject = [dic objectForKey:@"eventData"];
+    NSLog(@"checkAlarmEvent:%@",jsonObject);
     
-    if (responseString == nil) {
-        NSLog(@"return:%@",responseString);
+    if (jsonObject == nil) {
+        NSLog(@"return:%@",jsonObject);
         
         return;
     }
     
-    NSData *data= [responseString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSError *error = nil;
-    
-    
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+//    NSData *data= [responseString dataUsingEncoding:NSUTF8StringEncoding];
+//
+//    NSError *error = nil;
+//
+//
+//    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     
     if ([jsonObject isKindOfClass:[NSDictionary class]]){
         
@@ -258,6 +258,7 @@
     // [UMessage registerDeviceToken:deviceToken];
     NSString *token = [self stringDevicetoken:deviceToken];
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"push_deviceToken"];
+    //[[iToast makeText:token] show];
     NSLog(@"%@",token);
 }
 
@@ -281,9 +282,10 @@
     //
     //    }
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"UMPuserInfoNotification"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:@{@"userinfo":[NSString stringWithFormat:@"%@",userInfo]}];
+    [self checkAlarmEvent:userInfo];
+//    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//    [ud setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"UMPuserInfoNotification"];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:@{@"userinfo":[NSString stringWithFormat:@"%@",userInfo]}];
     
 }
 
@@ -302,14 +304,26 @@
         //应用处于前台时的远程推送接受
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
-        
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [ud setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"UMPuserInfoNotification"];
+        [self checkAlarmEvent:userInfo];
+//        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//        [ud setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"UMPuserInfoNotification"];
         
     }else{
         //应用处于前台时的本地推送接受
     }
-    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+    MyCamera *camera = nil;
+    for (MyCamera *c in [GBase sharedInstance].cameras) {
+        if([c.uid isEqualToString:(NSString*)[[userInfo objectForKey:@"eventData"] objectForKey:@"uid"]]){
+            camera = c;
+            break;
+        }
+    }
+    if(camera != nil && !camera.isPlaying){
+        completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+    }
+    else{
+        completionHandler(0);
+    }
 }
 
 //iOS10新增：处理后台点击通知的代理方法
@@ -320,8 +334,9 @@
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        [ud setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"UMPuserInfoNotification"];
+        [self checkAlarmEvent:userInfo];
+//        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//        [ud setObject:[NSString stringWithFormat:@"%@",userInfo] forKey:@"UMPuserInfoNotification"];
         
     }else{
         //应用处于后台时的本地推送接受

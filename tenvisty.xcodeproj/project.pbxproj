@@ -124,6 +124,7 @@
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
+		89D3F6E91FFB76DC00E3E8EA /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
 		89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811151FF63FEB00679B39 /* AppVersionController.m */; };
 		89D8111C1FF63FEB00679B39 /* WebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811171FF63FEB00679B39 /* WebBrowserController.m */; };
 		89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D869821FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m */; };
@@ -143,7 +144,6 @@
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
-		ED6C474A1FF78CC800262F52 /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C47491FF78CC800262F52 /* IOTCamera */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
 		EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */; };
 		EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1C1841FD5A99D00DAE334 /* CameraSettingViewController.m */; };
@@ -707,7 +707,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED6C474A1FF78CC800262F52 /* IOTCamera in Frameworks */,
+				89D3F6E91FFB76DC00E3E8EA /* IOTCamera in Frameworks */,
 				8936B9F21FF621F800F72595 /* libavconVoiceRecognize.a in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
@@ -1999,7 +1999,7 @@
 					894D7E481FAB01D900C58BB2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 6HDH3DS77K;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2367,8 +2367,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2380,7 +2380,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/tenvisty/lib",
-					"$(PROJECT_DIR)/XG",
 					"$(PROJECT_DIR)/UM",
 				);
 				ONLY_ACTIVE_ARCH = YES;
@@ -2391,8 +2390,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4ec898b5-418d-4caa-8127-e4e305cdc1e6";
+				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_20171229_profile;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2405,9 +2404,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2419,7 +2418,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/tenvisty/lib",
-					"$(PROJECT_DIR)/XG",
 					"$(PROJECT_DIR)/UM",
 				);
 				ONLY_ACTIVE_ARCH = NO;
@@ -2430,8 +2428,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f339e28f-cf94-44d8-878a-eaf95715e7eb";
+				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_20180102_hoc;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
