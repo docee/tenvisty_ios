@@ -74,6 +74,29 @@
                                             <outlet property="rightLabDesc" destination="WgL-Cc-ovs" id="Tcq-c1-xwe"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewcell_nocamera" id="4PS-1E-n1r" customClass="ImageTableViewCell">
+                                        <rect key="frame" x="0.0" y="113" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4PS-1E-n1r" id="mBx-Jq-Un9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="84.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Camera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wO5-bT-FeA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.666666666666671"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wO5-bT-FeA" firstAttribute="leading" secondItem="mBx-Jq-Un9" secondAttribute="leading" id="8ev-is-SKn"/>
+                                                <constraint firstAttribute="trailing" secondItem="wO5-bT-FeA" secondAttribute="trailing" id="DAk-Eb-Cc1"/>
+                                                <constraint firstItem="wO5-bT-FeA" firstAttribute="top" secondItem="mBx-Jq-Un9" secondAttribute="top" id="Mfz-VO-gwB"/>
+                                                <constraint firstAttribute="bottom" secondItem="wO5-bT-FeA" secondAttribute="bottom" id="l6b-Bq-aDp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="oaX-Ge-kd4" id="jir-qG-B1b"/>

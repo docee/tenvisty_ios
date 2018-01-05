@@ -21,9 +21,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1.3</string>
+	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>8</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -187,13 +187,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Access to Camera</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Access to Microphone</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Access to Microphone</string>
+	<string>Access to Photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to Microphone</string>
+	<string>Access to Photos</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

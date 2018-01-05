@@ -124,7 +124,7 @@
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
-		89D3F6E91FFB76DC00E3E8EA /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 8989EC2B1FF1E19A004989A9 /* IOTCamera */; };
+		89D3F6EB1FFE344500E3E8EA /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D3F6EA1FFE344400E3E8EA /* IOTCamera */; };
 		89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811151FF63FEB00679B39 /* AppVersionController.m */; };
 		89D8111C1FF63FEB00679B39 /* WebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811171FF63FEB00679B39 /* WebBrowserController.m */; };
 		89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D869821FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m */; };
@@ -404,6 +404,7 @@
 		89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
 		89D2B4EC1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessSettingViewController.h; sourceTree = "<group>"; };
 		89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessSettingViewController.m; sourceTree = "<group>"; };
+		89D3F6EA1FFE344400E3E8EA /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates.noindex/ArchiveIntermediates/tenvisty/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
 		89D811141FF63FEB00679B39 /* AppVersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppVersionController.h; sourceTree = "<group>"; };
 		89D811151FF63FEB00679B39 /* AppVersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppVersionController.m; sourceTree = "<group>"; };
 		89D811161FF63FEB00679B39 /* WebBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebBrowserController.h; sourceTree = "<group>"; };
@@ -707,7 +708,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89D3F6E91FFB76DC00E3E8EA /* IOTCamera in Frameworks */,
+				89D3F6EB1FFE344500E3E8EA /* IOTCamera in Frameworks */,
 				8936B9F21FF621F800F72595 /* libavconVoiceRecognize.a in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
@@ -862,6 +863,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6C47491FF78CC800262F52 /* IOTCamera */,
+				89D3F6EA1FFE344400E3E8EA /* IOTCamera */,
 				ED6C47371FF78CBD00262F52 /* lib */,
 				890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */,
 				8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */,
@@ -2428,8 +2430,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f339e28f-cf94-44d8-878a-eaf95715e7eb";
-				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_20180102_hoc;
+				PROVISIONING_PROFILE = "3f0d9e7f-8d2e-42cf-8e39-8c4af63614fb";
+				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_appstore_20180104;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

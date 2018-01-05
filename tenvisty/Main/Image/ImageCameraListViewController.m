@@ -77,6 +77,31 @@
         controller.camera =  [GBase getCamera:[self.tableview indexPathForSelectedRow].row];
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if([GBase sharedInstance].cameras.count == 0){
+        return Screen_Main.height/2;
+    }
+    else{
+        return 0.1f;
+    }
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if([GBase sharedInstance].cameras.count == 0){
+        NSString *vid = @"tableviewcell_nocamera";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid];
+        if([[cell.contentView.subviews objectAtIndex:0] isKindOfClass:[UILabel class]]){
+            UILabel *ilabV = [cell.contentView.subviews objectAtIndex:0];
+            [ilabV setText:LOCALSTR(@"No Camera")];
+        }
+        return cell.contentView;
+    }
+    else{
+        return nil;
+    }
+}
+
 /*
  #pragma mark - Navigation
  
