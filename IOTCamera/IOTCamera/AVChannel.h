@@ -13,7 +13,7 @@
 
 #define QUEUE_SIZE 32
 #define MAX_IOCTRL_BUFFER_SIZE 1024
-#define MAX_IMG_BUFFER_SIZE	3686400   //2764800	//1280 * 720 * 3
+#define MAX_IMG_BUFFER_SIZE	1920*1080*3   //2764800	//1280 * 720 * 3
 
 
 typedef struct SendIOCtrlStruct {    

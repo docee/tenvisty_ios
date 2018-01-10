@@ -21,9 +21,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.1.1</string>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>10</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -187,13 +187,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Access to Camera</string>
+	<string>if not allowed, TENVISTY will not be able to use scan function.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Access to Microphone</string>
+	<string>if not allowed, TENVISTY will not be able to use talk function.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Access to Photos</string>
+	<string>if not allowed, TENVISTY will not be able to save picture/video to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to Photos</string>
+	<string>if not allowed, TENVISTY will not be able to save picture/video to your photo library.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
