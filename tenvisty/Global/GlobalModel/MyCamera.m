@@ -28,107 +28,107 @@
 
 #pragma mark - Public Methods
 
-- (NSArray *)getSupportedStreams
-{
-    return [arrayStreamChannel count] == 0 ? nil : [[NSArray alloc] initWithArray:arrayStreamChannel];
-}
-
-- (BOOL)getAudioInSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 1) == 0;
-}
-
-- (BOOL)getAudioOutSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 2) == 0;
-}
-
-- (BOOL)getPanTiltSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 4) == 0;
-}
-
-- (BOOL)getEventListSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 8) == 0;
-}
-
-- (BOOL)getPlaybackSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 16) == 0;
-}
-
-- (BOOL)getWiFiSettingSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 32) == 0;
-}
-
-- (BOOL)getMotionDetectionSettingSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 64) == 0;
-}
-
-- (BOOL)getRecordSettingSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 128) == 0;
-}
-
-- (BOOL)getFormatSDCardSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 256) == 0;
-}
-
-- (BOOL)getVideoFlipSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 512) == 0;
-}
-
-- (BOOL)getEnvironmentModeSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 1024) == 0;
-}
-
-- (BOOL)getMultiStreamSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 2048) == 0;
-}
-
-- (NSInteger)getAudioOutFormatOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 4096) == 0 ? MEDIA_CODEC_AUDIO_SPEEX : MEDIA_CODEC_AUDIO_ADPCM;
-}
-
-- (BOOL)getVideoQualitySettingSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 8192) == 0;
-}
-
-- (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel
-{
-    return ([self getServiceTypeOfChannel:channel] & 16384) == 0;
-}
-
--(NSString *)getCameraStatus{
-    if (self.sessionState == CONNECTION_STATE_CONNECTING) {
-        return LOCALSTR(@"Connecting...");
-    }
-    else if (self.sessionState == CONNECTION_STATE_DISCONNECTED) {
-        return LOCALSTR(@"Off line");
-    }
-    else if (self.sessionState == CONNECTION_STATE_UNKNOWN_DEVICE) {
-        return LOCALSTR(@"Unknown Device");
-    }
-    else if (self.sessionState == CONNECTION_STATE_TIMEOUT) {
-        return LOCALSTR(@"Timeout");
-    }
-    else if (self.sessionState == CONNECTION_STATE_UNSUPPORTED) {
-        return LOCALSTR(@"Unsupported");
-    }
-    else if (self.sessionState == CONNECTION_STATE_CONNECT_FAILED) {
-        return LOCALSTR(@"Connect Failed");
-    }
-    return LOCALSTR(@"Off line");
-}
+//- (NSArray *)getSupportedStreams
+//{
+//    return [arrayStreamChannel count] == 0 ? nil : [[NSArray alloc] initWithArray:arrayStreamChannel];
+//}
+//
+//- (BOOL)getAudioInSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 1) == 0;
+//}
+//
+//- (BOOL)getAudioOutSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 2) == 0;
+//}
+//
+//- (BOOL)getPanTiltSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 4) == 0;
+//}
+//
+//- (BOOL)getEventListSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 8) == 0;
+//}
+//
+//- (BOOL)getPlaybackSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 16) == 0;
+//}
+//
+//- (BOOL)getWiFiSettingSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 32) == 0;
+//}
+//
+//- (BOOL)getMotionDetectionSettingSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 64) == 0;
+//}
+//
+//- (BOOL)getRecordSettingSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 128) == 0;
+//}
+//
+//- (BOOL)getFormatSDCardSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 256) == 0;
+//}
+//
+//- (BOOL)getVideoFlipSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 512) == 0;
+//}
+//
+//- (BOOL)getEnvironmentModeSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 1024) == 0;
+//}
+//
+//- (BOOL)getMultiStreamSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 2048) == 0;
+//}
+//
+//- (NSInteger)getAudioOutFormatOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 4096) == 0 ? MEDIA_CODEC_AUDIO_SPEEX : MEDIA_CODEC_AUDIO_ADPCM;
+//}
+//
+//- (BOOL)getVideoQualitySettingSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 8192) == 0;
+//}
+//
+//- (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel
+//{
+//    return ([self getServiceTypeOfChannel:channel] & 16384) == 0;
+//}
+//
+//-(NSString *)getCameraStatus{
+//    if (self.sessionState == CONNECTION_STATE_CONNECTING) {
+//        return LOCALSTR(@"Connecting...");
+//    }
+//    else if (self.sessionState == CONNECTION_STATE_DISCONNECTED) {
+//        return LOCALSTR(@"Off line");
+//    }
+//    else if (self.sessionState == CONNECTION_STATE_UNKNOWN_DEVICE) {
+//        return LOCALSTR(@"Unknown Device");
+//    }
+//    else if (self.sessionState == CONNECTION_STATE_TIMEOUT) {
+//        return LOCALSTR(@"Timeout");
+//    }
+//    else if (self.sessionState == CONNECTION_STATE_UNSUPPORTED) {
+//        return LOCALSTR(@"Unsupported");
+//    }
+//    else if (self.sessionState == CONNECTION_STATE_CONNECT_FAILED) {
+//        return LOCALSTR(@"Connect Failed");
+//    }
+//    return LOCALSTR(@"Off line");
+//}
 
 #pragma mark -
 

@@ -61,22 +61,22 @@ typedef enum{
 @property (nonatomic) int   nStatus;
 
 
-+(void)LanSearch;
--(id)init;
--(void)start;
--(void)stop;
--(void)startVideo;
--(void)stopVideo;
--(void)startAudio;
--(void)stopAudio;
--(void)startSpeak;
--(void)stopSpeak;
+//+(void)LanSearch;
+//-(id)init;
+//-(void)start;
+//-(void)stop;
+//-(void)startVideo;
+//-(void)stopVideo;
+//-(void)startAudio;
+//-(void)stopAudio;
+//-(void)startSpeak;
+//-(void)stopSpeak;
 -(void)startRecordVideo:(NSString *)filePath;
 -(BOOL)stopRecordVideo;
--(void)setResolutionModel:(ResolutionModel )resolutionModel;
--(void)PTZ:(unsigned char)ctrl;
-
-- (BOOL)getEventListSupportOfChannel:(NSInteger)channel;
+//-(void)setResolutionModel:(ResolutionModel )resolutionModel;
+//-(void)PTZ:(unsigned char)ctrl;
+//
+//- (BOOL)getEventListSupportOfChannel:(NSInteger)channel;
 
 @end
 

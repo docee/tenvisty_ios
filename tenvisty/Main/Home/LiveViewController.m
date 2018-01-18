@@ -627,8 +627,8 @@
                     [self stopRecord];
                     [[iToast makeText:LOCALSTR(@"recording stopped")] show];
                 }
+                [_viewLoading setHidden:NO];
             }
-            [_viewLoading setHidden:NO];
             
         }
     });

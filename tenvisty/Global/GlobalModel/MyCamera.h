@@ -21,9 +21,10 @@
 #import <IOTCamera/NSCamera.h>
 #import <IOTCamera/AVIOCTRLDEFs.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import "IMyCamera.h"
 
 @interface MyCamera : Camera
-<CameraDelegate>
+<CameraDelegate,BaseCameraProtocol,BaseCameraDelegate>
 {
     
     NSInteger lastChannel;
@@ -76,26 +77,26 @@
 /*********************   æﬂÃÂÀµ√˜   **************************************/
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_;
 - (id)initWithName:(NSString *)name viewAccount:(NSString *)viewAcc viewPassword:(NSString *)viewPwd;
--(void)start;
+//-(void)start;
 - (void)start:(NSInteger)channel;
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time;
 - (void)clearRemoteNotifications;
-- (NSArray *)getSupportedStreams;
-- (BOOL)getAudioInSupportOfChannel:(NSInteger)channel;
-- (BOOL)getAudioOutSupportOfChannel:(NSInteger)channel;
-- (BOOL)getPanTiltSupportOfChannel:(NSInteger)channel;
-- (BOOL)getPlaybackSupportOfChannel:(NSInteger)channel;
-- (BOOL)getWiFiSettingSupportOfChannel:(NSInteger)channel;
-- (BOOL)getMotionDetectionSettingSupportOfChannel:(NSInteger)channel;
-- (BOOL)getRecordSettingSupportOfChannel:(NSInteger)channel;
-- (BOOL)getFormatSDCardSupportOfChannel:(NSInteger)channel;
-- (BOOL)getVideoFlipSupportOfChannel:(NSInteger)channel;
-- (BOOL)getEnvironmentModeSupportOfChannel:(NSInteger)channel;
-- (BOOL)getMultiStreamSupportOfChannel:(NSInteger)channel;
-- (NSInteger)getAudioOutFormatOfChannel:(NSInteger)channel;
-- (BOOL)getVideoQualitySettingSupportOfChannel:(NSInteger)channel;
-- (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel;
--(NSString *)getCameraStatus;
+//- (NSArray *)getSupportedStreams;
+//- (BOOL)getAudioInSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getAudioOutSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getPanTiltSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getPlaybackSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getWiFiSettingSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getMotionDetectionSettingSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getRecordSettingSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getFormatSDCardSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getVideoFlipSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getEnvironmentModeSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getMultiStreamSupportOfChannel:(NSInteger)channel;
+//- (NSInteger)getAudioOutFormatOfChannel:(NSInteger)channel;
+//- (BOOL)getVideoQualitySettingSupportOfChannel:(NSInteger)channel;
+//- (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel;
+//-(NSString *)getCameraStatus;
 
 @property (nonatomic,assign) NSInteger connectState;
 @property (nonatomic,assign) BOOL isPlaying;

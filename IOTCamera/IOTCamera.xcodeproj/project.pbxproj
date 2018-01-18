@@ -293,6 +293,8 @@
 		89C62B131ACE77C40004FF08 /* AVAPIs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVAPIs.h; path = IOTCamera/include/AVAPIs.h; sourceTree = SOURCE_ROOT; };
 		89C62B141ACE77C40004FF08 /* IOTCAPIs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOTCAPIs.h; path = IOTCamera/include/IOTCAPIs.h; sourceTree = SOURCE_ROOT; };
 		89C62B151ACE77C40004FF08 /* RDTAPIs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDTAPIs.h; path = IOTCamera/include/RDTAPIs.h; sourceTree = SOURCE_ROOT; };
+		89DBE533201081B100B79617 /* libHiP2PSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHiP2PSDK.a; path = ../tenvisty/lib/libHiP2PSDK.a; sourceTree = "<group>"; };
+		89DBE5352010822100B79617 /* libHiP2PSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHiP2PSDK.a; sourceTree = "<group>"; };
 		B2111FE117F8028700BF0C0C /* H264iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = H264iPhone.h; path = H264Dec/h264dec/H264iPhone.h; sourceTree = "<group>"; };
 		B277383E1808F5A300CA52DA /* NSCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSCamera.h; path = IOTCamera/NSCamera.h; sourceTree = SOURCE_ROOT; };
 		B277383F1808F5A300CA52DA /* NSCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSCamera.m; path = IOTCamera/NSCamera.m; sourceTree = SOURCE_ROOT; };
@@ -386,6 +388,8 @@
 		612B288E15999A29002E82F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89DBE533201081B100B79617 /* libHiP2PSDK.a */,
+				89DBE5352010822100B79617 /* libHiP2PSDK.a */,
 				8912D4E51FF117FF00C660AB /* AVFoundation.framework */,
 				61E550F315D9F71B00AA6184 /* H264Dec.xcodeproj */,
 				61E550AC15D9E93600AA6184 /* Speex.xcodeproj */,
@@ -1021,7 +1025,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CONFIGURATION_BUILD_DIR = "../tenvisty/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = NO;
 				DEPLOYMENT_LOCATION = YES;
@@ -1080,7 +1084,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CONFIGURATION_BUILD_DIR = "../tenvisty/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "../lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = NO;
 				DEPLOYMENT_LOCATION = YES;
@@ -1135,6 +1139,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../tenvisty,
+					"$(PROJECT_DIR)",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = staticlib;
@@ -1175,6 +1180,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../tenvisty,
+					"$(PROJECT_DIR)",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = staticlib;
