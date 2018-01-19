@@ -26,12 +26,12 @@
 
 #import "g711T.h"
 
-#ifdef MJ4
-#import "h264.h"
-#import "mpeg4.h"
-#else
+//#ifdef MJ4
+//#import "h264.h"
+//#import "mpeg4.h"
+//#else
 #import "H264iPhone.h"
-#endif
+//#endif
 
 #define REAL_AUDIO_OUT
 //#define TEST_AUDIO_OUT
@@ -1761,17 +1761,17 @@ int bLocalSearch = 0;
     unsigned int t = 0;
     unsigned int Rt = 0;
     
-#ifdef MJ4
-    h264 *h264Dec = nil;
-    mpeg4 *mpeg4Dec = nil;
-#else
+//#ifdef MJ4
+//    h264 *h264Dec = nil;
+//    mpeg4 *mpeg4Dec = nil;
+//#else
     int consumedBytes = 0;
 	int arrFramePara[4] = {0};
 //    InitDecoder();
     //支持多画面修改
     H264iPhone *h264iphone = [[H264iPhone alloc]init];
     [h264iphone InitDecoder];
-#endif
+//#endif
     
     channel.videoFps = 0;
     
@@ -1822,90 +1822,90 @@ int bLocalSearch = 0;
         } 
         
 
-#ifdef MJ4
-        
-            if (avFrameSize > 0) {
-                
-                int w = 0;
-                int h = 0;
-                
-                if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_H264) {
-                    
-                    if (h264Dec == nil) h264Dec = [[h264 alloc] init];
-                    
-                    [h264Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size   decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
-                }
-                
-                
-                if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_MPEG4) {
-                    
-                    if (mpeg4Dec == nil) {
-                        
-                        int w = ((pAvFrame->pBuffer[0x17] & 0x0F) << 9 ) | ((pAvFrame->pBuffer[0x18] & 0xFF) << 1 ) | ((pAvFrame->pBuffer[0x19] & 0x80) >> 7 ) ;
-                        int h = ((pAvFrame->pBuffer[0x19] & 0x3F) << 7 ) | ((pAvFrame->pBuffer[0x1A] & 0xFE) >> 1 );
-                        
-                        mpeg4Dec = [[mpeg4 alloc] initWithWidth:w Height:h];
-                    }
-                    
-                    // char *bufWithHeader = malloc(MPEG4_VOL_SIZE + pAvFrame->buff_size);
-                    // memcpy(bufWithHeader, mpeg4_vol_header, MPEG4_VOL_SIZE);
-                    // memcpy(&bufWithHeader[MPEG4_VOL_SIZE], pAvFrame->pBuffer, pAvFrame->buff_size);
-
-                    // [mpeg4Dec decode:bufWithHeader SizeOfBufferToDecode:pAvFrame->buff_size + MPEG4_VOL_SIZE decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
-                    
-                    // free(bufWithHeader);
-                    
-                    [mpeg4Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
-                }
-                
-                if (imageSize > 0 && w > 0 && h > 0) {
-             
-                    channel.videoWidth = w;
-                    channel.videoHeight = h;
-             
-                    if (pAvFrame != NULL && firstTimeStampFromLocal != 0 && firstTimeStampFromDevice != 0) {
-             
-                        unsigned int t = _getTickCount();
-                        sleepTime = (firstTimeStampFromLocal + (pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice)) - t;
-             
-                        //LOG(@"decode %@ frame, sleeptime (%d) = (t0 (%u) + (Tn(%u) - T0(%u) %d ) - tn'(%u)", (ip_block_isIFrame(pAvFrame) == 1 ? @"I" : "P"),sleepTime, firstTimeStampFromLocal, pAvFrame->frmInfo.timestamp, firstTimeStampFromDevice, pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice, t);
-             
-                        if (sleepTime >= 0 && sleepTime < 3000) {
-             
-                            usleep(sleepTime * 1000);
-                            firstTimeStampFromLocal = firstTimeStampFromLocal - ip_block_FifoCount(channel.videoQueue);
-             
-                            nDelayFrameCnt = 0;
-                            
-                        } else {
-             
-                            firstTimeStampFromDevice = pAvFrame->frmInfo.timestamp;
-                            firstTimeStampFromLocal = t;
-             
-                            nDelayFrameCnt++;
-                        }
-                    }
-             
-                    if (firstTimeStampFromDevice == 0 || firstTimeStampFromLocal == 0) {
-                        firstTimeStampFromDevice = pAvFrame->frmInfo.timestamp;
-                        firstTimeStampFromLocal = _getTickCount();
-                    }
-             
-                    channel.videoFps++;
-             
-                    dispatch_async(dispatch_get_main_queue(), ^{
-             
-                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
-                            [self.delegate camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
-             
-                        if (self.delegateForMonitor && [self.delegateForMonitor respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
-                            [self.delegateForMonitor camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
-                    });
-                    
-                }
-            }        
-        
-#else
+//#ifdef MJ4
+//
+//            if (avFrameSize > 0) {
+//
+//                int w = 0;
+//                int h = 0;
+//
+//                if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_H264) {
+//
+//                    if (h264Dec == nil) h264Dec = [[h264 alloc] init];
+//
+//                    [h264Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size   decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
+//                }
+//
+//
+//                if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_MPEG4) {
+//
+//                    if (mpeg4Dec == nil) {
+//
+//                        int w = ((pAvFrame->pBuffer[0x17] & 0x0F) << 9 ) | ((pAvFrame->pBuffer[0x18] & 0xFF) << 1 ) | ((pAvFrame->pBuffer[0x19] & 0x80) >> 7 ) ;
+//                        int h = ((pAvFrame->pBuffer[0x19] & 0x3F) << 7 ) | ((pAvFrame->pBuffer[0x1A] & 0xFE) >> 1 );
+//
+//                        mpeg4Dec = [[mpeg4 alloc] initWithWidth:w Height:h];
+//                    }
+//
+//                    // char *bufWithHeader = malloc(MPEG4_VOL_SIZE + pAvFrame->buff_size);
+//                    // memcpy(bufWithHeader, mpeg4_vol_header, MPEG4_VOL_SIZE);
+//                    // memcpy(&bufWithHeader[MPEG4_VOL_SIZE], pAvFrame->pBuffer, pAvFrame->buff_size);
+//
+//                    // [mpeg4Dec decode:bufWithHeader SizeOfBufferToDecode:pAvFrame->buff_size + MPEG4_VOL_SIZE decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
+//
+//                    // free(bufWithHeader);
+//
+//                    [mpeg4Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
+//                }
+//
+//                if (imageSize > 0 && w > 0 && h > 0) {
+//
+//                    channel.videoWidth = w;
+//                    channel.videoHeight = h;
+//
+//                    if (pAvFrame != NULL && firstTimeStampFromLocal != 0 && firstTimeStampFromDevice != 0) {
+//
+//                        unsigned int t = _getTickCount();
+//                        sleepTime = (firstTimeStampFromLocal + (pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice)) - t;
+//
+//                        //LOG(@"decode %@ frame, sleeptime (%d) = (t0 (%u) + (Tn(%u) - T0(%u) %d ) - tn'(%u)", (ip_block_isIFrame(pAvFrame) == 1 ? @"I" : "P"),sleepTime, firstTimeStampFromLocal, pAvFrame->frmInfo.timestamp, firstTimeStampFromDevice, pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice, t);
+//
+//                        if (sleepTime >= 0 && sleepTime < 3000) {
+//
+//                            usleep(sleepTime * 1000);
+//                            firstTimeStampFromLocal = firstTimeStampFromLocal - ip_block_FifoCount(channel.videoQueue);
+//
+//                            nDelayFrameCnt = 0;
+//
+//                        } else {
+//
+//                            firstTimeStampFromDevice = pAvFrame->frmInfo.timestamp;
+//                            firstTimeStampFromLocal = t;
+//
+//                            nDelayFrameCnt++;
+//                        }
+//                    }
+//
+//                    if (firstTimeStampFromDevice == 0 || firstTimeStampFromLocal == 0) {
+//                        firstTimeStampFromDevice = pAvFrame->frmInfo.timestamp;
+//                        firstTimeStampFromLocal = _getTickCount();
+//                    }
+//
+//                    channel.videoFps++;
+//
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                        if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
+//                            [self.delegate camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
+//
+//                        if (self.delegateForMonitor && [self.delegateForMonitor respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
+//                            [self.delegateForMonitor camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
+//                    });
+//
+//                }
+//            }
+//
+//#else
 
             
             while (avFrameSize > 0) {
@@ -2000,20 +2000,20 @@ int bLocalSearch = 0;
                 }
             }
         
-#endif
+//#endif
         
     }
     
-#ifdef MJ4
-    if (h264Dec != nil) {
-        [h264Dec release];
-        h264Dec = nil;
-    }    
-    if (mpeg4Dec != nil) {
-        [mpeg4Dec release];
-        mpeg4Dec = nil;
-    }
-#else
+//#ifdef MJ4
+//    if (h264Dec != nil) {
+//        [h264Dec release];
+//        h264Dec = nil;
+//    }
+//    if (mpeg4Dec != nil) {
+//        [mpeg4Dec release];
+//        mpeg4Dec = nil;
+//    }
+//#else
 //    UninitDecoder();
     //支持ipad多画面修改
     
@@ -2022,7 +2022,7 @@ int bLocalSearch = 0;
         [h264iphone release];
         h264iphone = nil;
     }
-#endif
+//#endif
     
     LOG(@"=== Decode Video Thread Exit (%@) ===", self.uid);
     
@@ -2056,16 +2056,16 @@ int bLocalSearch = 0;
     bool bSkipThisRound = false;
     unsigned int t = 0;
 
-#ifdef MJ4
-    h264 *h264Dec = nil;
-    mpeg4 *mpeg4Dec = nil;
-#else
+//#ifdef MJ4
+//    h264 *h264Dec = nil;
+//    mpeg4 *mpeg4Dec = nil;
+//#else
     int consumedBytes = 0;
 	int arrFramePara[4] = {0};
     //支持多画面修改
     H264iPhone *h264iphone = [[H264iPhone alloc]init];
     [h264iphone InitDecoder];
-#endif
+//#endif
     
 //    while (channel.isRunningDecVideoThread && imageFrame != NULL) {
     while (channel.isRunningDecVideoThread) {
@@ -2120,90 +2120,90 @@ int bLocalSearch = 0;
             imageSize = [channel getVideoBuffer:&imageFrame];  
         }
 
-#ifdef MJ4
-         
-         if (avFrameSize > 0) {
-         
-             int w = 0;
-             int h = 0;
-         
-         
-             if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_H264) {
-             
-                 if (h264Dec == nil) h264Dec = [[h264 alloc] init];
-             
-                 [h264Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
-             }
-             
-             
-             if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_MPEG4) {
-             
-                 if (mpeg4Dec == nil) {
-             
-                     int w = ((pAvFrame->pBuffer[0x17] & 0x0F) << 9 ) | ((pAvFrame->pBuffer[0x18] & 0xFF) << 1 ) | ((pAvFrame->pBuffer[0x19] & 0x80) >> 7 ) ;
-                     int h = ((pAvFrame->pBuffer[0x19] & 0x3F) << 7 ) | ((pAvFrame->pBuffer[0x1A] & 0xFE) >> 1 );
-             
-                     mpeg4Dec = [[mpeg4 alloc] initWithWidth:w Height:h];
-                 }
-             
-                 [mpeg4Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
-                 
-                 LOG("MPEG4 decode width:%d, height:%d", w, h);
-             }
-             
-             if (imageSize > 0 && w > 0 && h > 0) {
-             
-                 channel.videoWidth = w;
-                 channel.videoHeight = h;
-             
-                 if (pAvFrame != NULL && firstTimeStampFromLocal != 0 && firstTimeStampFromDevice != 0) {
-                     
-                     t = _getTickCount();
-                     int sleepTime = (firstTimeStampFromLocal + (pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice)) - t;
-                     delayTime = (sleepTime * -1);
-                     
-                     //LOG(@"%@ frame, sleeptime(%d)=(t0 (%u)+(Tn(%u)-T0(%u) %d)-tn'(%u), deltaT:%d", (ip_block_isIFrame(pAvFrame) == 1 ? @"I" : @"P"), sleepTime, firstTimeStampFromLocal, pAvFrame->frmInfo.timestamp, firstTimeStampFromDevice, pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice, t, (pAvFrame->frmInfo.timestamp - lastFrameTimeStamp));
-                     
-                     if (sleepTime >= 0) {
-                         
-                         // sometimes, the time interval from device will large than 1 second, must reset the base timestamp
-                         if ((pAvFrame->frmInfo.timestamp - lastFrameTimeStamp) > 1000) {
-                             firstTimeStampFromDevice = pAvFrame->frmInfo.timestamp;
-                             firstTimeStampFromLocal = t;
-                             LOG("RESET base timestamp");
-                             
-                             if (sleepTime > 1000) sleepTime = 33;
-                         }
-                         
-                         if (sleepTime > 1000) sleepTime = 1000;
-                         usleep(sleepTime * 1000);
-                     }
-                     
-                     lastFrameTimeStamp = pAvFrame->frmInfo.timestamp;
-                 }
-                 
-                 if (firstTimeStampFromDevice == 0 || firstTimeStampFromLocal == 0 || lastFrameTimeStamp == 0) {
-                     firstTimeStampFromDevice = lastFrameTimeStamp = pAvFrame->frmInfo.timestamp;
-                     firstTimeStampFromLocal = _getTickCount();
-                 }
-             
-                 channel.videoFps++;
-                 channel.videoDataSize = avFrameSize;
-                 
-                 
-                 dispatch_async(dispatch_get_main_queue(), ^{
-             
-                     if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
-                         [self.delegate camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
-             
-                     if (self.delegateForMonitor && [self.delegateForMonitor respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
-                         [self.delegateForMonitor camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
-                });
-            }
-         }
+//#ifdef MJ4
+//
+//         if (avFrameSize > 0) {
+//
+//             int w = 0;
+//             int h = 0;
+//
+//
+//             if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_H264) {
+//
+//                 if (h264Dec == nil) h264Dec = [[h264 alloc] init];
+//
+//                 [h264Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
+//             }
+//
+//
+//             if (pAvFrame->frmInfo.codec_id == MEDIA_CODEC_VIDEO_MPEG4) {
+//
+//                 if (mpeg4Dec == nil) {
+//
+//                     int w = ((pAvFrame->pBuffer[0x17] & 0x0F) << 9 ) | ((pAvFrame->pBuffer[0x18] & 0xFF) << 1 ) | ((pAvFrame->pBuffer[0x19] & 0x80) >> 7 ) ;
+//                     int h = ((pAvFrame->pBuffer[0x19] & 0x3F) << 7 ) | ((pAvFrame->pBuffer[0x1A] & 0xFE) >> 1 );
+//
+//                     mpeg4Dec = [[mpeg4 alloc] initWithWidth:w Height:h];
+//                 }
+//
+//                 [mpeg4Dec decode:pAvFrame->pBuffer SizeOfBufferToDecode:pAvFrame->buff_size decodedBuffer:imageFrame decodedBufferSize:&imageSize imgWidth:&w imageHeight:&h];
+//
+//                 LOG("MPEG4 decode width:%d, height:%d", w, h);
+//             }
+//
+//             if (imageSize > 0 && w > 0 && h > 0) {
+//
+//                 channel.videoWidth = w;
+//                 channel.videoHeight = h;
+//
+//                 if (pAvFrame != NULL && firstTimeStampFromLocal != 0 && firstTimeStampFromDevice != 0) {
+//
+//                     t = _getTickCount();
+//                     int sleepTime = (firstTimeStampFromLocal + (pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice)) - t;
+//                     delayTime = (sleepTime * -1);
+//
+//                     //LOG(@"%@ frame, sleeptime(%d)=(t0 (%u)+(Tn(%u)-T0(%u) %d)-tn'(%u), deltaT:%d", (ip_block_isIFrame(pAvFrame) == 1 ? @"I" : @"P"), sleepTime, firstTimeStampFromLocal, pAvFrame->frmInfo.timestamp, firstTimeStampFromDevice, pAvFrame->frmInfo.timestamp - firstTimeStampFromDevice, t, (pAvFrame->frmInfo.timestamp - lastFrameTimeStamp));
+//
+//                     if (sleepTime >= 0) {
+//
+//                         // sometimes, the time interval from device will large than 1 second, must reset the base timestamp
+//                         if ((pAvFrame->frmInfo.timestamp - lastFrameTimeStamp) > 1000) {
+//                             firstTimeStampFromDevice = pAvFrame->frmInfo.timestamp;
+//                             firstTimeStampFromLocal = t;
+//                             LOG("RESET base timestamp");
+//
+//                             if (sleepTime > 1000) sleepTime = 33;
+//                         }
+//
+//                         if (sleepTime > 1000) sleepTime = 1000;
+//                         usleep(sleepTime * 1000);
+//                     }
+//
+//                     lastFrameTimeStamp = pAvFrame->frmInfo.timestamp;
+//                 }
+//
+//                 if (firstTimeStampFromDevice == 0 || firstTimeStampFromLocal == 0 || lastFrameTimeStamp == 0) {
+//                     firstTimeStampFromDevice = lastFrameTimeStamp = pAvFrame->frmInfo.timestamp;
+//                     firstTimeStampFromLocal = _getTickCount();
+//                 }
+//
+//                 channel.videoFps++;
+//                 channel.videoDataSize = avFrameSize;
+//
+//
+//                 dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                     if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
+//                         [self.delegate camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
+//
+//                     if (self.delegateForMonitor && [self.delegateForMonitor respondsToSelector:@selector(camera:didReceiveRawDataFrame:VideoWidth:VideoHeight:)])
+//                         [self.delegateForMonitor camera:self didReceiveRawDataFrame:[NSData dataWithBytes:imageFrame length:MAX_IMG_BUFFER_SIZE] VideoWidth:channel.videoWidth VideoHeight:channel.videoHeight];
+//                });
+//            }
+//         }
+//
+//#else
         
-#else
-         
         while (avFrameSize > 0) {
         
 //            consumedBytes = DecoderNal((uint8_t *)pAvFrame->pBuffer, pAvFrame->buff_size, arrFramePara, (uint8_t *)imageFrame);
@@ -2296,20 +2296,20 @@ int bLocalSearch = 0;
             }
         }
         
-#endif
+//#endif
         
     }
     
-#ifdef MJ4
-    if (h264Dec != nil) {
-        [h264Dec release];
-        h264Dec = nil;
-    }
-    if (mpeg4Dec != nil) {
-        [mpeg4Dec release];
-        mpeg4Dec = nil;
-    }
-#else
+//#ifdef MJ4
+//    if (h264Dec != nil) {
+//        [h264Dec release];
+//        h264Dec = nil;
+//    }
+//    if (mpeg4Dec != nil) {
+//        [mpeg4Dec release];
+//        mpeg4Dec = nil;
+//    }
+//#else
     //支持ipad多画面修改
     
     if (h264iphone != nil) {
@@ -2317,7 +2317,7 @@ int bLocalSearch = 0;
         [h264iphone release];
         h264iphone = nil;
     }
-#endif
+//#endif
     
     
     LOG(@"=== Decode Video Thread Exit (%@) ===", self.uid);

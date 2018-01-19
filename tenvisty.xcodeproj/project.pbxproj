@@ -116,12 +116,11 @@
 		89A096821FF109C700E5EBAE /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A0967E1FF109C700E5EBAE /* FLAnimatedImage.m */; };
 		89A096831FF109C700E5EBAE /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A096801FF109C700E5EBAE /* FLAnimatedImageView.m */; };
 		89A096841FF109C700E5EBAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A096811FF109C700E5EBAE /* Info.plist */; };
-		89A37BB82010AF3700A6F0CD /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
-		89A37BBA2010AF4700A6F0CD /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB92010AF4700A6F0CD /* libIOTCAPIs_ALL.a */; };
 		89A37BBC2010AF5200A6F0CD /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
 		89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */; };
-		89A37BCF2010B0A000A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		89A37BD02010B0E500A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
+		89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
+		89A37C712011DCA200A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		89A37C722011FFDC00A6F0CD /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
 		89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89A7E93B1FECB30B00F12BFF /* Localizable.strings */; };
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89AA50E62010558A009CCA5D /* IMyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E52010558A009CCA5D /* IMyCamera.m */; };
@@ -134,7 +133,6 @@
 		89D946691FDF7D90000ABB0A /* GNetworkStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946661FDF7D90000ABB0A /* GNetworkStates.m */; };
 		89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946681FDF7D90000ABB0A /* Reachability.m */; };
 		89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DBE539201085D500B79617 /* libz.1.2.5.tbd */; };
-		89DBE53C201085E200B79617 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DBE53B201085E200B79617 /* libstdc++.tbd */; };
 		89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171201FDFD48F004AAD3D /* BaseWiFiConfig.m */; };
 		89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171231FDFD7F0004AAD3D /* FaceberAudioConfig.m */; };
 		89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E1712A1FDFF126004AAD3D /* WiFiConfigContext.m */; };
@@ -163,13 +161,6 @@
 			remoteGlobalIDString = 61EC09AD1599B9E800BE959E;
 			remoteInfo = IOTCamera;
 		};
-		890B46A51FB032A400C1061A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E2A43D315FEEBE6000A2974;
-			remoteInfo = IOTCamera_MJ4;
-		};
 		893E6BD31FF5F3A000502F55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 890B469B1FB032A300C1061A /* IOTCamera.xcodeproj */;
@@ -186,7 +177,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				89A37BCF2010B0A000A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */,
 			);
 			name = "Embed Frameworks (1 item) (1 item)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,12 +731,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A37BD02010B0E500A6F0CD /* IOTCamera.framework in Frameworks */,
+				89A37C722011FFDC00A6F0CD /* libHiP2PSDK.a in Frameworks */,
+				89A37C712011DCA200A6F0CD /* IOTCamera.framework in Frameworks */,
+				89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */,
 				89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */,
 				89A37BBC2010AF5200A6F0CD /* libavconVoiceRecognize.a in Frameworks */,
-				89A37BBA2010AF4700A6F0CD /* libIOTCAPIs_ALL.a in Frameworks */,
-				89A37BB82010AF3700A6F0CD /* libHiP2PSDK.a in Frameworks */,
-				89DBE53C201085E200B79617 /* libstdc++.tbd in Frameworks */,
 				89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
@@ -775,6 +764,7 @@
 		890B40671FAFF99400C1061A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				894D7E4F1FAB01D900C58BB2 /* AppDelegate.h */,
 				89D811111FF63FEB00679B39 /* About */,
 				895141D51FE7780100905355 /* Model */,
 				89E6D9931FDA2B0B0049F1E7 /* Extend */,
@@ -837,7 +827,6 @@
 			isa = PBXGroup;
 			children = (
 				890B46A41FB032A400C1061A /* IOTCamera.framework */,
-				890B46A61FB032A400C1061A /* IOTCamera_MJ4.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1074,7 +1063,6 @@
 				890B46B01FB03CD500C1061A /* Expand */,
 				890B40801FB02F1A00C1061A /* Global */,
 				890B40671FAFF99400C1061A /* Main */,
-				894D7E4F1FAB01D900C58BB2 /* AppDelegate.h */,
 				894D7E501FAB01D900C58BB2 /* AppDelegate.m */,
 				894D7E551FAB01D900C58BB2 /* Main.storyboard */,
 				894D7E5B1FAB01D900C58BB2 /* Assets.xcassets */,
@@ -2127,13 +2115,6 @@
 			remoteRef = 890B46A31FB032A400C1061A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		890B46A61FB032A400C1061A /* IOTCamera_MJ4.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = IOTCamera_MJ4.framework;
-			remoteRef = 890B46A51FB032A400C1061A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -2455,7 +2436,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/Debug-iphoneos",
-					"$(PROJECT_DIR)/lib/Release-iphoneos",
 				);
 				GCC_PREFIX_HEADER = tenvisty/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = IOTCamera/IOTCamera;
@@ -2491,7 +2471,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/Debug-iphoneos",
-					"$(PROJECT_DIR)/lib/Release-iphoneos",
 				);
 				GCC_PREFIX_HEADER = tenvisty/PrefixHeader.pch;
 				HEADER_SEARCH_PATHS = IOTCamera/IOTCamera;
