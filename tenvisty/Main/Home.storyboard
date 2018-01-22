@@ -517,7 +517,7 @@
             <objects>
                 <tableViewController id="VSZ-NI-ln8" customClass="SearchCameraTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="2tp-DI-eeW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -557,7 +557,7 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="fwb-sa-GDU">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="j2T-sU-ygU" kind="unwind" unwindAction="AddCameraViewController1UnwindSegue:" id="NNL-sl-XpA"/>
+                                <action selector="goBack:" destination="VSZ-NI-ln8" id="gqF-ze-xey"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="navRefresh" id="v6F-Vn-9sb">
@@ -574,7 +574,6 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uq-bZ-km1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="j2T-sU-ygU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="48.125937031484263"/>
         </scene>
@@ -583,7 +582,7 @@
             <objects>
                 <tableViewController id="BsP-AW-4LW" customClass="SaveCameraTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="sAc-XC-Las">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2095,7 +2094,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-hv-kTY">
-                                        <rect key="frame" x="64" y="481" width="60" height="60"/>
+                                        <rect key="frame" x="64" y="491" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="TGN-ag-VMC"/>
                                             <constraint firstAttribute="width" constant="60" id="VME-A3-hwJ"/>
@@ -2107,32 +2106,44 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25x-i1-3t2">
-                                        <rect key="frame" x="251.5" y="481" width="60" height="60"/>
+                                        <rect key="frame" x="251.5" y="491" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="GD8-te-HfB"/>
                                             <constraint firstAttribute="width" constant="60" id="QSz-qJ-57F"/>
                                         </constraints>
                                         <state key="normal" image="btn_search_trans"/>
-                                        <state key="highlighted" image="btn_scan_manually_press"/>
+                                        <state key="highlighted" image="btn_search_trans"/>
                                         <connections>
+                                            <action selector="goSearchLan:" destination="DQe-jU-Sry" eventType="touchUpInside" id="5Ll-7X-6hA"/>
                                             <action selector="skipScanQrCode:" destination="DQe-jU-Sry" eventType="touchUpInside" id="4eD-MJ-vb7"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO4-I1-0fl">
-                                        <rect key="frame" x="76" y="541" width="36" height="17.5"/>
+                                        <rect key="frame" x="76" y="551" width="36" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAN Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxX-T7-fVB">
-                                        <rect key="frame" x="241.5" y="541" width="80.5" height="17.5"/>
+                                        <rect key="frame" x="241.5" y="551" width="80.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gd2-yV-4zn" customClass="HyperlinksButton">
+                                        <rect key="frame" x="123" y="441" width="128" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Input UID manually">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goInputUIDManually:" destination="DQe-jU-Sry" eventType="touchUpInside" id="rCu-eq-2Lm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Gd2-yV-4zn" firstAttribute="centerX" secondItem="2vX-dU-2ao" secondAttribute="centerX" id="BGL-0D-D29"/>
                                     <constraint firstItem="oO4-I1-0fl" firstAttribute="centerX" secondItem="HnI-hv-kTY" secondAttribute="centerX" id="DT1-RL-wNx"/>
                                     <constraint firstItem="25x-i1-3t2" firstAttribute="centerY" secondItem="HnI-hv-kTY" secondAttribute="centerY" id="Dj3-m1-Mrj"/>
                                     <constraint firstItem="sxX-T7-fVB" firstAttribute="top" secondItem="25x-i1-3t2" secondAttribute="bottom" id="KFz-LA-ABV"/>
@@ -2143,13 +2154,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4B-Ol-gLs">
-                                <rect key="frame" x="50" y="196" width="275" height="275"/>
+                                <rect key="frame" x="50" y="166" width="275" height="275"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A4B-Ol-gLs" secondAttribute="height" multiplier="1:1" id="Z9D-jr-h4a"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Align camera QR Code winthin frame to scan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAV-af-tmf">
-                                <rect key="frame" x="50" y="146" width="275" height="40"/>
+                                <rect key="frame" x="50" y="116" width="275" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -2167,8 +2178,9 @@
                             <constraint firstItem="A4B-Ol-gLs" firstAttribute="width" secondItem="DAV-af-tmf" secondAttribute="width" id="ltD-pT-dtf"/>
                             <constraint firstItem="A4B-Ol-gLs" firstAttribute="leading" secondItem="y5Y-ao-6Xh" secondAttribute="leading" constant="50" id="og5-IH-PCF"/>
                             <constraint firstAttribute="trailing" secondItem="A4B-Ol-gLs" secondAttribute="trailing" constant="50" id="qNj-86-Lgx"/>
-                            <constraint firstItem="A4B-Ol-gLs" firstAttribute="centerY" secondItem="y5Y-ao-6Xh" secondAttribute="centerY" id="sSz-8K-qTa"/>
-                            <constraint firstItem="HnI-hv-kTY" firstAttribute="bottom" secondItem="A4B-Ol-gLs" secondAttribute="bottom" constant="90" id="vVy-rs-n62"/>
+                            <constraint firstItem="A4B-Ol-gLs" firstAttribute="centerY" secondItem="y5Y-ao-6Xh" secondAttribute="centerY" constant="-30" id="sSz-8K-qTa"/>
+                            <constraint firstItem="Gd2-yV-4zn" firstAttribute="bottom" secondItem="A4B-Ol-gLs" secondAttribute="bottom" constant="50" id="uXk-Vx-IZJ"/>
+                            <constraint firstItem="HnI-hv-kTY" firstAttribute="bottom" secondItem="A4B-Ol-gLs" secondAttribute="bottom" constant="130" id="vVy-rs-n62"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Scan QR Code" id="uXg-AR-9D7">
@@ -2181,7 +2193,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="boxView" destination="A4B-Ol-gLs" id="6yy-5c-U9I"/>
+                        <outlet property="btn_searchLan" destination="25x-i1-3t2" id="00K-Vb-wfi"/>
                         <outlet property="viewPreview" destination="2vX-dU-2ao" id="3xz-1X-1Yc"/>
+                        <segue destination="VSZ-NI-ln8" kind="show" identifier="ScanQRCode2SearchCamera" id="ImC-C4-Yk1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Pi-Ho-QIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2712,8 +2726,7 @@
         <image name="btn_reconnect" width="40" height="40"/>
         <image name="btn_scan_flash_off_nor" width="43" height="45"/>
         <image name="btn_scan_flash_on_nor" width="43" height="45"/>
-        <image name="btn_scan_manually_press" width="40" height="40"/>
-        <image name="btn_search_trans" width="42" height="50"/>
+        <image name="btn_search_trans" width="38" height="45"/>
         <image name="configwifi_note" width="335" height="132"/>
         <image name="configwifi_setting" width="335" height="279"/>
         <image name="ethnet_page" width="230" height="75"/>
@@ -2739,8 +2752,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="RLm-CL-VCr"/>
         <segue reference="Ekd-dn-ODp"/>
-        <segue reference="wkI-hP-L0S"/>
-        <segue reference="SOf-2T-VCX"/>
+        <segue reference="6Zl-SU-ISp"/>
+        <segue reference="ImC-C4-Yk1"/>
         <segue reference="7gs-zU-rAy"/>
     </inferredMetricsTieBreakers>
 </document>

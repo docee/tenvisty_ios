@@ -14,6 +14,7 @@
 @interface OCScanLifeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIView *viewPreview;
 @property (weak, nonatomic) IBOutlet UIView *boxView;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btn_searchLan;
 
 @property (nonatomic, assign) BOOL isReading;
 @property (nonatomic, strong) CALayer *scanLayer;
@@ -102,6 +103,11 @@
 }
 */
 
+- (IBAction)goSearchLan:(id)sender {
+    [self performSegueWithIdentifier:@"ScanQRCode2SearchCamera" sender:sender];
+}
+- (IBAction)goInputUIDManually:(id)sender {
+}
 
 - (IBAction)goBack:(id)sender {   [self.navigationController popViewControllerAnimated:YES];
     if (self.delegate)

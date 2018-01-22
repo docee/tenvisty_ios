@@ -153,6 +153,7 @@
 		ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D506A1FD59D0300F0C658 /* BaseTableView.m */; };
 		ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E88B71FE6C012006754E8 /* UIDevice+TFDevice.m */; };
 		ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8CA6871FD40A29005858CC /* LiveViewController.m */; };
+		ED9DD5F82018E03A00C3C2CF /* HyperlinksButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9DD5F72018E03A00C3C2CF /* HyperlinksButton.m */; };
 		EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */; };
 		EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1C1841FD5A99D00DAE334 /* CameraSettingViewController.m */; };
 		EDF1C1871FD5AA6B00DAE334 /* ListImgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1C1861FD5AA6B00DAE334 /* ListImgTableViewCell.xib */; };
@@ -732,6 +733,8 @@
 		ED6C47491FF78CC800262F52 /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-hgdwhrvovyreqqcjuxfukgheohqw/Build/Intermediates.noindex/ArchiveIntermediates/tenvisty/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
 		ED8CA6861FD40A29005858CC /* LiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		ED8CA6871FD40A29005858CC /* LiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
+		ED9DD5F62018E03A00C3C2CF /* HyperlinksButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HyperlinksButton.h; sourceTree = "<group>"; };
+		ED9DD5F72018E03A00C3C2CF /* HyperlinksButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HyperlinksButton.m; sourceTree = "<group>"; };
 		EDB075EE1FEE331B00B3EE23 /* EventCustomSearchSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCustomSearchSource.h; sourceTree = "<group>"; };
 		EDB075EF1FEE331B00B3EE23 /* EventCustomSearchSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCustomSearchSource.m; sourceTree = "<group>"; };
 		EDF1C1831FD5A99D00DAE334 /* CameraSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSettingViewController.h; sourceTree = "<group>"; };
@@ -974,6 +977,8 @@
 				89E6D98B1FDA25F30049F1E7 /* BaseViewController.m */,
 				89368D9D1FEA13EF000FCDC0 /* BaseFragmentViewController.h */,
 				89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */,
+				ED9DD5F62018E03A00C3C2CF /* HyperlinksButton.h */,
+				ED9DD5F72018E03A00C3C2CF /* HyperlinksButton.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2187,6 +2192,7 @@
 				890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */,
 				89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */,
 				896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */,
+				ED9DD5F82018E03A00C3C2CF /* HyperlinksButton.m in Sources */,
 				898D8B9B1FE0CDA900062F04 /* GCDAsyncSocket.m in Sources */,
 				896BA3DA1FD9375400EE31AB /* ShowImageViewController.m in Sources */,
 				892ADB8E1FD7B94500BD8929 /* SystemSettingTableViewController.m in Sources */,
