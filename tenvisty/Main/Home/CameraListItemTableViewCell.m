@@ -94,7 +94,7 @@
     if(self.camera){
         self.labCameraConnectState.text = self.camera.cameraStateDesc;
     }
-    if(state == CONNECTION_STATE_CONNECTING || (self.camera.p2pType == P2P_Tutk && ((MyCamera*)self.camera.orginCamera).processState != CAMERASTATE_NONE)){
+    if(state == CONNECTION_STATE_CONNECTING || (self.camera.p2pType == P2P_Tutk && self.camera.processState != CAMERASTATE_NONE)){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
         MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];

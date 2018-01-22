@@ -24,7 +24,11 @@
 @synthesize baseCamera;
 @synthesize lastChannel;
 @synthesize user, pwd;
+@synthesize cameraStateDesc;
 
+@synthesize p2pType;
+
+@synthesize cameraDelegate;
 
 #pragma mark - Public Methods
 
@@ -763,5 +767,7 @@
     _vRatio = videoRatio;
     [GBase setCameraVideoRatio:self ratio:videoRatio];
 }
+
+
 
 @end

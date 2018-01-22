@@ -33,7 +33,7 @@
 @property (nonatomic,assign) NSInteger processState;
 @property (nonatomic,assign) NSInteger upgradePercent;
 @property (nonatomic,assign) CGFloat videoRatio;
-@property (nonatomic,weak) BaseCamera *baseCamera;
+@property (nonatomic,strong) BaseCamera *baseCamera;
 
 //  ---- 传感器 ---- //
 

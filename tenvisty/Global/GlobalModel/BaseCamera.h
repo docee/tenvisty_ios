@@ -67,7 +67,7 @@
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>
-@property (nonatomic, assign,readonly) id<BaseCameraProtocol> orginCamera;
+@property (nonatomic, strong,readonly) id<BaseCameraProtocol> orginCamera;
 
 @end
 

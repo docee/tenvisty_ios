@@ -11,14 +11,14 @@
 #import "HiCamera.h"
 
 @interface BaseCamera()
-@property (nonatomic, assign) id<BaseCameraProtocol> orginCamera;
+@property (nonatomic, strong) id<BaseCameraProtocol> orginCamera;
 @property (nonatomic, assign) NSInteger p2pType;
 @end
 
 @implementation BaseCamera
 
 - (void)setCameraDelegate:(id<BaseCameraDelegate>)cameraDelegate{
-    _orginCamera.cameraDelegate = cameraDelegate;
+    self.orginCamera.cameraDelegate = cameraDelegate;
 }
 
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_{
@@ -33,6 +33,9 @@
     //hichip p2p
     else if(uid.length == 17){
         self.p2pType = P2P_Hichip;
+        MyCamera *camera = [[MyCamera alloc] initWithUid:uid Name:name UserName:viewAcc_ Password:viewPwd_];
+        camera.baseCamera = self;
+        self.orginCamera = camera;
     }
     return self;
 }
