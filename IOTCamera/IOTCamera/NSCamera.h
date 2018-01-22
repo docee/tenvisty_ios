@@ -19,6 +19,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CameraProtocol.h"
+#import <UIKit/UIKit.h>
 
 typedef enum{
     CAMERA_MODEL_H264 = 0,

@@ -41,7 +41,7 @@
     [[WiFiConfigContext sharedInstance] setData:self.wifiSsid password:self.wifiPassword auth:self.wifiAuthMode];
     [[WiFiConfigContext sharedInstance] setReceiveListner:self];
     [self setTimerInterval:SMART_WIFI_TIME/100.0f];
-    self.camera = [[MyCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
+    self.camera = [[BaseCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
     
     // Do any additional setup after loading the view.
 }
@@ -99,7 +99,7 @@
 
 -(void)saveCamera{
     BOOL isExist = NO;
-    for(MyCamera *c in [GBase sharedInstance].cameras){
+    for(BaseCamera *c in [GBase sharedInstance].cameras){
         if([c.uid isEqualToString:self.camera.uid]){
             isExist = YES;
             break;

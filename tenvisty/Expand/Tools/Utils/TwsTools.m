@@ -11,8 +11,13 @@
 @implementation TwsTools
 
 +(NSString*)readUID:(NSString*)source{
-    if([source length] > 20){
-        source = [[source stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
+    
+    if([source length] == 17 || [source length] == 20){
+        return source;
+    }
+    source = [[source stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
+    if([source length] == 17 || [source length] == 20){
+        return source;
     }
     if(![NO_USE_UID isEqualToString:source]){
         if([source length] != 20){

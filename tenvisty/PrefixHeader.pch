@@ -10,7 +10,9 @@
 #define PrefixHeader_pch
 
 #import "NSString+MD5.h"
-#import "MyCamera.h"
+#import <IOTCamera/NSCamera.h>
+#import <IOTCamera/AVIOCTRLDEFs.h>
+#import "BaseCamera.h"
 #import "UIColor+Hex.h"
 #import "UIImage+Colors.h"
 #import "MBProgressHUD+Add.h"

@@ -102,7 +102,7 @@ static GBase *base = nil;
             //NSInteger tchannel = [rs intForColumn:@"channel"];
             NSInteger tvideoQuality = [rs intForColumn:@"video_quality"];
             NSInteger eventNotification = [rs intForColumn:@"event_notification"];
-            MyCamera *mycam = [[MyCamera alloc] initWithUid:tuid Name:tname UserName:tuser Password:tpwd];
+            BaseCamera *mycam = [[BaseCamera alloc] initWithUid:tuid Name:tname UserName:tuser Password:tpwd];
             mycam.videoQuality = tvideoQuality;
             mycam.remoteNotifications = eventNotification;
             [base.cameras addObject:mycam];
@@ -116,7 +116,7 @@ static GBase *base = nil;
     }
 }
 
-+ (void)addCamera:(MyCamera *)mycam {
++ (void)addCamera:(BaseCamera *)mycam {
     GBase *base = [GBase sharedInstance];
     
     [base.cameras addObject:mycam];
@@ -127,7 +127,7 @@ static GBase *base = nil;
     }
 }
 
-+ (void)deleteCamera:(Camera *)mycam {
++ (void)deleteCamera:(BaseCamera *)mycam {
     GBase *base = [GBase sharedInstance];
     
     [base.cameras removeObject:mycam];
@@ -140,7 +140,7 @@ static GBase *base = nil;
     }
 }
 
-+ (void)editCamera:(MyCamera *)mycam {
++ (void)editCamera:(BaseCamera *)mycam {
     GBase *base = [GBase sharedInstance];
     
     if (base.db != NULL) {
@@ -150,7 +150,7 @@ static GBase *base = nil;
     }
 }
 
-+ (BOOL)savePictureForCamera:(MyCamera *)mycam image:(UIImage*)img {
++ (BOOL)savePictureForCamera:(BaseCamera *)mycam image:(UIImage*)img {
     
     GBase *base = [GBase sharedInstance];
     
@@ -174,7 +174,7 @@ static GBase *base = nil;
     return YES;
 }
 
-+ (BOOL)saveRemoteRecordPictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime {
++ (BOOL)saveRemoteRecordPictureForCamera:(BaseCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime {
     
     GBase *base = [GBase sharedInstance];
     
@@ -199,7 +199,7 @@ static GBase *base = nil;
 }
 
 //删除照片
-+ (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName {
++ (void)deletePicture:(BaseCamera*)camera name:(NSString *)pictureName {
     GBase *base = [GBase sharedInstance];
     if (base.db != NULL) {
         
@@ -223,7 +223,7 @@ static GBase *base = nil;
         [base.db executeUpdate:@"DELETE FROM snapshot WHERE file_path=?", pictureName];
     }
 }
-+(NSString*)thumbPath:(MyCamera*)camera{
++(NSString*)thumbPath:(BaseCamera*)camera{
     NSString *path = nil;
     NSString *fullPath = nil;
     GBase *base = [GBase sharedInstance];
@@ -340,12 +340,12 @@ static GBase *base = nil;
 - (NSString *)documentsWithFileName:(NSString *)fileName {
     return [self.Documents stringByAppendingPathComponent:fileName];
 }
-+ (MyCamera*)getCamera:(NSInteger)index{
++ (BaseCamera*)getCamera:(NSInteger)index{
     GBase *base = [GBase sharedInstance];
     return [base.cameras objectAtIndex:index];
 }
 
-+(NSInteger)getCameraIndex:(MyCamera*)camera{
++(NSInteger)getCameraIndex:(BaseCamera*)camera{
     for(int i = 0; i< [GBase sharedInstance].cameras.count; i++){
         if([[GBase sharedInstance].cameras objectAtIndex:i] == camera){
             return i;
@@ -356,7 +356,7 @@ static GBase *base = nil;
 
 
 //删除录像
-+ (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(Camera *)mycam {
++ (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(BaseCamera *)mycam {
     
     GBase *base = [GBase sharedInstance];
     
@@ -385,7 +385,7 @@ static GBase *base = nil;
 }
 
 //根据完整路径删除录像
-+ (void)deleteRecord:(NSString *)fullFilePath  camera:(Camera *)mycam{
++ (void)deleteRecord:(NSString *)fullFilePath  camera:(BaseCamera *)mycam{
     GBase *base = [GBase sharedInstance];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -410,7 +410,7 @@ static GBase *base = nil;
     }
 }
 
-- (NSString *)recordingFileName:(Camera *)mycam {
+- (NSString *)recordingFileName:(BaseCamera *)mycam {
     
     NSDate* date = [NSDate date];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -424,7 +424,7 @@ static GBase *base = nil;
     return strFileName;
 }
 
-- (NSString *)recordingFilePath:(Camera *)mycam fileName:(NSString *)fileName {
+- (NSString *)recordingFilePath:(BaseCamera *)mycam fileName:(NSString *)fileName {
     
     //创建文件管理器
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -446,7 +446,7 @@ static GBase *base = nil;
 }
 
 
-- (NSString *)recordingNameWithCamera:(Camera *)mycam {
+- (NSString *)recordingNameWithCamera:(BaseCamera *)mycam {
     
     NSDate* date = [NSDate date];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -460,7 +460,7 @@ static GBase *base = nil;
 }
 
 // 本地录像存储路径 Documents/uid/recordingName.mp4
-- (NSString *)recordingPathWithCamera:(Camera *)mycam recordingName:(NSString *)recordingName {
+- (NSString *)recordingPathWithCamera:(BaseCamera *)mycam recordingName:(NSString *)recordingName {
     
     NSString *document_uid = [self.Documents stringByAppendingPathComponent:mycam.uid];
     [[NSFileManager defaultManager] createDirectoryAtPath:document_uid withIntermediateDirectories:YES attributes:nil error:nil];
@@ -469,7 +469,7 @@ static GBase *base = nil;
 }
 
 // 本地抓拍存储路径 Documents/uid/
-- (NSString *)snapshotPathWithCamera:(Camera *)mycam imgName:(NSString *)imgName {
+- (NSString *)snapshotPathWithCamera:(BaseCamera *)mycam imgName:(NSString *)imgName {
     
     NSString *document_uid = [self.Documents stringByAppendingPathComponent:mycam.uid];
     [[NSFileManager defaultManager] createDirectoryAtPath:document_uid withIntermediateDirectories:YES attributes:nil error:nil];
@@ -479,7 +479,7 @@ static GBase *base = nil;
     return [document_uid_snapshot stringByAppendingPathComponent:imgName];
 }
 
-+ (NSMutableArray *)recordingsForCamera:(Camera *)mycam {
++ (NSMutableArray *)recordingsForCamera:(BaseCamera *)mycam {
     
     GBase *base = [GBase sharedInstance];
     
@@ -516,7 +516,7 @@ static GBase *base = nil;
 }
 
 //保存录像
-+ (NSString*)saveRecordingForCamera:(Camera *)mycam thumb:(UIImage *)img {
++ (NSString*)saveRecordingForCamera:(BaseCamera *)mycam thumb:(UIImage *)img {
     
     GBase *base = [GBase sharedInstance];
     
@@ -546,7 +546,7 @@ static GBase *base = nil;
     return recordFilePath;
 }
 
-+ (NSMutableArray *)picturesForCamera:(MyCamera *)mycam {
++ (NSMutableArray *)picturesForCamera:(BaseCamera *)mycam {
     
     GBase *base = [GBase sharedInstance];
     
@@ -579,7 +579,7 @@ static GBase *base = nil;
     return pictures;
 }
 
-+(CGFloat)getCameraVideoRatio:(MyCamera *)mycam{
++(CGFloat)getCameraVideoRatio:(BaseCamera *)mycam{
     GBase *base = [GBase sharedInstance];
     CGFloat ratio = 16.0/9;
     if(base.db){
@@ -595,7 +595,7 @@ static GBase *base = nil;
     return ratio;
 }
 
-+(void)setCameraVideoRatio:(MyCamera*)mycam ratio:(CGFloat)ratio{
++(void)setCameraVideoRatio:(BaseCamera*)mycam ratio:(CGFloat)ratio{
      GBase *base = [GBase sharedInstance];
     if (base.db != NULL) {
         [base.db executeUpdate:@"DELETE FROM device_diction WHERE dev_uid=? and dev_key=?", mycam.uid,VIDEO_RATIO];

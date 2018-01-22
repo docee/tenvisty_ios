@@ -17,23 +17,23 @@
 
 + (GBase *)sharedInstance;
 + (void)initCameras;
-+ (void)addCamera:(MyCamera *)mycam;
-+ (void)deleteCamera:(Camera *)mycam;
-+ (void)editCamera:(MyCamera *)mycam;
-+ (MyCamera*)getCamera:(NSInteger)index;
-+(NSInteger)getCameraIndex:(MyCamera*)camera;
-+ (BOOL)savePictureForCamera:(MyCamera *)mycam image:(UIImage*)img;
-+ (NSString*)saveRecordingForCamera:(Camera *)mycam thumb:(UIImage*)img;
-+ (BOOL)saveRemoteRecordPictureForCamera:(MyCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime;
++ (void)addCamera:(BaseCamera *)mycam;
++ (void)deleteCamera:(BaseCamera *)mycam;
++ (void)editCamera:(BaseCamera *)mycam;
++ (BaseCamera*)getCamera:(NSInteger)index;
++(NSInteger)getCameraIndex:(BaseCamera*)camera;
++ (BOOL)savePictureForCamera:(BaseCamera *)mycam image:(UIImage*)img;
++ (NSString*)saveRecordingForCamera:(BaseCamera *)mycam thumb:(UIImage*)img;
++ (BOOL)saveRemoteRecordPictureForCamera:(BaseCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime;
 +(NSInteger)countSnapshot:(NSString*)uid;
 +(NSInteger)countVideo:(NSString*)uid;
-+(NSString*)thumbPath:(MyCamera*)uid;
++(NSString*)thumbPath:(BaseCamera*)uid;
 // 屏幕快照
-+ (NSMutableArray *)picturesForCamera:(Camera *)mycam;
++ (NSMutableArray *)picturesForCamera:(BaseCamera *)mycam;
 // 摄像机本地录像
-+ (NSMutableArray *)recordingsForCamera:(Camera *)mycam;
-+ (void)deletePicture:(MyCamera*)camera name:(NSString *)pictureName;
-+ (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(Camera *)mycam;
-+(CGFloat)getCameraVideoRatio:(MyCamera *)mycam;
-+(void)setCameraVideoRatio:(MyCamera*)mycam ratio:(CGFloat)ratio;
++ (NSMutableArray *)recordingsForCamera:(BaseCamera *)mycam;
++ (void)deletePicture:(BaseCamera*)camera name:(NSString *)pictureName;
++ (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(BaseCamera *)mycam;
++(CGFloat)getCameraVideoRatio:(BaseCamera *)mycam;
++(void)setCameraVideoRatio:(BaseCamera*)mycam ratio:(CGFloat)ratio;
 @end

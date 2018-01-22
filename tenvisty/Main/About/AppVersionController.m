@@ -7,6 +7,7 @@
 //
 
 #import "AppVersionController.h"
+#import "MyCamera.h"
 
 @interface AppVersionController ()
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *labAppVersion;

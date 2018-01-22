@@ -206,7 +206,7 @@
     [super viewWillAppear:animated];
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = YES;
-    _labConnectState.text = [(self.camera) strConnectState];
+    _labConnectState.text = [(self.camera) cameraStateDesc];
     [_videoMonitor attachCamera:self.camera];
     [_viewLoading setHidden:NO];
     [self changeStream:self.camera.videoQuality];
@@ -593,15 +593,15 @@
         controller.camera =  self.camera;
     }
 }
-- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+- (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     dispatch_async(dispatch_get_main_queue(), ^{
-        _labConnectState.text = [((MyCamera*)camera) strConnectState];
+        _labConnectState.text = camera.cameraStateDesc;
     });
 }
 
-- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+- (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
     dispatch_async(dispatch_get_main_queue(), ^{
-        _labConnectState.text = [((MyCamera*)camera) strConnectState];
+        _labConnectState.text = camera.cameraStateDesc;
     });
     if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
         [self changeStream:self.camera.videoQuality];
@@ -613,7 +613,7 @@
     }
 }
 
-- (void)camera:(NSCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
+- (void)camera:(BaseCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
     videoFps = fps;
     dispatch_async(dispatch_get_main_queue(), ^{
         if(fps > 1 ){

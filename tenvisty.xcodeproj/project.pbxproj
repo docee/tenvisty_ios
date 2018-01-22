@@ -119,11 +119,12 @@
 		89A37BBC2010AF5200A6F0CD /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
 		89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */; };
 		89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
-		89A37C712011DCA200A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		89A37C722011FFDC00A6F0CD /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
+		89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C772015D44200A6F0CD /* LANSearchCamera.m */; };
+		89A37C792015E8B500A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
 		89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89A7E93B1FECB30B00F12BFF /* Localizable.strings */; };
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
-		89AA50E62010558A009CCA5D /* IMyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E52010558A009CCA5D /* IMyCamera.m */; };
+		89AA50E62010558A009CCA5D /* BaseCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E52010558A009CCA5D /* BaseCamera.m */; };
 		89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E920107838009CCA5D /* HichipCamera.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
@@ -409,14 +410,16 @@
 		89A37BB92010AF4700A6F0CD /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIOTCAPIs_ALL.a; path = lib/libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
 		89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavconVoiceRecognize.a; path = lib/libavconVoiceRecognize.a; sourceTree = "<group>"; };
 		89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libXG-SDK.a"; path = "lib/libXG-SDK.a"; sourceTree = "<group>"; };
+		89A37C762015D44200A6F0CD /* LANSearchCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LANSearchCamera.h; sourceTree = "<group>"; };
+		89A37C772015D44200A6F0CD /* LANSearchCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LANSearchCamera.m; sourceTree = "<group>"; };
 		89A7E9331FECB2CC00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		89A7E93A1FECB30B00F12BFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		89A7E93C1FECB31A00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		89A7E93D1FED108200F12BFF /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		89A7E93E1FED108200F12BFF /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		89A8F4651FDE97D2003863B6 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAnimatedImage.framework; path = "tenvisty/lib/Release-iphoneos/FLAnimatedImage.framework"; sourceTree = "<group>"; };
-		89AA50E42010558A009CCA5D /* IMyCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMyCamera.h; sourceTree = "<group>"; };
-		89AA50E52010558A009CCA5D /* IMyCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IMyCamera.m; sourceTree = "<group>"; };
+		89AA50E42010558A009CCA5D /* BaseCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCamera.h; sourceTree = "<group>"; };
+		89AA50E52010558A009CCA5D /* BaseCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCamera.m; sourceTree = "<group>"; };
 		89AA50E820107838009CCA5D /* HichipCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HichipCamera.h; sourceTree = "<group>"; };
 		89AA50E920107838009CCA5D /* HichipCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HichipCamera.m; sourceTree = "<group>"; };
 		89AA50EB2010794D009CCA5D /* libHiP2PSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHiP2PSDK.a; path = tenvisty/lib/libHiP2PSDK.a; sourceTree = "<group>"; };
@@ -731,8 +734,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A37C792015E8B500A6F0CD /* IOTCamera.framework in Frameworks */,
 				89A37C722011FFDC00A6F0CD /* libHiP2PSDK.a in Frameworks */,
-				89A37C712011DCA200A6F0CD /* IOTCamera.framework in Frameworks */,
 				89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */,
 				89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */,
 				89A37BBC2010AF5200A6F0CD /* libavconVoiceRecognize.a in Frameworks */,
@@ -764,7 +767,6 @@
 		890B40671FAFF99400C1061A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				894D7E4F1FAB01D900C58BB2 /* AppDelegate.h */,
 				89D811111FF63FEB00679B39 /* About */,
 				895141D51FE7780100905355 /* Model */,
 				89E6D9931FDA2B0B0049F1E7 /* Extend */,
@@ -842,10 +844,12 @@
 				892ADB841FD78E5400BD8929 /* TimeZoneModel.m */,
 				898D8BB21FE0F75B00062F04 /* GBase.h */,
 				898D8BB31FE0F75B00062F04 /* GBase.m */,
-				89AA50E42010558A009CCA5D /* IMyCamera.h */,
-				89AA50E52010558A009CCA5D /* IMyCamera.m */,
+				89AA50E42010558A009CCA5D /* BaseCamera.h */,
+				89AA50E52010558A009CCA5D /* BaseCamera.m */,
 				89AA50E820107838009CCA5D /* HichipCamera.h */,
 				89AA50E920107838009CCA5D /* HichipCamera.m */,
+				89A37C762015D44200A6F0CD /* LANSearchCamera.h */,
+				89A37C772015D44200A6F0CD /* LANSearchCamera.m */,
 			);
 			path = GlobalModel;
 			sourceTree = "<group>";
@@ -1059,6 +1063,7 @@
 		894D7E4B1FAB01D900C58BB2 /* tenvisty */ = {
 			isa = PBXGroup;
 			children = (
+				894D7E4F1FAB01D900C58BB2 /* AppDelegate.h */,
 				8900737E1FF483D700FB36B1 /* tenvisty.entitlements */,
 				890B46B01FB03CD500C1061A /* Expand */,
 				890B40801FB02F1A00C1061A /* Global */,
@@ -2226,6 +2231,7 @@
 				89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */,
 				892ADB5D1FD6524800BD8929 /* ChangeCameraNameViewController.m in Sources */,
 				89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */,
+				89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */,
 				894D7E4E1FAB01D900C58BB2 /* main.m in Sources */,
 				892CE0981FCFD32300942E28 /* ModifyCameraNameTableViewController.m in Sources */,
 				892ADB941FD803BC00BD8929 /* EventItemTableViewCell.m in Sources */,
@@ -2240,7 +2246,7 @@
 				89A096821FF109C700E5EBAE /* FLAnimatedImage.m in Sources */,
 				890B40741FAFFA6200C1061A /* HomeViewController.m in Sources */,
 				892ADB601FD6691100BD8929 /* ChangeCameraPasswordViewController.m in Sources */,
-				89AA50E62010558A009CCA5D /* IMyCamera.m in Sources */,
+				89AA50E62010558A009CCA5D /* BaseCamera.m in Sources */,
 				89D946691FDF7D90000ABB0A /* GNetworkStates.m in Sources */,
 				898D8B9C1FE0CDA900062F04 /* GCDAsyncUdpSocket.m in Sources */,
 				EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */,
@@ -2438,7 +2444,7 @@
 					"$(PROJECT_DIR)/lib/Debug-iphoneos",
 				);
 				GCC_PREFIX_HEADER = tenvisty/PrefixHeader.pch;
-				HEADER_SEARCH_PATHS = IOTCamera/IOTCamera;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = tenvisty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -2473,7 +2479,7 @@
 					"$(PROJECT_DIR)/lib/Debug-iphoneos",
 				);
 				GCC_PREFIX_HEADER = tenvisty/PrefixHeader.pch;
-				HEADER_SEARCH_PATHS = IOTCamera/IOTCamera;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = tenvisty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

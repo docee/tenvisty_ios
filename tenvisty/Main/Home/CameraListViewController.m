@@ -11,7 +11,7 @@
 #import "BaseTableViewController.h"
 #import "BaseViewController.h"
 
-@interface CameraListViewController ()<MyCameraDelegate>{
+@interface CameraListViewController ()<BaseCameraDelegate>{
     BOOL isShowingModifyPassword;
 }
 @property (weak, nonatomic) IBOutlet UIView *view_first_add;
@@ -25,8 +25,8 @@
     [self setup];
 }
 -(void)setup{
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
-        camera.delegate2 = self;
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
+        camera.cameraDelegate = self;
         [camera start];
     }
 }
@@ -43,11 +43,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
-        camera.delegate2 = self;
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
+        camera.cameraDelegate = self;
         //强制改密码；
         if(camera.connectState == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
-             [self showChangePasswordStrict:(MyCamera*)camera];
+             [self showChangePasswordStrict:camera];
         }
     }
     [self checkShowFirstAddView];
@@ -61,8 +61,8 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
-        camera.delegate2 = nil;
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
+        camera.cameraDelegate = nil;
     }
 }
 
@@ -90,7 +90,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *vid = @"cameraListItemCell";
-    MyCamera *camera = [GBase getCamera:indexPath.row];
+    BaseCamera *camera = [GBase getCamera:indexPath.row];
     CameraListItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
     cell.camera = camera;
     return cell;
@@ -130,7 +130,7 @@
 - (IBAction)deleteCamera:(UIButton *)sender {
     NSInteger row = sender.tag;
     [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to remove this camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
-        MyCamera *camera = [GBase getCamera:row];
+        BaseCamera *camera = [GBase getCamera:row];
         if(camera){
             [camera closePush:^(NSInteger code) {
                 
@@ -184,7 +184,7 @@
     });
 }
 
--(void)doShowModifyPassword:(MyCamera *)camera{
+-(void)doShowModifyPassword:(BaseCamera *)camera{
     if(isShowingModifyPassword){
         return;
     }
@@ -210,7 +210,7 @@
         isShowingModifyPassword = NO;
         camera.pwd = alertController.textFields.firstObject.text;
         [GBase editCamera:camera];
-        [camera start:0];
+        [camera start];
         //        [camera stop];
         //        [camera start];
         //        dispatch_async(dispatch_get_global_queue(0,0), ^{
@@ -228,10 +228,10 @@
 - (IBAction)CameraListViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     
 }
--(void)showChangePasswordStrict:(MyCamera*)camera{
+-(void)showChangePasswordStrict:(BaseCamera*)camera{
     if(!isShowingModifyPassword){
         isShowingModifyPassword = YES;
-        [TwsTools presentAlertMsg:self message: FORMAT(LOCALSTR(@"Your camera [%@] uses default password, please change the password for security."),((MyCamera*)camera).nickName) actionDefaultBlock:^{
+        [TwsTools presentAlertMsg:self message: FORMAT(LOCALSTR(@"Your camera [%@] uses default password, please change the password for security."),((BaseCamera*)camera).nickName) actionDefaultBlock:^{
             UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
             BaseTableViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_changcamerapassword"];  //test2为viewcontroller的StoryboardId
             test2obj.camera = camera;
@@ -239,8 +239,8 @@
         }];
     }
 }
-- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
-    NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+- (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+    NSInteger row = [GBase getCameraIndex:(BaseCamera*)camera];
     
     if(row >= 0){
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -253,13 +253,13 @@
     }
 }
 
-- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
-    NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+- (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+    NSInteger row = [GBase getCameraIndex:camera];
     if(status == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
-        [self showChangePasswordStrict:(MyCamera*)camera];
+        [self showChangePasswordStrict:camera];
     }
-    else if(((MyCamera*)camera).processState == CAMERASTATE_NONE && status == CONNECTION_STATE_WRONG_PASSWORD){
-        [self doShowModifyPassword:(MyCamera*)camera];
+    else if(camera.processState == CAMERASTATE_NONE && status == CONNECTION_STATE_WRONG_PASSWORD){
+        [self doShowModifyPassword:camera];
     }
     if(row >= 0){
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -272,13 +272,13 @@
     }
 }
 
-- (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+- (void)camera:(BaseCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     if(type == IOTYPE_USER_IPCAM_UPGRADE_STATUS){
-        NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+        NSInteger row = [GBase getCameraIndex:(BaseCamera*)camera];
         SMsgAVIoctrlUpgradeStatus *resp = (SMsgAVIoctrlUpgradeStatus*)data;
-        ((MyCamera*)camera).upgradePercent = resp->p;
+        camera.upgradePercent = resp->p;
         if(resp->p >= 100 ){
-            ((MyCamera*)camera).processState = CAMERASTATE_WILLREBOOTING;
+            (camera).processState = CAMERASTATE_WILLREBOOTING;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [iToast makeText:LOCALSTR(@"Firmware update success, camera will reboot later, please wait a moment.")];
             });
@@ -293,8 +293,8 @@
     }
 }
 
-- (void)camera:(NSCamera *)camera _didReceiveRemoteNotification:(NSInteger)eventType EventTime:(long)eventTime{
-      NSInteger row = [GBase getCameraIndex:(MyCamera*)camera];
+- (void)camera:(BaseCamera *)camera _didReceiveRemoteNotification:(NSInteger)eventType EventTime:(long)eventTime{
+    NSInteger row = [GBase getCameraIndex:camera];
         dispatch_async(dispatch_get_main_queue(), ^{
         CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
         if(cell){

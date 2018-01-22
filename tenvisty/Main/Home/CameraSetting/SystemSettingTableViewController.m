@@ -9,6 +9,7 @@
 #define REBOOT_WAIT_TIMEOUT 60
 
 #import "SystemSettingTableViewController.h"
+#import "MyCamera.h"
 
 
 @interface SystemSettingTableViewController (){
@@ -21,6 +22,7 @@
 }
 
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
+@property (nonatomic,strong) MyCamera *myCamera;
 @end
 
 @implementation SystemSettingTableViewController
@@ -69,6 +71,7 @@
 }
 
 -(void)setup{
+    self.myCamera = self.camera.cameraDelegate;
     updateState = -1;
     resetState = -1;
     rebootState = -1;
@@ -253,7 +256,7 @@
     }
     //check new firmware
     else if(indexPath.section == 2){
-        self.camera.upgradePercent = 0;
+        self.myCamera.upgradePercent = 0;
         [self doGetAccFmInfo];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

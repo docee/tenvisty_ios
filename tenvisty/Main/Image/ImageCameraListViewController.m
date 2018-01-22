@@ -44,7 +44,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
-    MyCamera *camera = [GBase getCamera:indexPath.row];
+    BaseCamera *camera = [GBase getCamera:indexPath.row];
     NSString *vid = @"tableviewCellImage";
     ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
     cell.rightLabCameraName.text = camera.nickName;

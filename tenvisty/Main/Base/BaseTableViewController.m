@@ -8,7 +8,7 @@
 
 #import "BaseTableViewController.h"
 
-@interface BaseTableViewController ()<MyCameraDelegate>
+@interface BaseTableViewController ()<BaseCameraDelegate>
 
 @end
 
@@ -51,12 +51,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.camera.delegate2 = self;
+    self.camera.cameraDelegate = self;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.camera.delegate2 = nil;
+    self.camera.cameraDelegate = nil;
 }
 
 

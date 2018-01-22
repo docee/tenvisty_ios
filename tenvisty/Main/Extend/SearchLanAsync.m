@@ -8,6 +8,9 @@
 
 #import "SearchLanAsync.h"
 #import <IOTCamera/IOTCAPIs.h>
+#import "HiSearchSDK.h"
+#import <IOTCamera/LANSearchDevice.h>
+#import "MyCamera.h"
 
 #define SEARCHING (0)
 #define STOPPING (1)
@@ -16,7 +19,7 @@
 #define DONE 1
 #define NOTDONE 0
 
-@interface SearchLanAsync()
+@interface SearchLanAsync()<OnSearchResult>
 
 @property (nonatomic,strong) NSMutableArray* deviceList;
 @property (nonatomic,assign) NSInteger searchCount;
@@ -25,11 +28,18 @@
 @property (nonatomic,assign) NSInteger state;
 @property (nonatomic, strong) NSThread *searchThread;
 @property (nonatomic, strong) NSConditionLock *searchThreadLock;
+@property (nonatomic,strong) HiSearchSDK *hiSearchSDK;
 @end
 
 
 @implementation SearchLanAsync
 
+- (HiSearchSDK *)hiSearchSDK {
+    if (!_hiSearchSDK) {
+        _hiSearchSDK = [[HiSearchSDK alloc] init];
+    }
+    return _hiSearchSDK;
+}
 -(id)init{
     self = [super init];
     if(self){
@@ -46,6 +56,27 @@
         _deviceList = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return _deviceList;
+}
+- (void)receiveSearchResult:(char *)uid IP:(char *)ip PORT:(int)port NAME:(char *)name VEISION:(char *)version {
+    if(self.state == SEARCHING && ([[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] integerValue] - self.beginTime) < self.maxWaitTime){
+        LANSearchCamera *dev = [[LANSearchCamera alloc] init];
+        dev.uid = [NSString stringWithFormat:@"%s",uid];
+        dev.ip = [NSString stringWithFormat:@"%s", ip];
+        dev.port = port;
+        BOOL exist = NO;
+        for(LANSearchCamera *d in [self deviceList]){
+            if([d.uid isEqualToString:dev.uid]){
+                exist = YES;
+                break;
+            }
+        }
+        if(!exist){
+            [[self deviceList] addObject:dev];
+            if(self.delegate != nil &&  [self.delegate respondsToSelector:@selector(onReceiveSearchResult:status:)]){
+                [self.delegate onReceiveSearchResult:dev status:1];
+            }
+        }
+    }
 }
 
 -(void) beginSearch{
@@ -67,6 +98,8 @@
     }
     int num = 0;
     int k = 0;
+    self.hiSearchSDK.delegate = self;
+    [self.hiSearchSDK search2];
     while (self.state == SEARCHING && ([[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] integerValue] - self.beginTime) < self.maxWaitTime) {
         self.searchCount++;
         NSInteger timeout = self.searchCount/2<1?1:self.searchCount*75;
@@ -80,7 +113,7 @@
 //                printf("\tPORT[%d]\n", pLanSearchAll[k].port);
 //                printf("------------------------------------------\n");
                 
-                LANSearchDevice *dev = [[LANSearchDevice alloc] init];
+                LANSearchCamera *dev = [[LANSearchCamera alloc] init];
                 dev.uid = [NSString stringWithFormat:@"%s", pLanSearchAll[k].UID];
                 dev.ip = [NSString stringWithFormat:@"%s", pLanSearchAll[k].IP];
                 dev.port = pLanSearchAll[k].port;
@@ -100,6 +133,9 @@
                 
             }
         }
+    }
+    if(_hiSearchSDK){
+        [self.hiSearchSDK stop];
     }
     self.state = STOPPED;
     if(self.delegate != nil &&  [self.delegate respondsToSelector:@selector(onReceiveSearchResult:status:)]){

@@ -10,6 +10,6 @@
 
 @interface BaseViewController : UIViewController
 
-@property (nonatomic,strong) MyCamera *camera;
+@property (nonatomic,strong) BaseCamera *camera;
 
 @end

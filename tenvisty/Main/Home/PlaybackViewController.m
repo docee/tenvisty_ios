@@ -14,6 +14,7 @@
 
 #import "PlaybackViewController.h"
 #import <IOTCamera/Monitor.h>
+#import "MyCamera.h"
 
 @interface PlaybackViewController (){
     NSInteger mMediaState;
@@ -29,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labEventTime;
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_ratio_videowrapper;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
+@property (nonatomic,strong) MyCamera *myCamera;
 @end
 
 @implementation PlaybackViewController
@@ -94,7 +96,7 @@
 }
 
 #pragma mark - MyCameraDelegate Methods
-- (void)camera:(MyCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char *)data DataSize:(NSInteger)size
+- (void)camera:(BaseCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char *)data DataSize:(NSInteger)size
 {
     if (type == IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL_RESP) {
         SMsgAVIoctrlPlayRecordResp *resp = (SMsgAVIoctrlPlayRecordResp *)data;
@@ -104,7 +106,7 @@
                     if(resp->result >= 0 && resp->result <= 31){
                         mMediaState = MEDIA_STATE_PLAYING;
                         mPlaybackChannel = resp->result;
-                        [self.camera start:mPlaybackChannel];
+                        [self.myCamera start:mPlaybackChannel];
                         [self refreshButton];
                     }
                 }
@@ -114,7 +116,7 @@
                 if(mPlaybackChannel > 0){
                     if(mMediaState == MEDIA_STATE_PAUSED){
                         mMediaState = MEDIA_STATE_PLAYING;
-                        [self.monitor attachCamera:self.camera];
+                        [self.monitor attachCamera:self.myCamera];
                     }
                     else if(mMediaState == MEDIA_STATE_PLAYING){
                         mMediaState = MEDIA_STATE_PAUSED;
@@ -126,7 +128,7 @@
             }
             case AVIOCTRL_RECORD_PLAY_STOP:{
                 if(mPlaybackChannel > 0){
-                    [self.camera stop:mPlaybackChannel];
+                    [self.myCamera stop:mPlaybackChannel];
                     [self.monitor deattachCamera];
                 }
                 mPlaybackChannel = -1;
@@ -136,7 +138,7 @@
             }
             case AVIOCTRL_RECORD_PLAY_END:{
                 if(mPlaybackChannel > 0){
-                    [self.camera stop:mPlaybackChannel];
+                    [self.myCamera stop:mPlaybackChannel];
                     [self.monitor deattachCamera];
                     [self doEndPlayback];
                 }
@@ -171,7 +173,7 @@
 //        [self.camera stop:mPlaybackChannel];
 //        [self doEndPlayback];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.camera stop:mPlaybackChannel];
+            [self.myCamera stop:mPlaybackChannel];
             [self doEndPlayback];
             mPlaybackChannel = -1;
         });
@@ -185,7 +187,7 @@
     req->command = AVIOCTRL_RECORD_PLAY_STOP;
     req->Param = 0;
     req->stTimeDay = [Event getTimeDay:self.evt.eventTime];
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
+    [self.myCamera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
     free(req);
 }
 
@@ -218,11 +220,11 @@
     req->command = AVIOCTRL_RECORD_PLAY_PAUSE;
     req->Param = 0;
     req->stTimeDay = [Event getTimeDay:self.evt.eventTime];
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
+    [self.myCamera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
     free(req);
 }
 
-- (void)camera:(NSCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
+- (void)camera:(BaseCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
     dispatch_async(dispatch_get_main_queue(), ^{
         if(fps > 1){
             [self.indicator_loading setHidden:NO];
@@ -241,7 +243,7 @@
     });
 }
 
-- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+- (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     if(status == CONNECTION_STATE_TIMEOUT){
         [self disconnect];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -252,12 +254,12 @@
     
 }
 
-- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+- (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
     if(status == CONNECTION_STATE_CONNECTED){
         if(mPlaybackChannel > 0 && mPlaybackChannel == channel){
-            [self.camera startShow:mPlaybackChannel];
-            [self.camera startAudio:mPlaybackChannel];
-            [self.monitor attachCamera:self.camera];
+            [self.myCamera startShow:mPlaybackChannel];
+            [self.myCamera startAudio:mPlaybackChannel];
+            [self.monitor attachCamera:self.myCamera];
         }
         else if(channel == 0){
             [self startPlayback];
@@ -265,7 +267,7 @@
     }
 }
 
-- (void)camera:(NSCamera *)camera _didReceiveRawDataFrame:(const char *)imgData VideoWidth:(NSInteger)width VideoHeight:(NSInteger)height{
+- (void)camera:(BaseCamera *)camera _didReceiveRawDataFrame:(const char *)imgData VideoWidth:(NSInteger)width VideoHeight:(NSInteger)height{
     if(_needCreateSnapshot && _monitor.image){
         _needCreateSnapshot = NO;
         [GBase saveRemoteRecordPictureForCamera:self.camera image:_monitor.image eventType:self.evt.eventType eventTime:self.evt.eventTime];

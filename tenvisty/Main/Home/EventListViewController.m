@@ -293,7 +293,7 @@
 
 
 #pragma mark - MyCameraDelegate Methods
-- (void)camera:(MyCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char *)data DataSize:(NSInteger)size
+- (void)camera:(BaseCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char *)data DataSize:(NSInteger)size
 {
     if (type == IOTYPE_USER_IPCAM_LISTEVENT_RESP) {
         

@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IMyCamera.h"
+#import "BaseCamera.h"
 #import "HiCamera.h"
 
 @interface HichipCamera : HiCamera<BaseCameraDelegate,BaseCameraProtocol>
+
 
 @end

@@ -24,7 +24,7 @@ UIAlertViewDelegate//,
 //CameraIOSessionProtocol
 >
 
-@property (nonatomic, strong) MyCamera *camera;
+@property (nonatomic, strong) BaseCamera *camera;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;

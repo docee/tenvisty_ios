@@ -21,7 +21,7 @@
 @end
 
 @implementation MyCamera
-@synthesize delegate2;
+@synthesize baseCamera;
 @synthesize lastChannel;
 @synthesize user, pwd;
 
@@ -176,7 +176,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"didReceiveIOCtrl" object:nil];
-    self.delegate2 = nil;
+    self.cameraDelegate = nil;
 }
 
 -(void)start{
@@ -319,13 +319,12 @@
 
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time
 {
-    NSLog(@"setRemoteNotification %@ %@ %s %d",[self class],[self.delegate2 class],__func__,__LINE__);
+    NSLog(@"setRemoteNotification %@ %@ %s %d",[self class],[self.cameraDelegate class],__func__,__LINE__);
     if(self.remoteNotifications > 0){
         self.remoteNotifications++;
         [GBase editCamera:self];
-        //NSString dname = [NSString stringWithUTF8String:object_getClassName(self.delegate2)];
-        if (self.delegate2 != nil && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]) {
-            [self.delegate2 camera:self _didReceiveRemoteNotification:type EventTime:time];
+        if(self.cameraDelegate != nil && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]){
+            [self.cameraDelegate camera:self.baseCamera _didReceiveRemoteNotification:type EventTime:time];
         }
     }
 }
@@ -344,22 +343,22 @@
 #pragma mark - CameraDelegate Methods
 - (void)camera:(Camera *)camera didReceiveRawDataFrame:(NSData *)imgData VideoWidth:(NSInteger)width VideoHeight:(NSInteger)height
 {
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveRawDataFrame:VideoWidth:VideoHeight:)]) {
-        [self.delegate2 camera:self _didReceiveRawDataFrame:[imgData bytes] VideoWidth:width VideoHeight:height];
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveRawDataFrame:VideoWidth:VideoHeight:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didReceiveRawDataFrame:[imgData bytes] VideoWidth:width VideoHeight:height];
     }
 }
 
 - (void)camera:(Camera *)camera didReceiveJPEGDataFrame:(const char *)imgData DataSize:(NSInteger)size
 {
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveJPEGDataFrame:DataSize:)]) {
-        [self.delegate2 camera:self _didReceiveJPEGDataFrame:imgData DataSize:size];
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveJPEGDataFrame:DataSize:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didReceiveJPEGDataFrame:imgData DataSize:size];
     }
 }
 
 - (void)camera:(Camera *)camera didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount
 {
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveFrameInfoWithVideoWidth:VideoHeight:VideoFPS:VideoBPS:AudioBPS:OnlineNm:FrameCount:IncompleteFrameCount:)]) {
-        [self.delegate2 camera:self _didReceiveFrameInfoWithVideoWidth:videoWidth VideoHeight:videoHeight VideoFPS:fps VideoBPS:videoBps AudioBPS:audioBps OnlineNm:onlineNm FrameCount:frameCount IncompleteFrameCount:incompleteFrameCount];
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveFrameInfoWithVideoWidth:VideoHeight:VideoFPS:VideoBPS:AudioBPS:OnlineNm:FrameCount:IncompleteFrameCount:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didReceiveFrameInfoWithVideoWidth:videoWidth VideoHeight:videoHeight VideoFPS:fps VideoBPS:videoBps AudioBPS:audioBps OnlineNm:onlineNm FrameCount:frameCount IncompleteFrameCount:incompleteFrameCount];
     }
 }
 
@@ -407,8 +406,8 @@
     
     
     self.connectState = status;
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
-        [self.delegate2 camera:self _didChangeSessionStatus:status];
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didChangeSessionStatus:status];
     }
     
 }
@@ -428,8 +427,8 @@
     if(channel == 0){
         self.connectState = status;
     }
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
-        [self.delegate2 camera:self _didChangeChannelStatus:channel ChannelStatus:status];
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didChangeChannelStatus:channel ChannelStatus:status];
     }
     
     if (status == CONNECTION_STATE_WRONG_PASSWORD) {
@@ -448,8 +447,8 @@
 
 - (void)camera:(Camera *)camera didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size
 {
-    if (self.delegate2 && [self.delegate2 respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
-        [self.delegate2 camera:self _didReceiveIOCtrlWithType:type Data:data DataSize:size];
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didReceiveIOCtrlWithType:type Data:data DataSize:size];
     }
     
     NSData *buf = [NSData dataWithBytes:data length:size];
@@ -764,4 +763,5 @@
     _vRatio = videoRatio;
     [GBase setCameraVideoRatio:self ratio:videoRatio];
 }
+
 @end

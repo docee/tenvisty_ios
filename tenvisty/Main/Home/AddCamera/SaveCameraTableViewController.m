@@ -32,7 +32,7 @@
             nickName = LOCALSTR(@"Camera Name");
         }
         NSString *password = [self iptPassword];
-        MyCamera *camera = [[MyCamera alloc] initWithUid:self.uid Name:nickName UserName:@"admin" Password:password];
+        BaseCamera *camera = [[BaseCamera alloc] initWithUid:self.uid Name:nickName UserName:@"admin" Password:password];
         [camera start];
         [GBase addCamera:camera];
         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -46,7 +46,7 @@
         return NO;
     }
     NSString *uid = [TwsTools readUID:[self iptUid]];
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
         if([camera.uid isEqualToString:uid]){
             [TwsTools presentAlertMsg:self message:LOCALSTR(@"This camera already exists, please enter another one.")];
             return NO;

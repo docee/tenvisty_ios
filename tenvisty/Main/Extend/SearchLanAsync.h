@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LANSearchCamera.h"
+
 @protocol SearchLanDelegate <NSObject>
 @optional
-- (void)onReceiveSearchResult:(LANSearchDevice *)device status:(NSInteger)status;
+- (void)onReceiveSearchResult:(LANSearchCamera *)device status:(NSInteger)status;
 
 @end
 

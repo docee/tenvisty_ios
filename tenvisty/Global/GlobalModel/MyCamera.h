@@ -6,25 +6,17 @@
 //  Copyright (c) 2012年 TUTK. All rights reserved.
 //
 
-#define CAMERASTATE_NONE 0
-#define CAMERASTATE_WILLREBOOTING 1
-#define CAMERASTATE_REBOOTING 2
-#define CAMERASTATE_WILLRESETING 3
-#define CAMERASTATE_RESETING 4
-#define CAMERASTATE_WILLUPGRADING 5
-#define CAMERASTATE_UPGRADING 6
+
 
 
 
 #import <Foundation/Foundation.h>
 #import <IOTCamera/Camera.h>
-#import <IOTCamera/NSCamera.h>
-#import <IOTCamera/AVIOCTRLDEFs.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "IMyCamera.h"
+#import "BaseCamera.h"
 
 @interface MyCamera : Camera
-<CameraDelegate,BaseCameraProtocol,BaseCameraDelegate>
+<CameraDelegate,BaseCameraProtocol>
 {
     
     NSInteger lastChannel;
@@ -35,13 +27,13 @@
     NSTimer *ptz_timer;
 }
 
-
 @property NSInteger lastChannel;
 @property (nonatomic,assign) NSInteger videoQuality;
 @property (nonatomic,strong) NSString* nickName;
 @property (nonatomic,assign) NSInteger processState;
 @property (nonatomic,assign) NSInteger upgradePercent;
 @property (nonatomic,assign) CGFloat videoRatio;
+@property (nonatomic,weak) BaseCamera *baseCamera;
 
 //  ---- 传感器 ---- //
 

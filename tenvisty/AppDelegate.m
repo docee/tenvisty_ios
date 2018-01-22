@@ -11,6 +11,7 @@
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
+#import "MyCamera.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>{
     BOOL isEnterBackground;
@@ -122,7 +123,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     isEnterBackground = YES;
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
         [camera stop];
         //camera.delegate2 = nil;
     }
@@ -142,7 +143,7 @@
 //    });
     isEnterBackground = NO;
      [MyCamera initIOTC];
-     for(MyCamera *camera in [GBase sharedInstance].cameras){
+     for(BaseCamera *camera in [GBase sharedInstance].cameras){
         [camera start];
             //camera.delegate2 = nil;
      }
@@ -205,7 +206,7 @@
         }
         NSLog(@"time:%ld",(long)time);
         BOOL isNotExist = YES;
-        for (MyCamera *cam in [GBase sharedInstance].cameras) {
+        for (BaseCamera *cam in [GBase sharedInstance].cameras) {
             // [HXProgress showText:cam.uid];
             if ([cam.uid isEqualToString:uid]) {
                 isNotExist = NO;
@@ -220,7 +221,7 @@
             
         }// @for
         if(isNotExist){
-            MyCamera *cam = [[MyCamera alloc] initWithUid:uid Name:@"camera name" UserName:@"admin" Password:@"admin"];
+            BaseCamera *cam = [[BaseCamera alloc] initWithUid:uid Name:@"camera name" UserName:@"admin" Password:@"admin"];
             [cam closePush:nil];
         }
         
@@ -231,7 +232,7 @@
 -(void)checkAlarmEventByUID:(NSString*) uid {
     if(uid && uid.length == 20){
         BOOL isNotExist = YES;
-        for (MyCamera *cam in [GBase sharedInstance].cameras) {
+        for (BaseCamera *cam in [GBase sharedInstance].cameras) {
             // [HXProgress showText:cam.uid];
             if ([cam.uid isEqualToString:uid]) {
                 isNotExist = NO;
@@ -246,7 +247,7 @@
             
         }// @for
         if(isNotExist){
-            MyCamera *cam = [[MyCamera alloc] initWithUid:uid Name:@"camera name" UserName:@"admin" Password:@"admin"];
+            BaseCamera *cam = [[BaseCamera alloc] initWithUid:uid Name:@"camera name" UserName:@"admin" Password:@"admin"];
             [cam closePush:nil];
         }
     }
@@ -311,8 +312,8 @@
     }else{
         //应用处于前台时的本地推送接受
     }
-    MyCamera *camera = nil;
-    for (MyCamera *c in [GBase sharedInstance].cameras) {
+    BaseCamera *camera = nil;
+    for (BaseCamera *c in [GBase sharedInstance].cameras) {
         if([c.uid isEqualToString:(NSString*)[[userInfo objectForKey:@"eventData"] objectForKey:@"uid"]]){
             camera = c;
             break;

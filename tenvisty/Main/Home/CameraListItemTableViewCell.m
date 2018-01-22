@@ -9,9 +9,10 @@
 
 #import "CameraListItemTableViewCell.h"
 #import "BaseViewController.h"
+#import "MyCamera.h"
 
 @interface CameraListItemTableViewCell(){
-   __weak MyCamera *_camera;
+   __weak BaseCamera *_camera;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_labConnectstate;
 @property (weak, nonatomic) IBOutlet UIView *viewSnapshotMask;
@@ -91,9 +92,9 @@
 
 -(void)setState:(NSInteger)state{
     if(self.camera){
-        self.labCameraConnectState.text = [self.camera strConnectState];
+        self.labCameraConnectState.text = self.camera.cameraStateDesc;
     }
-    if(state == CONNECTION_STATE_CONNECTING || self.camera.processState != CAMERASTATE_NONE){
+    if(state == CONNECTION_STATE_CONNECTING || (self.camera.p2pType == P2P_Tutk && ((MyCamera*)self.camera.orginCamera).processState != CAMERASTATE_NONE)){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
         MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
@@ -186,7 +187,7 @@
     [[self currentViewController].navigationController pushViewController:test2obj animated:YES];
 }
 
--(void)setCamera:(MyCamera *)camera{
+-(void)setCamera:(BaseCamera *)camera{
     _camera = camera;
     if(_camera){
         [self refreshState];

@@ -55,7 +55,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)onReceiveSearchResult:(LANSearchDevice *)device status:(NSInteger)status{
+- (void)onReceiveSearchResult:(LANSearchCamera *)device status:(NSInteger)status{
     //开始搜索摄像机
     if(status == 2){
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -107,11 +107,11 @@
     NSInteger row = indexPath.row;
     
     if (row < self.searchResults.count) {
-        LANSearchDevice *result = [self.searchResults objectAtIndex:row];
+        LANSearchCamera *result = [self.searchResults objectAtIndex:row];
         cell.labDesc.text = result.ip;
         cell.labTitle.text = result.uid;
         BOOL hasAdded = NO;
-        for(MyCamera *camera in [GBase sharedInstance].cameras){
+        for(BaseCamera *camera in [GBase sharedInstance].cameras){
             if([camera.uid isEqualToString:result.uid]){
                 hasAdded = YES;
                 break;
@@ -130,8 +130,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString* uid = ((LANSearchDevice*)[self.searchResults objectAtIndex:[self.tableView indexPathForSelectedRow].row]).uid;
-    for(MyCamera *camera in [GBase sharedInstance].cameras){
+    NSString* uid = ((LANSearchCamera*)[self.searchResults objectAtIndex:[self.tableView indexPathForSelectedRow].row]).uid;
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
         if([camera.uid isEqualToString:uid]){
             [[iToast makeText:LOCALSTR(@"this camera is in your camera list, please tap other camera.")] show];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -151,7 +151,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"SearchCamera2SaveCamera"]){
         SaveCameraTableViewController *controller= segue.destinationViewController;
-        controller.uid = ((LANSearchDevice*)[self.searchResults objectAtIndex:[self.tableView indexPathForSelectedRow].row]).uid;
+        controller.uid = ((LANSearchCamera*)[self.searchResults objectAtIndex:[self.tableView indexPathForSelectedRow].row]).uid;
     }
 }
 
