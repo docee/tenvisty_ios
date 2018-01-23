@@ -12,7 +12,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AudioToolbox/ExtendedAudioFile.h>
 
-@interface OpenALPlayer : NSObject{
+@interface TwsOpenALPlayer : NSObject{
     ALCcontext *mContext;
     ALCdevice *mDevice;
     ALuint outSourceID;

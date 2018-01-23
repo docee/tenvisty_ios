@@ -12,7 +12,7 @@
 #define RECORD_TIMEOUT (5)
 #define DEFAULT_VIDEO_RATIO 16/9
 
-#import "LiveViewController.h"
+#import "LiveView_HichipController.h"
 #import <IOTCamera/Monitor.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AppDelegate.h"
@@ -20,7 +20,7 @@
 #import "SwitchVideoQualityDialog.h"
 #import "MyCamera.h"
 
-@interface LiveViewController ()<MyCameraDelegate,MonitorTouchDelegate>{
+@interface LiveView_HichipController ()<MyCameraDelegate,MonitorTouchDelegate>{
     BOOL isTalking;
     BOOL isListening;
     BOOL isRecording;
@@ -70,7 +70,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
 
-@implementation LiveViewController
+@implementation LiveView_HichipController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

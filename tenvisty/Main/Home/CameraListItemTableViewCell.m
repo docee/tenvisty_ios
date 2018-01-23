@@ -91,10 +91,11 @@
 
 
 -(void)setState:(NSInteger)state{
-    if(self.camera){
-        self.labCameraConnectState.text = self.camera.cameraStateDesc;
+    if(!self.camera){
+        return;
     }
-    if(state == CONNECTION_STATE_CONNECTING || (self.camera.p2pType == P2P_Tutk && self.camera.processState != CAMERASTATE_NONE)){
+     self.labCameraConnectState.text = self.camera.cameraStateDesc;
+    if(self.camera.isConnecting){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
         MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
@@ -111,7 +112,7 @@
     }
     else{
         [MBProgressHUD hideAllHUDsForView:self animated:NO];
-        if(state == CONNECTION_STATE_CONNECTED){
+        if(self.camera.isAuthConnected){
             [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_2];
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:YES];
@@ -123,7 +124,7 @@
             [_btnCameraEvent setEnabled:YES];
             [_btnCameraSetting setEnabled:YES];
         }
-        else if(state == CONNECTION_STATE_WRONG_PASSWORD){
+        else if(self.camera.isWrongPassword){
             [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:NO];
@@ -158,7 +159,7 @@
 
 -(void)refreshState{
     if(self.camera){
-        [self setState:self.camera.connectState];
+        [self setState:self.camera.cameraConnectState];
     }
 }
 -(void)refreshSnapshot{

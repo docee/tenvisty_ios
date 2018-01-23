@@ -3245,7 +3245,7 @@ void ff_set_cmp(DSPContext* c, me_cmp_func *cmp, int type){
             break;
 #endif
         default:
-            av_log(NULL, AV_LOG_ERROR,"internal error in cmp function selection\n");
+            av_log222(NULL, AV_LOG_ERROR,"internal error in cmp function selection\n");
         }
     }
 }
@@ -3954,7 +3954,7 @@ int ff_check_alignment(void){
     if((long)&aligned & 15){
         if(!did_fail){
 #if defined(HAVE_MMX) || defined(HAVE_ALTIVEC)
-            av_log(NULL, AV_LOG_ERROR,
+            av_log222(NULL, AV_LOG_ERROR,
                 "Compiler did not align stack variables. Libavcodec has been miscompiled\n"
                 "and may be very slow or crash. This is not a bug in libavcodec,\n"
                 "but in the compiler. You may try recompiling using gcc >= 4.2.\n"
@@ -4290,7 +4290,7 @@ void dsputil_init(DSPContext* c, AVCodecContext *avctx)
             c->idct_permutation[i]= (i&0x38) | idct_sse2_row_perm[i&7];
         break;
     default:
-        av_log(avctx, AV_LOG_ERROR, "Internal error, IDCT permutation not set\n");
+        av_log222(avctx, AV_LOG_ERROR, "Internal error, IDCT permutation not set\n");
     }
 }
 

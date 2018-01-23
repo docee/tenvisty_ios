@@ -620,7 +620,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2Z-zO-rey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Camera Name-->
+        <!--Live View-->
         <scene sceneID="a2d-um-0ec">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="Clh-uG-1TF" customClass="LiveViewController" sceneMemberID="viewController">
@@ -1453,7 +1453,7 @@
                             <outletCollection property="gestureRecognizers" destination="gTc-Hu-qn0" appends="YES" id="9H1-0N-6hg"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Camera Name" id="h29-hI-td0">
+                    <navigationItem key="navigationItem" title="Live View" id="h29-hI-td0">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="KdF-fa-swW">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -1970,7 +1970,7 @@
             </objects>
             <point key="canvasLocation" x="24.800000000000001" y="690.14778325123154"/>
         </scene>
-        <!--Camera Name-->
+        <!--Playback-->
         <scene sceneID="1kQ-d1-eBx">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="zNa-YN-PJP" customClass="PlaybackViewController" sceneMemberID="viewController">
@@ -2056,7 +2056,7 @@
                             <constraint firstItem="dna-kz-yon" firstAttribute="top" secondItem="AGY-bs-4aa" secondAttribute="bottom" constant="2" id="tbD-po-cOd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Camera Name" id="3UZ-6b-tz9">
+                    <navigationItem key="navigationItem" title="Playback" id="3UZ-6b-tz9">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="rFf-fE-qZR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -2185,7 +2185,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Pi-Ho-QIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Add Camera-->
+        <!--Add Camera Wireless Note-->
         <scene sceneID="4mH-O1-HR6">
             <objects>
                 <viewController id="m84-YK-Ql0" customClass="AddDeviceWirelessNoteViewController" sceneMemberID="viewController">
@@ -2243,7 +2243,7 @@
                             <constraint firstItem="qM0-XO-crD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="boM-x0-l4z" secondAttribute="leading" constant="20" id="smo-tU-Cyi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Camera" id="MkF-F1-S8C">
+                    <navigationItem key="navigationItem" title="Add Camera Wireless Note" id="MkF-F1-S8C">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="OU1-AX-OCa">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -2257,7 +2257,7 @@
             </objects>
             <point key="canvasLocation" x="948" y="-121.88905547226388"/>
         </scene>
-        <!--Add Camera-->
+        <!--Add Camera Wireless Input-->
         <scene sceneID="AGa-Kv-xcB">
             <objects>
                 <viewController id="xqR-6c-skT" customClass="AddDeviceWirelessViewController" sceneMemberID="viewController">
@@ -2317,7 +2317,7 @@
                             <constraint firstAttribute="trailing" secondItem="IcA-xi-tOp" secondAttribute="trailing" id="kxV-TD-A27"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Camera" id="Ffj-KL-7fv">
+                    <navigationItem key="navigationItem" title="Add Camera Wireless Input" id="Ffj-KL-7fv">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="R5A-7c-cKU">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -2339,7 +2339,7 @@
                 <exit id="UKG-Mr-UA3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
-        <!--Add Camera-->
+        <!--Add Camera Wireless Setting-->
         <scene sceneID="Oc8-RX-8D7">
             <objects>
                 <viewController id="7Nl-3P-d2B" customClass="AddDeviceWirelessSettingViewController" sceneMemberID="viewController">
@@ -2430,7 +2430,7 @@
                             <constraint firstItem="99k-sP-KYz" firstAttribute="centerX" secondItem="ICc-at-C4n" secondAttribute="centerX" id="tQR-fc-Pl0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Camera" id="hK8-jb-8UP">
+                    <navigationItem key="navigationItem" title="Add Camera Wireless Setting" id="hK8-jb-8UP">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="5az-Vn-aFb">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -2600,7 +2600,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="u2h-rS-5ub"/>
         <segue reference="wsG-cn-sSa"/>
-        <segue reference="wkI-hP-L0S"/>
+        <segue reference="6Zl-SU-ISp"/>
         <segue reference="Y28-Yq-DHg"/>
         <segue reference="p9E-YF-VbO"/>
         <segue reference="7gs-zU-rAy"/>

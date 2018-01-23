@@ -625,7 +625,7 @@ void ff_er_add_slice(MpegEncContext *s, int startx, int starty, int endx, int en
     int mask= -1;
 
     if(start_i > end_i || start_xy > end_xy){
-        av_log(s->avctx, AV_LOG_ERROR, "internal error, slice end before start\n");
+        av_log222(s->avctx, AV_LOG_ERROR, "internal error, slice end before start\n");
         return;
     }
 
@@ -686,7 +686,7 @@ void ff_er_frame_end(MpegEncContext *s){
        s->error_count==3*s->mb_width*(s->avctx->skip_top + s->avctx->skip_bottom)) return;
 
     if(s->current_picture.motion_val[0] == NULL){
-        av_log(s->avctx, AV_LOG_ERROR, "Warning MVs not available\n");
+        av_log222(s->avctx, AV_LOG_ERROR, "Warning MVs not available\n");
 
         for(i=0; i<2; i++){
             pic->ref_index[i]= av_mallocz(size * sizeof(uint8_t));
@@ -707,9 +707,9 @@ void ff_er_frame_end(MpegEncContext *s){
             for(mb_x=0; mb_x<s->mb_width; mb_x++){
                 int status= s->error_status_table[mb_x + mb_y*s->mb_stride];
 
-                av_log(s->avctx, AV_LOG_DEBUG, "%2X ", status);
+                av_log222(s->avctx, AV_LOG_DEBUG, "%2X ", status);
             }
-            av_log(s->avctx, AV_LOG_DEBUG, "\n");
+            av_log222(s->avctx, AV_LOG_DEBUG, "\n");
         }
     }
 
@@ -841,7 +841,7 @@ void ff_er_frame_end(MpegEncContext *s){
         if(error&AC_ERROR) ac_error ++;
         if(error&MV_ERROR) mv_error ++;
     }
-    av_log(s->avctx, AV_LOG_INFO, "concealing %d DC, %d AC, %d MV errors\n", dc_error, ac_error, mv_error);
+    av_log222(s->avctx, AV_LOG_INFO, "concealing %d DC, %d AC, %d MV errors\n", dc_error, ac_error, mv_error);
 
     is_intra_likely= is_intra_more_likely(s);
 

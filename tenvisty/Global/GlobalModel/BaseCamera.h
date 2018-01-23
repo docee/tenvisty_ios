@@ -34,12 +34,16 @@
 @property (nonatomic,assign) BOOL isPlaying;
 @property (nonatomic,assign) NSInteger videoQuality;
 @property (nonatomic,assign) CGFloat videoRatio;
-@property (nonatomic,assign) NSInteger connectState;
+@property (nonatomic,assign) NSInteger cameraConnectState;
 @property(nonatomic,strong,readonly) NSString *cameraStateDesc;
 @property(nonatomic,assign,readonly) NSInteger p2pType;
 @property (nonatomic,assign) NSInteger processState;
 @property (nonatomic,assign) NSInteger upgradePercent;
-
+@property(nonatomic,assign,readonly) BOOL isSessionConnected;
+@property(nonatomic,assign,readonly) BOOL isAuthConnected;
+@property(nonatomic,assign,readonly) BOOL isConnecting;
+@property(nonatomic,assign,readonly) BOOL isDisconnect;
+@property(nonatomic,assign,readonly) BOOL isWrongPassword;
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_;
 -(id)init;
 -(void)start;

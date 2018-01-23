@@ -344,7 +344,7 @@ static inline int get_ue(GetBitContext *s, char *file, const char *func, int lin
 
     print_bin(bits, len);
 
-    av_log(NULL, AV_LOG_DEBUG, "%5d %2d %3d ue  @%5d in %s %s:%d\n", bits, len, i, pos, file, func, line);
+    av_log222(NULL, AV_LOG_DEBUG, "%5d %2d %3d ue  @%5d in %s %s:%d\n", bits, len, i, pos, file, func, line);
 
     return i;
 }
@@ -358,7 +358,7 @@ static inline int get_se(GetBitContext *s, char *file, const char *func, int lin
 
     print_bin(bits, len);
 
-    av_log(NULL, AV_LOG_DEBUG, "%5d %2d %3d se  @%5d in %s %s:%d\n", bits, len, i, pos, file, func, line);
+    av_log222(NULL, AV_LOG_DEBUG, "%5d %2d %3d se  @%5d in %s %s:%d\n", bits, len, i, pos, file, func, line);
 
     return i;
 }
@@ -372,7 +372,7 @@ static inline int get_te(GetBitContext *s, int r, char *file, const char *func, 
 
     print_bin(bits, len);
 
-    av_log(NULL, AV_LOG_DEBUG, "%5d %2d %3d te  @%5d in %s %s:%d\n", bits, len, i, pos, file, func, line);
+    av_log222(NULL, AV_LOG_DEBUG, "%5d %2d %3d te  @%5d in %s %s:%d\n", bits, len, i, pos, file, func, line);
 
     return i;
 }
@@ -423,7 +423,7 @@ static inline void set_te_golomb(PutBitContext *pb, int i, int range){
  */
 static inline void set_se_golomb(PutBitContext *pb, int i){
 //    if (i>32767 || i<-32767)
-//        av_log(NULL,AV_LOG_ERROR,"value out of range %d\n", i);
+//        av_log222(NULL,AV_LOG_ERROR,"value out of range %d\n", i);
 #if 0
     if(i<=0) i= -2*i;
     else     i=  2*i-1;

@@ -90,7 +90,7 @@
 //- (BOOL)getDeviceInfoSupportOfChannel:(NSInteger)channel;
 //-(NSString *)getCameraStatus;
 
-@property (nonatomic,assign) NSInteger connectState;
+@property (nonatomic,assign) NSInteger cameraConnectState;
 @property (nonatomic,assign) BOOL isPlaying;
 
 - (void)saveImage:(UIImage *)image;

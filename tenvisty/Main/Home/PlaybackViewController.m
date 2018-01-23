@@ -57,7 +57,7 @@
 -(dispatch_block_t)timeoutTask{
     if(_timeoutTask == nil){
         _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-            if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
+            if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
                 [self startPlayback];
             }
             else{

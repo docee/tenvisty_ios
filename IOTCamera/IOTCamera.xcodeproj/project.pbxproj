@@ -22,8 +22,8 @@
 		614AF7AC15A6675F009869D3 /* IOTCamera-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7AB15A6675F009869D3 /* IOTCamera-Prefix.pch */; };
 		614AF7D015A667AD009869D3 /* adpcm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7BF15A667AD009869D3 /* adpcm.cpp */; };
 		614AF7D115A667AD009869D3 /* adpcm.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C015A667AD009869D3 /* adpcm.h */; };
-		614AF7D215A667AD009869D3 /* AudioRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C115A667AD009869D3 /* AudioRecorder.h */; };
-		614AF7D315A667AD009869D3 /* AudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7C215A667AD009869D3 /* AudioRecorder.m */; };
+		614AF7D215A667AD009869D3 /* TwsAudioRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C115A667AD009869D3 /* TwsAudioRecorder.h */; };
+		614AF7D315A667AD009869D3 /* TwsAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7C215A667AD009869D3 /* TwsAudioRecorder.m */; };
 		614AF7D415A667AD009869D3 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C315A667AD009869D3 /* Camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614AF7D515A667AD009869D3 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7C415A667AD009869D3 /* Camera.m */; };
 		614AF7D615A667AD009869D3 /* Camera2.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C515A667AD009869D3 /* Camera2.h */; };
@@ -31,8 +31,8 @@
 		614AF7D815A667AD009869D3 /* ip_block_fifo.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C715A667AD009869D3 /* ip_block_fifo.h */; };
 		614AF7D915A667AD009869D3 /* Monitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7C815A667AD009869D3 /* Monitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614AF7DA15A667AD009869D3 /* Monitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7C915A667AD009869D3 /* Monitor.m */; };
-		614AF7DB15A667AD009869D3 /* OpenALPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7CA15A667AD009869D3 /* OpenALPlayer.h */; };
-		614AF7DC15A667AD009869D3 /* OpenALPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7CB15A667AD009869D3 /* OpenALPlayer.m */; };
+		614AF7DB15A667AD009869D3 /* TwsOpenALPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7CA15A667AD009869D3 /* TwsOpenALPlayer.h */; };
+		614AF7DC15A667AD009869D3 /* TwsOpenALPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7CB15A667AD009869D3 /* TwsOpenALPlayer.m */; };
 		614AF7DD15A667AD009869D3 /* Queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7CC15A667AD009869D3 /* Queue.h */; };
 		614AF7DE15A667AD009869D3 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 614AF7CD15A667AD009869D3 /* Queue.m */; };
 		614AF7DF15A667AD009869D3 /* AVChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 614AF7CE15A667AD009869D3 /* AVChannel.h */; };
@@ -138,8 +138,8 @@
 		614AF7AB15A6675F009869D3 /* IOTCamera-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IOTCamera-Prefix.pch"; path = "IOTCamera/IOTCamera-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		614AF7BF15A667AD009869D3 /* adpcm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = adpcm.cpp; path = IOTCamera/adpcm.cpp; sourceTree = SOURCE_ROOT; };
 		614AF7C015A667AD009869D3 /* adpcm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = adpcm.h; path = IOTCamera/adpcm.h; sourceTree = SOURCE_ROOT; };
-		614AF7C115A667AD009869D3 /* AudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioRecorder.h; path = IOTCamera/AudioRecorder.h; sourceTree = SOURCE_ROOT; };
-		614AF7C215A667AD009869D3 /* AudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioRecorder.m; path = IOTCamera/AudioRecorder.m; sourceTree = SOURCE_ROOT; };
+		614AF7C115A667AD009869D3 /* TwsAudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwsAudioRecorder.h; path = IOTCamera/TwsAudioRecorder.h; sourceTree = SOURCE_ROOT; };
+		614AF7C215A667AD009869D3 /* TwsAudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwsAudioRecorder.m; path = IOTCamera/TwsAudioRecorder.m; sourceTree = SOURCE_ROOT; };
 		614AF7C315A667AD009869D3 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = IOTCamera/Camera.h; sourceTree = SOURCE_ROOT; };
 		614AF7C415A667AD009869D3 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Camera.m; path = IOTCamera/Camera.m; sourceTree = SOURCE_ROOT; };
 		614AF7C515A667AD009869D3 /* Camera2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera2.h; path = IOTCamera/Camera2.h; sourceTree = SOURCE_ROOT; };
@@ -147,8 +147,8 @@
 		614AF7C715A667AD009869D3 /* ip_block_fifo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ip_block_fifo.h; path = IOTCamera/ip_block_fifo.h; sourceTree = SOURCE_ROOT; };
 		614AF7C815A667AD009869D3 /* Monitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Monitor.h; path = IOTCamera/Monitor.h; sourceTree = SOURCE_ROOT; };
 		614AF7C915A667AD009869D3 /* Monitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Monitor.m; path = IOTCamera/Monitor.m; sourceTree = SOURCE_ROOT; };
-		614AF7CA15A667AD009869D3 /* OpenALPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenALPlayer.h; path = IOTCamera/OpenALPlayer.h; sourceTree = SOURCE_ROOT; };
-		614AF7CB15A667AD009869D3 /* OpenALPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenALPlayer.m; path = IOTCamera/OpenALPlayer.m; sourceTree = SOURCE_ROOT; };
+		614AF7CA15A667AD009869D3 /* TwsOpenALPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwsOpenALPlayer.h; path = IOTCamera/TwsOpenALPlayer.h; sourceTree = SOURCE_ROOT; };
+		614AF7CB15A667AD009869D3 /* TwsOpenALPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwsOpenALPlayer.m; path = IOTCamera/TwsOpenALPlayer.m; sourceTree = SOURCE_ROOT; };
 		614AF7CC15A667AD009869D3 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Queue.h; path = IOTCamera/Queue.h; sourceTree = SOURCE_ROOT; };
 		614AF7CD15A667AD009869D3 /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Queue.m; path = IOTCamera/Queue.m; sourceTree = SOURCE_ROOT; };
 		614AF7CE15A667AD009869D3 /* AVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVChannel.h; path = IOTCamera/AVChannel.h; sourceTree = SOURCE_ROOT; };
@@ -303,8 +303,8 @@
 				61B948FE15A66B200000BCF8 /* AVFRAMEINFO.h */,
 				61B948FF15A66B200000BCF8 /* AVIOCTRLDEFs.h */,
 				61B9490515A66B200000BCF8 /* platform_Config.h */,
-				614AF7C115A667AD009869D3 /* AudioRecorder.h */,
-				614AF7C215A667AD009869D3 /* AudioRecorder.m */,
+				614AF7C115A667AD009869D3 /* TwsAudioRecorder.h */,
+				614AF7C215A667AD009869D3 /* TwsAudioRecorder.m */,
 				B277383E1808F5A300CA52DA /* NSCamera.h */,
 				B277383F1808F5A300CA52DA /* NSCamera.m */,
 				614AF7C315A667AD009869D3 /* Camera.h */,
@@ -316,8 +316,8 @@
 				614AF7C715A667AD009869D3 /* ip_block_fifo.h */,
 				614AF7C815A667AD009869D3 /* Monitor.h */,
 				614AF7C915A667AD009869D3 /* Monitor.m */,
-				614AF7CA15A667AD009869D3 /* OpenALPlayer.h */,
-				614AF7CB15A667AD009869D3 /* OpenALPlayer.m */,
+				614AF7CA15A667AD009869D3 /* TwsOpenALPlayer.h */,
+				614AF7CB15A667AD009869D3 /* TwsOpenALPlayer.m */,
 				614AF7CC15A667AD009869D3 /* Queue.h */,
 				614AF7CD15A667AD009869D3 /* Queue.m */,
 				614AF7CE15A667AD009869D3 /* AVChannel.h */,
@@ -427,12 +427,12 @@
 				89C62B161ACE77C40004FF08 /* AVAPIs.h in Headers */,
 				614AF7AC15A6675F009869D3 /* IOTCamera-Prefix.pch in Headers */,
 				614AF7D115A667AD009869D3 /* adpcm.h in Headers */,
-				614AF7D215A667AD009869D3 /* AudioRecorder.h in Headers */,
+				614AF7D215A667AD009869D3 /* TwsAudioRecorder.h in Headers */,
 				614AF7D615A667AD009869D3 /* Camera2.h in Headers */,
 				89C62B181ACE77C40004FF08 /* RDTAPIs.h in Headers */,
 				614AF7D815A667AD009869D3 /* ip_block_fifo.h in Headers */,
 				89479E2D1A272956003A6566 /* g711T.h in Headers */,
-				614AF7DB15A667AD009869D3 /* OpenALPlayer.h in Headers */,
+				614AF7DB15A667AD009869D3 /* TwsOpenALPlayer.h in Headers */,
 				614AF7DD15A667AD009869D3 /* Queue.h in Headers */,
 				614AF7DF15A667AD009869D3 /* AVChannel.h in Headers */,
 				61B9490E15A66B210000BCF8 /* platform_Config.h in Headers */,
@@ -548,11 +548,11 @@
 				89479E2C1A272956003A6566 /* g711T.c in Sources */,
 				B29F5C7017F95BE7000CCC8A /* MjpegCamera.m in Sources */,
 				614AF7D015A667AD009869D3 /* adpcm.cpp in Sources */,
-				614AF7D315A667AD009869D3 /* AudioRecorder.m in Sources */,
+				614AF7D315A667AD009869D3 /* TwsAudioRecorder.m in Sources */,
 				614AF7D515A667AD009869D3 /* Camera.m in Sources */,
 				614AF7D715A667AD009869D3 /* ip_block_fifo.c in Sources */,
 				614AF7DA15A667AD009869D3 /* Monitor.m in Sources */,
-				614AF7DC15A667AD009869D3 /* OpenALPlayer.m in Sources */,
+				614AF7DC15A667AD009869D3 /* TwsOpenALPlayer.m in Sources */,
 				89A37C7C2015E90300A6F0CD /* LANSearchDevice.m in Sources */,
 				614AF7DE15A667AD009869D3 /* Queue.m in Sources */,
 				2E0926721956A322005F62A6 /* FHVideoRecorder.mm in Sources */,
@@ -640,7 +640,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				MACH_O_TYPE = mh_object;
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -692,7 +692,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				MACH_O_TYPE = mh_object;
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -728,11 +728,11 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				MACH_O_TYPE = mh_object;
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tutk.IOTCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -770,10 +770,10 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
-				MACH_O_TYPE = mh_object;
+				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tutk.IOTCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

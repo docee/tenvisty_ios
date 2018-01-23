@@ -115,15 +115,15 @@ extern int av_log_level;
  * @see av_vlog
  */
 #ifdef __GNUC__
-void av_log(void*, int level, const char *fmt, ...) __attribute__ ((__format__ (__printf__, 3, 4)));
+void av_log222(void*, int level, const char *fmt, ...) __attribute__ ((__format__ (__printf__, 3, 4)));
 #else
-void av_log(void*, int level, const char *fmt, ...);
+void av_log222(void*, int level, const char *fmt, ...);
 #endif
 
-void av_vlog(void*, int level, const char *fmt, va_list);
+void av_vlog222(void*, int level, const char *fmt, va_list);
 int av_log_get_level(void);
 void av_log_set_level(int);
 void av_log_set_callback(void (*)(void*, int, const char*, va_list));
-void av_log_default_callback(void* ptr, int level, const char* fmt, va_list vl);
+void av_log_default_callback222(void* ptr, int level, const char* fmt, va_list vl);
 
 #endif /* FFMPEG_LOG_H */

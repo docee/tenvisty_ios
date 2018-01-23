@@ -24,12 +24,14 @@
     [super viewDidLoad];
     [self setup];
 }
+
 -(void)setup{
     for(BaseCamera *camera in [GBase sharedInstance].cameras){
         camera.cameraDelegate = self;
         [camera start];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -46,7 +48,7 @@
     for(BaseCamera *camera in [GBase sharedInstance].cameras){
         camera.cameraDelegate = self;
         //强制改密码；
-        if(camera.connectState == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
+        if(camera.cameraConnectState == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
              [self showChangePasswordStrict:camera];
         }
     }

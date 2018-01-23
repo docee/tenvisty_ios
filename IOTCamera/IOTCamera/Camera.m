@@ -9,7 +9,7 @@
 #import <sys/time.h>
 #import "Camera.h"
 #import "Camera2.h"
-#import "AudioRecorder.h"
+#import "TwsAudioRecorder.h"
 #import "AVChannel.h"
 #import "IOTCAPIs.h"
 #import "AVAPIs.h"
@@ -19,8 +19,8 @@
 #import "mpg123.h"
 #import "speex/speex.h"
 #import "speex/speex_echo.h"
-#import "OpenALPlayer.h"
-#import "AudioRecorder.h"
+#import "TwsOpenALPlayer.h"
+//#import "TwsAudioRecorder.h"
 #import "codec_g726.h"
 
 
@@ -1012,6 +1012,13 @@ int bLocalSearch = 0;
                     [ch.startThread wakeup];
                 }
             }
+              self.sessionState = CONNECTION_STATE_CONNECTED_SESSION;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LOG(@"session: CONNECTION_STATE: %d", (int)self.sessionState);
+                
+                if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+                    [self.delegate camera:self didChangeSessionStatus:self.sessionState];
+            });
 //            struct st_SInfo Sinfo;
 //            //struct st_SInfoEx SinfoEx;
 //            int ret;
@@ -1236,8 +1243,8 @@ int bLocalSearch = 0;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        channel.connectionState = CONNECTION_STATE_CONNECTING;
-                        self.sessionState = CONNECTION_STATE_CONNECTING;
+                        channel.connectionState = CONNECTION_STATE_CONNECTED_SESSION;
+                        self.sessionState = CONNECTION_STATE_CONNECTED_SESSION;
                         if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeChannelStatus:ChannelStatus:)])
                             [self.delegate camera:self didChangeChannelStatus:channel.avChannel ChannelStatus:channel.connectionState];
                     });
@@ -2334,7 +2341,7 @@ int bLocalSearch = 0;
     
     LOG(@"=== RecvAudio Thread Start (%@) ===", self.uid);
     
-    OpenALPlayer *player = nil;
+    TwsOpenALPlayer *player = nil;
     
     // speex variables
     SpeexBits speex_bits;
@@ -2513,7 +2520,7 @@ int bLocalSearch = 0;
                     
                     LOG(@"audio format=%x", format);
                     
-                    player = [[OpenALPlayer alloc] init];
+                    player = [[TwsOpenALPlayer alloc] init];
                     [player initOpenAL:format :nSamplingRate];
                     
                     // usleep(1000 / nFPS * 1000);
@@ -2651,7 +2658,7 @@ int bLocalSearch = 0;
         
     LOG(@"=== Decode Audio Thread Start (%@) ===", self.uid);
 
-    OpenALPlayer *player = nil;
+    TwsOpenALPlayer *player = nil;
     
     // speex variables
     SpeexBits speex_bits;
@@ -2804,7 +2811,7 @@ int bLocalSearch = 0;
                 
                 LOG(@"audio format=%x", format);
                 
-                player = [[OpenALPlayer alloc] init];
+                player = [[TwsOpenALPlayer alloc] init];
                 [player initOpenAL:format :nSamplingRate];
                 
             }            
@@ -2966,7 +2973,7 @@ int bLocalSearch = 0;
     
     LOG(@"=== SendAudio Thread Start (%@) ===", self.uid);
     
-    AudioRecorder *recorder = nil;
+    TwsAudioRecorder *recorder = nil;
     speex_enc_state = NULL;
     
     BOOL bFirst = YES;     
@@ -3052,7 +3059,7 @@ int bLocalSearch = 0;
                      
             
             // init AudioRecorder
-            recorder = [[AudioRecorder alloc] initAudioRecorderWithAvIndex:channel.avIndexForSendAudio Codec:channel.audioCodec AudioFormat:format Delegate:self];
+            recorder = [[TwsAudioRecorder alloc] initAudioRecorderWithAvIndex:channel.avIndexForSendAudio Codec:channel.audioCodec AudioFormat:format Delegate:self];
             
             if (channel.audioCodec == MEDIA_CODEC_AUDIO_G726 || channel.audioCodec == MEDIA_CODEC_AUDIO_G711)
                 [recorder start:320];

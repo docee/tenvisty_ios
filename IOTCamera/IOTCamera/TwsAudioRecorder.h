@@ -15,7 +15,7 @@
 
 @protocol AudioRecordDelegate;
 
-@interface AudioRecorder : NSObject {
+@interface TwsAudioRecorder : NSObject {
     
     id<AudioRecordDelegate> delegate;
 	AudioQueueRef audioQueue;

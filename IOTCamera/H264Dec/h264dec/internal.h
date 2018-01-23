@@ -130,13 +130,13 @@
 
 /* dprintf macros */
 #ifdef DEBUG
-#    define dprintf(pctx, ...) av_log(pctx, AV_LOG_DEBUG, __VA_ARGS__)
+#    define dprintf(pctx, ...) av_log222(pctx, AV_LOG_DEBUG, __VA_ARGS__)
 #else
 //#    define dprintf(pctx, ...)
 #    define dprintf  
 #endif
 
-#define av_abort()      do { av_log(NULL, AV_LOG_ERROR, "Abort at %s:%d\n", __FILE__, __LINE__); abort(); } while (0)
+#define av_abort()      do { av_log222(NULL, AV_LOG_ERROR, "Abort at %s:%d\n", __FILE__, __LINE__); abort(); } while (0)
 
 /* math */
 
@@ -263,7 +263,7 @@ if((y)<(x)){\
 {\
     p= av_mallocz(size);\
     if(p==NULL && (size)!=0){\
-        av_log(NULL, AV_LOG_ERROR, "Cannot allocate memory.");\
+        av_log222(NULL, AV_LOG_ERROR, "Cannot allocate memory.");\
         goto fail;\
     }\
 }

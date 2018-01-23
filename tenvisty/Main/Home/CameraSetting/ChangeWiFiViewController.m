@@ -54,7 +54,7 @@
 -(dispatch_block_t)delayTask{
     if(_delayTask == nil){
         _delayTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-            if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
+            if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
                 isRequestWiFiListForResult = YES;
                 [self doGetWifiList];
             }

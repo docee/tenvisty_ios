@@ -7,10 +7,10 @@
 //
 
 
-#import "OpenALPlayer.h"
+#import "TwsOpenALPlayer.h"
 #import "FHVideoRecorder.h"
 
-@implementation OpenALPlayer
+@implementation TwsOpenALPlayer
 
 @synthesize audioFormat;
 @synthesize mDevice;

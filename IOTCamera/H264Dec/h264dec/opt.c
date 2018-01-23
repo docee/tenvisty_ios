@@ -57,7 +57,7 @@ const AVOption *av_next_option(void *obj, const AVOption *last){
 //        return NULL;
 //
 //    if(o->max*den < num*intnum || o->min*den > num*intnum) {
-//        av_log(NULL, AV_LOG_ERROR, "Value %lf for parameter '%s' out of range.\n", num, name);
+//        av_log222(NULL, AV_LOG_ERROR, "Value %lf for parameter '%s' out of range.\n", num, name);
 //        return NULL;
 //    }
 //
@@ -176,7 +176,7 @@ const AVOption *av_next_option(void *obj, const AVOption *last){
 //                else if(!strcmp(buf, "all"    )) d= ~0;
 //                else {
 //                    if (error)
-//                        av_log(NULL, AV_LOG_ERROR, "Unable to parse option value \"%s\": %s\n", val, error);
+//                        av_log222(NULL, AV_LOG_ERROR, "Unable to parse option value \"%s\": %s\n", val, error);
 //                    return NULL;
 //                }
 //            }
@@ -329,50 +329,50 @@ const AVOption *av_set_int(void *obj, const char *name, int64_t n){
 //        else if (unit && opt->type==FF_OPT_TYPE_CONST && strcmp(unit, opt->unit))
 //            continue;
 //        else if (unit && opt->type == FF_OPT_TYPE_CONST)
-//            av_log(av_log_obj, AV_LOG_INFO, "   %-15s ", opt->name);
+//            av_log222(av_log_obj, AV_LOG_INFO, "   %-15s ", opt->name);
 //        else
-//            av_log(av_log_obj, AV_LOG_INFO, "-%-17s ", opt->name);
+//            av_log222(av_log_obj, AV_LOG_INFO, "-%-17s ", opt->name);
 //
 //        switch( opt->type )
 //        {
 //            case FF_OPT_TYPE_FLAGS:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<flags>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<flags>" );
 //                break;
 //            case FF_OPT_TYPE_INT:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<int>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<int>" );
 //                break;
 //            case FF_OPT_TYPE_INT64:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<int64>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<int64>" );
 //                break;
 //            case FF_OPT_TYPE_DOUBLE:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<double>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<double>" );
 //                break;
 //            case FF_OPT_TYPE_FLOAT:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<float>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<float>" );
 //                break;
 //            case FF_OPT_TYPE_STRING:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<string>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<string>" );
 //                break;
 //            case FF_OPT_TYPE_RATIONAL:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<rational>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<rational>" );
 //                break;
 //            case FF_OPT_TYPE_BINARY:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "<binary>" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "<binary>" );
 //                break;
 //            case FF_OPT_TYPE_CONST:
 //            default:
-//                av_log( av_log_obj, AV_LOG_INFO, "%-7s ", "" );
+//                av_log222( av_log_obj, AV_LOG_INFO, "%-7s ", "" );
 //                break;
 //        }
-//        av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_ENCODING_PARAM) ? 'E' : '.');
-//        av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_DECODING_PARAM) ? 'D' : '.');
-//        av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_VIDEO_PARAM   ) ? 'V' : '.');
-//        av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_AUDIO_PARAM   ) ? 'A' : '.');
-//        av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_SUBTITLE_PARAM) ? 'S' : '.');
+//        av_log222(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_ENCODING_PARAM) ? 'E' : '.');
+//        av_log222(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_DECODING_PARAM) ? 'D' : '.');
+//        av_log222(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_VIDEO_PARAM   ) ? 'V' : '.');
+//        av_log222(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_AUDIO_PARAM   ) ? 'A' : '.');
+//        av_log222(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_SUBTITLE_PARAM) ? 'S' : '.');
 //
 //        if(opt->help)
-//            av_log(av_log_obj, AV_LOG_INFO, " %s", opt->help);
-//        av_log(av_log_obj, AV_LOG_INFO, "\n");
+//            av_log222(av_log_obj, AV_LOG_INFO, " %s", opt->help);
+//        av_log222(av_log_obj, AV_LOG_INFO, "\n");
 //        if (opt->unit && opt->type != FF_OPT_TYPE_CONST) {
 //            opt_list(obj, av_log_obj, opt->unit);
 //        }
@@ -383,7 +383,7 @@ const AVOption *av_set_int(void *obj, const char *name, int64_t n){
 //    if(!obj)
 //        return -1;
 //
-//    av_log(av_log_obj, AV_LOG_INFO, "%s AVOptions:\n", (*(AVClass**)obj)->class_name);
+//    av_log222(av_log_obj, AV_LOG_INFO, "%s AVOptions:\n", (*(AVClass**)obj)->class_name);
 //
 //    opt_list(obj, av_log_obj, NULL);
 //
@@ -432,7 +432,7 @@ void av_opt_set_defaults2(void *s, int mask, int flags)
             break;
 
             default:
-                av_log(s, AV_LOG_DEBUG, "AVOption type %d of option %s not implemented yet\n", opt->type, opt->name);
+                av_log222(s, AV_LOG_DEBUG, "AVOption type %d of option %s not implemented yet\n", opt->type, opt->name);
         }
     }
 }

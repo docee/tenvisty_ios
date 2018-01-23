@@ -174,11 +174,11 @@ void avcodec_align_dimensions(AVCodecContext *s, int *width, int *height){
 
 int avcodec_check_dimensions(void *av_log_ctx, unsigned int w, unsigned int h){
     if((int)w>0 && (int)h>0 && (w+128)*(uint64_t)(h+128) < INT_MAX/4) return 0;
-    av_log(av_log_ctx, AV_LOG_ERROR, "picture size invalid (%ux%u)\n", w, h);
+    av_log222(av_log_ctx, AV_LOG_ERROR, "picture size invalid (%ux%u)\n", w, h);
     return -1;
 }
 
-int avcodec_default_get_buffer(AVCodecContext *s, AVFrame *pic){
+int avcodec_default_get_buffer222(AVCodecContext *s, AVFrame *pic){
     int i;
     int w= s->width;
     int h= s->height;
@@ -186,11 +186,11 @@ int avcodec_default_get_buffer(AVCodecContext *s, AVFrame *pic){
     int *picture_number;
 
     if(pic->data[0]!=NULL) {
-        av_log(s, AV_LOG_ERROR, "pic->data[0]!=NULL in avcodec_default_get_buffer\n");
+        av_log222(s, AV_LOG_ERROR, "pic->data[0]!=NULL in avcodec_default_get_buffer222\n");
         return -1;
     }
     if(s->internal_buffer_count >= INTERNAL_BUFFER_SIZE) {
-        av_log(s, AV_LOG_ERROR, "internal_buffer_count overflow (missing release_buffer?)\n");
+        av_log222(s, AV_LOG_ERROR, "internal_buffer_count overflow (missing release_buffer?)\n");
         return -1;
     }
 
@@ -286,7 +286,7 @@ int avcodec_default_get_buffer(AVCodecContext *s, AVFrame *pic){
     return 0;
 }
 
-void avcodec_default_release_buffer(AVCodecContext *s, AVFrame *pic){
+void avcodec_default_release_buffer222(AVCodecContext *s, AVFrame *pic){
     int i;
     InternalBuffer *buf, *last;
 
@@ -319,7 +319,7 @@ int avcodec_default_reget_buffer(AVCodecContext *s, AVFrame *pic){
     if(pic->data[0] == NULL) {
         /* We will copy from buffer, so must be readable */
         pic->buffer_hints |= FF_BUFFER_HINTS_READABLE;
-        return s->get_buffer(s, pic);
+        return s->get_buffer222(s, pic);
     }
 
     /* If internal buffer type return the same buffer */
@@ -332,10 +332,10 @@ int avcodec_default_reget_buffer(AVCodecContext *s, AVFrame *pic){
     for(i = 0; i < 4; i++) pic->data[i] = pic->base[i] = NULL;
     pic->opaque = NULL;
     /* Allocate new frame */
-    if (s->get_buffer(s, pic)) return -1;
+    if (s->get_buffer222(s, pic)) return -1;
     /* Copy image data from old buffer to new buffer */
     av_picture_copy((AVPicture*)pic, (AVPicture*)&temp_pic, s->pix_fmt, s->width, s->height);
-    s->release_buffer(s, &temp_pic); // Release old frame
+    s->release_buffer222(s, &temp_pic); // Release old frame
     return 0;
 }
 
@@ -736,8 +736,8 @@ void avcodec_get_context_defaults2(AVCodecContext *s, enum CodecType codec_type)
 
     s->rc_eq= "tex^qComp";
     s->time_base= av01;
-    s->get_buffer= avcodec_default_get_buffer;
-    s->release_buffer= avcodec_default_release_buffer;
+    s->get_buffer222= avcodec_default_get_buffer222;
+    s->release_buffer222= avcodec_default_release_buffer222;
     s->get_format= avcodec_default_get_format;
     s->execute= avcodec_default_execute;
     s->sample_aspect_ratio= av01;
@@ -788,7 +788,7 @@ int avcodec_open(AVCodecContext *avctx, AVCodec *codec)
 
     entangled_thread_counter++;
     if(entangled_thread_counter != 1){
-        av_log(avctx, AV_LOG_ERROR, "insufficient thread locking around avcodec_open/close()\n");
+        av_log222(avctx, AV_LOG_ERROR, "insufficient thread locking around avcodec_open/close()\n");
         goto end;
     }
 
@@ -833,7 +833,7 @@ int  avcodec_encode_audio(AVCodecContext *avctx, uint8_t *buf, int buf_size,
                          const short *samples)
 {
     if(buf_size < FF_MIN_BUFFER_SIZE && 0){
-        av_log(avctx, AV_LOG_ERROR, "buffer smaller than minimum size\n");
+        av_log222(avctx, AV_LOG_ERROR, "buffer smaller than minimum size\n");
         return -1;
     }
     if((avctx->codec->capabilities & CODEC_CAP_DELAY) || samples){
@@ -846,7 +846,7 @@ int  avcodec_encode_audio(AVCodecContext *avctx, uint8_t *buf, int buf_size,
 int  avcodec_encode_video(AVCodecContext *avctx, uint8_t *buf, int buf_size, const AVFrame *pict)
 {
     if(buf_size < FF_MIN_BUFFER_SIZE){
-        av_log(avctx, AV_LOG_ERROR, "buffer smaller than minimum size\n");
+        av_log222(avctx, AV_LOG_ERROR, "buffer smaller than minimum size\n");
         return -1;
     }
     if(avcodec_check_dimensions(avctx,avctx->width,avctx->height)) return -1;
@@ -896,12 +896,12 @@ int  avcodec_decode_audio2(AVCodecContext *avctx, int16_t *samples,
     if((avctx->codec->capabilities & CODEC_CAP_DELAY) || buf_size){
         //FIXME remove the check below _after_ ensuring that all audio check that the available space is enough
         if(*frame_size_ptr < AVCODEC_MAX_AUDIO_FRAME_SIZE){
-            av_log(avctx, AV_LOG_ERROR, "buffer smaller than AVCODEC_MAX_AUDIO_FRAME_SIZE\n");
+            av_log222(avctx, AV_LOG_ERROR, "buffer smaller than AVCODEC_MAX_AUDIO_FRAME_SIZE\n");
             return -1;
         }
         if(*frame_size_ptr < FF_MIN_BUFFER_SIZE ||
         *frame_size_ptr < avctx->channels * avctx->frame_size * sizeof(int16_t)){
-            av_log(avctx, AV_LOG_ERROR, "buffer %d too small\n", *frame_size_ptr);
+            av_log222(avctx, AV_LOG_ERROR, "buffer %d too small\n", *frame_size_ptr);
             return -1;
         }
 
@@ -935,11 +935,11 @@ int avcodec_decode_subtitle(AVCodecContext *avctx, AVSubtitle *sub,
     return ret;
 }
 
-int avcodec_close(AVCodecContext *avctx)
+int avcodec_close222(AVCodecContext *avctx)
 {
     entangled_thread_counter++;
     if(entangled_thread_counter != 1){
-        av_log(avctx, AV_LOG_ERROR, "insufficient thread locking around avcodec_open/close()\n");
+        av_log222(avctx, AV_LOG_ERROR, "insufficient thread locking around avcodec_open/close()\n");
         entangled_thread_counter--;
         return -1;
     }
@@ -1304,7 +1304,7 @@ int av_tempfile(char *prefix, char **filename) {
 #endif
     // -----common section-----
     if (*filename == NULL) {
-        av_log(NULL, AV_LOG_ERROR, "ff_tempfile: Cannot allocate file name\n");
+        av_log222(NULL, AV_LOG_ERROR, "ff_tempfile: Cannot allocate file name\n");
         return -1;
     }
 #if !defined(HAVE_MKSTEMP)
@@ -1319,7 +1319,7 @@ int av_tempfile(char *prefix, char **filename) {
 #endif
     // -----common section-----
     if (fd < 0) {
-        av_log(NULL, AV_LOG_ERROR, "ff_tempfile: Cannot open temporary file %s\n", *filename);
+        av_log222(NULL, AV_LOG_ERROR, "ff_tempfile: Cannot open temporary file %s\n", *filename);
         return -1;
     }
     return fd; // success 

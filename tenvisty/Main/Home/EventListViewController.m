@@ -252,7 +252,7 @@
     if(isSearchingEvent){
         return;
     }
-    if(self.camera.connectState != CONNECTION_STATE_CONNECTED){
+    if(self.camera.cameraConnectState != CONNECTION_STATE_CONNECTED){
         [[iToast makeText:LOCALSTR(@"connection dropped")] show];
         return;
     }
@@ -393,7 +393,7 @@
             for(UIView *view in cell.contentView.subviews){
                 if([view isKindOfClass:[UILabel class]]){
                     UILabel *labDesc = (UILabel*)view;
-                    if(self.camera.connectState == CONNECTION_STATE_CONNECTED){
+                    if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
                          if(isSearchingEvent){
                              labDesc.text = LOCALSTR(@"loading...");
                          }

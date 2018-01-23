@@ -38,8 +38,9 @@
 #define zkDevice_IsiPhoneXOrBigger ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 //#define DidEnterBackground  (@"applicationDidEnterBackground")
 #define zkDevice_IsiPhoneXOrBigger_SafeArea ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) : NO)
-
+//系统版本号
 #define SystemVersion       ([[UIDevice currentDevice] systemVersion].floatValue)
+#define DisplayName         ([NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"])
 #define NO_USE_UID @"00000000000000000000"
 #define DEFAULT_PASSWORD @"admin"
 #define NTP_SERVER  (@"pool.ntp.org")
@@ -165,6 +166,16 @@
 
 
 
+
+
+//hichip global vars
+/************************** 报警推送服务器IP地址 20170118 **************************/
+#define AlarmPushServerIPAddress   (@"47.91.149.233")//当前报警推送服务器地址
+#define ThreeAPSAddress (@"47.90.64.173");
+
+#define AlarmPushServerIPAddressKey     (@"AlarmPushServerIPAddressKey")
+
+#define SVAlarmPushServerIPAddress  (@"190.210.197.178")//艾赛德报警推送服务器地址
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

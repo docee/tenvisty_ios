@@ -180,22 +180,22 @@ int alloc_picture(MpegEncContext *s, Picture *pic, int shared)
     }else{
         assert(!pic->data[0]);
 
-        r= s->avctx->get_buffer(s->avctx, (AVFrame*)pic);
+        r= s->avctx->get_buffer222(s->avctx, (AVFrame*)pic);
 
         if(r<0 || !pic->age || !pic->type || !pic->data[0]){
-            av_log(s->avctx, AV_LOG_ERROR, "get_buffer() failed (%d %d %d %p)\n", r, pic->age, pic->type, pic->data[0]);
+            av_log222(s->avctx, AV_LOG_ERROR, "get_buffer222() failed (%d %d %d %p)\n", r, pic->age, pic->type, pic->data[0]);
             return -1;
         }
 
         if(s->linesize && (s->linesize != pic->linesize[0] || s->uvlinesize != pic->linesize[1])){
-            av_log(s->avctx, AV_LOG_ERROR, "get_buffer() failed (stride changed)\n");
-            s->avctx->release_buffer(s->avctx, (AVFrame*)pic);
+            av_log222(s->avctx, AV_LOG_ERROR, "get_buffer() failed (stride changed)\n");
+            s->avctx->release_buffer222(s->avctx, (AVFrame*)pic);
             return -1;
         }
 
         if(pic->linesize[1] != pic->linesize[2]){
-            av_log(s->avctx, AV_LOG_ERROR, "get_buffer() failed (uv stride mismatch)\n");
-            s->avctx->release_buffer(s->avctx, (AVFrame*)pic);
+            av_log222(s->avctx, AV_LOG_ERROR, "get_buffer() failed (uv stride mismatch)\n");
+            s->avctx->release_buffer222(s->avctx, (AVFrame*)pic);
             return -1;
         }
 
@@ -247,7 +247,7 @@ int alloc_picture(MpegEncContext *s, Picture *pic, int shared)
     return 0;
 
 fail: //for the CHECKED_ALLOCZ macro
-    if(r>=0)  s->avctx->release_buffer(s->avctx, (AVFrame*)pic);
+    if(r>=0)  s->avctx->release_buffer222(s->avctx, (AVFrame*)pic);
     return -1;
 }
 
@@ -258,7 +258,7 @@ static void free_picture(MpegEncContext *s, Picture *pic){
     int i;
 
     if(pic->data[0] && pic->type!=FF_BUFFER_TYPE_SHARED){
-        s->avctx->release_buffer(s->avctx, (AVFrame*)pic);
+        s->avctx->release_buffer222(s->avctx, (AVFrame*)pic);
     }
 
     av_freep(&pic->mb_var);
@@ -407,7 +407,7 @@ int MPV_common_init(MpegEncContext *s)
     s->mb_height = (s->height + 15) / 16;
 
     if(s->avctx->thread_count > MAX_THREADS || (s->avctx->thread_count > s->mb_height && s->mb_height)){
-        av_log(s->avctx, AV_LOG_ERROR, "too many threads\n");
+        av_log222(s->avctx, AV_LOG_ERROR, "too many threads\n");
         return -1;
     }
 
@@ -782,7 +782,7 @@ int ff_find_unused_picture(MpegEncContext *s, int shared){
         }
     }
 
-    av_log(s->avctx, AV_LOG_FATAL, "Internal error, picture buffer overflow\n");
+    av_log222(s->avctx, AV_LOG_FATAL, "Internal error, picture buffer overflow\n");
     /* We could return -1, but the codec would crash trying to draw into a
      * non-existing frame anyway. This is safer than waiting for a random crash.
      * Also the return of this is never useful, an encoder must only allocate
@@ -829,15 +829,15 @@ int MPV_frame_start(MpegEncContext *s, AVCodecContext *avctx)
     /* mark&release old frames */
     if (s->pict_type != FF_B_TYPE && s->last_picture_ptr && s->last_picture_ptr != s->next_picture_ptr && s->last_picture_ptr->data[0]) {
       if(s->out_format != FMT_H264 || s->codec_id == CODEC_ID_SVQ3){
-        avctx->release_buffer(avctx, (AVFrame*)s->last_picture_ptr);
+        avctx->release_buffer222(avctx, (AVFrame*)s->last_picture_ptr);
 
         /* release forgotten pictures */
         /* if(mpeg124/h263) */
         if(!s->encoding){
             for(i=0; i<MAX_PICTURE_COUNT; i++){
                 if(s->picture[i].data[0] && &s->picture[i] != s->next_picture_ptr && s->picture[i].reference){
-                    av_log(avctx, AV_LOG_ERROR, "releasing zombie picture\n");
-                    avctx->release_buffer(avctx, (AVFrame*)&s->picture[i]);
+                    av_log222(avctx, AV_LOG_ERROR, "releasing zombie picture\n");
+                    avctx->release_buffer222(avctx, (AVFrame*)&s->picture[i]);
                 }
             }
         }
@@ -848,7 +848,7 @@ alloc:
         /* release non reference frames */
         for(i=0; i<MAX_PICTURE_COUNT; i++){
             if(s->picture[i].data[0] && !s->picture[i].reference /*&& s->picture[i].type!=FF_BUFFER_TYPE_SHARED*/){
-                s->avctx->release_buffer(s->avctx, (AVFrame*)&s->picture[i]);
+                s->avctx->release_buffer222(s->avctx, (AVFrame*)&s->picture[i]);
             }
         }
 
@@ -889,7 +889,7 @@ alloc:
         if(!s->dropable)
             s->next_picture_ptr= s->current_picture_ptr;
     }
-/*    av_log(s->avctx, AV_LOG_DEBUG, "L%p N%p C%p L%p N%p C%p type:%d drop:%d\n", s->last_picture_ptr, s->next_picture_ptr,s->current_picture_ptr,
+/*    av_log222(s->avctx, AV_LOG_DEBUG, "L%p N%p C%p L%p N%p C%p type:%d drop:%d\n", s->last_picture_ptr, s->next_picture_ptr,s->current_picture_ptr,
         s->last_picture_ptr    ? s->last_picture_ptr->data[0] : NULL,
         s->next_picture_ptr    ? s->next_picture_ptr->data[0] : NULL,
         s->current_picture_ptr ? s->current_picture_ptr->data[0] : NULL,
@@ -899,7 +899,7 @@ alloc:
     if(s->next_picture_ptr) copy_picture(&s->next_picture, s->next_picture_ptr);
 
     if(s->pict_type != FF_I_TYPE && (s->last_picture_ptr==NULL || s->last_picture_ptr->data[0]==NULL) && !s->dropable){
-        av_log(avctx, AV_LOG_ERROR, "warning: first frame is no keyframe\n");
+        av_log222(avctx, AV_LOG_ERROR, "warning: first frame is no keyframe\n");
         assert(s->pict_type != FF_B_TYPE); //these should have been dropped if we don't have a reference
         goto alloc;
     }
@@ -985,7 +985,7 @@ void MPV_frame_end(MpegEncContext *s)
         /* release non-reference frames */
         for(i=0; i<MAX_PICTURE_COUNT; i++){
             if(s->picture[i].data[0] && !s->picture[i].reference /*&& s->picture[i].type!=FF_BUFFER_TYPE_SHARED*/){
-                s->avctx->release_buffer(s->avctx, (AVFrame*)&s->picture[i]);
+                s->avctx->release_buffer222(s->avctx, (AVFrame*)&s->picture[i]);
             }
         }
     }
@@ -1090,76 +1090,76 @@ void ff_print_debug_info(MpegEncContext *s, AVFrame *pict){
     if(s->avctx->debug&(FF_DEBUG_SKIP | FF_DEBUG_QP | FF_DEBUG_MB_TYPE)){
         int x,y;
 
-        av_log(s->avctx,AV_LOG_DEBUG,"New frame, type: ");
+        av_log222(s->avctx,AV_LOG_DEBUG,"New frame, type: ");
         switch (pict->pict_type) {
-            case FF_I_TYPE: av_log(s->avctx,AV_LOG_DEBUG,"I\n"); break;
-            case FF_P_TYPE: av_log(s->avctx,AV_LOG_DEBUG,"P\n"); break;
-            case FF_B_TYPE: av_log(s->avctx,AV_LOG_DEBUG,"B\n"); break;
-            case FF_S_TYPE: av_log(s->avctx,AV_LOG_DEBUG,"S\n"); break;
-            case FF_SI_TYPE: av_log(s->avctx,AV_LOG_DEBUG,"SI\n"); break;
-            case FF_SP_TYPE: av_log(s->avctx,AV_LOG_DEBUG,"SP\n"); break;
+            case FF_I_TYPE: av_log222(s->avctx,AV_LOG_DEBUG,"I\n"); break;
+            case FF_P_TYPE: av_log222(s->avctx,AV_LOG_DEBUG,"P\n"); break;
+            case FF_B_TYPE: av_log222(s->avctx,AV_LOG_DEBUG,"B\n"); break;
+            case FF_S_TYPE: av_log222(s->avctx,AV_LOG_DEBUG,"S\n"); break;
+            case FF_SI_TYPE: av_log222(s->avctx,AV_LOG_DEBUG,"SI\n"); break;
+            case FF_SP_TYPE: av_log222(s->avctx,AV_LOG_DEBUG,"SP\n"); break;
         }
         for(y=0; y<s->mb_height; y++){
             for(x=0; x<s->mb_width; x++){
                 if(s->avctx->debug&FF_DEBUG_SKIP){
                     int count= s->mbskip_table[x + y*s->mb_stride];
                     if(count>9) count=9;
-                    av_log(s->avctx, AV_LOG_DEBUG, "%1d", count);
+                    av_log222(s->avctx, AV_LOG_DEBUG, "%1d", count);
                 }
                 if(s->avctx->debug&FF_DEBUG_QP){
-                    av_log(s->avctx, AV_LOG_DEBUG, "%2d", pict->qscale_table[x + y*s->mb_stride]);
+                    av_log222(s->avctx, AV_LOG_DEBUG, "%2d", pict->qscale_table[x + y*s->mb_stride]);
                 }
                 if(s->avctx->debug&FF_DEBUG_MB_TYPE){
                     int mb_type= pict->mb_type[x + y*s->mb_stride];
                     //Type & MV direction
                     if(IS_PCM(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "P");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "P");
                     else if(IS_INTRA(mb_type) && IS_ACPRED(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "A");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "A");
                     else if(IS_INTRA4x4(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "i");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "i");
                     else if(IS_INTRA16x16(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "I");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "I");
                     else if(IS_DIRECT(mb_type) && IS_SKIP(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "d");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "d");
                     else if(IS_DIRECT(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "D");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "D");
                     else if(IS_GMC(mb_type) && IS_SKIP(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "g");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "g");
                     else if(IS_GMC(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "G");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "G");
                     else if(IS_SKIP(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "S");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "S");
                     else if(!USES_LIST(mb_type, 1))
-                        av_log(s->avctx, AV_LOG_DEBUG, ">");
+                        av_log222(s->avctx, AV_LOG_DEBUG, ">");
                     else if(!USES_LIST(mb_type, 0))
-                        av_log(s->avctx, AV_LOG_DEBUG, "<");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "<");
                     else{
                         assert(USES_LIST(mb_type, 0) && USES_LIST(mb_type, 1));
-                        av_log(s->avctx, AV_LOG_DEBUG, "X");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "X");
                     }
 
                     //segmentation
                     if(IS_8X8(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "+");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "+");
                     else if(IS_16X8(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "-");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "-");
                     else if(IS_8X16(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, "|");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "|");
                     else if(IS_INTRA(mb_type) || IS_16X16(mb_type))
-                        av_log(s->avctx, AV_LOG_DEBUG, " ");
+                        av_log222(s->avctx, AV_LOG_DEBUG, " ");
                     else
-                        av_log(s->avctx, AV_LOG_DEBUG, "?");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "?");
 
 
                     if(IS_INTERLACED(mb_type) && s->codec_id == CODEC_ID_H264)
-                        av_log(s->avctx, AV_LOG_DEBUG, "=");
+                        av_log222(s->avctx, AV_LOG_DEBUG, "=");
                     else
-                        av_log(s->avctx, AV_LOG_DEBUG, " ");
+                        av_log222(s->avctx, AV_LOG_DEBUG, " ");
                 }
-//                av_log(s->avctx, AV_LOG_DEBUG, " ");
+//                av_log222(s->avctx, AV_LOG_DEBUG, " ");
             }
-            av_log(s->avctx, AV_LOG_DEBUG, "\n");
+            av_log222(s->avctx, AV_LOG_DEBUG, "\n");
         }
     }
 
@@ -2055,7 +2055,7 @@ void ff_mpeg_flush(AVCodecContext *avctx){
     if(s==NULL || s->picture==NULL) return;
     for(i=0; i<MAX_PICTURE_COUNT; i++){
        if(s->picture[i].data[0] && (s->picture[i].type == FF_BUFFER_TYPE_INTERNAL || s->picture[i].type == FF_BUFFER_TYPE_USER))
-        avctx->release_buffer(avctx, (AVFrame*)&s->picture[i]);
+        avctx->release_buffer222(avctx, (AVFrame*)&s->picture[i]);
     }
     s->current_picture_ptr = s->last_picture_ptr = s->next_picture_ptr = NULL;
 

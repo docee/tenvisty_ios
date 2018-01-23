@@ -13,4 +13,5 @@
 @interface HichipCamera : HiCamera<BaseCameraDelegate,BaseCameraProtocol>
 
 
+@property (nonatomic,strong) BaseCamera *baseCamera;
 @end

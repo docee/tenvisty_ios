@@ -172,7 +172,7 @@ extern AVCodec h264_decoder;
 {
     NSLog(@"UninitDecoder");
 	if(c){
-		avcodec_close(c);
+		avcodec_close222(c);
 		av_free(c);
 		c=NULL;
 	}

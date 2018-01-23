@@ -314,7 +314,7 @@ if(s->quarter_sample)
        || (unsigned)src_y >    v_edge_pos - (motion_y&1) - h){
             if(is_mpeg12 || s->codec_id == CODEC_ID_MPEG2VIDEO ||
                s->codec_id == CODEC_ID_MPEG1VIDEO){
-                av_log(s->avctx,AV_LOG_DEBUG,
+                av_log222(s->avctx,AV_LOG_DEBUG,
                         "MPEG motion vector out of boundary\n");
                 return ;
             }

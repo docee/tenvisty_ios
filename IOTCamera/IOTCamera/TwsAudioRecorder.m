@@ -6,27 +6,27 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AudioRecorder.h"
+#import "TwsAudioRecorder.h"
 
-@interface AudioRecorder()
+@interface TwsAudioRecorder()
 @property (readwrite) AudioQueueRef audioQueue;
 @end
 
-@implementation AudioRecorder
+@implementation TwsAudioRecorder
 
 @synthesize delegate;
 @synthesize audioQueue;
 @synthesize avIndex;
 @synthesize codec;
 
-void audioQueueInputCallback (void *inUserData,
+void twsAudioQueueInputCallback (void *inUserData,
                               AudioQueueRef inAQ,
                               AudioQueueBufferRef inBuffer,
                               const AudioTimeStamp *inStartTime,
                               UInt32 inNumberPacketDescriptions,
                               const AudioStreamPacketDescription *inPacketDescs) {
     
-    AudioRecorder *self = (AudioRecorder *)inUserData;
+    TwsAudioRecorder *self = (TwsAudioRecorder *)inUserData;
 
 //    if (inNumberPacketDescriptions == 0 && self->format.mBytesPerPacket != 0)
 //        inNumberPacketDescriptions = inBuffer->mAudioDataByteSize / self->format.mBytesPerPacket;
@@ -85,7 +85,7 @@ void audioQueueInputCallback (void *inUserData,
 
 - (void)start:(int)bufferSize;
 {        
-    if (AudioQueueNewInput(&format, audioQueueInputCallback, self, NULL, NULL, 0, &audioQueue) != noErr){
+    if (AudioQueueNewInput(&format, twsAudioQueueInputCallback, self, NULL, NULL, 0, &audioQueue) != noErr){
 		return;
 	}
     

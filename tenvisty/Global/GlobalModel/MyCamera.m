@@ -135,6 +135,62 @@
 //}
 
 #pragma mark -
+-(NSString*)cameraStateDesc{
+    if(self.processState == CAMERASTATE_NONE){
+        if(self.isConnecting){
+            return LOCALSTR(@"Connecting");
+        }
+        else{
+            if(self.isAuthConnected){
+                return LOCALSTR(@"Online");
+            }
+            else if(self.isWrongPassword){
+                return LOCALSTR(@"Wrong Password");
+            }
+            else{
+                return LOCALSTR(@"Offline");
+            }
+        }
+    }
+    else{
+        if(self.processState == CAMERASTATE_WILLREBOOTING || self.processState == CAMERASTATE_REBOOTING){
+            return LOCALSTR(@"Rebooting...");
+        }
+        else if(self.processState == CAMERASTATE_WILLRESETING || self.processState == CAMERASTATE_RESETING){
+            return LOCALSTR(@"Reseting...");
+        }
+        else if(self.processState == CAMERASTATE_WILLUPGRADING || self.processState == CAMERASTATE_UPGRADING){
+            if(self.upgradePercent > 0){
+                return FORMAT(LOCALSTR(@"Upgrading %d%%"),self.upgradePercent);
+            }
+            else{
+                return LOCALSTR(@"Upgrading...");
+            }
+        }
+    }
+    return @"";
+}
+
+-(BOOL)isSessionConnected{
+    return self.cameraConnectState == CONNECTION_STATE_CONNECTED_SESSION;
+}
+
+-(BOOL)isAuthConnected{
+    return self.cameraConnectState == CONNECTION_STATE_CONNECTED;
+}
+
+-(BOOL)isConnecting{
+    return self.cameraConnectState == CONNECTION_STATE_CONNECTING || self.isSessionConnected;
+}
+
+-(BOOL)isDisconnect{
+    return self.cameraConnectState == CONNECTION_STATE_DISCONNECTED;
+}
+
+-(BOOL)isWrongPassword{
+    return self.cameraConnectState == CONNECTION_STATE_WRONG_PASSWORD;
+}
+
 
 - (id)init
 {
@@ -409,7 +465,7 @@
     }
     
     
-    self.connectState = status;
+    self.cameraConnectState = status;
     if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
         [self.cameraDelegate camera:self.baseCamera _didChangeSessionStatus:status];
     }
@@ -429,7 +485,7 @@
         }
     }
     if(channel == 0){
-        self.connectState = status;
+        self.cameraConnectState = status;
     }
     if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
         [self.cameraDelegate camera:self.baseCamera _didChangeChannelStatus:channel ChannelStatus:status];
@@ -699,18 +755,18 @@
 }
 
 -(BOOL)isDisconnected{
-    return self.connectState != CONNECTION_STATE_CONNECTING && self.connectState != CONNECTION_STATE_CONNECTED && self.connectState != CONNECTION_STATE_WRONG_PASSWORD;
+    return self.cameraConnectState != CONNECTION_STATE_CONNECTING && self.cameraConnectState != CONNECTION_STATE_CONNECTED && self.cameraConnectState != CONNECTION_STATE_WRONG_PASSWORD;
 }
 -(NSString*)strConnectState{
     if(self.processState == CAMERASTATE_NONE){
-        if(self.connectState == CONNECTION_STATE_CONNECTING){
+        if(self.cameraConnectState == CONNECTION_STATE_CONNECTING){
            return LOCALSTR(@"Connecting");
         }
         else{
-            if(self.connectState == CONNECTION_STATE_CONNECTED){
+            if(self.cameraConnectState == CONNECTION_STATE_CONNECTED){
                 return LOCALSTR(@"Online");
             }
-            else if(self.connectState == CONNECTION_STATE_WRONG_PASSWORD){
+            else if(self.cameraConnectState == CONNECTION_STATE_WRONG_PASSWORD){
                 return LOCALSTR(@"Wrong Password");
             }
             else{

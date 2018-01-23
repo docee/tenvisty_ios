@@ -1151,7 +1151,7 @@ typedef struct AVCodecContext {
      * - encoding: unused
      * - decoding: Set by libavcodec., user can override.
      */
-    int (*get_buffer)(struct AVCodecContext *c, AVFrame *pic);
+    int (*get_buffer222)(struct AVCodecContext *c, AVFrame *pic);
 
     /**
      * Called to release buffers which were allocated with get_buffer.
@@ -1160,7 +1160,7 @@ typedef struct AVCodecContext {
      * - encoding: unused
      * - decoding: Set by libavcodec., user can override.
      */
-    void (*release_buffer)(struct AVCodecContext *c, AVFrame *pic);
+    void (*release_buffer222)(struct AVCodecContext *c, AVFrame *pic);
 
     /**
      * If 1 the stream has a 1 frame delay during decoding.
@@ -2599,8 +2599,8 @@ void avcodec_get_frame_defaults(AVFrame *pic);
  */
 AVFrame *avcodec_alloc_frame(void);
 
-int avcodec_default_get_buffer(AVCodecContext *s, AVFrame *pic);
-void avcodec_default_release_buffer(AVCodecContext *s, AVFrame *pic);
+int avcodec_default_get_buffer222(AVCodecContext *s, AVFrame *pic);
+void avcodec_default_release_buffer222(AVCodecContext *s, AVFrame *pic);
 int avcodec_default_reget_buffer(AVCodecContext *s, AVFrame *pic);
 void avcodec_align_dimensions(AVCodecContext *s, int *width, int *height);
 
@@ -2785,7 +2785,7 @@ int avcodec_encode_video(AVCodecContext *avctx, uint8_t *buf, int buf_size,
 int avcodec_encode_subtitle(AVCodecContext *avctx, uint8_t *buf, int buf_size,
                             const AVSubtitle *sub);
 
-int avcodec_close(AVCodecContext *avctx);
+int avcodec_close222(AVCodecContext *avctx);
 
 void avcodec_register_all(void);
 
