@@ -757,9 +757,9 @@ int bLocalSearch = 0;
             
             showedChannel.isRunningDecVideoThread = TRUE;
 #ifdef DECODEVIDEO2
-            showedChannel.decVideoThread = [[NSThread alloc] initWithTarget:self selector:@selector(doDecodeVideo2:) object:showedChannel];
+            showedChannel.decVideoThread = [[NSThread alloc] initWithTarget:self selector:@selector(doDecodeVideo_tws2:) object:showedChannel];
 #else
-            showedChannel.decVideoThread = [[NSThread alloc] initWithTarget:self selector:@selector(doDecodeVideo:) object:showedChannel];
+            showedChannel.decVideoThread = [[NSThread alloc] initWithTarget:self selector:@selector(doDecodeVideo_tws:) object:showedChannel];
 #endif
             [showedChannel.decVideoThread start];
             
@@ -1751,7 +1751,7 @@ int bLocalSearch = 0;
 }
 #endif
 
-- (void)doDecodeVideo:(AVChannel *)channel
+- (void)doDecodeVideo_tws:(AVChannel *)channel
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
@@ -2038,7 +2038,7 @@ int bLocalSearch = 0;
     [pool release];
 }
 
-- (void)doDecodeVideo2:(AVChannel *)channel
+- (void)doDecodeVideo_tws2:(AVChannel *)channel
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     

@@ -212,14 +212,14 @@ static av_always_inline void idct(uint8_t *dst, int stride, int16_t *input, int 
     }
 }
 
-void ff_vp3_idct_c(DCTELEM *block/* align 16*/){
+void ff_vp3_idct_c(DCTELEM222 *block/* align 16*/){
     idct(NULL, 0, block, 0);
 }
 
-void ff_vp3_idct_put_c(uint8_t *dest/*align 8*/, int line_size, DCTELEM *block/*align 16*/){
+void ff_vp3_idct_put_c(uint8_t *dest/*align 8*/, int line_size, DCTELEM222 *block/*align 16*/){
     idct(dest, line_size, block, 1);
 }
 
-void ff_vp3_idct_add_c(uint8_t *dest/*align 8*/, int line_size, DCTELEM *block/*align 16*/){
+void ff_vp3_idct_add_c(uint8_t *dest/*align 8*/, int line_size, DCTELEM222 *block/*align 16*/){
     idct(dest, line_size, block, 2);
 }

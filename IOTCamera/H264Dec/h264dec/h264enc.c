@@ -85,7 +85,7 @@ static uint8_t *h264_write_nal_unit(int nal_ref_idc, int nal_unit_type, uint8_t 
 
     if(rbsplen + escape_count + 1> *destsize)
     {
-        av_log(NULL, AV_LOG_ERROR, "Destination buffer too small!\n");
+        av_log222(NULL, AV_LOG_ERROR, "Destination buffer too small!\n");
         return NULL;
     }
 

@@ -54,7 +54,7 @@ NAL_SPS_EXT,
 NAL_AUXILIARY_SLICE=19
 };
 
-static const AVRational pixel_aspect[17]={
+static const AVRational222 pixel_aspect[17]={
  {0, 1},
  {1, 1},
  {12, 11},

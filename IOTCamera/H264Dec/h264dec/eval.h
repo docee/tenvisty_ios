@@ -28,7 +28,7 @@
 #ifndef FFMPEG_EVAL_H
 #define FFMPEG_EVAL_H
 
-#if LIBAVCODEC_VERSION_INT < ((52<<16)+(0<<8)+0)
+#if LIBAVCODEC_VERSION_INT222 < ((52<<16)+(0<<8)+0)
 /**
  * @deprecated Use ff_eval2 instead
  */

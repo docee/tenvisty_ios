@@ -39,24 +39,24 @@
 #include "define.h"
 #include <limits.h>
 
-int dct_quantize_c(MpegEncContext *s, DCTELEM *block, int n, int qscale, int *overflow);
-int dct_quantize_trellis_c(MpegEncContext *s, DCTELEM *block, int n, int qscale, int *overflow);
-void  denoise_dct_c(MpegEncContext *s, DCTELEM *block);
-void copy_picture(Picture *dst, Picture *src);
+int dct_quantize_c(MpegEncContext222 *s, DCTELEM222 *block, int n, int qscale, int *overflow);
+int dct_quantize_trellis_c(MpegEncContext222 *s, DCTELEM222 *block, int n, int qscale, int *overflow);
+void  denoise_dct_c(MpegEncContext222 *s, DCTELEM222 *block);
+void copy_picture(Picture222 *dst, Picture222 *src);
 
 /**
- * allocates a Picture
+ * allocates a Picture222
  * The pixels are allocated/set by calling get_buffer() if shared=0
  */
-int alloc_picture(MpegEncContext *s, Picture *pic, int shared);
+int alloc_picture(MpegEncContext222 *s, Picture222 *pic, int shared);
 
 /**
- * sets the given MpegEncContext to common defaults (same for encoding and decoding).
- * the changed fields will not depend upon the prior state of the MpegEncContext.
+ * sets the given MpegEncContext222 to common defaults (same for encoding and decoding).
+ * the changed fields will not depend upon the prior state of the MpegEncContext222.
  */
-void MPV_common_defaults(MpegEncContext *s);
+void MPV_common_defaults(MpegEncContext222 *s);
 
-static inline void gmc1_motion(MpegEncContext *s,
+static inline void gmc1_motion(MpegEncContext222 *s,
                                uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr,
                                uint8_t **ref_picture)
 {
@@ -142,7 +142,7 @@ static inline void gmc1_motion(MpegEncContext *s,
     return;
 }
 
-static inline void gmc_motion(MpegEncContext *s,
+static inline void gmc_motion(MpegEncContext222 *s,
                                uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr,
                                uint8_t **ref_picture)
 {
@@ -198,7 +198,7 @@ static inline void gmc_motion(MpegEncContext *s,
            s->h_edge_pos>>1, s->v_edge_pos>>1);
 }
 
-static inline int hpel_motion(MpegEncContext *s,
+static inline int hpel_motion(MpegEncContext222 *s,
                                   uint8_t *dest, uint8_t *src,
                                   int field_based, int field_select,
                                   int src_x, int src_y,
@@ -239,7 +239,7 @@ static inline int hpel_motion(MpegEncContext *s,
 }
 
 static av_always_inline
-void mpeg_motion_internal(MpegEncContext *s,
+void mpeg_motion_internal(MpegEncContext222 *s,
                  uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr,
                  int field_based, int bottom_field, int field_select,
                  uint8_t **ref_picture, op_pixels_func (*pix_op)[4],
@@ -364,7 +364,7 @@ if(s->quarter_sample)
 }
 /* apply one mpeg motion vector to the three components */
 static av_always_inline
-void mpeg_motion(MpegEncContext *s,
+void mpeg_motion(MpegEncContext222 *s,
                  uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr,
                  int field_based, int bottom_field, int field_select,
                  uint8_t **ref_picture, op_pixels_func (*pix_op)[4],
@@ -435,7 +435,7 @@ static inline void put_obmc(uint8_t *dst, uint8_t *src[5], int stride){
 }
 
 /* obmc for 1 8x8 luma block */
-static inline void obmc_motion(MpegEncContext *s,
+static inline void obmc_motion(MpegEncContext222 *s,
                                uint8_t *dest, uint8_t *src,
                                int src_x, int src_y,
                                op_pixels_func *pix_op,
@@ -464,7 +464,7 @@ static inline void obmc_motion(MpegEncContext *s,
     put_obmc(dest, ptr, s->linesize);
 }
 
-static inline void qpel_motion(MpegEncContext *s,
+static inline void qpel_motion(MpegEncContext222 *s,
                                uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr,
                                int field_based, int bottom_field, int field_select,
                                uint8_t **ref_picture, op_pixels_func (*pix_op)[4],
@@ -559,7 +559,7 @@ static inline void qpel_motion(MpegEncContext *s,
 /**
  * h263 chroma 4mv motion compensation.
  */
-static inline void chroma_4mv_motion(MpegEncContext *s,
+static inline void chroma_4mv_motion(MpegEncContext222 *s,
                                      uint8_t *dest_cb, uint8_t *dest_cr,
                                      uint8_t **ref_picture,
                                      op_pixels_func *pix_op,
@@ -609,7 +609,7 @@ static inline void chroma_4mv_motion(MpegEncContext *s,
     pix_op[dxy](dest_cr, ptr, s->uvlinesize, 8);
 }
 
-static inline void prefetch_motion(MpegEncContext *s, uint8_t **pix, int dir){
+static inline void prefetch_motion222(MpegEncContext222 *s, uint8_t **pix, int dir){
     /* fetch pixels for estimated mv 4 macroblocks ahead
      * optimized for 64byte cache lines */
     const int shift = s->quarter_sample ? 2 : 1;
@@ -633,7 +633,7 @@ static inline void prefetch_motion(MpegEncContext *s, uint8_t **pix, int dir){
  * @param pic_op qpel motion compensation function (average or put normally)
  * the motion vectors are taken from s->mv and the MV type from s->mv_type
  */
-static av_always_inline void MPV_motion_internal(MpegEncContext *s,
+static av_always_inline void MPV_motion_internal(MpegEncContext222 *s,
                               uint8_t *dest_y, uint8_t *dest_cb,
                               uint8_t *dest_cr, int dir,
                               uint8_t **ref_picture,
@@ -645,7 +645,7 @@ static av_always_inline void MPV_motion_internal(MpegEncContext *s,
    
 }
 
-static inline void MPV_motion(MpegEncContext *s,
+static inline void MPV_motion(MpegEncContext222 *s,
                               uint8_t *dest_y, uint8_t *dest_cb,
                               uint8_t *dest_cr, int dir,
                               uint8_t **ref_picture,

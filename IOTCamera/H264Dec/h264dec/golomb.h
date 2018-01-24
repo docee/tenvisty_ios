@@ -49,7 +49,7 @@ extern const uint8_t ff_interleaved_dirac_golomb_vlc_code[256];
  /**
  * read unsigned exp golomb code.
  */
-static inline int get_ue_golomb(GetBitContext *gb){
+static inline int get_ue_golomb(GetBitContext222 *gb){
     unsigned int buf;
     int log;
 
@@ -74,7 +74,7 @@ static inline int get_ue_golomb(GetBitContext *gb){
     }
 }
 
-static inline int svq3_get_ue_golomb(GetBitContext *gb){
+static inline int svq3_get_ue_golomb(GetBitContext222 *gb){
     uint32_t buf;
 
     OPEN_READER(re, gb);
@@ -112,7 +112,7 @@ static inline int svq3_get_ue_golomb(GetBitContext *gb){
 /**
  * read unsigned truncated exp golomb code.
  */
-static inline int get_te0_golomb(GetBitContext *gb, int range){
+static inline int get_te0_golomb(GetBitContext222 *gb, int range){
     assert(range >= 1);
 
     if(range==1)      return 0;
@@ -123,7 +123,7 @@ static inline int get_te0_golomb(GetBitContext *gb, int range){
 /**
  * read unsigned truncated exp golomb code.
  */
-static inline int get_te_golomb(GetBitContext *gb, int range){
+static inline int get_te_golomb(GetBitContext222 *gb, int range){
     assert(range >= 1);
 
     if(range==2) return get_bits1(gb)^1;
@@ -134,7 +134,7 @@ static inline int get_te_golomb(GetBitContext *gb, int range){
 /**
  * read signed exp golomb code.
  */
-static inline int get_se_golomb(GetBitContext *gb){
+static inline int get_se_golomb(GetBitContext222 *gb){
     unsigned int buf;
     int log;
 
@@ -162,7 +162,7 @@ static inline int get_se_golomb(GetBitContext *gb){
     }
 }
 
-static inline int svq3_get_se_golomb(GetBitContext *gb){
+static inline int svq3_get_se_golomb(GetBitContext222 *gb){
     unsigned int buf;
     int log;
 
@@ -195,7 +195,7 @@ static inline int svq3_get_se_golomb(GetBitContext *gb){
     }
 }
 
-static inline int dirac_get_se_golomb(GetBitContext *gb){
+static inline int dirac_get_se_golomb(GetBitContext222 *gb){
     uint32_t buf;
     uint32_t ret;
 
@@ -216,7 +216,7 @@ static inline int dirac_get_se_golomb(GetBitContext *gb){
 /**
  * read unsigned golomb rice code (ffv1).
  */
-static inline int get_ur_golomb(GetBitContext *gb, int k, int limit, int esc_len){
+static inline int get_ur_golomb(GetBitContext222 *gb, int k, int limit, int esc_len){
     unsigned int buf;
     int log;
 
@@ -245,7 +245,7 @@ static inline int get_ur_golomb(GetBitContext *gb, int k, int limit, int esc_len
 /**
  * read unsigned golomb rice code (jpegls).
  */
-static inline int get_ur_golomb_jpegls(GetBitContext *gb, int k, int limit, int esc_len){
+static inline int get_ur_golomb_jpegls(GetBitContext222 *gb, int k, int limit, int esc_len){
     unsigned int buf;
     int log;
 
@@ -294,7 +294,7 @@ static inline int get_ur_golomb_jpegls(GetBitContext *gb, int k, int limit, int 
 /**
  * read signed golomb rice code (ffv1).
  */
-static inline int get_sr_golomb(GetBitContext *gb, int k, int limit, int esc_len){
+static inline int get_sr_golomb(GetBitContext222 *gb, int k, int limit, int esc_len){
     int v= get_ur_golomb(gb, k, limit, esc_len);
 
     v++;
@@ -307,7 +307,7 @@ static inline int get_sr_golomb(GetBitContext *gb, int k, int limit, int esc_len
 /**
  * read signed golomb rice code (flac).
  */
-static inline int get_sr_golomb_flac(GetBitContext *gb, int k, int limit, int esc_len){
+static inline int get_sr_golomb_flac(GetBitContext222 *gb, int k, int limit, int esc_len){
     int v= get_ur_golomb_jpegls(gb, k, limit, esc_len);
     return (v>>1) ^ -(v&1);
 }
@@ -315,14 +315,14 @@ static inline int get_sr_golomb_flac(GetBitContext *gb, int k, int limit, int es
 /**
  * read unsigned golomb rice code (shorten).
  */
-static inline unsigned int get_ur_golomb_shorten(GetBitContext *gb, int k){
+static inline unsigned int get_ur_golomb_shorten(GetBitContext222 *gb, int k){
         return get_ur_golomb_jpegls(gb, k, INT_MAX, 0);
 }
 
 /**
  * read signed golomb rice code (shorten).
  */
-static inline int get_sr_golomb_shorten(GetBitContext* gb, int k)
+static inline int get_sr_golomb_shorten(GetBitContext222* gb, int k)
 {
     int uvar = get_ur_golomb_jpegls(gb, k + 1, INT_MAX, 0);
     if (uvar & 1)
@@ -335,7 +335,7 @@ static inline int get_sr_golomb_shorten(GetBitContext* gb, int k)
 
 #ifdef TRACE
 
-static inline int get_ue(GetBitContext *s, char *file, const char *func, int line){
+static inline int get_ue(GetBitContext222 *s, char *file, const char *func, int line){
     int show= show_bits(s, 24);
     int pos= get_bits_count(s);
     int i= get_ue_golomb(s);
@@ -349,7 +349,7 @@ static inline int get_ue(GetBitContext *s, char *file, const char *func, int lin
     return i;
 }
 
-static inline int get_se(GetBitContext *s, char *file, const char *func, int line){
+static inline int get_se(GetBitContext222 *s, char *file, const char *func, int line){
     int show= show_bits(s, 24);
     int pos= get_bits_count(s);
     int i= get_se_golomb(s);
@@ -363,7 +363,7 @@ static inline int get_se(GetBitContext *s, char *file, const char *func, int lin
     return i;
 }
 
-static inline int get_te(GetBitContext *s, int r, char *file, const char *func, int line){
+static inline int get_te(GetBitContext222 *s, int r, char *file, const char *func, int line){
     int show= show_bits(s, 24);
     int pos= get_bits_count(s);
     int i= get_te0_golomb(s, r);

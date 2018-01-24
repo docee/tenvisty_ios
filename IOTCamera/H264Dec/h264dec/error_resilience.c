@@ -32,7 +32,7 @@
 #include "mpegvideo.h"
 #include "log.h"
 
-static void decode_mb(MpegEncContext *s){
+static void decode_mb(MpegEncContext222 *s){
     s->dest[0] = s->current_picture.data[0] + (s->mb_y * 16* s->linesize  ) + s->mb_x * 16;
     s->dest[1] = s->current_picture.data[1] + (s->mb_y * 8 * s->uvlinesize) + s->mb_x * 8;
     s->dest[2] = s->current_picture.data[2] + (s->mb_y * 8 * s->uvlinesize) + s->mb_x * 8;
@@ -43,7 +43,7 @@ static void decode_mb(MpegEncContext *s){
 /**
  * replaces the current MB with a flat dc only version.
  */
-static void put_dc(MpegEncContext *s, uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr, int mb_x, int mb_y)
+static void put_dc(MpegEncContext222 *s, uint8_t *dest_y, uint8_t *dest_cb, uint8_t *dest_cr, int mb_x, int mb_y)
 {
     int dc, dcu, dcv, y, i;
     for(i=0; i<4; i++){
@@ -113,7 +113,7 @@ static void filter181(int16_t *data, int width, int height, int stride){
  * @param w     width in 8 pixel blocks
  * @param h     height in 8 pixel blocks
  */
-static void guess_dc(MpegEncContext *s, int16_t *dc, int w, int h, int stride, int is_luma){
+static void guess_dc(MpegEncContext222 *s, int16_t *dc, int w, int h, int stride, int is_luma){
     int b_x, b_y;
 
     for(b_y=0; b_y<h; b_y++){
@@ -197,7 +197,7 @@ static void guess_dc(MpegEncContext *s, int16_t *dc, int w, int h, int stride, i
  * @param w     width in 8 pixel blocks
  * @param h     height in 8 pixel blocks
  */
-static void h_block_filter(MpegEncContext *s, uint8_t *dst, int w, int h, int stride, int is_luma){
+static void h_block_filter(MpegEncContext222 *s, uint8_t *dst, int w, int h, int stride, int is_luma){
     int b_x, b_y;
     uint8_t *cm = ff_cropTbl + MAX_NEG_CROP;
 
@@ -257,7 +257,7 @@ static void h_block_filter(MpegEncContext *s, uint8_t *dst, int w, int h, int st
  * @param w     width in 8 pixel blocks
  * @param h     height in 8 pixel blocks
  */
-static void v_block_filter(MpegEncContext *s, uint8_t *dst, int w, int h, int stride, int is_luma){
+static void v_block_filter(MpegEncContext222 *s, uint8_t *dst, int w, int h, int stride, int is_luma){
     int b_x, b_y;
     uint8_t *cm = ff_cropTbl + MAX_NEG_CROP;
 
@@ -312,7 +312,7 @@ static void v_block_filter(MpegEncContext *s, uint8_t *dst, int w, int h, int st
     }
 }
 
-static void guess_mv(MpegEncContext *s){
+static void guess_mv(MpegEncContext222 *s){
 //    uint8_t fixed[s->mb_stride * s->mb_height];
 	uint8_t fixed[2000];
 #define MV_FROZEN    3
@@ -347,7 +347,7 @@ static void guess_mv(MpegEncContext *s){
                 if(!(s->error_status_table[mb_xy]&MV_ERROR)) continue;
 
                 s->mv_dir = MV_DIR_FORWARD;
-                s->mb_intra=0;
+                s->mb_intra222=0;
                 s->mv_type = MV_TYPE_16X16;
                 s->mb_skipped=0;
 
@@ -475,7 +475,7 @@ int score_sum=0;
                     pred_count++;
 
                     s->mv_dir = MV_DIR_FORWARD;
-                    s->mb_intra=0;
+                    s->mb_intra222=0;
                     s->mv_type = MV_TYPE_16X16;
                     s->mb_skipped=0;
 
@@ -550,7 +550,7 @@ score_sum+= best_score;
     }
 }
 
-static int is_intra_more_likely(MpegEncContext *s){
+static int is_intra_more_likely(MpegEncContext222 *s){
     int is_intra_likely, i, j, undamaged_count, skip_amount, mb_x, mb_y;
 
     if(s->last_picture_ptr==NULL) return 1; //no previous frame available -> use spatial prediction
@@ -604,7 +604,7 @@ static int is_intra_more_likely(MpegEncContext *s){
     return is_intra_likely > 0;
 }
 
-void ff_er_frame_start(MpegEncContext *s){
+void ff_er_frame_start222(MpegEncContext222 *s){
     if(!s->error_resilience) return;
 
     memset(s->error_status_table, MV_ERROR|AC_ERROR|DC_ERROR|VP_START|AC_END|DC_END|MV_END, s->mb_stride*s->mb_height*sizeof(uint8_t));
@@ -617,7 +617,7 @@ void ff_er_frame_start(MpegEncContext *s){
  * @param status the status at the end (MV_END, AC_ERROR, ...), it is assumed that no earlier end or
  *               error of the same type occurred
  */
-void ff_er_add_slice(MpegEncContext *s, int startx, int starty, int endx, int endy, int status){
+void ff_er_add_slice222(MpegEncContext222 *s, int startx, int starty, int endx, int endy, int status){
     const int start_i= av_clip(startx + starty * s->mb_width    , 0, s->mb_num-1);
     const int end_i  = av_clip(endx   + endy   * s->mb_width    , 0, s->mb_num);
     const int start_xy= s->mb_index2xy[start_i];
@@ -673,14 +673,14 @@ void ff_er_add_slice(MpegEncContext *s, int startx, int starty, int endx, int en
     }
 }
 
-void ff_er_frame_end(MpegEncContext *s){
+void ff_er_frame_end222(MpegEncContext222 *s){
     int i, mb_x, mb_y, error, error_type, dc_error, mv_error, ac_error;
     int distance;
     int threshold_part[4]= {100,100,100};
     int threshold= 50;
     int is_intra_likely;
     int size = s->b8_stride * 2 * s->mb_height;
-    Picture *pic= s->current_picture_ptr;
+    Picture222 *pic= s->current_picture_ptr;
 
     if(!s->error_resilience || s->error_count==0 ||
        s->error_count==3*s->mb_width*(s->avctx->skip_top + s->avctx->skip_bottom)) return;
@@ -870,7 +870,7 @@ void ff_er_frame_end(MpegEncContext *s){
             if(!(error&AC_ERROR)) continue;           //undamaged inter
 
             s->mv_dir = MV_DIR_FORWARD;
-            s->mb_intra=0;
+            s->mb_intra222=0;
             s->mb_skipped=0;
             if(IS_8X8(mb_type)){
                 int mb_index= mb_x*2 + mb_y*2*s->b8_stride;
@@ -908,7 +908,7 @@ void ff_er_frame_end(MpegEncContext *s){
                 if(!(error&AC_ERROR)) continue;           //undamaged inter
 
                 s->mv_dir = MV_DIR_FORWARD|MV_DIR_BACKWARD;
-                s->mb_intra=0;
+                s->mb_intra222=0;
                 s->mv_type = MV_TYPE_16X16;
                 s->mb_skipped=0;
 

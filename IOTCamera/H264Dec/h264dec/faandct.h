@@ -33,7 +33,7 @@
 
 #define FAAN_POSTSCALE
 
-void ff_faandct(DCTELEM * data);
-void ff_faandct248(DCTELEM * data);
+void ff_faandct(DCTELEM222 * data);
+void ff_faandct248(DCTELEM222 * data);
 
 #endif /* FFMPEG_FAANDCT_H */

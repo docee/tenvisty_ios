@@ -85,5 +85,7 @@
 - (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status;
 - (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status;
 - (void)camera:(BaseCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size;
+- (void)camera:(BaseCamera *)camera _didReceivePushResult:(NSInteger)result type:(NSInteger)type subId:(NSInteger)subId;
+- (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)w height:(NSInteger)h;
 @end
 

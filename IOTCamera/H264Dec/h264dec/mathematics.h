@@ -47,6 +47,6 @@ int64_t av_rescale_rnd(int64_t a, int64_t b, int64_t c, enum AVRounding) av_cons
 /**
  * rescale a 64bit integer by 2 rational numbers.
  */
-int64_t av_rescale_q(int64_t a, AVRational bq, AVRational cq) av_const;
+int64_t av_rescale_q(int64_t a, AVRational222 bq, AVRational222 cq) av_const;
 
 #endif /* FFMPEG_MATHEMATICS_H */

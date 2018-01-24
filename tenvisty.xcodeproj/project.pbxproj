@@ -120,11 +120,12 @@
 		89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */; };
 		89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
 		89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C772015D44200A6F0CD /* LANSearchCamera.m */; };
-		89A37C822016DC0500A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
 		89A37C8920171A3200A6F0CD /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
 		89A37C8C201726FB00A6F0CD /* Home_Hichip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */; };
 		89A37C90201727A000A6F0CD /* LiveView_HichipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */; };
+		89A37C912018359B00A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C97201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m */; };
 		89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89A7E93B1FECB30B00F12BFF /* Localizable.strings */; };
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89AA50E62010558A009CCA5D /* BaseCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E52010558A009CCA5D /* BaseCamera.m */; };
@@ -181,7 +182,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				89A37C822016DC0500A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */,
+				89A37C912018359B00A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */,
 			);
 			name = "Embed Frameworks (1 item) (1 item)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +420,8 @@
 		89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home_Hichip.storyboard; sourceTree = "<group>"; };
 		89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveView_HichipController.m; sourceTree = "<group>"; };
 		89A37C8F2017279F00A6F0CD /* LiveView_HichipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveView_HichipController.h; sourceTree = "<group>"; };
+		89A37C96201879CD00A6F0CD /* AddCameraNavigationTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCameraNavigationTypeViewController.h; sourceTree = "<group>"; };
+		89A37C97201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCameraNavigationTypeViewController.m; sourceTree = "<group>"; };
 		89A7E9331FECB2CC00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		89A7E93A1FECB30B00F12BFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		89A7E93C1FECB31A00F12BFF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1027,6 +1030,8 @@
 				892CE0DC1FD13E6200942E28 /* SearchCameraTableViewController.h */,
 				892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */,
 				892CE0D41FD13E1500942E28 /* Scan */,
+				89A37C96201879CD00A6F0CD /* AddCameraNavigationTypeViewController.h */,
+				89A37C97201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m */,
 			);
 			path = AddCamera;
 			sourceTree = "<group>";
@@ -2222,6 +2227,7 @@
 				892CE0BB1FD1014000942E28 /* TextFieldImgTableViewCell.m in Sources */,
 				89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */,
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
+				89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */,
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
 				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,

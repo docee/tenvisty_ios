@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/MyCamera.m"
-            timestampString = "538388923.616021"
+            timestampString = "538474411.2524951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/BaseCamera.m"
-            timestampString = "538388923.616384"
+            timestampString = "538474411.2528501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-cameraStateDesc"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/AppDelegate.m"
-            timestampString = "538388923.616608"
+            timestampString = "538474411.253123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "-applicationWillEnterForeground:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/BaseCamera.m"
-            timestampString = "538388923.616805"
+            timestampString = "538474411.253353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "-start"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/MyCamera.m"
-            timestampString = "538388923.616874"
+            timestampString = "538474411.253443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "244"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/MyCamera.m"
-            timestampString = "538388923.616937"
+            timestampString = "538474411.253515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "430"
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "538388923.617"
+            timestampString = "538483425.191506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "-camera:_didChangeSessionStatus:"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListItemTableViewCell.m"
-            timestampString = "538388923.617187"
+            timestampString = "538474411.254238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "161"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListItemTableViewCell.m"
-            timestampString = "538388923.617376"
+            timestampString = "538474411.254441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.61743"
+            timestampString = "538474411.254499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "-start"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.617637"
+            timestampString = "538474411.254745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "-start"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.617702"
+            timestampString = "538474411.254836"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "-initWithUid:Name:UserName:Password:"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/AppDelegate.m"
-            timestampString = "538388923.617764"
+            timestampString = "538474411.2549241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "-onInitResult:"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.617812"
+            timestampString = "538474411.25498"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
             landmarkName = "-receiveIOCtrl:Type:Data:Size:Status:"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.617867"
+            timestampString = "538474411.25506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "-receivePlayState:State:Width:Height:"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.61792"
+            timestampString = "538474411.255136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "-receivePlayUTC:Time:"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.617973"
+            timestampString = "538474411.2552119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "-receiveDownloadState:Total:CurSize:State:Path:"
             landmarkType = "7">
          </BreakpointContent>
@@ -278,15 +278,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
-            timestampString = "538388923.6180249"
+            timestampString = "538474411.255288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-receiveSessionState:Status:"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,12 +298,284 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tenvisty/Main/Home/CameraListViewController.m"
-            timestampString = "538388923.618075"
+            timestampString = "538483425.191978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.2556829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.255914"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "-viewWillDisappear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.255988"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.256057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-viewWillDisappear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
+            timestampString = "538474411.2561229"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-stopVideoAsync:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
+            timestampString = "538474411.256179"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "-stopVideo"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/BaseCamera.m"
+            timestampString = "538474411.256237"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "-saveImage:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/BaseCamera.m"
+            timestampString = "538474411.256289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-saveImage:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
+            timestampString = "538474411.256338"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-pwd"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Home/CameraListViewController.m"
+            timestampString = "538483425.192327"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "-doShowModifyPassword:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/BaseCamera.m"
+            timestampString = "538474411.256632"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-setPwd:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.256683"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "-changeStream:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.256742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "-changeStream:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.256796"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "681"
+            endingLineNumber = "681"
+            landmarkName = "-camera:_didReceivePlayState:witdh:height:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.256847"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
+            landmarkName = "-startRecord"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Main/Hichip/LiveView_HichipController.m"
+            timestampString = "538474411.256896"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
+            landmarkName = "-startRecord"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tenvisty/Global/GlobalModel/HichipCamera.m"
+            timestampString = "538474411.256945"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
+            landmarkName = "-receivePlayState:State:Width:Height:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

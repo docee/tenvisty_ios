@@ -34,6 +34,6 @@
  * finds the end of the current frame in the bitstream.
  * @return the position of the first byte of the next frame, or -1
  */
-int ff_h264_find_frame_end(H264Context *h, const uint8_t *buf, int buf_size);
+int ff_h264_find_frame_end(H264Context222 *h, const uint8_t *buf, int buf_size);
 
 #endif /* FFMPEG_H264_PARSER_H */

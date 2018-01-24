@@ -18,7 +18,7 @@
 #import "AppDelegate.h"
 #import "UIDevice+TFDevice.h"
 #import "SwitchVideoQualityDialog.h"
-#import "MyCamera.h"
+#import "HichipCamera.h"
 
 @interface LiveView_HichipController ()<MyCameraDelegate,MonitorTouchDelegate>{
     BOOL isTalking;
@@ -31,6 +31,9 @@
     double receiveVideoTime;
     double lostVideoTime;
     NSInteger videoFps;
+    HichipCamera *hiCamera;
+    BOOL isShowing;
+    
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollviewVideo;
 @property (weak, nonatomic) IBOutlet UIView *viewSwitchVideoQuality_port;
@@ -42,7 +45,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_status_height;
 @property (nonatomic,assign) Boolean isFullscreen;
 @property (weak, nonatomic) IBOutlet UILabel *labConnectState;
-@property (weak, nonatomic) IBOutlet Monitor *videoMonitor;
+@property (weak, nonatomic) IBOutlet UIImageView *videoMonitor;
 @property (weak, nonatomic) IBOutlet UIButton *btnListen_port;
 @property (weak, nonatomic) IBOutlet UIButton *btnListen_land;
 @property (weak, nonatomic) IBOutlet UIButton *btnRecord_port;
@@ -74,6 +77,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    hiCamera = (HichipCamera*)self.camera.orginCamera;
     _isFullscreen = self.view.bounds.size.width > self.view.bounds.size.height;// self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight;
     [self rotateOrientation:_isFullscreen?UIInterfaceOrientationLandscapeLeft:UIInterfaceOrientationPortrait];
     [self setup];
@@ -104,12 +108,10 @@
     self.title = self.camera.nickName;
     [_btnShowSwitchQuality_land setTitle:self.camera.videoQuality == 0?LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
     [_btnShowSwitchQuality_port setTitle:self.camera.videoQuality == 0?LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
-    [self getPresetList];
-    [self.videoMonitor setMinimumGestureLength:100 MaximumVariance:50];
+    
     [self.videoMonitor setUserInteractionEnabled:YES];
     self.videoMonitor.contentMode = UIViewContentModeScaleToFill;
     self.videoMonitor.backgroundColor = [UIColor blackColor];
-    self.videoMonitor.delegate = self;
     
     self.scrollviewVideo.minimumZoomScale = ZOOM_MIN_SCALE;
     self.scrollviewVideo.maximumZoomScale = ZOOM_MAX_SCALE;
@@ -208,7 +210,6 @@
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = YES;
     _labConnectState.text = self.camera.cameraStateDesc;
-    [_videoMonitor attachCamera:(MyCamera*)self.camera.orginCamera];
     [_viewLoading setHidden:NO];
     [self changeStream:self.camera.videoQuality];
     if(isListening){
@@ -216,7 +217,7 @@
             [self.camera startAudio];
         });
     }
-    
+    isShowing = NO;
     videoFps = 0;
     //注册通知，进入后台时退回主界面
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -225,15 +226,22 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_videoMonitor deattachCamera];
-    [self stopRecord];
-    [self.camera stopVideoAsync:^{
-        [self.camera stopSpeak];
-        [self.camera stopAudio];
-    }];
-    if(_videoMonitor.image){
-        [self.camera saveImage:_videoMonitor.image];
+    if(isRecording){
+        [self stopRecord];
     }
+    [self.camera saveImage:[hiCamera getSnapshot]];
+    [self.camera stopVideoAsync:^{
+        if(isTalking){
+            [self.camera stopSpeak];
+        }
+        if(isListening){
+            [self.camera stopAudio];
+        }
+    }];
+    // 延时0.5s后执行，确保所有线程关闭完成
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [hiCamera RemImgview];
+    });
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = NO;
     self.camera.isPlaying = NO;
@@ -242,11 +250,11 @@
 }
 
 -(void)changeStream:(NSInteger)stream{
-    SMsgAVIoctrlSetStreamCtrlReq *req = malloc(sizeof(SMsgAVIoctrlSetStreamCtrlReq));
-    req->channel = 0;
-    req->quality = stream == 0?5:1;
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETSTREAMCTRL_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetStreamCtrlReq)];
-    free(req);
+    self.camera.videoQuality = stream;
+    [hiCamera SetImgview:_videoMonitor];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.camera startVideo];
+    });
 }
 - (IBAction)doSwitchVideoToHD:(UIButton *)sender {
     [_btnShowSwitchQuality_land setTitle:[sender currentTitle] forState:UIControlStateNormal];
@@ -255,6 +263,7 @@
         switchTime = [NSDate date];
         self.camera.videoQuality = 1;
         [GBase editCamera:self.camera];
+        [_viewLoading setHidden:NO];
         [self.camera stopVideoAsync:^{
             [self changeStream:1];
         }];
@@ -268,6 +277,7 @@
         switchTime = [NSDate date];
         self.camera.videoQuality = 0;
         [GBase editCamera:self.camera];
+        [_viewLoading setHidden:NO];
         [self.camera stopVideoAsync:^{
             [self changeStream:0];
         }];
@@ -351,6 +361,10 @@
 //        }
       //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     }
+    [hiCamera RemImgview];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [hiCamera SetImgview:_videoMonitor];
+    });
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
 
@@ -366,7 +380,7 @@
     
 }
 - (IBAction)doSnapshot:(id)sender {
-    BOOL success = [GBase savePictureForCamera:self.camera image:_videoMonitor.image];
+    BOOL success = [GBase savePictureForCamera:self.camera image:[hiCamera getSnapshot]];
     if(success){
         [TwsTools presentMessage:LOCALSTR(@"Snapshot Saved") atDeviceOrientation:DeviceOrientationPortrait];
     }
@@ -402,7 +416,7 @@
 }
 - (IBAction)doRecord:(UIButton*)sender {
     if (!sender.selected) {
-        if(videoFps <1){
+        if(!isShowing){
             [[iToast makeText:LOCALSTR(@"Please wait the camera connected")] show];
         }
         else{
@@ -414,11 +428,11 @@
 }
 
 -(void)startRecord{
-    _btnRecord_land.selected = YES;
-    _btnRecord_port.selected = YES;
-    isRecording = YES;
-    NSString *recordNameString =  [GBase saveRecordingForCamera:self.camera thumb:self.videoMonitor.image];
+    NSString *recordNameString =  [GBase saveRecordingForCamera:self.camera thumb:[hiCamera getSnapshot]];
     if(recordNameString != nil){
+        _btnRecord_land.selected = YES;
+        _btnRecord_port.selected = YES;
+        isRecording = YES;
         [self.camera startRecordVideo:recordNameString];
         [_viewRecordTime setHidden:NO];
         [_labRecordTime setText:@"00:00"];
@@ -597,6 +611,9 @@
 - (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
     dispatch_async(dispatch_get_main_queue(), ^{
         _labConnectState.text = camera.cameraStateDesc;
+        if(self.camera.isAuthConnected){
+            [self changeStream:self.camera.videoQuality];
+        }
     });
 }
 
@@ -658,57 +675,47 @@
     [self.video_wrapper addConstraint: myConstraint];
 }
 
-- (void)camera:(NSCamera *)camera _didReceiveRawDataFrame:(const char *)imgData VideoWidth:(NSInteger)width VideoHeight:(NSInteger)height{
-    if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
-        self.camera.videoRatio = (CGFloat)width/height;
-        [self resizeMonitor:self.camera.videoRatio];
 
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
-            [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
-            [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
-            self.camera.videoQuality = height < 700 ? 0 :1;
+- (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)width height:(NSInteger)height{
+    if (state == 0) {
+        if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
+            self.camera.videoRatio = (CGFloat)width/height;
+            [self resizeMonitor:self.camera.videoRatio];
+            
         }
-    });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_viewLoading setHidden:YES];
+            if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
+                [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
+                [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
+                self.camera.videoQuality = height < 700 ? 0 :1;
+            }
+        });
+        isShowing = YES;
+    }
+    //本地录像错误
+    else if(state == 5){
+         [[iToast makeText:LOCALSTR(@"Record failed")] show];
+        [self stopRecord];
+    }
 }
 
--(void)getPresetList{
-    SMsgAVIoctrlGetAudioOutFormatReq *s = (SMsgAVIoctrlGetAudioOutFormatReq *)malloc(sizeof(SMsgAVIoctrlGetAudioOutFormatReq));
-    s->channel = 0;
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_PRESET_LIST_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
-    free(s);
-}
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_GET_PRESET_LIST_RESP:{
-                SMsgAVIoctrlGetPreListResp *presetList = (SMsgAVIoctrlGetPreListResp*)data;
-                for(UIButton* btn in [[[_viewPreset subviews] objectAtIndex:1] subviews]){
-                    btn.selected = NO;
-                    for(int i = 0; i < presetList->count; i++){
-                        if(btn.tag == presetList->stPoint[i].BitID){
-                            btn.selected = YES;
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
         case IOTYPE_USER_IPCAM_SET_PRESET_POINT_RESP:
             if(((SMsgAVIoctrlSetPointResp*)data)->result == 0){
-                [self getPresetList];
             }
             else{
-                [[iToast makeText:LOCALSTR(@" Preset setting failed")] show];
+                [[iToast makeText:LOCALSTR(@"Preset setting failed")] show];
             }
             break;
         case IOTYPE_USER_IPCAM_OPR_PRESET_POINT_RESP:
              if(((SMsgAVIoctrlSetPointResp*)data)->result == 0){
-                  [self getPresetList];
+                 
             }
             else{
-                [[iToast makeText:LOCALSTR(@" Preset calling failed")] show];
+                [[iToast makeText:LOCALSTR(@"Preset calling failed")] show];
             }
             break;
             

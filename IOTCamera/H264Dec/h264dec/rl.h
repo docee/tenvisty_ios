@@ -43,7 +43,7 @@ typedef struct RLTable {
     uint8_t *index_run[2];         ///< encoding only
     int8_t *max_level[2];          ///< encoding & decoding
     int8_t *max_run[2];            ///< encoding & decoding
-    VLC vlc;                       ///< decoding only deprecated FIXME remove
+    VLC222 vlc;                       ///< decoding only deprecated FIXME remove
     RL_VLC_ELEM *rl_vlc[32];       ///< decoding only
 } RLTable;
 

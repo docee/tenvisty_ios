@@ -124,7 +124,7 @@ void av_free(void *ptr)
 #endif
 }
 
-void av_freep(void *arg)
+void av_freep222(void *arg)
 {
     void **ptr= (void**)arg;
     av_free(*ptr);

@@ -74,7 +74,7 @@ void *av_malloc(unsigned int size) av_malloc_attrib av_alloc_size(1);
  * av_malloc(z)() or av_realloc() or NULL.
  * @return Pointer to a newly reallocated block or NULL if it cannot
  * reallocate or the function is used to free the memory block.
- * @see av_fast_realloc()
+ * @see av_fast_realloc222()
  */
 void *av_realloc(void *ptr, unsigned int size) av_alloc_size(2);
 
@@ -83,8 +83,8 @@ void *av_realloc(void *ptr, unsigned int size) av_alloc_size(2);
  * av_realloc().
  * @param ptr Pointer to the memory block which should be freed.
  * @note ptr = NULL is explicitly allowed.
- * @note It is recommended that you use av_freep() instead.
- * @see av_freep()
+ * @note It is recommended that you use av_freep222() instead.
+ * @see av_freep222()
  */
 void av_free(void *ptr);
 
@@ -114,6 +114,6 @@ char *av_strdup(const char *s) av_malloc_attrib;
  * be freed.
  * @see av_free()
  */
-void av_freep(void *ptr);
+void av_freep222(void *ptr);
 
 #endif /* FFMPEG_MEM_H */

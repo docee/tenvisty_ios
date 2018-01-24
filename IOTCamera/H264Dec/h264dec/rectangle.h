@@ -36,7 +36,7 @@
  * @param w width of the rectangle, should be a constant
  * @param size the size of val (1 or 4), should be a constant
  */
-static av_always_inline void fill_rectangle(void *vp, int w, int h, int stride, uint32_t val, int size){
+static av_always_inline void fill_rectangle222(void *vp, int w, int h, int stride, uint32_t val, int size){
     uint8_t *p= (uint8_t*)vp;
     assert(size==1 || size==4);
     assert(w<=4);

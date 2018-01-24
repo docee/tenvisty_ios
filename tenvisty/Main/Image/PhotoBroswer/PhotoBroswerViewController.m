@@ -125,7 +125,7 @@
 //        _indexTitle.center = CGPointMake(CGRectGetWidth(self.naToolbar.frame)/2, CGRectGetHeight(self.naToolbar.frame)/2);
 //        _indexTitle.textAlignment = NSTextAlignmentCenter;
 //        _indexTitle.adjustsFontSizeToFitWidth = YES;
-//        _indexTitle.text = INTERSTR(@"Local Picture");
+//        _indexTitle.text = INTERSTR(@"Local Picture222");
 //        //_indexTitle.text = [NSString stringWithFormat:@"%d/%d", (int)([self.images indexOfObject:self.selectPhoto]+1), (int)self.images.count];
 //    }
 //    return _indexTitle;

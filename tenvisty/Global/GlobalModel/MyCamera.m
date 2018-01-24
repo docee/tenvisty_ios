@@ -541,8 +541,6 @@
             }
             free(def);
         }
-    }else if (type == (int)IOTYPE_USER_IPCAM_SETSTREAMCTRL_RESP) {
-        [self startVideo];
     }
     else if(type == IOTYPE_USER_IPCAM_REBOOT_RESP){
         SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;

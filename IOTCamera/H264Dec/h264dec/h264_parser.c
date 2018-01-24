@@ -31,7 +31,7 @@
 #include <assert.h>
 
 
-int ff_h264_find_frame_end(H264Context *h, const uint8_t *buf, int buf_size)
+int ff_h264_find_frame_end(H264Context222 *h, const uint8_t *buf, int buf_size)
 {
     int i;
     uint32_t state;
@@ -80,12 +80,12 @@ found:
     return END_NOT_FOUND;
 }
 
-static int h264_parse(AVCodecParserContext *s,
-                      AVCodecContext *avctx,
+static int h264_parse(AVCodecParserContext222 *s,
+                      AVCodecContext222 *avctx,
                       const uint8_t **poutbuf, int *poutbuf_size,
                       const uint8_t *buf, int buf_size)
 {
-    H264Context *h = s->priv_data;
+    H264Context222 *h = s->priv_data;
     ParseContext *pc = &h->s.parse_context;
     int next;
 
@@ -111,7 +111,7 @@ static int h264_parse(AVCodecParserContext *s,
     return next;
 }
 
-static int h264_split(AVCodecContext *avctx,
+static int h264_split(AVCodecContext222 *avctx,
                       const uint8_t *buf, int buf_size)
 {
     int i;
@@ -136,9 +136,9 @@ static int h264_split(AVCodecContext *avctx,
 }
 
 
-AVCodecParser h264_parser = {
+AVCodecParser222 h264_parser = {
     { CODEC_ID_H264 },
-    sizeof(H264Context),
+    sizeof(H264Context222),
     NULL,
     h264_parse,
     ff_parse_close,

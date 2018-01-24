@@ -10,6 +10,7 @@
 #import "CameraListItemTableViewCell.h"
 #import "BaseTableViewController.h"
 #import "BaseViewController.h"
+#import "OCScanLifeViewController.h"
 
 @interface CameraListViewController ()<BaseCameraDelegate>{
     BOOL isShowingModifyPassword;
@@ -42,6 +43,14 @@
     BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_cameraSetting"];  //test2为viewcontroller的StoryboardId
     [self.navigationController pushViewController:test2obj animated:YES];
 }
+- (IBAction)go2AddCamera:(id)sender {
+    [self go2ScanQRCode];
+}
+
+-(void)go2ScanQRCode{
+    OCScanLifeViewController* test2obj = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_scanQRCode"];  //test2为viewcontroller的StoryboardId
+    [self.navigationController pushViewController:test2obj animated:YES];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -59,6 +68,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self setTitle:FORMAT(@"%@ (%lu)",LOCALSTR(@"Camera List"),(unsigned long)[GBase sharedInstance].cameras.count)];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -128,6 +138,20 @@
 //    }
     
 }
+- (IBAction)go2LiveView:(UIButton *)sender {
+    BaseCamera *camera = [GBase getCamera:sender.tag];
+    if(camera.p2pType == P2P_Tutk){
+        [self performSegueWithIdentifier:@"CameraList2LiveView" sender:sender];
+    }
+    else{
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Home_Hichip" bundle:nil];
+        BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_liveview_hichip"];  //test2为viewcontroller的StoryboardId
+        test2obj.camera = camera;
+        [self.navigationController pushViewController:test2obj animated:YES];
+    }
+}
+
+
 
 - (IBAction)deleteCamera:(UIButton *)sender {
     NSInteger row = sender.tag;

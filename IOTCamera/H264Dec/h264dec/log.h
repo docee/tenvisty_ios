@@ -26,7 +26,7 @@
 /**
  * Describes the class of an AVClass context structure, that is an
  * arbitrary struct of which the first field is a pointer to an
- * AVClass struct (e.g. AVCodecContext, AVFormatContext etc.).
+ * AVClass struct (e.g. AVCodecContext222, AVFormatContext etc.).
  */
 typedef struct AVCLASS AVClass;
 struct AVCLASS {

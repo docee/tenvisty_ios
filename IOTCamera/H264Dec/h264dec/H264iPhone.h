@@ -26,7 +26,7 @@
 
 @interface H264iPhone : NSObject
 {
-    struct AVCodecContext *c;
+    struct AVCodecContext222 *c;
     struct AVFrame *picture;
     
     long int crv_tab[256];
@@ -37,7 +37,7 @@
     
     unsigned char clp[1024];
     
-    struct AVCodec *codec;
+    struct AVCodec222 *codec;
 }
 -(int)InitDecoder;
 -(int)UninitDecoder;

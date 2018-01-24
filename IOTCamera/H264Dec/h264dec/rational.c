@@ -35,7 +35,7 @@
 #include "math.h"
 
 int av_reduce(int *dst_nom, int *dst_den, int64_t nom, int64_t den, int64_t max){
-    AVRational a0={0,1}, a1={1,0};
+    AVRational222 a0={0,1}, a1={1,0};
     int sign= (nom<0) ^ (den<0);
     int64_t gcd= ff_gcd(FFABS(nom), FFABS(den));
 
@@ -61,12 +61,12 @@ int av_reduce(int *dst_nom, int *dst_den, int64_t nom, int64_t den, int64_t max)
             if(a1.den) x= FFMIN(x, (max - a0.den) / a1.den);
 
             if (den*(2*x*a1.den + a0.den) > nom*a1.den)
-//                a1 = (AVRational){x*a1.num + a0.num, x*a1.den + a0.den};
+//                a1 = (AVRational222){x*a1.num + a0.num, x*a1.den + a0.den};
             break;
         }
 
         a0= a1;
- //       a1= (AVRational){a2n, a2d};
+ //       a1= (AVRational222){a2n, a2d};
         nom= den;
         den= next_den;
     }
@@ -78,28 +78,28 @@ int av_reduce(int *dst_nom, int *dst_den, int64_t nom, int64_t den, int64_t max)
     return den==0;
 }
 
-AVRational av_mul_q(AVRational b, AVRational c){
+AVRational222 av_mul_q(AVRational222 b, AVRational222 c){
     av_reduce(&b.num, &b.den, b.num * (int64_t)c.num, b.den * (int64_t)c.den, INT_MAX);
     return b;
 }
-static AVRational AV00 = {0,0};
-AVRational av_div_q(AVRational b, AVRational c){
-   // return av_mul_q(b, (AVRational){c.den, c.num});
+static AVRational222 AV00 = {0,0};
+AVRational222 av_div_q(AVRational222 b, AVRational222 c){
+   // return av_mul_q(b, (AVRational222){c.den, c.num});
 	return AV00;
 }
 
-AVRational av_add_q(AVRational b, AVRational c){
+AVRational222 av_add_q(AVRational222 b, AVRational222 c){
     av_reduce(&b.num, &b.den, b.num * (int64_t)c.den + c.num * (int64_t)b.den, b.den * (int64_t)c.den, INT_MAX);
     return b;
 }
 
-AVRational av_sub_q(AVRational b, AVRational c){
-//    return av_add_q(b, (AVRational){-c.num, c.den});
+AVRational222 av_sub_q(AVRational222 b, AVRational222 c){
+//    return av_add_q(b, (AVRational222){-c.num, c.den});
 	return AV00;
 }
 
-AVRational av_d2q(double d, int max){
-    AVRational a;
+AVRational222 av_d2q(double d, int max){
+    AVRational222 a;
 #define LOG2  0.69314718055994530941723212145817656807550013436025
     int exponent= FFMAX( (int)(log(fabs(d) + 1e-20)/LOG2), 0);
     int64_t den= 1 << (61 - exponent);

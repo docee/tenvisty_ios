@@ -711,7 +711,10 @@
                 [[iToast makeText:LOCALSTR(@" Preset calling failed")] show];
             }
             break;
-            
+        case IOTYPE_USER_IPCAM_SETSTREAMCTRL_RESP: {
+                 [self.camera startVideo];
+             }
+            break;
         default:
             break;
     }

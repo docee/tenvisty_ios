@@ -13,6 +13,7 @@
 @interface BaseCamera()
 @property (nonatomic, strong) id<BaseCameraProtocol> orginCamera;
 @property (nonatomic, assign) NSInteger p2pType;
+@property (nonatomic,assign) CGFloat vRatio;
 //@property (nonatomic, strong) NSString* cameraStateDesc;
 @end
 
@@ -69,47 +70,94 @@
     return self.orginCamera.uid;
 }
 
--(NSString*)pwd{
-    return self.orginCamera.uid;
+-(void)setUid:(NSString *)uid{
+    self.orginCamera.uid = uid;
 }
+
+-(NSString*)pwd{
+    return self.orginCamera.pwd;
+}
+
+-(void)setPwd:(NSString *)pwd{
+    self.orginCamera.pwd = pwd;
+}
+
 -(NSString*)user{
     return self.orginCamera.user;
+}
+
+-(void)setUser:(NSString *)user{
+    self.user = user;
 }
 
 -(NSInteger)remoteNotifications{
     return self.orginCamera.remoteNotifications;
 }
 
+-(void)setRemoteNotifications:(NSInteger)remoteNotifications{
+    self.orginCamera.remoteNotifications = remoteNotifications;
+}
+
 -(NSString*)nickName{
     return self.orginCamera.nickName;
+}
+
+-(void)setNickName:(NSString *)nickName{
+    self.orginCamera.nickName = nickName;
 }
 
 -(BOOL)isPlaying{
     return self.orginCamera.isPlaying;
 }
 
+-(void)setIsPlaying:(BOOL)isPlaying{
+    self.orginCamera.isPlaying = isPlaying;
+}
+
+
 -(NSInteger)videoQuality{
     return self.orginCamera.videoQuality;
 }
 
+-(void)setVideoQuality:(NSInteger)videoQuality{
+    self.orginCamera.videoQuality = videoQuality;
+}
+
 -(CGFloat)videoRatio{
-    return self.orginCamera.videoRatio;
+    if(!_vRatio){
+        _vRatio = [GBase getCameraVideoRatio:self];
+    }
+    return _vRatio;
+}
+
+-(void)setVideoRatio:(CGFloat)videoRatio{
+    _vRatio = videoRatio;
+    [GBase setCameraVideoRatio:self ratio:videoRatio];
 }
 
 -(NSInteger)cameraConnectState{
     return self.orginCamera.cameraConnectState;
 }
 
+
 -(NSString*)cameraStateDesc{
     return self.orginCamera.cameraStateDesc;
 }
+
 
 -(NSInteger)processState{
     return self.orginCamera.processState;
 }
 
+-(void)setProcessState:(NSInteger)processState{
+    self.processState = processState;
+}
+
 -(NSInteger)upgradePercent{
     return self.orginCamera.upgradePercent;
+}
+-(void)setUpgradePercent:(NSInteger)upgradePercent{
+    self.orginCamera.upgradePercent = upgradePercent;
 }
 
 -(BOOL)isSessionConnected{
@@ -181,12 +229,14 @@
 }
 
 - (void)saveImage:(UIImage *)image {
-    NSString *extension = [[[self.imagePath componentsSeparatedByString:@"."] lastObject] lowercaseString];
-    if([extension isEqualToString:@"png"]){
-        [UIImagePNGRepresentation(image) writeToFile:self.imagePath atomically:YES];
-    }
-    else{
-        [UIImageJPEGRepresentation(image, 0.5) writeToFile:self.imagePath atomically:YES];
+    if(image){
+        NSString *extension = [[[self.imagePath componentsSeparatedByString:@"."] lastObject] lowercaseString];
+        if([extension isEqualToString:@"png"]){
+            [UIImagePNGRepresentation(image) writeToFile:self.imagePath atomically:YES];
+        }
+        else{
+            [UIImageJPEGRepresentation(image, 0.5) writeToFile:self.imagePath atomically:YES];
+        }
     }
 }
 

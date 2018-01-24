@@ -25,8 +25,8 @@
  * @author Michael Niedermayer <michaelni@gmx.at>
  */
 
-#ifndef FFMPEG_H264_H
-#define FFMPEG_H264_H
+#ifndef FFMPEG_H264_H222
+#define FFMPEG_H264_H222
 
 #include "dsputil.h"
 #include "cabac.h"
@@ -34,47 +34,47 @@
 #include "h264pred.h"
 #include "log.h"
 
-#define interlaced_dct interlaced_dct_is_a_bad_name
-#define mb_intra mb_intra_is_not_initialized_see_mb_type
+#define interlaced_dct222 interlaced_dct_is_a_bad_name222
+#define mb_intra222 mb_intra_is_not_initialized_see_mb_type222
 
-#define LUMA_DC_BLOCK_INDEX   25
-#define CHROMA_DC_BLOCK_INDEX 26
+#define LUMA_DC_BLOCK_INDEX222   25
+#define CHROMA_DC_BLOCK_INDEX222 26
 
-#define CHROMA_DC_COEFF_TOKEN_VLC_BITS 8
-#define COEFF_TOKEN_VLC_BITS           8
-#define TOTAL_ZEROS_VLC_BITS           9
-#define CHROMA_DC_TOTAL_ZEROS_VLC_BITS 3
-#define RUN_VLC_BITS                   3
-#define RUN7_VLC_BITS                  6
+#define CHROMA_DC_COEFF_TOKEN_VLC_BITS222 8
+#define COEFF_TOKEN_VLC_BITS222           8
+#define TOTAL_ZEROS_VLC_BITS222           9
+#define CHROMA_DC_TOTAL_ZEROS_VLC_BITS222 3
+#define RUN_VLC_BITS222                   3
+#define RUN7_VLC_BITS222                  6
 
-#define MAX_SPS_COUNT 32
-#define MAX_PPS_COUNT 256
+#define MAX_SPS_COUNT222 32
+#define MAX_PPS_COUNT222 256
 
-#define MAX_MMCO_COUNT 66
+#define MAX_MMCO_COUNT222 66
 
 /* Compiling in interlaced support reduces the speed
  * of progressive decoding by about 2%. */
-#define ALLOW_INTERLACE
+#define ALLOW_INTERLACE222
 
-#ifdef ALLOW_INTERLACE
-#define MB_MBAFF h->mb_mbaff
-#define MB_FIELD h->mb_field_decoding_flag
-#define FRAME_MBAFF h->mb_aff_frame
-#define FIELD_PICTURE (s->picture_structure != PICT_FRAME)
+#ifdef ALLOW_INTERLACE222
+#define MB_MBAFF222 h->mb_mbaff
+#define MB_FIELD222 h->mb_field_decoding_flag
+#define FRAME_MBAFF222 h->mb_aff_frame
+#define FIELD_PICTURE222 (s->picture_structure != PICT_FRAME)
 #else
-#define MB_MBAFF 0
-#define MB_FIELD 0
-#define FRAME_MBAFF 0
-#define FIELD_PICTURE 0
-#undef  IS_INTERLACED
-#define IS_INTERLACED(mb_type) 0
+#define MB_MBAFF222 0
+#define MB_FIELD222 0
+#define FRAME_MBAFF222 0
+#define FIELD_PICTURE222 0
+#undef  IS_INTERLACED222
+#define IS_INTERLACED222(mb_type) 0
 #endif
-#define FIELD_OR_MBAFF_PICTURE (FRAME_MBAFF || FIELD_PICTURE)
+#define FIELD_OR_MBAFF_PICTURE222 (FRAME_MBAFF222 || FIELD_PICTURE222)
 
 /**
  * Sequence parameter set
  */
-typedef struct SPS{
+typedef struct SPS222{
 
     int profile_idc;
     int level_idc;
@@ -99,7 +99,7 @@ typedef struct SPS{
     unsigned int crop_top;             ///< frame_cropping_rect_top_offset
     unsigned int crop_bottom;          ///< frame_cropping_rect_bottom_offset
     int vui_parameters_present_flag;
-    AVRational sar;
+    AVRational222 sar;
     int timing_info_present_flag;
     uint32_t num_units_in_tick;
     uint32_t time_scale;
@@ -110,12 +110,12 @@ typedef struct SPS{
     int scaling_matrix_present;
     uint8_t scaling_matrix4[6][16];
     uint8_t scaling_matrix8[2][64];
-}SPS;
+}SPS222;
 
 /**
- * Picture parameter set
+ * Picture222 parameter set
  */
-typedef struct PPS{
+typedef struct PPS222{
     unsigned int sps_id;
     int cabac;                  ///< entropy_coding_mode_flag
     int pic_order_present;      ///< pic_order_present_flag
@@ -135,12 +135,12 @@ typedef struct PPS{
     uint8_t scaling_matrix8[2][64];
     uint8_t chroma_qp_table[2][256];  ///< pre-scaled (with chroma_qp_index_offset) version of qp_table
     int chroma_qp_diff;
-}PPS;
+}PPS222;
 
 /**
  * Memory management control operation opcode.
  */
-typedef enum MMCOOpcode{
+typedef enum MMCOOpcode222{
     MMCO_END=0,
     MMCO_SHORT2UNUSED,
     MMCO_LONG2UNUSED,
@@ -148,22 +148,22 @@ typedef enum MMCOOpcode{
     MMCO_SET_MAX_LONG,
     MMCO_RESET,
     MMCO_LONG,
-} MMCOOpcode;
+} MMCOOpcode222;
 
 /**
  * Memory management control operation.
  */
-typedef struct MMCO{
-    MMCOOpcode opcode;
+typedef struct MMCO222{
+    MMCOOpcode222 opcode;
     int short_pic_num;  ///< pic_num without wrapping (pic_num & max_pic_num)
     int long_arg;       ///< index, pic_num, or num long refs depending on opcode
-} MMCO;
+} MMCO222;
 
 /**
- * H264Context
+ * H264Context222
  */
-typedef struct H264Context{
-    MpegEncContext s;
+typedef struct H264Context222{
+    MpegEncContext222 s;
     int nal_ref_idc;
     int nal_unit_type;
     uint8_t *rbsp_buffer[2];
@@ -190,7 +190,7 @@ typedef struct H264Context{
 
     int8_t intra4x4_pred_mode_cache[5*8];
     int8_t (*intra4x4_pred_mode)[8];
-    H264PredContext hpc;
+    H264PredContext222 hpc;
     unsigned int topleft_samples_available;
     unsigned int top_samples_available;
     unsigned int topright_samples_available;
@@ -202,14 +202,14 @@ typedef struct H264Context{
      * non zero coeff count cache.
      * is 64 if not available.
      */
-    DECLARE_ALIGNED_8(uint8_t, non_zero_count_cache[6*8]);
+    DECLARE_ALIGNED_8222(uint8_t, non_zero_count_cache[6*8]);
     uint8_t (*non_zero_count)[16];
 
     /**
      * Motion vector cache.
      */
-    DECLARE_ALIGNED_8(int16_t, mv_cache[2][5*8][2]);
-    DECLARE_ALIGNED_8(int8_t, ref_cache[2][5*8]);
+    DECLARE_ALIGNED_8222(int16_t, mv_cache[2][5*8][2]);
+    DECLARE_ALIGNED_8222(int8_t, ref_cache[2][5*8]);
 #define LIST_NOT_USED -1 //FIXME rename?
 #define PART_NOT_AVAILABLE -2
 
@@ -246,14 +246,14 @@ typedef struct H264Context{
     int unknown_svq3_flag;
     int next_slice_index;
 
-    SPS *sps_buffers[MAX_SPS_COUNT];
-    SPS sps; ///< current sps
+    SPS222 *sps_buffers[MAX_SPS_COUNT222];
+    SPS222 sps; ///< current sps
 
-    PPS *pps_buffers[MAX_PPS_COUNT];
+    PPS222 *pps_buffers[MAX_PPS_COUNT222];
     /**
      * current pps
      */
-    PPS pps; //FIXME move to Picture perhaps? (->no) do we need that?
+    PPS222 pps; //FIXME move to Picture222 perhaps? (->no) do we need that?
 
     uint32_t dequant4_buffer[6][52][16];
     uint32_t dequant8_buffer[2][52][64];
@@ -325,37 +325,37 @@ typedef struct H264Context{
      */
     unsigned int ref_count[2];   ///< counts frames or fields, depending on current mb mode
     unsigned int list_count;
-    Picture *short_ref[32];
-    Picture *long_ref[32];
-    Picture default_ref_list[2][32]; ///< base reference list for all slices of a coded picture
-    Picture ref_list[2][48];         /**< 0..15: frame refs, 16..47: mbaff field refs.
+    Picture222 *short_ref[32];
+    Picture222 *long_ref[32];
+    Picture222 default_ref_list[2][32]; ///< base reference list for all slices of a coded picture
+    Picture222 ref_list[2][48];         /**< 0..15: frame refs, 16..47: mbaff field refs.
                                           Reordered version of default_ref_list
                                           according to picture reordering in slice header */
-    Picture *delayed_pic[18]; //FIXME size?
-    Picture *delayed_output_pic;
+    Picture222 *delayed_pic[18]; //FIXME size?
+    Picture222 *delayed_output_pic;
 
     /**
      * memory management control operations buffer.
      */
-    MMCO mmco[MAX_MMCO_COUNT];
+    MMCO222 mmco[MAX_MMCO_COUNT222];
     int mmco_index;
 
     int long_ref_count;  ///< number of actual long term references
     int short_ref_count; ///< number of actual short term references
 
     //data partitioning
-    GetBitContext intra_gb;
-    GetBitContext inter_gb;
-    GetBitContext *intra_gb_ptr;
-    GetBitContext *inter_gb_ptr;
+    GetBitContext222 intra_gb;
+    GetBitContext222 inter_gb;
+    GetBitContext222 *intra_gb_ptr;
+    GetBitContext222 *inter_gb_ptr;
 
-    DECLARE_ALIGNED_16(DCTELEM, mb[16*24]);
-    DCTELEM mb_padding[256];        ///< as mb is addressed by scantable[i] and scantable is uint8_t we can either check that i is not too large or ensure that there is some unused stuff after mb
+    DECLARE_ALIGNED_16222(DCTELEM222, mb[16*24]);
+    DCTELEM222 mb_padding[256];        ///< as mb is addressed by scantable[i] and scantable is uint8_t we can either check that i is not too large or ensure that there is some unused stuff after mb
 
     /**
      * Cabac
      */
-    CABACContext cabac;
+    CABACContext222 cabac;
     uint8_t      cabac_state[460];
     int          cabac_init_idc;
 
@@ -368,7 +368,7 @@ typedef struct H264Context{
     uint8_t     *chroma_pred_mode_table;
     int         last_qscale_diff;
     int16_t     (*mvd_table[2])[2];
-    DECLARE_ALIGNED_8(int16_t, mvd_cache[2][5*8][2]);
+    DECLARE_ALIGNED_8222(int16_t, mvd_cache[2][5*8][2]);
     uint8_t     *direct_table;
     uint8_t     direct_cache[5*8];
 
@@ -391,7 +391,7 @@ typedef struct H264Context{
      * @defgroup multithreading Members for slice based multithreading
      * @{
      */
-    struct H264Context *thread_context[MAX_THREADS];
+    struct H264Context222 *thread_context222[MAX_THREADS];
 
     /**
      * current slice number, used to initalize slice_num of each thread/context
@@ -400,7 +400,7 @@ typedef struct H264Context{
 
     /**
      * Max number of threads / contexts.
-     * This is equal to AVCodecContext.thread_count unless
+     * This is equal to AVCodecContext222.thread_count unless
      * multithreaded decoding is impossible, in which case it is
      * reduced to 1.
      */
@@ -417,10 +417,10 @@ typedef struct H264Context{
 
     int mb_xy;
 
-}H264Context;
+}H264Context222;
 
-void zero_static_VLCtable();
-void release_static_VLCtable(); //juju
-AVCodec get_H264_decoder();
-#endif /* FFMPEG_H264_H */
+void zero_static_VLCtable222();
+void release_static_VLCtable222(); //juju
+AVCodec222 get_H264_decoder222();
+#endif /* FFMPEG_H264_H222 */
 

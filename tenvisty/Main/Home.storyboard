@@ -13,6 +13,7 @@
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -174,7 +175,7 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="tap to live view" image="btn_play"/>
                                                     <connections>
-                                                        <segue destination="Clh-uG-1TF" kind="show" identifier="CameraList2LiveView" id="1tY-Qx-EyW"/>
+                                                        <action selector="go2LiveView:" destination="BDn-US-UtP" eventType="touchUpInside" id="BGI-lg-cbD"/>
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7b-aV-gWV">
@@ -293,7 +294,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xzh-MX-CiK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="8Lq-GA-z5B" kind="show" identifier="CameraList2AddCamera" id="p9E-YF-VbO"/>
+                                <action selector="go2AddCamera:" destination="BDn-US-UtP" id="7g5-JY-esW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -301,6 +302,7 @@
                         <outlet property="tableview" destination="3oP-Ha-nHT" id="HcF-pq-hfs"/>
                         <outlet property="view_first_add" destination="S8Y-0M-GmP" id="ftf-nm-b8P"/>
                         <segue destination="KYR-hL-4XR" kind="show" identifier="CameraList2EventList" id="Ekd-dn-ODp"/>
+                        <segue destination="Clh-uG-1TF" kind="show" identifier="CameraList2LiveView" id="yIv-5O-vlA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLY-jx-TUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2080,20 +2082,20 @@
         <!--Scan QR Code-->
         <scene sceneID="Ztk-N3-fuj">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="DQe-jU-Sry" customClass="OCScanLifeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="storyboard_scanQRCode" hidesBottomBarWhenPushed="YES" id="DQe-jU-Sry" customClass="OCScanLifeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dyd-2n-BBC"/>
                         <viewControllerLayoutGuide type="bottom" id="dTB-WJ-B1I"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="y5Y-ao-6Xh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-dU-2ao">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-hv-kTY">
-                                        <rect key="frame" x="64" y="469" width="60" height="60"/>
+                                        <rect key="frame" x="64" y="481" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="TGN-ag-VMC"/>
                                             <constraint firstAttribute="width" constant="60" id="VME-A3-hwJ"/>
@@ -2105,25 +2107,25 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25x-i1-3t2">
-                                        <rect key="frame" x="251.5" y="469" width="60" height="60"/>
+                                        <rect key="frame" x="251.5" y="481" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="GD8-te-HfB"/>
                                             <constraint firstAttribute="width" constant="60" id="QSz-qJ-57F"/>
                                         </constraints>
-                                        <state key="normal" image="btn_scan_manually_nor"/>
+                                        <state key="normal" image="btn_search_trans"/>
                                         <state key="highlighted" image="btn_scan_manually_press"/>
                                         <connections>
                                             <action selector="skipScanQrCode:" destination="DQe-jU-Sry" eventType="touchUpInside" id="4eD-MJ-vb7"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO4-I1-0fl">
-                                        <rect key="frame" x="76" y="529" width="36" height="17.5"/>
+                                        <rect key="frame" x="76" y="541" width="36" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxX-T7-fVB">
-                                        <rect key="frame" x="238.5" y="529" width="86" height="17.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAN Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxX-T7-fVB">
+                                        <rect key="frame" x="241.5" y="541" width="80.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2141,13 +2143,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4B-Ol-gLs">
-                                <rect key="frame" x="50" y="164" width="275" height="275"/>
+                                <rect key="frame" x="50" y="196" width="275" height="275"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A4B-Ol-gLs" secondAttribute="height" multiplier="1:1" id="Z9D-jr-h4a"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Align camera QR Code winthin frame to scan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAV-af-tmf">
-                                <rect key="frame" x="50" y="114" width="275" height="40"/>
+                                <rect key="frame" x="50" y="146" width="275" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -2544,6 +2546,139 @@
             </objects>
             <point key="canvasLocation" x="669.60000000000002" y="31.934032983508249"/>
         </scene>
+        <!--Add Camera Navigation-->
+        <scene sceneID="PpJ-mS-Sid">
+            <objects>
+                <tableViewController storyboardIdentifier="storyboard_addCameraNavigationType" hidesBottomBarWhenPushed="YES" id="hvu-KT-lti" customClass="AddCameraNavigationTypeViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="180" estimatedRowHeight="-1" sectionHeaderHeight="15" sectionFooterHeight="1" id="ED9-uX-o0t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="6666" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <sections>
+                            <tableViewSection headerTitle=" " id="E85-qu-nXt">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="N4S-C1-KGj">
+                                        <rect key="frame" x="0.0" y="15" width="375" height="180"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N4S-C1-KGj" id="1Cc-Bk-uak">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_network_wifi" translatesAutoresizingMaskIntoConstraints="NO" id="y8u-Bk-jDV">
+                                                    <rect key="frame" x="15" y="15" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="bH8-yb-TQI"/>
+                                                        <constraint firstAttribute="width" constant="45" id="qaK-Ja-PXp"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wireless" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpd-iF-Ms5">
+                                                    <rect key="frame" x="80" y="15" width="81.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add camera by 2.4GHz Wi-Fi." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ex7-aP-gBg">
+                                                    <rect key="frame" x="80" y="44" width="187" height="16.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_page" translatesAutoresizingMaskIntoConstraints="NO" id="M5W-h0-BRK">
+                                                    <rect key="frame" x="80" y="94.5" width="230" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="75" id="m51-sb-F7C"/>
+                                                        <constraint firstAttribute="width" constant="230" id="tdm-Gx-zTT"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tpd-iF-Ms5" firstAttribute="top" secondItem="y8u-Bk-jDV" secondAttribute="top" id="350-mM-MDd"/>
+                                                <constraint firstItem="ex7-aP-gBg" firstAttribute="top" secondItem="tpd-iF-Ms5" secondAttribute="bottom" constant="5" id="4AY-NL-XV6"/>
+                                                <constraint firstItem="tpd-iF-Ms5" firstAttribute="leading" secondItem="y8u-Bk-jDV" secondAttribute="trailing" constant="20" id="9hS-zi-g8G"/>
+                                                <constraint firstItem="M5W-h0-BRK" firstAttribute="leading" secondItem="ex7-aP-gBg" secondAttribute="leading" id="Wvg-4J-qRa"/>
+                                                <constraint firstItem="y8u-Bk-jDV" firstAttribute="leading" secondItem="1Cc-Bk-uak" secondAttribute="leading" constant="15" id="mBB-n2-lW8"/>
+                                                <constraint firstAttribute="bottom" secondItem="M5W-h0-BRK" secondAttribute="bottom" constant="10" id="ofX-PM-KiA"/>
+                                                <constraint firstItem="y8u-Bk-jDV" firstAttribute="top" secondItem="1Cc-Bk-uak" secondAttribute="top" constant="15" id="peN-pr-lMd"/>
+                                                <constraint firstItem="ex7-aP-gBg" firstAttribute="leading" secondItem="tpd-iF-Ms5" secondAttribute="leading" id="wzM-fh-Ung"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle=" " id="wZg-7m-PpV">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FQ3-ur-axJ">
+                                        <rect key="frame" x="0.0" y="210" width="375" height="180"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FQ3-ur-axJ" id="FVK-qh-FZ8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_network_cable" translatesAutoresizingMaskIntoConstraints="NO" id="Qx5-zA-0f8">
+                                                    <rect key="frame" x="15" y="15" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="dpC-MI-VcT"/>
+                                                        <constraint firstAttribute="width" constant="45" id="lj9-i3-wl4"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wired" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCK-Vr-bnE">
+                                                    <rect key="frame" x="80" y="15" width="55.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hQ-W6-ayC">
+                                                    <rect key="frame" x="80" y="44" width="238.5" height="33"/>
+                                                    <string key="text">Add camera by Ethernet cable.
+(Only support by Ethernet port device)</string>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ethnet_page" translatesAutoresizingMaskIntoConstraints="NO" id="hM8-5n-Eg0">
+                                                    <rect key="frame" x="80" y="94.5" width="230" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="75" id="Aml-b2-vbU"/>
+                                                        <constraint firstAttribute="width" constant="230" id="CEN-jn-TRJ"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5hQ-W6-ayC" firstAttribute="leading" secondItem="uCK-Vr-bnE" secondAttribute="leading" id="5c1-fc-Lcy"/>
+                                                <constraint firstItem="Qx5-zA-0f8" firstAttribute="top" secondItem="FVK-qh-FZ8" secondAttribute="top" constant="15" id="AKK-fv-VU8"/>
+                                                <constraint firstItem="hM8-5n-Eg0" firstAttribute="leading" secondItem="5hQ-W6-ayC" secondAttribute="leading" id="Tmt-4E-BXw"/>
+                                                <constraint firstItem="Qx5-zA-0f8" firstAttribute="leading" secondItem="FVK-qh-FZ8" secondAttribute="leading" constant="15" id="YR9-tc-30d"/>
+                                                <constraint firstItem="uCK-Vr-bnE" firstAttribute="leading" secondItem="Qx5-zA-0f8" secondAttribute="trailing" constant="20" id="nuW-ie-cGk"/>
+                                                <constraint firstItem="uCK-Vr-bnE" firstAttribute="top" secondItem="Qx5-zA-0f8" secondAttribute="top" id="wL8-Bo-BPB"/>
+                                                <constraint firstItem="5hQ-W6-ayC" firstAttribute="top" secondItem="uCK-Vr-bnE" secondAttribute="bottom" constant="5" id="xXr-Vn-Xzo"/>
+                                                <constraint firstAttribute="bottom" secondItem="hM8-5n-Eg0" secondAttribute="bottom" constant="10" id="yeY-yV-EXK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="delegate" destination="hvu-KT-lti" id="joO-Pq-Yqp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Camera Navigation" id="Ivv-ZY-xkF">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="YOx-hz-yK9">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="0PD-ur-1Cb" kind="unwind" unwindAction="CameraListViewController1UnwindSegue:" id="R7a-lR-RZH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="DQe-jU-Sry" kind="show" identifier="AddCameraNavigationType2ScanQRCode" id="RLm-CL-VCr"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lGF-sl-Wm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="0PD-ur-1Cb" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="Home" width="30" height="30"/>
@@ -2577,16 +2712,19 @@
         <image name="btn_reconnect" width="40" height="40"/>
         <image name="btn_scan_flash_off_nor" width="43" height="45"/>
         <image name="btn_scan_flash_on_nor" width="43" height="45"/>
-        <image name="btn_scan_manually_nor" width="40" height="40"/>
         <image name="btn_scan_manually_press" width="40" height="40"/>
+        <image name="btn_search_trans" width="42" height="50"/>
         <image name="configwifi_note" width="335" height="132"/>
         <image name="configwifi_setting" width="335" height="279"/>
+        <image name="ethnet_page" width="230" height="75"/>
         <image name="ic_dialog_alert" width="32" height="32"/>
         <image name="ic_first_add_nor" width="69" height="69"/>
         <image name="ic_first_add_press" width="69" height="69"/>
         <image name="ic_menu_play" width="20" height="20"/>
         <image name="ic_menu_search_inverse" width="20" height="20"/>
         <image name="ic_motion_detection_read" width="23" height="23"/>
+        <image name="ic_network_cable" width="60" height="60"/>
+        <image name="ic_network_wifi" width="60" height="60"/>
         <image name="ic_popuwindow_down" width="10" height="5"/>
         <image name="ic_popuwindow_left" width="5" height="10"/>
         <image name="ic_progressview_direct_down" width="4" height="4"/>
@@ -2596,13 +2734,13 @@
         <image name="navDone" width="30" height="30"/>
         <image name="navRefresh" width="30" height="30"/>
         <image name="view_event_record" width="80" height="61"/>
+        <image name="wifi_page" width="230" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u2h-rS-5ub"/>
-        <segue reference="wsG-cn-sSa"/>
-        <segue reference="6Zl-SU-ISp"/>
-        <segue reference="Y28-Yq-DHg"/>
-        <segue reference="p9E-YF-VbO"/>
+        <segue reference="RLm-CL-VCr"/>
+        <segue reference="Ekd-dn-ODp"/>
+        <segue reference="wkI-hP-L0S"/>
+        <segue reference="SOf-2T-VCX"/>
         <segue reference="7gs-zU-rAy"/>
     </inferredMetricsTieBreakers>
 </document>

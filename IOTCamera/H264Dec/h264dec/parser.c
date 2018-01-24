@@ -26,23 +26,23 @@
 #include "avcodec.h"
 #include <stdio.h>
 
-AVCodecParser *av_first_parser = NULL;
+AVCodecParser222 *av_first_parser = NULL;
 
-AVCodecParser* av_parser_next(AVCodecParser *p){
+AVCodecParser222* av_parser_next(AVCodecParser222 *p){
     if(p) return p->next;
     else  return av_first_parser;
 }
 
-void av_register_codec_parser(AVCodecParser *parser)
+void av_register_codec_parser222(AVCodecParser222 *parser)
 {
     parser->next = av_first_parser;
     av_first_parser = parser;
 }
 
-AVCodecParserContext *av_parser_init(int codec_id)
+AVCodecParserContext222 *av_parser_init(int codec_id)
 {
-    AVCodecParserContext *s;
-    AVCodecParser *parser;
+    AVCodecParserContext222 *s;
+    AVCodecParser222 *parser;
     int ret;
 
     if(codec_id == CODEC_ID_NONE)
@@ -58,7 +58,7 @@ AVCodecParserContext *av_parser_init(int codec_id)
     }
     return NULL;
  found:
-    s = av_mallocz(sizeof(AVCodecParserContext));
+    s = av_mallocz(sizeof(AVCodecParserContext222));
     if (!s)
         return NULL;
     s->parser = parser;
@@ -80,10 +80,10 @@ AVCodecParserContext *av_parser_init(int codec_id)
     return s;
 }
 
-void ff_fetch_timestamp(AVCodecParserContext *s, int off, int remove){
+void ff_fetch_timestamp(AVCodecParserContext222 *s, int off, int remove){
     int i;
 
-    s->dts= s->pts= AV_NOPTS_VALUE;
+    s->dts= s->pts= AV_NOPTS_VALUE222;
     s->offset= 0;
     for(i = 0; i < AV_PARSER_PTS_NB; i++) {
         if (   s->next_frame_offset + off >= s->cur_frame_offset[i]
@@ -112,7 +112,7 @@ void ff_fetch_timestamp(AVCodecParserContext *s, int off, int remove){
  * Example:
  * @code
  *   while(in_len){
- *       len = av_parser_parse(myparser, AVCodecContext, &data, &size,
+ *       len = av_parser_parse222(myparser, AVCodecContext222, &data, &size,
  *                                       in_data, in_len,
  *                                       pts, dts);
  *       in_data += len;
@@ -123,14 +123,14 @@ void ff_fetch_timestamp(AVCodecParserContext *s, int off, int remove){
  *   }
  * @endcode
  */
-int av_parser_parse(AVCodecParserContext *s,
-                    AVCodecContext *avctx,
+int av_parser_parse222(AVCodecParserContext222 *s,
+                    AVCodecContext222 *avctx,
                     uint8_t **poutbuf, int *poutbuf_size,
                     const uint8_t *buf, int buf_size,
                     int64_t pts, int64_t dts)
 {
     int index, i;
-    uint8_t dummy_buf[FF_INPUT_BUFFER_PADDING_SIZE];
+    uint8_t dummy_buf[FF_INPUT_BUFFER_PADDING_SIZE222];
 
     if (buf_size == 0) {
         /* padding is always necessary even if EOF, so we add it here */
@@ -138,7 +138,7 @@ int av_parser_parse(AVCodecParserContext *s,
         buf = dummy_buf;
     } else {
         /* add a new packet descriptor */
-        if(pts != AV_NOPTS_VALUE || dts != AV_NOPTS_VALUE){
+        if(pts != AV_NOPTS_VALUE222 || dts != AV_NOPTS_VALUE222){
             i = (s->cur_frame_start_index + 1) & (AV_PARSER_PTS_NB - 1);
             s->cur_frame_start_index = i;
             s->cur_frame_offset[i] = s->cur_offset;
@@ -178,8 +178,8 @@ int av_parser_parse(AVCodecParserContext *s,
  * @return 0 if the output buffer is a subset of the input, 1 if it is allocated and must be freed
  * @deprecated use AVBitstreamFilter
  */
-int av_parser_change(AVCodecParserContext *s,
-                     AVCodecContext *avctx,
+int av_parser_change222(AVCodecParserContext222 *s,
+                     AVCodecContext222 *avctx,
                      uint8_t **poutbuf, int *poutbuf_size,
                      const uint8_t *buf, int buf_size, int keyframe)
 {
@@ -200,10 +200,10 @@ int av_parser_change(AVCodecParserContext *s,
             /*||(? && (s->flags & PARSER_FLAG_DUMP_EXTRADATA_AT_BEGIN)*/){
             int size= buf_size + avctx->extradata_size;
             *poutbuf_size= size;
-            *poutbuf= av_malloc(size + FF_INPUT_BUFFER_PADDING_SIZE);
+            *poutbuf= av_malloc(size + FF_INPUT_BUFFER_PADDING_SIZE222);
 
             memcpy(*poutbuf, avctx->extradata, avctx->extradata_size);
-            memcpy((*poutbuf) + avctx->extradata_size, buf, buf_size + FF_INPUT_BUFFER_PADDING_SIZE);
+            memcpy((*poutbuf) + avctx->extradata_size, buf, buf_size + FF_INPUT_BUFFER_PADDING_SIZE222);
             return 1;
         }
     }
@@ -211,7 +211,7 @@ int av_parser_change(AVCodecParserContext *s,
     return 0;
 }
 
-void av_parser_close(AVCodecParserContext *s)
+void av_parser_close222(AVCodecParserContext222 *s)
 {
     if(s){
         if (s->parser->parser_close)
@@ -249,7 +249,7 @@ int ff_combine_frame(ParseContext *pc, int next, const uint8_t **buf, int *buf_s
 
     // copy into buffer end return
     if(next == END_NOT_FOUND){
-        void* new_buffer = av_fast_realloc(pc->buffer, &pc->buffer_size, (*buf_size) + pc->index + FF_INPUT_BUFFER_PADDING_SIZE);
+        void* new_buffer = av_fast_realloc222(pc->buffer, &pc->buffer_size, (*buf_size) + pc->index + FF_INPUT_BUFFER_PADDING_SIZE222);
 
         if(!new_buffer) return AVERROR(ENOMEM);
         pc->buffer = new_buffer;
@@ -262,11 +262,11 @@ int ff_combine_frame(ParseContext *pc, int next, const uint8_t **buf, int *buf_s
 
     // append to buffer
     if(pc->index){
-        void* new_buffer = av_fast_realloc(pc->buffer, &pc->buffer_size, next + pc->index + FF_INPUT_BUFFER_PADDING_SIZE);
+        void* new_buffer = av_fast_realloc222(pc->buffer, &pc->buffer_size, next + pc->index + FF_INPUT_BUFFER_PADDING_SIZE222);
 
         if(!new_buffer) return AVERROR(ENOMEM);
         pc->buffer = new_buffer;
-        memcpy(&pc->buffer[pc->index], *buf, next + FF_INPUT_BUFFER_PADDING_SIZE );
+        memcpy(&pc->buffer[pc->index], *buf, next + FF_INPUT_BUFFER_PADDING_SIZE222 );
         pc->index = 0;
         *buf= pc->buffer;
     }
@@ -287,14 +287,14 @@ int ff_combine_frame(ParseContext *pc, int next, const uint8_t **buf, int *buf_s
     return 0;
 }
 
-void ff_parse_close(AVCodecParserContext *s)
+void ff_parse_close(AVCodecParserContext222 *s)
 {
     ParseContext *pc = s->priv_data;
 
     av_free(pc->buffer);
 }
 
-void ff_parse1_close(AVCodecParserContext *s)
+void ff_parse1_close(AVCodecParserContext222 *s)
 {
     ParseContext1 *pc1 = s->priv_data;
 
@@ -304,7 +304,7 @@ void ff_parse1_close(AVCodecParserContext *s)
 
 /*************************/
 
-int ff_mpeg4video_split(AVCodecContext *avctx,
+int ff_mpeg4video_split(AVCodecContext222 *avctx,
                            const uint8_t *buf, int buf_size)
 {
     int i;

@@ -989,8 +989,8 @@ static void pred8x8l_horizontal_up_c(uint8_t *src, int has_topleft, int has_topr
 /**
  * Sets the intra prediction function pointers.
  */
-void ff_h264_pred_init(H264PredContext *h, int codec_id){
-//    MpegEncContext * const s = &h->s;
+void ff_h264_pred_init222(H264PredContext222 *h, int codec_id){
+//    MpegEncContext222 * const s = &h->s;
 
     if(codec_id != CODEC_ID_RV40){
         h->pred4x4[VERT_PRED           ]= pred4x4_vertical_c;

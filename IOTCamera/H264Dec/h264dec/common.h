@@ -162,7 +162,7 @@
 #define FFSWAP(type,a,b) do{type SWAP_tmp= b; b= a; a= SWAP_tmp;}while(0)
 
 // misc math functions 
-extern const uint8_t ff_log2_tab[256];
+extern const uint8_t ff_log2_tab222[256];
 
 static inline av_const int av_log2(unsigned int v)
 {
@@ -175,7 +175,7 @@ static inline av_const int av_log2(unsigned int v)
         v >>= 8;
         n += 8;
     }
-    n += ff_log2_tab[v];
+    n += ff_log2_tab222[v];
 
     return n;
 }
@@ -187,13 +187,13 @@ static inline av_const int av_log2_16bit(unsigned int v)
         v >>= 8;
         n += 8;
     }
-    n += ff_log2_tab[v];
+    n += ff_log2_tab222[v];
 
     return n;
 }
 
 /* median of 3 */
-static inline av_const int mid_pred(int a, int b, int c)
+static inline av_const int mid_pred222(int a, int b, int c)
 {
 #ifdef HAVE_CMOV
     int i=b;
@@ -434,7 +434,7 @@ tend= AV_READ_TIME();\
 /**
  * Returns NULL if CONFIG_SMALL is defined otherwise the argument
  * without modifications, used to disable the definition of strings
- * (for example AVCodec long_names).
+ * (for example AVCodec222 long_names).
  */
 #ifdef CONFIG_SMALL
 #   define NULL_IF_CONFIG_SMALL(x) NULL

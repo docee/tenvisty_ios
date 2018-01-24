@@ -19,7 +19,7 @@
         <!--Live View-->
         <scene sceneID="M5J-Ug-Lru">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="miK-c2-cyq" customClass="LiveView_HichipController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="storyboard_liveview_hichip" hidesBottomBarWhenPushed="YES" id="miK-c2-cyq" customClass="LiveView_HichipController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qIa-fB-f8C"/>
                         <viewControllerLayoutGuide type="bottom" id="rZo-75-mio"/>
@@ -62,7 +62,7 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1EB-wk-irx">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XK5-pI-aww" customClass="Monitor">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XK5-pI-aww">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                                 <gestureRecognizers/>
                                             </imageView>
@@ -845,10 +845,16 @@
                             <constraint firstItem="9dI-Cf-Jsv" firstAttribute="top" secondItem="E01-cF-f24" secondAttribute="top" priority="700" constant="86" id="pRm-5d-ljb"/>
                             <constraint firstItem="5yD-7i-oVV" firstAttribute="centerX" secondItem="E01-cF-f24" secondAttribute="centerX" priority="800" id="tRe-71-qTc"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="tMD-UL-0hd" appends="YES" id="bsZ-ST-Fhe"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Live View" id="mnO-iE-daj">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="5nq-6N-eNW">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="LCp-3n-v8x" kind="unwind" unwindAction="CameraListViewController1UnwindSegue:" id="jFt-9w-TYz"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -887,6 +893,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8AP-1F-8oj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="LCp-3n-v8x" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="tMD-UL-0hd">
+                    <connections>
+                        <action selector="toggleBtnsLand:" destination="miK-c2-cyq" id="Yr6-83-g8s"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="362.39999999999998" y="-636.4317841079461"/>
         </scene>

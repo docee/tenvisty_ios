@@ -38,7 +38,7 @@
 #define SHIFTCgu   128
 #define SHIFTCgv   128
 
-extern AVCodec h264_decoder;
+extern AVCodec222 h264_decoder;
 
 @implementation H264iPhone
 
@@ -144,26 +144,26 @@ extern AVCodec h264_decoder;
     
 	[self yuv420torgb24_c_init];
     // find the mpeg1 video decoder
-    avcodec_init();
-    avcodec_register_all();
+    avcodec_init222();
+    avcodec_register_all222();
     
-    c= avcodec_alloc_context();
+    c= avcodec_alloc_context222();
 	
     // For some codecs, such as msmpeg4 and mpeg4, width and height
     // MUST be initialized there because this information is not
     // available in the bitstream.
-    if(avcodec_open(c, codec) < 0) {
+    if(avcodec_open222(c, codec) < 0) {
         //fprintf(stderr, "could not open codec\n");
         return -1;
     }
 	
 	{
-		H264Context *h = c->priv_data;
-		MpegEncContext *s = &h->s;
+		H264Context222 *h = c->priv_data;
+		MpegEncContext222 *s = &h->s;
 		s->dsp.idct_permutation_type =1;
 		dsputil_init(&s->dsp, c);
 	}
-	picture  = avcodec_alloc_frame();
+	picture  = avcodec_alloc_frame222();
     
 	return 1;
 }
@@ -190,7 +190,7 @@ extern AVCodec h264_decoder;
 {
     
 	int got_picture;
-	int consumed_bytes = avcodec_decode_video(c, picture, &got_picture, in, inLen);
+	int consumed_bytes = avcodec_decode_video222(c, picture, &got_picture, in, inLen);
     
 	framePara[0]=got_picture;
 //    NSLog(@"DecoderNal %d %d %d %d",c->width,c->height,consumed_bytes,got_picture);

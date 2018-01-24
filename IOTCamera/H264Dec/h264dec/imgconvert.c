@@ -384,13 +384,13 @@ static const PixFmtInfo pix_fmt_info[100] ;
 
 //};
 
-void avcodec_get_chroma_sub_sample(int pix_fmt, int *h_shift, int *v_shift)
+void avcodec_get_chroma_sub_sample222(int pix_fmt, int *h_shift, int *v_shift)
 {
     *h_shift = pix_fmt_info[pix_fmt].x_chroma_shift;
     *v_shift = pix_fmt_info[pix_fmt].y_chroma_shift;
 }
 
-const char *avcodec_get_pix_fmt_name(int pix_fmt)
+const char *avcodec_get_pix_fmt_name222(int pix_fmt)
 {
     if (pix_fmt < 0 || pix_fmt >= PIX_FMT_NB)
         return "???";
@@ -398,7 +398,7 @@ const char *avcodec_get_pix_fmt_name(int pix_fmt)
         return pix_fmt_info[pix_fmt].name;
 }
 
-enum PixelFormat avcodec_get_pix_fmt(const char* name)
+enum PixelFormat avcodec_get_pix_fmt222(const char* name)
 {
     int i;
 
@@ -408,7 +408,7 @@ enum PixelFormat avcodec_get_pix_fmt(const char* name)
     return i;
 }
 
-void avcodec_pix_fmt_string (char *buf, int buf_size, int pix_fmt)
+void avcodec_pix_fmt_string222 (char *buf, int buf_size, int pix_fmt)
 {
     /* print header */
     if (pix_fmt < 0)
@@ -605,11 +605,11 @@ int ff_fill_pointer(AVPicture *picture, uint8_t *ptr, int pix_fmt,
     }
 }
 
-int avpicture_fill(AVPicture *picture, uint8_t *ptr,
+int avpicture_fill222(AVPicture *picture, uint8_t *ptr,
                    int pix_fmt, int width, int height)
 {
 
-    if(avcodec_check_dimensions(NULL, width, height))
+    if(avcodec_check_dimensions222(NULL, width, height))
         return -1;
 
     if (ff_fill_linesize(picture, pix_fmt, width))
@@ -618,13 +618,13 @@ int avpicture_fill(AVPicture *picture, uint8_t *ptr,
     return ff_fill_pointer(picture, ptr, pix_fmt, height);
 }
 
-int avpicture_layout(const AVPicture* src, int pix_fmt, int width, int height,
+int avpicture_layout222(const AVPicture* src, int pix_fmt, int width, int height,
                      unsigned char *dest, int dest_size)
 {
     const PixFmtInfo* pf = &pix_fmt_info[pix_fmt];
     int i, j, w, h, data_planes;
     const unsigned char* s;
-    int size = avpicture_get_size(pix_fmt, width, height);
+    int size = avpicture_get_size222(pix_fmt, width, height);
 
     if (size > dest_size || size < 0)
         return -1;
@@ -671,13 +671,13 @@ int avpicture_layout(const AVPicture* src, int pix_fmt, int width, int height,
     return size;
 }
 
-int avpicture_get_size(int pix_fmt, int width, int height)
+int avpicture_get_size222(int pix_fmt, int width, int height)
 {
     AVPicture dummy_pict;
-    return avpicture_fill(&dummy_pict, NULL, pix_fmt, width, height);
+    return avpicture_fill222(&dummy_pict, NULL, pix_fmt, width, height);
 }
 
-int avcodec_get_pix_fmt_loss(int dst_pix_fmt, int src_pix_fmt,
+int avcodec_get_pix_fmt_loss222(int dst_pix_fmt, int src_pix_fmt,
                              int has_alpha)
 {
     const PixFmtInfo *pf, *ps;
@@ -787,7 +787,7 @@ static int avcodec_find_best_pix_fmt1(int pix_fmt_mask,
     min_dist = 0x7fffffff;
     for(i = 0;i < PIX_FMT_NB; i++) {
         if (pix_fmt_mask & (1 << i)) {
-            loss = avcodec_get_pix_fmt_loss(i, src_pix_fmt, has_alpha) & loss_mask;
+            loss = avcodec_get_pix_fmt_loss222(i, src_pix_fmt, has_alpha) & loss_mask;
             if (loss == 0) {
                 dist = avg_bits_per_pixel(i);
                 if (dist < min_dist) {
@@ -800,7 +800,7 @@ static int avcodec_find_best_pix_fmt1(int pix_fmt_mask,
     return dst_pix_fmt;
 }
 
-int avcodec_find_best_pix_fmt(int pix_fmt_mask, int src_pix_fmt,
+int avcodec_find_best_pix_fmt222(int pix_fmt_mask, int src_pix_fmt,
                               int has_alpha, int *loss_ptr)
 {
     int dst_pix_fmt, loss_mask, i;
@@ -828,7 +828,7 @@ int avcodec_find_best_pix_fmt(int pix_fmt_mask, int src_pix_fmt,
     return -1;
  found:
     if (loss_ptr)
-        *loss_ptr = avcodec_get_pix_fmt_loss(dst_pix_fmt, src_pix_fmt, has_alpha);
+        *loss_ptr = avcodec_get_pix_fmt_loss222(dst_pix_fmt, src_pix_fmt, has_alpha);
     return dst_pix_fmt;
 }
 
@@ -886,7 +886,7 @@ int ff_get_plane_bytewidth(enum PixelFormat pix_fmt, int width, int plane)
     return -1;
 }
 
-void av_picture_copy(AVPicture *dst, const AVPicture *src,
+void av_picture_copy222(AVPicture *dst, const AVPicture *src,
               int pix_fmt, int width, int height)
 {
     int i;
@@ -1976,23 +1976,23 @@ static const ConvertEntry convert_table[PIX_FMT_NB][PIX_FMT_NB];
 //
 //};
 
-int avpicture_alloc(AVPicture *picture, int pix_fmt, int width, int height)
+int avpicture_alloc222(AVPicture *picture, int pix_fmt, int width, int height)
 {
     int size;
     void *ptr;
 
-    size = avpicture_get_size(pix_fmt, width, height);
+    size = avpicture_get_size222(pix_fmt, width, height);
     if(size<0) goto fail;
     ptr = av_malloc(size);
     if (!ptr) goto fail;
-    avpicture_fill(picture, ptr, pix_fmt, width, height);
+    avpicture_fill222(picture, ptr, pix_fmt, width, height);
     return 0;
  fail:
     memset(picture, 0, sizeof(AVPicture));
     return -1;
 }
 
-void avpicture_free(AVPicture *picture)
+void avpicture_free222(AVPicture *picture)
 {
     av_free(picture->data[0]);
 }
@@ -2005,7 +2005,7 @@ static inline int is_yuv_planar(const PixFmtInfo *ps)
         ps->pixel_type == FF_PIXEL_PLANAR;
 }
 
-int av_picture_crop(AVPicture *dst, const AVPicture *src,
+int av_picture_crop222(AVPicture *dst, const AVPicture *src,
               int pix_fmt, int top_band, int left_band)
 {
     int y_shift;
@@ -2027,7 +2027,7 @@ int av_picture_crop(AVPicture *dst, const AVPicture *src,
     return 0;
 }
 
-int av_picture_pad(AVPicture *dst, const AVPicture *src, int height, int width,
+int av_picture_pad222(AVPicture *dst, const AVPicture *src, int height, int width,
             int pix_fmt, int padtop, int padbottom, int padleft, int padright,
             int *color)
 {
@@ -2087,24 +2087,24 @@ int av_picture_pad(AVPicture *dst, const AVPicture *src, int height, int width,
     return 0;
 }
 
-#if LIBAVCODEC_VERSION_INT < ((52<<16)+(0<<8)+0)
-void img_copy(AVPicture *dst, const AVPicture *src,
+#if LIBAVCODEC_VERSION_INT222 < ((52<<16)+(0<<8)+0)
+void img_copy222(AVPicture *dst, const AVPicture *src,
               int pix_fmt, int width, int height)
 {
-    av_picture_copy(dst, src, pix_fmt, width, height);
+    av_picture_copy222(dst, src, pix_fmt, width, height);
 }
 
-int img_crop(AVPicture *dst, const AVPicture *src,
+int img_crop222(AVPicture *dst, const AVPicture *src,
               int pix_fmt, int top_band, int left_band)
 {
-    return av_picture_crop(dst, src, pix_fmt, top_band, left_band);
+    return av_picture_crop222(dst, src, pix_fmt, top_band, left_band);
 }
 
-int img_pad(AVPicture *dst, const AVPicture *src, int height, int width,
+int img_pad222(AVPicture *dst, const AVPicture *src, int height, int width,
             int pix_fmt, int padtop, int padbottom, int padleft, int padright,
             int *color)
 {
-    return av_picture_pad(dst, src, height, width, pix_fmt, padtop, padbottom, padleft, padright, color);
+    return av_picture_pad222(dst, src, height, width, pix_fmt, padtop, padbottom, padleft, padright, color);
 }
 #endif
 
@@ -2383,7 +2383,7 @@ static void conv411(uint8_t *dst, int dst_wrap,
 }
 
 /* XXX: always use linesize. Return -1 if not supported */
-int img_convert(AVPicture *dst, int dst_pix_fmt,
+int img_convert222(AVPicture *dst, int dst_pix_fmt,
                 const AVPicture *src, int src_pix_fmt,
                 int src_width, int src_height)
 {
@@ -2411,7 +2411,7 @@ int img_convert(AVPicture *dst, int dst_pix_fmt,
     src_pix = &pix_fmt_info[src_pix_fmt];
     if (src_pix_fmt == dst_pix_fmt) {
         /* no conversion needed: just copy */
-        av_picture_copy(dst, src, dst_pix_fmt, dst_width, dst_height);
+        av_picture_copy222(dst, src, dst_pix_fmt, dst_width, dst_height);
         return 0;
     }
 
@@ -2614,18 +2614,18 @@ int img_convert(AVPicture *dst, int dst_pix_fmt,
     }
     if (src_pix_fmt == int_pix_fmt)
         return -1;
-    if (avpicture_alloc(tmp, int_pix_fmt, dst_width, dst_height) < 0)
+    if (avpicture_alloc222(tmp, int_pix_fmt, dst_width, dst_height) < 0)
         return -1;
     ret = -1;
-    if (img_convert(tmp, int_pix_fmt,
+    if (img_convert222(tmp, int_pix_fmt,
                     src, src_pix_fmt, src_width, src_height) < 0)
         goto fail1;
-    if (img_convert(dst, dst_pix_fmt,
+    if (img_convert222(dst, dst_pix_fmt,
                     tmp, int_pix_fmt, dst_width, dst_height) < 0)
         goto fail1;
     ret = 0;
  fail1:
-    avpicture_free(tmp);
+    avpicture_free222(tmp);
     return ret;
 }
 #endif
@@ -2656,7 +2656,7 @@ static int get_alpha_info_pal8(const AVPicture *src, int width, int height)
     return ret;
 }
 
-int img_get_alpha_info(const AVPicture *src,
+int img_get_alpha_info222(const AVPicture *src,
                        int pix_fmt, int width, int height)
 {
     const PixFmtInfo *pf = &pix_fmt_info[pix_fmt];
@@ -2875,7 +2875,7 @@ static void deinterlace_bottom_field_inplace(uint8_t *src1, int src_wrap,
     av_free(buf);
 }
 
-int avpicture_deinterlace(AVPicture *dst, const AVPicture *src,
+int avpicture_deinterlace222(AVPicture *dst, const AVPicture *src,
                           int pix_fmt, int width, int height)
 {
     int i;

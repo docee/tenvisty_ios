@@ -27,7 +27,7 @@
 
 #include "dsputil.h"
 
-static av_always_inline void idct_internal(uint8_t *dst, DCTELEM *block, int stride, int block_stride, int shift, int add){
+static av_always_inline void idct_internal(uint8_t *dst, DCTELEM222 *block, int stride, int block_stride, int shift, int add){
     int i;
     uint8_t *cm = ff_cropTbl + MAX_NEG_CROP;
 
@@ -58,21 +58,21 @@ static av_always_inline void idct_internal(uint8_t *dst, DCTELEM *block, int str
     }
 }
 
-void ff_h264_idct_add_c(uint8_t *dst, DCTELEM *block, int stride){
+void ff_h264_idct_add_c(uint8_t *dst, DCTELEM222 *block, int stride){
     idct_internal(dst, block, stride, 4, 6, 1);
 }
 
-void ff_h264_lowres_idct_add_c(uint8_t *dst, int stride, DCTELEM *block){
+void ff_h264_lowres_idct_add_c(uint8_t *dst, int stride, DCTELEM222 *block){
     idct_internal(dst, block, stride, 8, 3, 1);
 }
 
-void ff_h264_lowres_idct_put_c(uint8_t *dst, int stride, DCTELEM *block){
+void ff_h264_lowres_idct_put_c(uint8_t *dst, int stride, DCTELEM222 *block){
     idct_internal(dst, block, stride, 8, 3, 0);
 }
 
-void ff_h264_idct8_add_c(uint8_t *dst, DCTELEM *block, int stride){
+void ff_h264_idct8_add_c(uint8_t *dst, DCTELEM222 *block, int stride){
     int i;
-    DCTELEM (*src)[8] = (DCTELEM(*)[8])block;
+    DCTELEM222 (*src)[8] = (DCTELEM222(*)[8])block;
     uint8_t *cm = ff_cropTbl + MAX_NEG_CROP;
 
     block[0] += 32;
@@ -142,7 +142,7 @@ void ff_h264_idct8_add_c(uint8_t *dst, DCTELEM *block, int stride){
 }
 
 // assumes all AC coefs are 0
-void ff_h264_idct_dc_add_c(uint8_t *dst, DCTELEM *block, int stride){
+void ff_h264_idct_dc_add_c(uint8_t *dst, DCTELEM222 *block, int stride){
     int i, j;
     uint8_t *cm = ff_cropTbl + MAX_NEG_CROP;
     int dc = (block[0] + 32) >> 6;
@@ -154,7 +154,7 @@ void ff_h264_idct_dc_add_c(uint8_t *dst, DCTELEM *block, int stride){
     }
 }
 
-void ff_h264_idct8_dc_add_c(uint8_t *dst, DCTELEM *block, int stride){
+void ff_h264_idct8_dc_add_c(uint8_t *dst, DCTELEM222 *block, int stride){
     int i, j;
     uint8_t *cm = ff_cropTbl + MAX_NEG_CROP;
     int dc = (block[0] + 32) >> 6;

@@ -89,7 +89,7 @@ void ff_copy_bits(PutBitContext *pb, const uint8_t *src, int length)
     put_bits(pb, bits, be2me_16(srcw[words])>>(16-bits));
 }
 
-/* VLC decoding */
+/* VLC222 decoding */
 
 //#define DEBUG_VLC
 
@@ -110,7 +110,7 @@ void ff_copy_bits(PutBitContext *pb, const uint8_t *src, int length)
 }
 
 
-static int alloc_table(VLC *vlc, int size, int use_static)
+static int alloc_table(VLC222 *vlc, int size, int use_static)
 {
     int index;
     index = vlc->table_size;
@@ -131,7 +131,7 @@ static int alloc_table(VLC *vlc, int size, int use_static)
     return index;
 }
 
-static int build_table(VLC *vlc, int table_nb_bits,
+static int build_table(VLC222 *vlc, int table_nb_bits,
                        int nb_codes,
                        const void *bits, int bits_wrap, int bits_size,
                        const void *codes, int codes_wrap, int codes_size,
@@ -239,7 +239,7 @@ static int build_table(VLC *vlc, int table_nb_bits,
 }
 
 
-/* Build VLC decoding tables suitable for use with get_vlc().
+/* Build VLC222 decoding tables suitable for use with get_vlc().
 
    'nb_bits' set thee decoding table size (2^nb_bits) entries. The
    bigger it is, the faster is the decoding. But it should not be too
@@ -265,7 +265,7 @@ static int build_table(VLC *vlc, int table_nb_bits,
    'use_static' should be set to 1 for tables, which should be freed
    with av_free_static(), 0 if free_vlc() will be used.
 */
-int init_vlc_sparse(VLC *vlc, int nb_bits, int nb_codes,
+int init_vlc_sparse(VLC222 *vlc, int nb_bits, int nb_codes,
              const void *bits, int bits_wrap, int bits_size,
              const void *codes, int codes_wrap, int codes_size,
              const void *symbols, int symbols_wrap, int symbols_size,
@@ -298,7 +298,7 @@ int init_vlc_sparse(VLC *vlc, int nb_bits, int nb_codes,
                     codes, codes_wrap, codes_size,
                     symbols, symbols_wrap, symbols_size,
                     0, 0, flags) < 0) {
-        av_freep(&vlc->table);
+        av_freep222(&vlc->table);
         return -1;
     }
     if((flags & INIT_VLC_USE_NEW_STATIC) && vlc->table_size != vlc->table_allocated)
@@ -307,8 +307,8 @@ int init_vlc_sparse(VLC *vlc, int nb_bits, int nb_codes,
 }
 
 
-void free_vlc(VLC *vlc)
+void free_vlc(VLC222 *vlc)
 {
-    av_freep(&vlc->table);
+    av_freep222(&vlc->table);
 }
 

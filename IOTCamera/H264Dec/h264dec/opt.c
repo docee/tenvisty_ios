@@ -70,8 +70,8 @@ const AVOption *av_next_option(void *obj, const AVOption *last){
 //    case FF_OPT_TYPE_FLOAT: *(float     *)dst= num*intnum/den;         break;
 //    case FF_OPT_TYPE_DOUBLE:*(double    *)dst= num*intnum/den;         break;
 //    case FF_OPT_TYPE_RATIONAL:
-//        if((int)num == num) *(AVRational*)dst= (AVRational){num*intnum, den};
-//        else                *(AVRational*)dst= av_d2q(num*intnum/den, 1<<24);
+//        if((int)num == num) *(AVRational222*)dst= (AVRational222){num*intnum, den};
+//        else                *(AVRational222*)dst= av_d2q(num*intnum/den, 1<<24);
 //        break;
 //    default:
 //        return NULL;
@@ -130,7 +130,7 @@ const AVOption *av_next_option(void *obj, const AVOption *last){
 //        int *lendst = (int *)(dst + 1);
 //        uint8_t *bin, *ptr;
 //        int len = strlen(val);
-//        av_freep(dst);
+//        av_freep222(dst);
 //        *lendst = 0;
 //        if (len & 1) return NULL;
 //        len /= 2;
@@ -208,7 +208,7 @@ const AVOption *av_set_double(void *obj, const char *name, double n){
 }
 //
 static AVOption *AVNULL = 0;
-const AVOption *av_set_q(void *obj, const char *name, AVRational n){
+const AVOption *av_set_q(void *obj, const char *name, AVRational222 n){
 //    return av_set_number(obj, name, n.num, n.den, 1);
 	return 0;
 }
@@ -242,7 +242,7 @@ const AVOption *av_set_int(void *obj, const char *name, int64_t n){
 //    case FF_OPT_TYPE_INT64:     snprintf(buf, buf_len, "%"PRId64, *(int64_t*)dst);break;
 //    case FF_OPT_TYPE_FLOAT:     snprintf(buf, buf_len, "%f" , *(float  *)dst);break;
 //    case FF_OPT_TYPE_DOUBLE:    snprintf(buf, buf_len, "%f" , *(double *)dst);break;
-//    case FF_OPT_TYPE_RATIONAL:  snprintf(buf, buf_len, "%d/%d", ((AVRational*)dst)->num, ((AVRational*)dst)->den);break;
+//    case FF_OPT_TYPE_RATIONAL:  snprintf(buf, buf_len, "%d/%d", ((AVRational222*)dst)->num, ((AVRational222*)dst)->den);break;
 //    case FF_OPT_TYPE_STRING:    return *(void**)dst;
 //    case FF_OPT_TYPE_BINARY:
 //        len = *(int*)(((uint8_t *)dst) + sizeof(uint8_t *));
@@ -271,8 +271,8 @@ const AVOption *av_set_int(void *obj, const char *name, int64_t n){
 //    case FF_OPT_TYPE_INT64:     *intnum= *(int64_t*)dst;return 0;
 //    case FF_OPT_TYPE_FLOAT:     *num=    *(float  *)dst;return 0;
 //    case FF_OPT_TYPE_DOUBLE:    *num=    *(double *)dst;return 0;
-//    case FF_OPT_TYPE_RATIONAL:  *intnum= ((AVRational*)dst)->num;
-//                                *den   = ((AVRational*)dst)->den;
+//    case FF_OPT_TYPE_RATIONAL:  *intnum= ((AVRational222*)dst)->num;
+//                                *den   = ((AVRational222*)dst)->den;
 //                                                        return 0;
 //    }
 //error:
@@ -289,14 +289,14 @@ const AVOption *av_set_int(void *obj, const char *name, int64_t n){
 //    return num*intnum/den;
 //}
 //
-//AVRational av_get_q(void *obj, const char *name, const AVOption **o_out){
+//AVRational222 av_get_q(void *obj, const char *name, const AVOption **o_out){
 //    int64_t intnum=1;
 //    double num=1;
 //    int den=1;
 //
 //    av_get_number(obj, name, o_out, &num, &den, &intnum);
 //    if(num == 1.0 && (int)intnum == intnum)
-//        return (AVRational){intnum, den};
+//        return (AVRational222){intnum, den};
 //    else
 //        return av_d2q(num*intnum/den, 1<<24);
 //}
@@ -390,13 +390,13 @@ const AVOption *av_set_int(void *obj, const char *name, int64_t n){
 //    return 0;
 //}
 //
-///** Set the values of the AVCodecContext or AVFormatContext structure.
+///** Set the values of the AVCodecContext222 or AVFormatContext structure.
 // * They are set to the defaults specified in the according AVOption options
 // * array default_val field.
 // *
-// * @param s AVCodecContext or AVFormatContext for which the defaults will be set
+// * @param s AVCodecContext222 or AVFormatContext for which the defaults will be set
 // */
-void av_opt_set_defaults2(void *s, int mask, int flags)
+void av_opt_set_defaults2222(void *s, int mask, int flags)
 {
     const AVOption *opt = NULL;
     while ((opt = av_next_option(s, opt)) != NULL) {
@@ -421,7 +421,7 @@ void av_opt_set_defaults2(void *s, int mask, int flags)
             }
             break;
             case FF_OPT_TYPE_RATIONAL: {
-                AVRational val;
+                AVRational222 val;
                 val = av_d2q(opt->default_val, INT_MAX);
                 av_set_q(s, opt->name, val);
             }
@@ -438,6 +438,6 @@ void av_opt_set_defaults2(void *s, int mask, int flags)
 }
 //
 //void av_opt_set_defaults(void *s){
-//    av_opt_set_defaults2(s, 0, 0);
+//    av_opt_set_defaults2222(s, 0, 0);
 //}
 //
