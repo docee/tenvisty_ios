@@ -147,6 +147,7 @@
 		89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9951FDA2B280049F1E7 /* SearchLanAsync.m */; };
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
+		89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */; };
 		C6D1F8203E76628784C971FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E58AE4DC4897602AE9CF48 /* Security.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
@@ -473,6 +474,8 @@
 		89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		89E6D99A1FDA61DC0049F1E7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		89EA52272019720200F2F15C /* AddCameraInputUIDTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCameraInputUIDTableViewController.h; sourceTree = "<group>"; };
+		89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCameraInputUIDTableViewController.m; sourceTree = "<group>"; };
 		8D671A28AAADB2741242114D /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
 		A259C50E727727C3F0BF3358 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = "<group>"; };
 		C4E58AE4DC4897602AE9CF48 /* Security.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<group>"; };
@@ -1037,6 +1040,8 @@
 				892CE0D41FD13E1500942E28 /* Scan */,
 				89A37C96201879CD00A6F0CD /* AddCameraNavigationTypeViewController.h */,
 				89A37C97201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m */,
+				89EA52272019720200F2F15C /* AddCameraInputUIDTableViewController.h */,
+				89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */,
 			);
 			path = AddCamera;
 			sourceTree = "<group>";
@@ -2239,6 +2244,7 @@
 				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
+				89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */,
 				892ADB691FD6909B00BD8929 /* EventSettingViewController.m in Sources */,
 				890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */,
 				894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */,

@@ -12,7 +12,6 @@
 #import "AddCameraNavigationTypeViewController.h"
 
 @interface AddCameraNavigationTypeViewController (){
-    
 }
 @property (nonatomic,strong) NSString* uid;
 @property (nonatomic,assign) NSInteger addCameraType;
@@ -24,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView setBackgroundColor:Color_GrayLightest];
-    [self go2ScanQRCode];
     // Do any additional setup after loading the view.
 }
 
@@ -44,7 +42,14 @@
 
 -(void)go2ScanQRCode{
     OCScanLifeViewController* test2obj = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_scanQRCode"];  //test2为viewcontroller的StoryboardId
-    [self.navigationController pushViewController:test2obj animated:NO];
+    [self.navigationController pushViewController:test2obj animated:YES];
+}
+//其他界面返回到此界面调用的方法
+- (IBAction)AddCameraNavigationTypeViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
+    
+}
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+    return YES;
 }
 
 - (void)scanResult:(NSString *)result{

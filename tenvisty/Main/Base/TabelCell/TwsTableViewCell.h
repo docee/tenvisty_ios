@@ -21,5 +21,6 @@
 @property (nonatomic,weak) NSObject *actionOwner;
 
 -(void)resignFirstResponder;
+-(void)setMaxLength:(NSInteger)maxLength;
 
 @end

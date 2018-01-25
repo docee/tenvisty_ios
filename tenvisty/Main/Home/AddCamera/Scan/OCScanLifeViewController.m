@@ -73,14 +73,18 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = true;
     self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
-    [self.session startRunning];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.session startRunning];
+    });
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if([self.session isRunning]){
-        [self.session stopRunning];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if([self.session isRunning]){
+            [self.session stopRunning];
+        }
+    });
     if(_reRunTimer != nil){
         [_reRunTimer invalidate];
         _reRunTimer = nil;
@@ -116,6 +120,13 @@
     }
 }
 
+//其他界面返回到此界面调用的方法
+- (IBAction)ScanQRCodeViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
+    
+}
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+    return NO;
+}
 - (void)setUp
 {
 //    CGFloat screenW = self.view.frame.size.width;
@@ -230,7 +241,7 @@
 
     //start session
     //[self.session startRunning];
-
+    [self.view setBackgroundColor:Color_Black];
 }
 
 - (void)showScanLine

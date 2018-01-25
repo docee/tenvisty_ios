@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -303,6 +304,7 @@
                         <outlet property="view_first_add" destination="S8Y-0M-GmP" id="ftf-nm-b8P"/>
                         <segue destination="KYR-hL-4XR" kind="show" identifier="CameraList2EventList" id="Ekd-dn-ODp"/>
                         <segue destination="Clh-uG-1TF" kind="show" identifier="CameraList2LiveView" id="yIv-5O-vlA"/>
+                        <segue destination="DQe-jU-Sry" kind="push" identifier="CameraList2ScanQRCode" id="7i4-VV-h0I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLY-jx-TUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -517,22 +519,22 @@
             <objects>
                 <tableViewController id="VSZ-NI-ln8" customClass="SearchCameraTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="2tp-DI-eeW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="lFG-sW-s6a">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lFG-sW-s6a">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera On LAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aws-Ae-pPR">
-                                    <rect key="frame" x="20" y="-8.5" width="104" height="17"/>
+                                    <rect key="frame" x="20" y="9" width="104" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQ4-0Q-4BU">
-                                    <rect key="frame" x="129" y="-10" width="20" height="20"/>
+                                    <rect key="frame" x="129" y="7.5" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="CXQ-EY-o2l"/>
                                         <constraint firstAttribute="height" constant="20" id="ZVJ-BT-7m8"/>
@@ -582,7 +584,7 @@
             <objects>
                 <tableViewController id="BsP-AW-4LW" customClass="SaveCameraTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="sAc-XC-Las">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2087,14 +2089,14 @@
                         <viewControllerLayoutGuide type="bottom" id="dTB-WJ-B1I"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="y5Y-ao-6Xh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-dU-2ao">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-hv-kTY">
-                                        <rect key="frame" x="64" y="491" width="60" height="60"/>
+                                        <rect key="frame" x="64" y="479" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="TGN-ag-VMC"/>
                                             <constraint firstAttribute="width" constant="60" id="VME-A3-hwJ"/>
@@ -2106,7 +2108,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25x-i1-3t2">
-                                        <rect key="frame" x="251.5" y="491" width="60" height="60"/>
+                                        <rect key="frame" x="251.5" y="479" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="GD8-te-HfB"/>
                                             <constraint firstAttribute="width" constant="60" id="QSz-qJ-57F"/>
@@ -2114,30 +2116,29 @@
                                         <state key="normal" image="btn_search_trans"/>
                                         <state key="highlighted" image="btn_search_trans"/>
                                         <connections>
-                                            <action selector="goSearchLan:" destination="DQe-jU-Sry" eventType="touchUpInside" id="5Ll-7X-6hA"/>
-                                            <action selector="skipScanQrCode:" destination="DQe-jU-Sry" eventType="touchUpInside" id="4eD-MJ-vb7"/>
+                                            <segue destination="VSZ-NI-ln8" kind="show" id="kJn-Fr-nKe"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO4-I1-0fl">
-                                        <rect key="frame" x="76" y="551" width="36" height="17.5"/>
+                                        <rect key="frame" x="76" y="539" width="36" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAN Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxX-T7-fVB">
-                                        <rect key="frame" x="241.5" y="551" width="80.5" height="17.5"/>
+                                        <rect key="frame" x="241.5" y="539" width="80.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gd2-yV-4zn" customClass="HyperlinksButton">
-                                        <rect key="frame" x="123" y="441" width="128" height="30"/>
+                                        <rect key="frame" x="123" y="429" width="128" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Input UID manually">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="goInputUIDManually:" destination="DQe-jU-Sry" eventType="touchUpInside" id="rCu-eq-2Lm"/>
+                                            <segue destination="RXw-Mx-deJ" kind="show" id="gfy-NL-Hac"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2154,13 +2155,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4B-Ol-gLs">
-                                <rect key="frame" x="50" y="166" width="275" height="275"/>
+                                <rect key="frame" x="50" y="134" width="275" height="275"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A4B-Ol-gLs" secondAttribute="height" multiplier="1:1" id="Z9D-jr-h4a"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Align camera QR Code winthin frame to scan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAV-af-tmf">
-                                <rect key="frame" x="50" y="116" width="275" height="40"/>
+                                <rect key="frame" x="50" y="84" width="275" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -2187,7 +2188,7 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="s0K-i1-P8x">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="goBack:" destination="DQe-jU-Sry" id="nGa-WO-q75"/>
+                                <segue destination="D5H-om-btg" kind="unwind" unwindAction="AddCameraNavigationTypeViewController1UnwindSegue:" id="Yd6-gx-fP8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2196,9 +2197,11 @@
                         <outlet property="btn_searchLan" destination="25x-i1-3t2" id="00K-Vb-wfi"/>
                         <outlet property="viewPreview" destination="2vX-dU-2ao" id="3xz-1X-1Yc"/>
                         <segue destination="VSZ-NI-ln8" kind="show" identifier="ScanQRCode2SearchCamera" id="ImC-C4-Yk1"/>
+                        <segue destination="RXw-Mx-deJ" kind="show" id="dth-b5-AO4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Pi-Ho-QIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="D5H-om-btg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
         <!--Add Camera Wireless Note-->
@@ -2693,6 +2696,49 @@
                 <exit id="0PD-ur-1Cb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
+        <!--Input Camera UID-->
+        <scene sceneID="nZM-Eq-VpY">
+            <objects>
+                <tableViewController id="RXw-Mx-deJ" customClass="AddCameraInputUIDTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dcl-yz-Vn4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JB6-2s-3mB">
+                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JB6-2s-3mB" id="tVh-GV-5Hf">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="RXw-Mx-deJ" id="Y2I-oz-GyW"/>
+                            <outlet property="delegate" destination="RXw-Mx-deJ" id="6NS-U6-e7Z"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Input Camera UID" id="g2N-us-41x">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="8fY-W4-WlZ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="goBack:" destination="RXw-Mx-deJ" id="RQM-kW-7nc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navDone" id="Zhi-gk-t0f">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="save:" destination="RXw-Mx-deJ" id="4wr-w4-8W1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="atT-cw-dse" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="Home" width="30" height="30"/>
@@ -2750,7 +2796,8 @@
         <image name="wifi_page" width="230" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RLm-CL-VCr"/>
+        <segue reference="dth-b5-AO4"/>
+        <segue reference="7i4-VV-h0I"/>
         <segue reference="Ekd-dn-ODp"/>
         <segue reference="6Zl-SU-ISp"/>
         <segue reference="ImC-C4-Yk1"/>
