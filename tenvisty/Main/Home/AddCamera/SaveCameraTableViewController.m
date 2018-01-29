@@ -84,15 +84,12 @@
     NSString *id = TableViewCell_TextField_Disable;
     if(indexPath.row == 0){
         TwsTableViewCell *cell = nil;
-        id = TableViewCell_TextField_Img;
+        id = TableViewCell_TextField_Disable;
         cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
         if(self.uid != nil && ![self.uid isEqualToString:NO_USE_UID]){
             cell.value = self.uid;
         }
         cell.title = LOCALSTR(@"UID");
-        cell.rightImage = @"btnQRCode";
-        cell.action = @selector(go2ScanQRCode);
-        cell.actionOwner = self;
         return cell;
     }
     else if(indexPath.row ==1){
@@ -100,7 +97,9 @@
         id =  TableViewCell_TextField_Password;
         cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
         cell.title = LOCALSTR(@"Password");
-        //[cell.midPasswordField becomeFirstResponder];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [cell resignFirstResponder];
+//        });
         return cell;
     }
     else if(indexPath.row == 2){

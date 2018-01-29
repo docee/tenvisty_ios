@@ -186,7 +186,15 @@
 - (void)start {
     if ([self shouldConnect]) {
         if ((self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_WRONG_PASSWORD)  && ([super getThreadState] == 0)){
-            [self connect];
+            [super connect];
+        }
+    }
+}
+
+-(void)connect{
+    if ([self shouldConnect]) {
+        if ((self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_WRONG_PASSWORD)  && ([super getThreadState] == 0)){
+            [super connect];
         }
     }
 }

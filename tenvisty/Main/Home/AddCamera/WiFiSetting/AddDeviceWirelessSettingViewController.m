@@ -38,7 +38,7 @@
     self.progressView.progress = .0;
 //    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 2.0f);
 //    self.progressView.transform = transform;
-    [[WiFiConfigContext sharedInstance] setData:self.wifiSsid password:self.wifiPassword auth:self.wifiAuthMode];
+    [[WiFiConfigContext sharedInstance] setData:self.uid ssid:self.wifiSsid password:self.wifiPassword auth:self.wifiAuthMode];
     [[WiFiConfigContext sharedInstance] setReceiveListner:self];
     [self setTimerInterval:SMART_WIFI_TIME/100.0f];
     self.camera = [[BaseCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
@@ -64,36 +64,24 @@
     if(self.progressView.progress >= 1){
         [[WiFiConfigContext sharedInstance] stopConfig];
         [self.pTimer invalidate];
-        if([self.camera.uid isEqualToString:NO_USE_UID]){
-            [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Camera sound end?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"YES") actionDefaultBlock:^{
-                [[[iToast makeText:LOCALSTR(@"Search Camera on LAN")] setDuration:2] show];
-                [self go2Search];
-            } actionCancelTitle:LOCALSTR(@"NO") actionCancelBlock:^{
-                
-                [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Configure Wi-Fi failed, please check your Wi-Fi password") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Retry") actionDefaultBlock:^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                } actionCancelTitle:LOCALSTR(@"Help") actionCancelBlock:^{
-                    [self go2Help];
-                }];
-            }];
+
+        if(self.configWifiResult == CONFIG_WIFI_SUCCESS){
+            [self saveCamera];
+            [self go2List];
+        }
+        else if(self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
+            [self saveCamera];
+            [self go2List];
         }
         else{
-            if(self.configWifiResult == CONFIG_WIFI_SUCCESS){
-                [self saveCamera];
-                [self go2List];
-            }
-            else if(self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
-                [self saveCamera];
-                [self go2List];
-            }
-            else{
-                [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Configure Wi-Fi failed, please check your Wi-Fi password") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Retry") actionDefaultBlock:^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                } actionCancelTitle:LOCALSTR(@"Help") actionCancelBlock:^{
-                    [self go2Help];
-                }];
-            }
+            [self performSegueWithIdentifier:@"AddDeviceWirelessSetting2AddDeviceWirelessFail" sender:self];
+//            [TwsTools presentAlertTitle:self title:nil message:LOCALSTR(@"Configure Wi-Fi failed, please check your Wi-Fi password") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Retry") actionDefaultBlock:^{
+//                [self.navigationController popViewControllerAnimated:YES];
+//            } actionCancelTitle:LOCALSTR(@"Help") actionCancelBlock:^{
+//                [self go2Help];
+//            }];
         }
+        
     }
 }
 
@@ -109,6 +97,10 @@
         [GBase addCamera:self.camera];
     }
     [self.camera start];
+}
+- (IBAction)goBack:(id)sender {
+    [self stopConfig];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

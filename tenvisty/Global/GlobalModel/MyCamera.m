@@ -245,6 +245,11 @@
     [self start:0];
 }
 
+-(void)connect{
+     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
+     [self connect:self.uid];
+}
+
 -(void)stop{
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     [self stop:0];

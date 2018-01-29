@@ -46,6 +46,7 @@
 @property(nonatomic,assign,readonly) BOOL isWrongPassword;
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_;
 -(id)init;
+-(void)connect;
 -(void)start;
 -(void)stop;
 -(void)startVideo;

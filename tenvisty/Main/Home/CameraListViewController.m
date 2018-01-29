@@ -54,6 +54,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [TwsDataValue setTryConnectCamera:nil];
+    });
     for(BaseCamera *camera in [GBase sharedInstance].cameras){
         camera.cameraDelegate = self;
         //强制改密码；

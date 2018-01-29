@@ -9,5 +9,5 @@
 #import "BaseTableViewController.h"
 
 @interface AddCameraInputUIDTableViewController : BaseTableViewController
-@property (nonatomic,strong) NSString *uid;
+
 @end

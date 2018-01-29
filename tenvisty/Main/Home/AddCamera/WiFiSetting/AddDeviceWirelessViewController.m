@@ -10,7 +10,8 @@
 #import "BaseTableView.h"
 #import "TextFieldDisableTableViewCell.h"
 #import "PasswordFieldTableViewCell.h"
-#import "AddDeviceWirelessSettingViewController.h"
+#import "SaveCameraTableViewController.h"
+#import "AddDeviceWirelessNoteViewController.h"
 
 @interface AddDeviceWirelessViewController ()
 @property (weak, nonatomic) IBOutlet BaseTableView *tableview;
@@ -34,6 +35,9 @@
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
@@ -59,12 +63,16 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-     if([segue.identifier isEqualToString:@"AddDeviceWireless2AddDeviceWirelessSetting"]){
-        AddDeviceWirelessSettingViewController *controller= segue.destinationViewController;
-        controller.uid = self.uid;
+     if([segue.identifier isEqualToString:@"AddCameraWireless2AddCameraWirelessNote"]){
+        AddDeviceWirelessNoteViewController *controller= segue.destinationViewController;
+        controller.uid = [TwsDataValue getTryConnectCamera].uid;
         controller.wifiSsid = ((TwsTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).value;
         controller.wifiPassword = ((TwsTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).value;
         controller.wifiAuthMode = 1;
+     }
+     else if([segue.identifier isEqualToString:@"AddDeviceWireless2SaveCamera"]){
+         SaveCameraTableViewController *controller =  segue.destinationViewController;
+         controller.uid = [TwsDataValue getTryConnectCamera].uid;
      }
 }
 

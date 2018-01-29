@@ -192,6 +192,9 @@
     [self.orginCamera start];
 }
 
+-(void)connect{
+    [self.orginCamera connect];
+}
 - (void)startAudio {
     [self.orginCamera startAudio];
 }

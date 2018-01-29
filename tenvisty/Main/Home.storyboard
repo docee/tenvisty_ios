@@ -27,7 +27,7 @@
                         <viewControllerLayoutGuide type="bottom" id="kKB-U0-esG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fPu-Re-iMb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3oP-Ha-nHT" customClass="BaseTableView">
@@ -244,7 +244,7 @@
                                 </connections>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8Y-0M-GmP">
-                                <rect key="frame" x="77.5" y="138" width="220" height="176"/>
+                                <rect key="frame" x="77.5" y="162" width="220" height="176"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IoB-44-Lib">
                                         <rect key="frame" x="75" y="31" width="70" height="70"/>
@@ -255,7 +255,7 @@
                                         <state key="normal" image="ic_first_add_nor"/>
                                         <state key="highlighted" image="ic_first_add_press"/>
                                         <connections>
-                                            <segue destination="8Lq-GA-z5B" kind="show" identifier="CameraList2AddCameraFirst" id="KEp-Ju-c90"/>
+                                            <action selector="go2AddCamera:" destination="BDn-US-UtP" eventType="touchUpInside" id="An7-Id-RY6"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to add camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kP-BJ-mYi">
@@ -304,7 +304,7 @@
                         <outlet property="view_first_add" destination="S8Y-0M-GmP" id="ftf-nm-b8P"/>
                         <segue destination="KYR-hL-4XR" kind="show" identifier="CameraList2EventList" id="Ekd-dn-ODp"/>
                         <segue destination="Clh-uG-1TF" kind="show" identifier="CameraList2LiveView" id="yIv-5O-vlA"/>
-                        <segue destination="DQe-jU-Sry" kind="push" identifier="CameraList2ScanQRCode" id="7i4-VV-h0I"/>
+                        <segue destination="DQe-jU-Sry" kind="show" identifier="CameraList2ScanQRCode" id="7i4-VV-h0I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLY-jx-TUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -331,14 +331,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCQ-CT-Rqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320.8" y="-95.802098950524751"/>
+            <point key="canvasLocation" x="1362" y="-113"/>
         </scene>
         <!--Edit Camera-->
         <scene sceneID="36m-XW-LUL">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="qNM-55-ghs" customClass="ModifyCameraNameTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="Rf1-XN-ShR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -380,11 +380,11 @@
                         <viewControllerLayoutGuide type="bottom" id="I1q-g1-O3a"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7BY-8T-rpm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFc-UG-SQg">
-                                <rect key="frame" x="112.5" y="151" width="150" height="150"/>
+                                <rect key="frame" x="112.5" y="175" width="150" height="150"/>
                                 <state key="normal" image="btnWirelessInstall_nor"/>
                                 <state key="highlighted" image="btnWirelessInstall_press"/>
                                 <connections>
@@ -392,25 +392,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wireless Installation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xz-wj-TXB">
-                                <rect key="frame" x="36" y="301" width="303" height="16"/>
+                                <rect key="frame" x="36" y="325" width="303" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="labAddCameraHasConnect" text="Camera has been connected to internet？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFo-1F-NcR">
-                                <rect key="frame" x="20" y="491" width="335" height="17"/>
+                                <rect key="frame" x="20" y="555" width="335" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.031372549019607843" green="0.5490196078431373" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jU6-EA-x7U">
-                                <rect key="frame" x="10" y="513" width="355" height="80"/>
+                                <rect key="frame" x="10" y="577" width="355" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQR-bO-4rv">
                                         <rect key="frame" x="0.0" y="0.0" width="177.5" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQy-qt-2RW">
-                                                <rect key="frame" x="38.5" y="0.0" width="100" height="80"/>
+                                                <rect key="frame" x="39" y="0.0" width="100" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="8g2-KU-aEO"/>
                                                     <constraint firstAttribute="width" constant="100" id="eE8-eH-6tg"/>
@@ -439,7 +439,7 @@
                                         <rect key="frame" x="177.5" y="0.0" width="177.5" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSw-qf-Rxi">
-                                                <rect key="frame" x="39" y="0.0" width="100" height="80"/>
+                                                <rect key="frame" x="39.5" y="0.0" width="100" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="H8V-tZ-8J8"/>
                                                     <constraint firstAttribute="height" constant="80" id="KqF-8W-5rX"/>
@@ -519,7 +519,7 @@
             <objects>
                 <tableViewController id="VSZ-NI-ln8" customClass="SearchCameraTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="2tp-DI-eeW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -579,12 +579,12 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="48.125937031484263"/>
         </scene>
-        <!--Add Camera-->
+        <!--Save Camera-->
         <scene sceneID="TQx-0e-GvT">
             <objects>
                 <tableViewController id="BsP-AW-4LW" customClass="SaveCameraTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="sAc-XC-Las">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -594,7 +594,7 @@
                             <outlet property="delegate" destination="BsP-AW-4LW" id="4UT-Z7-uJL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Camera" id="qPk-ZA-s1S">
+                    <navigationItem key="navigationItem" title="Save Camera" id="qPk-ZA-s1S">
                         <barButtonItem key="leftBarButtonItem" id="erc-pS-woQ">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bnx-0Y-kzI">
                                 <rect key="frame" x="16" y="7" width="30" height="30"/>
@@ -632,11 +632,11 @@
                         <viewControllerLayoutGuide type="bottom" id="7ed-Cp-oSW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="liveview_portrait" insetsLayoutMarginsFromSafeArea="NO" id="Bpq-F5-tPb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Di-zb-hug">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="labCameraConnectState2" text="Online" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4W-14-BpJ">
                                         <rect key="frame" x="290" y="7" width="75" height="26"/>
@@ -664,7 +664,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEB-va-RUZ">
-                                <rect key="frame" x="0.0" y="40" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="211"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEH-rg-a1Z">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
@@ -899,7 +899,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAP-Xc-HbE">
-                                <rect key="frame" x="0.0" y="251" width="375" height="352"/>
+                                <rect key="frame" x="0.0" y="271" width="375" height="396"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FZk-Nl-bhg">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -1021,10 +1021,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MgN-IW-zvA">
-                                        <rect key="frame" x="0.0" y="40" width="375" height="312"/>
+                                        <rect key="frame" x="0.0" y="40" width="375" height="356"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0F-rM-YlL">
-                                                <rect key="frame" x="128" y="96.5" width="120" height="120"/>
+                                                <rect key="frame" x="128" y="118.5" width="120" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="3Ok-GS-mhu"/>
                                                     <constraint firstAttribute="height" constant="120" id="r42-ck-1ul"/>
@@ -1039,7 +1039,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx5-qg-Zin">
-                                                <rect key="frame" x="23" y="116.5" width="80" height="80"/>
+                                                <rect key="frame" x="23" y="138.5" width="80" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="EAu-sY-0rm"/>
                                                     <constraint firstAttribute="width" constant="80" id="n8o-ol-aJx"/>
@@ -1056,7 +1056,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4V-Zq-vxw">
-                                                <rect key="frame" x="273" y="116.5" width="80" height="80"/>
+                                                <rect key="frame" x="273" y="138.5" width="80" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="BBy-Vk-nGL"/>
                                                     <constraint firstAttribute="height" constant="80" id="pNb-S2-yfd"/>
@@ -1095,7 +1095,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dvh-31-9Y4" userLabel="View Switch Video Quality">
-                                <rect key="frame" x="273" y="122" width="80" height="80"/>
+                                <rect key="frame" x="273" y="142" width="80" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdp-Bn-vBs">
                                         <rect key="frame" x="10" y="39.5" width="60" height="1"/>
@@ -1529,11 +1529,11 @@
                         <viewControllerLayoutGuide type="bottom" id="hJj-PV-EmA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IiG-c0-eG5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9m-3T-aza">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeU-Gf-29d">
                                         <rect key="frame" x="0.0" y="5" width="375" height="50"/>
@@ -1614,10 +1614,10 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QzV-f2-3rn">
-                                <rect key="frame" x="0.0" y="120" width="375" height="483"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="527"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCellEventItem" id="PlK-nb-cw2" customClass="EventItemTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCellEventItem" id="PlK-nb-cw2" customClass="EventItemTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PlK-nb-cw2" id="6OL-Cg-Cw6">
@@ -1739,7 +1739,7 @@
                                             <outlet property="labEventType" destination="TxE-5L-QE1" id="dUD-d6-hwx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCellSearchEventProcess" id="YfR-rP-cbC" customClass="EventItemTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCellSearchEventProcess" id="YfR-rP-cbC" customClass="EventItemTableViewCell">
                                         <rect key="frame" x="0.0" y="158" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YfR-rP-cbC" id="5fX-dV-D2x">
@@ -1773,7 +1773,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEs-Vh-NBT">
-                                <rect key="frame" x="0.0" y="120" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="30"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12-05-2017" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgh-0w-n76">
                                         <rect key="frame" x="4" y="10" width="75" height="20"/>
@@ -1800,14 +1800,14 @@
                                 </constraints>
                             </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zvm-AC-8Cf">
-                                <rect key="frame" x="0.0" y="54" width="375" height="220"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="220"/>
                                 <color key="backgroundColor" red="0.0" green="0.55691540241241455" blue="0.84010487794876099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="lmt-Fz-k4P"/>
                                 </constraints>
                                 <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewcell_eventsearch" id="lTj-eh-Gik">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewcell_eventsearch" id="lTj-eh-Gik">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lTj-eh-Gik" id="UGk-f6-Boq">
@@ -1830,7 +1830,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.55691540241241455" blue="0.84010487794876099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dGi-1e-1mk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dGi-1e-1mk">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dGi-1e-1mk" id="j7c-jQ-OKF">
@@ -1853,7 +1853,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.55691540241241455" blue="0.84010487794876099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="oDQ-KZ-U21">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="oDQ-KZ-U21">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oDQ-KZ-U21" id="Tri-dv-Hn3">
@@ -1876,7 +1876,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.55691540241241455" blue="0.84010487794876099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vPE-WI-M7q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vPE-WI-M7q">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vPE-WI-M7q" id="WBN-Si-kNL">
@@ -1899,7 +1899,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.55691540241241455" blue="0.84010487794876099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="miX-Js-ztb">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="miX-Js-ztb">
                                         <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="miX-Js-ztb" id="BNO-NC-SDa">
@@ -1982,11 +1982,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Yql-QG-ufx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vhk-Jd-t4K">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGY-bs-4aa">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full-time recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9C-fk-2wp">
                                         <rect key="frame" x="5" y="14" width="118" height="17"/>
@@ -2011,7 +2011,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHZ-3N-d9N">
-                                <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="POu-fN-yvI"/>
@@ -2022,7 +2022,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dna-kz-yon">
-                                <rect key="frame" x="0.0" y="46" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="211"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O18-ti-FGr" customClass="Monitor">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="211"/>
@@ -2089,14 +2089,14 @@
                         <viewControllerLayoutGuide type="bottom" id="dTB-WJ-B1I"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="y5Y-ao-6Xh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-dU-2ao">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HnI-hv-kTY">
-                                        <rect key="frame" x="64" y="479" width="60" height="60"/>
+                                        <rect key="frame" x="64.5" y="491" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="TGN-ag-VMC"/>
                                             <constraint firstAttribute="width" constant="60" id="VME-A3-hwJ"/>
@@ -2108,7 +2108,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25x-i1-3t2">
-                                        <rect key="frame" x="251.5" y="479" width="60" height="60"/>
+                                        <rect key="frame" x="252" y="491" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="GD8-te-HfB"/>
                                             <constraint firstAttribute="width" constant="60" id="QSz-qJ-57F"/>
@@ -2116,29 +2116,29 @@
                                         <state key="normal" image="btn_search_trans"/>
                                         <state key="highlighted" image="btn_search_trans"/>
                                         <connections>
-                                            <segue destination="VSZ-NI-ln8" kind="show" id="kJn-Fr-nKe"/>
+                                            <segue destination="VSZ-NI-ln8" kind="push" id="wJ7-eZ-lPk"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO4-I1-0fl">
-                                        <rect key="frame" x="76" y="539" width="36" height="17.5"/>
+                                        <rect key="frame" x="76.5" y="551" width="36" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAN Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxX-T7-fVB">
-                                        <rect key="frame" x="241.5" y="539" width="80.5" height="17.5"/>
+                                        <rect key="frame" x="242" y="551" width="80.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gd2-yV-4zn" customClass="HyperlinksButton">
-                                        <rect key="frame" x="123" y="429" width="128" height="30"/>
+                                        <rect key="frame" x="123" y="441" width="128" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Input UID manually">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="RXw-Mx-deJ" kind="show" id="gfy-NL-Hac"/>
+                                            <segue destination="RXw-Mx-deJ" kind="push" id="7Kh-Ii-y5f"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2155,13 +2155,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4B-Ol-gLs">
-                                <rect key="frame" x="50" y="134" width="275" height="275"/>
+                                <rect key="frame" x="50" y="166" width="275" height="275"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A4B-Ol-gLs" secondAttribute="height" multiplier="1:1" id="Z9D-jr-h4a"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Align camera QR Code winthin frame to scan" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAV-af-tmf">
-                                <rect key="frame" x="50" y="84" width="275" height="40"/>
+                                <rect key="frame" x="50" y="116" width="275" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -2188,20 +2188,19 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="s0K-i1-P8x">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="D5H-om-btg" kind="unwind" unwindAction="AddCameraNavigationTypeViewController1UnwindSegue:" id="Yd6-gx-fP8"/>
+                                <action selector="goBack:" destination="DQe-jU-Sry" id="8cL-ma-T7a"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="boxView" destination="A4B-Ol-gLs" id="6yy-5c-U9I"/>
+                        <outlet property="btnTorch" destination="HnI-hv-kTY" id="lC1-Yk-mNF"/>
                         <outlet property="btn_searchLan" destination="25x-i1-3t2" id="00K-Vb-wfi"/>
                         <outlet property="viewPreview" destination="2vX-dU-2ao" id="3xz-1X-1Yc"/>
-                        <segue destination="VSZ-NI-ln8" kind="show" identifier="ScanQRCode2SearchCamera" id="ImC-C4-Yk1"/>
-                        <segue destination="RXw-Mx-deJ" kind="show" id="dth-b5-AO4"/>
+                        <segue destination="hvu-KT-lti" kind="push" identifier="ScanQRCode2AddCameraNavigationType" id="Jct-Sv-dwe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Pi-Ho-QIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="D5H-om-btg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
         <!--Add Camera Wireless Note-->
@@ -2213,17 +2212,17 @@
                         <viewControllerLayoutGuide type="bottom" id="twd-JR-fGv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="boM-x0-l4z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please power on the camera, and wait till the music comes out." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM0-XO-crD">
-                                <rect key="frame" x="25" y="50" width="325.5" height="37.5"/>
+                                <rect key="frame" x="25" y="70" width="325.5" height="37.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PjI-Ts-x1X">
-                                <rect key="frame" x="87.5" y="493.5" width="200" height="40"/>
+                                <rect key="frame" x="87.5" y="525.5" width="200" height="40"/>
                                 <color key="backgroundColor" red="0.031372549020000001" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="P6G-sn-Qd4"/>
@@ -2239,11 +2238,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="xqR-6c-skT" kind="show" identifier="AddDeviceWirelessNote2AddDeviceWireless" id="RXW-4V-Fd1"/>
+                                    <segue destination="7Nl-3P-d2B" kind="show" identifier="AddDeviceWirelessNote2AddDeviceWirelessSetting" id="4Hg-wI-LdE"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="configwifi_note" translatesAutoresizingMaskIntoConstraints="NO" id="XMw-2B-3sG">
-                                <rect key="frame" x="20" y="209.5" width="335" height="184"/>
+                                <rect key="frame" x="20" y="241.5" width="335" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="XMw-2B-3sG" secondAttribute="height" multiplier="291:160" id="eyo-X6-zPp"/>
                                 </constraints>
@@ -2254,10 +2253,10 @@
                             <constraint firstAttribute="trailing" secondItem="XMw-2B-3sG" secondAttribute="trailing" constant="20" id="20C-sN-1xo"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qM0-XO-crD" secondAttribute="trailing" constant="20" id="Csr-fV-5wQ"/>
                             <constraint firstItem="qM0-XO-crD" firstAttribute="centerX" secondItem="boM-x0-l4z" secondAttribute="centerX" id="V5I-1y-KXa"/>
+                            <constraint firstItem="qM0-XO-crD" firstAttribute="top" secondItem="fD2-Ii-Mui" secondAttribute="bottom" constant="50" id="as6-gK-lED"/>
                             <constraint firstItem="XMw-2B-3sG" firstAttribute="leading" secondItem="boM-x0-l4z" secondAttribute="leading" constant="20" id="dGp-y6-NFH"/>
                             <constraint firstItem="XMw-2B-3sG" firstAttribute="centerY" secondItem="boM-x0-l4z" secondAttribute="centerY" id="eXV-7U-HhU"/>
                             <constraint firstItem="PjI-Ts-x1X" firstAttribute="centerX" secondItem="boM-x0-l4z" secondAttribute="centerX" id="ewk-t2-Lu0"/>
-                            <constraint firstItem="qM0-XO-crD" firstAttribute="top" secondItem="fD2-Ii-Mui" secondAttribute="bottom" constant="50" id="gym-aW-br6"/>
                             <constraint firstItem="PjI-Ts-x1X" firstAttribute="top" secondItem="XMw-2B-3sG" secondAttribute="bottom" constant="100" id="qjS-an-HEP"/>
                             <constraint firstItem="qM0-XO-crD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="boM-x0-l4z" secondAttribute="leading" constant="20" id="smo-tU-Cyi"/>
                         </constraints>
@@ -2266,13 +2265,15 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="OU1-AX-OCa">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="WVd-Zr-dc8" kind="unwind" unwindAction="AddCameraViewController1UnwindSegue:" id="g4P-1J-4Y5"/>
+                                <action selector="goBack:" destination="m84-YK-Ql0" id="H8L-I3-sZX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="BsP-AW-4LW" kind="show" identifier="AddDeviceWirelessNote2SaveCamera" id="APm-Wv-oAf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5k-7c-5Ev" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="WVd-Zr-dc8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="948" y="-121.88905547226388"/>
         </scene>
@@ -2285,11 +2286,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Oh3-ju-GOL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oHm-bW-H9w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IcA-xi-tOp" customClass="BaseTableView">
-                                <rect key="frame" x="0.0" y="80" width="375" height="110"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="110"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="Tt0-Gd-7ef"/>
@@ -2301,23 +2302,33 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the Wi-Fi password." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAa-II-yIU">
-                                <rect key="frame" x="10" y="0.0" width="345" height="80"/>
+                                <rect key="frame" x="10" y="20" width="345" height="80"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdc-kY-VRO">
-                                <rect key="frame" x="10" y="200" width="345" height="17.5"/>
+                                <rect key="frame" x="10" y="220" width="345" height="17.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only support 2.4Ghz Wi-Fi." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcw-uz-hCE">
-                                <rect key="frame" x="10" y="222.5" width="345" height="17.5"/>
+                                <rect key="frame" x="10" y="242.5" width="345" height="17.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV4-J2-W6V" customClass="HyperlinksButton">
+                                <rect key="frame" x="30" y="320" width="315" height="32"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Camera has been connected to network?">
+                                    <color key="titleColor" red="0.031372549020000001" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BsP-AW-4LW" kind="show" identifier="AddDeviceWireless2SaveCamera" id="Ute-k5-Gwo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -2325,6 +2336,7 @@
                             <constraint firstItem="dcw-uz-hCE" firstAttribute="top" secondItem="bdc-kY-VRO" secondAttribute="bottom" constant="5" id="0ox-Mi-8tm"/>
                             <constraint firstItem="IcA-xi-tOp" firstAttribute="top" secondItem="IAa-II-yIU" secondAttribute="bottom" id="2TN-gU-rTg"/>
                             <constraint firstAttribute="trailing" secondItem="IAa-II-yIU" secondAttribute="trailing" constant="20" id="9mP-Qg-zAo"/>
+                            <constraint firstItem="mV4-J2-W6V" firstAttribute="top" secondItem="dcw-uz-hCE" secondAttribute="bottom" constant="60" id="Au4-9a-NCz"/>
                             <constraint firstItem="bdc-kY-VRO" firstAttribute="leading" secondItem="oHm-bW-H9w" secondAttribute="leading" constant="10" id="GUh-fg-8q8"/>
                             <constraint firstAttribute="trailing" secondItem="bdc-kY-VRO" secondAttribute="trailing" constant="20" id="USy-v8-zXq"/>
                             <constraint firstItem="dcw-uz-hCE" firstAttribute="leading" secondItem="oHm-bW-H9w" secondAttribute="leading" constant="10" id="VQo-h1-n3w"/>
@@ -2334,19 +2346,20 @@
                             <constraint firstItem="bdc-kY-VRO" firstAttribute="top" secondItem="IcA-xi-tOp" secondAttribute="bottom" constant="10" id="gWU-C6-6nR"/>
                             <constraint firstAttribute="trailing" secondItem="dcw-uz-hCE" secondAttribute="trailing" constant="20" id="kZo-ef-kfL"/>
                             <constraint firstAttribute="trailing" secondItem="IcA-xi-tOp" secondAttribute="trailing" id="kxV-TD-A27"/>
+                            <constraint firstItem="mV4-J2-W6V" firstAttribute="centerX" secondItem="oHm-bW-H9w" secondAttribute="centerX" id="o1n-RL-GMo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Camera Wireless Input" id="Ffj-KL-7fv">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="R5A-7c-cKU">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="UKG-Mr-UA3" kind="unwind" unwindAction="AddDeviceWirelessNoteViewController1UnwindSegue:" id="53s-cK-nDL"/>
+                                <action selector="goBack:" destination="xqR-6c-skT" id="X3C-kZ-HBL"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="navDone" id="Jix-5l-MYD">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="7Nl-3P-d2B" kind="show" identifier="AddDeviceWireless2AddDeviceWirelessSetting" id="oQN-vY-haA"/>
+                                <segue destination="m84-YK-Ql0" kind="show" identifier="AddCameraWireless2AddCameraWirelessNote" id="zSX-HR-9iJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2355,7 +2368,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAW-qi-q8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="UKG-Mr-UA3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
         <!--Add Camera Wireless Setting-->
@@ -2367,20 +2379,20 @@
                         <viewControllerLayoutGuide type="bottom" id="U2a-11-oL7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ICc-at-C4n">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="configwifi_setting" translatesAutoresizingMaskIntoConstraints="NO" id="hC5-5n-fxa">
-                                <rect key="frame" x="20" y="112" width="335" height="279"/>
+                                <rect key="frame" x="20" y="138.5" width="335" height="279"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please turn up the phone volume near the camera" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0i-a5-fae">
-                                <rect key="frame" x="20" y="40" width="335" height="17.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep phone near to camera and turn up the phone volume" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0i-a5-fae">
+                                <rect key="frame" x="20" y="60" width="335" height="17.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="aaW-JJ-BcN">
-                                <rect key="frame" x="20" y="431" width="335" height="12"/>
+                                <rect key="frame" x="20" y="457.5" width="335" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="8Hc-Q1-F34"/>
                                 </constraints>
@@ -2392,16 +2404,16 @@
                                 </userDefinedRuntimeAttributes>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuring Wi-Fi, please wait..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99k-sP-KYz">
-                                <rect key="frame" x="80.5" y="545.5" width="214" height="17.5"/>
+                                <rect key="frame" x="80.5" y="609.5" width="214" height="17.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1X-UN-lQ1">
-                                <rect key="frame" x="4" y="412" width="32" height="18"/>
+                                <rect key="frame" x="4" y="438.5" width="32" height="18"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsY-8a-ziu">
-                                        <rect key="frame" x="0.0" y="0.0" width="32" height="13"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="32" height="13"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2413,7 +2425,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_progressview_direct_down" translatesAutoresizingMaskIntoConstraints="NO" id="hdf-ai-yr0">
-                                        <rect key="frame" x="14" y="13" width="4" height="4"/>
+                                        <rect key="frame" x="14" y="13.5" width="4" height="4"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="4" id="IG4-d1-eCM"/>
                                             <constraint firstAttribute="height" constant="4" id="rX3-d8-oa5"/>
@@ -2453,7 +2465,7 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="5az-Vn-aFb">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="pcM-sA-frC" kind="unwind" unwindAction="AddDeviceWirelessViewController1UnwindSegue:" id="bUn-bs-5dg"/>
+                                <action selector="goBack:" destination="7Nl-3P-d2B" id="Cie-Nc-z9l"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2463,10 +2475,10 @@
                         <outlet property="progressView" destination="aaW-JJ-BcN" id="Y4D-00-CI3"/>
                         <segue destination="BDn-US-UtP" kind="show" identifier="AddDeviceWirelessSetting2CameraList" id="xAs-AT-dZ3"/>
                         <segue destination="VSZ-NI-ln8" kind="show" identifier="AddDeviceWirelessSetting2SearchCamera" id="Y28-Yq-DHg"/>
+                        <segue destination="dzc-It-PCf" kind="show" identifier="AddDeviceWirelessSetting2AddDeviceWirelessFail" id="rlj-u8-Rtx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pIt-Et-ty5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="pcM-sA-frC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="24.800000000000001" y="30.134932533733135"/>
         </scene>
@@ -2479,11 +2491,11 @@
                         <viewControllerLayoutGuide type="bottom" id="EMK-oP-AxZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sFk-G6-jPi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HRa-qz-kbO">
-                                <rect key="frame" x="0.0" y="106.5" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="138.5" width="375" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="xaO-4y-Rja"/>
                                 </constraints>
@@ -2492,7 +2504,7 @@
                                 </date>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-oZ-vir">
-                                <rect key="frame" x="0.0" y="306.5" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="338.5" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="icR-Cl-neQ"/>
                                 </constraints>
@@ -2501,7 +2513,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI1-dQ-ukI">
-                                <rect key="frame" x="0.0" y="66.5" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="98.5" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="xUL-J3-ycj"/>
                                 </constraints>
@@ -2510,7 +2522,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="EGP-cw-KWu">
-                                <rect key="frame" x="0.0" y="346.5" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="378.5" width="375" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="LZ9-xu-f0x"/>
                                 </constraints>
@@ -2620,6 +2632,9 @@
                                                 <constraint firstItem="ex7-aP-gBg" firstAttribute="leading" secondItem="tpd-iF-Ms5" secondAttribute="leading" id="wzM-fh-Ung"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="xqR-6c-skT" kind="show" id="Sbt-gW-8fF"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2672,6 +2687,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="hM8-5n-Eg0" secondAttribute="bottom" constant="10" id="yeY-yV-EXK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="qXZ-x3-HhW" kind="show" id="5hR-ki-RRl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2684,16 +2702,15 @@
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="YOx-hz-yK9">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="0PD-ur-1Cb" kind="unwind" unwindAction="CameraListViewController1UnwindSegue:" id="R7a-lR-RZH"/>
+                                <action selector="goBack:" destination="hvu-KT-lti" id="JYR-Wv-Rbr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="DQe-jU-Sry" kind="show" identifier="AddCameraNavigationType2ScanQRCode" id="RLm-CL-VCr"/>
+                        <segue destination="qXZ-x3-HhW" kind="push" id="III-R8-2xU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lGF-sl-Wm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="0PD-ur-1Cb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
         <!--Input Camera UID-->
@@ -2701,7 +2718,7 @@
             <objects>
                 <tableViewController id="RXw-Mx-deJ" customClass="AddCameraInputUIDTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dcl-yz-Vn4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2735,8 +2752,157 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="dQJ-bA-gSJ" kind="unwind" identifier="Unwind_InputCameraUID2ScanQRCode" unwindAction="ScanQRCodeViewController1UnwindSegue:" id="007-J6-yqQ"/>
+                        <segue destination="hvu-KT-lti" kind="show" identifier="InputCameraUID2AddCameraNavigationType" id="EX6-uk-LQP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="atT-cw-dse" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dQJ-bA-gSJ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Add Camera Wired Note-->
+        <scene sceneID="w5K-dN-VI1">
+            <objects>
+                <viewController id="qXZ-x3-HhW" customClass="AddCameraWiredNoteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bgp-1P-614"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y2N-hh-U0m"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f9D-pB-SBg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please power on the camera and plug into the Ethernet cable (Yellow &amp; Green light will on if all is OK)." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whd-l1-BO2">
+                                <rect key="frame" x="20" y="70" width="335" height="56"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ethnet_page" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-bI-uzy">
+                                <rect key="frame" x="20" y="279" width="335" height="109"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gYe-bI-uzy" secondAttribute="height" multiplier="230:75" id="R1Q-CR-hNz"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-bK-P3R">
+                                <rect key="frame" x="87.5" y="488" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.031372549020000001" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2oh-0A-gj9"/>
+                                    <constraint firstAttribute="width" constant="200" id="pY8-nO-JYW"/>
+                                </constraints>
+                                <state key="normal" title="Ready">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="BsP-AW-4LW" kind="show" identifier="AddCameraWiredNote2SaveCamera" id="8Ya-W3-d4K"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gYe-bI-uzy" firstAttribute="centerY" secondItem="f9D-pB-SBg" secondAttribute="centerY" id="Cty-xs-9zk"/>
+                            <constraint firstAttribute="trailing" secondItem="Whd-l1-BO2" secondAttribute="trailing" constant="20" id="GQy-I9-cXw"/>
+                            <constraint firstAttribute="trailing" secondItem="gYe-bI-uzy" secondAttribute="trailing" constant="20" id="Z7G-ib-Xyw"/>
+                            <constraint firstItem="Whd-l1-BO2" firstAttribute="leading" secondItem="f9D-pB-SBg" secondAttribute="leading" constant="20" id="ZY6-hm-cbk"/>
+                            <constraint firstItem="Hxa-bK-P3R" firstAttribute="top" secondItem="gYe-bI-uzy" secondAttribute="bottom" constant="100" id="d7V-VL-AYK"/>
+                            <constraint firstItem="gYe-bI-uzy" firstAttribute="leading" secondItem="f9D-pB-SBg" secondAttribute="leading" constant="20" id="dwk-4l-tUs"/>
+                            <constraint firstItem="Whd-l1-BO2" firstAttribute="top" secondItem="bgp-1P-614" secondAttribute="bottom" constant="50" id="gdE-dX-pTa"/>
+                            <constraint firstItem="Whd-l1-BO2" firstAttribute="centerX" secondItem="f9D-pB-SBg" secondAttribute="centerX" id="j0A-jt-QyQ"/>
+                            <constraint firstItem="Hxa-bK-P3R" firstAttribute="centerX" secondItem="f9D-pB-SBg" secondAttribute="centerX" id="np4-br-7ve"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Camera Wired Note" id="Sem-hR-b76">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="X2g-8O-4aN">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="Ird-TG-V2X" kind="unwind" identifier="" unwindAction="AddCameraNavigationTypeViewController1UnwindSegue:" id="hZw-1j-1HB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OqH-L3-SrV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ird-TG-V2X" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Add Camera Failed-->
+        <scene sceneID="akl-D3-r9f">
+            <objects>
+                <viewController id="dzc-It-PCf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xyh-7V-1Hm"/>
+                        <viewControllerLayoutGuide type="bottom" id="d5o-dR-1zF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yZf-YM-Ybb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi Conifgure Failed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f72-lM-mrB">
+                                <rect key="frame" x="88" y="35" width="199" height="23.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elt-p4-Eia">
+                                <rect key="frame" x="20" y="78.5" width="335" height="122.5"/>
+                                <string key="text">Notes for Wi-Fi configuration of IP camera:
+1. Please make sure your Wi-Fi password is correct.
+2. Please confirm your Wi-Fi is 2.4GHz.
+3. DHCP is enabled in Router.
+4. Please keep camera near to your router &amp; your phone and connect to stable network.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zrf-VK-eeK">
+                                <rect key="frame" x="87.5" y="261" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8Kv-PC-AQe"/>
+                                    <constraint firstAttribute="width" constant="200" id="g8H-yN-frg"/>
+                                </constraints>
+                                <state key="normal" title="RETRY">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="HKB-OE-FFX" kind="unwind" unwindAction="AddDeviceWirelessViewController1UnwindSegue:" id="GNY-Nv-ckI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f72-lM-mrB" firstAttribute="top" secondItem="Xyh-7V-1Hm" secondAttribute="bottom" constant="15" id="7np-ds-lcL"/>
+                            <constraint firstItem="elt-p4-Eia" firstAttribute="centerX" secondItem="yZf-YM-Ybb" secondAttribute="centerX" id="G9Y-a3-xmf"/>
+                            <constraint firstItem="elt-p4-Eia" firstAttribute="top" secondItem="f72-lM-mrB" secondAttribute="bottom" constant="20" id="JeT-fc-kfP"/>
+                            <constraint firstItem="Zrf-VK-eeK" firstAttribute="top" secondItem="elt-p4-Eia" secondAttribute="bottom" constant="60" id="Z44-tb-LQX"/>
+                            <constraint firstItem="Zrf-VK-eeK" firstAttribute="centerX" secondItem="yZf-YM-Ybb" secondAttribute="centerX" id="daj-l7-Rsc"/>
+                            <constraint firstItem="f72-lM-mrB" firstAttribute="centerX" secondItem="yZf-YM-Ybb" secondAttribute="centerX" id="g5U-wT-VCA"/>
+                            <constraint firstAttribute="trailing" secondItem="elt-p4-Eia" secondAttribute="trailing" constant="20" id="ool-jL-bVx"/>
+                            <constraint firstItem="elt-p4-Eia" firstAttribute="leading" secondItem="yZf-YM-Ybb" secondAttribute="leading" constant="20" id="xyh-pC-HjU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Camera Failed" id="xFm-ae-s2A">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="k9X-gM-Hc7">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="HKB-OE-FFX" kind="unwind" unwindAction="AddDeviceWirelessViewController1UnwindSegue:" id="PSK-in-rD7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yLd-59-PRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HKB-OE-FFX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>
@@ -2796,11 +2962,13 @@
         <image name="wifi_page" width="230" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dth-b5-AO4"/>
+        <segue reference="5hR-ki-RRl"/>
+        <segue reference="Jct-Sv-dwe"/>
+        <segue reference="zSX-HR-9iJ"/>
         <segue reference="7i4-VV-h0I"/>
         <segue reference="Ekd-dn-ODp"/>
-        <segue reference="6Zl-SU-ISp"/>
-        <segue reference="ImC-C4-Yk1"/>
-        <segue reference="7gs-zU-rAy"/>
+        <segue reference="APm-Wv-oAf"/>
+        <segue reference="Y28-Yq-DHg"/>
+        <segue reference="xAs-AT-dZ3"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,7 +17,7 @@
 
 -(void) add:(BaseWiFiConfig*)config;
 
--(void) setData:(NSString*)ssid password:(NSString*)pwd auth:(NSInteger)authMode;
+-(void) setData:(NSString*)uid ssid:(NSString*)ssid password:(NSString*)pwd auth:(NSInteger)authMode;
 
 -(void) startConfig;
 

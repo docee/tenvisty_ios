@@ -8,6 +8,8 @@
 
 #import "WiFiConfigContext.h"
 #import "FaceberAudioConfig.h"
+#import "HichipAudioWiFiConfig.h"
+#import "HichipSmarkWiFiConfig.h"
 
 @interface WiFiConfigContext(){
     id<WiFiConfigDelegate> configDelegate;
@@ -24,7 +26,7 @@
     @synchronized(self) {
         if (instance == nil){
             instance = [[self alloc] init];
-            [instance add:[FaceberAudioConfig sharedInstance]];
+            
         }
     }
     return instance;
@@ -65,7 +67,18 @@
     [self.configList addObject:config];
 }
 
--(void) setData:(NSString*)ssid password:(NSString*)pwd auth:(NSInteger)authMode{
+-(void) setData:(NSString*)uid ssid:(NSString*)ssid password:(NSString*)pwd auth:(NSInteger)authMode{
+    if(!isStopped){
+        [self stopConfig];
+    }
+    [self clear];
+    if(uid.length == 17){
+        [self add:[HichipAudioWiFiConfig sharedInstance]];
+    }
+    else{
+        [self add:[FaceberAudioConfig sharedInstance]];
+    }
+    [self add:[HichipSmarkWiFiConfig sharedInstance]];
     for(BaseWiFiConfig *config in self.configList){
         config.pwd = pwd;
         config.ssid = ssid;
@@ -79,6 +92,11 @@
         config.delegate = configDelegate;
         [config runConfig];
     }
+}
+
+
+-(void) clear{
+    [self.configList removeAllObjects];
 }
 
 -(void) stopConfig{

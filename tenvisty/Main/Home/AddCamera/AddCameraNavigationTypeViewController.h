@@ -9,6 +9,7 @@
 #import "BaseTableViewController.h"
 #import "OCScanLifeViewController.h"
 
-@interface AddCameraNavigationTypeViewController : BaseTableViewController<OCScanLifeViewControllerDelegate>
+@interface AddCameraNavigationTypeViewController : BaseTableViewController
 
+@property (nonatomic,strong) NSString *uid;
 @end

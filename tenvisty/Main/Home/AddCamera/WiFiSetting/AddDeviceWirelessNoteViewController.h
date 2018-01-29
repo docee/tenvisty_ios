@@ -11,4 +11,7 @@
 @interface AddDeviceWirelessNoteViewController : BaseViewController
 
 @property (nonatomic,strong) NSString *uid;
+@property (nonatomic,strong) NSString *wifiSsid;
+@property (nonatomic,strong) NSString *wifiPassword;
+@property (nonatomic,assign) NSInteger wifiAuthMode;
 @end

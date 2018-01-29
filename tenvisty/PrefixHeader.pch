@@ -22,6 +22,7 @@
 #import "GNetworkStates.h"
 #import "GBase.h"
 #import "iToast.h"
+#import "TwsDataValue.h"
 
 //宏定义国际化字符
 #define INTERNATIONAL

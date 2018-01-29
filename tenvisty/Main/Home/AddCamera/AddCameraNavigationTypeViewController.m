@@ -13,7 +13,6 @@
 
 @interface AddCameraNavigationTypeViewController (){
 }
-@property (nonatomic,strong) NSString* uid;
 @property (nonatomic,assign) NSInteger addCameraType;
 
 @end
@@ -40,10 +39,6 @@
     return 1;
 }
 
--(void)go2ScanQRCode{
-    OCScanLifeViewController* test2obj = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_scanQRCode"];  //test2为viewcontroller的StoryboardId
-    [self.navigationController pushViewController:test2obj animated:YES];
-}
 //其他界面返回到此界面调用的方法
 - (IBAction)AddCameraNavigationTypeViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     
@@ -52,28 +47,25 @@
     return YES;
 }
 
-- (void)scanResult:(NSString *)result{
-    if(result){
-        self.uid = result;
-//        if( self.addCameraType == ADDCAMERA_WIRELESS){
-//            [self performSegueWithIdentifier:@"AddCamera2SaveCamera" sender:self];
-//        }
-//        else if(self.addCameraType == ADDCAMERA_WIRED){
-//            [self performSegueWithIdentifier:@"AddCamera2AddDeviceWirelessNote" sender:self];
-//        }
-    }
-    else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"AddCameraNavigationType2ScanQRCode"]){
-        OCScanLifeViewController *controller= segue.destinationViewController;
-        controller.title = LOCALSTR(@"Scan QR Code");
-        controller.delegate = self;
-    }
     
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear: animated];
+    [self tryConnect: self.uid];
+}
+
+-(void)tryConnect:(NSString*)_uid{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        BaseCamera *camera = [[BaseCamera alloc] initWithUid:_uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
+        [camera connect];
+        [TwsDataValue setTryConnectCamera:camera];
+    });
 }
 /*
 #pragma mark - Navigation

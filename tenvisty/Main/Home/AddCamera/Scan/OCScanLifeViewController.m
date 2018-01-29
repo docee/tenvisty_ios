@@ -9,6 +9,7 @@
 #import "OCScanLifeViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "AddCameraNavigationTypeViewController.h"
 
 
 @interface OCScanLifeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
@@ -26,10 +27,12 @@
 @property (nonatomic, strong) AVCaptureMetadataOutput *output;
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnTorch;
 
 @property (nonatomic,strong) NSTimer *reRunTimer;
 
 
+@property (nonatomic,strong) NSString *uid;
 @end
 
 @implementation OCScanLifeViewController
@@ -85,6 +88,7 @@
             [self.session stopRunning];
         }
     });
+    self.btnTorch.selected = NO;
     if(_reRunTimer != nil){
         [_reRunTimer invalidate];
         _reRunTimer = nil;
@@ -113,7 +117,8 @@
 - (IBAction)goInputUIDManually:(id)sender {
 }
 
-- (IBAction)goBack:(id)sender {   [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
     if (self.delegate)
     {
         [self.delegate scanResult:nil];
@@ -125,8 +130,56 @@
     
 }
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+    if([self checkUID:sender sender:fromViewController]){
+        [self go2AddCameraNavigationType:sender];
+    }
     return NO;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ScanQRCode2AddCameraNavigationType"]){
+        AddCameraNavigationTypeViewController *controller= segue.destinationViewController;
+        controller.uid = self.uid;
+    }
+    
+}
+
+-(void)go2AddCameraNavigationType:(NSString*)_uid{
+    self.uid = _uid;
+    [self performSegueWithIdentifier:@"ScanQRCode2AddCameraNavigationType" sender:self];
+}
+
+-(BOOL)checkUID:(NSString*)_uid sender:(UIViewController*)sender{
+    
+    if(_uid.length == 0){
+        if(sender == self){
+            [TwsTools presentAlertMsg:sender message:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label") actionDefaultBlock:^{
+                [self reRunScan];
+            }];
+        }
+        else{
+            [TwsTools presentAlertMsg:sender message:LOCALSTR(@"[UID] is not entered.")];
+        }
+    }
+    else{
+        _uid = [TwsTools readUID:_uid];
+        if(_uid){
+            return YES;
+        }
+        else{
+            if(sender == self){
+                [TwsTools presentAlertMsg:sender message:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label") actionDefaultBlock:^{
+                    [self reRunScan];
+                }];
+            }
+            else {
+                [TwsTools presentAlertMsg:sender message:LOCALSTR(@"Invalid UID")];
+            }
+        }
+    }
+    return NO;
+}
+
 - (void)setUp
 {
 //    CGFloat screenW = self.view.frame.size.width;
@@ -290,19 +343,30 @@
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
         NSLog(@"metadataObject = %@", metadataObject.stringValue);
-        NSString *uid = [TwsTools readUID:stringValue];;
-        if(uid == nil){
+        if([self checkUID:stringValue sender:self]){
+            [self go2AddCameraNavigationType:stringValue];
+        }
+        else{
             self.output.metadataObjectTypes = @[];
             [self.session startRunning];
-            [[[iToast makeText:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label")] setDuration:3] show];
-            if(_reRunTimer == nil){
-               _reRunTimer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(reRunScan) userInfo:nil repeats:NO];
-            }
+//            [[[iToast makeText:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label")] setDuration:3] show];
+//            if(_reRunTimer == nil){
+//                _reRunTimer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(reRunScan) userInfo:nil repeats:NO];
+//            }
         }
-        else if (self.delegate){
-            [self.navigationController popViewControllerAnimated:!self.hasNoQRCodeBtn];
-            [self.delegate scanResult:stringValue];
-        }
+//        NSString *uid = [TwsTools readUID:stringValue];;
+//        if(uid == nil){
+//            self.output.metadataObjectTypes = @[];
+//            [self.session startRunning];
+//            [[[iToast makeText:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label")] setDuration:3] show];
+//            if(_reRunTimer == nil){
+//               _reRunTimer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(reRunScan) userInfo:nil repeats:NO];
+//            }
+//        }
+//        else if (self.delegate){
+//            [self.navigationController popViewControllerAnimated:!self.hasNoQRCodeBtn];
+//            [self.delegate scanResult:stringValue];
+//        }
         
         if ([metadataObject.type isEqualToString:AVMetadataObjectTypeQRCode])
         {

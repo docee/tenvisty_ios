@@ -17,17 +17,17 @@
     if (self) {
         
     }
-    lineColor = Color_White;
+    lineColor = self.titleLabel.textColor;
     return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if(self){
-       lineColor = Color_White;
+       lineColor = self.titleLabel.textColor;
         
         // underline Terms and condidtions
-        NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:LOCALSTR(@"Input UID manually")];
+        NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:self.titleLabel.text];
         
         //设置下划线...
         /*
@@ -40,10 +40,10 @@
                           value:@(NSUnderlineStyleSingle)
                           range:(NSRange){0,[tncString length]}];
         //此时如果设置字体颜色要这样
-        [tncString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]  range:NSMakeRange(0,[tncString length])];
+        [tncString addAttribute:NSForegroundColorAttributeName value:lineColor  range:NSMakeRange(0,[tncString length])];
         
         //设置下划线颜色...
-        [tncString addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:(NSRange){0,[tncString length]}];
+        [tncString addAttribute:NSUnderlineColorAttributeName value:lineColor range:(NSRange){0,[tncString length]}];
         [self setAttributedTitle:tncString forState:UIControlStateNormal];
         
     }

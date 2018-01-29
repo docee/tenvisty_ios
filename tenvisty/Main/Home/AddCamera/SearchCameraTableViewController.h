@@ -12,4 +12,6 @@
 
 @interface SearchCameraTableViewController : BaseTableViewController<SearchLanDelegate>
 
+@property(nonatomic,strong)NSString *uid;
+
 @end

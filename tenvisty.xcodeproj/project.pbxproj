@@ -28,6 +28,13 @@
 		890B46AB1FB034C000C1061A /* MyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46AA1FB034C000C1061A /* MyCamera.m */; };
 		890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B41FB03CD500C1061A /* UIColor+Hex.m */; };
 		890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B46B61FB03CD500C1061A /* UIImage+Colors.m */; };
+		8924116C201ED810001F60E8 /* TwsDataValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924116B201ED810001F60E8 /* TwsDataValue.m */; };
+		8924116F201EEAA7001F60E8 /* AddCameraWiredNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924116E201EEAA7001F60E8 /* AddCameraWiredNoteViewController.m */; };
+		89241172201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241171201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m */; };
+		89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */; };
+		89241178201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */; };
+		8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
+		8924118D201F28C7001F60E8 /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
 		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
 		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
@@ -116,9 +123,7 @@
 		89A096821FF109C700E5EBAE /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A0967E1FF109C700E5EBAE /* FLAnimatedImage.m */; };
 		89A096831FF109C700E5EBAE /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A096801FF109C700E5EBAE /* FLAnimatedImageView.m */; };
 		89A096841FF109C700E5EBAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A096811FF109C700E5EBAE /* Info.plist */; };
-		89A37BBC2010AF5200A6F0CD /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
 		89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */; };
-		89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
 		89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C772015D44200A6F0CD /* LANSearchCamera.m */; };
 		89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
 		89A37C8920171A3200A6F0CD /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
@@ -234,6 +239,16 @@
 		8912D3FC1FF10BBA00C660AB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8912D4001FF10F4500C660AB /* IOTCamera */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = IOTCamera; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates/UninstalledProducts/iphoneos/IOTCamera.framework/IOTCamera"; sourceTree = "<group>"; };
 		8912D4031FF10F9A00C660AB /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates/UninstalledProducts/iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
+		8924116A201ED810001F60E8 /* TwsDataValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsDataValue.h; sourceTree = "<group>"; };
+		8924116B201ED810001F60E8 /* TwsDataValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsDataValue.m; sourceTree = "<group>"; };
+		8924116D201EEAA7001F60E8 /* AddCameraWiredNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCameraWiredNoteViewController.h; sourceTree = "<group>"; };
+		8924116E201EEAA7001F60E8 /* AddCameraWiredNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCameraWiredNoteViewController.m; sourceTree = "<group>"; };
+		89241170201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessFailNoteViewController.h; sourceTree = "<group>"; };
+		89241171201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessFailNoteViewController.m; sourceTree = "<group>"; };
+		89241173201F1DF9001F60E8 /* HichipAudioWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HichipAudioWiFiConfig.h; sourceTree = "<group>"; };
+		89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HichipAudioWiFiConfig.m; sourceTree = "<group>"; };
+		89241176201F1FE7001F60E8 /* HichipSmarkWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HichipSmarkWiFiConfig.h; sourceTree = "<group>"; };
+		89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HichipSmarkWiFiConfig.m; sourceTree = "<group>"; };
 		892477941FE263F70021D8E6 /* TwsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsTableViewCell.h; sourceTree = "<group>"; };
 		892477951FE263F70021D8E6 /* TwsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsTableViewCell.m; sourceTree = "<group>"; };
 		8924779B1FE28AF60021D8E6 /* TwsViewTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsViewTools.h; sourceTree = "<group>"; };
@@ -750,11 +765,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8924118D201F28C7001F60E8 /* libavconVoiceRecognize.a in Frameworks */,
+				8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */,
 				89A37C8920171A3200A6F0CD /* libHiP2PSDK.a in Frameworks */,
 				89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */,
-				89A37C5C2011C36500A6F0CD /* libstdc++.6.0.9.tbd in Frameworks */,
 				89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */,
-				89A37BBC2010AF5200A6F0CD /* libavconVoiceRecognize.a in Frameworks */,
 				89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
 				890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */,
@@ -982,6 +997,8 @@
 				89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */,
 				ED9DD5F62018E03A00C3C2CF /* HyperlinksButton.h */,
 				ED9DD5F72018E03A00C3C2CF /* HyperlinksButton.m */,
+				8924116A201ED810001F60E8 /* TwsDataValue.h */,
+				8924116B201ED810001F60E8 /* TwsDataValue.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1042,6 +1059,8 @@
 				89A37C97201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m */,
 				89EA52272019720200F2F15C /* AddCameraInputUIDTableViewController.h */,
 				89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */,
+				8924116D201EEAA7001F60E8 /* AddCameraWiredNoteViewController.h */,
+				8924116E201EEAA7001F60E8 /* AddCameraWiredNoteViewController.m */,
 			);
 			path = AddCamera;
 			sourceTree = "<group>";
@@ -1350,6 +1369,8 @@
 				89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */,
 				89D2B4EC1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.h */,
 				89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */,
+				89241170201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.h */,
+				89241171201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m */,
 			);
 			path = WiFiSetting;
 			sourceTree = "<group>";
@@ -1375,6 +1396,10 @@
 				89E171231FDFD7F0004AAD3D /* FaceberAudioConfig.m */,
 				89E171291FDFF126004AAD3D /* WiFiConfigContext.h */,
 				89E1712A1FDFF126004AAD3D /* WiFiConfigContext.m */,
+				89241173201F1DF9001F60E8 /* HichipAudioWiFiConfig.h */,
+				89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */,
+				89241176201F1FE7001F60E8 /* HichipSmarkWiFiConfig.h */,
+				89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */,
 			);
 			path = ConfigWiFi;
 			sourceTree = "<group>";
@@ -2202,6 +2227,7 @@
 				896BA3DA1FD9375400EE31AB /* ShowImageViewController.m in Sources */,
 				892ADB8E1FD7B94500BD8929 /* SystemSettingTableViewController.m in Sources */,
 				892ADB911FD7C5AA00BD8929 /* EventListViewController.m in Sources */,
+				89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */,
 				896BA3DE1FD94DC500EE31AB /* AboutListViewController.m in Sources */,
 				892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */,
 				892CE0C31FD121DB00942E28 /* BaseTableViewController.m in Sources */,
@@ -2229,6 +2255,7 @@
 				89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */,
 				89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */,
 				890B408D1FB02F5300C1061A /* TwsViewController.m in Sources */,
+				89241178201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m in Sources */,
 				EDB075F01FEE331B00B3EE23 /* EventCustomSearchSource.m in Sources */,
 				890B46B81FB03CD500C1061A /* UIImage+Colors.m in Sources */,
 				890B407E1FB006C600C1061A /* AboutViewController.m in Sources */,
@@ -2245,6 +2272,8 @@
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
 				89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */,
+				8924116F201EEAA7001F60E8 /* AddCameraWiredNoteViewController.m in Sources */,
+				8924116C201ED810001F60E8 /* TwsDataValue.m in Sources */,
 				892ADB691FD6909B00BD8929 /* EventSettingViewController.m in Sources */,
 				890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */,
 				894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */,
@@ -2274,6 +2303,7 @@
 				892ADB941FD803BC00BD8929 /* EventItemTableViewCell.m in Sources */,
 				892ADB631FD6740B00BD8929 /* WiFiSettingViewController.m in Sources */,
 				892ADB8B1FD7AE8500BD8929 /* DeviceInfoViewController.m in Sources */,
+				89241172201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m in Sources */,
 				894D7E5A1FAB01D900C58BB2 /* tenvisty.xcdatamodeld in Sources */,
 				890B40791FB006A000C1061A /* ImageViewController.m in Sources */,
 				895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */,

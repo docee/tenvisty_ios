@@ -47,18 +47,7 @@
     TwsTableViewCell *cell0 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [cell0 resignFirstResponder];
     NSString *_uid = cell0.value;
-    if(_uid.length == 0){
-         [TwsTools presentAlertMsg:self message:LOCALSTR(@"[UID] is not entered.")];
-    }
-    else{
-        _uid = [TwsTools readUID:_uid];
-        if(_uid){
-            [self performSegueWithIdentifier:@"Unwind_InputCameraUID2ScanQRCode" sender:self.uid];
-        }
-        else{
-            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Invalid UID")];
-        }
-    }
+    [self performSegueWithIdentifier:@"Unwind_InputCameraUID2ScanQRCode" sender:_uid];
 }
 
 - (IBAction)goBack:(id)sender {

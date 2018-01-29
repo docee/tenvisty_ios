@@ -7,8 +7,8 @@
 //
 
 #import "AddDeviceWirelessNoteViewController.h"
-#import "FLAnimatedImage.h"
-#import "AddDeviceWirelessViewController.h"
+#import "AddDeviceWirelessSettingViewController.h"
+#import "SaveCameraTableViewController.h"
 
 @interface AddDeviceWirelessNoteViewController ()
 //@property (weak, nonatomic) IBOutlet FLAnimatedImageView *gifView;
@@ -26,6 +26,14 @@
 //    NSData *data1 = [NSData dataWithContentsOfURL:url1];
 //    FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
 //    self.gifView.animatedImage = animatedImage1;
+    if([TwsDataValue getTryConnectCamera].isSessionConnected){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Camera is online, please enter its password to add.") actionDefaultBlock:^{
+            [self performSegueWithIdentifier:@"AddDeviceWirelessNote2SaveCamera" sender:self];
+        }];
+    }
+}
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,10 +42,28 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"AddDeviceWirelessNote2AddDeviceWireless"]){
-        AddDeviceWirelessViewController *controller= segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"AddDeviceWirelessNote2AddDeviceWirelessSetting"]){
+        AddDeviceWirelessSettingViewController *controller= segue.destinationViewController;
+        controller.uid = self.uid;
+        controller.wifiSsid = self.wifiSsid;
+        controller.wifiPassword = self.wifiPassword;
+        controller.wifiAuthMode = self.wifiAuthMode;
+    }
+    else if([segue.identifier isEqualToString:@"AddDeviceWirelessNote2SaveCamera"]){
+        SaveCameraTableViewController *controller = segue.destinationViewController;
         controller.uid = self.uid;
     }
+}
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if([identifier isEqualToString:@"AddDeviceWirelessNote2AddDeviceWirelessSetting"]){
+        if([TwsDataValue getTryConnectCamera].isSessionConnected){
+            [TwsTools presentAlertMsg:self message:LOCALSTR(@"Camera is online, please enter its password to add.") actionDefaultBlock:^{
+                [self performSegueWithIdentifier:@"AddDeviceWirelessNote2SaveCamera" sender:self];
+            }];
+            return NO;
+        }
+    }
+    return YES;
 }
 
 //其他界面返回到此界面调用的方法
