@@ -44,6 +44,7 @@
 @property(nonatomic,assign,readonly) BOOL isConnecting;
 @property(nonatomic,assign,readonly) BOOL isDisconnect;
 @property(nonatomic,assign,readonly) BOOL isWrongPassword;
+@property(nonatomic,assign) BOOL isSessionConnecting;
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_;
 -(id)init;
 -(void)connect;

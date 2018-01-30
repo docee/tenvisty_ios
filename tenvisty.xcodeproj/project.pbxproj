@@ -34,7 +34,22 @@
 		89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */; };
 		89241178201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */; };
 		8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
-		8924118D201F28C7001F60E8 /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
+		892411D2202010CA001F60E8 /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
+		89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89241244202062CD001F60E8 /* CameraSetting_Hichip.storyboard */; };
+		89241262202062CD001F60E8 /* CameraSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241246202062CD001F60E8 /* CameraSetting_HichipViewController.m */; };
+		89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241248202062CD001F60E8 /* ChangeCameraName_HichipViewController.m */; };
+		89241264202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924124A202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.m */; };
+		89241265202062CD001F60E8 /* ChangeWiFi_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924124C202062CD001F60E8 /* ChangeWiFi_HichipViewController.m */; };
+		89241266202062CD001F60E8 /* DeviceInfo_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924124E202062CD001F60E8 /* DeviceInfo_HichipViewController.m */; };
+		89241267202062CD001F60E8 /* EventSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241250202062CD001F60E8 /* EventSetting_HichipViewController.m */; };
+		89241268202062CD001F60E8 /* OtherSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241252202062CD001F60E8 /* OtherSetting_HichipViewController.m */; };
+		89241269202062CD001F60E8 /* RecordSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241254202062CD001F60E8 /* RecordSetting_HichipViewController.m */; };
+		8924126A202062CD001F60E8 /* SDCard_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241256202062CD001F60E8 /* SDCard_HichipViewController.m */; };
+		8924126B202062CD001F60E8 /* SensSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241258202062CD001F60E8 /* SensSetting_HichipViewController.m */; };
+		8924126C202062CD001F60E8 /* SystemSettingTable_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924125A202062CD001F60E8 /* SystemSettingTable_HichipViewController.m */; };
+		8924126D202062CD001F60E8 /* TimeSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924125C202062CD001F60E8 /* TimeSetting_HichipViewController.m */; };
+		8924126E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924125E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m */; };
+		8924126F202062CD001F60E8 /* WiFiSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241260202062CD001F60E8 /* WiFiSetting_HichipViewController.m */; };
 		892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892477951FE263F70021D8E6 /* TwsTableViewCell.m */; };
 		8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8924779C1FE28AF60021D8E6 /* TwsViewTools.m */; };
 		892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 892ADB521FD635EB00BD8929 /* ListImgTableViewCell.m */; };
@@ -92,6 +107,11 @@
 		895141D01FE763BD00905355 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141CC1FE763BD00905355 /* iToast.m */; };
 		895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141D81FE7780100905355 /* LocalVideoInfo.m */; };
 		895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */; };
+		89545E992020751800151E90 /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
+		89545EA420207F6900151E90 /* WifiAp.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545E9D20207F6800151E90 /* WifiAp.m */; };
+		89545EA520207F6900151E90 /* WifiCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545E9F20207F6800151E90 /* WifiCheck.m */; };
+		89545EA620207F6900151E90 /* WifiList.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EA120207F6800151E90 /* WifiList.m */; };
+		89545EA720207F6900151E90 /* WifiParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EA320207F6800151E90 /* WifiParam.m */; };
 		896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */; };
 		896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */; };
 		896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D61FD92C7600EE31AB /* ImageCollectionViewCell.m */; };
@@ -126,7 +146,6 @@
 		89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */; };
 		89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C772015D44200A6F0CD /* LANSearchCamera.m */; };
 		89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
-		89A37C8920171A3200A6F0CD /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
 		89A37C8C201726FB00A6F0CD /* Home_Hichip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */; };
 		89A37C90201727A000A6F0CD /* LiveView_HichipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */; };
 		89A37C912018359B00A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -249,6 +268,35 @@
 		89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HichipAudioWiFiConfig.m; sourceTree = "<group>"; };
 		89241176201F1FE7001F60E8 /* HichipSmarkWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HichipSmarkWiFiConfig.h; sourceTree = "<group>"; };
 		89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HichipSmarkWiFiConfig.m; sourceTree = "<group>"; };
+		89241244202062CD001F60E8 /* CameraSetting_Hichip.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraSetting_Hichip.storyboard; sourceTree = "<group>"; };
+		89241245202062CD001F60E8 /* CameraSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89241246202062CD001F60E8 /* CameraSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89241247202062CD001F60E8 /* ChangeCameraName_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeCameraName_HichipViewController.h; sourceTree = "<group>"; };
+		89241248202062CD001F60E8 /* ChangeCameraName_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeCameraName_HichipViewController.m; sourceTree = "<group>"; };
+		89241249202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeCameraPassword_HichipViewController.h; sourceTree = "<group>"; };
+		8924124A202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeCameraPassword_HichipViewController.m; sourceTree = "<group>"; };
+		8924124B202062CD001F60E8 /* ChangeWiFi_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeWiFi_HichipViewController.h; sourceTree = "<group>"; };
+		8924124C202062CD001F60E8 /* ChangeWiFi_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeWiFi_HichipViewController.m; sourceTree = "<group>"; };
+		8924124D202062CD001F60E8 /* DeviceInfo_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo_HichipViewController.h; sourceTree = "<group>"; };
+		8924124E202062CD001F60E8 /* DeviceInfo_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo_HichipViewController.m; sourceTree = "<group>"; };
+		8924124F202062CD001F60E8 /* EventSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89241250202062CD001F60E8 /* EventSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89241251202062CD001F60E8 /* OtherSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89241252202062CD001F60E8 /* OtherSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89241253202062CD001F60E8 /* RecordSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89241254202062CD001F60E8 /* RecordSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89241255202062CD001F60E8 /* SDCard_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCard_HichipViewController.h; sourceTree = "<group>"; };
+		89241256202062CD001F60E8 /* SDCard_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCard_HichipViewController.m; sourceTree = "<group>"; };
+		89241257202062CD001F60E8 /* SensSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89241258202062CD001F60E8 /* SensSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89241259202062CD001F60E8 /* SystemSettingTable_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingTable_HichipViewController.h; sourceTree = "<group>"; };
+		8924125A202062CD001F60E8 /* SystemSettingTable_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingTable_HichipViewController.m; sourceTree = "<group>"; };
+		8924125B202062CD001F60E8 /* TimeSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSetting_HichipViewController.h; sourceTree = "<group>"; };
+		8924125C202062CD001F60E8 /* TimeSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSetting_HichipViewController.m; sourceTree = "<group>"; };
+		8924125D202062CD001F60E8 /* TimeZoneSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeZoneSetting_HichipViewController.h; sourceTree = "<group>"; };
+		8924125E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeZoneSetting_HichipViewController.m; sourceTree = "<group>"; };
+		8924125F202062CD001F60E8 /* WiFiSetting_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89241260202062CD001F60E8 /* WiFiSetting_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSetting_HichipViewController.m; sourceTree = "<group>"; };
 		892477941FE263F70021D8E6 /* TwsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsTableViewCell.h; sourceTree = "<group>"; };
 		892477951FE263F70021D8E6 /* TwsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsTableViewCell.m; sourceTree = "<group>"; };
 		8924779B1FE28AF60021D8E6 /* TwsViewTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsViewTools.h; sourceTree = "<group>"; };
@@ -350,6 +398,14 @@
 		895141D81FE7780100905355 /* LocalVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoInfo.m; sourceTree = "<group>"; };
 		895141E31FE8C7FF00905355 /* SwitchVideoQualityDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchVideoQualityDialog.h; sourceTree = "<group>"; };
 		895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwitchVideoQualityDialog.m; sourceTree = "<group>"; };
+		89545E9C20207F6800151E90 /* WifiAp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiAp.h; sourceTree = "<group>"; };
+		89545E9D20207F6800151E90 /* WifiAp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiAp.m; sourceTree = "<group>"; };
+		89545E9E20207F6800151E90 /* WifiCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiCheck.h; sourceTree = "<group>"; };
+		89545E9F20207F6800151E90 /* WifiCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiCheck.m; sourceTree = "<group>"; };
+		89545EA020207F6800151E90 /* WifiList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiList.h; sourceTree = "<group>"; };
+		89545EA120207F6800151E90 /* WifiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiList.m; sourceTree = "<group>"; };
+		89545EA220207F6800151E90 /* WifiParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiParam.h; sourceTree = "<group>"; };
+		89545EA320207F6800151E90 /* WifiParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiParam.m; sourceTree = "<group>"; };
 		896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
 		896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -765,9 +821,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8924118D201F28C7001F60E8 /* libavconVoiceRecognize.a in Frameworks */,
+				89545E992020751800151E90 /* libavconVoiceRecognize.a in Frameworks */,
+				892411D2202010CA001F60E8 /* libHiP2PSDK.a in Frameworks */,
 				8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */,
-				89A37C8920171A3200A6F0CD /* libHiP2PSDK.a in Frameworks */,
 				89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */,
 				89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */,
 				89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */,
@@ -982,6 +1038,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		89241243202062CD001F60E8 /* CameraSetting */ = {
+			isa = PBXGroup;
+			children = (
+				89241244202062CD001F60E8 /* CameraSetting_Hichip.storyboard */,
+				89241245202062CD001F60E8 /* CameraSetting_HichipViewController.h */,
+				89241246202062CD001F60E8 /* CameraSetting_HichipViewController.m */,
+				89241247202062CD001F60E8 /* ChangeCameraName_HichipViewController.h */,
+				89241248202062CD001F60E8 /* ChangeCameraName_HichipViewController.m */,
+				89241249202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.h */,
+				8924124A202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.m */,
+				8924124B202062CD001F60E8 /* ChangeWiFi_HichipViewController.h */,
+				8924124C202062CD001F60E8 /* ChangeWiFi_HichipViewController.m */,
+				8924124D202062CD001F60E8 /* DeviceInfo_HichipViewController.h */,
+				8924124E202062CD001F60E8 /* DeviceInfo_HichipViewController.m */,
+				8924124F202062CD001F60E8 /* EventSetting_HichipViewController.h */,
+				89241250202062CD001F60E8 /* EventSetting_HichipViewController.m */,
+				89241251202062CD001F60E8 /* OtherSetting_HichipViewController.h */,
+				89241252202062CD001F60E8 /* OtherSetting_HichipViewController.m */,
+				89241253202062CD001F60E8 /* RecordSetting_HichipViewController.h */,
+				89241254202062CD001F60E8 /* RecordSetting_HichipViewController.m */,
+				89241255202062CD001F60E8 /* SDCard_HichipViewController.h */,
+				89241256202062CD001F60E8 /* SDCard_HichipViewController.m */,
+				89241257202062CD001F60E8 /* SensSetting_HichipViewController.h */,
+				89241258202062CD001F60E8 /* SensSetting_HichipViewController.m */,
+				89241259202062CD001F60E8 /* SystemSettingTable_HichipViewController.h */,
+				8924125A202062CD001F60E8 /* SystemSettingTable_HichipViewController.m */,
+				8924125B202062CD001F60E8 /* TimeSetting_HichipViewController.h */,
+				8924125C202062CD001F60E8 /* TimeSetting_HichipViewController.m */,
+				8924125D202062CD001F60E8 /* TimeZoneSetting_HichipViewController.h */,
+				8924125E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m */,
+				8924125F202062CD001F60E8 /* WiFiSetting_HichipViewController.h */,
+				89241260202062CD001F60E8 /* WiFiSetting_HichipViewController.m */,
+			);
+			path = CameraSetting;
+			sourceTree = "<group>";
+		};
 		892CE0A51FD0F57100942E28 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,6 +1235,7 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89545E9B20207F6800151E90 /* WiFi */,
 				895141DF1FE8C7BE00905355 /* View */,
 				895141D61FE7780100905355 /* Video */,
 			);
@@ -1171,6 +1264,21 @@
 				895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		89545E9B20207F6800151E90 /* WiFi */ = {
+			isa = PBXGroup;
+			children = (
+				89545E9C20207F6800151E90 /* WifiAp.h */,
+				89545E9D20207F6800151E90 /* WifiAp.m */,
+				89545E9E20207F6800151E90 /* WifiCheck.h */,
+				89545E9F20207F6800151E90 /* WifiCheck.m */,
+				89545EA020207F6800151E90 /* WifiList.h */,
+				89545EA120207F6800151E90 /* WifiList.m */,
+				89545EA220207F6800151E90 /* WifiParam.h */,
+				89545EA320207F6800151E90 /* WifiParam.m */,
+			);
+			path = WiFi;
 			sourceTree = "<group>";
 		};
 		896BA3CB1FD9255500EE31AB /* Image */ = {
@@ -1342,6 +1450,7 @@
 		89A37C8A201726E700A6F0CD /* Hichip */ = {
 			isa = PBXGroup;
 			children = (
+				89241243202062CD001F60E8 /* CameraSetting */,
 				89A37C8F2017279F00A6F0CD /* LiveView_HichipController.h */,
 				89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */,
 				89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */,
@@ -2187,6 +2296,7 @@
 			files = (
 				894D7E5C1FAB01D900C58BB2 /* Assets.xcassets in Resources */,
 				890B407B1FB006B700C1061A /* About.storyboard in Resources */,
+				89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */,
 				892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */,
 				894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */,
 				890B40761FB0069400C1061A /* Image.storyboard in Resources */,
@@ -2227,12 +2337,15 @@
 				896BA3DA1FD9375400EE31AB /* ShowImageViewController.m in Sources */,
 				892ADB8E1FD7B94500BD8929 /* SystemSettingTableViewController.m in Sources */,
 				892ADB911FD7C5AA00BD8929 /* EventListViewController.m in Sources */,
+				8924126E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m in Sources */,
 				89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */,
+				89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */,
 				896BA3DE1FD94DC500EE31AB /* AboutListViewController.m in Sources */,
 				892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */,
 				892CE0C31FD121DB00942E28 /* BaseTableViewController.m in Sources */,
 				892ADB7F1FD781F800BD8929 /* TimeSettingViewController.m in Sources */,
 				89870A241FDA83AA005207AB /* TwsTools.m in Sources */,
+				89241269202062CD001F60E8 /* RecordSetting_HichipViewController.m in Sources */,
 				892ADB761FD6A26100BD8929 /* SelectItemTableViewCell.m in Sources */,
 				89E4E9721FCE7EC1007EA336 /* CameraListItemTableViewCell.m in Sources */,
 				89E6D98C1FDA25F30049F1E7 /* BaseViewController.m in Sources */,
@@ -2244,11 +2357,13 @@
 				898D8BB41FE0F75B00062F04 /* GBase.m in Sources */,
 				895141D01FE763BD00905355 /* iToast.m in Sources */,
 				8924779D1FE28AF60021D8E6 /* TwsViewTools.m in Sources */,
+				89241264202062CD001F60E8 /* ChangeCameraPassword_HichipViewController.m in Sources */,
 				8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */,
 				892ADB9A1FD8F83000BD8929 /* ImageTableViewCell.m in Sources */,
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
 				89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */,
+				8924126C202062CD001F60E8 /* SystemSettingTable_HichipViewController.m in Sources */,
 				895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */,
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
 				892CE0D71FD13E1500942E28 /* OCScanLifeViewController.m in Sources */,
@@ -2262,13 +2377,17 @@
 				89D8111C1FF63FEB00679B39 /* WebBrowserController.m in Sources */,
 				892ADB851FD78E5400BD8929 /* TimeZoneModel.m in Sources */,
 				898D8BAD1FE0F66600062F04 /* FMDatabase.m in Sources */,
+				89545EA720207F6900151E90 /* WifiParam.m in Sources */,
+				8924126F202062CD001F60E8 /* WiFiSetting_HichipViewController.m in Sources */,
 				892CE0BB1FD1014000942E28 /* TextFieldImgTableViewCell.m in Sources */,
+				89241267202062CD001F60E8 /* EventSetting_HichipViewController.m in Sources */,
 				89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */,
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
 				89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */,
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
 				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,
+				89545EA520207F6900151E90 /* WifiCheck.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
 				89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */,
@@ -2278,6 +2397,7 @@
 				890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */,
 				894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */,
 				ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */,
+				89241265202062CD001F60E8 /* ChangeWiFi_HichipViewController.m in Sources */,
 				890B40891FB02F1A00C1061A /* TimeScheduleViewController.m in Sources */,
 				890B408A1FB02F1A00C1061A /* ViewController.m in Sources */,
 				892CE0B81FD1013100942E28 /* TextFieldTableViewCell.m in Sources */,
@@ -2295,20 +2415,27 @@
 				890B46AB1FB034C000C1061A /* MyCamera.m in Sources */,
 				892CE0BE1FD1029F00942E28 /* TextFieldDisableTableViewCell.m in Sources */,
 				89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */,
+				89241268202062CD001F60E8 /* OtherSetting_HichipViewController.m in Sources */,
 				892ADB5D1FD6524800BD8929 /* ChangeCameraNameViewController.m in Sources */,
 				89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */,
 				89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */,
 				894D7E4E1FAB01D900C58BB2 /* main.m in Sources */,
+				89545EA620207F6900151E90 /* WifiList.m in Sources */,
 				892CE0981FCFD32300942E28 /* ModifyCameraNameTableViewController.m in Sources */,
+				8924126A202062CD001F60E8 /* SDCard_HichipViewController.m in Sources */,
 				892ADB941FD803BC00BD8929 /* EventItemTableViewCell.m in Sources */,
 				892ADB631FD6740B00BD8929 /* WiFiSettingViewController.m in Sources */,
+				89545EA420207F6900151E90 /* WifiAp.m in Sources */,
+				8924126B202062CD001F60E8 /* SensSetting_HichipViewController.m in Sources */,
 				892ADB8B1FD7AE8500BD8929 /* DeviceInfoViewController.m in Sources */,
 				89241172201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m in Sources */,
 				894D7E5A1FAB01D900C58BB2 /* tenvisty.xcdatamodeld in Sources */,
 				890B40791FB006A000C1061A /* ImageViewController.m in Sources */,
 				895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */,
 				89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */,
+				89241266202062CD001F60E8 /* DeviceInfo_HichipViewController.m in Sources */,
 				892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */,
+				89241262202062CD001F60E8 /* CameraSetting_HichipViewController.m in Sources */,
 				898D8BB11FE0F66600062F04 /* FMResultSet.m in Sources */,
 				89A096821FF109C700E5EBAE /* FLAnimatedImage.m in Sources */,
 				89A37C90201727A000A6F0CD /* LiveView_HichipController.m in Sources */,
@@ -2321,6 +2448,7 @@
 				892ADB661FD67A0A00BD8929 /* ChangeWiFiViewController.m in Sources */,
 				890B40931FB02FD000C1061A /* TwsCell.m in Sources */,
 				892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */,
+				8924126D202062CD001F60E8 /* TimeSetting_HichipViewController.m in Sources */,
 				896BA3E11FD950A200EE31AB /* ImageCameraListViewController.m in Sources */,
 				892ADB791FD6A70400BD8929 /* RecordSettingViewController.m in Sources */,
 				89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */,

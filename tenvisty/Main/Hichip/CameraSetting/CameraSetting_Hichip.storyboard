@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -18,7 +19,7 @@
         <!--Camera Setting-->
         <scene sceneID="Yhx-zV-cvn">
             <objects>
-                <viewController storyboardIdentifier="storyboard_cameraSetting" hidesBottomBarWhenPushed="YES" id="3aF-RF-Eil" customClass="CameraSettingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="storyboard_cameraSetting" hidesBottomBarWhenPushed="YES" id="3aF-RF-Eil" customClass="CameraSetting_HichipViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gug-0T-Bfd"/>
                         <viewControllerLayoutGuide type="bottom" id="hzx-1a-pUx"/>
@@ -129,7 +130,7 @@
         <!--Camera Name-->
         <scene sceneID="UMG-1x-5MR">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="y9d-zb-Q0d" customClass="ChangeCameraNameViewController" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="y9d-zb-Q0d" customClass="ChangeCameraName_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="ku2-ex-jWq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -172,7 +173,7 @@
         <!--Change Camera Password-->
         <scene sceneID="xB4-df-H8f">
             <objects>
-                <tableViewController storyboardIdentifier="storyboard_changcamerapassword" hidesBottomBarWhenPushed="YES" id="vEH-oV-IOe" customClass="ChangeCameraPasswordViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="storyboard_changcamerapassword" hidesBottomBarWhenPushed="YES" id="vEH-oV-IOe" customClass="ChangeCameraPassword_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="RSg-oQ-oyY" customClass="BaseTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,7 +257,7 @@
         <!--Wi-Fi Setting-->
         <scene sceneID="YNh-xS-tUP">
             <objects>
-                <tableViewController id="gZk-HX-Ihr" customClass="WiFiSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="gZk-HX-Ihr" customClass="WiFiSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="18" sectionFooterHeight="18" id="fRH-mg-3Eq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,7 +294,7 @@
         <!--Wi-Fi Setting-->
         <scene sceneID="M6e-yx-Mef">
             <objects>
-                <tableViewController id="t3s-Bm-tpk" customClass="ChangeWiFiViewController" sceneMemberID="viewController">
+                <tableViewController id="t3s-Bm-tpk" customClass="ChangeWiFi_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="AoZ-za-TJa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -336,7 +337,7 @@
         <!--Event Setting-->
         <scene sceneID="Xx1-qY-lgM">
             <objects>
-                <tableViewController id="7DM-0D-WgU" customClass="EventSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="7DM-0D-WgU" customClass="EventSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="vkm-ZJ-PHj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -366,7 +367,7 @@
         <!--Sensitivity Setting-->
         <scene sceneID="p42-d1-fOe">
             <objects>
-                <tableViewController id="73X-Qw-JdK" customClass="SensSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="73X-Qw-JdK" customClass="SensSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="oWL-gq-kJv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -393,7 +394,7 @@
         <!--Record Setting-->
         <scene sceneID="lcZ-s7-2fL">
             <objects>
-                <tableViewController id="izW-dz-a5c" customClass="RecordSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="izW-dz-a5c" customClass="RecordSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="uoG-Wx-qzH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,7 +421,7 @@
         <!--Other Setting-->
         <scene sceneID="Haf-X1-9VM">
             <objects>
-                <tableViewController id="Snu-m4-qBh" customClass="OtherSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="Snu-m4-qBh" customClass="OtherSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="9ez-Vx-cmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -452,7 +453,7 @@
         <!--Time Setting-->
         <scene sceneID="DPO-E6-xgU">
             <objects>
-                <tableViewController id="EKy-nf-165" customClass="TimeSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="EKy-nf-165" customClass="TimeSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="40" sectionFooterHeight="18" id="QQs-32-3hr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -544,7 +545,7 @@
         <!--SD Card-->
         <scene sceneID="ET2-5l-6LG">
             <objects>
-                <tableViewController id="Ttx-47-tOU" customClass="SDCardViewController" sceneMemberID="viewController">
+                <tableViewController id="Ttx-47-tOU" customClass="SDCard_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="90" sectionHeaderHeight="18" sectionFooterHeight="18" id="zXU-aR-Usj" customClass="BaseTableView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -608,7 +609,7 @@
         <!--Device Information-->
         <scene sceneID="7kr-Gy-j9V">
             <objects>
-                <tableViewController id="lTX-H4-HqB" customClass="DeviceInfoViewController" sceneMemberID="viewController">
+                <tableViewController id="lTX-H4-HqB" customClass="DeviceInfo_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="Fcx-9W-BSV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -635,7 +636,7 @@
         <!--System Setting-->
         <scene sceneID="bGh-nL-TqF">
             <objects>
-                <tableViewController id="Xz8-Fb-QrX" customClass="SystemSettingTableViewController" sceneMemberID="viewController">
+                <tableViewController id="Xz8-Fb-QrX" customClass="SystemSettingTable_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="40" sectionHeaderHeight="18" sectionFooterHeight="18" id="Cjj-s4-R5N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -740,7 +741,7 @@
         <!--Time Zone-->
         <scene sceneID="WM8-DC-YW2">
             <objects>
-                <viewController id="eWU-SD-bQe" customClass="TimeZoneSettingViewController" sceneMemberID="viewController">
+                <viewController id="eWU-SD-bQe" customClass="TimeZoneSetting_HichipViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BfH-ky-TPl"/>
                         <viewControllerLayoutGuide type="bottom" id="lES-JV-Ol8"/>

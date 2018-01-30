@@ -69,9 +69,11 @@
     [self.tableview reloadData];
     
 }
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self setTitle:FORMAT(@"%@ (%lu)",LOCALSTR(@"Camera List"),(unsigned long)[GBase sharedInstance].cameras.count)];
+    [self.navigationController setTitle:LOCALSTR(@"Home")];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -257,11 +259,14 @@
 - (IBAction)CameraListViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     
 }
+-(NSString*)getSettingStoryboardName:(BaseCamera*)camera{
+    return camera.p2pType == P2P_Hichip?@"CameraSetting_Hichip":@"CameraSetting";
+}
 -(void)showChangePasswordStrict:(BaseCamera*)camera{
     if(!isShowingModifyPassword){
         isShowingModifyPassword = YES;
         [TwsTools presentAlertMsg:self message: FORMAT(LOCALSTR(@"Your camera [%@] uses default password, please change the password for security."),((BaseCamera*)camera).nickName) actionDefaultBlock:^{
-            UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
+            UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:[self getSettingStoryboardName:camera] bundle:nil];
             BaseTableViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_changcamerapassword"];  //test2为viewcontroller的StoryboardId
             test2obj.camera = camera;
             [self.navigationController pushViewController:test2obj animated:YES];

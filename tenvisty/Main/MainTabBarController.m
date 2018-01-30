@@ -19,17 +19,17 @@
     // Do any additional setup after loading the view.
     UIStoryboard *homeboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     UINavigationController *homeController = [homeboard instantiateViewControllerWithIdentifier:@"homeViewController"];
-    UITabBarItem* item1 = [[UITabBarItem alloc]initWithTitle:@"Home" image:[UIImage imageNamed:@"Home"] tag:0];
+    UITabBarItem* item1 = [[UITabBarItem alloc]initWithTitle:LOCALSTR(@"Home") image:[UIImage imageNamed:@"Home"] tag:0];
     homeController.tabBarItem = item1;
     
     UIStoryboard *imageBoard = [UIStoryboard storyboardWithName:@"Image" bundle:nil];
     UINavigationController *imageViewController = [imageBoard instantiateViewControllerWithIdentifier:@"imageViewController"];
-    UITabBarItem* item2 = [[UITabBarItem alloc]initWithTitle:@"Image" image:[UIImage imageNamed:@"Image"] tag:1];
+    UITabBarItem* item2 = [[UITabBarItem alloc]initWithTitle:LOCALSTR(@"Image") image:[UIImage imageNamed:@"Image"] tag:1];
     imageViewController.tabBarItem = item2;
     
     UIStoryboard *aboutBoard = [UIStoryboard storyboardWithName:@"About" bundle:nil];
     UINavigationController *aboutViewController = [aboutBoard instantiateViewControllerWithIdentifier:@"aboutViewController"];
-    UITabBarItem* item3 = [[UITabBarItem alloc]initWithTitle:@"About" image:[UIImage imageNamed:@"About"] tag:2];
+    UITabBarItem* item3 = [[UITabBarItem alloc]initWithTitle:LOCALSTR(@"About") image:[UIImage imageNamed:@"About"] tag:2];
     aboutViewController.tabBarItem = item3;
     
     NSArray* array = [[NSArray alloc]initWithObjects:homeController,imageViewController,aboutViewController, nil];

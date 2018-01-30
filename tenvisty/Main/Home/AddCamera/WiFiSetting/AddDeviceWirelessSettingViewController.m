@@ -41,13 +41,14 @@
     [[WiFiConfigContext sharedInstance] setData:self.uid ssid:self.wifiSsid password:self.wifiPassword auth:self.wifiAuthMode];
     [[WiFiConfigContext sharedInstance] setReceiveListner:self];
     [self setTimerInterval:SMART_WIFI_TIME/100.0f];
-    self.camera = [[BaseCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
+    self.camera = [TwsDataValue getTryConnectCamera];
     
     // Do any additional setup after loading the view.
 }
+
 -(void)setTimerInterval:(NSTimeInterval)interval{
     if (self.progressView.progress < 1) {
-        if( self.pTimer != nil){
+        if(self.pTimer != nil){
             [self.pTimer invalidate];
         }
         self.pTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(progressMethod:) userInfo:nil repeats:YES];
@@ -83,6 +84,17 @@
         }
         
     }
+    else{
+        if(self.configWifiResult == CONFIG_WIFI_FAIL){
+            if(self.camera.isDisconnect){
+                [self.camera connect];
+            }
+            else if(self.camera.isSessionConnected){
+                self.configWifiResult = CONFIG_WIFI_SUCCESS;
+                [self setTimerInterval:0.01f];
+            }
+        }
+    }
 }
 
 -(void)saveCamera{
@@ -105,7 +117,7 @@
 
 
 -(void)onReceived:(NSString *)status ip:(NSString*) ip uid:(NSString*)uid{
-    if([self.uid isEqualToString:NO_USE_UID] || [self.uid isEqualToString:uid]){
+    if(self.configWifiResult == CONFIG_WIFI_FAIL && [self.uid isEqualToString:uid]){
         self.configWifiResult = CONFIG_WIFI_SUCCESS;
         self.camera.uid = uid;
         [self setTimerInterval:0.01f];
@@ -123,10 +135,12 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
     //[self performSegueWithIdentifier:@"AddDeviceWirelessSetting2CameraList" sender:self];
 }
+
 -(void)go2Help{
     [self stopConfig];
     [self performSegueWithIdentifier:@"AddDeviceWirelessSetting2SearchCamera" sender:self];
 }
+
 -(void)go2Search{
     [self stopConfig];
     [self performSegueWithIdentifier:@"AddDeviceWirelessSetting2SearchCamera" sender:self];

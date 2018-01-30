@@ -62,7 +62,7 @@
 
 -(void)tryConnect:(NSString*)_uid{
     dispatch_async(dispatch_get_main_queue(), ^{
-        BaseCamera *camera = [[BaseCamera alloc] initWithUid:_uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
+        BaseCamera *camera =  [[BaseCamera alloc] initWithUid:self.uid Name:LOCALSTR(@"Camera Name") UserName:@"admin" Password:@"admin"];
         [camera connect];
         [TwsDataValue setTryConnectCamera:camera];
     });

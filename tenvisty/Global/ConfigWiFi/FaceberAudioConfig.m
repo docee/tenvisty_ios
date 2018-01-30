@@ -82,8 +82,6 @@ int freqss[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,1700
         _player=[[VoicePlayer alloc] init];
         _player.delegate = self;
         [_player setFreqs:freqss freqCount:sizeof(freqss)/sizeof(int)];
-        //[NSThread detachNewThreadSelector:@selector(GoSmartLinkThread) toTarget:self withObject:nil];
-        //[self GoSmartLinkThread];
     }
     if(udpSocket == nil){
         [self setupSocket];

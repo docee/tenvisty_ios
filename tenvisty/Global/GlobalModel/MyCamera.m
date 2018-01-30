@@ -29,6 +29,7 @@
 @synthesize p2pType;
 
 @synthesize cameraDelegate;
+@synthesize isSessionConnecting;
 
 #pragma mark - Public Methods
 
@@ -181,6 +182,9 @@
 
 -(BOOL)isConnecting{
     return self.cameraConnectState == CONNECTION_STATE_CONNECTING || self.isSessionConnected;
+}
+-(BOOL)isSessionConnecting{
+    return self.cameraConnectState == CONNECTION_STATE_CONNECTING;
 }
 
 -(BOOL)isDisconnect{

@@ -56,6 +56,7 @@
 @synthesize videoRatio;
 
 @synthesize cameraStateDesc;
+@synthesize isSessionConnecting;
 
 
 -(NSString*)pwd{
@@ -87,6 +88,9 @@
 
 -(BOOL)isConnecting{
     return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || [self isSessionConnected];
+}
+-(BOOL)isSessionConnecting{
+    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING;
 }
 
 -(BOOL)isDisconnect{
@@ -176,7 +180,7 @@
 }
 
 - (void)sendIOCtrlToChannel:(NSInteger)channel Type:(NSInteger)type Data:(char *)buff DataSize:(NSInteger)size {
-    
+    [super sendIOCtrl:(int)type Data:buff Size:size];
 }
 
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time {
@@ -310,6 +314,9 @@
 
 - (void)receiveIOCtrl:(HiCamera *)camera Type:(int)type Data:(char*)data Size:(int)size Status:(int)status {
     LOG(@">>>HiCamera_receiveIOCtrl %@ %x %d %d",camera.uid, type, size, status);
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didReceiveIOCtrlWithType:type Data:data DataSize:size];
+    }
     switch (type) {
         case HI_P2P_GET_TIME_PARAM:
             

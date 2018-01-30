@@ -6,12 +6,13 @@
 //  Copyright © 2017 Tenvis. All rights reserved.
 //
 
-#import "CameraSettingViewController.h"
+#import "CameraSetting_HichipViewController.h"
 #import "ListImgTableViewCell.h"
 #import "ListImgTableViewCellModel.h"
 #import "BaseTableViewController.h"
+#import "WifiParam.h"
 
-@interface CameraSettingViewController ()
+@interface CameraSetting_HichipViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong,nonatomic) NSArray *listItems;
 @property (weak, nonatomic) IBOutlet UIImageView *imgCameraSnapShot;
@@ -19,7 +20,7 @@
 
 @end
 
-@implementation CameraSettingViewController
+@implementation CameraSetting_HichipViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,10 +38,7 @@
 
 -(void)doGetWiFi{
     [self setRowValue:nil section:1 row:0];
-    SMsgAVIoctrlGetWifiReq *req = malloc(sizeof(SMsgAVIoctrlGetWifiReq));
-    memset(req, 0, sizeof(SMsgAVIoctrlGetWifiReq));
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetWifiReq)];
-    free(req);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_WIFI_PARAM Data:(char*)nil DataSize:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -174,15 +172,12 @@
             [self setRowValue:v section:1 row:2];
             break;
         }
-        case IOTYPE_USER_IPCAM_GETWIFI_RESP:{
-            SMsgAVIoctrlGetWifiResp *resp = (SMsgAVIoctrlGetWifiResp*)data;
-            NSString* ssid =  [NSString stringWithUTF8String: (const char*)resp->ssid];
-            if(resp->status == 1 || resp->status == 3){
+        case HI_P2P_GET_WIFI_PARAM:{
+            WifiParam *wifiParam = [[WifiParam alloc] initWithData:(char*)data size:(int)size];
+            NSString* ssid = wifiParam.strSSID;// [NSString stringWithUTF8String: (const char*)resp->ssid];
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self setRowValue:ssid section:1 row:0];
-            }
-            else{
-                [self setRowValue:LOCALSTR(@"") section:1 row:0];
-            }
+            });
             break;
         }
         default:

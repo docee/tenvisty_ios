@@ -67,7 +67,7 @@
 //    }
 }
 - (IBAction)goSetting:(UIButton *)sender {
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:[self getSettingStoryboardName] bundle:nil];
     UIViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_cameraSetting"];  //test2为viewcontroller的StoryboardId
     [sender.window.rootViewController.navigationController pushViewController:test2obj animated:YES];
 }
@@ -182,7 +182,7 @@
 }
 
 - (IBAction)go2CameraSetting:(id)sender {
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"CameraSetting" bundle:nil];
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:[self getSettingStoryboardName] bundle:nil];
     BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_cameraSetting"];  //test2为viewcontroller的StoryboardId
     test2obj.camera = self.camera;
     [[self currentViewController].navigationController pushViewController:test2obj animated:YES];
@@ -208,6 +208,10 @@
         }
     }
     return vc;
+}
+
+-(NSString*)getSettingStoryboardName{
+    return _camera.p2pType == P2P_Hichip?@"CameraSetting_Hichip":@"CameraSetting";
 }
 
 @end

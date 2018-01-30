@@ -347,8 +347,8 @@
             [self go2AddCameraNavigationType:stringValue];
         }
         else{
-            self.output.metadataObjectTypes = @[];
-            [self.session startRunning];
+//            self.output.metadataObjectTypes = @[];
+//            [self.session startRunning];
 //            [[[iToast makeText:LOCALSTR(@"Invalid QR code, please scan QR code on the camera label")] setDuration:3] show];
 //            if(_reRunTimer == nil){
 //                _reRunTimer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(reRunScan) userInfo:nil repeats:NO];
@@ -394,10 +394,12 @@
 }
 
 -(void)reRunScan{
-    self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
-    [_reRunTimer invalidate];
-    _reRunTimer = nil;
+    [self.session startRunning];
+//    self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+//    [_reRunTimer invalidate];
+//    _reRunTimer = nil;
 }
+
 - (IBAction)openFlash:(UIButton *)sender {
     sender.selected = !sender.selected;
     if (sender.isSelected == YES) { //打开闪光灯
