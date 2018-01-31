@@ -13,6 +13,7 @@
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -338,7 +339,7 @@
         <scene sceneID="Xx1-qY-lgM">
             <objects>
                 <tableViewController id="7DM-0D-WgU" customClass="EventSetting_HichipViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="vkm-ZJ-PHj">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="14" sectionFooterHeight="1" id="vkm-ZJ-PHj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -358,6 +359,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="73X-Qw-JdK" kind="show" identifier="EventSetting2SensSetting" id="mvT-9i-2ok"/>
+                        <segue destination="Nhb-TP-YsN" kind="show" identifier="EventSetting2EmailSetting" id="8dt-QO-Po9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qz1-xQ-snl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -804,6 +806,105 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1y-PW-XBu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ctK-Su-SQC" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Email Setting-->
+        <scene sceneID="vuS-EQ-6fM">
+            <objects>
+                <viewController id="Nhb-TP-YsN" customClass="EmailSetting_HichipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lBE-d8-Ykn"/>
+                        <viewControllerLayoutGuide type="bottom" id="gKv-pO-INj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AiV-ZV-O7J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-7d-9Mt" customClass="BaseTableView">
+                                <rect key="frame" x="0.0" y="15" width="375" height="588"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCell_emailSwitch" id="myQ-mV-UO5">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="myQ-mV-UO5" id="u01-Gc-zG1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Email Alert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24a-6G-BlZ">
+                                                    <rect key="frame" x="10" y="15" width="148.5" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1N-vo-yue">
+                                                    <rect key="frame" x="311" y="9.5" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="g1N-vo-yue" secondAttribute="trailing" constant="15" id="Gw8-Cm-zef"/>
+                                                <constraint firstItem="24a-6G-BlZ" firstAttribute="leading" secondItem="u01-Gc-zG1" secondAttribute="leading" constant="10" id="I3b-54-Vvw"/>
+                                                <constraint firstItem="g1N-vo-yue" firstAttribute="centerY" secondItem="u01-Gc-zG1" secondAttribute="centerY" id="LjL-SZ-w4D"/>
+                                                <constraint firstItem="24a-6G-BlZ" firstAttribute="centerY" secondItem="u01-Gc-zG1" secondAttribute="centerY" id="q3P-zp-MAM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewcell_emailAdvanceSwitch" id="Pjn-b1-BJV">
+                                        <rect key="frame" x="0.0" y="78" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pjn-b1-BJV" id="Nfa-jt-K6H">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z52-FC-e5V">
+                                                    <rect key="frame" x="311" y="9.5" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advanced Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-hL-edD">
+                                                    <rect key="frame" x="10" y="16" width="119.5" height="17.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Z52-FC-e5V" secondAttribute="trailing" constant="15" id="7jF-XP-rmE"/>
+                                                <constraint firstItem="JGk-hL-edD" firstAttribute="leading" secondItem="Nfa-jt-K6H" secondAttribute="leading" constant="10" id="KDD-sg-27x"/>
+                                                <constraint firstItem="JGk-hL-edD" firstAttribute="centerY" secondItem="Nfa-jt-K6H" secondAttribute="centerY" id="LSt-l8-8qe"/>
+                                                <constraint firstItem="Z52-FC-e5V" firstAttribute="centerY" secondItem="Nfa-jt-K6H" secondAttribute="centerY" id="r1i-DE-5Gu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Nhb-TP-YsN" id="eem-mE-tw4"/>
+                                    <outlet property="delegate" destination="Nhb-TP-YsN" id="mw1-uW-ebG"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8V3-7d-9Mt" firstAttribute="top" secondItem="lBE-d8-Ykn" secondAttribute="bottom" constant="15" id="74b-N7-GQE"/>
+                            <constraint firstItem="gKv-pO-INj" firstAttribute="top" secondItem="8V3-7d-9Mt" secondAttribute="bottom" id="Sss-Wg-q73"/>
+                            <constraint firstAttribute="trailing" secondItem="8V3-7d-9Mt" secondAttribute="trailing" id="ZWA-KL-VKe"/>
+                            <constraint firstItem="8V3-7d-9Mt" firstAttribute="leading" secondItem="AiV-ZV-O7J" secondAttribute="leading" id="bDG-sV-lwQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Email Setting" id="LDW-a6-2e6">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="TM9-ey-gxC">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="o9w-rA-Mw2" kind="unwind" identifier="unwind_EmailSetting2EventSetting" unwindAction="EventSettingViewController1UnwindSegue:" id="oXe-Fh-xO9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="8V3-7d-9Mt" id="x4v-Lq-3LW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZHO-fd-m9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="o9w-rA-Mw2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>

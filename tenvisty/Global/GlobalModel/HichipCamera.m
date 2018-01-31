@@ -10,7 +10,9 @@
 #import "CameraIOSessionProtocol.h"
 #import "HiPushSDK.h"
 
-@interface HichipCamera()<CameraIOSessionProtocol,OnPushResult>
+@interface HichipCamera()<CameraIOSessionProtocol,OnPushResult>{
+    BOOL isStopManually;
+}
 
 
 @property (nonatomic, assign) int subID;
@@ -180,7 +182,7 @@
 }
 
 - (void)sendIOCtrlToChannel:(NSInteger)channel Type:(NSInteger)type Data:(char *)buff DataSize:(NSInteger)size {
-    [super sendIOCtrl:(int)type Data:buff Size:size];
+    [super sendIOCtrl:(int)type Data:buff Size:(int)size];
 }
 
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time {
@@ -188,6 +190,7 @@
 }
 
 - (void)start {
+    isStopManually = NO;
     if ([self shouldConnect]) {
         if ((self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_WRONG_PASSWORD)  && ([super getThreadState] == 0)){
             [super connect];
@@ -196,6 +199,7 @@
 }
 
 -(void)connect{
+    isStopManually = NO;
     if ([self shouldConnect]) {
         if ((self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_WRONG_PASSWORD)  && ([super getThreadState] == 0)){
             [super connect];
@@ -220,6 +224,7 @@
 }
 
 - (void)stop {
+    isStopManually = YES;
      [self disconnect_session];
 }
 
@@ -288,9 +293,23 @@
 }
 
 - (void)receiveSessionState:(HiCamera *)camera Status:(int)status {
+    if(self.cameraConnectState == status || isStopManually){
+        return;
+    }
     self.cameraConnectState = status;
-    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
-        [self.cameraDelegate camera:self.baseCamera _didChangeSessionStatus:status];
+    if(self.isAuthConnected){
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
+                [self.cameraDelegate camera:self.baseCamera _didChangeChannelStatus:0 ChannelStatus:status];
+            }
+        });
+    }
+    else{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
+                [self.cameraDelegate camera:self.baseCamera _didChangeSessionStatus:status];
+            }
+        });
     }
     LOG(@">>>HiCamera_receiveSessionState %@ %@ %x", camera.uid, self.cameraStateDesc, status);
     
@@ -314,9 +333,12 @@
 
 - (void)receiveIOCtrl:(HiCamera *)camera Type:(int)type Data:(char*)data Size:(int)size Status:(int)status {
     LOG(@">>>HiCamera_receiveIOCtrl %@ %x %d %d",camera.uid, type, size, status);
-    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
-        [self.cameraDelegate camera:self.baseCamera _didReceiveIOCtrlWithType:type Data:data DataSize:size];
-    }
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
+            [self.cameraDelegate camera:self.baseCamera _didReceiveIOCtrlWithType:type Data:data DataSize:size];
+        }
+    });
     switch (type) {
         case HI_P2P_GET_TIME_PARAM:
             

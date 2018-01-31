@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewCellMultiTextField" rowHeight="163" id="clQ-PQ-cok" customClass="MutilTextFieldTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="163"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="clQ-PQ-cok" id="vx6-LZ-fHa">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="162.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sJ-xT-rOB">
+                        <rect key="frame" x="10" y="10" width="54" height="17.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="afT-oG-pfY">
+                        <rect key="frame" x="10" y="32.5" width="355" height="125"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="afT-oG-pfY" secondAttribute="trailing" constant="10" id="02z-gh-CVO"/>
+                    <constraint firstItem="5sJ-xT-rOB" firstAttribute="leading" secondItem="vx6-LZ-fHa" secondAttribute="leading" constant="10" id="2U0-aM-Zhb"/>
+                    <constraint firstAttribute="bottom" secondItem="afT-oG-pfY" secondAttribute="bottom" constant="5" id="OuG-W4-dpU"/>
+                    <constraint firstItem="5sJ-xT-rOB" firstAttribute="top" secondItem="vx6-LZ-fHa" secondAttribute="top" constant="10" id="bos-ZF-lMG"/>
+                    <constraint firstItem="afT-oG-pfY" firstAttribute="top" secondItem="5sJ-xT-rOB" secondAttribute="bottom" constant="5" id="iNT-3b-BUt"/>
+                    <constraint firstItem="afT-oG-pfY" firstAttribute="leading" secondItem="vx6-LZ-fHa" secondAttribute="leading" constant="10" id="q6A-kM-FVK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="labTitleText" destination="5sJ-xT-rOB" id="0vn-Wg-jkA"/>
+                <outlet property="textTitleValue" destination="afT-oG-pfY" id="hgF-I5-zTe"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="-169.5"/>
+        </tableViewCell>
+    </objects>
+</document>

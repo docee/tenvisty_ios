@@ -164,6 +164,7 @@
 #define TableViewCell_ListImg (@"tableviewCellListImg")
 #define TableViewCell_Switch (@"tableviewCellSwitch")
 #define TableViewCell_SelectItem (@"tableviewCellSelectItem")
+#define TableViewCell_TextField_Multi (@"tableviewCellMultiTextField")
 
 
 

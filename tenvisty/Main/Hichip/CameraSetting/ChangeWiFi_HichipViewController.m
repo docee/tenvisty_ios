@@ -13,11 +13,14 @@
 @interface ChangeWiFi_HichipViewController (){
     BOOL isTimeout;
     BOOL isSetting;
+    BOOL isGettingNetType;
     BOOL isRequestWiFiListForResult;
     NSString *wifiPassword;
+    NSInteger netType;
 }
 @property (nonatomic,copy) dispatch_block_t delayTask;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
+@property (nonatomic,copy) dispatch_block_t successtTask;
 @property (nonatomic,assign) BOOL hasChangedWiFi;
 @end
 
@@ -43,6 +46,7 @@
     }
     return _timeoutTask;
 }
+
 -(dispatch_block_t)newTimeoutTask{
     if(_timeoutTask != nil){
         dispatch_block_cancel(_timeoutTask);
@@ -51,10 +55,20 @@
     return self.timeoutTask;
 }
 
+-(dispatch_block_t)successtTask{
+    if(_successtTask == nil){
+        _successtTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+    }
+    return _successtTask;
+}
 -(dispatch_block_t)delayTask{
     if(_delayTask == nil){
         _delayTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-            if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
+            if(self.camera.isAuthConnected){
                 isRequestWiFiListForResult = YES;
                 [self doGetWifiList];
             }
@@ -83,10 +97,13 @@
     }
 }
 
+-(void)doGetNetType{
+    isGettingNetType = YES;
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_DEV_INFO_EXT Data:(char *)nil DataSize:0];
+}
+
 -(void)doGetWifiList{
-    SMsgAVIoctrlListWifiApReq *req = malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_LISTWIFIAP_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlListWifiApReq)];
-    free(req);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_WIFI_LIST Data:(char*)nil DataSize:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,21 +112,17 @@
 }
 
 -(void)doSetWifi:(NSString*)password{
-    [MBProgressHUD showMessag:LOCALSTR(@"setting...") toView:self.tableView].userInteractionEnabled = YES;
-    SMsgAVIoctrlSetWifiReq *req = malloc(sizeof(SMsgAVIoctrlSetWifiReq));
-    memset(req, 0, sizeof(SMsgAVIoctrlSetWifiReq));
-    req->enctype = self.wifiEnctype;
-    req->mode = self.wifiMode;
-    memcpy(req->ssid, [self.wifiSsid UTF8String], self.wifiSsid.length);
-    memcpy(req->password, [password UTF8String], password.length);
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetWifiReq)];
+    HI_P2P_S_WIFI_PARAM *req = malloc(sizeof(HI_P2P_S_WIFI_PARAM));
+    memset(req, 0, sizeof(HI_P2P_S_WIFI_PARAM));
+    req->EncType = self.wifiEnctype;
+    req->Mode = self.wifiMode;
+    memcpy(req->strSSID, [self.wifiSsid UTF8String], self.wifiSsid.length);
+    memcpy(req->strKey, [password UTF8String], password.length);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_WIFI_PARAM Data:(char*)req DataSize:sizeof(HI_P2P_S_WIFI_PARAM)];
     free(req);
 }
 -(void)doGetWifi{
-    SMsgAVIoctrlGetWifiReq *req = malloc(sizeof(SMsgAVIoctrlGetWifiReq));
-    memset(req, 0, sizeof(SMsgAVIoctrlGetWifiReq));
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetWifiReq)];
-    free(req);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_WIFI_PARAM Data:(char*)nil DataSize:0];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -156,106 +169,105 @@
             return;
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SET_WIFI_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
+        [MBProgressHUD showMessag:LOCALSTR(@"setting...") toView:self.tableView].userInteractionEnabled = YES;
         [self doSetWifi:wifiPassword];
     }
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_SETWIFI_RESP:{
-            SMsgAVIoctrlSetWifiResp *resp = (SMsgAVIoctrlSetWifiResp*)data;
+//        case HI_P2P_GET_DEV_INFO_EXT:{
+//            HI_P2P_S_DEV_INFO_EXT *resp = (HI_P2P_S_DEV_INFO_EXT*)data;
+//            netType = resp->u32NetType;
+//            if(isGettingNetType){
+//                isGettingNetType = NO;
+//                [self doSetWifi:wifiPassword];
+//            }
+//        }
+//            break;
+        case HI_P2P_SET_WIFI_PARAM:{
             if(_timeoutTask != nil){
                 dispatch_block_cancel(_timeoutTask);
                 _timeoutTask = nil;
             }
-            if(resp->result == 0){
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRED * NSEC_PER_SEC)), dispatch_get_main_queue(),self.delayTask);
-            }
-            else{
-                [self doGetWifi];
-            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), [self successtTask]);
+//            //wifi连接
+//            if(YES || netType == 1){
+//                if(size >0 ){
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                        [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
+//                        [self.navigationController popToRootViewControllerAnimated:YES];
+//                    });
+//                }
+//                else{
+//                    isSetting = NO;
+//                     [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];
+//                }
+//            }
+//            else{
+//                //wired连接
+//                if(size >= 0){
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFI_DELAY_WIRED * NSEC_PER_SEC)), dispatch_get_main_queue(),self.delayTask);
+//                }
+//                else{
+//                    [self doGetWifi];
+//                }
+//            }
             break;
         }
-        case IOTYPE_USER_IPCAM_UPDATE_WIFI_STATUS:{
-            SMsgAVIoctrlUpdateWifiStatus *resp = (SMsgAVIoctrlUpdateWifiStatus*)data;
-            if([[NSString stringWithUTF8String: resp->ssid] isEqualToString:self.wifiSsid]){
-                if(_delayTask != nil){
-                    dispatch_block_cancel(_delayTask);
-                    _delayTask = nil;
-                }
-                [self doGetWifiList];
-                if(isSetting){
-                    isSetting = NO;
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    if(resp->status == 2){
-                        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Wi-Fi password wrong")];
-                    }
-                    else if(resp->status == 1){
-                        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Fail to connect Wi-Fi, please try again later.")];
-                    }
-                    else if(resp ->status == 0){
-                        [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
-                        self.hasChangedWiFi = YES;
-                        [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
-                    }
-                }
-            }
-            break;
-        }
-        case IOTYPE_USER_IPCAM_GETWIFI_RESP:{
-            if(isSetting){
-                isSetting = NO;
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                SMsgAVIoctrlGetWifiResp *resp = (SMsgAVIoctrlGetWifiResp*)data;
-                NSString* ssid =  [NSString stringWithUTF8String: (const char*)resp->ssid];
-                NSString* password =  [NSString stringWithUTF8String: (const char*)resp->password];
-                if([ssid isEqualToString:self.wifiSsid] && [password isEqualToString:wifiPassword]){
-                    [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
-                    self.hasChangedWiFi = YES;
-                    [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
-                }
-                else{
-                    [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
-                }
-                
-            }
-            break;
-        }
-        case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:{
-            if(isRequestWiFiListForResult && isSetting){
-                isRequestWiFiListForResult = NO;
-                isSetting = NO;
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                SMsgAVIoctrlListWifiApResp *p = (SMsgAVIoctrlListWifiApResp *)data;
-                for(int i=0;i<p->number;i++){
-                    SWifiAp ap = p->stWifiAp[i];
-                    if([[NSString stringWithUTF8String:ap.ssid] isEqualToString:self.wifiSsid]){
-                        if(ap.status == 1 || ap.status == 4){
-                            [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
-                            self.hasChangedWiFi = YES;
-                            [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
-                        }
-                        else if(ap.status == 2){
-                            [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
-                        }
-                        else {
-                            [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
-                        }
-                    }
-                }
-            }
-        }
+//        case HI_P2P_GET_WIFI_PARAM:{
+//            if(isSetting){
+//                isSetting = NO;
+//                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                SMsgAVIoctrlGetWifiResp *resp = (SMsgAVIoctrlGetWifiResp*)data;
+//                NSString* ssid =  [NSString stringWithUTF8String: (const char*)resp->ssid];
+//                NSString* password =  [NSString stringWithUTF8String: (const char*)resp->password];
+//                if([ssid isEqualToString:self.wifiSsid] && [password isEqualToString:wifiPassword]){
+//                    [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
+//                    self.hasChangedWiFi = YES;
+//                    [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
+//                }
+//                else{
+//                    [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
+//                }
+//            }
+//            break;
+//        }
+//        case HI_P2P_GET_WIFI_LIST:{
+//            if(isRequestWiFiListForResult && isSetting){
+//                isRequestWiFiListForResult = NO;
+//                isSetting = NO;
+//                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                HI_P2P_S_WIFI_LIST *p = (HI_P2P_S_WIFI_LIST *)data;
+//                for(int i=0;i<p->u32Num;i++){
+//                    HI_SWifiAp ap = p->sWifiInfo[i];
+//                    if([[NSString stringWithUTF8String:ap.strSSID] isEqualToString:self.wifiSsid]){
+//                        if(ap.Status == 1 || ap.Status == 4){
+//                            [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
+//                            self.hasChangedWiFi = YES;
+//                            [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
+//                        }
+//                        else if(ap.Status == 2){
+//                            [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
+//                        }
+//                        else {
+//                            [TwsTools presentAlertMsg:self message:LOCALSTR(@"WiFi config failed, pealse check your password and try again")];
+//                        }
+//                    }
+//                }
+//            }
+//        }
             
     }
 }
-- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
-    if(status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_UNSUPPORTED || status == CONNECTION_STATE_CONNECT_FAILED || status == CONNECTION_STATE_NETWORK_FAILED){
-        [camera stop];
+- (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+    if(camera.isDisconnect){
+        //[camera stop];
         [camera start];
     }
 }
-- (void)camera:(NSCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
-    if(status == CONNECTION_STATE_CONNECTED){
+- (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+    if(camera.isAuthConnected){
         if(isSetting){
             if(_delayTask != nil){
                 dispatch_block_cancel(_delayTask);

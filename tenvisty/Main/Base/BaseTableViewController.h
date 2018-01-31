@@ -15,6 +15,7 @@
 #import "ListImgTableViewCell.h"
 #import "SwitchTableViewCell.h"
 #import "SelectItemTableViewCell.h"
+#import "MutilTextFieldTableViewCell.h"
 #import "ListImgTableViewCellModel.h"
 
 @interface BaseTableViewController : UITableViewController<UITableViewDelegate>

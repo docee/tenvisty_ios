@@ -175,9 +175,7 @@
         case HI_P2P_GET_WIFI_PARAM:{
             WifiParam *wifiParam = [[WifiParam alloc] initWithData:(char*)data size:(int)size];
             NSString* ssid = wifiParam.strSSID;// [NSString stringWithUTF8String: (const char*)resp->ssid];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self setRowValue:ssid section:1 row:0];
-            });
+            [self setRowValue:ssid section:1 row:0];
             break;
         }
         default:

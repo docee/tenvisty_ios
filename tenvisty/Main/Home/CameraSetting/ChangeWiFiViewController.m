@@ -194,7 +194,7 @@
                         [TwsTools presentAlertMsg:self message:LOCALSTR(@"Fail to connect Wi-Fi, please try again later.")];
                     }
                     else if(resp ->status == 0){
-                        [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
+                        [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
                         self.hasChangedWiFi = YES;
                         [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
                     }
@@ -210,7 +210,7 @@
                 NSString* ssid =  [NSString stringWithUTF8String: (const char*)resp->ssid];
                 NSString* password =  [NSString stringWithUTF8String: (const char*)resp->password];
                 if([ssid isEqualToString:self.wifiSsid] && [password isEqualToString:wifiPassword]){
-                    [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
+                    [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
                     self.hasChangedWiFi = YES;
                     [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
                 }
@@ -231,7 +231,7 @@
                     SWifiAp ap = p->stWifiAp[i];
                     if([[NSString stringWithUTF8String:ap.ssid] isEqualToString:self.wifiSsid]){
                         if(ap.status == 1 || ap.status == 4){
-                            [[[iToast makeText:LOCALSTR(@"setting successfully")] setDuration:1] show];
+                            [[[iToast makeText:LOCALSTR(@"Setting Successfully")] setDuration:1] show];
                             self.hasChangedWiFi = YES;
                             [self performSegueWithIdentifier:@"ChangeWiFi2WiFiSetting" sender:self];
                         }

@@ -112,6 +112,12 @@
 		89545EA520207F6900151E90 /* WifiCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545E9F20207F6800151E90 /* WifiCheck.m */; };
 		89545EA620207F6900151E90 /* WifiList.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EA120207F6800151E90 /* WifiList.m */; };
 		89545EA720207F6900151E90 /* WifiParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EA320207F6800151E90 /* WifiParam.m */; };
+		89545EAB202181F900151E90 /* MdParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EAA202181F900151E90 /* MdParam.m */; };
+		89545EB12021A40700151E90 /* AlarmLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EAE2021A40700151E90 /* AlarmLink.m */; };
+		89545EB22021A40700151E90 /* SnapAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EB02021A40700151E90 /* SnapAlarm.m */; };
+		89545EB52021AD0400151E90 /* EmailSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EB42021AD0400151E90 /* EmailSetting_HichipViewController.m */; };
+		89545EB72021D0DB00151E90 /* MultiTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89545EB62021D0DB00151E90 /* MultiTextFieldTableViewCell.xib */; };
+		89545EBA2021D1FE00151E90 /* MutilTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EB92021D1FE00151E90 /* MutilTextFieldTableViewCell.m */; };
 		896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */; };
 		896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */; };
 		896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D61FD92C7600EE31AB /* ImageCollectionViewCell.m */; };
@@ -406,6 +412,17 @@
 		89545EA120207F6800151E90 /* WifiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiList.m; sourceTree = "<group>"; };
 		89545EA220207F6800151E90 /* WifiParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiParam.h; sourceTree = "<group>"; };
 		89545EA320207F6800151E90 /* WifiParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiParam.m; sourceTree = "<group>"; };
+		89545EA9202181F900151E90 /* MdParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MdParam.h; sourceTree = "<group>"; };
+		89545EAA202181F900151E90 /* MdParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MdParam.m; sourceTree = "<group>"; };
+		89545EAD2021A40700151E90 /* AlarmLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmLink.h; sourceTree = "<group>"; };
+		89545EAE2021A40700151E90 /* AlarmLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmLink.m; sourceTree = "<group>"; };
+		89545EAF2021A40700151E90 /* SnapAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapAlarm.h; sourceTree = "<group>"; };
+		89545EB02021A40700151E90 /* SnapAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapAlarm.m; sourceTree = "<group>"; };
+		89545EB32021AD0400151E90 /* EmailSetting_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmailSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89545EB42021AD0400151E90 /* EmailSetting_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmailSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89545EB62021D0DB00151E90 /* MultiTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		89545EB82021D1FE00151E90 /* MutilTextFieldTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MutilTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		89545EB92021D1FE00151E90 /* MutilTextFieldTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MutilTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
 		896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -1070,6 +1087,8 @@
 				8924125E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m */,
 				8924125F202062CD001F60E8 /* WiFiSetting_HichipViewController.h */,
 				89241260202062CD001F60E8 /* WiFiSetting_HichipViewController.m */,
+				89545EB32021AD0400151E90 /* EmailSetting_HichipViewController.h */,
+				89545EB42021AD0400151E90 /* EmailSetting_HichipViewController.m */,
 			);
 			path = CameraSetting;
 			sourceTree = "<group>";
@@ -1132,6 +1151,9 @@
 				892477951FE263F70021D8E6 /* TwsTableViewCell.m */,
 				89368DA41FEB6305000FCDC0 /* SyncTimeTableViewCell.h */,
 				89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */,
+				89545EB62021D0DB00151E90 /* MultiTextFieldTableViewCell.xib */,
+				89545EB82021D1FE00151E90 /* MutilTextFieldTableViewCell.h */,
+				89545EB92021D1FE00151E90 /* MutilTextFieldTableViewCell.m */,
 			);
 			path = TabelCell;
 			sourceTree = "<group>";
@@ -1235,6 +1257,8 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89545EAC2021A40700151E90 /* AlarmLink */,
+				89545EA8202181F900151E90 /* Event */,
 				89545E9B20207F6800151E90 /* WiFi */,
 				895141DF1FE8C7BE00905355 /* View */,
 				895141D61FE7780100905355 /* Video */,
@@ -1279,6 +1303,26 @@
 				89545EA320207F6800151E90 /* WifiParam.m */,
 			);
 			path = WiFi;
+			sourceTree = "<group>";
+		};
+		89545EA8202181F900151E90 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				89545EA9202181F900151E90 /* MdParam.h */,
+				89545EAA202181F900151E90 /* MdParam.m */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		89545EAC2021A40700151E90 /* AlarmLink */ = {
+			isa = PBXGroup;
+			children = (
+				89545EAD2021A40700151E90 /* AlarmLink.h */,
+				89545EAE2021A40700151E90 /* AlarmLink.m */,
+				89545EAF2021A40700151E90 /* SnapAlarm.h */,
+				89545EB02021A40700151E90 /* SnapAlarm.m */,
+			);
+			path = AlarmLink;
 			sourceTree = "<group>";
 		};
 		896BA3CB1FD9255500EE31AB /* Image */ = {
@@ -2305,6 +2349,7 @@
 				892CE0CB1FD126F200942E28 /* PasswordFieldTableViewCell.xib in Resources */,
 				89A37C8C201726FB00A6F0CD /* Home_Hichip.storyboard in Resources */,
 				892CE0CF1FD12D3600942E28 /* DetailTableViewCell.xib in Resources */,
+				89545EB72021D0DB00151E90 /* MultiTextFieldTableViewCell.xib in Resources */,
 				EDF1C1871FD5AA6B00DAE334 /* ListImgTableViewCell.xib in Resources */,
 				89A096841FF109C700E5EBAE /* Info.plist in Resources */,
 				892CE0C91FD126D900942E28 /* TextFieldImgTableViewCell.xib in Resources */,
@@ -2350,6 +2395,7 @@
 				89E4E9721FCE7EC1007EA336 /* CameraListItemTableViewCell.m in Sources */,
 				89E6D98C1FDA25F30049F1E7 /* BaseViewController.m in Sources */,
 				892ADB6E1FD692B500BD8929 /* SwitchTableViewCell.m in Sources */,
+				89545EB22021A40700151E90 /* SnapAlarm.m in Sources */,
 				89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */,
 				89E4E96D1FCE67CA007EA336 /* CameraListViewController.m in Sources */,
 				892ADB971FD80AB600BD8929 /* PlaybackViewController.m in Sources */,
@@ -2378,9 +2424,11 @@
 				892ADB851FD78E5400BD8929 /* TimeZoneModel.m in Sources */,
 				898D8BAD1FE0F66600062F04 /* FMDatabase.m in Sources */,
 				89545EA720207F6900151E90 /* WifiParam.m in Sources */,
+				89545EB12021A40700151E90 /* AlarmLink.m in Sources */,
 				8924126F202062CD001F60E8 /* WiFiSetting_HichipViewController.m in Sources */,
 				892CE0BB1FD1014000942E28 /* TextFieldImgTableViewCell.m in Sources */,
 				89241267202062CD001F60E8 /* EventSetting_HichipViewController.m in Sources */,
+				89545EAB202181F900151E90 /* MdParam.m in Sources */,
 				89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */,
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
 				89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */,
@@ -2407,8 +2455,10 @@
 				89A7E93F1FED108200F12BFF /* Event.m in Sources */,
 				89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */,
 				898D8BAE1FE0F66600062F04 /* FMDatabaseAdditions.m in Sources */,
+				89545EBA2021D1FE00151E90 /* MutilTextFieldTableViewCell.m in Sources */,
 				89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */,
 				892CE0DE1FD13E6300942E28 /* AddCameraViewController.m in Sources */,
+				89545EB52021AD0400151E90 /* EmailSetting_HichipViewController.m in Sources */,
 				896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */,
 				892ADB7C1FD6A8B000BD8929 /* OtherSettingViewController.m in Sources */,
 				892CE0B71FD1013100942E28 /* PasswordFieldTableViewCell.m in Sources */,

@@ -7,21 +7,25 @@
 //
 
 #import "EventSetting_HichipViewController.h"
+#import "AlarmLink.h"
+#import "BaseViewController.h"
 
 @interface EventSetting_HichipViewController (){
-    NSString *currentSens;
     NSInteger currentPush;
 }
 @property (nonatomic,strong) NSArray *sensValueDesc;
 @property (nonatomic,strong) NSArray *sensValue;
+@property (strong,nonatomic) NSArray *listItems;
+@property (nonatomic,strong) AlarmLink *alarmParas;
 @end
 
 @implementation EventSetting_HichipViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _sensValue = @[@90,@70,@50,@30,@0];
+    _sensValue = @[@80,@60,@40,@20,@0];
     _sensValueDesc = @[LOCALSTR(@"Highest"),LOCALSTR(@"High"),LOCALSTR(@"General"),LOCALSTR(@"Low"),LOCALSTR(@"Close")];
+    [self.tableView setBackgroundColor:Color_GrayLightest];
     // Do any additional setup after loading the view.
 }
 
@@ -31,52 +35,132 @@
 }
 
 -(void)setup{
-    currentSens = nil;
     [self.tableView reloadData];
     [self doGetEventSetting];
+}
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_sens" title:LOCALSTR(@"Sensitivity Setting") showValue:YES value:nil viewId:TableViewCell_ListImg],nil];
+        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_push" title:LOCALSTR(@"Alarm Push") showValue:YES value:self.camera.remoteNotifications>0?@"1":@"0" viewId:TableViewCell_Switch],nil];
+        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"SD-Card Recording") showValue:YES value:nil viewId:TableViewCell_Switch],nil];
+        NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"Email Alert") showValue:YES value:nil viewId:TableViewCell_ListImg],nil];
+        NSArray *sec5 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"Save Picture to FTP Server") showValue:YES value:nil viewId:TableViewCell_Switch],
+            [ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"Save Video to FTP Server") showValue:YES value:nil viewId:TableViewCell_Switch],
+            [ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"FTP Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1,sec2,sec3,sec4,sec5, nil];
+    }
+    return _listItems;
+}
+#pragma mark - 移动侦测报警
+- (void)doGetEventSetting {
+    [self doGetMotionDetectSetting];
+    [self doGetAlarmLinkSetting];
+}
+
+-(void)doGetMotionDetectSetting{
+    // 获取全部区域的参数
+    for (NSInteger i = HI_P2P_MOTION_AREA_1; i <= HI_P2P_MOTION_AREA_MAX; i++) {
+        HI_P2P_S_MD_PARAM *md_param = (HI_P2P_S_MD_PARAM*)malloc(sizeof(HI_P2P_S_MD_PARAM));
+        memset(md_param, 0, sizeof(HI_P2P_S_MD_PARAM));
+        md_param->struArea.u32Area = (HI_U32)i;
+        md_param->u32Channel = 0;
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_MD_PARAM Data:(char *)md_param DataSize:sizeof(HI_P2P_S_MD_PARAM)];
+        free(md_param);
+        md_param = nil;
+    }
+}
+
+-(void)doGetAlarmLinkSetting{
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_ALARM_PARAM Data:(char*)nil DataSize:0];
+   // [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_SNAP_ALARM_PARAM Data:(char*)nil DataSize:0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)doGetEventSetting{
-    SMsgAVIoctrlGetMotionDetectReq *req = malloc(sizeof(SMsgAVIoctrlGetMotionDetectReq));
-    req->channel = 0;
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetMotionDetectReq)];
-    free(req);
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.listItems.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return ((NSArray*)[self.listItems objectAtIndex:section]).count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
-    if(indexPath.row == 0){
-        NSString *id = TableViewCell_ListImg;
-        ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"Sensitivity Setting");
-        cell.showValue = YES;
-        cell.value= currentSens;//LOCALSTR(@"Close");
-        [cell setLeftImage:@"ic_sens"];
+    ListImgTableViewCellModel *model  = [[self.listItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if([model.viewId isEqualToString:TableViewCell_Switch]){
+        SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
+        cell.leftLabTitle.text = model.titleText;
+        [cell setLeftImage:model.titleImgName];
+        [cell.rightLabLoading setHidden:model.titleValue!=nil];
+        [cell.rightSwitch setOn:[model.titleValue isEqualToString:@"1"]];
+        cell.rightSwitch.tag = indexPath.section*10+indexPath.row;
+        [cell.rightSwitch addTarget:self action:@selector(doClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else{
-        NSString *id = TableViewCell_Switch;
-        SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.leftLabTitle.text = LOCALSTR(@"Alarm Push");
-        [cell setLeftImage:@"ic_push"];
-        [cell.rightLabLoading setHidden:YES];
-        [cell.rightSwitch setOn:self.camera.remoteNotifications>0];
-        [cell.rightSwitch addTarget:self action:@selector(clickPush:) forControlEvents:UIControlEventTouchUpInside];
+        ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
+        cell.title = model.titleText;
+        cell.showValue = model.showValue;
+        cell.value= model.titleValue;//LOCALSTR(@"Close");
+        [cell setLeftImage:model.titleImgName];
         return cell;
     }
     return nil;
+}
+
+-(void)doClickSwitch:(UISwitch *)sender{
+    int section = floor(sender.tag / 10);
+    int row = sender.tag % 10;
+    if(section == 1 && row == 0){
+        [self clickPush:sender];
+    }
+    else{
+        if(section == 2 && row == 0){
+            self.alarmParas.u32SDRec = sender.isOn?1:0;
+            if(self.alarmParas.u32SDRec == 0 && self.alarmParas.u32FtpRec == 1){
+                self.alarmParas.u32FtpRec = 0;
+                [self refreshViewModel];
+            }
+        }
+        else if(section == 4 && row == 0){
+            self.alarmParas.u32FtpSnap = sender.isOn?1:0;
+        }
+        else if(section == 4 && row == 1){
+            self.alarmParas.u32FtpRec = sender.isOn?1:0;
+            if(self.alarmParas.u32FtpRec == 1 && self.alarmParas.u32SDRec == 0){
+                self.alarmParas.u32SDRec = 1;
+                [self refreshViewModel];
+            }
+        }
+        [self setAlarmLinkParas];
+    }
+    
+}
+
+-(void)refreshViewModel{
+    ListImgTableViewCellModel *sdRecordModel = [[self.listItems objectAtIndex:2] objectAtIndex:0];
+    sdRecordModel.titleValue = self.alarmParas.u32SDRec == 0 ? @"0" : @"1";
+    ListImgTableViewCellModel *emailSnapModel = [[self.listItems objectAtIndex:3] objectAtIndex:0];
+    emailSnapModel.titleValue = self.alarmParas.u32EmailSnap == 0 ? LOCALSTR(@"OFF") :LOCALSTR(@"ON");
+    
+    ListImgTableViewCellModel *ftpSnapModel = [[self.listItems objectAtIndex:4] objectAtIndex:0];
+    ftpSnapModel.titleValue = self.alarmParas.u32FtpSnap == 0 ? @"0" : @"1";
+    ListImgTableViewCellModel *ftpRecordModel = [[self.listItems objectAtIndex:4] objectAtIndex:1];
+    ftpRecordModel.titleValue = self.alarmParas.u32FtpRec == 0 ? @"0" : @"1";
+    [self.tableView reloadData];
+}
+
+-(void)setAlarmLinkParas{
+    if(self.alarmParas){
+        HI_P2P_S_ALARM_PARAM *model = [self.alarmParas model];
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_ALARM_PARAM Data:(char*)model DataSize:sizeof(HI_P2P_S_ALARM_PARAM)];
+        free(model);
+        model = nil;
+    }
 }
 
 -(void)clickPush:(UISwitch *)sender{
@@ -114,8 +198,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == 0){
+    if(indexPath.section == 0 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"EventSetting2SensSetting" sender:nil];
+    }
+    else if(indexPath.section == 3 && indexPath.row == 0){
+        [self performSegueWithIdentifier:@"EventSetting2EmailSetting" sender:nil];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -127,27 +214,65 @@
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_GETMOTIONDETECT_RESP:{
-            SMsgAVIoctrlGetMotionDetectResp *resp = (SMsgAVIoctrlGetMotionDetectResp*)data;
-            for(int i=0;i<_sensValue.count;i++){
-                if(resp->sensitivity >= [(NSNumber*)_sensValue[i] intValue]){
-                    currentSens = _sensValueDesc[i];
-                    break;
+        case HI_P2P_GET_MD_PARAM:{
+            ListImgTableViewCellModel *model = [[self.listItems objectAtIndex:0] objectAtIndex:0];
+            HI_P2P_S_MD_PARAM *resp = (HI_P2P_S_MD_PARAM*)data;
+            if(resp->struArea.u32Area == HI_P2P_MOTION_AREA_1){
+                if(resp->struArea.u32Enable == 0){
+                    model.titleValue = _sensValueDesc[_sensValueDesc.count - 1];
+                }
+                else{
+                    for(int i=0;i<_sensValue.count;i++){
+                        if(resp->struArea.u32Sensi >= [(NSNumber*)_sensValue[i] intValue]){
+                            model.titleValue = _sensValueDesc[i];
+                            break;
+                        }
+                    }
                 }
             }
             [self.tableView reloadData];
             break;
         }
+        case HI_P2P_GET_ALARM_PARAM:{
+            if(size >= sizeof(HI_P2P_S_ALARM_PARAM)){
+                self.alarmParas =[[AlarmLink alloc] initWithData:(char*)data size:(int)size];
+                [self refreshViewModel];
+            }
+        }
+            break;
+        case HI_P2P_SET_ALARM_PARAM:{
+            if(size >=0){
+                [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+            }
+            [self doGetAlarmLinkSetting];
+        }
+            break;
         default:
             break;
     }
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIButton*)sender{
     
     if([segue.identifier isEqualToString:@"EventSetting2SensSetting"]){
         BaseTableViewController *controller= segue.destinationViewController;
         controller.camera =  self.camera;
     }
+    else if([segue.identifier isEqualToString:@"EventSetting2EmailSetting"]){
+        BaseViewController *controller= segue.destinationViewController;
+        controller.camera =  self.camera;
+    }
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20.0, 15.0)];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 15.0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50.0;
 }
 /*
 #pragma mark - Navigation

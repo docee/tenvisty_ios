@@ -10,12 +10,12 @@
 
 #import "WiFiSettingViewController.h"
 #import "ChangeWiFiViewController.h"
+#import "WifiList.h"
 
 @interface WiFiSettingViewController ()<MyCameraDelegate>{
-    SWifiAp wifiSSIDList[28];
-    int wifiSSIDListCount;
+    WifiList *wifiSSIDList;
     BOOL isRefreshing;
-    SWifiAp selectedAP;
+    WifiAp *selectedAP;
     BOOL needRefresh;
 }
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
@@ -80,7 +80,7 @@
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(GET_WIFILIST_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     isRefreshing = YES;
-    wifiSSIDListCount = 0;
+    wifiSSIDList = nil;
     [self.tableView reloadData];
     SMsgAVIoctrlListWifiApReq *req = malloc(sizeof(SMsgAVIoctrlListWifiApReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_LISTWIFIAP_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlListWifiApReq)];
@@ -93,43 +93,43 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-      return wifiSSIDList != nil && wifiSSIDListCount >= 0 ? wifiSSIDListCount : 0;
+      return wifiSSIDList != nil ? wifiSSIDList.u32Num : 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     NSString *id = TableViewCell_Detail;
     DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    SWifiAp ap = wifiSSIDList[indexPath.row];
-    cell.labTitle.text = [NSString stringWithUTF8String: ap.ssid];
-    if(ap.status == 1 || ap.status == 3){
+    WifiAp *ap = [wifiSSIDList.wifis objectAtIndex:indexPath.row];
+    cell.labTitle.text = ap.strSSID;//[NSString stringWithUTF8String: ap.ssid];
+    if([ap.Status intValue] == 1 || [ap.Status intValue] == 3){
         cell.labDesc.text = LOCALSTR(@"Connected");
         [cell.labDesc setTextColor:Color_Primary];
     }
-    else if(ap.status == 2){
+    else if([ap.Status intValue] == 2){
         cell.labDesc.text = LOCALSTR(@"Wrong Password");
         [cell.labDesc setTextColor:Color_GrayDark];
     }
-    else if(ap.status == 4){
+    else if([ap.Status intValue] == 4){
         cell.labDesc.text = LOCALSTR(@"Saved");
         [cell.labDesc setTextColor:Color_Primary];
     }
     else{
-        cell.labDesc.text = ap.enctype == 1?LOCALSTR(@"Open"):LOCALSTR(@"Encrypted");
+        cell.labDesc.text = [ap.EncType intValue] == 1?LOCALSTR(@"Open"):LOCALSTR(@"Encrypted");
         [cell.labDesc setTextColor:Color_Gray];
     }
     NSString *strImg = nil;
-    if(ap.signal > 90){
-        strImg = ap.enctype == 1?@"wifi_signal4_nolock":@"wifi_signal4_lock";
+    if([ap.Signal intValue] > 90){
+        strImg = [ap.EncType intValue] == 1?@"wifi_signal4_nolock":@"wifi_signal4_lock";
     }
-    else if(ap.signal > 60){
-        strImg = ap.enctype == 1?@"wifi_signal3_nolock":@"wifi_signal3_lock";
+    else if([ap.Signal intValue] > 60){
+        strImg = [ap.EncType intValue] == 1?@"wifi_signal3_nolock":@"wifi_signal3_lock";
     }
-    else if(ap.signal > 30){
-        strImg = ap.enctype == 1?@"wifi_signal2_nolock":@"wifi_signal2_lock";
+    else if([ap.Signal intValue] > 30){
+        strImg = [ap.EncType intValue] == 1?@"wifi_signal2_nolock":@"wifi_signal2_lock";
     }
     else{
-        strImg = ap.enctype == 1?@"wifi_signal1_nolock":@"wifi_signal1_lock";
+        strImg = [ap.EncType intValue] == 1?@"wifi_signal1_nolock":@"wifi_signal1_lock";
     }
     [cell.rightImg setImage:[UIImage imageNamed:strImg]];
     return cell;
@@ -154,7 +154,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    selectedAP = wifiSSIDList[indexPath.row];
+    selectedAP = [wifiSSIDList.wifis objectAtIndex:indexPath.row];
     NSLog(@"begin :%f",[NSDate timeIntervalSinceReferenceDate]);
    [self performSegueWithIdentifier:@"WiFiSetting2ChangeWiFi" sender:self];
    // [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -173,18 +173,17 @@
             }
             isRefreshing = NO;
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-            memset(wifiSSIDList, 0, sizeof(wifiSSIDList));
-            
-            SMsgAVIoctrlListWifiApResp *p = (SMsgAVIoctrlListWifiApResp *)data;
-            
-            wifiSSIDListCount = p->number;
-            memcpy(wifiSSIDList, p->stWifiAp, size - sizeof(p->number));
-            SWifiAp tmpAp = wifiSSIDList[0];
-            for(int i=0;i<wifiSSIDListCount;i++){
-                if(wifiSSIDList[i].status != 0){
-                    wifiSSIDList[0] = wifiSSIDList[i];
-                    wifiSSIDList[i] = tmpAp;
-                    break;
+            wifiSSIDList = [[WifiList alloc] initWithData:(char*)data size:(int)size];
+            if(wifiSSIDList.u32Num > 0){
+                WifiAp *firstAp = [wifiSSIDList.wifis objectAtIndex:0];
+                if([firstAp.Status intValue] == 0){
+                    for(int i=0;i<wifiSSIDList.u32Num;i++){
+                        WifiAp *tempAp = [wifiSSIDList.wifis objectAtIndex:i];
+                        if([tempAp.Status intValue] != 0){
+                            [wifiSSIDList.wifis exchangeObjectAtIndex:i withObjectAtIndex:0];
+                            break;
+                        }
+                    }
                 }
             }
             [self.tableView reloadData];
@@ -196,9 +195,9 @@
     if([segue.identifier isEqualToString:@"WiFiSetting2ChangeWiFi"]){
         ChangeWiFiViewController *controller= segue.destinationViewController;
         controller.camera =  self.camera;
-        controller.wifiSsid =  [NSString stringWithUTF8String: selectedAP.ssid];
-        controller.wifiMode = selectedAP.mode;
-        controller.wifiEnctype = selectedAP.enctype;
+        controller.wifiSsid = selectedAP.strSSID;// [NSString stringWithUTF8String: selectedAP.ssid];
+        controller.wifiMode = [selectedAP.Mode intValue];
+        controller.wifiEnctype = [selectedAP.EncType intValue];
     }
 }
 /*

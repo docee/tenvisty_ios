@@ -107,7 +107,7 @@
             SMsgAVIoctrlSetMotionDetectResp *resp = (SMsgAVIoctrlSetMotionDetectResp*)data;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if(resp->result == 0){
-                [[iToast makeText:LOCALSTR(@"setting successfully")] show];
+                [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             else{

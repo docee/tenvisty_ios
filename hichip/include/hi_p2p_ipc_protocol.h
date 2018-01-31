@@ -294,7 +294,7 @@ typedef struct
 typedef struct
 {
     HI_U32 u32Num;
-    SWifiAp sWifiInfo[0];
+    HI_SWifiAp sWifiInfo[0];
 } HI_P2P_S_WIFI_LIST;
 /****************HI_P2P_GET_WIFI_PARAM  HI_P2P_SET_WIFI_PARAM HI_P2P_GET_WIFI_LIST*******************/
 

@@ -117,7 +117,7 @@
         case IOTYPE_USER_IPCAM_SET_ZONE_INFO_RESP:{
             SMsgAVIoctrlSetDstResp *resp = (SMsgAVIoctrlSetDstResp*)data;
             if(resp->result == 0){
-                [[iToast makeText:LOCALSTR(@"setting successfully")] show];
+                [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             else{
