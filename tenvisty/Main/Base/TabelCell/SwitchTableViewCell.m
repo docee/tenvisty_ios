@@ -19,7 +19,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-        self.constraint_width_leftImg.constant = 0;
+    self.constraint_width_leftImg.constant = 0;
     // Initialization code
 }
 

@@ -38,7 +38,9 @@
     if(indexPath.row == 0){
         cell.title = LOCALSTR(@"UID");
         cell.placeHolder = LOCALSTR(@"UID on camera label");
-        [cell setMaxLength:20];
+        cell.maxLength = 20;
+        cell.autoUppercase = YES;
+        cell.textFilter = @"^[0-9a-zA-Z\\-]$";
         //[cell.rightTextField becomeFirstResponder];
     }
     return cell;

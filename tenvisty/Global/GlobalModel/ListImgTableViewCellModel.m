@@ -29,5 +29,36 @@
     model.viewId = vid;
     return model;
 }
++(ListImgTableViewCellModel*) initObj:(NSString *)titleTxt value:(NSString *)value placeHodler:(NSString*)placeHolder maxLength:(NSInteger)maxLength viewId:(NSString *)vid{
+    ListImgTableViewCellModel *model = [[ListImgTableViewCellModel alloc] init];
+    model.titleText = titleTxt;
+    model.textPlaceHolder = placeHolder;
+    model.titleValue = value;
+    model.viewId = vid;
+    model.maxLength = maxLength;
+    return model;
+}
 
++(ListImgTableViewCellModel*) initObj:(NSString *)titleTxt value:(NSString *)value placeHodler:(NSString*)placeHolder maxLength:(NSInteger)maxLength filter:(NSString*)filter viewId:(NSString *)vid{
+    ListImgTableViewCellModel *model = [[ListImgTableViewCellModel alloc] init];
+    model.titleText = titleTxt;
+    model.textPlaceHolder = placeHolder;
+    model.titleValue = value;
+    model.viewId = vid;
+    model.maxLength = maxLength;
+    model.textFilter = filter;
+    return model;
+}
+
++(ListImgTableViewCellModel*) initObj:(NSString *)titleTxt value:(NSString *)value placeHodler:(NSString*)placeHolder maxLength:(NSInteger)maxLength filter:(NSString*)filter autoUppercase:(BOOL)autoUppercase viewId:(NSString *)vid{
+    ListImgTableViewCellModel *model = [[ListImgTableViewCellModel alloc] init];
+    model.titleText = titleTxt;
+    model.textPlaceHolder = placeHolder;
+    model.titleValue = value;
+    model.viewId = vid;
+    model.maxLength = maxLength;
+    model.textFilter = filter;
+    model.autoUppercase = autoUppercase;
+    return model;
+}
 @end

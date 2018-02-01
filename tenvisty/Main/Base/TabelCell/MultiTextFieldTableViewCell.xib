@@ -23,27 +23,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="162.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sJ-xT-rOB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sJ-xT-rOB">
                         <rect key="frame" x="10" y="10" width="54" height="17.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="afT-oG-pfY">
-                        <rect key="frame" x="10" y="32.5" width="355" height="125"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="afT-oG-pfY" customClass="TwsAutoKeyboardTextView">
+                        <rect key="frame" x="74" y="5" width="291" height="152.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="afT-oG-pfY" secondAttribute="trailing" constant="10" id="02z-gh-CVO"/>
                     <constraint firstItem="5sJ-xT-rOB" firstAttribute="leading" secondItem="vx6-LZ-fHa" secondAttribute="leading" constant="10" id="2U0-aM-Zhb"/>
+                    <constraint firstItem="afT-oG-pfY" firstAttribute="top" secondItem="vx6-LZ-fHa" secondAttribute="top" constant="5" id="Div-Fr-OQe"/>
                     <constraint firstAttribute="bottom" secondItem="afT-oG-pfY" secondAttribute="bottom" constant="5" id="OuG-W4-dpU"/>
                     <constraint firstItem="5sJ-xT-rOB" firstAttribute="top" secondItem="vx6-LZ-fHa" secondAttribute="top" constant="10" id="bos-ZF-lMG"/>
-                    <constraint firstItem="afT-oG-pfY" firstAttribute="top" secondItem="5sJ-xT-rOB" secondAttribute="bottom" constant="5" id="iNT-3b-BUt"/>
-                    <constraint firstItem="afT-oG-pfY" firstAttribute="leading" secondItem="vx6-LZ-fHa" secondAttribute="leading" constant="10" id="q6A-kM-FVK"/>
+                    <constraint firstItem="afT-oG-pfY" firstAttribute="leading" secondItem="5sJ-xT-rOB" secondAttribute="trailing" constant="10" id="m30-az-qfv"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

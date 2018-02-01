@@ -9,6 +9,7 @@
 #import "EventSetting_HichipViewController.h"
 #import "AlarmLink.h"
 #import "BaseViewController.h"
+#import "EmailSetting_HichipViewController.h"
 
 @interface EventSetting_HichipViewController (){
     NSInteger currentPush;
@@ -259,8 +260,9 @@
         controller.camera =  self.camera;
     }
     else if([segue.identifier isEqualToString:@"EventSetting2EmailSetting"]){
-        BaseViewController *controller= segue.destinationViewController;
+        EmailSetting_HichipViewController *controller= segue.destinationViewController;
         controller.camera =  self.camera;
+        controller.enableEmail = self.alarmParas.u32EmailSnap == 1;
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TwsTableViewCell : UITableViewCell
+@interface TwsTableViewCell : UITableViewCell<UITextFieldDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSString* title;
 @property (nonatomic,strong) NSString* value;
 @property (nonatomic,assign) CGFloat valueMarginLeft;
@@ -19,8 +19,12 @@
 @property (nonatomic,strong) NSString* placeHolder;
 @property (nonatomic,assign) SEL action;
 @property (nonatomic,weak) NSObject *actionOwner;
+@property (nonatomic,assign) NSInteger maxLength;
+@property (nonatomic,strong) NSString* textFilter;
+@property (nonatomic,assign) BOOL autoUppercase;
+@property (nonatomic,assign) BOOL showValue;
 
 -(void)resignFirstResponder;
--(void)setMaxLength:(NSInteger)maxLength;
+-(void)textFieldDidChange:(UITextField *)textField;
 
 @end

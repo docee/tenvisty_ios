@@ -35,4 +35,5 @@ typedef NS_ENUM(NSInteger, DeviceOrientation) {
 + (BOOL)checkPasswordFormat:(NSString*)pwd;
 + (NSDate*)zeroOfDateTime:(NSDate*)date;
 +(NSString*)createSign:(NSArray*)arr;
++ (UIViewController *)getCurrentVC;
 @end

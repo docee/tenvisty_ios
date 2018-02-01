@@ -7,9 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "TwsTableViewCell.h"
+#import "ListImgTableViewCellModel.h"
 
 @interface BaseViewController ()<BaseCameraDelegate>
-
+@property (nonatomic,strong) UIButton *doneButton;
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation BaseViewController
@@ -34,6 +37,35 @@
     self.camera.cameraDelegate = nil;
 }
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
+{
+    TwsTableViewCell *cell = nil;
+    ListImgTableViewCellModel *model  = [[self.listItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
+    cell.title = model.titleText;
+    cell.value= model.titleValue;
+    cell.placeHolder = model.textPlaceHolder;
+    [cell setLeftImage:model.titleImgName];
+    cell.maxLength = model.maxLength;
+    cell.textFilter = model.textFilter;
+    cell.showValue = model.showValue;
+    return cell;
+}
+//-(void) keyboardWillChangeFrame: (NSNotification *)notification
+//{
+//    self.doneButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+//    self.doneButton.frame = CGRectMake(0, 228, 70, 35);
+//    [self.doneButton setTitle:@"完成编辑" forState: UIControlStateNormal];
+//    [self.doneButton addTarget: self action:@selector(hideKeyboard) forControlEvents: UIControlEventTouchUpInside];
+//
+//    [self.view addSubview:self.doneButton];
+//}
+
+-(void) hideKeyboard
+{
+    [self.doneButton removeFromSuperview];
+    //[myTextView resignFirstResponder];
+}
 /*
 #pragma mark - Navigation
 

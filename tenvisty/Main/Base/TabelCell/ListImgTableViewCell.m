@@ -53,7 +53,7 @@
 }
 
 -(void)setValue:(NSString *)value{
-    if(value == nil && _showValue){
+    if(value == nil && self.showValue){
         value = LOCALSTR(@"loading...");
     }
     _rightLabValue.text = value;

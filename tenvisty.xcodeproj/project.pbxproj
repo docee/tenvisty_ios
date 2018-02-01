@@ -118,6 +118,9 @@
 		89545EB52021AD0400151E90 /* EmailSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EB42021AD0400151E90 /* EmailSetting_HichipViewController.m */; };
 		89545EB72021D0DB00151E90 /* MultiTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89545EB62021D0DB00151E90 /* MultiTextFieldTableViewCell.xib */; };
 		89545EBA2021D1FE00151E90 /* MutilTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EB92021D1FE00151E90 /* MutilTextFieldTableViewCell.m */; };
+		89545EBD2022B99700151E90 /* TwsAutoKeyboardTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EBC2022B99700151E90 /* TwsAutoKeyboardTextField.m */; };
+		89545EC32022F5E300151E90 /* TwsAutoKeyboardTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EC22022F5E300151E90 /* TwsAutoKeyboardTextView.m */; };
+		89545EC72022FDEB00151E90 /* EmailParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EC62022FDEA00151E90 /* EmailParam.m */; };
 		896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */; };
 		896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */; };
 		896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D61FD92C7600EE31AB /* ImageCollectionViewCell.m */; };
@@ -423,6 +426,12 @@
 		89545EB62021D0DB00151E90 /* MultiTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		89545EB82021D1FE00151E90 /* MutilTextFieldTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MutilTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		89545EB92021D1FE00151E90 /* MutilTextFieldTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MutilTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		89545EBB2022B99700151E90 /* TwsAutoKeyboardTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsAutoKeyboardTextField.h; sourceTree = "<group>"; };
+		89545EBC2022B99700151E90 /* TwsAutoKeyboardTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsAutoKeyboardTextField.m; sourceTree = "<group>"; };
+		89545EC12022F5E300151E90 /* TwsAutoKeyboardTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsAutoKeyboardTextView.h; sourceTree = "<group>"; };
+		89545EC22022F5E300151E90 /* TwsAutoKeyboardTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsAutoKeyboardTextView.m; sourceTree = "<group>"; };
+		89545EC52022FDEA00151E90 /* EmailParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailParam.h; sourceTree = "<group>"; };
+		89545EC62022FDEA00151E90 /* EmailParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailParam.m; sourceTree = "<group>"; };
 		896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
 		896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -1110,6 +1119,10 @@
 				ED9DD5F72018E03A00C3C2CF /* HyperlinksButton.m */,
 				8924116A201ED810001F60E8 /* TwsDataValue.h */,
 				8924116B201ED810001F60E8 /* TwsDataValue.m */,
+				89545EBB2022B99700151E90 /* TwsAutoKeyboardTextField.h */,
+				89545EBC2022B99700151E90 /* TwsAutoKeyboardTextField.m */,
+				89545EC12022F5E300151E90 /* TwsAutoKeyboardTextView.h */,
+				89545EC22022F5E300151E90 /* TwsAutoKeyboardTextView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1257,6 +1270,7 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89545EC42022FDEA00151E90 /* Email */,
 				89545EAC2021A40700151E90 /* AlarmLink */,
 				89545EA8202181F900151E90 /* Event */,
 				89545E9B20207F6800151E90 /* WiFi */,
@@ -1323,6 +1337,15 @@
 				89545EB02021A40700151E90 /* SnapAlarm.m */,
 			);
 			path = AlarmLink;
+			sourceTree = "<group>";
+		};
+		89545EC42022FDEA00151E90 /* Email */ = {
+			isa = PBXGroup;
+			children = (
+				89545EC52022FDEA00151E90 /* EmailParam.h */,
+				89545EC62022FDEA00151E90 /* EmailParam.m */,
+			);
+			path = Email;
 			sourceTree = "<group>";
 		};
 		896BA3CB1FD9255500EE31AB /* Image */ = {
@@ -2382,6 +2405,7 @@
 				896BA3DA1FD9375400EE31AB /* ShowImageViewController.m in Sources */,
 				892ADB8E1FD7B94500BD8929 /* SystemSettingTableViewController.m in Sources */,
 				892ADB911FD7C5AA00BD8929 /* EventListViewController.m in Sources */,
+				89545EC32022F5E300151E90 /* TwsAutoKeyboardTextView.m in Sources */,
 				8924126E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m in Sources */,
 				89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */,
 				89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */,
@@ -2436,6 +2460,7 @@
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
 				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,
 				89545EA520207F6900151E90 /* WifiCheck.m in Sources */,
+				89545EC72022FDEB00151E90 /* EmailParam.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
 				89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */,
@@ -2470,6 +2495,7 @@
 				89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */,
 				89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */,
 				894D7E4E1FAB01D900C58BB2 /* main.m in Sources */,
+				89545EBD2022B99700151E90 /* TwsAutoKeyboardTextField.m in Sources */,
 				89545EA620207F6900151E90 /* WifiList.m in Sources */,
 				892CE0981FCFD32300942E28 /* ModifyCameraNameTableViewController.m in Sources */,
 				8924126A202062CD001F60E8 /* SDCard_HichipViewController.m in Sources */,

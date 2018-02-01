@@ -23,6 +23,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    _midTextField.delegate = self;
+    //[_rightTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    _midTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

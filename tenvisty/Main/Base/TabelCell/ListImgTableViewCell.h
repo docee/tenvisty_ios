@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TwsTableViewCell.h"
 
-@interface ListImgTableViewCell : UITableViewCell
--(void) setLeftImage:(NSString*)imageName;
-
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic,strong) NSString *value;
-@property (nonatomic,assign) BOOL showValue;
+@interface ListImgTableViewCell : TwsTableViewCell
+//-(void) setLeftImage:(NSString*)imageName;
+//
+//@property (nonatomic,strong) NSString *title;
+//@property (nonatomic,strong) NSString *value;
 @end

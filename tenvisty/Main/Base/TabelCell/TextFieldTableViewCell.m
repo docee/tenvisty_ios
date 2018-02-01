@@ -7,11 +7,12 @@
 //
 
 #import "TextFieldTableViewCell.h"
+#import "TwsAutoKeyboardTextField.h"
 @interface TextFieldTableViewCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *leftImg;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_leftImg;
-@property (weak, nonatomic) IBOutlet UITextField *rightTextField;
+@property (weak, nonatomic) IBOutlet TwsAutoKeyboardTextField *rightTextField;
 @property (weak, nonatomic) IBOutlet UILabel *leftLabel;
 
 @property (nonatomic,assign) NSInteger mLength;
@@ -24,8 +25,25 @@
     
     self.constraint_width_leftImg.constant = 0;
     _rightTextField.delegate = self;
-    [_rightTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    //[_rightTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     _rightTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+     _rightTextField.secureTextEntry = NO;
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    [topView setBarStyle:UIBarStyleDefault];
+    
+    //UIBarButtonItem * helloButton = [[UIBarButtonItem alloc]initWithTitle:@"Hello" style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem * helloButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+    
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:LOCALSTR(@"Done") style:UIBarButtonItemStyleDone target:self action:@selector(resignFirstResponder)];
+    doneButton.tintColor = [UIColor blackColor];
+    
+    
+    NSArray * buttonsArray = [NSArray arrayWithObjects:helloButton,btnSpace,doneButton,nil];
+    
+    [topView setItems:buttonsArray];
+    [_rightTextField setInputAccessoryView:topView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -51,7 +69,23 @@
 -(void)setPlaceHolder:(NSString *)placeHolder{
     _rightTextField.placeholder = placeHolder;
 }
-
+// 获得焦点
+- (BOOL)textFieldShouldBeginEditing:(TwsAutoKeyboardTextField *)textField{
+    [_rightTextField relocateView];
+    return YES;
+}
+// 失去焦点
+- (BOOL)textFieldShouldEndEditing:(TwsAutoKeyboardTextField *)textField{
+    // [_rightTextField closeNotification];
+    return YES;
+}
+-(void)dealloc{
+   // [_rightTextField closeNotification];
+}
+// 失去焦点
+//- (void)textFieldDidEndEditing:(UITextField *)textField{
+//     [_rightTextField closeNotification];
+//}
 //-(id)initWithCoder:(NSCoder *)aDecoder{
 //    self = [super initWithCoder:aDecoder];
 //    if(self){
@@ -60,64 +94,22 @@
 //    return self;
 //}
 
+
 -(void) setLeftImage:(NSString*)imageName{
-    [self.leftImg setImage:[UIImage imageNamed:imageName]];
-    self.constraint_width_leftImg.constant = 30;
+    if(imageName != nil){
+        [self.leftImg setHidden:NO];
+        [self.leftImg setImage:[UIImage imageNamed:imageName]];
+        self.constraint_width_leftImg.constant = 30;
+    }
+    else{
+        [self.leftImg setHidden:YES];
+        self.constraint_width_leftImg.constant = 0;
+    }
 }
 
 -(void)resignFirstResponder{
     [_rightTextField resignFirstResponder];
-}
-
--(void)setMaxLength:(NSInteger)maxLength{
-    self.mLength = maxLength;
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if(self.mLength > 0){
-        if (string.length == 0) {
-            return YES;
-        }
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > self.mLength) {
-            return NO;
-        }
-        char commitChar = [string characterAtIndex:0];
-        if((commitChar > 96 && commitChar < 123)|| (commitChar < 91 && commitChar > 64) || (commitChar > 47 && commitChar < 58) ||commitChar == 45){
-            if (commitChar > 96 && commitChar < 123 ){
-                NSString * uppercaseString = string.uppercaseString;
-                NSString * str1 = [textField.text substringToIndex:range.location];
-                NSString * str2 = [textField.text substringFromIndex:range.location];
-                textField.text = [[NSString stringWithFormat:@"%@%@%@",str1,uppercaseString,str2] uppercaseString];// [NSString stringWithFormat:@"%@%@%@",str1,uppercaseString,str2].uppercaseString;
-                return NO;
-            }
-        }
-        else{
-            return NO;
-        }
-    }
-//    NSCharacterSet *cs;
-//    cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
-//    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-//    BOOL basicTest = [string isEqualToString:filtered];
-//    if(!basicTest)  {
-//        return NO;
-//    }
-    return YES;
-}
-
-- (void)textFieldDidChange:(UITextField *)textField
-{
-    if(self.mLength > 0){
-        if (textField.text.length > self.mLength) {
-            textField.text = [[textField.text substringToIndex:self.mLength] uppercaseString];
-        }
-    }
+    [_rightTextField refreshLocateView];
 }
 
 @end
