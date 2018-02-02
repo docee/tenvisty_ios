@@ -16,6 +16,7 @@
 @interface AddDeviceWirelessViewController ()
 @property (weak, nonatomic) IBOutlet BaseTableView *tableview;
 
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation AddDeviceWirelessViewController
@@ -28,9 +29,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+-(NSArray *)listItems{
+    if(!_listItems){
+        ListImgTableViewCellModel *ssidModel = [ListImgTableViewCellModel initObj:@"ic_wifi" title:@"" showValue:YES value:[GNetworkStates getDeviceSSID] viewId:TableViewCell_TextField_Disable];
+        ssidModel.textAlignment = NSTextAlignmentLeft;
+        ssidModel.valueMarginLeft = 60;
+        ListImgTableViewCellModel *pwdModel = [ListImgTableViewCellModel initObj:@"ic_password" title:@"" showValue:YES value:@"" viewId:TableViewCell_TextField_Password];
+        pwdModel.textAlignment = NSTextAlignmentLeft;
+        pwdModel.valueMarginLeft = 60;
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         ssidModel,pwdModel,nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
+    }
+    return _listItems;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -39,35 +50,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == 0){
-        NSString *vid = TableViewCell_TextField_Disable;
-        TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        cell.title = @"";
-        cell.leftImage = @"ic_wifi";
-        cell.value = [GNetworkStates getDeviceSSID];
-        cell.valueAligment = NSTextAlignmentLeft;
-        cell.valueMarginLeft = 60;
-        return cell;
-    }
-    else{
-        NSString *vid = TableViewCell_TextField_Password;
-        TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        [cell setTitle:@""];
-        [cell setLeftImage:@"ic_password"];
-        [cell setValueAligment:NSTextAlignmentLeft];
-        [cell setValueMarginLeft:60];
-        return cell;
-    }
-    return nil;
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
      if([segue.identifier isEqualToString:@"AddCameraWireless2AddCameraWirelessNote"]){
         AddDeviceWirelessNoteViewController *controller= segue.destinationViewController;
         controller.uid = [TwsDataValue getTryConnectCamera].uid;
-        controller.wifiSsid = ((TwsTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).value;
-        controller.wifiPassword = ((TwsTableViewCell*)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).value;
+        controller.wifiSsid = [self getRowValue:0 section:0];
+        controller.wifiPassword = [self getRowValue:1 section:0];
         controller.wifiAuthMode = 1;
      }
      else if([segue.identifier isEqualToString:@"AddDeviceWireless2SaveCamera"]){

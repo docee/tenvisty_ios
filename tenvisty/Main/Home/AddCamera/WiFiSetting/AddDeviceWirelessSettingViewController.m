@@ -108,7 +108,9 @@
     if(!isExist){
         [GBase addCamera:self.camera];
     }
-    [self.camera start];
+    if(!self.camera.isDisconnect){
+        [self.camera start];
+    }
 }
 - (IBAction)goBack:(id)sender {
     [self stopConfig];

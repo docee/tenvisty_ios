@@ -49,25 +49,17 @@
 
 -(NSArray *)listItems{
     if(!_listItems){
-        _listItems = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Time Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Time Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
         [ListImgTableViewCellModel initObj:@"ic_reverse" title:LOCALSTR(@"Mirror") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_inverse" title:LOCALSTR(@"Flip") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_sd" title:LOCALSTR(@"SD Card") showValue:NO value:nil viewId:TableViewCell_ListImg],
         [ListImgTableViewCellModel initObj:@"ic_info" title:LOCALSTR(@"Device Infomation") showValue:NO value:nil viewId:TableViewCell_ListImg], nil];
        
-        
+          _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
     }
     return _listItems;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self listItems].count;
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[BaseTableViewController class]]){
@@ -75,46 +67,15 @@
         controller.camera =  self.camera;
     }
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    
-    ListImgTableViewCellModel *model = [[self listItems]objectAtIndex:indexPath.row];
-    NSString *vid = model.viewId;
-    if([vid isEqualToString:TableViewCell_ListImg]){
-        ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        [cell setLeftImage:model.titleImgName];
-        cell.title = model.titleText;
-        cell.showValue = model.showValue;
-        cell.value = model.titleValue;
-//        [cell setSeparatorInset:UIEdgeInsetsZero];
-//        [cell setLayoutMargins:UIEdgeInsetsZero];
-        return cell;
-    }
-    else if([vid isEqualToString:TableViewCell_Switch]){
-        SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        [cell setLeftImage:model.titleImgName];
-        cell.leftLabTitle.text = model.titleText;
-        cell.rightLabLoading.text = LOCALSTR(@"loading...");
-        [cell.rightLabLoading setHidden:model.titleValue != nil];
-        [cell.rightSwitch setEnabled:model.titleValue != nil];
-        [cell.rightSwitch setOn:[model.titleValue isEqualToString:@"on"]];
-        [cell.rightSwitch addTarget:self action:@selector(clickSwitch:)
-                   forControlEvents:UIControlEventTouchUpInside];
-        cell.rightSwitch.tag = indexPath.row;
-        //        [cell setSeparatorInset:UIEdgeInsetsZero];
-        //        [cell setLayoutMargins:UIEdgeInsetsZero];
-        return cell;
-    }
-    return nil;
-}
--(void)clickSwitch:(UISwitch*)sender{
-    ListImgTableViewCellModel *model = [[self listItems]objectAtIndex:sender.tag];
-    model.titleValue = [sender isOn]?@"on":@"off";
-    ListImgTableViewCellModel *mirrorModel = [[self listItems]objectAtIndex:1];
-    ListImgTableViewCellModel *flipModel = [[self listItems]objectAtIndex:2];
-    int videoMode = ([mirrorModel.titleValue isEqualToString:@"on"]?2:0) +  ([flipModel.titleValue isEqualToString:@"on"]?1:0);
+
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw{
+    cellModel.titleValue = [sw isOn]?@"1":@"0";
+    ListImgTableViewCellModel *mirrorModel = [self listItems][0][1];
+    ListImgTableViewCellModel *flipModel = [self listItems][0][2];
+    int videoMode = ([mirrorModel.titleValue isEqualToString:@"1"]?2:0) +  ([flipModel.titleValue isEqualToString:@"1"]?1:0);
     [self doSetVideoMode:videoMode];
 }
+
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -144,8 +105,8 @@
     switch (type) {
         case IOTYPE_USER_IPCAM_GET_VIDEOMODE_RESP:{
             SMsgAVIoctrlGetVideoModeResp *resp = (SMsgAVIoctrlGetVideoModeResp*)data;
-            [self setRowValue:(resp->mode&0x2)>0?@"on":@"off" row:1];
-            [self setRowValue:(resp->mode&0x1)>0?@"on":@"off" row:2];
+            [self setRowValue:(resp->mode&0x2)>0?@"1":@"0" row:1 section:0];
+            [self setRowValue:(resp->mode&0x1)>0?@"1":@"0" row:2 section:0];
             [self.tableView reloadData];
             break;
         }
@@ -154,10 +115,6 @@
     }
 }
 
--(void)setRowValue:(NSString*)value row:(NSInteger)row{
-    ListImgTableViewCellModel* model = (ListImgTableViewCellModel*)[self.listItems objectAtIndex:row];
-    model.titleValue = value;
-}
 /*
 #pragma mark - Navigation
 

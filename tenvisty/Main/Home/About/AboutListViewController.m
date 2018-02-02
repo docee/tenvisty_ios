@@ -32,41 +32,15 @@
 }
 -(NSArray *)listItems{
     if(!_listItems){
-        _listItems = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_menu_help" title:LOCALSTR(@"Help") showValue:NO value:nil viewId:TableViewCell_ListImg],
+      NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_menu_help" title:LOCALSTR(@"Help") showValue:NO value:nil viewId:TableViewCell_ListImg],
                       [ListImgTableViewCellModel initObj:@"ic_menu_privacypolicy" title:LOCALSTR(@"Privacy Policy") showValue:NO value:nil viewId:TableViewCell_ListImg],
                       [ListImgTableViewCellModel initObj:@"ic_menu_info" title:LOCALSTR(@"APP Version") showValue:NO value:nil viewId:TableViewCell_ListImg], nil];
-        
+         _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
         
     }
     return _listItems;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 3;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    
-    ListImgTableViewCellModel *model = [[self listItems]objectAtIndex:indexPath.row];
-    NSString *vid = model.viewId;
-    if([vid isEqualToString:TableViewCell_ListImg]){
-        ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-        [cell setLeftImage:model.titleImgName];
-        cell.title = model.titleText;
-        cell.showValue = model.showValue;
-        cell.value = model.titleValue;
-        //        [cell setSeparatorInset:UIEdgeInsetsZero];
-        //        [cell setLayoutMargins:UIEdgeInsetsZero];
-        return cell;
-    }
-    return nil;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
@@ -85,12 +59,12 @@
     // Pass the selected object to the new view controller.
     // App Name
     
-    if([segue.identifier isEqualToString:@"AboutList2Privacy"]){
+    if([segue.identifier isEqualToString:@"AboutList2Help"]){
         WebBrowserController *controller= segue.destinationViewController;
         NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         controller.Url = FORMAT(@"http://p.webgoodcam.com/%@/touch/camerafaq/detail_wireless_install.html",appName);
     }
-    else if([segue.identifier isEqualToString:@"AboutList2Help"]){
+    else if([segue.identifier isEqualToString:@"AboutList2Privacy"]){
         WebBrowserController *controller= segue.destinationViewController;
         NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         controller.Url = FORMAT(@"http://p.webgoodcam.com/%@/ysxy.html",appName);

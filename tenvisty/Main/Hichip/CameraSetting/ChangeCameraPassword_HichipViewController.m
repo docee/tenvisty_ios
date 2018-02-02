@@ -13,6 +13,7 @@
     NSString *newCameraPassword;
 }
 
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation ChangeCameraPassword_HichipViewController
@@ -32,7 +33,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"Old") value:[self.camera.pwd isEqualToString:DEFAULT_PASSWORD]?self.camera.pwd:@"" placeHodler:LOCALSTR(@"Old Password") maxLength:31 viewId:TableViewCell_TextField_Password],
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"New") value:nil placeHodler:LOCALSTR(@"New Password") maxLength:31 viewId:TableViewCell_TextField_Password],
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"Confirm") value:nil placeHodler:LOCALSTR(@"Confirm Password") maxLength:31 viewId:TableViewCell_TextField_Password], nil];
+        for(int i = 0; i< sec1.count ;i++){
+            ((ListImgTableViewCellModel*)sec1[i]).rightImage = nil;
+        }
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
+    }
+    return _listItems;
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
@@ -41,48 +54,18 @@
     [super viewWillDisappear:animated];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-
-    NSString *id = TableViewCell_TextField_Password;
-    PasswordFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    if(indexPath.row == 0){
-        cell.title = LOCALSTR(@"Old");
-        cell.placeHolder = LOCALSTR(@"Old Password");
-        if([self.camera.pwd isEqualToString:DEFAULT_PASSWORD]){
-            cell.value = self.camera.pwd;
-        }
-        //[cell.rightTextField becomeFirstResponder];
-    }
-    else if(indexPath.row == 1){
-        cell.title = LOCALSTR(@"New");
-        cell.placeHolder  = LOCALSTR(@"New Password");
-    }
-    else if(indexPath.row == 2){
-        cell.title = LOCALSTR(@"Confirm");
-        cell.placeHolder = LOCALSTR(@"Confirm Password");
-    }
-    [cell hideImgBtn];
-    return cell;
-}
 - (IBAction)save:(id)sender {
-    TwsTableViewCell *cell0 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    TwsTableViewCell *cell1 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    TwsTableViewCell *cell2 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    [cell0 resignFirstResponder];
-    [cell1 resignFirstResponder];
-    [cell2 resignFirstResponder];
-    NSString *oldPassword =  cell0.value;
-    NSString *newPassword = cell1.value;
-    NSString *confirmPassword = cell2.value;
+    [self.view endEditing:YES];
+    
+//    TwsTableViewCell *cell0 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//    TwsTableViewCell *cell1 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//    TwsTableViewCell *cell2 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+//    [cell0 resignFirstResponder];
+//    [cell1 resignFirstResponder];
+//    [cell2 resignFirstResponder];
+    NSString *oldPassword = [self getRowValue:0 section:0];
+    NSString *newPassword =[self getRowValue:1 section:0];
+    NSString *confirmPassword = [self getRowValue:2 section:0];
     if(oldPassword.length == 0 || newPassword.length == 0 || confirmPassword.length == 0){
         [[iToast makeText:LOCALSTR(@"Please complete each password.")] show];
     }

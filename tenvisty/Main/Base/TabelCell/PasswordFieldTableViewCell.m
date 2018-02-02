@@ -10,7 +10,6 @@
 #import "TwsAutoKeyboardTextField.h"
 
 @interface PasswordFieldTableViewCell()
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_left_midPasswordField;
 @property (weak, nonatomic) IBOutlet UIImageView *leftImg;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_leftImg;
@@ -86,15 +85,8 @@
     return _leftLabel.text;
 }
 
--(void)setTitle:(NSString*)t{
-    _leftLabel.text = t;
-}
 -(NSString*)value{
     return _midPasswordField.text;
-}
-
--(void)setValue:(NSString*)t{
-    _midPasswordField.text = t;
 }
 
 -(void) setLeftImage:(NSString*)imageName{
@@ -108,34 +100,40 @@
         self.constraint_width_leftImg.constant = 0;
     }
 }
-
--(void) setValueAligment:(NSTextAlignment)align{
-    _midPasswordField.textAlignment = align;
-}
--(void) setValueMarginLeft:(CGFloat)left{
-    _constraint_left_midPasswordField.constant  = left;
+-(void)setRightImage:(NSString *)rightImage{
+    if(rightImage == nil){
+        [_btnShowHidePassword setImage:nil forState:UIControlStateNormal];
+        [_btnShowHidePassword setImage:nil forState:UIControlStateSelected];
+        _constraint_width_btnImg.constant = 0;
+    }
 }
 -(void)showPassword{
     [_midPasswordField setSecureTextEntry:NO];
 }
+
 -(void)hidePassword{
     [_midPasswordField setSecureTextEntry:YES];
 }
--(void)setPlaceHolder:(NSString *)placeHolder{
-    _midPasswordField.placeholder = placeHolder;
-}
+
 -(void)resignFirstResponder{
     [_midPasswordField resignFirstResponder];
-    [_midPasswordField refreshLocateView];
 }
-// 获得焦点
-- (BOOL)textFieldShouldBeginEditing:(TwsAutoKeyboardTextField *)textField{
-    [_midPasswordField relocateView];
-    return YES;
+
+-(void)setCellModel:(ListImgTableViewCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    [self refreshCell];
 }
-// 失去焦点
-- (BOOL)textFieldShouldEndEditing:(TwsAutoKeyboardTextField *)textField{
-    // [_rightTextField closeNotification];
-    return YES;
+
+-(void)refreshCell{
+    [super refreshCell];
+    if(self.cellModel){
+        _midPasswordField.text = self.cellModel.titleValue;
+        _leftLabel.text = self.cellModel.titleText;
+        _midPasswordField.placeholder = self.cellModel.textPlaceHolder;
+        _midPasswordField.textAlignment = self.cellModel.textAlignment;
+        _constraint_left_midPasswordField.constant  = self.cellModel.valueMarginLeft;
+        [self setRightImage:self.cellModel.rightImage];
+        [self setLeftImage:self.cellModel.titleImgName];
+    }
 }
 @end

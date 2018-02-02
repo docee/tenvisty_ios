@@ -16,6 +16,8 @@
     model.titleText = titleTxt;
     model.showValue = showV;
     model.titleValue = value;
+    model.rightImage = @"";
+    model.textAlignment = NSTextAlignmentRight;
     return model;
 }
 
@@ -27,6 +29,8 @@
     model.showValue = showV;
     model.titleValue = value;
     model.viewId = vid;
+    model.rightImage = @"";
+    model.textAlignment = NSTextAlignmentRight;
     return model;
 }
 +(ListImgTableViewCellModel*) initObj:(NSString *)titleTxt value:(NSString *)value placeHodler:(NSString*)placeHolder maxLength:(NSInteger)maxLength viewId:(NSString *)vid{
@@ -36,6 +40,8 @@
     model.titleValue = value;
     model.viewId = vid;
     model.maxLength = maxLength;
+    model.rightImage = @"";
+    model.textAlignment = NSTextAlignmentRight;
     return model;
 }
 
@@ -47,6 +53,8 @@
     model.viewId = vid;
     model.maxLength = maxLength;
     model.textFilter = filter;
+    model.rightImage = @"";
+    model.textAlignment = NSTextAlignmentRight;
     return model;
 }
 
@@ -59,6 +67,8 @@
     model.maxLength = maxLength;
     model.textFilter = filter;
     model.autoUppercase = autoUppercase;
+    model.rightImage = @"";
+    model.textAlignment = NSTextAlignmentRight;
     return model;
 }
 @end

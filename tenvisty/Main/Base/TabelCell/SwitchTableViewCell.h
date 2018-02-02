@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TwsTableViewCell.h"
 
-@interface SwitchTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *leftLabTitle;
-@property (weak, nonatomic) IBOutlet UILabel *rightLabLoading;
-@property (weak, nonatomic) IBOutlet UISwitch *rightSwitch;
--(void) setLeftImage:(NSString*)imageName;
+@interface SwitchTableViewCell : TwsTableViewCell
 @end

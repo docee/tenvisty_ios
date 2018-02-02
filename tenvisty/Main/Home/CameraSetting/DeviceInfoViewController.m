@@ -9,8 +9,8 @@
 #import "DeviceInfoViewController.h"
 
 @interface DeviceInfoViewController (){
-    NSString *fmVersion;
 }
+@property (strong,nonatomic) NSArray *listItems;
 
 @end
 
@@ -26,40 +26,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"UID") showValue:YES value:self.camera.uid viewId:TableViewCell_TextField_Disable],
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"Version") showValue:YES value:nil viewId:TableViewCell_TextField_Disable]
+                         ,nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1,nil];
+    }
+    return _listItems;
+}
+
 -(void)getSDCardInfo{
-    fmVersion = nil;
     SMsgAVIoctrlDeviceInfoReq *req = malloc(sizeof(SMsgAVIoctrlDeviceInfoReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_DEVINFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlDeviceInfoReq)];
     free(req);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    NSString *id = TableViewCell_TextField_Disable;
-    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    if(indexPath.row == 1){
-        cell.title = LOCALSTR(@"Version");
-        if(fmVersion == nil){
-            cell.value = LOCALSTR(@"loading...");
-        }else{
-            cell.value = fmVersion;
-        }
-       
-    }
-    else if(indexPath.row == 0){
-        cell.title = LOCALSTR(@"UID");
-        cell.value = self.camera.uid;
-    }
-    return cell;
-}
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
@@ -70,7 +53,7 @@
             v[2] = (char)(resp->version >> 8);
             v[1] = (char)(resp->version >> 16);
             v[0] = (char)(resp->version >> 24);
-            fmVersion = [NSString stringWithFormat:@"%d.%d.%d.%d",v[0],v[1],v[2],v[3]];
+            [self setRowValue:[NSString stringWithFormat:@"%d.%d.%d.%d",v[0],v[1],v[2],v[3]] row:1 section:0];
             [self.tableView reloadData];
             break;
         }

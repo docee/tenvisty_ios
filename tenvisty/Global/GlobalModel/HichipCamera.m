@@ -81,7 +81,7 @@
 }
 
 -(BOOL)isSessionConnected{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED || self.isAuthConnected;
 }
 
 -(BOOL)isAuthConnected{

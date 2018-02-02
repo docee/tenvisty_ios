@@ -44,19 +44,25 @@
 -(NSString*)title{
     return _leftLabTitle.text;
 }
--(void)setTitle:(NSString *)title{
-    _leftLabTitle.text = title;
-}
+
 
 -(NSString*)value{
     return _rightLabValue.text;
 }
 
--(void)setValue:(NSString *)value{
-    if(value == nil && self.showValue){
-        value = LOCALSTR(@"loading...");
+
+-(void)setCellModel:(ListImgTableViewCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    [self refreshCell];
+}
+
+-(void)refreshCell{
+    [super refreshCell];
+    if(self.cellModel){
+        _leftLabTitle.text = self.cellModel.titleText;
+        _rightLabValue.text = (self.cellModel.titleValue == nil && self.cellModel.showValue)? LOCALSTR(@"loading...") :self.cellModel.titleValue;
+        [self setLeftImage:self.cellModel.titleImgName];
     }
-    _rightLabValue.text = value;
 }
 
 @end

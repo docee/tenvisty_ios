@@ -17,6 +17,7 @@
 #import "BaseTableView.h"
 #import "EmailParam.h"
 #import "ListImgTableViewCell.h"
+#import "EmailEncType_HichipViewController.h"
 
 @interface EmailSetting_HichipViewController ()
 @property (weak, nonatomic) IBOutlet BaseTableView *tableview;
@@ -55,23 +56,28 @@
 
 -(void)refreshTable{
     if(_paras){
-        ListImgTableViewCellModel *emailModel = self.listItems[0][0];
-        emailModel.titleValue = _paras.strUsernm;
-        ListImgTableViewCellModel *passwordModel = self.listItems[0][1];
-        passwordModel.titleValue = _paras.strPasswd;
-        ListImgTableViewCellModel *sendToModel = self.listItems[1][0];
-        sendToModel.titleValue = _paras.strTo;
-        ListImgTableViewCellModel *smtpModel = self.listItems[1][1];
-        smtpModel.titleValue = _paras.strSvr;
-        ListImgTableViewCellModel *portModel = self.listItems[1][2];
-        portModel.titleValue = FORMAT(@"%d",_paras.u32Port);
-        ListImgTableViewCellModel *encTypeModel = self.listItems[1][3];
-        encTypeModel.titleValue = [_paras connectionType];
-        ListImgTableViewCellModel *subjectModel = self.listItems[1][4];
-        subjectModel.titleValue = _paras.strSubject;
-        ListImgTableViewCellModel *messageModel = self.listItems[1][5];
-        messageModel.titleValue = _paras.strText;
+        [self setRowValue:_paras.strUsernm row:0 section:0];
+        [self setRowValue:_paras.strPasswd row:1 section:0];
+        [self setRowValue:_paras.strTo row:0 section:1];
+        [self setRowValue:_paras.strSvr row:1 section:1];
+        [self setRowValue:FORMAT(@"%d",_paras.u32Port) row:2 section:1];
+        [self setRowValue:[_paras connectionType] row:3 section:1];
+        [self setRowValue:_paras.strSubject row:4 section:1];
+        [self setRowValue:_paras.strText row:5 section:1];
         [self.tableview reloadData];
+    }
+}
+
+-(void)reloadParasFromTable{
+    if(_paras){
+        _paras.strUsernm = [self getRowValue:0 section:0];
+        _paras.strPasswd = [self getRowValue:1 section:0];
+        _paras.strTo = [self getRowValue:0 section:1];
+        _paras.strSvr = [self getRowValue:1 section:1];
+        _paras.u32Port =   [[self getRowValue:2 section:1] intValue];
+        _paras.u32Auth = [[self getRowValue:3 section:1] intValue];
+        _paras.strSubject = [self getRowValue:4 section:1];
+        _paras.strText = [self getRowValue:5 section:1];
     }
 }
 
@@ -165,11 +171,28 @@
 }
 - (IBAction)doSaveSetting:(id)sender {
     [self.view endEditing:YES];
+    [self doTest];
+}
+- (void)doTest {
+    [self reloadParasFromTable];
     [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
+    HI_P2P_S_EMAIL_PARAM_EXT *p = [self.paras checkModel];
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_EMAIL_PARAM_EXT Data:(char*)p DataSize:sizeof(HI_P2P_S_EMAIL_PARAM_EXT)];
+    free(p);
+    p = nil;
+}
+
+- (void)doSave {
     HI_P2P_S_EMAIL_PARAM *p = [self.paras model];
     [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_EMAIL_PARAM Data:(char*)p DataSize:sizeof(HI_P2P_S_EMAIL_PARAM)];
     free(p);
     p = nil;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 1 && indexPath.row == 3){
+        [self performSegueWithIdentifier:@"EmailSetting2EncType" sender:self];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
@@ -186,17 +209,46 @@
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
             if(size >=0){
                 [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }
+            break;
         case HI_P2P_SET_EMAIL_PARAM_EXT:{
             if(size >=0){
-                [[iToast makeText:LOCALSTR(@"Test Successfully")] show];
+                [self doSave];
+            }
+            else{
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Test failed, continue to save?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"Continue") actionDefaultBlock:^{
+                    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
+                    [self doSave];
+                } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+                    
+                }];
             }
         }
             break;
         default:
             break;
     }
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"EmailSetting2EncType"]){
+        EmailEncType_HichipViewController *controller = segue.destinationViewController;
+        if(self.paras){
+            controller.encType = self.paras.u32Auth;
+        }
+    }
+}
+
+//其他界面返回到此界面调用的方法
+- (IBAction)EmailSettingViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
+}
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{
+    EmailEncType_HichipViewController *controller = fromViewController;
+    self.paras.u32Auth = (int)controller.encType;
+    [self.tableview reloadData];
+    return YES;
 }
 /*
 #pragma mark - Navigation

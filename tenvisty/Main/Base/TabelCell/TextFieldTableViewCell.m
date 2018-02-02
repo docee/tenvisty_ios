@@ -55,44 +55,10 @@
     return _leftLabel.text;
 }
 
--(void)setTitle:(NSString*)t{
-    _leftLabel.text = t;
-}
+
 -(NSString*)value{
     return _rightTextField.text;
 }
-
--(void)setValue:(NSString*)t{
-    _rightTextField.text = t;
-}
-
--(void)setPlaceHolder:(NSString *)placeHolder{
-    _rightTextField.placeholder = placeHolder;
-}
-// 获得焦点
-- (BOOL)textFieldShouldBeginEditing:(TwsAutoKeyboardTextField *)textField{
-    [_rightTextField relocateView];
-    return YES;
-}
-// 失去焦点
-- (BOOL)textFieldShouldEndEditing:(TwsAutoKeyboardTextField *)textField{
-    // [_rightTextField closeNotification];
-    return YES;
-}
--(void)dealloc{
-   // [_rightTextField closeNotification];
-}
-// 失去焦点
-//- (void)textFieldDidEndEditing:(UITextField *)textField{
-//     [_rightTextField closeNotification];
-//}
-//-(id)initWithCoder:(NSCoder *)aDecoder{
-//    self = [super initWithCoder:aDecoder];
-//    if(self){
-//        self.constraint_width_leftImg.constant = 0;
-//    }
-//    return self;
-//}
 
 
 -(void) setLeftImage:(NSString*)imageName{
@@ -109,7 +75,21 @@
 
 -(void)resignFirstResponder{
     [_rightTextField resignFirstResponder];
-    [_rightTextField refreshLocateView];
+}
+
+-(void)setCellModel:(ListImgTableViewCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    [self refreshCell];
+}
+
+-(void)refreshCell{
+    [super refreshCell];
+    if(self.cellModel){
+        _rightTextField.text = self.cellModel.titleValue;
+        _leftLabel.text = self.cellModel.titleText;
+        _rightTextField.placeholder = self.cellModel.textPlaceHolder;
+        [self setLeftImage:self.cellModel.titleImgName];
+    }
 }
 
 @end

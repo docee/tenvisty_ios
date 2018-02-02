@@ -7,6 +7,8 @@
 //
 
 #import "TwsTableViewCell.h"
+#import "TwsAutoKeyboardTextField.h"
+#import "TwsAutoKeyboardTextView.h"
 
 @interface TwsTableViewCell()
 @property (nonatomic,strong) NSRegularExpression *regular;
@@ -44,14 +46,14 @@
         [textField resignFirstResponder];
         return NO;
     }
-    if(self.maxLength > 0){
+    if(self.cellModel.maxLength > 0){
         if (string.length == 0) {
             return YES;
         }
         NSInteger existedLength = textField.text.length;
         NSInteger selectedLength = range.length;
         NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > self.maxLength) {
+        if (existedLength - selectedLength + replaceLength > self.cellModel.maxLength) {
             return NO;
         }
     }
@@ -87,7 +89,7 @@
 //        NSString * str2 = [textField.text substringFromIndex:range.location];
 //        textField.text = [[NSString stringWithFormat:@"%@%@%@",str1,string,str2] uppercaseString];
 //    }
-    if(self.autoUppercase){
+    if(self.cellModel.autoUppercase){
         NSString * uppercaseString = string.uppercaseString;
         NSString * str1 = [textField.text substringToIndex:range.location];
         NSString * str2 = [textField.text substringFromIndex:range.location];
@@ -100,25 +102,25 @@
 - (void)textFieldDidChange:(UITextField *)textField
 {
     
-    if(self.maxLength > 0){
-        if (textField.text.length > self.maxLength) {
-            textField.text = [textField.text substringToIndex:self.maxLength];
+    if(self.cellModel.maxLength > 0){
+        if (textField.text.length > self.cellModel.maxLength) {
+            textField.text = [textField.text substringToIndex:self.cellModel.maxLength];
         }
     }
-    if(self.autoUppercase){
+    if(self.cellModel.autoUppercase){
         textField.text = [textField.text uppercaseString];
     }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)string{
-    if(self.maxLength > 0){
+    if(self.cellModel.maxLength > 0){
         if (string.length == 0) {
             return YES;
         }
         NSInteger existedLength = textView.text.length;
         NSInteger selectedLength = range.length;
         NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > self.maxLength) {
+        if (existedLength - selectedLength + replaceLength > self.cellModel.maxLength) {
             return NO;
         }
     }
@@ -128,7 +130,7 @@
             return NO;
         }
     }
-    if(self.autoUppercase){
+    if(self.cellModel.autoUppercase){
         NSString * uppercaseString = string.uppercaseString;
         NSString * str1 = [textView.text substringToIndex:range.location];
         NSString * str2 = [textView.text substringFromIndex:range.location];
@@ -138,5 +140,35 @@
     return YES;
 }
 
+// 获得焦点
+- (BOOL)textFieldShouldBeginEditing:(TwsAutoKeyboardTextField *)textField{
+    [textField relocateView];
+    return YES;
+}
 
+- (BOOL)textViewShouldBeginEditing:(TwsAutoKeyboardTextView *)textView{
+    [textView relocateView];
+    return YES;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if(self.cellModel){
+        self.cellModel.titleValue = textField.text;
+    }
+}
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    if(self.cellModel){
+        self.cellModel.titleValue = textView.text;
+    }
+}
+
+-(void)refreshCell{
+    if(self.cellModel){
+        if(self.cellModel.textFilter == nil){
+            _regular = nil;
+        }
+        else{
+            _regular =  [[NSRegularExpression alloc] initWithPattern:self.cellModel.textFilter options:0 error:nil];
+        }
+    }
+}
 @end

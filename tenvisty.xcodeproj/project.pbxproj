@@ -121,6 +121,7 @@
 		89545EBD2022B99700151E90 /* TwsAutoKeyboardTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EBC2022B99700151E90 /* TwsAutoKeyboardTextField.m */; };
 		89545EC32022F5E300151E90 /* TwsAutoKeyboardTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EC22022F5E300151E90 /* TwsAutoKeyboardTextView.m */; };
 		89545EC72022FDEB00151E90 /* EmailParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EC62022FDEA00151E90 /* EmailParam.m */; };
+		89545ECD20246A6C00151E90 /* EmailEncType_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545ECC20246A6C00151E90 /* EmailEncType_HichipViewController.m */; };
 		896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */; };
 		896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D21FD926D400EE31AB /* ImageCollectionTableViewCell.m */; };
 		896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D61FD92C7600EE31AB /* ImageCollectionViewCell.m */; };
@@ -432,6 +433,8 @@
 		89545EC22022F5E300151E90 /* TwsAutoKeyboardTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsAutoKeyboardTextView.m; sourceTree = "<group>"; };
 		89545EC52022FDEA00151E90 /* EmailParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailParam.h; sourceTree = "<group>"; };
 		89545EC62022FDEA00151E90 /* EmailParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailParam.m; sourceTree = "<group>"; };
+		89545ECB20246A6C00151E90 /* EmailEncType_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmailEncType_HichipViewController.h; sourceTree = "<group>"; };
+		89545ECC20246A6C00151E90 /* EmailEncType_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmailEncType_HichipViewController.m; sourceTree = "<group>"; };
 		896BA3CE1FD9257600EE31AB /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
 		896BA3CF1FD9257600EE31AB /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		896BA3D11FD926D400EE31AB /* ImageCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -1098,6 +1101,8 @@
 				89241260202062CD001F60E8 /* WiFiSetting_HichipViewController.m */,
 				89545EB32021AD0400151E90 /* EmailSetting_HichipViewController.h */,
 				89545EB42021AD0400151E90 /* EmailSetting_HichipViewController.m */,
+				89545ECB20246A6C00151E90 /* EmailEncType_HichipViewController.h */,
+				89545ECC20246A6C00151E90 /* EmailEncType_HichipViewController.m */,
 			);
 			path = CameraSetting;
 			sourceTree = "<group>";
@@ -2529,6 +2534,7 @@
 				892ADB791FD6A70400BD8929 /* RecordSettingViewController.m in Sources */,
 				89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */,
 				892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */,
+				89545ECD20246A6C00151E90 /* EmailEncType_HichipViewController.m in Sources */,
 				89A096831FF109C700E5EBAE /* FLAnimatedImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

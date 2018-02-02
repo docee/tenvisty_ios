@@ -39,16 +39,11 @@
     return _leftLabel.text;
 }
 
--(void)setTitle:(NSString*)t{
-    _leftLabel.text = t;
-}
+
 -(NSString*)value{
     return _midTextField.text;
 }
 
--(void)setValue:(NSString*)t{
-    _midTextField.text = t;
-}
 - (IBAction)clickBtn:(id)sender {
     if(self.action && self.actionOwner){
         if([self.actionOwner respondsToSelector:self.action]){
@@ -65,5 +60,18 @@
 }
 -(void)resignFirstResponder{
     [_midTextField resignFirstResponder];
+}
+-(void)setCellModel:(ListImgTableViewCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    [self refreshCell];
+}
+
+-(void)refreshCell{
+    [super refreshCell];
+    if(self.cellModel){
+        _midTextField.text = self.cellModel.titleValue;
+        _leftLabel.text = self.cellModel.titleText;
+        _midTextField.placeholder = self.cellModel.textPlaceHolder;
+    }
 }
 @end

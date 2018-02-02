@@ -8,8 +8,9 @@
 
 #import "BaseTableViewController.h"
 
-@interface BaseTableViewController ()<BaseCameraDelegate>
+@interface BaseTableViewController ()<BaseCameraDelegate,CellModelDelegate>
 
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation BaseTableViewController
@@ -42,11 +43,21 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    if(self.listItems){
+        return self.listItems.count;
+    }
+    else{
+        return [super numberOfSectionsInTableView:tableView];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    if(self.listItems){
+        return ((NSArray*)self.listItems[section]).count;
+    }
+    else{
+         return [super tableView:tableView numberOfRowsInSection:section];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -63,8 +74,47 @@
 -(TwsTableViewCell*) getRowCell:(NSInteger)row{
     return (TwsTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:row inSection:0]];
 }
+
 - (BOOL)prefersHomeIndicatorAutoHidden{
     return YES;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
+{
+    if(self.listItems){
+        TwsTableViewCell *cell = nil;
+        ListImgTableViewCellModel *model  = [[self.listItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
+        cell.cellModel = model;
+        model.delegate = self;
+        return cell;
+    }
+    else{
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+}
+
+-(NSString*)getRowValue:(NSInteger)row section:(NSInteger)section{
+    NSString *v = ((ListImgTableViewCellModel*)self.listItems[section][row]).titleValue;
+    if(v == nil){
+        v = @"";
+    }
+    return v;
+}
+
+-(NSIndexPath*)getIndexPath:(ListImgTableViewCellModel*)cellModel{
+    for( int i = 0; i < self.listItems.count; i++){
+        for(int j = 0; j < ((NSArray*)self.listItems[i]).count; j++){
+            if(self.listItems[i][j] == cellModel){
+                return [NSIndexPath indexPathForRow:j inSection:i];
+            }
+        }
+    }
+    return nil;
+}
+
+-(void)setRowValue:(NSString*)val row:(NSInteger)row section:(NSInteger)section{
+    ((ListImgTableViewCellModel*)self.listItems[section][row]).titleValue = val;
 }
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

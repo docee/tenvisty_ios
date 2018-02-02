@@ -20,7 +20,16 @@ static   BaseCamera *tryCamera;
 }
 +(void) setTryConnectCamera:(BaseCamera*)camera{
     if(tryCamera != camera && tryCamera != nil){
-        [tryCamera stop];
+        BOOL added = NO;
+        for(BaseCamera *c in [GBase sharedInstance].cameras){
+            if(c == tryCamera){
+                added = YES;
+                break;
+            }
+        }
+        if(!added){
+            [tryCamera stop];
+        }
     }
     tryCamera = camera;
 }

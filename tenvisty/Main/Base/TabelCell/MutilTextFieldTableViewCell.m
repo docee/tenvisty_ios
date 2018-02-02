@@ -51,24 +51,11 @@
     return _labTitleText.text;
 }
 
--(void)setTitle:(NSString*)t{
-    _labTitleText.text = t;
-}
-
 -(NSString*)value{
     return _textTitleValue.text;
 }
 
--(void)setValue:(NSString*)t{
-    _textTitleValue.text = t;
-}
 
--(void)setPlaceHolder:(NSString *)placeHolder{
-    [super setPlaceHolder:placeHolder];
-//    if(_textTitleValue.text.length == 0){
-//        _textTitleValue.text = self.placeHolder;
-//    }
-}
 //#pragma mark - UITextViewDelegate
 //- (void)textViewDidEndEditing:(UITextView *)textView
 //{
@@ -88,13 +75,19 @@
 
 -(void)resignFirstResponder{
     [_textTitleValue resignFirstResponder];
-    [_textTitleValue refreshLocateView];
 }
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    [_textTitleValue relocateView];
-    return YES;
+-(void)setCellModel:(ListImgTableViewCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    [self refreshCell];
 }
 
+-(void)refreshCell{
+    [super refreshCell];
+    if(self.cellModel){
+        _labTitleText.text = self.cellModel.titleText;
+        _textTitleValue.text = self.cellModel.titleValue;
+    }
+}
 
 @end

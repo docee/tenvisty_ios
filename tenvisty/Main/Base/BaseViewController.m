@@ -10,7 +10,7 @@
 #import "TwsTableViewCell.h"
 #import "ListImgTableViewCellModel.h"
 
-@interface BaseViewController ()<BaseCameraDelegate>
+@interface BaseViewController ()<BaseCameraDelegate,CellModelDelegate>
 @property (nonatomic,strong) UIButton *doneButton;
 @property (strong,nonatomic) NSArray *listItems;
 @end
@@ -36,20 +36,47 @@
     [super viewWillDisappear:animated];
     self.camera.cameraDelegate = nil;
 }
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.listItems.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return ((NSArray*)self.listItems[section]).count;
+}
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     TwsTableViewCell *cell = nil;
     ListImgTableViewCellModel *model  = [[self.listItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
-    cell.title = model.titleText;
-    cell.value= model.titleValue;
-    cell.placeHolder = model.textPlaceHolder;
-    [cell setLeftImage:model.titleImgName];
-    cell.maxLength = model.maxLength;
-    cell.textFilter = model.textFilter;
-    cell.showValue = model.showValue;
+    cell.cellModel = model;
+    model.delegate = self;
     return cell;
+}
+
+-(NSString*)getRowValue:(NSInteger)row section:(NSInteger)section{
+    NSString *v = ((ListImgTableViewCellModel*)self.listItems[section][row]).titleValue;
+    if(v == nil){
+        v = @"";
+    }
+    return v;
+}
+-(void)setRowValue:(NSString*)val row:(NSInteger)row section:(NSInteger)section{
+    ((ListImgTableViewCellModel*)self.listItems[section][row]).titleValue = val;
+}
+
+-(NSIndexPath*)getIndexPath:(ListImgTableViewCellModel*)cellModel{
+    for( int i = 0; i < self.listItems.count; i++){
+        for(int j = 0; j < ((NSArray*)self.listItems[i]).count; j++){
+            if(self.listItems[i][j] == cellModel){
+                return [NSIndexPath indexPathForRow:j inSection:i];
+            }
+        }
+    }
+    return nil;
 }
 //-(void) keyboardWillChangeFrame: (NSNotification *)notification
 //{

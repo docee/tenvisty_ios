@@ -14,6 +14,7 @@
     BOOL isFormatting;
 }
 
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation SDCardViewController
@@ -47,41 +48,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    NSString *id = TableViewCell_TextField_Disable;
-    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    if(indexPath.row == 0){
-        cell.title = LOCALSTR(@"Total size");
-        if(totalSize == -1){
-            cell.value = LOCALSTR(@"loading...");
-        }
-        else{
-            cell.value = FORMAT(@"%d MB",(int)totalSize);
-        }
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"Total size")  showValue:YES value:nil viewId:TableViewCell_TextField_Disable],
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"Free size")  showValue:YES value:nil viewId:TableViewCell_TextField_Disable]
+                         ,nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
     }
-    else if(indexPath.row == 1){
-        cell.title = LOCALSTR(@"Free size");
-        if(freeSize == -1){
-            cell.value = LOCALSTR(@"loading...");
-        }
-        else{
-            cell.value = FORMAT(@"%d MB",(int)freeSize);
-        }
-    }
-    
-    return cell;
+    return _listItems;
 }
-
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableviewCellFooter"];
@@ -114,8 +90,8 @@
         case IOTYPE_USER_IPCAM_DEVINFO_RESP:{
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlDeviceInfoResp *resp = (SMsgAVIoctrlDeviceInfoResp*)data;
-            freeSize = resp->free;
-            totalSize = resp->total;
+            [self setRowValue:FORMAT(@"%d MB",resp->total) row:0 section:0];
+            [self setRowValue:FORMAT(@"%d MB",resp->free) row:1 section:0];
             [self.tableView reloadData];
             if(isFormatting){
                 [[[iToast makeText:LOCALSTR(@"format success")]setDuration:1] show];
@@ -127,6 +103,8 @@
             SMsgAVIoctrlFormatExtStorageResp *resp = (SMsgAVIoctrlFormatExtStorageResp*)data;
             if(resp->result == 0){
                 isFormatting = YES;
+                [self setRowValue:nil row:0 section:0];
+                [self setRowValue:nil row:1 section:0];
                 [self getSDCardInfo];
                 [self.tableView reloadData];
             }

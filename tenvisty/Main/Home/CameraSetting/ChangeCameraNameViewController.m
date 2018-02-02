@@ -10,6 +10,7 @@
 #import "TextFieldTableViewCell.h"
 
 @interface ChangeCameraNameViewController ()
+@property (strong,nonatomic) NSArray *listItems;
 
 @end
 
@@ -25,32 +26,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    NSString *id = TableViewCell_TextField_Normal;
-    TwsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    cell.title = LOCALSTR(@"Name");
-    cell.value = self.camera.nickName;
-    //[cell.rightTextField becomeFirstResponder];
-    return cell;
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"UID") showValue:YES value:self.camera.uid viewId:TableViewCell_TextField_Disable],
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"Name") value:self.camera.nickName placeHodler:LOCALSTR(@"Camera Name") maxLength:20 viewId:TableViewCell_TextField_Normal],
+                         nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
+    }
+    return _listItems;
 }
 - (IBAction)save:(id)sender {
-    NSString *nickName = ((TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).value;
+    [self.view endEditing:YES];
+    NSString *nickName = [self getRowValue:1 section:0];
     // 用于过滤空格和Tab换行符
     NSCharacterSet *characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     nickName = [nickName stringByTrimmingCharactersInSet:characterSet];
     if(nickName.length == 0){
-        [TwsTools presentAlertMsg:self message:LOCALSTR(@"[Camera name] must be entered.")];
-        return;
+        nickName = LOCALSTR(@"Camera Name");
     }
     self.camera.nickName = nickName;
     [GBase editCamera:self.camera];

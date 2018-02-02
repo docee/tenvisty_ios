@@ -10,6 +10,7 @@
 
 @interface ModifyCameraNameTableViewController ()
 
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation ModifyCameraNameTableViewController
@@ -28,44 +29,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    NSString *id = nil;
-    TwsTableViewCell *cell = nil;
-    
-    if(indexPath.row == 0){
-        id = TableViewCell_TextField_Disable;
-       cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"UID");
-        cell.value = self.camera.uid;
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"UID") showValue:YES value:self.camera.uid viewId:TableViewCell_TextField_Disable],
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"Name") value:self.camera.nickName placeHodler:LOCALSTR(@"Camera Name") maxLength:20 viewId:TableViewCell_TextField_Normal],
+                         nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
     }
-    else if(indexPath.row == 1){
-        id = TableViewCell_TextField_Normal;
-        cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"Name");
-        cell.value = self.camera.nickName;
-    }
-    
-    return cell;
+    return _listItems;
 }
+
 - (IBAction)save:(id)sender {
-    NSString *nickName = [self getRowCell:1].value;
+    [self.view endEditing:YES];
+    NSString *nickName = [self getRowValue:1 section:0];
     // 用于过滤空格和Tab换行符
     NSCharacterSet *characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     nickName = [nickName stringByTrimmingCharactersInSet:characterSet];
     if(nickName.length ==0){
-        [TwsTools presentAlertMsg:self message:LOCALSTR(@"[Camera name] must be entered.")];
-        return;
+        nickName = LOCALSTR(@"Camera Name");
     }
     self.camera.nickName = nickName;
     [GBase editCamera:self.camera];

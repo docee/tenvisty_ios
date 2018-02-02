@@ -173,7 +173,7 @@
 }
 
 -(BOOL)isSessionConnected{
-    return self.cameraConnectState == CONNECTION_STATE_CONNECTED_SESSION;
+    return self.cameraConnectState == CONNECTION_STATE_CONNECTED_SESSION || self.isAuthConnected;
 }
 
 -(BOOL)isAuthConnected{

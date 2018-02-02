@@ -37,15 +37,17 @@
 }
 
 -(void)doGetWiFi{
-    [self setRowValue:nil section:1 row:0];
+    [self setRowValue:nil row:0 section:1];
     [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_WIFI_PARAM Data:(char*)nil DataSize:0];
+    [self.tableview reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setup];
     //刷新摄像机名称
-    [self setRowValue:self.camera.nickName section:0 row:0];
+    [self setRowValue:self.camera.nickName row:0 section:0];
+    [self.tableview reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,49 +56,34 @@
 }
 
 -(void)doGetRecordSetting{
-    [self setRowValue:nil section:1 row:2];
+    [self setRowValue:nil row:2 section:1];
     SMsgAVIoctrlGetRecordReq *req = malloc(sizeof(SMsgAVIoctrlGetRecordReq));
     req->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETRECORD_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetRecordReq)];
     free(req);
+    [self.tableview reloadData];
 }
 
 -(NSArray *)listItems{
     if(!_listItems){
-        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") showValue:NO value:self.camera.nickName],[ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") showValue:NO value:nil], nil];
-        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Wi-Fi") showValue:YES value:nil],[ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") showValue:NO value:nil],
-            [ListImgTableViewCellModel initObj:@"ic_setting_record" title:LOCALSTR(@"Record") showValue:YES value:nil],nil];
-        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"Other Setting") showValue:NO value:nil],nil];
-        NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"System Setting") showValue:NO value:nil],nil];
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:@"ic_modifyname" title:LOCALSTR(@"Camera Name") showValue:YES value:self.camera.nickName viewId:TableViewCell_ListImg],
+                         [ListImgTableViewCellModel initObj:@"ic_modifypassword" title:LOCALSTR(@"Change Password") showValue:NO value:nil viewId:TableViewCell_ListImg], nil];
+        NSArray *sec2 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:@"ic_network" title:LOCALSTR(@"Wi-Fi") showValue:YES value:nil viewId:TableViewCell_ListImg],
+                         [ListImgTableViewCellModel initObj:@"ic_eventsetting" title:LOCALSTR(@"Event Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
+            [ListImgTableViewCellModel initObj:@"ic_setting_record" title:LOCALSTR(@"Record") showValue:NO value:nil viewId:TableViewCell_ListImg],nil];
+        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"Other Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],nil];
+        NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"System Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],nil];
         _listItems = [[NSArray alloc] initWithObjects:sec1,sec2,sec3,sec4, nil];
     }
     return _listItems;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self listItems].count;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return ((NSArray *)[[self listItems] objectAtIndex:section]).count;
-}
-
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
-    NSString *vid = TableViewCell_ListImg;
-    ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-    
-    if(cell == nil)
-    {
-        cell = [[ListImgTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:vid];
-    }
-    ListImgTableViewCellModel *model = [[[self listItems]objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    [cell setLeftImage:model.titleImgName];
-    cell.title = model.titleText;
-    cell.showValue = model.showValue;
-    cell.value= model.titleValue;
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+   
     
     [cell setSeparatorInset:UIEdgeInsetsZero];
     [cell setLayoutMargins:UIEdgeInsetsZero];
@@ -169,13 +156,15 @@
         case IOTYPE_USER_IPCAM_GETRECORD_RESP:{
             SMsgAVIoctrlGetRecordResq *resp = (SMsgAVIoctrlGetRecordResq*)data;
             NSString* v = resp->recordType == 0?LOCALSTR(@"OFF"):(resp->recordType == 1 ? LOCALSTR(@"Full Time Recording") : LOCALSTR(@"Alarm Recording"));
-            [self setRowValue:v section:1 row:2];
+            [self setRowValue:v row:2 section:1 ];
+            [self.tableview reloadData];
             break;
         }
         case HI_P2P_GET_WIFI_PARAM:{
             WifiParam *wifiParam = [[WifiParam alloc] initWithData:(char*)data size:(int)size];
             NSString* ssid = wifiParam.strSSID;// [NSString stringWithUTF8String: (const char*)resp->ssid];
-            [self setRowValue:ssid section:1 row:0];
+            [self setRowValue:ssid row:0 section:1 ];
+            [self.tableview reloadData];
             break;
         }
         default:
@@ -183,11 +172,6 @@
     }
 }
 
--(void)setRowValue:(NSString*)value section:(NSInteger)section row:(NSInteger)row{
-    ListImgTableViewCellModel* model = (ListImgTableViewCellModel*)[[self.listItems objectAtIndex:section] objectAtIndex:row];
-    model.titleValue = value;
-    [self.tableview reloadData];
-}
 
 /*
 #pragma mark - Navigation

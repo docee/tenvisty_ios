@@ -10,6 +10,8 @@
 
 @interface AddCameraInputUIDTableViewController ()
 
+@property (strong,nonatomic) NSArray *listItems;
+
 @end
 
 @implementation AddCameraInputUIDTableViewController
@@ -28,27 +30,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    
-    NSString *id = TableViewCell_TextField_Normal;
-    TextFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-    if(indexPath.row == 0){
-        cell.title = LOCALSTR(@"UID");
-        cell.placeHolder = LOCALSTR(@"UID on camera label");
-        cell.maxLength = 20;
-        cell.autoUppercase = YES;
-        cell.textFilter = @"^[0-9a-zA-Z\\-]$";
-        //[cell.rightTextField becomeFirstResponder];
+-(NSArray *)listItems{
+    if(!_listItems){
+        ListImgTableViewCellModel *vm = [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"UID") showValue:NO value:nil viewId:TableViewCell_TextField_Normal];
+        vm.maxLength = 20;
+        vm.autoUppercase = YES;
+        vm.textFilter = @"^[0-9a-zA-Z\\-]$";
+        vm.textPlaceHolder =  LOCALSTR(@"UID on camera label");
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:vm,
+                         nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
     }
-    return cell;
+    return _listItems;
 }
+
 - (IBAction)save:(id)sender {
-    TwsTableViewCell *cell0 = (TwsTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell0 resignFirstResponder];
-    NSString *_uid = cell0.value;
+    [self.view endEditing:YES];
+    NSString *_uid = [self getRowValue:0 section:0];
     [self performSegueWithIdentifier:@"Unwind_InputCameraUID2ScanQRCode" sender:_uid];
 }
 
@@ -56,15 +54,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
 
 
 

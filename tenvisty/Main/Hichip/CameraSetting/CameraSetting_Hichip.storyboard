@@ -820,7 +820,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-7d-9Mt" customClass="BaseTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8V3-7d-9Mt" customClass="BaseTableView">
                                 <rect key="frame" x="0.0" y="15" width="375" height="588"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -907,10 +907,54 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="8V3-7d-9Mt" id="x4v-Lq-3LW"/>
+                        <segue destination="1iF-T2-gFa" kind="show" identifier="EmailSetting2EncType" id="mBl-kj-OM8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZHO-fd-m9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="o9w-rA-Mw2" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Email Setting-->
+        <scene sceneID="vz0-b9-RAZ">
+            <objects>
+                <viewController id="1iF-T2-gFa" customClass="EmailEncType_HichipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tNi-lc-0ok"/>
+                        <viewControllerLayoutGuide type="bottom" id="j1H-aO-gTR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="G6r-EZ-bf5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SaJ-st-5nI" customClass="BaseTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="1iF-T2-gFa" id="pvR-t1-hJh"/>
+                                    <outlet property="delegate" destination="1iF-T2-gFa" id="Rt6-Hf-9u1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SaJ-st-5nI" secondAttribute="trailing" id="Fav-xR-ewe"/>
+                            <constraint firstItem="SaJ-st-5nI" firstAttribute="leading" secondItem="G6r-EZ-bf5" secondAttribute="leading" id="gUP-UZ-y1z"/>
+                            <constraint firstItem="j1H-aO-gTR" firstAttribute="top" secondItem="SaJ-st-5nI" secondAttribute="bottom" id="gqU-ak-hyp"/>
+                            <constraint firstItem="SaJ-st-5nI" firstAttribute="top" secondItem="tNi-lc-0ok" secondAttribute="bottom" id="rH7-vr-S5x"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Email Setting" id="UI7-ZT-UEf">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="Zoe-F6-xDm">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="LBH-JS-TT4" kind="unwind" identifier="unwind_EmailEncTypp2EmailSetting" unwindAction="EmailSettingViewController1UnwindSegue:" id="FOQ-ZZ-fu5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Uo-uF-aZS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="LBH-JS-TT4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>

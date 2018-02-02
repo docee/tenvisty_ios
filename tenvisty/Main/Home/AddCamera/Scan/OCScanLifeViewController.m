@@ -164,6 +164,14 @@
     else{
         _uid = [TwsTools readUID:_uid];
         if(_uid){
+            for(BaseCamera *c in [GBase sharedInstance].cameras){
+                if([c.uid isEqualToString:_uid]){
+                    [TwsTools presentAlertMsg:sender message:LOCALSTR(@"Camera already exists in your list") actionDefaultBlock:^{
+                        [self reRunScan];
+                    }];
+                    return NO;
+                }
+            }
             return YES;
         }
         else{

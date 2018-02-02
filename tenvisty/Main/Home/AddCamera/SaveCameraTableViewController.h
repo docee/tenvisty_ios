@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-#import "OCScanLifeViewController.h"
 
-@interface SaveCameraTableViewController : BaseTableViewController<OCScanLifeViewControllerDelegate>
+@interface SaveCameraTableViewController : BaseTableViewController
 
 @property (nonatomic,strong) NSString *uid;
 @end

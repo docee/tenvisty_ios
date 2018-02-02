@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
+@protocol CellModelDelegate;
+
 @interface ListImgTableViewCellModel : NSObject
+@property (nonatomic, assign) id<CellModelDelegate> delegate;
 @property (nonatomic,copy) NSString *titleImgName;
 @property (nonatomic,copy) NSString *titleText;
 @property (nonatomic,copy) NSString *titleValue;
@@ -18,6 +22,9 @@
 @property (nonatomic,assign) NSInteger maxLength;
 @property (nonatomic,copy) NSString *textFilter;
 @property (nonatomic,assign) BOOL autoUppercase;
+@property (nonatomic,assign) NSTextAlignment textAlignment;
+@property (nonatomic,assign) CGFloat valueMarginLeft;
+@property (nonatomic,strong) NSString* rightImage;
 
 
 +(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt showValue:(BOOL)showV value:(NSString *)value;
@@ -29,4 +36,9 @@
 
 +(ListImgTableViewCellModel*) initObj:(NSString *)titleTxt value:(NSString *)value placeHodler:(NSString*)placeHolder maxLength:(NSInteger)maxLength filter:(NSString*)filter viewId:(NSString *)vid;
 +(ListImgTableViewCellModel*) initObj:(NSString *)titleTxt value:(NSString *)value placeHodler:(NSString*)placeHolder maxLength:(NSInteger)maxLength filter:(NSString*)filter autoUppercase:(BOOL)autoUppercase viewId:(NSString *)vid;
+@end
+@protocol CellModelDelegate <NSObject>
+@optional
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickButton:(UIButton*)btn;
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw;
 @end

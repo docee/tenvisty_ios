@@ -13,6 +13,7 @@
 
 @interface SaveCameraTableViewController ()
 
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation SaveCameraTableViewController
@@ -25,13 +26,25 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"UID") value:self.uid placeHodler:nil maxLength:20 viewId:TableViewCell_TextField_Disable],
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"Password") value:nil placeHodler:LOCALSTR(@"Camera Password") maxLength:31 viewId:TableViewCell_TextField_Password],
+                         [ListImgTableViewCellModel initObj:LOCALSTR(@"Name") value:nil placeHodler:LOCALSTR(@"Camera Name") maxLength:20  viewId:TableViewCell_TextField_Normal],
+                        nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
+    }
+    return _listItems;
+}
 - (IBAction)saveCamera:(id)sender {
+    [self.view endEditing:YES];
     if([self checkData]){
-        NSString *nickName = [self iptName];
+        NSString *nickName = [self getRowValue:2 section:0];
         if(nickName.length == 0){
             nickName = LOCALSTR(@"Camera Name");
         }
-        NSString *password = [self iptPassword];
+        NSString *password =  [self getRowValue:1 section:0];;
         BaseCamera *camera = [[BaseCamera alloc] initWithUid:self.uid Name:nickName UserName:@"admin" Password:password];
         [camera start];
         [GBase addCamera:camera];
@@ -41,11 +54,13 @@
     
 }
 -(BOOL)checkData{
-    if([self iptUid].length == 0){
+    NSString *uid = [self getRowValue:0 section:0];
+    NSString *password = [self getRowValue:1 section:0];
+    if(uid.length == 0){
         [TwsTools presentAlertMsg:self message:LOCALSTR(@"[UID] is not entered.")];
         return NO;
     }
-    NSString *uid = [TwsTools readUID:[self iptUid]];
+    uid = [TwsTools readUID:uid];
     for(BaseCamera *camera in [GBase sharedInstance].cameras){
         if([camera.uid isEqualToString:uid]){
             [TwsTools presentAlertMsg:self message:LOCALSTR(@"This camera already exists, please enter another one.")];
@@ -56,7 +71,7 @@
         [TwsTools presentAlertMsg:self message:LOCALSTR(@"Invalid UID")];
         return NO;
     }
-    if([self iptPassword].length == 0){
+    if(password.length == 0){
         [TwsTools presentAlertMsg:self message:LOCALSTR(@"[Password] is not entered.")];
         return NO;
     }
@@ -69,86 +84,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    NSString *id = TableViewCell_TextField_Disable;
-    if(indexPath.row == 0){
-        TwsTableViewCell *cell = nil;
-        id = TableViewCell_TextField_Disable;
-        cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        if(self.uid != nil && ![self.uid isEqualToString:NO_USE_UID]){
-            cell.value = self.uid;
-        }
-        cell.title = LOCALSTR(@"UID");
-        return cell;
-    }
-    else if(indexPath.row ==1){
-        PasswordFieldTableViewCell *cell = nil;
-        id =  TableViewCell_TextField_Password;
-        cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"Password");
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [cell resignFirstResponder];
-//        });
-        return cell;
-    }
-    else if(indexPath.row == 2){
-        TextFieldTableViewCell *cell = nil;
-        id = TableViewCell_TextField_Normal;
-        cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"Name");
-        return cell;
-    }
-    return nil;
-}
-
--(NSString*)iptUid{
-    TwsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    return cell.value;
-}
--(NSString*)iptPassword{
-    TwsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    return cell.value;
-}
--(NSString*)iptName{
-    TextFieldTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    return cell.value;
-}
-
--(void)go2ScanQRCode{
-    [self performSegueWithIdentifier:@"SaveCamera2ScanQRCode" sender:self];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"SaveCamera2ScanQRCode"]){
-        OCScanLifeViewController *controller= segue.destinationViewController;
-        controller.hasNoQRCodeBtn = NO;
-        controller.delegate = self;
+        
     }
     
 }
-
-- (void)scanResult:(NSString *)result{
-    if(result){
-        if(![result isEqualToString:NO_USE_UID]){
-            _uid = result;
-            TwsTableViewCell *cell  = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-            cell.value = _uid;
-        }
-    }
-}
-
-
 
 - (IBAction)back:(id)sender {
      [self.navigationController popViewControllerAnimated:YES];

@@ -14,6 +14,7 @@
 }
 @property (nonatomic,strong) NSArray *sensValueDesc;
 @property (nonatomic,strong) NSArray *sensValue;
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation EventSettingViewController
@@ -46,39 +47,22 @@
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetMotionDetectReq)];
     free(req);
 }
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    if(indexPath.row == 0){
-        NSString *id = TableViewCell_ListImg;
-        ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"Sensitivity Setting");
-        cell.showValue = YES;
-        cell.value= currentSens;//LOCALSTR(@"Close");
-        [cell setLeftImage:@"ic_sens"];
-        return cell;
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:@"ic_sens" title:LOCALSTR(@"Sensitivity Setting") showValue:YES value:nil viewId:TableViewCell_ListImg],
+                         [ListImgTableViewCellModel initObj:@"ic_push" title:LOCALSTR(@"Alarm Push") showValue:YES value:nil viewId:TableViewCell_Switch],
+                         
+                         nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
     }
-    else{
-        NSString *id = TableViewCell_Switch;
-        SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.leftLabTitle.text = LOCALSTR(@"Alarm Push");
-        [cell setLeftImage:@"ic_push"];
-        [cell.rightLabLoading setHidden:YES];
-        [cell.rightSwitch setOn:self.camera.remoteNotifications>0];
-        [cell.rightSwitch addTarget:self action:@selector(clickPush:) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
-    }
-    return nil;
+    return _listItems;
 }
 
+
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw{
+    [self clickPush:sw];
+}
 -(void)clickPush:(UISwitch *)sender{
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:NO];
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];

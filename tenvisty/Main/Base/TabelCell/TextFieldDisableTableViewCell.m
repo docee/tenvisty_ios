@@ -48,25 +48,32 @@
     return _leftLabel.text;
 }
 
--(void)setTitle:(NSString*)t{
-    _leftLabel.text = t;
-}
 -(NSString*)value{
     return _rightTextField.text;
 }
 
--(void)setValue:(NSString*)t{
-    _rightTextField.text = t;
-}
-
--(void) setValueAligment:(NSTextAlignment)align{
-    _rightTextField.textAlignment = align;
-}
-
--(void) setValueMarginLeft:(CGFloat)left{
-    _constraint_left_rightTextField.constant  = left;
-}
 -(void)resignFirstResponder{
     [_rightTextField resignFirstResponder];
+}
+-(void)setCellModel:(ListImgTableViewCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    [self refreshCell];
+}
+
+-(void)refreshCell{
+    [super refreshCell];
+    if(self.cellModel){
+        if(self.cellModel.showValue && self.cellModel.titleValue == nil){
+            _rightTextField.text = LOCALSTR(@"loading...");
+        }
+        else{
+            _rightTextField.text = self.cellModel.titleValue;
+        }
+        _leftLabel.text = self.cellModel.titleText;
+        _rightTextField.placeholder = self.cellModel.textPlaceHolder;
+        _rightTextField.textAlignment = self.cellModel.textAlignment;
+        [self setLeftImage:self.cellModel.titleImgName];
+        _constraint_left_rightTextField.constant  = self.cellModel.valueMarginLeft;
+    }
 }
 @end

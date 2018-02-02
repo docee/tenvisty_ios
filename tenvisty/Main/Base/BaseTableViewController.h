@@ -23,4 +23,9 @@
 @property (nonatomic,weak) BaseCamera *camera;
 
 -(TwsTableViewCell*) getRowCell:(NSInteger)row;
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath;
+-(NSString*)getRowValue:(NSInteger)row section:(NSInteger)section;
+-(void)setRowValue:(NSString*)val row:(NSInteger)row section:(NSInteger)section;
+-(NSIndexPath*)getIndexPath:(ListImgTableViewCellModel*)cellModel;
 @end

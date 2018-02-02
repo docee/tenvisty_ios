@@ -81,65 +81,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.listItems.count;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((NSArray*)[self.listItems objectAtIndex:section]).count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    ListImgTableViewCellModel *model  = [[self.listItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    if([model.viewId isEqualToString:TableViewCell_Switch]){
-        SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
-        cell.leftLabTitle.text = model.titleText;
-        [cell setLeftImage:model.titleImgName];
-        [cell.rightLabLoading setHidden:model.titleValue!=nil];
-        [cell.rightSwitch setOn:[model.titleValue isEqualToString:@"1"]];
-        cell.rightSwitch.tag = indexPath.section*10+indexPath.row;
-        [cell.rightSwitch addTarget:self action:@selector(doClickSwitch:) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw{
+    NSIndexPath *indexPath = [self getIndexPath:cellModel];
+    if(indexPath.section == 1 && indexPath.row == 0){
+        [self clickPush:sw];
     }
     else{
-        ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.viewId forIndexPath:indexPath];
-        cell.title = model.titleText;
-        cell.showValue = model.showValue;
-        cell.value= model.titleValue;//LOCALSTR(@"Close");
-        [cell setLeftImage:model.titleImgName];
-        return cell;
-    }
-    return nil;
-}
-
--(void)doClickSwitch:(UISwitch *)sender{
-    int section = floor(sender.tag / 10);
-    int row = sender.tag % 10;
-    if(section == 1 && row == 0){
-        [self clickPush:sender];
-    }
-    else{
-        if(section == 2 && row == 0){
-            self.alarmParas.u32SDRec = sender.isOn?1:0;
+        if(indexPath.section == 2 && indexPath.row == 0){
+            self.alarmParas.u32SDRec = sw.isOn?1:0;
             if(self.alarmParas.u32SDRec == 0 && self.alarmParas.u32FtpRec == 1){
                 self.alarmParas.u32FtpRec = 0;
                 [self refreshViewModel];
             }
-        }
-        else if(section == 4 && row == 0){
-            self.alarmParas.u32FtpSnap = sender.isOn?1:0;
-        }
-        else if(section == 4 && row == 1){
-            self.alarmParas.u32FtpRec = sender.isOn?1:0;
-            if(self.alarmParas.u32FtpRec == 1 && self.alarmParas.u32SDRec == 0){
-                self.alarmParas.u32SDRec = 1;
-                [self refreshViewModel];
+            else if(indexPath.section == 4 && indexPath.row == 0){
+                self.alarmParas.u32FtpSnap = sw.isOn?1:0;
             }
+            else if(indexPath.section == 4 && indexPath.row == 1){
+                self.alarmParas.u32FtpRec = sw.isOn?1:0;
+                if(self.alarmParas.u32FtpRec == 1 && self.alarmParas.u32SDRec == 0){
+                    self.alarmParas.u32SDRec = 1;
+                    [self refreshViewModel];
+                }
+            }
+            [self setAlarmLinkParas];
         }
-        [self setAlarmLinkParas];
     }
-    
 }
 
 -(void)refreshViewModel{

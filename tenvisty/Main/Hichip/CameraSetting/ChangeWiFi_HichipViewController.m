@@ -22,6 +22,7 @@
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
 @property (nonatomic,copy) dispatch_block_t successtTask;
 @property (nonatomic,assign) BOOL hasChangedWiFi;
+@property (strong,nonatomic) NSArray *listItems;
 @end
 
 @implementation ChangeWiFi_HichipViewController
@@ -125,44 +126,23 @@
     [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_WIFI_PARAM Data:(char*)nil DataSize:0];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
-{
-    if(indexPath.row == 0){
-        NSString *id = TableViewCell_TextField_Disable;
-        TextFieldDisableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"SSID");
-        cell.value = self.wifiSsid;
-        cell.leftImage = @"ic_wifi";
-        NSLog(@"end1 :%f",[NSDate timeIntervalSinceReferenceDate]);
-        return cell;
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:@"ic_wifi" title:LOCALSTR(@"SSID") showValue:YES value:self.wifiSsid viewId:TableViewCell_TextField_Disable],
+                         [ListImgTableViewCellModel initObj:@"ic_password" title:LOCALSTR(@"Password") showValue:YES value:@"" viewId:TableViewCell_TextField_Password],
+                         nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
     }
-    else{
-        NSString *id = TableViewCell_TextField_Password;
-        PasswordFieldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
-        cell.title = LOCALSTR(@"Password");
-        cell.leftImage = @"ic_password";
-        //[cell.midPasswordField becomeFirstResponder];
-        NSLog(@"end2 :%f",[NSDate timeIntervalSinceReferenceDate]);
-        return cell;
-    }
-    return nil;
+    return _listItems;
 }
 
 
 - (IBAction)save:(id)sender {
     if(!isSetting){
+        [self.view endEditing:YES];
         isSetting = YES;
-        TwsTableViewCell* cell = (TwsTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]];
-        [cell resignFirstResponder];
-        wifiPassword = cell.value;
+        wifiPassword = [self getRowValue:1 section:0];
         if(self.wifiEnctype != 1&& wifiPassword.length == 0){
             [[[iToast makeText:LOCALSTR(@"wifi password is not entered.")] setDuration:1] show];
              isSetting = YES;

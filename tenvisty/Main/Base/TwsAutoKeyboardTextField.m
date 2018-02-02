@@ -63,6 +63,11 @@
         view.transform = CGAffineTransformMakeTranslation(0, 0);
     }];
 }
+- (BOOL)resignFirstResponder{
+   BOOL result = [super resignFirstResponder];
+    [self refreshLocateView];
+    return result;
+}
 //- (void)keyboardWillChangeFrame:(NSNotification *)notification {
 //    if(!self.isFirstResponder){
 //        return;

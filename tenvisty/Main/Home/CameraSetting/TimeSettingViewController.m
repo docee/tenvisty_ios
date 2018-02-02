@@ -11,13 +11,14 @@
 #import "TimeZoneModel.h"
 #import "BaseViewController.h"
 
-@interface TimeSettingViewController (){
+@interface TimeSettingViewController ()<CellModelDelegate>{
     NSString *time;
     NSInteger timezoneIndex;
     NSInteger dst;
 }
 @property (weak, nonatomic) IBOutlet UILabel *labTime;
 @property (weak, nonatomic) IBOutlet UILabel *labTimezone;
+@property (strong,nonatomic) NSArray *listItems;
 
 @end
 
@@ -97,6 +98,21 @@
     }
 }
 
+-(NSArray *)listItems{
+    if(!_listItems){
+        NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil value:nil placeHodler:nil maxLength:0 viewId:TableViewCell_ListImg],
+                         nil];
+        NSArray *sec2 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"Select time zone") showValue:YES value:nil viewId:TableViewCell_ListImg],
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"Daylight") showValue:YES value:nil viewId:TableViewCell_Switch],
+                         
+                         nil];
+        _listItems = [[NSArray alloc] initWithObjects:sec1,sec2, nil];
+    }
+    return _listItems;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     if(indexPath.section == 0){
@@ -105,34 +121,15 @@
         return cell;
     }
     else{
-        if(indexPath.row == 0){
-            
-            ListImgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TableViewCell_ListImg forIndexPath:indexPath];
-            cell.showValue = YES;
-            if(timezoneIndex == -1){
-                cell.value = nil;
-            }
-            else{
-                NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:timezoneIndex]).area;
-                cell.value = LOCALSTR(timezoneId);
-            }
-            [cell setLeftImage:nil];
-            cell.title = LOCALSTR(@"Select time zone");
-            return cell;
-        }
-        else{
-            SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TableViewCell_Switch forIndexPath:indexPath];
-            [cell.rightSwitch setOn:dst == 1];
-            cell.leftLabTitle.text = LOCALSTR(@"Daylight");
-            [cell setLeftImage:nil];
-            [cell.rightLabLoading setHidden:dst != -1];
-            [cell.rightSwitch addTarget:self action:@selector(clickSwitch:) forControlEvents:UIControlEventTouchUpInside];
-            return cell;
-        }
+       return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
 
     
     return nil;
+}
+
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw{
+      [self setTimezoneDst:[sw isOn]];
 }
 
 -(void)setTimezoneDst:(BOOL)enable{
@@ -149,9 +146,6 @@
     free(req);
 }
 
--(void)clickSwitch:(UISwitch*)sender{
-    [self setTimezoneDst:[sender isOn]];
-}
 
 //其他界面返回到此界面调用的方法
 - (IBAction)TimeSettingViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
@@ -172,9 +166,12 @@
             for(int i=0; i < [TimeZoneModel getAll].count; i++){
                 TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
                 if([tz.area isEqualToString:[NSString stringWithUTF8String:resp->DstDistrictInfo.DstDistId]]){
+                    NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:timezoneIndex]).area;
+                    [self setRowValue:LOCALSTR(timezoneId) row:0 section:0];
                     timezoneIndex = i;
                     if(tz.dst){
                         dst = resp->enable;
+                        [self setRowValue:FORMAT(@"%ld",(long)dst) row:1 section:0];
                     }
                     else{
                         dst = -1;

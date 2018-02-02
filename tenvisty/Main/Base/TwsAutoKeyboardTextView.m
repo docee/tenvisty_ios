@@ -56,4 +56,10 @@
         view.transform = CGAffineTransformMakeTranslation(0, 0);
     }];
 }
+
+-(BOOL)resignFirstResponder{
+   BOOL result = [super resignFirstResponder];
+    [self refreshLocateView];
+    return result;
+}
 @end

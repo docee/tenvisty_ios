@@ -57,13 +57,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [TwsDataValue setTryConnectCamera:nil];
     });
-    for(BaseCamera *camera in [GBase sharedInstance].cameras){
-        camera.cameraDelegate = self;
-        //强制改密码；
-        if(camera.cameraConnectState == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
-             [self showChangePasswordStrict:camera];
-        }
-    }
     [self checkShowFirstAddView];
 
     [self.tableview reloadData];
@@ -74,6 +67,13 @@
     [super viewDidAppear:animated];
     [self setTitle:FORMAT(@"%@ (%lu)",LOCALSTR(@"Camera List"),(unsigned long)[GBase sharedInstance].cameras.count)];
     [self.navigationController setTitle:LOCALSTR(@"Home")];
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
+        camera.cameraDelegate = self;
+        //强制改密码；
+        if(camera.isAuthConnected && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
+            [self showChangePasswordStrict:camera];
+        }
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -289,10 +289,10 @@
 
 - (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
     NSInteger row = [GBase getCameraIndex:camera];
-    if(status == CONNECTION_STATE_CONNECTED && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
+    if(camera.isAuthConnected && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
         [self showChangePasswordStrict:camera];
     }
-    else if(camera.processState == CAMERASTATE_NONE && status == CONNECTION_STATE_WRONG_PASSWORD){
+    else if(camera.processState == CAMERASTATE_NONE && camera.isWrongPassword){
         [self doShowModifyPassword:camera];
     }
     if(row >= 0){

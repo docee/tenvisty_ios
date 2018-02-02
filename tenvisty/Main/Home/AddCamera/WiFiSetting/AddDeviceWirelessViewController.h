@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface AddDeviceWirelessViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface AddDeviceWirelessViewController : BaseViewController
 
 @property (nonatomic,strong) NSString *uid;
 @end
