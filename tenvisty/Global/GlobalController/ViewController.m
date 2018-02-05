@@ -21,8 +21,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     //统一返回按钮
     UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] init];
-    backBarButtonItem.title = LOCALSTR(@"Back");
     self.navigationItem.backBarButtonItem = backBarButtonItem;
+    self.navigationItem.backBarButtonItem.image = [UIImage imageNamed:@"navBack"];
+    self.navigationItem.backBarButtonItem.tintColor = Color_White;
+    self.navigationItem.backBarButtonItem.title = LOCALSTR(@"");
 }
 
 - (void)viewDidAppear:(BOOL)animated {

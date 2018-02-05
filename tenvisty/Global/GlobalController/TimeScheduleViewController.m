@@ -27,8 +27,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIBarButtonItem *rbtnItem = [[UIBarButtonItem alloc] initWithTitle:LOCALSTR(@"Done") style:UIBarButtonItemStyleDone target:self action:@selector(rbtnItemAction:)];
+    UIBarButtonItem *rbtnItem = [[UIBarButtonItem alloc] initWithTitle:LOCALSTR(@"") style:UIBarButtonItemStyleDone target:self action:@selector(rbtnItemAction:)];
     self.navigationItem.rightBarButtonItem = rbtnItem;
+    self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"navDone"];
+    self.navigationItem.rightBarButtonItem.tintColor = Color_White;
+    UIBarButtonItem *lbtnItem = [[UIBarButtonItem alloc] initWithTitle:LOCALSTR(@"") style:UIBarButtonItemStyleDone target:self action:@selector(lbtnItemAction:)];
+    self.navigationItem.leftBarButtonItem = lbtnItem;
+    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"navBack"];
+    self.navigationItem.leftBarButtonItem.tintColor = Color_White;
     [self.view addSubview:self.tableView];
     
 }
@@ -45,7 +51,11 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (void)lbtnItemAction:(id)sender {
+    NSLog(@"Back");
 
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -225,9 +235,8 @@
         CGFloat th = (self.view.frame.size.height - 50 )/3;
         CGFloat tx = 0;
         CGFloat ty = 0;
-        UIImageView *imgViewSelected = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 50 - 50/2, ((self.view.frame.size.height - 100 )/3 - 50)/2, 50, 50)];
-        imgViewSelected.image = [UIImage imageNamed:@"tws_status_selected"];
-
+        UIImageView *imgViewSelected = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 50 - 50/2, ((self.view.frame.size.height - 100 )/3 - 50)/2, 60, 60)];
+        imgViewSelected.image =  [UIImage imageNamed:@"ic_select"];
         _viewSelectedBg = [[UIView alloc] initWithFrame:CGRectMake(tx, ty, tw, th)];
         [_viewSelectedBg setBackgroundColor:Color_Item_Selected_BG];
         [_viewSelectedBg addSubview:imgViewSelected];

@@ -55,7 +55,7 @@
     if(self.cellModel){
         _leftLabTitle.text = self.cellModel.titleText;
         _rightLabLoading.text = LOCALSTR(@"loading...");
-        [_rightLabLoading setHidden:self.cellModel.titleValue != nil];
+        [_rightLabLoading setHidden:!self.cellModel.showValue || self.cellModel.titleValue != nil];
         [_rightSwitch setEnabled:self.cellModel.titleValue != nil];
         [_rightSwitch setOn:[self.cellModel.titleValue isEqualToString:@"1"]];
         [self setLeftImage:self.cellModel.titleImgName];
@@ -63,6 +63,7 @@
 }
 
 -(void)clickSwitch:(UISwitch*)sender{
+    self.cellModel.titleValue = sender.isOn ? @"1" : @"0";
     if(self.cellModel && self.cellModel.delegate && [self.cellModel.delegate respondsToSelector:@selector(ListImgTableViewCellModel:didClickSwitch:)]){
         [self.cellModel.delegate ListImgTableViewCellModel:self.cellModel didClickSwitch:sender];
     }

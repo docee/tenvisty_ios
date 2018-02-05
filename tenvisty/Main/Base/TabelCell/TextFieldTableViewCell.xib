@@ -23,7 +23,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="input name" textAlignment="right" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="n3O-Hb-yBm" customClass="TwsAutoKeyboardTextField">
-                        <rect key="frame" x="130" y="0.0" width="963" height="59.5"/>
+                        <rect key="frame" x="130" y="0.0" width="963" height="60"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -41,13 +41,22 @@
                             <constraint firstAttribute="width" constant="30" id="gzl-CT-fbG"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXS-lS-J9P">
+                        <rect key="frame" x="1093" y="0.0" width="0.0" height="59.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="P7e-C2-eYE" secondAttribute="bottom" id="Afd-d8-ciJ"/>
                     <constraint firstItem="n3O-Hb-yBm" firstAttribute="top" secondItem="UXy-95-9dq" secondAttribute="top" identifier="contraint_marginTop" id="FUJ-Y2-pDY"/>
                     <constraint firstItem="k7G-Ur-ldO" firstAttribute="leading" secondItem="UXy-95-9dq" secondAttribute="leading" constant="10" id="GaD-n8-KQw"/>
+                    <constraint firstAttribute="bottom" secondItem="tXS-lS-J9P" secondAttribute="bottom" id="II4-BC-V76"/>
                     <constraint firstItem="P7e-C2-eYE" firstAttribute="leading" secondItem="k7G-Ur-ldO" secondAttribute="trailing" id="LDf-rz-kba"/>
-                    <constraint firstAttribute="trailing" secondItem="n3O-Hb-yBm" secondAttribute="trailing" constant="10" id="N6d-D9-9Qg"/>
+                    <constraint firstItem="tXS-lS-J9P" firstAttribute="top" secondItem="UXy-95-9dq" secondAttribute="top" id="MuD-o8-X4x"/>
+                    <constraint firstAttribute="trailing" secondItem="tXS-lS-J9P" secondAttribute="trailing" constant="10" id="W0V-DZ-9mf"/>
+                    <constraint firstItem="tXS-lS-J9P" firstAttribute="leading" secondItem="n3O-Hb-yBm" secondAttribute="trailing" id="iWf-uH-P3C"/>
                     <constraint firstItem="n3O-Hb-yBm" firstAttribute="leading" secondItem="UXy-95-9dq" secondAttribute="leading" constant="130" id="nAp-R1-OSK"/>
                     <constraint firstItem="P7e-C2-eYE" firstAttribute="top" secondItem="UXy-95-9dq" secondAttribute="top" identifier="contraint_marginTop" id="olg-LP-n8K"/>
                     <constraint firstAttribute="bottom" secondItem="n3O-Hb-yBm" secondAttribute="bottom" id="vnG-Kj-XTE"/>
@@ -56,9 +65,11 @@
             </tableViewCellContentView>
             <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
             <connections>
+                <outlet property="constraint_trail_textField" destination="iWf-uH-P3C" id="mvb-Yz-BBa"/>
                 <outlet property="constraint_width_leftImg" destination="gzl-CT-fbG" id="Xy3-tu-fce"/>
                 <outlet property="leftImg" destination="k7G-Ur-ldO" id="03R-Uv-CLi"/>
                 <outlet property="leftLabel" destination="P7e-C2-eYE" id="Ea0-5g-9rU"/>
+                <outlet property="rightLabel" destination="tXS-lS-J9P" id="wP8-Wc-mRO"/>
                 <outlet property="rightTextField" destination="n3O-Hb-yBm" id="eCi-Sw-Azd"/>
             </connections>
             <point key="canvasLocation" x="182.5" y="-378"/>

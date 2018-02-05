@@ -164,6 +164,16 @@
 		89A7E93F1FED108200F12BFF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A7E93E1FED108200F12BFF /* Event.m */; };
 		89AA50E62010558A009CCA5D /* BaseCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E52010558A009CCA5D /* BaseCamera.m */; };
 		89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AA50E920107838009CCA5D /* HichipCamera.m */; };
+		89AD33742028047300B4520A /* EmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33722028047100B4520A /* EmailModel.m */; };
+		89AD33772028178C00B4520A /* FTPSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33762028178C00B4520A /* FTPSetting_HichipViewController.m */; };
+		89AD337B2028252000B4520A /* FTPParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD337A2028251F00B4520A /* FTPParam.m */; };
+		89AD337E20282DD300B4520A /* TimingRecord_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD337D20282DD300B4520A /* TimingRecord_HichipViewController.m */; };
+		89AD33822028315600B4520A /* LinkButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89AD33812028315600B4520A /* LinkButtonTableViewCell.xib */; };
+		89AD33882028327300B4520A /* LinkButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33872028327300B4520A /* LinkButtonTableViewCell.m */; };
+		89AD338E20283CE100B4520A /* QuantumTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD338B20283CE100B4520A /* QuantumTime.m */; };
+		89AD338F20283CE100B4520A /* RecAutoParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD338D20283CE100B4520A /* RecAutoParam.m */; };
+		89AD339220285C4A00B4520A /* SelectItemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD339120285C4A00B4520A /* SelectItemDetailTableViewCell.m */; };
+		89AD339520285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD339420285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
 		89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811151FF63FEB00679B39 /* AppVersionController.m */; };
@@ -535,6 +545,25 @@
 		89AA50E820107838009CCA5D /* HichipCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HichipCamera.h; sourceTree = "<group>"; };
 		89AA50E920107838009CCA5D /* HichipCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HichipCamera.m; sourceTree = "<group>"; };
 		89AA50EB2010794D009CCA5D /* libHiP2PSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHiP2PSDK.a; path = tenvisty/lib/libHiP2PSDK.a; sourceTree = "<group>"; };
+		89AD33722028047100B4520A /* EmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailModel.m; sourceTree = "<group>"; };
+		89AD33732028047200B4520A /* EmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailModel.h; sourceTree = "<group>"; };
+		89AD33752028178C00B4520A /* FTPSetting_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTPSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89AD33762028178C00B4520A /* FTPSetting_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTPSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33792028251F00B4520A /* FTPParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPParam.h; sourceTree = "<group>"; };
+		89AD337A2028251F00B4520A /* FTPParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPParam.m; sourceTree = "<group>"; };
+		89AD337C20282DD300B4520A /* TimingRecord_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimingRecord_HichipViewController.h; sourceTree = "<group>"; };
+		89AD337D20282DD300B4520A /* TimingRecord_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimingRecord_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33812028315600B4520A /* LinkButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkButtonTableViewCell.xib; sourceTree = "<group>"; };
+		89AD33862028327300B4520A /* LinkButtonTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButtonTableViewCell.h; sourceTree = "<group>"; };
+		89AD33872028327300B4520A /* LinkButtonTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButtonTableViewCell.m; sourceTree = "<group>"; };
+		89AD338A20283CE100B4520A /* QuantumTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuantumTime.h; sourceTree = "<group>"; };
+		89AD338B20283CE100B4520A /* QuantumTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuantumTime.m; sourceTree = "<group>"; };
+		89AD338C20283CE100B4520A /* RecAutoParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecAutoParam.h; sourceTree = "<group>"; };
+		89AD338D20283CE100B4520A /* RecAutoParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecAutoParam.m; sourceTree = "<group>"; };
+		89AD339020285C4A00B4520A /* SelectItemDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectItemDetailTableViewCell.h; sourceTree = "<group>"; };
+		89AD339120285C4A00B4520A /* SelectItemDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectItemDetailTableViewCell.m; sourceTree = "<group>"; };
+		89AD339320285F8D00B4520A /* TimingRecordSchedule_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimingRecordSchedule_HichipViewController.h; sourceTree = "<group>"; };
+		89AD339420285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimingRecordSchedule_HichipViewController.m; sourceTree = "<group>"; };
 		89D2B4E61FDF804A00639DD3 /* AddDeviceWirelessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessViewController.h; sourceTree = "<group>"; };
 		89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
 		89D2B4EC1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessSettingViewController.h; sourceTree = "<group>"; };
@@ -1103,6 +1132,12 @@
 				89545EB42021AD0400151E90 /* EmailSetting_HichipViewController.m */,
 				89545ECB20246A6C00151E90 /* EmailEncType_HichipViewController.h */,
 				89545ECC20246A6C00151E90 /* EmailEncType_HichipViewController.m */,
+				89AD33752028178C00B4520A /* FTPSetting_HichipViewController.h */,
+				89AD33762028178C00B4520A /* FTPSetting_HichipViewController.m */,
+				89AD337C20282DD300B4520A /* TimingRecord_HichipViewController.h */,
+				89AD337D20282DD300B4520A /* TimingRecord_HichipViewController.m */,
+				89AD339320285F8D00B4520A /* TimingRecordSchedule_HichipViewController.h */,
+				89AD339420285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m */,
 			);
 			path = CameraSetting;
 			sourceTree = "<group>";
@@ -1172,6 +1207,11 @@
 				89545EB62021D0DB00151E90 /* MultiTextFieldTableViewCell.xib */,
 				89545EB82021D1FE00151E90 /* MutilTextFieldTableViewCell.h */,
 				89545EB92021D1FE00151E90 /* MutilTextFieldTableViewCell.m */,
+				89AD33812028315600B4520A /* LinkButtonTableViewCell.xib */,
+				89AD33862028327300B4520A /* LinkButtonTableViewCell.h */,
+				89AD33872028327300B4520A /* LinkButtonTableViewCell.m */,
+				89AD339020285C4A00B4520A /* SelectItemDetailTableViewCell.h */,
+				89AD339120285C4A00B4520A /* SelectItemDetailTableViewCell.m */,
 			);
 			path = TabelCell;
 			sourceTree = "<group>";
@@ -1275,6 +1315,8 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89AD338920283CE100B4520A /* TimeRecord */,
+				89AD33782028251F00B4520A /* FTP */,
 				89545EC42022FDEA00151E90 /* Email */,
 				89545EAC2021A40700151E90 /* AlarmLink */,
 				89545EA8202181F900151E90 /* Event */,
@@ -1347,6 +1389,8 @@
 		89545EC42022FDEA00151E90 /* Email */ = {
 			isa = PBXGroup;
 			children = (
+				89AD33732028047200B4520A /* EmailModel.h */,
+				89AD33722028047100B4520A /* EmailModel.m */,
 				89545EC52022FDEA00151E90 /* EmailParam.h */,
 				89545EC62022FDEA00151E90 /* EmailParam.m */,
 			);
@@ -1528,6 +1572,26 @@
 				89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */,
 			);
 			path = Hichip;
+			sourceTree = "<group>";
+		};
+		89AD33782028251F00B4520A /* FTP */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33792028251F00B4520A /* FTPParam.h */,
+				89AD337A2028251F00B4520A /* FTPParam.m */,
+			);
+			path = FTP;
+			sourceTree = "<group>";
+		};
+		89AD338920283CE100B4520A /* TimeRecord */ = {
+			isa = PBXGroup;
+			children = (
+				89AD338A20283CE100B4520A /* QuantumTime.h */,
+				89AD338B20283CE100B4520A /* QuantumTime.m */,
+				89AD338C20283CE100B4520A /* RecAutoParam.h */,
+				89AD338D20283CE100B4520A /* RecAutoParam.m */,
+			);
+			path = TimeRecord;
 			sourceTree = "<group>";
 		};
 		89D811111FF63FEB00679B39 /* About */ = {
@@ -2367,6 +2431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				894D7E5C1FAB01D900C58BB2 /* Assets.xcassets in Resources */,
+				89AD33822028315600B4520A /* LinkButtonTableViewCell.xib in Resources */,
 				890B407B1FB006B700C1061A /* About.storyboard in Resources */,
 				89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */,
 				892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */,
@@ -2438,6 +2503,7 @@
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
 				89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */,
+				89AD337B2028252000B4520A /* FTPParam.m in Sources */,
 				8924126C202062CD001F60E8 /* SystemSettingTable_HichipViewController.m in Sources */,
 				895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */,
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
@@ -2461,11 +2527,13 @@
 				89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */,
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
 				89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */,
+				89AD338F20283CE100B4520A /* RecAutoParam.m in Sources */,
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
 				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,
 				89545EA520207F6900151E90 /* WifiCheck.m in Sources */,
 				89545EC72022FDEB00151E90 /* EmailParam.m in Sources */,
+				89AD33882028327300B4520A /* LinkButtonTableViewCell.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
 				89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */,
@@ -2476,6 +2544,7 @@
 				894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */,
 				ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */,
 				89241265202062CD001F60E8 /* ChangeWiFi_HichipViewController.m in Sources */,
+				89AD33742028047300B4520A /* EmailModel.m in Sources */,
 				890B40891FB02F1A00C1061A /* TimeScheduleViewController.m in Sources */,
 				890B408A1FB02F1A00C1061A /* ViewController.m in Sources */,
 				892CE0B81FD1013100942E28 /* TextFieldTableViewCell.m in Sources */,
@@ -2485,7 +2554,9 @@
 				89A7E93F1FED108200F12BFF /* Event.m in Sources */,
 				89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */,
 				898D8BAE1FE0F66600062F04 /* FMDatabaseAdditions.m in Sources */,
+				89AD338E20283CE100B4520A /* QuantumTime.m in Sources */,
 				89545EBA2021D1FE00151E90 /* MutilTextFieldTableViewCell.m in Sources */,
+				89AD339220285C4A00B4520A /* SelectItemDetailTableViewCell.m in Sources */,
 				89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */,
 				892CE0DE1FD13E6300942E28 /* AddCameraViewController.m in Sources */,
 				89545EB52021AD0400151E90 /* EmailSetting_HichipViewController.m in Sources */,
@@ -2500,6 +2571,7 @@
 				89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */,
 				89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */,
 				894D7E4E1FAB01D900C58BB2 /* main.m in Sources */,
+				89AD33772028178C00B4520A /* FTPSetting_HichipViewController.m in Sources */,
 				89545EBD2022B99700151E90 /* TwsAutoKeyboardTextField.m in Sources */,
 				89545EA620207F6900151E90 /* WifiList.m in Sources */,
 				892CE0981FCFD32300942E28 /* ModifyCameraNameTableViewController.m in Sources */,
@@ -2512,7 +2584,9 @@
 				89241172201F130D001F60E8 /* AddDeviceWirelessFailNoteViewController.m in Sources */,
 				894D7E5A1FAB01D900C58BB2 /* tenvisty.xcdatamodeld in Sources */,
 				890B40791FB006A000C1061A /* ImageViewController.m in Sources */,
+				89AD339520285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m in Sources */,
 				895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */,
+				89AD337E20282DD300B4520A /* TimingRecord_HichipViewController.m in Sources */,
 				89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */,
 				89241266202062CD001F60E8 /* DeviceInfo_HichipViewController.m in Sources */,
 				892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */,

@@ -25,6 +25,9 @@
 @property (nonatomic,assign) NSTextAlignment textAlignment;
 @property (nonatomic,assign) CGFloat valueMarginLeft;
 @property (nonatomic,strong) NSString* rightImage;
+@property (nonatomic,strong) NSString* rightDesc;
+@property (nonatomic,strong) NSString* desc;
+@property (nonatomic,strong) NSString* descDetail;
 
 
 +(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt showValue:(BOOL)showV value:(NSString *)value;
@@ -41,4 +44,6 @@
 @optional
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickButton:(UIButton*)btn;
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw;
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didEndTextFiledEditing:(UITextField*)sender;
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didEndTextViewEditing:(UITextView*)sender;
 @end

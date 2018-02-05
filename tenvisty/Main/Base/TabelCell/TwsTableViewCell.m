@@ -153,11 +153,17 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if(self.cellModel){
         self.cellModel.titleValue = textField.text;
+        if(self.cellModel.delegate && [self.cellModel.delegate respondsToSelector:@selector(ListImgTableViewCellModel:didEndTextFiledEditing:)]){
+            [self.cellModel.delegate ListImgTableViewCellModel:self.cellModel didEndTextFiledEditing:textField];
+        }
     }
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
     if(self.cellModel){
         self.cellModel.titleValue = textView.text;
+        if(self.cellModel.delegate && [self.cellModel.delegate respondsToSelector:@selector(ListImgTableViewCellModel:didEndTextViewEditing:)]){
+            [self.cellModel.delegate ListImgTableViewCellModel:self.cellModel didEndTextViewEditing:textView];
+        }
     }
 }
 

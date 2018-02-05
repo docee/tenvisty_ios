@@ -14,4 +14,5 @@
 
 
 @property (nonatomic,strong) BaseCamera *baseCamera;
+- (BOOL)isGoke;
 @end

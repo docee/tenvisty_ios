@@ -69,7 +69,6 @@
 }
 
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw{
-    cellModel.titleValue = [sw isOn]?@"1":@"0";
     ListImgTableViewCellModel *mirrorModel = [self listItems][0][1];
     ListImgTableViewCellModel *flipModel = [self listItems][0][2];
     int videoMode = ([mirrorModel.titleValue isEqualToString:@"1"]?2:0) +  ([flipModel.titleValue isEqualToString:@"1"]?1:0);

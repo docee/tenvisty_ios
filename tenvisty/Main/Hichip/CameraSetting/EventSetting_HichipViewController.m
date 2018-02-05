@@ -10,6 +10,7 @@
 #import "AlarmLink.h"
 #import "BaseViewController.h"
 #import "EmailSetting_HichipViewController.h"
+#import "EventSetting_HichipViewController.h"
 
 @interface EventSetting_HichipViewController (){
     NSInteger currentPush;
@@ -89,23 +90,25 @@
     }
     else{
         if(indexPath.section == 2 && indexPath.row == 0){
-            self.alarmParas.u32SDRec = sw.isOn?1:0;
-            if(self.alarmParas.u32SDRec == 0 && self.alarmParas.u32FtpRec == 1){
-                self.alarmParas.u32FtpRec = 0;
-                [self refreshViewModel];
+                self.alarmParas.u32SDRec = sw.isOn?1:0;
+                if(self.alarmParas.u32SDRec == 0 && self.alarmParas.u32FtpRec == 1){
+                    self.alarmParas.u32FtpRec = 0;
+                    //关闭SD卡录像,FTP上传录像也会关闭
+                    [self refreshViewModel];
+                }
             }
             else if(indexPath.section == 4 && indexPath.row == 0){
                 self.alarmParas.u32FtpSnap = sw.isOn?1:0;
             }
             else if(indexPath.section == 4 && indexPath.row == 1){
                 self.alarmParas.u32FtpRec = sw.isOn?1:0;
+                //打开FTP上传录像，SD卡录像也会打开
                 if(self.alarmParas.u32FtpRec == 1 && self.alarmParas.u32SDRec == 0){
                     self.alarmParas.u32SDRec = 1;
                     [self refreshViewModel];
                 }
             }
             [self setAlarmLinkParas];
-        }
     }
 }
 
@@ -172,6 +175,9 @@
     else if(indexPath.section == 3 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"EventSetting2EmailSetting" sender:nil];
     }
+    else if(indexPath.section == 4 && indexPath.row == 2){
+        [self performSegueWithIdentifier:@"EventSetting2FTPSetting" sender:self];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -231,6 +237,11 @@
         controller.camera =  self.camera;
         controller.enableEmail = self.alarmParas.u32EmailSnap == 1;
     }
+    else if([segue.identifier isEqualToString:@"EventSetting2FTPSetting"]){
+        EventSetting_HichipViewController *controller= segue.destinationViewController;
+        controller.camera = self.camera;
+    }
+    
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

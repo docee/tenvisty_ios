@@ -177,6 +177,20 @@
     return type;
 }
 
+- (int)connectionTypeValue:(NSString*)typeDesc {
+    int typeV = 0;
+    if([typeDesc isEqualToString:@"SSL"]){
+        typeV = 1;
+    }
+    else if([typeDesc isEqualToString:@"TLS"]){
+        typeV = 2;
+    }
+    else if([typeDesc isEqualToString:@"STARTTLS"]){
+        typeV = 3;
+    }
+    return typeV;
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@ %@", _strText, _strSubject, _strFrom, _strTo, _strPasswd, _strUsernm, _strSvr, _strReserved];
 }

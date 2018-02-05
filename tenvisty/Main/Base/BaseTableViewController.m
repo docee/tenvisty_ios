@@ -27,6 +27,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SwitchTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Switch];
     [self.tableView registerNib:[UINib nibWithNibName:@"SelectItemTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_SelectItem];
     [self.tableView registerNib:[UINib nibWithNibName:@"MultiTextFieldTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_TextField_Multi];
+    [self.tableView registerNib:[UINib nibWithNibName:@"LinkButtonTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Button_HyperLink];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

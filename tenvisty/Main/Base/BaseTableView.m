@@ -52,7 +52,7 @@
         [self registerNib:[UINib nibWithNibName:@"SwitchTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Switch];
         [self registerNib:[UINib nibWithNibName:@"SelectItemTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_SelectItem];
         [self registerNib:[UINib nibWithNibName:@"MultiTextFieldTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_TextField_Multi];
-        
+        [self registerNib:[UINib nibWithNibName:@"LinkButtonTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Button_HyperLink];
     }
     return self;
 }

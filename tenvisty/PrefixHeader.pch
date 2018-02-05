@@ -156,6 +156,10 @@
 #define Color_Item_Selected_BG (RGBA_COLOR(220, 220, 220, 0.8))
 
 
+
+#define REGEX_NUMBER (@"^[0-9]$")
+
+
 #define TableViewCell_TextField_Normal (@"tableviewCellTextField")
 #define TableViewCell_TextField_Img (@"tableviewCellTextFieldImg")
 #define TableViewCell_TextField_Disable (@"tableviewCellTextFieldDisable")
@@ -165,7 +169,8 @@
 #define TableViewCell_Switch (@"tableviewCellSwitch")
 #define TableViewCell_SelectItem (@"tableviewCellSelectItem")
 #define TableViewCell_TextField_Multi (@"tableviewCellMultiTextField")
-
+#define TableViewCell_Button_HyperLink (@"tableviewCellLinkButton")
+#define TableViewCell_SelectItem_Detail (@"tableviewCell_timingRecord");
 
 
 

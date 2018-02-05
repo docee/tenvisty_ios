@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_leftImg;
 @property (weak, nonatomic) IBOutlet TwsAutoKeyboardTextField *rightTextField;
 @property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_trail_textField;
 
 @property (nonatomic,assign) NSInteger mLength;
 @end
@@ -24,6 +26,7 @@
     [super awakeFromNib];
     
     self.constraint_width_leftImg.constant = 0;
+    self.constraint_trail_textField.constant = 0;
     _rightTextField.delegate = self;
     //[_rightTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     _rightTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -88,7 +91,14 @@
         _rightTextField.text = self.cellModel.titleValue;
         _leftLabel.text = self.cellModel.titleText;
         _rightTextField.placeholder = self.cellModel.textPlaceHolder;
+        _rightLabel.text = self.cellModel.rightDesc;
         [self setLeftImage:self.cellModel.titleImgName];
+        if(self.cellModel.rightDesc && self.cellModel.rightDesc.length > 0){
+            self.constraint_trail_textField.constant = 15;
+        }
+        if([self.cellModel.textFilter isEqualToString:REGEX_NUMBER]){
+            _rightTextField.keyboardType = UIKeyboardTypeNumberPad;
+        }
     }
 }
 

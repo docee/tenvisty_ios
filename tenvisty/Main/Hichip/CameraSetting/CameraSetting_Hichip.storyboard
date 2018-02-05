@@ -92,9 +92,9 @@
                         <segue destination="vEH-oV-IOe" kind="show" identifier="CameraSetting2ChangeCameraPassword" id="Zbd-lo-FTL"/>
                         <segue destination="gZk-HX-Ihr" kind="show" identifier="CameraSetting2WiFiSetting" id="WDo-FV-dDc"/>
                         <segue destination="7DM-0D-WgU" kind="show" identifier="CameraSetting2EventiSetting" id="BO9-ep-pCN"/>
-                        <segue destination="izW-dz-a5c" kind="show" identifier="CameraSetting2RecordSetting" id="pVd-bO-xBb"/>
                         <segue destination="Snu-m4-qBh" kind="show" identifier="CameraSetting2OtherSetting" id="958-Qs-Qjc"/>
                         <segue destination="Xz8-Fb-QrX" kind="show" identifier="CameraSetting2SystemSetting" id="icB-wT-YD2"/>
+                        <segue destination="r8X-2J-9wG" kind="show" identifier="CameraSetting2RecordSetting" id="eJH-kU-M6D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Bz-81-XW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -360,6 +360,7 @@
                     <connections>
                         <segue destination="73X-Qw-JdK" kind="show" identifier="EventSetting2SensSetting" id="mvT-9i-2ok"/>
                         <segue destination="Nhb-TP-YsN" kind="show" identifier="EventSetting2EmailSetting" id="8dt-QO-Po9"/>
+                        <segue destination="T8H-WK-z6q" kind="show" identifier="EventSetting2FTPSetting" id="E2k-l8-Rfv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qz1-xQ-snl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -398,7 +399,7 @@
             <objects>
                 <tableViewController id="izW-dz-a5c" customClass="RecordSetting_HichipViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="uoG-Wx-qzH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -957,10 +958,218 @@
                 <exit id="LBH-JS-TT4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
+        <!--FTP Setting-->
+        <scene sceneID="bMy-3i-n42">
+            <objects>
+                <viewController id="T8H-WK-z6q" customClass="FTPSetting_HichipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D1U-97-kOD"/>
+                        <viewControllerLayoutGuide type="bottom" id="8NC-7y-zut"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M19-UX-zNK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GKC-XJ-YTD" customClass="BaseTableView">
+                                <rect key="frame" x="0.0" y="15" width="375" height="588"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="T8H-WK-z6q" id="JP5-gk-aO0"/>
+                                    <outlet property="delegate" destination="T8H-WK-z6q" id="I07-uF-moI"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GKC-XJ-YTD" firstAttribute="leading" secondItem="M19-UX-zNK" secondAttribute="leading" id="BYu-9t-1LK"/>
+                            <constraint firstAttribute="trailing" secondItem="GKC-XJ-YTD" secondAttribute="trailing" id="oyN-ou-ppu"/>
+                            <constraint firstItem="8NC-7y-zut" firstAttribute="top" secondItem="GKC-XJ-YTD" secondAttribute="bottom" id="qN9-cz-USk"/>
+                            <constraint firstItem="GKC-XJ-YTD" firstAttribute="top" secondItem="D1U-97-kOD" secondAttribute="bottom" constant="15" id="zGR-mT-DnM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="FTP Setting" id="ehP-17-jBM">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="2Qw-CV-vEY">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="pSm-ii-S1b" kind="unwind" unwindAction="EventSettingViewController1UnwindSegue:" id="2Xp-Vj-wjF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navDone" id="eb8-Yq-pO3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="clickSave:" destination="T8H-WK-z6q" id="3Mr-SW-gqd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="GKC-XJ-YTD" id="bHo-YQ-Vfp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lnq-BM-0ld" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pSm-ii-S1b" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Timing Record-->
+        <scene sceneID="Kif-vX-j64">
+            <objects>
+                <viewController id="r8X-2J-9wG" customClass="TimingRecord_HichipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q8o-rM-kJj"/>
+                        <viewControllerLayoutGuide type="bottom" id="ne6-q3-xdC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L36-Q8-MBh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C41-Wt-oE4" customClass="BaseTableView">
+                                <rect key="frame" x="0.0" y="15" width="375" height="588"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="r8X-2J-9wG" id="jhH-Kp-j3S"/>
+                                    <outlet property="delegate" destination="r8X-2J-9wG" id="nov-hS-7n6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="C41-Wt-oE4" secondAttribute="trailing" id="1a5-tu-L1n"/>
+                            <constraint firstItem="C41-Wt-oE4" firstAttribute="top" secondItem="q8o-rM-kJj" secondAttribute="bottom" constant="15" id="Cba-Hi-r97"/>
+                            <constraint firstItem="ne6-q3-xdC" firstAttribute="top" secondItem="C41-Wt-oE4" secondAttribute="bottom" id="Egi-5w-HyA"/>
+                            <constraint firstItem="C41-Wt-oE4" firstAttribute="leading" secondItem="L36-Q8-MBh" secondAttribute="leading" id="aEe-s0-GfW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Timing Record" id="gkn-2N-pva">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="ls5-a3-Xzl">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="yki-gZ-G4F" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="gnX-bV-8IO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navDone" id="cVh-7W-iCW">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="clickSave:" destination="yki-gZ-G4F" id="1yS-TT-CNb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="C41-Wt-oE4" id="eHd-Ao-g8f"/>
+                        <segue destination="Vad-VV-Av5" kind="show" identifier="TimingRecord2TimingRecordSchedule" id="E2p-XV-Fni"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tps-1t-jFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yki-gZ-G4F" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Timing Record-->
+        <scene sceneID="2YS-IK-7Y8">
+            <objects>
+                <viewController id="Vad-VV-Av5" customClass="TimingRecordSchedule_HichipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tzc-MM-1Ua"/>
+                        <viewControllerLayoutGuide type="bottom" id="76b-cW-jPv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ILe-Fx-rfZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3oJ-ao-d9q" customClass="BaseTableView">
+                                <rect key="frame" x="0.0" y="15" width="375" height="588"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCell_timingRecord" rowHeight="100" id="oEQ-dT-3fV" customClass="SelectItemDetailTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oEQ-dT-3fV" id="P6l-IP-I6f">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NONE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmo-if-QZF">
+                                                    <rect key="frame" x="15" y="10" width="49.5" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device will stop recording on SD Card" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZb-Ug-RbA">
+                                                    <rect key="frame" x="15" y="40" width="255" height="17.5"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_select" translatesAutoresizingMaskIntoConstraints="NO" id="mZE-u9-kGn">
+                                                    <rect key="frame" x="320" y="30" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="G5z-Bt-bdF"/>
+                                                        <constraint firstAttribute="width" constant="40" id="d88-ME-v4E"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 - 00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-se-Wmx">
+                                                    <rect key="frame" x="15" y="75.5" width="71.5" height="14"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="mZE-u9-kGn" secondAttribute="trailing" constant="15" id="DgQ-0O-MqG"/>
+                                                <constraint firstItem="lZb-Ug-RbA" firstAttribute="leading" secondItem="P6l-IP-I6f" secondAttribute="leading" constant="15" id="Lnm-tu-OlI"/>
+                                                <constraint firstItem="mZE-u9-kGn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lZb-Ug-RbA" secondAttribute="trailing" constant="15" id="S90-4j-0B5"/>
+                                                <constraint firstItem="UkJ-se-Wmx" firstAttribute="leading" secondItem="P6l-IP-I6f" secondAttribute="leading" constant="15" id="Vcn-rf-JmP"/>
+                                                <constraint firstItem="mZE-u9-kGn" firstAttribute="centerY" secondItem="P6l-IP-I6f" secondAttribute="centerY" id="cuu-wZ-3Ev"/>
+                                                <constraint firstItem="lZb-Ug-RbA" firstAttribute="top" secondItem="lmo-if-QZF" secondAttribute="bottom" constant="10" id="eEl-be-qXx"/>
+                                                <constraint firstItem="lmo-if-QZF" firstAttribute="top" secondItem="P6l-IP-I6f" secondAttribute="top" constant="10" id="fg4-Rr-Fzt"/>
+                                                <constraint firstItem="lmo-if-QZF" firstAttribute="leading" secondItem="P6l-IP-I6f" secondAttribute="leading" constant="15" id="gGa-sz-xCf"/>
+                                                <constraint firstAttribute="bottom" secondItem="UkJ-se-Wmx" secondAttribute="bottom" constant="10" id="yyj-jg-Q7s"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="imgSelect" destination="mZE-u9-kGn" id="uvo-eO-tx8"/>
+                                            <outlet property="labDesc" destination="lZb-Ug-RbA" id="pyC-P5-fRs"/>
+                                            <outlet property="labDetailDesc" destination="UkJ-se-Wmx" id="krY-ln-Hdn"/>
+                                            <outlet property="labTitle" destination="lmo-if-QZF" id="8rL-z5-2Kv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Vad-VV-Av5" id="NKc-Oj-HUb"/>
+                                    <outlet property="delegate" destination="Vad-VV-Av5" id="ZZJ-Nz-ctx"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3oJ-ao-d9q" firstAttribute="leading" secondItem="ILe-Fx-rfZ" secondAttribute="leading" id="TVh-6F-Fay"/>
+                            <constraint firstItem="3oJ-ao-d9q" firstAttribute="top" secondItem="Tzc-MM-1Ua" secondAttribute="bottom" constant="15" id="kMY-Xp-Hii"/>
+                            <constraint firstItem="76b-cW-jPv" firstAttribute="top" secondItem="3oJ-ao-d9q" secondAttribute="bottom" id="kQ4-bL-IFC"/>
+                            <constraint firstAttribute="trailing" secondItem="3oJ-ao-d9q" secondAttribute="trailing" id="uO5-7E-0Xr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Timing Record" id="vKv-c7-VHA">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="p1D-Ls-BNg">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="Odz-Sf-tep" kind="unwind" identifier="unwind_TimingRecordSchedule2TimingRecord" unwindAction="TimingRecordViewController1UnwindSegue:" id="Plj-zn-Xeg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="3oJ-ao-d9q" id="9Fp-ck-Tbq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DNl-AN-BpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Odz-Sf-tep" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1444" y="-689.5052473763119"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkbox_checked" width="16" height="16"/>
         <image name="checkbox_uncheck" width="16" height="16"/>
+        <image name="ic_select" width="40" height="40"/>
         <image name="navBack" width="30" height="30"/>
         <image name="navDone" width="30" height="30"/>
         <image name="navRefresh" width="30" height="30"/>

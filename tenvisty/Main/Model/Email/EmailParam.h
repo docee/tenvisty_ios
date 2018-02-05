@@ -68,5 +68,5 @@
 - (HI_P2P_S_EMAIL_PARAM_EXT *)checkModel;
 - (HI_P2P_S_EMAIL_PARAM *)model;
 - (NSString *)connectionType;
-
+- (int)connectionTypeValue:(NSString*)typeDesc;
 @end
