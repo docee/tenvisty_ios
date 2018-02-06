@@ -301,5 +301,7 @@
     NSFileManager *tFileManager = [NSFileManager defaultManager];
     return [tFileManager fileExistsAtPath:filePath];
 }
-
+- (void)syncWithPhoneTime{
+    [self.orginCamera syncWithPhoneTime];
+}
 @end

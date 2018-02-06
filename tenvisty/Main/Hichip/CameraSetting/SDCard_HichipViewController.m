@@ -7,14 +7,14 @@
 //
 
 #import "SDCard_HichipViewController.h"
+#import "SDCard.h"
 
 @interface SDCard_HichipViewController (){
-    NSInteger freeSize;
-    NSInteger totalSize;
     BOOL isFormatting;
 }
 
 @property (strong,nonatomic) NSArray *listItems;
+@property (nonatomic, strong) SDCard *sdcard;
 @end
 
 @implementation SDCard_HichipViewController
@@ -26,22 +26,16 @@
     // Do any additional setup after loading the view.
 }
 -(void)setup{
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES].userInteractionEnabled = YES;
     [self getSDCardInfo];
 }
 -(void)getSDCardInfo{
-    freeSize = -1;
-    totalSize = -1;
-    SMsgAVIoctrlDeviceInfoReq *req = malloc(sizeof(SMsgAVIoctrlDeviceInfoReq));
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_DEVINFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlDeviceInfoReq)];
-    free(req);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_SD_INFO Data:(char*)nil DataSize:0];
 }
 
 -(void)doFormatSDCard{
     [MBProgressHUD showMessag:LOCALSTR(@"formating...") toView:self.tableView].userInteractionEnabled = YES;
-    SMsgAVIoctrlFormatExtStorageReq *req = malloc(sizeof(SMsgAVIoctrlFormatExtStorageReq));
-    req->storage = 0;
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlFormatExtStorageReq)];
-    free(req);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_FORMAT_SD Data:(char*)nil DataSize:0];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -87,33 +81,53 @@
     return 50.0;
 }
 
+-(void)refreshTable{
+    if(self.sdcard){
+        [self setRowValue:FORMAT(@"%d MB",self.sdcard.u32Space/1024) row:0 section:0];
+        [self setRowValue:FORMAT(@"%d MB",self.sdcard.u32LeftSpace/1024) row:1 section:0];
+        [self.tableView reloadData];
+    }
+}
+
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_DEVINFO_RESP:{
-            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-            SMsgAVIoctrlDeviceInfoResp *resp = (SMsgAVIoctrlDeviceInfoResp*)data;
-            [self setRowValue:FORMAT(@"%d MB",resp->total) row:0 section:0];
-            [self setRowValue:FORMAT(@"%d MB",resp->free) row:1 section:0];
-            [self.tableView reloadData];
-            if(isFormatting){
-                [[[iToast makeText:LOCALSTR(@"format success")]setDuration:1] show];
-                isFormatting= NO;
+        case HI_P2P_GET_SD_INFO:{
+            if(size >= sizeof(HI_P2P_S_SD_INFO)){
+                SDCard *sdcardTemp = [[SDCard alloc] initWithData:(char*)data size:(int)size];
+                if(self.sdcard  && isFormatting){
+                    if(self.sdcard.u32Space > 0){
+                        if(sdcardTemp.u32Space > 0){
+                            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                            [[[iToast makeText:LOCALSTR(@"format success")]setDuration:1] show];
+                            isFormatting= NO;
+                            self.sdcard = sdcardTemp;
+                            [self refreshTable];
+                        }
+                        else{
+                            [self getSDCardInfo];
+                        }
+                    }
+                }
+                else{
+                    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                    self.sdcard = sdcardTemp;
+                    [self refreshTable];
+                }
+            }
+            else{
+                [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             }
             break;
         }
-        case IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_RESP:{
-            SMsgAVIoctrlFormatExtStorageResp *resp = (SMsgAVIoctrlFormatExtStorageResp*)data;
-            if(resp->result == 0){
-                isFormatting = YES;
-                [self setRowValue:nil row:0 section:0];
-                [self setRowValue:nil row:1 section:0];
-                [self getSDCardInfo];
-                [self.tableView reloadData];
-            }
-            else{
-                [[iToast makeText:LOCALSTR(@"format failed, please try again later")] show];
-            }
+        case HI_P2P_SET_FORMAT_SD:{
+            isFormatting = YES;
+            [self setRowValue:nil row:0 section:0];
+            [self setRowValue:nil row:1 section:0];
+            [self.tableView reloadData];
+            sleep(15);
+            [self getSDCardInfo];
         }
+            break;
         default:
             break;
     }

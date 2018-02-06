@@ -43,6 +43,7 @@
 
 -(void)setup{
     self.title = self.camera.nickName;
+    self.myCamera = (MyCamera*)self.camera.orginCamera;
     waitResize = YES;
     mPlaybackChannel = -1;
     mMediaState = MEDIA_STATE_STOPPED;

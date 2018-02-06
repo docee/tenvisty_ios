@@ -12,8 +12,10 @@
 @property (nonatomic,copy) NSString* area;
 @property (nonatomic,copy) NSString* strGMT;
 @property (nonatomic,assign) Boolean dst;
+@property (nonatomic,assign) NSInteger timezone;
 
-+(TimeZoneModel *) initObj:(NSString*)area gmt:(NSString*)strGMT daylight:(Boolean)dst;
++(TimeZoneModel *) initObj:(NSInteger)timezone area:(NSString*)area gmt:(NSString*)strGMT daylight:(Boolean)dst;
 
 +(NSArray*)getAll;
++(NSArray*)getAllOld;
 @end

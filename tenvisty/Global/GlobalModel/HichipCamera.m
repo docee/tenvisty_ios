@@ -6,9 +6,12 @@
 //  Copyright © 2018年 Tenvis. All rights reserved.
 //
 
+#define CONNECT_TIMEOUT_WAITTIME 30
 #import "HichipCamera.h"
 #import "CameraIOSessionProtocol.h"
 #import "HiPushSDK.h"
+#import "TimeParam.h"
+#import "TimeZoneModel.h"
 
 @interface HichipCamera()<CameraIOSessionProtocol,OnPushResult>{
     BOOL isStopManually;
@@ -18,6 +21,11 @@
 @property (nonatomic, assign) int subID;
 @property (nonatomic, strong) NSUserDefaults *camDefaults;
 @property (nonatomic, strong) HiPushSDK *pushSDK;
+
+@property (nonatomic,assign) NSInteger beginRebootTime;
+@property (nonatomic,assign) NSInteger rebootTimeout;
+@property (nonatomic,assign) NSInteger connectTimeoutBeginTime;
+
 @end
 
 @implementation HichipCamera
@@ -81,7 +89,7 @@
 }
 
 -(BOOL)isSessionConnected{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED || self.isAuthConnected;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED || self.isAuthConnected || self.isWrongPassword;
 }
 
 -(BOOL)isAuthConnected{
@@ -297,6 +305,44 @@
         return;
     }
     self.cameraConnectState = status;
+    
+    //手动调用stop接口才是CONNECTION_STATE_DISCONNECTED ||
+    if([self isDisconnect]){
+        if(self.processState == CAMERASTATE_WILLREBOOTING){
+            self.processState = CAMERASTATE_REBOOTING;
+            _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            _rebootTimeout = 120;
+        }
+        else if(self.processState == CAMERASTATE_WILLRESETING){
+            self.processState = CAMERASTATE_RESETING;
+            _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            _rebootTimeout = 120;
+            
+        }
+        if(self.processState  != CAMERASTATE_NONE){
+            if([NSDate timeIntervalSinceReferenceDate] - _beginRebootTime > _rebootTimeout){
+                self.processState  = CAMERASTATE_NONE;
+            }
+        }
+        
+        if(self.processState != CAMERASTATE_NONE){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self start];
+            });
+        }
+    }
+    else if(self.isSessionConnected){
+        if(self.isAuthConnected && self.processState != CAMERASTATE_WILLUPGRADING && self.processState != CAMERASTATE_WILLREBOOTING && self.processState != CAMERASTATE_WILLRESETING){
+            self.processState = CAMERASTATE_NONE;
+        }
+        else if(self.isWrongPassword){
+            if(self.processState == CAMERASTATE_RESETING){
+                [self setPwd:DEFAULT_PASSWORD];
+                [GBase editCamera:(BaseCamera*)self];
+                [self start];
+            }
+        }
+    }
     if(self.isAuthConnected){
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
@@ -333,24 +379,55 @@
 
 - (void)receiveIOCtrl:(HiCamera *)camera Type:(int)type Data:(char*)data Size:(int)size Status:(int)status {
     LOG(@">>>HiCamera_receiveIOCtrl %@ %x %d %d",camera.uid, type, size, status);
-    
+    switch (type) {
+            //获取时区（新命令）
+        case HI_P2P_GET_TIME_ZONE_EXT:{
+            if(size >= sizeof(HI_P2P_S_TIME_ZONE_EXT)){
+                self.zkGmTimeZone = [[newTimeZone alloc] initWithData:data withSize:size];
+            }
+        }
+            break;
+        case HI_P2P_GET_TIME_ZONE:{
+            if(size >= sizeof(HI_P2P_S_TIME_ZONE)){
+                self.gmTimeZone = [[TimeZone alloc] initWithData:data size:size];
+            }
+        }
+            break;
+        case HI_P2P_GET_DEV_INFO_EXT:{
+            if(size >= sizeof(HI_P2P_S_DEV_INFO_EXT)){
+                self.deviceInfoExt = [[DeviceInfoExt alloc] initWithData:data size:size];
+            }
+        }
+            break;
+        case HI_P2P_GET_TIME_PARAM:
+            break;
+        case HI_P2P_SET_REBOOT:{
+            if(size >= 0){
+                self.processState = CAMERASTATE_WILLREBOOTING;
+            }
+        }
+            break;
+        case HI_P2P_SET_RESET:{
+            if(size >= 0){
+                self.processState = CAMERASTATE_WILLRESETING;
+            }
+        }
+            break;
+        case HI_P2P_SET_DOWNLOAD:{
+            if(size >= 0){
+                self.processState = CAMERASTATE_WILLUPGRADING;
+                self.beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+                self.rebootTimeout = 120;
+            }
+        }
+            break;
+    }
     dispatch_sync(dispatch_get_main_queue(), ^{
         if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
             [self.cameraDelegate camera:self.baseCamera _didReceiveIOCtrlWithType:type Data:data DataSize:size];
         }
     });
     switch (type) {
-        case HI_P2P_GET_TIME_PARAM:
-            
-            break;
-        case HI_P2P_GET_TIME_ZONE:{
-        
-        }
-            break;
-            //获取时区（新命令）
-        case HI_P2P_GET_TIME_ZONE_EXT:{
-        
-        }
             break;
             //获取摄像机本地服务器地址
         case HI_P2P_ALARM_ADDRESS_GET:{
@@ -715,6 +792,51 @@
     
 }
 
+- (void)syncWithPhoneTime{
+    long offset = 0;
+    if(self.zkGmTimeZone){
+        for (int i = 0; i < [TimeZoneModel getAll].count; i++) {
+            TimeZoneModel *model = [TimeZoneModel getAll][i];
+            if([model.area isEqualToString:self.zkGmTimeZone.timeName]){
+                offset = model.timezone * 60 * 60;
+            }
+        }
+    }
+    else if(self.gmTimeZone){
+        offset = self.gmTimeZone.model->s32TimeZone * 60 *60;
+    }
+    
+    NSDate *dates = [NSDate date];
+    if((self.zkGmTimeZone && self.zkGmTimeZone.dst == 1) || (self.gmTimeZone && self.gmTimeZone.u32DstMode == 1))
+    {
+        NSArray *names= [NSTimeZone knownTimeZoneNames];
+        for (int i = 0; i < [names count]; i++) {
+            
+            NSTimeZone *nsTzTmp = [NSTimeZone timeZoneWithName:[names objectAtIndex:i]];
+            if([nsTzTmp isDaylightSavingTime]){
+                if([nsTzTmp secondsFromGMT] - [nsTzTmp daylightSavingTimeOffsetForDate:dates] == offset){
+                    offset += 60*60;
+                    break;
+                }
+            }
+        }
+    }
+    
+    NSTimeZone *timezone = [NSTimeZone timeZoneForSecondsFromGMT:offset];
+    TimeParam *timeParams = [[TimeParam alloc] init];
+    NSCalendar *myCal =[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *dateComponents = [myCal componentsInTimeZone:timezone fromDate:dates];
+    [timeParams setU32Year:(unsigned int)dateComponents.year];
+    [timeParams setU32Month:(unsigned int)dateComponents.month];
+    [timeParams setU32Day:(unsigned int)dateComponents.day];
+    [timeParams setU32Hour:(unsigned int)dateComponents.hour];
+    [timeParams setU32Minute:(unsigned int)dateComponents.minute];
+    [timeParams setU32Second:(unsigned int)dateComponents.second];
+    HI_P2P_S_TIME_PARAM *p = [timeParams model];
+    [self sendIOCtrl:HI_P2P_SET_TIME_PARAM Data:(char*)p Size:sizeof(HI_P2P_S_TIME_PARAM)];
+    free(p);
+    p = nil;
+}
 
 
 @end

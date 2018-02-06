@@ -28,6 +28,9 @@
 @property (nonatomic,strong) NSString* rightDesc;
 @property (nonatomic,strong) NSString* desc;
 @property (nonatomic,strong) NSString* descDetail;
+@property (nonatomic,assign) NSInteger maxValue;
+@property (nonatomic,assign) NSInteger minValue;
+
 
 
 +(ListImgTableViewCellModel*) initObj:(NSString *)titleImge title:(NSString *)titleTxt showValue:(BOOL)showV value:(NSString *)value;
@@ -46,4 +49,6 @@
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw;
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didEndTextFiledEditing:(UITextField*)sender;
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didEndTextViewEditing:(UITextView*)sender;
+- (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didEndSliderChanging:(UISlider*)sender;
+
 @end

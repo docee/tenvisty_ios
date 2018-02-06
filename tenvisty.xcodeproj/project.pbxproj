@@ -174,6 +174,22 @@
 		89AD338F20283CE100B4520A /* RecAutoParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD338D20283CE100B4520A /* RecAutoParam.m */; };
 		89AD339220285C4A00B4520A /* SelectItemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD339120285C4A00B4520A /* SelectItemDetailTableViewCell.m */; };
 		89AD339520285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD339420285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m */; };
+		89AD339B2029567300B4520A /* Display.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33982029567200B4520A /* Display.m */; };
+		89AD339C2029567300B4520A /* ModelWhiteLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD339A2029567200B4520A /* ModelWhiteLight.m */; };
+		89AD33A620295A0C00B4520A /* newTimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD339F20295A0B00B4520A /* newTimeZone.m */; };
+		89AD33A720295A0C00B4520A /* TimeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33A120295A0B00B4520A /* TimeParam.m */; };
+		89AD33A820295A0C00B4520A /* TimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33A320295A0B00B4520A /* TimeZone.m */; };
+		89AD33A920295A0C00B4520A /* TimeZoneInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33A520295A0B00B4520A /* TimeZoneInfo.m */; };
+		89AD33AD20295AA000B4520A /* GDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33AC20295AA000B4520A /* GDate.m */; };
+		89AD33B02029951D00B4520A /* AudioSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33AF2029951D00B4520A /* AudioSetting_HichipViewController.m */; };
+		89AD33B22029961C00B4520A /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89AD33B12029961C00B4520A /* SliderTableViewCell.xib */; };
+		89AD33B5202997F600B4520A /* SliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33B4202997F600B4520A /* SliderTableViewCell.m */; };
+		89AD33B92029A2AD00B4520A /* AudioAttr.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33B82029A2AC00B4520A /* AudioAttr.m */; };
+		89AD33BD2029B1F900B4520A /* SDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33BC2029B1F900B4520A /* SDCard.m */; };
+		89AD33C32029B9AF00B4520A /* DeviceInfoExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C02029B9AF00B4520A /* DeviceInfoExt.m */; };
+		89AD33C42029B9AF00B4520A /* SetDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C22029B9AF00B4520A /* SetDownload.m */; };
+		89AD33CA2029B9DE00B4520A /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C72029B9DE00B4520A /* DeviceInfo.m */; };
+		89AD33CB2029B9DE00B4520A /* NetParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C92029B9DE00B4520A /* NetParam.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
 		89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811151FF63FEB00679B39 /* AppVersionController.m */; };
@@ -564,6 +580,37 @@
 		89AD339120285C4A00B4520A /* SelectItemDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectItemDetailTableViewCell.m; sourceTree = "<group>"; };
 		89AD339320285F8D00B4520A /* TimingRecordSchedule_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimingRecordSchedule_HichipViewController.h; sourceTree = "<group>"; };
 		89AD339420285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimingRecordSchedule_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33972029567200B4520A /* Display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Display.h; sourceTree = "<group>"; };
+		89AD33982029567200B4520A /* Display.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Display.m; sourceTree = "<group>"; };
+		89AD33992029567200B4520A /* ModelWhiteLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWhiteLight.h; sourceTree = "<group>"; };
+		89AD339A2029567200B4520A /* ModelWhiteLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelWhiteLight.m; sourceTree = "<group>"; };
+		89AD339E20295A0B00B4520A /* newTimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newTimeZone.h; sourceTree = "<group>"; };
+		89AD339F20295A0B00B4520A /* newTimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newTimeZone.m; sourceTree = "<group>"; };
+		89AD33A020295A0B00B4520A /* TimeParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeParam.h; sourceTree = "<group>"; };
+		89AD33A120295A0B00B4520A /* TimeParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeParam.m; sourceTree = "<group>"; };
+		89AD33A220295A0B00B4520A /* TimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeZone.h; sourceTree = "<group>"; };
+		89AD33A320295A0B00B4520A /* TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeZone.m; sourceTree = "<group>"; };
+		89AD33A420295A0B00B4520A /* TimeZoneInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeZoneInfo.h; sourceTree = "<group>"; };
+		89AD33A520295A0B00B4520A /* TimeZoneInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeZoneInfo.m; sourceTree = "<group>"; };
+		89AD33AB20295AA000B4520A /* GDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDate.h; sourceTree = "<group>"; };
+		89AD33AC20295AA000B4520A /* GDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDate.m; sourceTree = "<group>"; };
+		89AD33AE2029951D00B4520A /* AudioSetting_HichipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioSetting_HichipViewController.h; sourceTree = "<group>"; };
+		89AD33AF2029951D00B4520A /* AudioSetting_HichipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioSetting_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33B12029961C00B4520A /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
+		89AD33B3202997F600B4520A /* SliderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderTableViewCell.h; sourceTree = "<group>"; };
+		89AD33B4202997F600B4520A /* SliderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderTableViewCell.m; sourceTree = "<group>"; };
+		89AD33B72029A2AC00B4520A /* AudioAttr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioAttr.h; sourceTree = "<group>"; };
+		89AD33B82029A2AC00B4520A /* AudioAttr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioAttr.m; sourceTree = "<group>"; };
+		89AD33BB2029B1F900B4520A /* SDCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCard.h; sourceTree = "<group>"; };
+		89AD33BC2029B1F900B4520A /* SDCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCard.m; sourceTree = "<group>"; };
+		89AD33BF2029B9AF00B4520A /* DeviceInfoExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfoExt.h; sourceTree = "<group>"; };
+		89AD33C02029B9AF00B4520A /* DeviceInfoExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoExt.m; sourceTree = "<group>"; };
+		89AD33C12029B9AF00B4520A /* SetDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDownload.h; sourceTree = "<group>"; };
+		89AD33C22029B9AF00B4520A /* SetDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDownload.m; sourceTree = "<group>"; };
+		89AD33C62029B9DE00B4520A /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		89AD33C72029B9DE00B4520A /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
+		89AD33C82029B9DE00B4520A /* NetParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetParam.h; sourceTree = "<group>"; };
+		89AD33C92029B9DE00B4520A /* NetParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetParam.m; sourceTree = "<group>"; };
 		89D2B4E61FDF804A00639DD3 /* AddDeviceWirelessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessViewController.h; sourceTree = "<group>"; };
 		89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
 		89D2B4EC1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessSettingViewController.h; sourceTree = "<group>"; };
@@ -1015,6 +1062,7 @@
 		890B46B11FB03CD500C1061A /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				89AD33AA20295AA000B4520A /* DateFormatter */,
 				895141CA1FE763BD00905355 /* iToast */,
 				898D8BA11FE0F66600062F04 /* fmdb */,
 				898D8B911FE0CDA900062F04 /* GCD */,
@@ -1138,6 +1186,8 @@
 				89AD337D20282DD300B4520A /* TimingRecord_HichipViewController.m */,
 				89AD339320285F8D00B4520A /* TimingRecordSchedule_HichipViewController.h */,
 				89AD339420285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m */,
+				89AD33AE2029951D00B4520A /* AudioSetting_HichipViewController.h */,
+				89AD33AF2029951D00B4520A /* AudioSetting_HichipViewController.m */,
 			);
 			path = CameraSetting;
 			sourceTree = "<group>";
@@ -1212,6 +1262,9 @@
 				89AD33872028327300B4520A /* LinkButtonTableViewCell.m */,
 				89AD339020285C4A00B4520A /* SelectItemDetailTableViewCell.h */,
 				89AD339120285C4A00B4520A /* SelectItemDetailTableViewCell.m */,
+				89AD33B12029961C00B4520A /* SliderTableViewCell.xib */,
+				89AD33B3202997F600B4520A /* SliderTableViewCell.h */,
+				89AD33B4202997F600B4520A /* SliderTableViewCell.m */,
 			);
 			path = TabelCell;
 			sourceTree = "<group>";
@@ -1315,6 +1368,12 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89AD33C52029B9DE00B4520A /* DeviceInformation */,
+				89AD33BE2029B9AF00B4520A /* System */,
+				89AD33BA2029B1F900B4520A /* SDCard */,
+				89AD33B62029A2AC00B4520A /* Audio */,
+				89AD339D20295A0B00B4520A /* DeviceTime */,
+				89AD33962029567200B4520A /* LiveView */,
 				89AD338920283CE100B4520A /* TimeRecord */,
 				89AD33782028251F00B4520A /* FTP */,
 				89545EC42022FDEA00151E90 /* Email */,
@@ -1592,6 +1651,81 @@
 				89AD338D20283CE100B4520A /* RecAutoParam.m */,
 			);
 			path = TimeRecord;
+			sourceTree = "<group>";
+		};
+		89AD33962029567200B4520A /* LiveView */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33972029567200B4520A /* Display.h */,
+				89AD33982029567200B4520A /* Display.m */,
+				89AD33992029567200B4520A /* ModelWhiteLight.h */,
+				89AD339A2029567200B4520A /* ModelWhiteLight.m */,
+			);
+			path = LiveView;
+			sourceTree = "<group>";
+		};
+		89AD339D20295A0B00B4520A /* DeviceTime */ = {
+			isa = PBXGroup;
+			children = (
+				89AD339E20295A0B00B4520A /* newTimeZone.h */,
+				89AD339F20295A0B00B4520A /* newTimeZone.m */,
+				89AD33A020295A0B00B4520A /* TimeParam.h */,
+				89AD33A120295A0B00B4520A /* TimeParam.m */,
+				89AD33A220295A0B00B4520A /* TimeZone.h */,
+				89AD33A320295A0B00B4520A /* TimeZone.m */,
+				89AD33A420295A0B00B4520A /* TimeZoneInfo.h */,
+				89AD33A520295A0B00B4520A /* TimeZoneInfo.m */,
+			);
+			path = DeviceTime;
+			sourceTree = "<group>";
+		};
+		89AD33AA20295AA000B4520A /* DateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33AB20295AA000B4520A /* GDate.h */,
+				89AD33AC20295AA000B4520A /* GDate.m */,
+			);
+			path = DateFormatter;
+			sourceTree = "<group>";
+		};
+		89AD33B62029A2AC00B4520A /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33B72029A2AC00B4520A /* AudioAttr.h */,
+				89AD33B82029A2AC00B4520A /* AudioAttr.m */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		89AD33BA2029B1F900B4520A /* SDCard */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33BB2029B1F900B4520A /* SDCard.h */,
+				89AD33BC2029B1F900B4520A /* SDCard.m */,
+			);
+			path = SDCard;
+			sourceTree = "<group>";
+		};
+		89AD33BE2029B9AF00B4520A /* System */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33BF2029B9AF00B4520A /* DeviceInfoExt.h */,
+				89AD33C02029B9AF00B4520A /* DeviceInfoExt.m */,
+				89AD33C12029B9AF00B4520A /* SetDownload.h */,
+				89AD33C22029B9AF00B4520A /* SetDownload.m */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		89AD33C52029B9DE00B4520A /* DeviceInformation */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33C62029B9DE00B4520A /* DeviceInfo.h */,
+				89AD33C72029B9DE00B4520A /* DeviceInfo.m */,
+				89AD33C82029B9DE00B4520A /* NetParam.h */,
+				89AD33C92029B9DE00B4520A /* NetParam.m */,
+			);
+			path = DeviceInformation;
 			sourceTree = "<group>";
 		};
 		89D811111FF63FEB00679B39 /* About */ = {
@@ -2434,6 +2568,7 @@
 				89AD33822028315600B4520A /* LinkButtonTableViewCell.xib in Resources */,
 				890B407B1FB006B700C1061A /* About.storyboard in Resources */,
 				89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */,
+				89AD33B22029961C00B4520A /* SliderTableViewCell.xib in Resources */,
 				892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */,
 				894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */,
 				890B40761FB0069400C1061A /* Image.storyboard in Resources */,
@@ -2462,8 +2597,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */,
+				89AD33CB2029B9DE00B4520A /* NetParam.m in Sources */,
 				ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */,
+				89AD33B5202997F600B4520A /* SliderTableViewCell.m in Sources */,
 				896BA3D71FD92C7600EE31AB /* ImageCollectionViewCell.m in Sources */,
+				89AD33AD20295AA000B4520A /* GDate.m in Sources */,
 				892ADB881FD7A0F400BD8929 /* SDCardViewController.m in Sources */,
 				ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */,
 				8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */,
@@ -2475,12 +2613,15 @@
 				896BA3DA1FD9375400EE31AB /* ShowImageViewController.m in Sources */,
 				892ADB8E1FD7B94500BD8929 /* SystemSettingTableViewController.m in Sources */,
 				892ADB911FD7C5AA00BD8929 /* EventListViewController.m in Sources */,
+				89AD339B2029567300B4520A /* Display.m in Sources */,
 				89545EC32022F5E300151E90 /* TwsAutoKeyboardTextView.m in Sources */,
 				8924126E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m in Sources */,
 				89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */,
+				89AD33BD2029B1F900B4520A /* SDCard.m in Sources */,
 				89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */,
 				896BA3DE1FD94DC500EE31AB /* AboutListViewController.m in Sources */,
 				892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */,
+				89AD33B02029951D00B4520A /* AudioSetting_HichipViewController.m in Sources */,
 				892CE0C31FD121DB00942E28 /* BaseTableViewController.m in Sources */,
 				892ADB7F1FD781F800BD8929 /* TimeSettingViewController.m in Sources */,
 				89870A241FDA83AA005207AB /* TwsTools.m in Sources */,
@@ -2489,6 +2630,7 @@
 				89E4E9721FCE7EC1007EA336 /* CameraListItemTableViewCell.m in Sources */,
 				89E6D98C1FDA25F30049F1E7 /* BaseViewController.m in Sources */,
 				892ADB6E1FD692B500BD8929 /* SwitchTableViewCell.m in Sources */,
+				89AD33A620295A0C00B4520A /* newTimeZone.m in Sources */,
 				89545EB22021A40700151E90 /* SnapAlarm.m in Sources */,
 				89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */,
 				89E4E96D1FCE67CA007EA336 /* CameraListViewController.m in Sources */,
@@ -2506,6 +2648,7 @@
 				89AD337B2028252000B4520A /* FTPParam.m in Sources */,
 				8924126C202062CD001F60E8 /* SystemSettingTable_HichipViewController.m in Sources */,
 				895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */,
+				89AD33A920295A0C00B4520A /* TimeZoneInfo.m in Sources */,
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
 				892CE0D71FD13E1500942E28 /* OCScanLifeViewController.m in Sources */,
 				89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */,
@@ -2521,6 +2664,7 @@
 				89545EA720207F6900151E90 /* WifiParam.m in Sources */,
 				89545EB12021A40700151E90 /* AlarmLink.m in Sources */,
 				8924126F202062CD001F60E8 /* WiFiSetting_HichipViewController.m in Sources */,
+				89AD33B92029A2AD00B4520A /* AudioAttr.m in Sources */,
 				892CE0BB1FD1014000942E28 /* TextFieldImgTableViewCell.m in Sources */,
 				89241267202062CD001F60E8 /* EventSetting_HichipViewController.m in Sources */,
 				89545EAB202181F900151E90 /* MdParam.m in Sources */,
@@ -2541,11 +2685,14 @@
 				8924116C201ED810001F60E8 /* TwsDataValue.m in Sources */,
 				892ADB691FD6909B00BD8929 /* EventSettingViewController.m in Sources */,
 				890B46B71FB03CD500C1061A /* UIColor+Hex.m in Sources */,
+				89AD33A720295A0C00B4520A /* TimeParam.m in Sources */,
 				894D7E511FAB01D900C58BB2 /* AppDelegate.m in Sources */,
 				ED3D506B1FD59D0300F0C658 /* BaseTableView.m in Sources */,
+				89AD33CA2029B9DE00B4520A /* DeviceInfo.m in Sources */,
 				89241265202062CD001F60E8 /* ChangeWiFi_HichipViewController.m in Sources */,
 				89AD33742028047300B4520A /* EmailModel.m in Sources */,
 				890B40891FB02F1A00C1061A /* TimeScheduleViewController.m in Sources */,
+				89AD339C2029567300B4520A /* ModelWhiteLight.m in Sources */,
 				890B408A1FB02F1A00C1061A /* ViewController.m in Sources */,
 				892CE0B81FD1013100942E28 /* TextFieldTableViewCell.m in Sources */,
 				89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */,
@@ -2569,12 +2716,14 @@
 				89241268202062CD001F60E8 /* OtherSetting_HichipViewController.m in Sources */,
 				892ADB5D1FD6524800BD8929 /* ChangeCameraNameViewController.m in Sources */,
 				89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */,
+				89AD33C42029B9AF00B4520A /* SetDownload.m in Sources */,
 				89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */,
 				894D7E4E1FAB01D900C58BB2 /* main.m in Sources */,
 				89AD33772028178C00B4520A /* FTPSetting_HichipViewController.m in Sources */,
 				89545EBD2022B99700151E90 /* TwsAutoKeyboardTextField.m in Sources */,
 				89545EA620207F6900151E90 /* WifiList.m in Sources */,
 				892CE0981FCFD32300942E28 /* ModifyCameraNameTableViewController.m in Sources */,
+				89AD33C32029B9AF00B4520A /* DeviceInfoExt.m in Sources */,
 				8924126A202062CD001F60E8 /* SDCard_HichipViewController.m in Sources */,
 				892ADB941FD803BC00BD8929 /* EventItemTableViewCell.m in Sources */,
 				892ADB631FD6740B00BD8929 /* WiFiSettingViewController.m in Sources */,
@@ -2607,6 +2756,7 @@
 				896BA3E11FD950A200EE31AB /* ImageCameraListViewController.m in Sources */,
 				892ADB791FD6A70400BD8929 /* RecordSettingViewController.m in Sources */,
 				89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */,
+				89AD33A820295A0C00B4520A /* TimeZone.m in Sources */,
 				892ADB531FD635EB00BD8929 /* ListImgTableViewCell.m in Sources */,
 				89545ECD20246A6C00151E90 /* EmailEncType_HichipViewController.m in Sources */,
 				89A096831FF109C700E5EBAE /* FLAnimatedImageView.m in Sources */,

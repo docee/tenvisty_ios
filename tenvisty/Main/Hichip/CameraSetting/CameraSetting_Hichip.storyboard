@@ -447,6 +447,7 @@
                         <segue destination="EKy-nf-165" kind="show" identifier="OtherSetting2TimeSetting" id="Uzv-Ew-brS"/>
                         <segue destination="Ttx-47-tOU" kind="show" identifier="OtherSetting2SDCard" id="dvp-bW-AVm"/>
                         <segue destination="lTX-H4-HqB" kind="show" identifier="OtherSetting2DeviceInfo" id="gHS-m3-Jee"/>
+                        <segue destination="iHc-8M-HHd" kind="show" identifier="OtherSetting2AudioSetting" id="9mB-pw-Omq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGE-So-nzH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1050,7 +1051,7 @@
                         <barButtonItem key="rightBarButtonItem" image="navDone" id="cVh-7W-iCW">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="clickSave:" destination="yki-gZ-G4F" id="1yS-TT-CNb"/>
+                                <action selector="clickSave:" destination="r8X-2J-9wG" id="haR-KE-PrN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1164,6 +1165,52 @@
                 <exit id="Odz-Sf-tep" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1444" y="-689.5052473763119"/>
+        </scene>
+        <!--Audio Setting-->
+        <scene sceneID="Prf-Qt-WeH">
+            <objects>
+                <viewController id="iHc-8M-HHd" customClass="AudioSetting_HichipViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gIe-7N-3wh"/>
+                        <viewControllerLayoutGuide type="bottom" id="jkL-IW-MHG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JPr-sL-Sky">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XgL-48-NzY" customClass="BaseTableView">
+                                <rect key="frame" x="0.0" y="15" width="375" height="588"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="iHc-8M-HHd" id="7D7-sk-mGr"/>
+                                    <outlet property="delegate" destination="iHc-8M-HHd" id="7hG-61-F1V"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XgL-48-NzY" firstAttribute="top" secondItem="gIe-7N-3wh" secondAttribute="bottom" constant="15" id="1aN-OG-ksj"/>
+                            <constraint firstItem="jkL-IW-MHG" firstAttribute="top" secondItem="XgL-48-NzY" secondAttribute="bottom" id="45i-ZP-fRT"/>
+                            <constraint firstAttribute="trailing" secondItem="XgL-48-NzY" secondAttribute="trailing" id="Caa-0e-mfM"/>
+                            <constraint firstItem="XgL-48-NzY" firstAttribute="leading" secondItem="JPr-sL-Sky" secondAttribute="leading" id="lCe-KO-tcW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Audio Setting" id="D5V-4Y-OME">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="veP-ZN-NYP">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="IMK-i8-oan" kind="unwind" unwindAction="OtherSettingViewController1UnwindSegue:" id="9yF-rY-DHe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="XgL-48-NzY" id="WFy-kZ-5CI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KF1-SS-b9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="IMK-i8-oan" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

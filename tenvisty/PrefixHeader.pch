@@ -170,7 +170,8 @@
 #define TableViewCell_SelectItem (@"tableviewCellSelectItem")
 #define TableViewCell_TextField_Multi (@"tableviewCellMultiTextField")
 #define TableViewCell_Button_HyperLink (@"tableviewCellLinkButton")
-#define TableViewCell_SelectItem_Detail (@"tableviewCell_timingRecord");
+#define TableViewCell_SelectItem_Detail (@"tableviewCell_timingRecord")
+#define TableViewCell_Slider (@"tableviewCell_slider")
 
 
 

@@ -166,7 +166,7 @@
             for(int i=0; i < [TimeZoneModel getAll].count; i++){
                 TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
                 if([tz.area isEqualToString:[NSString stringWithUTF8String:resp->DstDistrictInfo.DstDistId]]){
-                    NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:timezoneIndex]).area;
+                    NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:i]).area;
                     [self setRowValue:LOCALSTR(timezoneId) row:0 section:0];
                     timezoneIndex = i;
                     if(tz.dst){

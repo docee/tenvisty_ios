@@ -7,10 +7,13 @@
 //
 
 #import "OtherSetting_HichipViewController.h"
+#import "Display.h"
+#import "BaseViewController.h"
 
 @interface OtherSetting_HichipViewController (){
 }
 @property (strong,nonatomic) NSArray *listItems;
+@property (strong,nonatomic) Display *display;
 
 @end
 
@@ -30,17 +33,15 @@
 }
 
 -(void) doGetVideoMode{
-    SMsgAVIoctrlGetVideoModeReq *req = malloc(sizeof(SMsgAVIoctrlGetVideoModeReq));
-    req->channel = 0;
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetVideoModeReq)];
-    free(req);
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_DISPLAY_PARAM Data:(char*)nil DataSize:0];
 }
--(void) doSetVideoMode:(NSInteger)mode{
-    SMsgAVIoctrlSetVideoModeReq *req = malloc(sizeof(SMsgAVIoctrlSetVideoModeReq));
-    req->channel = 0;
-    req->mode = (int)mode;
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_VIDEOMODE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetVideoModeReq)];
-    free(req);
+-(void) doSetVideoMode{
+    if(self.display){
+        HI_P2P_S_DISPLAY *req = [self.display model];
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_DISPLAY_PARAM Data:(char*)req DataSize:sizeof(HI_P2P_S_DISPLAY)];
+        free(req);
+        req = nil;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -50,6 +51,7 @@
 -(NSArray *)listItems{
     if(!_listItems){
        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Time Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
+                        [ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Audio Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
         [ListImgTableViewCellModel initObj:@"ic_reverse" title:LOCALSTR(@"Mirror") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_inverse" title:LOCALSTR(@"Flip") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_sd" title:LOCALSTR(@"SD Card") showValue:NO value:nil viewId:TableViewCell_ListImg],
@@ -60,19 +62,38 @@
     return _listItems;
 }
 
+-(void)refreshTable{
+    if(self.display){
+        [self setRowValue:FORMAT(@"%d",self.display.u32Mirror)  row:2 section:0];
+        [self setRowValue:FORMAT(@"%d",self.display.u32Flip)  row:3 section:0];
+    }
+    [self.tableView reloadData];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[BaseTableViewController class]]){
         BaseTableViewController *controller= segue.destinationViewController;
         controller.camera =  self.camera;
     }
+    if([segue.destinationViewController isKindOfClass:[BaseViewController class]]){
+        BaseViewController *controller= segue.destinationViewController;
+        controller.camera =  self.camera;
+    }
 }
 
 - (void)ListImgTableViewCellModel:(ListImgTableViewCellModel *)cellModel didClickSwitch:(UISwitch*)sw{
-    ListImgTableViewCellModel *mirrorModel = [self listItems][0][1];
-    ListImgTableViewCellModel *flipModel = [self listItems][0][2];
-    int videoMode = ([mirrorModel.titleValue isEqualToString:@"1"]?2:0) +  ([flipModel.titleValue isEqualToString:@"1"]?1:0);
-    [self doSetVideoMode:videoMode];
+    if(self.display){
+        NSIndexPath *indexPath = [self getIndexPath:cellModel];
+        //mirror
+        if(indexPath.row == 2){
+            self.display.u32Mirror = sw.isOn?1:0;
+        }
+        //flip
+        else if(indexPath.row == 3){
+            self.display.u32Flip = sw.isOn?1:0;
+        }
+        [self doSetVideoMode];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -80,10 +101,13 @@
         if(indexPath.row == 0){
               [self performSegueWithIdentifier:@"OtherSetting2TimeSetting" sender:self];
         }
-        else if(indexPath.row == 3){
-              [self performSegueWithIdentifier:@"OtherSetting2SDCard" sender:self];
+        else if(indexPath.row == 1){
+            [self performSegueWithIdentifier:@"OtherSetting2AudioSetting" sender:self];
         }
         else if(indexPath.row == 4){
+              [self performSegueWithIdentifier:@"OtherSetting2SDCard" sender:self];
+        }
+        else if(indexPath.row == 5){
             [self performSegueWithIdentifier:@"OtherSetting2DeviceInfo" sender:self];
         }
     }
@@ -100,11 +124,11 @@
 }
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_GET_VIDEOMODE_RESP:{
-            SMsgAVIoctrlGetVideoModeResp *resp = (SMsgAVIoctrlGetVideoModeResp*)data;
-            [self setRowValue:(resp->mode&0x2)>0?@"1":@"0" row:1 section:0];
-            [self setRowValue:(resp->mode&0x1)>0?@"1":@"0" row:2 section:0];
-            [self.tableView reloadData];
+        case HI_P2P_GET_DISPLAY_PARAM:{
+            if(size >= sizeof(HI_P2P_S_DISPLAY)){
+                self.display = [[Display alloc] initWithData:(char*)data size:(int)size];
+                [self refreshTable];
+            }
             break;
         }
         default:

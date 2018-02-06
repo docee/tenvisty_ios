@@ -194,6 +194,9 @@
 -(BOOL)isWrongPassword{
     return self.cameraConnectState == CONNECTION_STATE_WRONG_PASSWORD;
 }
+- (void)syncWithPhoneTime{
+    
+}
 
 
 - (id)init

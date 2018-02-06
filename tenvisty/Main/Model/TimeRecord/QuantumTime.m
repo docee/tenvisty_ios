@@ -249,7 +249,11 @@
         [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         //设定时间格式,这里可以设置成自己需要的格式
         [dateFormatter setDateFormat:@"HH:mm"];
-        result = [NSString stringWithFormat:@"%@ - %@",[dateFormatter stringFromDate:[self getFromTime]],[dateFormatter stringFromDate:[self getToTime]]];
+        NSString *strToTime = [dateFormatter stringFromDate:[self getToTime]];
+//        if([strToTime isEqualToString:@"00:00"]){
+//            strToTime = @"24:00";
+//        }
+        result = [NSString stringWithFormat:@"%@ - %@",[dateFormatter stringFromDate:[self getFromTime]],strToTime];
     }
     return result;
 }

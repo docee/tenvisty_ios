@@ -9,11 +9,14 @@
 #import "TimeZoneSetting_HichipViewController.h"
 #import "TimeZoneModel.h"
 #import "DetailTableViewCell.h"
+#import "HichipCamera.h"
 
 @interface TimeZoneSetting_HichipViewController (){
     NSInteger timezoneIndex;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (nonatomic,strong) HichipCamera *originCamera;
+@property (nonatomic,strong) NSArray *timezoneList;
 
 @end
 
@@ -25,7 +28,9 @@
     // Do any additional setup after loading the view.
 }
 -(void)setup{
+    self.originCamera = (HichipCamera*)self.camera.orginCamera;
     [self.tableview registerNib:[UINib nibWithNibName:@"DetailTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Detail];
+    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;
     [self getTimezone];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -33,24 +38,37 @@
 }
 
 -(void)getTimezone{
-    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;
-    SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
-    free(req);
+    if ([self.originCamera getCommandFunction:HI_P2P_GET_TIME_ZONE_EXT]) {//支持新命令
+        self.timezoneList = [TimeZoneModel getAll];
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_TIME_ZONE_EXT Data:(char*)nil DataSize:0];
+    }else{//不支持就用旧命令
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_TIME_ZONE Data:(char*)nil DataSize:0];
+        self.timezoneList = [TimeZoneModel getAllOld];
+    }
 }
 
 -(void)setTimezone:(NSInteger)index{
     [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;
-    SMsgAVIoctrlSetDstReq *req = malloc(sizeof(SMsgAVIoctrlSetDstReq));
-    memset(req, 0, sizeof(SMsgAVIoctrlSetDstReq));
-//    if([[NSTimeZone localTimeZone] isDaylightSavingTime] && [[NSTimeZone localTimeZone] isDaylightSavingTimeForDate:[NSDate date]]){
-//        req->Enable = 1;
-//    }
-    req->Enable = 1;
-    NSString *area = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:index]).area;
-    memcpy(req->DstDistId, [area UTF8String], area.length);
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetTimeReq)];
-    free(req);
+    //new timezone
+    if(self.originCamera.zkGmTimeZone){
+        TimeZoneModel *timezoneModel = (TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:index];
+        HI_P2P_S_TIME_ZONE_EXT *req = [self.originCamera.zkGmTimeZone model];
+        memset(req->sTimeZone, 0, 32);
+        memcpy(req->sTimeZone, [timezoneModel.area UTF8String], timezoneModel.area.length);
+        req->u32DstMode = 1;
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_TIME_ZONE_EXT Data:(char*)req DataSize:sizeof(HI_P2P_S_TIME_ZONE_EXT)];
+        free(req);
+        req = nil;
+    }
+    else if(self.originCamera.gmTimeZone){
+        TimeZoneModel *timezoneModel = (TimeZoneModel*)[[TimeZoneModel getAllOld] objectAtIndex:index];
+        HI_P2P_S_TIME_ZONE *req = [self.originCamera.gmTimeZone model];
+        req->u32DstMode = 1;
+        req->s32TimeZone = (int)timezoneModel.timezone;
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_TIME_ZONE Data:(char*)req DataSize:sizeof(HI_P2P_S_TIME_ZONE)];
+        free(req);
+        req = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,12 +82,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [TimeZoneModel getAll].count;
+    return  self.timezoneList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
-    TimeZoneModel *model = (TimeZoneModel *)[[TimeZoneModel getAll] objectAtIndex:indexPath.row];
+    TimeZoneModel *model = (TimeZoneModel *)self.timezoneList[indexPath.row];
     NSString *id = TableViewCell_Detail;
     DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id forIndexPath:indexPath];
     cell.labTitle.text = LOCALSTR(model.area);
@@ -100,23 +118,11 @@
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_GET_ZONE_INFO_RESP:{
-            SMsgAVIoctrlGetDstResp *resp = (SMsgAVIoctrlGetDstResp*)data;
-            for(int i=0; i < [TimeZoneModel getAll].count; i++){
-                TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
-                if([tz.area isEqualToString:[NSString stringWithUTF8String:resp->DstDistrictInfo.DstDistId]]){
-                    timezoneIndex = i;
-                    break;
-                }
-            }
-            [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
-            [self.tableview reloadData];
-            break;
-            break;
-        }
-        case IOTYPE_USER_IPCAM_SET_ZONE_INFO_RESP:{
-            SMsgAVIoctrlSetDstResp *resp = (SMsgAVIoctrlSetDstResp*)data;
-            if(resp->result == 0){
+        case HI_P2P_SET_TIME_ZONE:
+        case HI_P2P_SET_TIME_ZONE_EXT:{
+            if(size >= 0){
+                [self getTimezone];
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
                 [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -124,6 +130,41 @@
                 [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];
             }
         }
+            break;
+            
+            //新时区
+        case HI_P2P_GET_TIME_ZONE_EXT:{
+            if(self.originCamera.zkGmTimeZone){
+                for(int i=0; i < [TimeZoneModel getAll].count; i++){
+                    TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
+                    if([tz.area isEqualToString:self.originCamera.zkGmTimeZone.timeName]){
+                        NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:timezoneIndex]).area;
+                        [self setRowValue:LOCALSTR(timezoneId) row:0 section:0];
+                        timezoneIndex = i;
+                        break;
+                    }
+                }
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [self.tableview reloadData];
+            }
+        }
+            break;
+        case HI_P2P_GET_TIME_ZONE:{
+            if(self.originCamera.gmTimeZone){
+                for(int i=0; i < [TimeZoneModel getAllOld].count; i++){
+                    TimeZoneModel *tz = [[TimeZoneModel getAllOld] objectAtIndex:i];
+                    if(tz.timezone == self.originCamera.gmTimeZone.s32TimeZone){
+                        NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAllOld] objectAtIndex:timezoneIndex]).area;
+                        [self setRowValue:LOCALSTR(timezoneId) row:0 section:0];
+                        timezoneIndex = i;
+                        break;
+                    }
+                }
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [self.tableview reloadData];
+            }
+        }
+            break;
         default:
             break;
     }

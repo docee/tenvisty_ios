@@ -14,13 +14,18 @@
 #import "HichipCamera.h"
 #import "TimingRecordSchedule_HichipViewController.h"
 
-@interface TimingRecord_HichipViewController ()<CellModelDelegate>
+@interface TimingRecord_HichipViewController ()<CellModelDelegate>{
+    
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (strong,nonatomic) NSArray *listItems;
 @property (nonatomic, strong) __block RecAutoParam *recAutoParam;
 @property (nonatomic, strong) __block QuantumTime *quantumTime;
+@property (nonatomic, strong) __block RecAutoParam *recAutoParamOrigin;
+@property (nonatomic, strong) __block QuantumTime *quantumTimeOrigin;
 @property (nonatomic,assign) NSInteger autoRecTimeMin;
 @property (nonatomic,assign) NSInteger autoRecTimeMax;
+@property (nonatomic,assign) NSInteger hasChangedValue;
 
 @end
 
@@ -37,6 +42,7 @@
     self.autoRecTimeMax = [((HichipCamera*)self.camera.orginCamera) isGoke]?600:900;
     [self.tableview setBackgroundColor:Color_GrayLightless];
     [self.view setBackgroundColor:Color_GrayLightless];
+    [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
     [self doGetAutoRecordPara];
     [self doGetAutoRecordSchedule];
 }
@@ -49,11 +55,54 @@
       [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_REC_AUTO_SCHEDULE Data:(char*)nil DataSize:0];
 }
 
+-(void)doSetAutoRecordPara{
+    HI_P2P_S_REC_AUTO_PARAM *p = [self.recAutoParam model];
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_REC_AUTO_PARAM Data:(char*)p DataSize:sizeof(HI_P2P_S_REC_AUTO_PARAM)];
+    free(p);
+    p = nil;
+}
+
+-(void)doSetAutoRecordSchedule{
+    HI_P2P_QUANTUM_TIME *p = [self.quantumTime model];
+    [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_REC_AUTO_SCHEDULE Data:(char*)p DataSize:sizeof(HI_P2P_QUANTUM_TIME)];
+    free(p);
+    p = nil;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)clickSave:(id)sender {
+    if(self.recAutoParam && self.quantumTime){
+        [self.view endEditing:YES];
+        [self reloadParasFromTable];
+        if([self checkData]){
+            _hasChangedValue = 0;
+            if(self.recAutoParam.u32FileLen != self.recAutoParamOrigin.u32FileLen || self.recAutoParam.u32Enable != self.recAutoParamOrigin.u32Enable){
+                [self doSetAutoRecordPara];
+                _hasChangedValue += 1;
+            }
+            if(self.quantumTime.startIndex != self.quantumTimeOrigin.startIndex || self.quantumTime.endIndex != self.quantumTimeOrigin.endIndex){
+                [self doSetAutoRecordSchedule];
+                _hasChangedValue += 2;
+            }
+            if(_hasChangedValue == 0){
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else{
+                [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;
+            }
+        }
+    }
+}
+
+-(BOOL)checkData{
+    if(self.recAutoParam.u32FileLen > self.autoRecTimeMax || self.recAutoParam.u32FileLen < self.autoRecTimeMin){
+        [[iToast makeText:FORMAT(LOCALSTR(@"%d - %d seconds time range"),self.autoRecTimeMin,self.autoRecTimeMax)] show];
+        return NO;
+    }
+    return YES;
 }
 
 -(NSArray *)listItems{
@@ -87,9 +136,6 @@
     if(self.recAutoParam){
         self.recAutoParam.u32FileLen = [[self getRowValue:0 section:0] intValue];
     }
-    if(self.quantumTime){
-        
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -118,9 +164,13 @@
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
             if(size >= sizeof(HI_P2P_S_REC_AUTO_PARAM)){
                 self.recAutoParam =[[RecAutoParam alloc] initWithData:(char*)data size:(int)size];
+                self.recAutoParamOrigin =[[RecAutoParam alloc] initWithData:(char*)data size:(int)size];
                 if(self.recAutoParam.u32Enable == 0){
                     if(self.quantumTime){
                         self.quantumTime.recordTime = 0;
+                    }
+                    if(self.quantumTimeOrigin){
+                        self.quantumTimeOrigin.recordTime = 0;
                     }
                 }
                 [self refreshTable];
@@ -131,15 +181,52 @@
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
             if(size >= sizeof(HI_P2P_QUANTUM_TIME)){
                 self.quantumTime =[[QuantumTime alloc] initWithData:(char*)data size:(int)size];
+                self.quantumTimeOrigin =[[QuantumTime alloc] initWithData:(char*)data size:(int)size];
                 if(self.recAutoParam){
                     if(self.recAutoParam.u32Enable == 0){
                         self.quantumTime.recordTime = 0;
+                    }
+                }
+                if(self.recAutoParamOrigin){
+                    if(self.recAutoParamOrigin.u32Enable == 0){
+                        self.quantumTimeOrigin.recordTime = 0;
                     }
                 }
                 [self refreshTable];
             }
         }
             break;
+        case HI_P2P_SET_REC_AUTO_PARAM:{
+            if(size>=0){
+                self.hasChangedValue -= 1;
+            }
+            else{
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];
+            }
+            if(_hasChangedValue == 0){
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+            break;
+        case HI_P2P_SET_REC_AUTO_SCHEDULE:{
+            if(size>=0){
+                self.hasChangedValue -= 2;
+            }
+            else{
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];
+            }
+            if(_hasChangedValue == 0){
+                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+                [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+            break;
+            
         default:
             break;
     }
@@ -147,7 +234,17 @@
 //其他界面返回到此界面调用的方法
 - (IBAction)TimingRecordViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     TimingRecordSchedule_HichipViewController *controller = unwindSegue.sourceViewController;
-    [_quantumTime setTime:controller.fromTime totime:controller.toTime type:controller.type];
+    _quantumTime.recordTime = (int)controller.type;
+    if(controller.type != 0){
+        [_quantumTime setTime:controller.fromTime totime:controller.toTime type:controller.type];
+    }
+    if(controller.type == 0){
+        _recAutoParam.u32Enable = 0;
+    }
+    else {
+        _recAutoParam.u32Enable = 1;
+    }
+  
     [self refreshTable];
 }
 - (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender{

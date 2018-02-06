@@ -94,7 +94,11 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     //设定时间格式,这里可以设置成自己需要的格式
     [dateFormatter setDateFormat:@"HH:mm"];
-    ((ListImgTableViewCellModel*)self.listItems[0][2]).descDetail = [NSString stringWithFormat:@"%@ - %@",[dateFormatter stringFromDate:_fromTime],[dateFormatter stringFromDate:_toTime]];
+    NSString *strToTime = [dateFormatter stringFromDate:_toTime];
+//    if([strToTime isEqualToString:@"00:00"]){
+//        strToTime = @"24:00";
+//    }
+    ((ListImgTableViewCellModel*)self.listItems[0][2]).descDetail = [NSString stringWithFormat:@"%@ - %@",[dateFormatter stringFromDate:_fromTime],strToTime];
 }
 //-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 //{
