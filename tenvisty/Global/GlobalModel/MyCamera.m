@@ -825,15 +825,17 @@
 
 -(CGFloat)videoRatio{
     if(!_vRatio){
-        _vRatio = [GBase getCameraVideoRatio:self];
+        _vRatio = [GBase getCameraVideoRatio:(BaseCamera*)self];
     }
     return _vRatio;
 }
 -(void)setVideoRatio:(CGFloat)videoRatio{
     _vRatio = videoRatio;
-    [GBase setCameraVideoRatio:self ratio:videoRatio];
+    [GBase setCameraVideoRatio:(BaseCamera*)self ratio:videoRatio];
 }
-
+-(BOOL)getCommandFunction:(int)cmd{
+    return YES;
+}
 
 
 @end

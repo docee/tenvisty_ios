@@ -12,6 +12,7 @@
 #import "TimeZone.h"
 #import "newTimeZone.h"
 #import "DeviceInfoExt.h"
+#import "TimeParam.h"
 
 @interface HichipCamera : HiCamera<BaseCameraDelegate,BaseCameraProtocol>
 
@@ -21,5 +22,7 @@
 @property (nonatomic,strong) newTimeZone* zkGmTimeZone;//20170801
 @property (nonatomic,strong) BaseCamera *baseCamera;
 @property (nonatomic, strong)  DeviceInfoExt *deviceInfoExt;
+@property (nonatomic, strong)  TimeParam *deviceLoginTime;
+
 - (BOOL)isGoke;
 @end

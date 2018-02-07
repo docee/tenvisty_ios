@@ -39,7 +39,7 @@
 }
 
 - (IBAction)save:(id)sender {
-    NSString *nickName = [self getRowValue:1 section:0];
+    NSString *nickName = [self getRowValue:0 section:0];
     // 用于过滤空格和Tab换行符
     NSCharacterSet *characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     nickName = [nickName stringByTrimmingCharactersInSet:characterSet];

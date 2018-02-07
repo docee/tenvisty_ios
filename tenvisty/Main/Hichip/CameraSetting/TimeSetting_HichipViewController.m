@@ -212,7 +212,8 @@
         case HI_P2P_SET_TIME_PARAM:{
             
             if(size >= 0){
-                [self getTime];
+                //内部处理， 在设置完时间后自动获取时间
+                //[self getTime];
             }
             else{
                 [[iToast makeText:LOCALSTR(@"sync failed")] show];

@@ -304,4 +304,7 @@
 - (void)syncWithPhoneTime{
     [self.orginCamera syncWithPhoneTime];
 }
+-(BOOL)getCommandFunction:(int)cmd{
+    return [self.orginCamera getCommandFunction:cmd];
+}
 @end

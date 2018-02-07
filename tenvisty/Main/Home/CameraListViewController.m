@@ -100,7 +100,13 @@
 }
 
 - (IBAction)go2EventList:(UIButton*)sender {
-    [self performSegueWithIdentifier:@"CameraList2EventList" sender:sender];
+    BaseCamera *camera = [GBase getCamera:sender.tag];
+    NSString *storyboardName = [self getHomeStoryboardName:camera];
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_eventlist"];  //test2为viewcontroller的StoryboardId
+    test2obj.camera = camera;
+    [self.navigationController pushViewController:test2obj animated:YES];
+    //[self performSegueWithIdentifier:@"CameraList2EventList" sender:sender];
 }
 
 
@@ -261,6 +267,9 @@
 }
 -(NSString*)getSettingStoryboardName:(BaseCamera*)camera{
     return camera.p2pType == P2P_Hichip?@"CameraSetting_Hichip":@"CameraSetting";
+}
+-(NSString*)getHomeStoryboardName:(BaseCamera*)camera{
+    return camera.p2pType == P2P_Hichip?@"Home_Hichip":@"Home";
 }
 -(void)showChangePasswordStrict:(BaseCamera*)camera{
     if(!isShowingModifyPassword){

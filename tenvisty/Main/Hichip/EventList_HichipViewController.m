@@ -8,15 +8,17 @@
 
 #define SEARCHEVENT_WAIT_TIMEOUT 18
 
-#import "EventListViewController.h"
+#import "EventList_HichipViewController.h"
 #import "EventItemTableViewCell.h"
 #import "Event.h"
 #import "EventCustomSearchSource.h"
-#import "PlaybackViewController.h"
-#import "EventSearchCustomViewController.h"
+#import "Playback_HichipViewController.h"
+#import "EventSearchCustom_HichipViewController.h"
+#import "ListReq.h"
+#import "HichipCamera.h"
+#import "TimeZoneModel.h"
 
-@interface EventListViewController ()<EventCustomSearchDelegate>{
-    BOOL isSearchingEvent;
+@interface EventList_HichipViewController ()<EventCustomSearchDelegate>{
     BOOL isSearchingTimeout;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture_outerView;
@@ -29,11 +31,11 @@
 @property (nonatomic,strong) NSMutableArray *event_list;
 @property (nonatomic,strong) EventCustomSearchSource *searchMenu;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
-@property (nonatomic,strong) NSDate *toDate;
-@property (nonatomic,strong) NSDate *fromDate;
+@property (nonatomic,strong) ListReq *listReq;
+@property (nonatomic,strong) HichipCamera *originCamera;
 @end
 
-@implementation EventListViewController
+@implementation EventList_HichipViewController
 
 
 -(EventCustomSearchSource*)searchMenu{
@@ -42,7 +44,12 @@
     }
     return _searchMenu;
 }
-
+- (ListReq *)listReq {
+    if (!_listReq) {
+        _listReq = [[ListReq alloc] init];
+    }
+    return _listReq;
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableview reloadData];
@@ -58,7 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.originCamera = (HichipCamera*)self.camera.orginCamera;
     [_labCurrentEventDate.superview setHidden:YES];
     [self.btnSelectSearchTime setBackgroundImage:[UIImage imageWithColor:Color_Gray_alpha wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
     self.searchMenu.delegate = self;
@@ -70,8 +77,8 @@
 -(dispatch_block_t)timeoutTask{
     if(_timeoutTask == nil){
         _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
-            if(isSearchingEvent){
-                isSearchingEvent = NO;
+            if(self.listReq.isSerach){
+                self.listReq.isSerach = NO;
                 isSearchingTimeout = YES;
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 [[[iToast makeText:LOCALSTR(@"Connection timeout, please try again.")] setDuration:1] show];
@@ -90,7 +97,7 @@
 }
 
 - (IBAction)clickSearchMenu:(id)sender {
-    if(!isSearchingEvent){
+    if(!self.listReq.isSerach){
         BOOL isShow = [self.searchMenu toggleShow];
         [_tapGesture_outerView setEnabled:isShow];
     }
@@ -193,11 +200,9 @@
 //其他界面返回到此界面调用的方法
 - (IBAction)EventListViewController1UnwindSegue:(UIStoryboardSegue *)unwindSegue {
     if([unwindSegue.identifier isEqualToString:@"EventSearchCustomBack2EventList"]){
-        EventSearchCustomViewController * controller = (EventSearchCustomViewController*) unwindSegue.sourceViewController;
+        EventSearchCustom_HichipViewController * controller = (EventSearchCustom_HichipViewController*) unwindSegue.sourceViewController;
         if(controller.dateTo&&controller.dateFrom){
-            _fromDate = controller.dateFrom;
-            _toDate = controller.dateTo;
-            [self searchEventFrom:_fromDate To:_toDate];
+            [self searchEventFrom:[controller.dateFrom timeIntervalSince1970] To:[controller.dateTo timeIntervalSince1970]];
         }
     }
 }
@@ -234,8 +239,8 @@
     }
 }
 - (IBAction)clickEventTypeChange:(UISegmentedControl *)sender {
-    if(!isSearchingEvent){
-        [self searchEventFrom:_fromDate To:_toDate];
+    if(!self.listReq.isSerach){
+        [self searchEventFrom:self.listReq.startTime To:self.listReq.stopTime];
     }
     else{
         [sender setSelectedSegmentIndex:abs((int)sender.selectedSegmentIndex - 1)];
@@ -245,18 +250,32 @@
 -(void)beginSearch{
     NSDate *now = [NSDate date];
     NSDate *from = [TwsTools zeroOfDateTime:[NSDate date]];
-    [self searchEventFrom:from To:now];
+    [self searchEventFrom:[from timeIntervalSince1970] To:[now timeIntervalSince1970]];
 }
 
-- (void)searchEventFrom:(NSDate*)from  To:(NSDate*) to {
-    if(isSearchingEvent){
+- (void)searchEventFrom:(NSTimeInterval)from  To:(NSTimeInterval) to {
+    if(self.listReq.isSerach){
         return;
     }
-    if(self.camera.cameraConnectState != CONNECTION_STATE_CONNECTED){
+    if(!self.camera.isAuthConnected){
         [[iToast makeText:LOCALSTR(@"connection dropped")] show];
         return;
     }
-    isSearchingEvent = true;
+    int cmd = HI_P2P_PB_QUERY_START_NODST;
+    // 能力集判断
+    if ([self.camera getCommandFunction:cmd]) {
+        NSLog(@"support_HI_P2P_PB_QUERY_START_NODST");
+    } else {
+        cmd = HI_P2P_PB_QUERY_START;
+        if ([self.camera getCommandFunction:cmd]) {
+            NSLog(@"support_HI_P2P_PB_QUERY_START");
+        } else {
+            NSLog(@"unsupport_HI_P2P_PB_QUERY_START");
+            return;
+        }
+    }
+    
+    self.listReq.isSerach = true;
     isSearchingTimeout = NO;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SEARCHEVENT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     [_labCurrentEventDate.superview setHidden:YES];
@@ -264,30 +283,58 @@
     //[MBProgressHUD showMessag:LOCALSTR(@"loading...") toView:self.tableview].userInteractionEnabled = YES;
     [self.event_list removeAllObjects];
     [self.tableview reloadData];
-    TUTK_STimeDay start, stop;
-    start = [Event getTimeDay:[from timeIntervalSince1970]];
-    stop = [Event getTimeDay:[to timeIntervalSince1970]];
+    
+    self.listReq.startTime = from;
+    self.listReq.stopTime = to;
+    self.listReq.isSerach = YES;
+    
+    HI_P2P_S_PB_LIST_REQ *list_req = [self.listReq model];
+    //判断摄像机是否在夏令时，在夏令时需调整搜索时间+1个小时
+    long offset = 0;
+    if(self.originCamera.zkGmTimeZone){
+        for (int i = 0; i < [TimeZoneModel getAll].count; i++) {
+            TimeZoneModel *model = [TimeZoneModel getAll][i];
+            if([model.area isEqualToString:self.originCamera.zkGmTimeZone.timeName]){
+                offset = model.timezone * 60 * 60;
+                break;
+            }
+        }
+    }
+    else if(self.originCamera.gmTimeZone){
+        offset = self.originCamera.gmTimeZone.model->s32TimeZone * 60 *60;
+    }
+    Boolean isInDaylight = NO;
+    NSDate *dates = [NSDate date];
+    if((self.originCamera.zkGmTimeZone && self.originCamera.zkGmTimeZone.dst == 1) || (self.originCamera.gmTimeZone && self.originCamera.gmTimeZone.u32DstMode == 1))
+    {
+        NSArray *names= [NSTimeZone knownTimeZoneNames];
+        for (int i = 0; i < [names count]; i++) {
+            
+            NSTimeZone *nsTzTmp = [NSTimeZone timeZoneWithName:[names objectAtIndex:i]];
+            if([nsTzTmp isDaylightSavingTime]){
+                if([nsTzTmp secondsFromGMT] - [nsTzTmp daylightSavingTimeOffsetForDate:dates] == offset){
+                    offset += 60*60;
+                    isInDaylight = YES;
+                    break;
+                }
+            }
+        }
+    }
     
     
-    SMsgAVIoctrlListEventReq *req = (SMsgAVIoctrlListEventReq *) malloc(sizeof(SMsgAVIoctrlListEventReq));
-    memset(req, 0, sizeof(SMsgAVIoctrlListEventReq));
-    
-    req->channel = 0;
-    req->event = _swich_eventType.selectedSegmentIndex == 0?1:0;
-    req->stStartTime = start;
-    req->stEndTime = stop;
-    
-    //[searchButton setEnabled:NO];
-    [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_LISTEVENT_REQ Data:(char *)req DataSize:sizeof(SMsgAVIoctrlListEventReq)];
-    
-    free(req);
-    NSLog(@"load TF card video list...%d/%d/%d -> %d/%d/%d", start.year, start.month, start.day,stop.year, stop.month, stop.day);
-    _fromDate = from;
-    _toDate = to;
+    if(isInDaylight){
+        list_req->sStartTime = [self.listReq getTimeDay:self.listReq.startTime + 60*60];
+        list_req->sEndtime = [self.listReq getTimeDay:self.listReq.stopTime+60*60];
+    }
+    [self.camera sendIOCtrlToChannel:0 Type:cmd Data:(char*)list_req DataSize:sizeof(HI_P2P_S_PB_LIST_REQ)];
+    NSLog(@"load TF card video list...%d/%d/%d -> %d/%d/%d",list_req->sStartTime.year, list_req->sStartTime.month, list_req->sStartTime.day,list_req->sEndtime.year, list_req->sEndtime.month, list_req->sEndtime.day);
+    free(list_req);
+    list_req = nil;
   
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd HH:mm"];
-    _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:_fromDate],[formatter stringFromDate:_toDate]);
+    
+    _labSearchTime.text = FORMAT(@"%@ - %@",[formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.listReq.startTime]],[formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.listReq.stopTime]]);
     //dropboxVideo.delegate = self;
 }
 
@@ -295,16 +342,15 @@
 #pragma mark - MyCameraDelegate Methods
 - (void)camera:(BaseCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char *)data DataSize:(NSInteger)size
 {
-    if (type == IOTYPE_USER_IPCAM_LISTEVENT_RESP) {
-        
-        SMsgAVIoctrlListEventResp *s = (SMsgAVIoctrlListEventResp *)data ;
+    if (type == HI_P2P_PB_QUERY_START_NODST || type == HI_P2P_PB_QUERY_START) {
+        HI_P2P_S_PB_LIST_RESP* s = (HI_P2P_S_PB_LIST_RESP*)data;;
         
         if (s->count > 0) {
             for (int i = 0; i < s->count; i++) {
-                SAvEvent saEvt = s->stEvent[i];
-                double timeInMillis = [self getTimeInMillis:saEvt.stTime];
-                NSLog(@"<<< Get Event(%d): %d/%d/%d %d:%2d:%2d (%f)", saEvt.status, saEvt.stTime.year, saEvt.stTime.month, saEvt.stTime.day, (int)saEvt.stTime.hour, (int)saEvt.stTime.minute, (int)saEvt.stTime.second, timeInMillis);
-                Event *evt = [[Event alloc] initWithEventType:saEvt.event EventTime:[self getTimeInMillis:saEvt.stTime] EventStatus:saEvt.status];
+                HI_P2P_FILE_INFO saEvt = s->sFileInfo[i];
+                double timeInMillis = [self getTimeInMillis:saEvt.sStartTime];
+                NSLog(@"<<< Get Event(%d): %d/%d/%d %d:%2d:%2d (%f)", 0, saEvt.sStartTime.year, saEvt.sStartTime.month, saEvt.sStartTime.day, (int)saEvt.sStartTime.hour, (int)saEvt.sStartTime.minute, (int)saEvt.sStartTime.second, timeInMillis);
+                Event *evt = [[Event alloc] initWithEventType:saEvt.EventType EventStartTime:[self getTimeInMillis:saEvt.sStartTime] EventEndTime:[self getTimeInMillis:saEvt.sEndTime] EventStatus:0];
                 [self.event_list addObject:evt];
             }
         }
@@ -322,7 +368,7 @@
 //                    e1.isDateFirstItem = NO;
 //                }
 //            }
-            isSearchingEvent = false;
+            self.listReq.isSerach = false;
             [self.tableview reloadData];
             if(_timeoutTask != nil){
                 dispatch_block_cancel(_timeoutTask);
@@ -333,7 +379,7 @@
     }
 }
 
-- (double)getTimeInMillis:(TUTK_STimeDay)time {
+- (double)getTimeInMillis:(STimeDay)time {
     double result;
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     
@@ -346,8 +392,8 @@
     [comps setSecond:time.second];
     
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [cal setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    [cal setLocale:[NSLocale currentLocale]];
+//    [cal setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+//    [cal setLocale:[NSLocale currentLocale]];
     NSDate *date = [cal dateFromComponents:comps];
     result = [date timeIntervalSince1970];
     return result;
@@ -373,7 +419,7 @@
     else if (index == 3) {
         from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24 * 7)];
     }
-    [self searchEventFrom:from To:now];
+    [self searchEventFrom:[from timeIntervalSince1970] To:[now timeIntervalSince1970]];
     [self.searchMenu toggleShow];
 }
 
@@ -393,8 +439,8 @@
             for(UIView *view in cell.contentView.subviews){
                 if([view isKindOfClass:[UILabel class]]){
                     UILabel *labDesc = (UILabel*)view;
-                    if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
-                         if(isSearchingEvent){
+                    if(self.camera.isAuthConnected){
+                         if(self.listReq.isSerach){
                              labDesc.text = LOCALSTR(@"loading...");
                          }
                          else if(isSearchingTimeout){
@@ -420,7 +466,7 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"EventList2Playback"]){
-        PlaybackViewController *controller = (PlaybackViewController*)segue.destinationViewController;
+        Playback_HichipViewController *controller = (Playback_HichipViewController*)segue.destinationViewController;
         controller.camera = self.camera;
         controller.evt = [self.event_list objectAtIndex:[self.tableview indexPathForSelectedRow].row];
         controller.needCreateSnapshot = [self.camera remoteRecordImage: controller.evt.eventTime type:controller.evt.eventType] == nil;
@@ -428,41 +474,11 @@
 }
 
 -(void)showCustomSearchView{
-    //UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"storyboard_view_eventsearchcustom"];
-//    controller.modalPresentationStyle = UIModalPresentationFormSheet;
-//    [self presentViewController:controller animated:YES completion:nil];
-
     
     [self performSegueWithIdentifier:@"EventList2EventSearchCustom" sender:self];
     [self.searchMenu dismiss];
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Search Event\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleAlert];
-//    UILabel *labFrom = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, alert.view.frame.size.width -10, 20)];
-//    labFrom.text = LOCALSTR(@"From");
-//    labFrom.textAlignment = NSTextAlignmentLeft;
-//    labFrom.numberOfLines = 1;
-//    labFrom.font = [UIFont fontWithName:@"Helvetica Neue" size:17];
-//
-//    UIDatePicker *datePickerFrom = [[UIDatePicker alloc] init];
-//    datePickerFrom.datePickerMode = UIDatePickerModeDateAndTime;
-//    datePickerFrom.frame = CGRectMake(0, 55, 250, 150);
-//    [alert.view addSubview:labFrom];
-//    [alert.view addSubview:datePickerFrom];
-//
-//    //[[[NSBundle mainBundle] loadNibNamed:@"EventSearchCustom" owner:self options:nil] lastObject]
-//    //datePicker.frame = CGRectMake(0, 50, Screen_Main.width*0.6, 120);
-//    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-//        //实例化一个NSDateFormatter对象
-//        //[dateFormat setDateFormat:@"yyyy-MM-dd"];//设定时间格式
-//       // NSString *dateString = [dateFormat stringFromDate:datePicker.date];
-//        //求出当天的时间字符串
-//        NSLog(@"%@",@"11");
-//    }];
-//    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) { }];
-//    [alert addAction:ok];
-//    [alert addAction:cancel];
-//    [self presentViewController:alert animated:YES completion:^{ }];
 }
+
 /*
 #pragma mark - Navigation
 

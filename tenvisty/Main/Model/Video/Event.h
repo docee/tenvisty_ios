@@ -25,13 +25,15 @@
 @property (nonatomic, retain) NSString *pathString; //cloud stroger path
 @property int eventType;
 @property long eventTime;
+@property long eventEndTime;
 @property int eventStatus;
 
 @property (nonatomic,assign) BOOL isDateFirstItem;
 @property (nonatomic,assign) NSTimeInterval dateTimeInterval;
-
++ (STimeDay)getHiTimeDay:(long)time;
 + (NSString *)getEventTypeName:(int)eventType;
-+ (STimeDay)getTimeDay:(long)time;
++ (TUTK_STimeDay)getTimeDay:(long)time;
 - (id)initWithEventType:(int)eventType EventTime:(long)eventTime EventStatus:(int)status;
+- (id)initWithEventType:(int)eventType EventStartTime:(long)startTime EventEndTime:(long)endTime EventStatus:(int)status;
 - (id)initWithEventType:(int)type EventTime:(long)time EventStatus:(int)status cloudStoragePath:(NSString *)pathString_;
 @end

@@ -10,7 +10,6 @@
 #import "HichipCamera.h"
 #import "CameraIOSessionProtocol.h"
 #import "HiPushSDK.h"
-#import "TimeParam.h"
 #import "TimeZoneModel.h"
 
 @interface HichipCamera()<CameraIOSessionProtocol,OnPushResult>{
@@ -97,14 +96,14 @@
 }
 
 -(BOOL)isConnecting{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_UIDERROR;
 }
 -(BOOL)isSessionConnecting{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || self.getConnectState == CAMERA_CONNECTION_STATE_UIDERROR;
 }
 
 -(BOOL)isDisconnect{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_UIDERROR;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED ;
 }
 
 -(BOOL)isWrongPassword{
@@ -344,6 +343,7 @@
         }
     }
     if(self.isAuthConnected){
+        
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
                 [self.cameraDelegate camera:self.baseCamera _didChangeChannelStatus:0 ChannelStatus:status];
@@ -361,14 +361,16 @@
     
     
     
-    if(status == CAMERA_CONNECTION_STATE_LOGIN) {
+    if(self.isAuthConnected) {
+        if([super getCommandFunction:HI_P2P_GET_TIME_ZONE]){
+            [self sendIOCtrl:HI_P2P_GET_TIME_ZONE Data:(char*)nil Size:0];
+        }
+        else if([super getCommandFunction:HI_P2P_GET_TIME_ZONE_EXT]){
+            [self sendIOCtrl:HI_P2P_GET_TIME_ZONE_EXT Data:(char*)nil Size:0];
+        }
+        [self sendIOCtrl:HI_P2P_GET_TIME_PARAM Data:(char*)nil Size:0];
+        [self sendIOCtrl:HI_P2P_GET_DEV_INFO_EXT Data:(char*)nil Size:0];
         
-        //[self sendIOCtrl:HI_P2P_GET_TIME_ZONE Data:(char *)nil Size:0];
-        //同步时间
-        [self sendIOCtrl:HI_P2P_GET_TIME_PARAM Data:nil Size:0];
-        //        ListReq *listReq = [[ListReq alloc] init];
-        //        [self request:HI_P2P_PB_QUERY_START dson:[self dic:listReq]];
-        // 链接成功后，发送推送服务器地址, 检测是否开启信鸽推送，开启时向服务器注册subID
         if ([self getCommandFunction:HI_P2P_ALARM_ADDRESS_SET]) {//如果该相机支持设置服务器地址
             [self sendPushServerAddress:camera.uid];
         }
@@ -384,12 +386,20 @@
         case HI_P2P_GET_TIME_ZONE_EXT:{
             if(size >= sizeof(HI_P2P_S_TIME_ZONE_EXT)){
                 self.zkGmTimeZone = [[newTimeZone alloc] initWithData:data withSize:size];
+                if(self.deviceLoginTime != nil && self.deviceLoginTime.u32Year <= 1970){
+                    self.deviceLoginTime = nil;
+                    [self syncWithPhoneTime];
+                }
             }
         }
             break;
         case HI_P2P_GET_TIME_ZONE:{
             if(size >= sizeof(HI_P2P_S_TIME_ZONE)){
                 self.gmTimeZone = [[TimeZone alloc] initWithData:data size:size];
+                if(self.deviceLoginTime != nil && self.deviceLoginTime.u32Year <= 1970){
+                    self.deviceLoginTime = nil;
+                    [self syncWithPhoneTime];
+                }
             }
         }
             break;
@@ -400,6 +410,19 @@
         }
             break;
         case HI_P2P_GET_TIME_PARAM:
+            if(size >= sizeof(HI_P2P_GET_TIME_PARAM)){
+                self.deviceLoginTime = [[TimeParam alloc] initWithData:data size:size];
+                if(self.deviceLoginTime.u32Year <= 1970){
+                    if(self.gmTimeZone || self.zkGmTimeZone){
+                        self.deviceLoginTime = nil;
+                        [self syncWithPhoneTime];
+                    }
+                }
+            }
+            break;
+        case HI_P2P_SET_TIME_PARAM:{
+            [self sendIOCtrl:HI_P2P_GET_TIME_PARAM Data:(char*)nil Size:0];
+        }
             break;
         case HI_P2P_SET_REBOOT:{
             if(size >= 0){
@@ -799,6 +822,7 @@
             TimeZoneModel *model = [TimeZoneModel getAll][i];
             if([model.area isEqualToString:self.zkGmTimeZone.timeName]){
                 offset = model.timezone * 60 * 60;
+                break;
             }
         }
     }
@@ -838,5 +862,7 @@
     p = nil;
 }
 
-
+-(BOOL)getCommandFunction:(int)cmd{
+    return [super getCommandFunction:cmd];
+}
 @end

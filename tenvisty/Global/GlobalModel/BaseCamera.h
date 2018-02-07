@@ -70,6 +70,7 @@
 -(void)closePush:(void (^)(NSInteger code))successlock;
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time;
 - (void)syncWithPhoneTime;
+-(BOOL)getCommandFunction:(int)cmd;
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>

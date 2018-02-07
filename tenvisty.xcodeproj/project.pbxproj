@@ -190,6 +190,15 @@
 		89AD33C42029B9AF00B4520A /* SetDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C22029B9AF00B4520A /* SetDownload.m */; };
 		89AD33CA2029B9DE00B4520A /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C72029B9DE00B4520A /* DeviceInfo.m */; };
 		89AD33CB2029B9DE00B4520A /* NetParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33C92029B9DE00B4520A /* NetParam.m */; };
+		89AD33D0202A925700B4520A /* EventList_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33CD202A925600B4520A /* EventList_HichipViewController.m */; };
+		89AD33D1202A925700B4520A /* Playback_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33CF202A925600B4520A /* Playback_HichipViewController.m */; };
+		89AD33D4202A937500B4520A /* EventSearchCustom_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33D3202A937500B4520A /* EventSearchCustom_HichipViewController.m */; };
+		89AD33D8202A99B800B4520A /* ListReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33D7202A99B800B4520A /* ListReq.m */; };
+		89AD33DB202ACF6B00B4520A /* PlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33D9202ACF6A00B4520A /* PlayView.m */; };
+		89AD33DE202AD08D00B4520A /* ZKGangTimeBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33DC202AD08C00B4520A /* ZKGangTimeBar.m */; };
+		89AD33E0202AE26700B4520A /* VideoProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89AD33DF202AE26700B4520A /* VideoProgressBar.xib */; };
+		89AD33E3202AE6B600B4520A /* VideoProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33E2202AE6B600B4520A /* VideoProgressBarView.m */; };
+		89AD33E6202AF76100B4520A /* VideoProgressBarContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AD33E5202AF76100B4520A /* VideoProgressBarContentView.m */; };
 		89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */; };
 		89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D2B4ED1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m */; };
 		89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D811151FF63FEB00679B39 /* AppVersionController.m */; };
@@ -611,6 +620,23 @@
 		89AD33C72029B9DE00B4520A /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		89AD33C82029B9DE00B4520A /* NetParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetParam.h; sourceTree = "<group>"; };
 		89AD33C92029B9DE00B4520A /* NetParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetParam.m; sourceTree = "<group>"; };
+		89AD33CC202A925500B4520A /* EventList_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventList_HichipViewController.h; sourceTree = "<group>"; };
+		89AD33CD202A925600B4520A /* EventList_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventList_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33CE202A925600B4520A /* Playback_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playback_HichipViewController.h; sourceTree = "<group>"; };
+		89AD33CF202A925600B4520A /* Playback_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playback_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33D2202A937500B4520A /* EventSearchCustom_HichipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSearchCustom_HichipViewController.h; sourceTree = "<group>"; };
+		89AD33D3202A937500B4520A /* EventSearchCustom_HichipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSearchCustom_HichipViewController.m; sourceTree = "<group>"; };
+		89AD33D6202A99B800B4520A /* ListReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListReq.h; sourceTree = "<group>"; };
+		89AD33D7202A99B800B4520A /* ListReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListReq.m; sourceTree = "<group>"; };
+		89AD33D9202ACF6A00B4520A /* PlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayView.m; sourceTree = "<group>"; };
+		89AD33DA202ACF6B00B4520A /* PlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayView.h; sourceTree = "<group>"; };
+		89AD33DC202AD08C00B4520A /* ZKGangTimeBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKGangTimeBar.m; sourceTree = "<group>"; };
+		89AD33DD202AD08D00B4520A /* ZKGangTimeBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKGangTimeBar.h; sourceTree = "<group>"; };
+		89AD33DF202AE26700B4520A /* VideoProgressBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoProgressBar.xib; sourceTree = "<group>"; };
+		89AD33E1202AE6B600B4520A /* VideoProgressBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoProgressBarView.h; sourceTree = "<group>"; };
+		89AD33E2202AE6B600B4520A /* VideoProgressBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoProgressBarView.m; sourceTree = "<group>"; };
+		89AD33E4202AF76100B4520A /* VideoProgressBarContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoProgressBarContentView.h; sourceTree = "<group>"; };
+		89AD33E5202AF76100B4520A /* VideoProgressBarContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoProgressBarContentView.m; sourceTree = "<group>"; };
 		89D2B4E61FDF804A00639DD3 /* AddDeviceWirelessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessViewController.h; sourceTree = "<group>"; };
 		89D2B4E71FDF804A00639DD3 /* AddDeviceWirelessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceWirelessViewController.m; sourceTree = "<group>"; };
 		89D2B4EC1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceWirelessSettingViewController.h; sourceTree = "<group>"; };
@@ -1213,6 +1239,11 @@
 				89545EBC2022B99700151E90 /* TwsAutoKeyboardTextField.m */,
 				89545EC12022F5E300151E90 /* TwsAutoKeyboardTextView.h */,
 				89545EC22022F5E300151E90 /* TwsAutoKeyboardTextView.m */,
+				89AD33DF202AE26700B4520A /* VideoProgressBar.xib */,
+				89AD33E1202AE6B600B4520A /* VideoProgressBarView.h */,
+				89AD33E2202AE6B600B4520A /* VideoProgressBarView.m */,
+				89AD33E4202AF76100B4520A /* VideoProgressBarContentView.h */,
+				89AD33E5202AF76100B4520A /* VideoProgressBarContentView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1368,6 +1399,7 @@
 		895141D51FE7780100905355 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89AD33D5202A99B800B4520A /* ListReq */,
 				89AD33C52029B9DE00B4520A /* DeviceInformation */,
 				89AD33BE2029B9AF00B4520A /* System */,
 				89AD33BA2029B1F900B4520A /* SDCard */,
@@ -1389,6 +1421,10 @@
 		895141D61FE7780100905355 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				89AD33DD202AD08D00B4520A /* ZKGangTimeBar.h */,
+				89AD33DC202AD08C00B4520A /* ZKGangTimeBar.m */,
+				89AD33DA202ACF6B00B4520A /* PlayView.h */,
+				89AD33D9202ACF6A00B4520A /* PlayView.m */,
 				89A7E93D1FED108200F12BFF /* Event.h */,
 				89A7E93E1FED108200F12BFF /* Event.m */,
 				895141D71FE7780100905355 /* LocalVideoInfo.h */,
@@ -1625,6 +1661,12 @@
 		89A37C8A201726E700A6F0CD /* Hichip */ = {
 			isa = PBXGroup;
 			children = (
+				89AD33D2202A937500B4520A /* EventSearchCustom_HichipViewController.h */,
+				89AD33D3202A937500B4520A /* EventSearchCustom_HichipViewController.m */,
+				89AD33CC202A925500B4520A /* EventList_HichipViewController.h */,
+				89AD33CD202A925600B4520A /* EventList_HichipViewController.m */,
+				89AD33CE202A925600B4520A /* Playback_HichipViewController.h */,
+				89AD33CF202A925600B4520A /* Playback_HichipViewController.m */,
 				89241243202062CD001F60E8 /* CameraSetting */,
 				89A37C8F2017279F00A6F0CD /* LiveView_HichipController.h */,
 				89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */,
@@ -1726,6 +1768,15 @@
 				89AD33C92029B9DE00B4520A /* NetParam.m */,
 			);
 			path = DeviceInformation;
+			sourceTree = "<group>";
+		};
+		89AD33D5202A99B800B4520A /* ListReq */ = {
+			isa = PBXGroup;
+			children = (
+				89AD33D6202A99B800B4520A /* ListReq.h */,
+				89AD33D7202A99B800B4520A /* ListReq.m */,
+			);
+			path = ListReq;
 			sourceTree = "<group>";
 		};
 		89D811111FF63FEB00679B39 /* About */ = {
@@ -2584,6 +2635,7 @@
 				892CE0C71FD126C300942E28 /* TextFieldTableViewCell.xib in Resources */,
 				8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */,
 				892CE0CD1FD1271300942E28 /* TextFieldDisableTableViewCell.xib in Resources */,
+				89AD33E0202AE26700B4520A /* VideoProgressBar.xib in Resources */,
 				89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */,
 				892ADB6B1FD6928A00BD8929 /* SwitchTableViewCell.xib in Resources */,
 			);
@@ -2596,6 +2648,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89AD33D8202A99B800B4520A /* ListReq.m in Sources */,
 				8989EC311FF2203C004989A9 /* LocalPictureInfo.m in Sources */,
 				89AD33CB2029B9DE00B4520A /* NetParam.m in Sources */,
 				ED8CA6881FD40A29005858CC /* LiveViewController.m in Sources */,
@@ -2619,6 +2672,7 @@
 				89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */,
 				89AD33BD2029B1F900B4520A /* SDCard.m in Sources */,
 				89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */,
+				89AD33D1202A925700B4520A /* Playback_HichipViewController.m in Sources */,
 				896BA3DE1FD94DC500EE31AB /* AboutListViewController.m in Sources */,
 				892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */,
 				89AD33B02029951D00B4520A /* AudioSetting_HichipViewController.m in Sources */,
@@ -2643,6 +2697,7 @@
 				8989EC391FF262CE004989A9 /* PicturesLoop.m in Sources */,
 				892ADB9A1FD8F83000BD8929 /* ImageTableViewCell.m in Sources */,
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
+				89AD33DB202ACF6B00B4520A /* PlayView.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
 				89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */,
 				89AD337B2028252000B4520A /* FTPParam.m in Sources */,
@@ -2672,6 +2727,7 @@
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
 				89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */,
 				89AD338F20283CE100B4520A /* RecAutoParam.m in Sources */,
+				89AD33D4202A937500B4520A /* EventSearchCustom_HichipViewController.m in Sources */,
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
 				892ADB711FD69A2E00BD8929 /* SensSettingViewController.m in Sources */,
 				ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */,
@@ -2695,6 +2751,7 @@
 				89AD339C2029567300B4520A /* ModelWhiteLight.m in Sources */,
 				890B408A1FB02F1A00C1061A /* ViewController.m in Sources */,
 				892CE0B81FD1013100942E28 /* TextFieldTableViewCell.m in Sources */,
+				89AD33E6202AF76100B4520A /* VideoProgressBarContentView.m in Sources */,
 				89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */,
 				898D8BAF1FE0F66600062F04 /* FMDatabasePool.m in Sources */,
 				890B40941FB02FD000C1061A /* SelectTime.m in Sources */,
@@ -2703,11 +2760,14 @@
 				898D8BAE1FE0F66600062F04 /* FMDatabaseAdditions.m in Sources */,
 				89AD338E20283CE100B4520A /* QuantumTime.m in Sources */,
 				89545EBA2021D1FE00151E90 /* MutilTextFieldTableViewCell.m in Sources */,
+				89AD33E3202AE6B600B4520A /* VideoProgressBarView.m in Sources */,
 				89AD339220285C4A00B4520A /* SelectItemDetailTableViewCell.m in Sources */,
+				89AD33DE202AD08D00B4520A /* ZKGangTimeBar.m in Sources */,
 				89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */,
 				892CE0DE1FD13E6300942E28 /* AddCameraViewController.m in Sources */,
 				89545EB52021AD0400151E90 /* EmailSetting_HichipViewController.m in Sources */,
 				896BA3D31FD926D400EE31AB /* ImageCollectionTableViewCell.m in Sources */,
+				89AD33D0202A925700B4520A /* EventList_HichipViewController.m in Sources */,
 				892ADB7C1FD6A8B000BD8929 /* OtherSettingViewController.m in Sources */,
 				892CE0B71FD1013100942E28 /* PasswordFieldTableViewCell.m in Sources */,
 				890B46AB1FB034C000C1061A /* MyCamera.m in Sources */,

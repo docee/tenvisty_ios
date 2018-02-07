@@ -828,7 +828,7 @@ typedef struct
     HI_U8  minute;
     HI_U8 second;
     HI_U8  wday;        // Sunday = 0, Monday = 1, .....
-}HI_STimeDay;
+}STimeDay;
 
 typedef enum
 {

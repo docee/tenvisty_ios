@@ -742,7 +742,7 @@ typedef struct
 	unsigned char hour;     // The number of hours past midnight, in the range 0 to 23.
 	unsigned char minute;   // The number of minutes after the hour, in the range 0 to 59.
 	unsigned char second;   // The number of seconds after the minute, in the range 0 to 59.
-}STimeDay;
+}TUTK_STimeDay;
 
 /*
 IOTYPE_USER_IPCAM_LISTEVENT_REQ			= 0x0318,
@@ -751,8 +751,8 @@ IOTYPE_USER_IPCAM_LISTEVENT_REQ			= 0x0318,
 typedef struct
 {
 	unsigned int channel; 		// Camera Index
-	STimeDay stStartTime; 		// Search event from ...
-	STimeDay stEndTime;	  		// ... to (search event)
+	TUTK_STimeDay stStartTime; 		// Search event from ...
+	TUTK_STimeDay stEndTime;	  		// ... to (search event)
 	unsigned char event;  		// event type, refer to ENUM_EVENTTYPE
 	unsigned char status; 		// 0x00: Recording file exists, Event unreaded
 								// 0x01: Recording file exists, Event readed
@@ -763,7 +763,7 @@ typedef struct
 
 typedef struct
 {
-	STimeDay stTime;
+	TUTK_STimeDay stTime;
 	unsigned char event;
 	unsigned char status;	// 0x00: Recording file exists, Event unreaded
 							// 0x01: Recording file exists, Event readed
@@ -797,7 +797,7 @@ typedef struct
 	unsigned int channel;	// Camera Index
 	unsigned int command;	// play record command. refer to ENUM_PLAYCONTROL
 	unsigned int Param;		// command param, that the user defined
-	STimeDay stTimeDay;		// Event time from ListEvent
+	TUTK_STimeDay stTimeDay;		// Event time from ListEvent
 	unsigned char reserved[4];
 } SMsgAVIoctrlPlayRecord;
 
@@ -840,7 +840,7 @@ IOTYPE_USER_IPCAM_EVENT_REPORT	= 0x1FFF,	// Device Event Report Msg
  */
 typedef struct
 {
-	STimeDay stTime;
+	TUTK_STimeDay stTime;
 	unsigned long time; 	// UTC Time
 	unsigned int  channel; 	// Camera Index
 	unsigned int  event; 	// Event Type
@@ -1413,7 +1413,7 @@ typedef struct
 {
     //0-格林威治时间，1-本地时间，作为设置时，目前不支持本地时间设置设备时间
     int TimeType;
-    STimeDay TimeInfo;
+    TUTK_STimeDay TimeInfo;
     int AdjustFlg;    //Get: 是否已经校过时，用于测试两台设备时间相差的问题。
     //Set: 0: 不校时， 1：校时
     int NtpEnable;    //是否开启网络自动校时

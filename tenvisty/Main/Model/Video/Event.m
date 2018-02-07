@@ -63,9 +63,9 @@
 }
 
 
-+ (STimeDay)getTimeDay:(long)time {
++ (TUTK_STimeDay)getTimeDay:(long)time {
     
-    STimeDay result;
+    TUTK_STimeDay result;
     
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:time];    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];    
@@ -95,7 +95,40 @@
     
     return result;
 }
-
++ (STimeDay)getHiTimeDay:(long)time {
+    
+    STimeDay result;
+    
+    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:time];
+    NSCalendar *myCal =[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponents = [myCal componentsInTimeZone:[NSTimeZone systemTimeZone] fromDate:date];
+    //NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    //[dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    // [dateFormatter setDateFormat:@"yyyy"];
+    result.year = [dateComponents year];// [[dateFormatter stringFromDate:date] intValue];
+    
+    //[dateFormatter setDateFormat:@"MM"];
+    result.month = [dateComponents month];//[[dateFormatter stringFromDate:date] intValue];
+    
+    //[dateFormatter setDateFormat:@"dd"];
+    result.day = [dateComponents day];//[[dateFormatter stringFromDate:date] intValue];
+    
+    // [dateFormatter setDateFormat:@"e"];
+    result.wday = [dateComponents weekday];//[[dateFormatter stringFromDate:date] intValue];
+    
+    //[dateFormatter setDateFormat:@"HH"];
+    result.hour = [dateComponents hour];//[[dateFormatter stringFromDate:date] intValue];
+    
+    //[dateFormatter setDateFormat:@"mm"];
+    result.minute = [dateComponents minute];//[[dateFormatter stringFromDate:date] intValue];
+    
+    //[dateFormatter setDateFormat:@"ss"];
+    result.second = [dateComponents second];//[[dateFormatter stringFromDate:date] intValue];
+    
+    return result;
+}
 
 // return a new autoreleased UUID string
 - (NSString *)generateUuidString
@@ -127,6 +160,24 @@
         self.eventTime = time;
         self.eventStatus = status;
         self.dateTimeInterval = [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:time]];
+        
+    }
+    
+    return self;
+}
+
+
+- (id)initWithEventType:(int)eventType EventStartTime:(long)startTime EventEndTime:(long)endTime EventStatus:(int)status{
+    self = [super init];
+    
+    if (self) {
+        
+        self.UUID = [self generateUuidString];
+        self.eventType = eventType;
+        self.eventTime = startTime;
+        self.eventEndTime = endTime;
+        self.eventStatus = status;
+        self.dateTimeInterval = [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:startTime]];
         
     }
     
