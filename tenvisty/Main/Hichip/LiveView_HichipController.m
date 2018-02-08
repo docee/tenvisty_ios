@@ -223,18 +223,19 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self.camera saveImage:[hiCamera getSnapshot]];
+    [self.camera stopVideo];
     if(isRecording){
         [self stopRecord];
     }
-    [self.camera saveImage:[hiCamera getSnapshot]];
-    [self.camera stopVideoAsync:^{
-        if(isTalking){
-            [self.camera stopSpeak];
-        }
-        if(isListening){
-            [self.camera stopAudio];
-        }
-    }];
+//    [self.camera stopVideoAsync:^{
+//        if(isTalking){
+//            [self.camera stopSpeak];
+//        }
+//        if(isListening){
+//            [self.camera stopAudio];
+//        }
+//    }];
     // 延时0.5s后执行，确保所有线程关闭完成
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [hiCamera RemImgview];
@@ -682,6 +683,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [_viewLoading setHidden:YES];
+            [hiCamera SetImgview:_videoMonitor];
             if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
                 [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
                 [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
