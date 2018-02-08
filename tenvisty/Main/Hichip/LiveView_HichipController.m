@@ -156,35 +156,32 @@
     //set
     if(sender.tag == 0){
         if(_viewPreset.tag > 0){
-            SMsgAVIoctrlSetPointReq *req = malloc(sizeof(SMsgAVIoctrlSetPointReq));
-            NSString *desc = [NSString stringWithFormat:@"preset%d",(int)_viewPreset.tag];
-            memset(req, 0, sizeof(SMsgAVIoctrlSetPointReq));
-            memcpy(req->Desc,[desc UTF8String], desc.length);
-            req->BitID = (int)_viewPreset.tag;
-            [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetPointReq)];
-            free(req);
+            [self presetWithNumber:(int)_viewPreset.tag action:HI_P2P_PTZ_PRESET_ACT_CALL];
         }
     }
     //call
     else if(sender.tag == 1){
         if(_viewPreset.tag >= 0){
-            SMsgAVIoctrlPointOprReq *req = malloc(sizeof(SMsgAVIoctrlPointOprReq));
-            req->Type = 0;
-            req->BitID = (int)_viewPreset.tag;
-            [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_OPR_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPointOprReq)];
-            free(req);
+            [self presetWithNumber:(int)_viewPreset.tag action:HI_P2P_PTZ_PRESET_ACT_CALL];
         }
     }
-    //clear
-    else if(sender.tag == 2){
-        if(_viewPreset.tag > 0){
-            SMsgAVIoctrlPointOprReq *req = malloc(sizeof(SMsgAVIoctrlPointOprReq));
-            req->Type = 1;
-            req->BitID = (int)_viewPreset.tag;
-            [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_OPR_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPointOprReq)];
-            free(req);
-        }
+}
+
+#pragma mark - 预置位设置
+- (void)presetWithNumber:(NSInteger)number action:(NSInteger)action {
+    
+    HI_P2P_S_PTZ_PRESET* ptz = (HI_P2P_S_PTZ_PRESET*)malloc(sizeof(HI_P2P_S_PTZ_PRESET));
+    ptz->u32Channel = 0;
+    ptz->u32Number = (HI_U32)number;
+    ptz->u32Action = (HI_U32)action;
+    
+    LOG(@"ptz->u32Number:%d, ptz->u32Action:%d", ptz->u32Number, ptz->u32Action)
+    
+    if ([self.camera getCommandFunction:HI_P2P_SET_PTZ_PRESET]) {
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_PTZ_PRESET Data:(char *)ptz DataSize:sizeof(HI_P2P_S_PTZ_PRESET)];
     }
+    free(ptz);
+    ptz = nil;
 }
 
 
@@ -703,21 +700,7 @@
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
-        case IOTYPE_USER_IPCAM_SET_PRESET_POINT_RESP:
-            if(((SMsgAVIoctrlSetPointResp*)data)->result == 0){
-            }
-            else{
-                [[iToast makeText:LOCALSTR(@"Preset setting failed")] show];
-            }
-            break;
-        case IOTYPE_USER_IPCAM_OPR_PRESET_POINT_RESP:
-             if(((SMsgAVIoctrlSetPointResp*)data)->result == 0){
-                 
-            }
-            else{
-                [[iToast makeText:LOCALSTR(@"Preset calling failed")] show];
-            }
-            break;
+
             
         default:
             break;

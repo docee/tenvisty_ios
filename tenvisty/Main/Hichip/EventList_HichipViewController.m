@@ -140,7 +140,7 @@
     cell.labEventTime.text = [dateFormatter stringFromDate:date];
     [cell.labEventDate setHidden:!(indexPath.row == 0 || model.dateTimeInterval != ((Event*)[_event_list objectAtIndex:(indexPath.row-1)]).dateTimeInterval)];
     cell.labCameraName.text = self.camera.nickName;
-    cell.labEventType.text = [Event getEventTypeName:model.eventType];
+    cell.labEventType.text = [Event getHiEventTypeName:model.eventType];
     if(![cell.labEventDate isHidden]){
         cell.constraint_centerY_img_eventTypeIcon.constant = 20;
     }
@@ -169,7 +169,12 @@
     
     if(thumb == nil){
         thumb = [UIImage imageNamed:@"view_event_record"];
+        [cell.imgPlay setHidden:YES];
     }
+    else{
+        [cell.imgPlay setHidden:NO];
+    }
+    
     [cell.imgEventThumb setImage:thumb];
     return cell;
 }
@@ -240,6 +245,7 @@
 }
 - (IBAction)clickEventTypeChange:(UISegmentedControl *)sender {
     if(!self.listReq.isSerach){
+        self.listReq.eventType =  sender.selectedSegmentIndex == 0 ? EVENT_ALARM : EVENT_PLAN;
         [self searchEventFrom:self.listReq.startTime To:self.listReq.stopTime];
     }
     else{

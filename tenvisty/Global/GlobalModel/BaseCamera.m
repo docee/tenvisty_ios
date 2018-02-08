@@ -10,7 +10,10 @@
 #import "MyCamera.h"
 #import "HichipCamera.h"
 
-@interface BaseCamera()
+@interface BaseCamera(){
+    NSArray *functionFlag;
+    NSArray *defaultFunctionFlag;
+}
 @property (nonatomic, strong) id<BaseCameraProtocol> orginCamera;
 @property (nonatomic, assign) NSInteger p2pType;
 @property (nonatomic,assign) CGFloat vRatio;
@@ -25,6 +28,8 @@
 
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_{
     self = [self init];
+    
+    defaultFunctionFlag = DEFAULT_CAMERA_FUNCTION;// [NSArray arrayWithObjects:@"1",@"1",@"0",@"0",@"1", nil];
     //tutk p2p
     if(uid.length == 20){
         self.p2pType = P2P_Tutk;
@@ -252,12 +257,23 @@
 - (BOOL)stopRecordVideo {
     return [self.orginCamera stopRecordVideo];
 }
-
+//保存图片沙盒路径
+- (NSString *)remoteRecordImagePath:(NSInteger)recordId type:(NSInteger)tp{
+    NSString *fileName = [self remoteRecordThumbName:recordId type:tp];
+    NSString *filePath = [[self documents] stringByAppendingPathComponent:fileName];
+    return filePath;
+}
 - (UIImage *)remoteRecordImage:(NSInteger)time type:(NSInteger)tp{
-    return [self.orginCamera remoteRecordImage:time type:tp];
+    if ([self fileExistsAtPath:[self remoteRecordImagePath:time type:tp]]) {
+        return [UIImage imageWithContentsOfFile:[self remoteRecordImagePath:time type:tp]];
+    }
+    else {
+        return nil;
+    }
 }
 - (NSString *)remoteRecordThumbName:(NSInteger)recordId type:(NSInteger)tp{
-    return [self.orginCamera remoteRecordThumbName:recordId type:tp];
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld.jpg", self.uid,(int)tp,(long)recordId];
+    return fileName;
 }
 
 
@@ -306,5 +322,43 @@
 }
 -(BOOL)getCommandFunction:(int)cmd{
     return [self.orginCamera getCommandFunction:cmd];
+}
+
+//begin 添加摄像机功能标识位，yilu20170316
+- (NSArray *)getFunctionFlag{
+    if(functionFlag == nil || [functionFlag count] == 0){
+        return defaultFunctionFlag;
+    }
+    return functionFlag;
+}
+- (void)setFunctionFlag:(NSArray *)funcFlag{
+    functionFlag = funcFlag;
+}
+- (void)setStrFunctionFlag:(NSString *)strFuncFlag{
+    if(strFuncFlag != nil && strFuncFlag.length > 0){
+        NSMutableArray *arrFuc = [[NSMutableArray alloc] initWithCapacity:strFuncFlag.length];
+        for(int i = 0; i < strFuncFlag.length; i++){
+            [arrFuc setObject:[NSString stringWithFormat:@"%c",[strFuncFlag characterAtIndex:i]] atIndexedSubscript:i];
+        }
+        functionFlag = [arrFuc copy];
+    }
+}
+- (BOOL)hasSetFunctionFlag{
+    return functionFlag != nil && [functionFlag count] > 0;
+}
+- (BOOL)hasPTZ{
+    return [((NSString *)[[self getFunctionFlag] objectAtIndex:0]) isEqual:@"1"];
+}
+- (BOOL)hasListen{
+    return [((NSString *)[[self getFunctionFlag] objectAtIndex:1]) isEqual:@"1"];
+}
+- (BOOL)hasPreset{
+    return [((NSString *)[[self getFunctionFlag] objectAtIndex:2]) isEqual:@"1"];
+}
+- (BOOL)hasZoom{
+    return [((NSString *)[[self getFunctionFlag] objectAtIndex:3]) isEqual:@"1"];
+}
+- (BOOL)hasSDSlot{
+    return [((NSString *)[[self getFunctionFlag] objectAtIndex:4]) isEqual:@"1"];
 }
 @end

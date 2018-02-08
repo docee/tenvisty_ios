@@ -36,4 +36,6 @@
 + (void)deleteRecording:(NSString *)recordingPath thumbPath:(NSString*)thumbPath camera:(BaseCamera *)mycam;
 +(CGFloat)getCameraVideoRatio:(BaseCamera *)mycam;
 +(void)setCameraVideoRatio:(BaseCamera*)mycam ratio:(CGFloat)ratio;
++ (void)setCameraFunction:(NSString *)uid function:(NSString *)function;
++ (NSString *)getCameraFunction:(NSString *)uid;
 @end

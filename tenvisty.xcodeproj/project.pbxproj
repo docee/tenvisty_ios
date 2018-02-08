@@ -217,6 +217,7 @@
 		89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D9991FDA61DC0049F1E7 /* MBProgressHUD+Add.m */; };
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
 		89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */; };
+		89F0164F202C66F70098FE5F /* CameraFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0164D202C66F50098FE5F /* CameraFunction.m */; };
 		C6D1F8203E76628784C971FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E58AE4DC4897602AE9CF48 /* Security.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
@@ -678,6 +679,8 @@
 		89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		89EA52272019720200F2F15C /* AddCameraInputUIDTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCameraInputUIDTableViewController.h; sourceTree = "<group>"; };
 		89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCameraInputUIDTableViewController.m; sourceTree = "<group>"; };
+		89F0164D202C66F50098FE5F /* CameraFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFunction.m; sourceTree = "<group>"; };
+		89F0164E202C66F60098FE5F /* CameraFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFunction.h; sourceTree = "<group>"; };
 		8D671A28AAADB2741242114D /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
 		A259C50E727727C3F0BF3358 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = "<group>"; };
 		C4E58AE4DC4897602AE9CF48 /* Security.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<group>"; };
@@ -1055,6 +1058,8 @@
 		890B46A81FB034A400C1061A /* GlobalModel */ = {
 			isa = PBXGroup;
 			children = (
+				89F0164E202C66F60098FE5F /* CameraFunction.h */,
+				89F0164D202C66F50098FE5F /* CameraFunction.m */,
 				890B46A91FB034C000C1061A /* MyCamera.h */,
 				890B46AA1FB034C000C1061A /* MyCamera.m */,
 				892ADB561FD63CEA00BD8929 /* ListImgTableViewCellModel.h */,
@@ -2783,6 +2788,7 @@
 				89545EBD2022B99700151E90 /* TwsAutoKeyboardTextField.m in Sources */,
 				89545EA620207F6900151E90 /* WifiList.m in Sources */,
 				892CE0981FCFD32300942E28 /* ModifyCameraNameTableViewController.m in Sources */,
+				89F0164F202C66F70098FE5F /* CameraFunction.m in Sources */,
 				89AD33C32029B9AF00B4520A /* DeviceInfoExt.m in Sources */,
 				8924126A202062CD001F60E8 /* SDCard_HichipViewController.m in Sources */,
 				892ADB941FD803BC00BD8929 /* EventItemTableViewCell.m in Sources */,

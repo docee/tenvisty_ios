@@ -14,14 +14,18 @@
 #import "ZKGangTimeBar.h"
 #import "CameraIOSessionProtocol.h"
 #import "VideoProgressBarView.h"
+#import "AppDelegate.h"
+#import "UIDevice+TFDevice.h"
 
 @interface Playback_HichipViewController ()<VideoProgressBarDelegate>{
     BOOL waitResize;
     long totalSeconds;
 }
+@property (weak, nonatomic) IBOutlet UIView *toolbtns_portrait;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_height_titlebar;
+@property (weak, nonatomic) IBOutlet UIView *viewTitlebar;
 
 @property (weak, nonatomic) IBOutlet VideoProgressBarView *videoProgressbar;
-@property (nonatomic, strong) PlayView *playView;
 @property (nonatomic, assign) long playTime;
 @property (nonatomic, assign) long firstPlayTime;
 @property (nonatomic, assign) BOOL isFirstPlayTime;
@@ -29,7 +33,6 @@
 @property (nonatomic, assign) BOOL isEndingFlag;
 @property (nonatomic, assign) BOOL isDraging;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator_loading;
-@property (weak, nonatomic) IBOutlet UIButton *btnPlay;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview_video;
 @property (weak, nonatomic) IBOutlet UIImageView *monitor;
 @property (weak, nonatomic) IBOutlet UILabel *labEventType;
@@ -38,9 +41,15 @@
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
 @property (nonatomic,strong) HichipCamera *originCamera;
 @property (nonatomic,strong) ZKGangTimeBar* ZKGangBar;
+@property (nonatomic,assign) Boolean isFullscreen;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_xcenter_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_leading_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_trailing_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_ycenter_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_top_videowrapper;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_videowrapper;
 @end
 
-IB_DESIGNABLE
 @implementation Playback_HichipViewController
 
 - (void)viewDidLoad {
@@ -58,33 +67,67 @@ IB_DESIGNABLE
     }else{
         self.totalTime=[[NSString alloc] initWithFormat:@"%02d:%02d:%02d",hours,minutes,seconds];
     }
+    _isFullscreen = self.view.bounds.size.width > self.view.bounds.size.height;// self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight;
+    [self rotateOrientation:_isFullscreen?UIInterfaceOrientationLandscapeLeft:UIInterfaceOrientationPortrait];
+    
+    // Do any additional setup after loading the view.
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    //允许转成横屏
+    appDelegate.allowRotation = YES;
     //[self.view addSubview:[[NSBundle mainBundle] loadNibNamed:@"SliderTableViewCell" owner:self options:Nil][0]];
 //    [self.view addSubview:self.playView];
     [self.view addSubview:self.ZKGangBar];
     self.videoProgressbar.delegate = self;
-    [self.videoProgressbar setFrame:self.videoProgressbar.frame];
-    [self.videoProgressbar setTime:self.evt.eventTime start:self.evt.eventTime end:self.evt.eventEndTime];
+    //[self.videoProgressbar setFrame:self.videoProgressbar.frame];
+    [self.videoProgressbar setTime:self.evt.eventTime end:self.evt.eventEndTime];
     [self setup];
 }
 
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickPlayButton:(UIButton*)btn{
-    
+    if(self.isPlaying){
+        [self doTogglePausePlayback];
+    }
+    else if(btn.selected){
+        [self.videoProgressbar setTime:self.evt.eventTime end:self.evt.eventEndTime];
+        [self startPlayback];
+    }
 }
-- (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickExitButton:(UIButton*)btn{
-    
+- (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickFullScreenButton:(UIButton*)btn{
+    [self rotateOrientation:btn.selected? UIInterfaceOrientationLandscapeLeft:UIInterfaceOrientationPortrait];
+    [UIDevice switchNewOrientation:btn.selected?UIInterfaceOrientationLandscapeRight:UIInterfaceOrientationPortrait];
 }
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didEndSliderChanging:(UISlider*)sender time:(long)time{
-    
+    [UIView animateWithDuration:.35 animations:^{
+        self.ZKGangBar.alpha = 0;
+    }];
+    [self go2Pos:sender.value];
+}
+
+-(void)go2Pos:(long)time{
+    if(!_isPlaying){
+        [self doStartPlayback];
+    }
+    HI_P2P_PB_SETPOS_REQ* req = (HI_P2P_PB_SETPOS_REQ*)malloc(sizeof(HI_P2P_PB_SETPOS_REQ));
+    if(req){
+        STimeDay st = [Event getHiTimeDay:self.evt.eventTime];
+        memcpy(&req->sStartTime, &st, sizeof(STimeDay));
+        req->s32Pos = (HI_S32)time;
+        req->u32Chn = 0;
+        [self.originCamera sendIOCtrl:HI_P2P_PB_POS_SET Data:(char *)req Size:sizeof(HI_P2P_PB_SETPOS_REQ)];
+        
+        free(req);
+        req = nil;
+        //[wself pause];
+    }
 }
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didSliderChanging:(UISlider*)sender time:(long)time{
-    
+     [self youMoveDrag:sender];
 }
 
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickSlider:(UISlider*)sender time:(long)time{
-    
+    [self go2Pos:sender.value];
 }
 -(void)setup{
-    [self.playView.sliderProgress addTarget:self action:@selector(youMoveDrag:) forControlEvents:UIControlEventValueChanged];
     _isFirstPlayTime = YES;
     _isPlaying = NO;
     _isEndingFlag = NO;
@@ -100,130 +143,11 @@ IB_DESIGNABLE
     }
     waitResize = YES;
      _playTime = self.evt.eventEndTime - self.evt.eventTime;
-    _labEventType.text = [Event getEventTypeName:self.evt.eventType];
+    _labEventType.text = [Event getHiEventTypeName:self.evt.eventType];
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:self.evt.eventTime];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
     _labEventTime.text = [dateFormatter stringFromDate:date];
-    __weak typeof(self) wself = self;
-    self.playView.playBlock = ^(NSInteger type, CGFloat value) {
-        if (type == 0) {
-            if (wself.isEndingFlag) {
-                
-                STimeDay stime = [Event getHiTimeDay:wself.evt.eventTime];
-                [wself.originCamera SetImgview:wself.monitor];
-                //                [wself.camera startPlayback:&stime Monitor:wself.monitor];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [wself.originCamera startPlayback2:stime Monitor:nil];
-                });
-                
-            }
-            else {
-                if (wself.isPlaying) {
-                    
-                    //暂停时，发送暂停继续播放，做完任何操作都需要发送stop
-                    HI_P2P_S_PB_PLAY_REQ* req = (HI_P2P_S_PB_PLAY_REQ*)malloc(sizeof(HI_P2P_S_PB_PLAY_REQ));
-                    if(req){
-                        memset(req, 0, sizeof(HI_P2P_S_PB_PLAY_REQ));
-                        req->command = HI_P2P_PB_PAUSE;
-                        req->u32Chn = 0;
-                        STimeDay st = [Event getHiTimeDay:wself.evt.eventTime];
-                        memcpy(&req->sStartTime, &st, sizeof(STimeDay));
-                        [wself.originCamera sendIOCtrl:HI_P2P_PB_PLAY_CONTROL Data:(char *)req Size:sizeof(HI_P2P_S_PB_PLAY_REQ)];
-                        
-                        free(req);
-                        req = nil;
-                    }
-                    
-                }
-                else {
-                    HI_P2P_S_PB_PLAY_REQ* req = (HI_P2P_S_PB_PLAY_REQ*)malloc(sizeof(HI_P2P_S_PB_PLAY_REQ));
-                    if(req){
-                        memset(req, 0, sizeof(HI_P2P_S_PB_PLAY_REQ));
-                        req->command = HI_P2P_PB_PAUSE;
-                        req->u32Chn = 0;
-                        STimeDay st = [Event getHiTimeDay:wself.evt.eventTime];
-                        memcpy(&req->sStartTime, &st, sizeof(STimeDay));
-                        
-                        [wself.originCamera sendIOCtrl:HI_P2P_PB_PLAY_CONTROL Data:(char *)req Size:sizeof(HI_P2P_S_PB_PLAY_REQ)];
-                        
-                        free(req);
-                        req = nil;
-                    }
-                }
-                
-                wself.isPlaying = !wself.isPlaying;
-                
-            }
-            
-            
-        }
-        
-        
-        if (type == 1) {
-            [wself.originCamera stopPlayback];
-            
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [wself.originCamera RemImgview];
-                [wself.navigationController popViewControllerAnimated:YES];
-            });
-            
-            //            HI_P2P_S_PB_PLAY_REQ* req = (HI_P2P_S_PB_PLAY_REQ*)malloc(sizeof(HI_P2P_S_PB_PLAY_REQ));
-            //            memset(req, 0, sizeof(HI_P2P_S_PB_PLAY_REQ));
-            //            req->command = HI_P2P_PB_STOP;
-            //            req->u32Chn = 0;
-            //            STimeDay st = [VideoInfo getTimeDay:wself.video.startTime];
-            //            memcpy(&req->sStartTime, &st, sizeof(STimeDay));
-            //
-            //            [wself.camera sendIOCtrl:HI_P2P_PB_PLAY_CONTROL Data:(char *)req Size:sizeof(HI_P2P_S_PB_PLAY_REQ)];
-            //
-            //            free(req);
-            
-            
-            
-        }
-        
-        
-        if (type == 2) {//远程回放拖动结束
-            NSLog(@"拖动结束");
-            [UIView animateWithDuration:.35 animations:^{
-                wself.ZKGangBar.alpha = 0;
-            }];
-            //[wself pause];
-            //wself.isDraging = YES;
-            
-            if (!wself.isPlaying) {
-                STimeDay stime = [Event getHiTimeDay:wself.evt.eventTime];
-                [wself.originCamera SetImgview:wself.monitor];
-                //                 [wself.camera startPlayback:&stime Monitor:wself.monitor];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [wself.originCamera startPlayback2:stime Monitor:nil];
-                });
-                
-            }
-            
-            HI_P2P_PB_SETPOS_REQ* req = (HI_P2P_PB_SETPOS_REQ*)malloc(sizeof(HI_P2P_PB_SETPOS_REQ));
-            if(req){
-                STimeDay st = [Event getHiTimeDay:wself.evt.eventTime];
-                memcpy(&req->sStartTime, &st, sizeof(STimeDay));
-                req->s32Pos = (HI_S32)value;
-                req->u32Chn = 0;
-                [wself.originCamera sendIOCtrl:HI_P2P_PB_POS_SET Data:(char *)req Size:sizeof(HI_P2P_PB_SETPOS_REQ)];
-                
-                free(req);
-                req = nil;
-                //[wself pause];
-            }
-        }
-        
-        
-        if (type == 3) {
-            wself.isDraging = YES;
-        }
-        
-    };
     [self resizeMonitor:self.camera.videoRatio];
     [self startPlayback];
 }
@@ -234,18 +158,6 @@ IB_DESIGNABLE
     int current = totalSeconds*(slider.value/100);
     NSString* currentStr = [NSString stringWithFormat:@"%02d:%02d:%02d",current/3600,current%3600/60,current%60];
     self.ZKGangBar.time.text = [NSString stringWithFormat:@"%@ / %@",currentStr,self.totalTime];
-}
-- (PlayView *)playView {
-    if (!_playView) {
-        
-        CGFloat WIDTH = [UIScreen mainScreen].bounds.size.height;
-        CGFloat HEIGHT = [UIScreen mainScreen].bounds.size.width;//WIDTH/1.5;
-        CGFloat h = 50.0f;//WIDTH/1.5;
-        
-        _playView = [[PlayView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, h)];
-        _playView.center = CGPointMake(WIDTH/2, HEIGHT-h/2);
-    }
-    return _playView;
 }
 
 -(ZKGangTimeBar* )ZKGangBar{
@@ -292,18 +204,31 @@ IB_DESIGNABLE
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.originCamera startPlayback2: [Event getHiTimeDay:self.evt.eventTime] Monitor:nil];
     });
-//    HI_P2P_PB_SETPOS_REQ* req = (HI_P2P_PB_SETPOS_REQ*)malloc(sizeof(HI_P2P_PB_SETPOS_REQ));
-//    if(req){
-//        STimeDay st = [Event getHiTimeDay:self.evt.eventTime];
-//        memcpy(&req->sStartTime, &st, sizeof(STimeDay));
-//        req->s32Pos = (HI_S32)0;
-//        req->u32Chn = 0;
-//        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_PB_POS_SET Data:(char *)req DataSize:sizeof(HI_P2P_PB_SETPOS_REQ)];
-//        
-//        free(req);
-//        req = nil;
-//        //[wself pause];
-//    }
+}
+- (IBAction)toggleShowVideoProgressBar:(id)sender {
+    if(self.videoProgressbar.isVisibility){
+        [self.videoProgressbar dismiss];
+    }
+    else{
+         [self.videoProgressbar show];
+    }
+}
+- (void)camera:(BaseCamera *)camera _didReceivePlayUTC:(NSInteger)time{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(_timeoutTask != nil){
+            dispatch_block_cancel(_timeoutTask);
+            _timeoutTask = nil;
+        }
+        [self.indicator_loading setHidden:YES];
+        if(_needCreateSnapshot){
+            _needCreateSnapshot = NO;
+            UIImage *image = [self.originCamera getSnapshot];
+            if(image){
+                [GBase saveRemoteRecordPictureForCamera:self.camera image:image eventType:self.evt.eventType eventTime:self.evt.eventTime];
+            }
+        }
+        [self.videoProgressbar setNowTime:time];
+    });
 }
 
 - (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)w height:(NSInteger)h{
@@ -313,10 +238,8 @@ IB_DESIGNABLE
         [self.originCamera stopPlayback];
         self.isPlaying = NO;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.playView.btnPlay.selected = YES;
-            self.playView.sliderProgress.value = self.playView.sliderProgress.maximumValue;
             [[iToast makeText:LOCALSTR(@"Video play ends")] show];
-             [self refreshButton];
+            [self.videoProgressbar setEnd];
         });
     }
     else if(state == PLAY_STATE_START){
@@ -329,7 +252,6 @@ IB_DESIGNABLE
             if(fabs(self.camera.videoRatio-(CGFloat)w/h) > 0.2){
                 self.camera.videoRatio = (CGFloat)w/h;
                 [self resizeMonitor:self.camera.videoRatio];
-                
             }
             [self refreshButton];
         });
@@ -341,6 +263,14 @@ IB_DESIGNABLE
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self disconnect];
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = NO;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.allowRotation = YES;
 }
 
 -(void)disconnect{
@@ -350,7 +280,6 @@ IB_DESIGNABLE
         _timeoutTask = nil;
     }
     [self doEndPlayback];
-    [self refreshButton];
 }
 
 -(void)doEndPlayback{
@@ -361,24 +290,13 @@ IB_DESIGNABLE
 -(void)refreshButton{
     if(self.isPlaying){
         [self.indicator_loading setHidden:YES];
-        [_btnPlay setImage:[UIImage imageNamed:@"ic_menu_pause"] forState:UIControlStateNormal];
     }
     else{
-        [_btnPlay setImage:[UIImage imageNamed:@"ic_menu_play"] forState:UIControlStateNormal];
         [self.indicator_loading setHidden:NO];
     }
 }
-- (IBAction)clickPlay:(id)sender {
-    if(!self.isPlaying){
-        [self startPlayback];
-        [_btnPlay setImage:[UIImage imageNamed:@"ic_menu_pause"] forState:UIControlStateNormal];
-    }
-    else{
-        [self doPausePlayback];
-    }
-}
 
--(void)doPausePlayback{
+-(void)doTogglePausePlayback{
     //暂停时，发送暂停继续播放，做完任何操作都需要发送stop
     HI_P2P_S_PB_PLAY_REQ* req = (HI_P2P_S_PB_PLAY_REQ*)malloc(sizeof(HI_P2P_S_PB_PLAY_REQ));
     if(req){
@@ -391,36 +309,6 @@ IB_DESIGNABLE
         free(req);
         req = nil;
     }
-}
-
-- (void)camera:(BaseCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(fps > 1){
-            [self.indicator_loading setHidden:NO];
-            if(_timeoutTask != nil){
-                dispatch_block_cancel(_timeoutTask);
-                _timeoutTask = nil;
-            }
-           
-            [self.indicator_loading setHidden:YES];
-        }
-        else{
-             if(self.isPlaying){
-                 [self.indicator_loading setHidden:NO];
-             }
-        }
-    });
-}
-
-- (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
-    if(status == CONNECTION_STATE_TIMEOUT){
-        [self disconnect];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             [self startPlayback];
-        });
-       
-    }
-    
 }
 
 - (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
@@ -461,9 +349,59 @@ IB_DESIGNABLE
 - (IBAction)goBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    [self rotateOrientation:toInterfaceOrientation];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+}
 
-
-
+-(void) rotateOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    CGFloat height = Screen_Main.width>Screen_Main.height?Screen_Main.height:Screen_Main.width;
+    CGFloat width = Screen_Main.width>Screen_Main.height?Screen_Main.width:Screen_Main.height;
+    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight ){
+        //[self.toolbtns_land setHidden:NO];
+        //[self toggleTools:YES];
+        [self.constraint_height_titlebar setConstant:0];
+        [self.viewTitlebar setHidden:YES];
+        [self.toolbtns_portrait setHidden:YES];
+        self.navigationController.navigationBar.hidden=YES;
+        _isFullscreen = YES;
+        if(width/height < self.camera.videoRatio){
+            _constraint_ycenter_videowrapper.priority = 800;
+            _constraint_bottom_videowrapper.priority = 700;
+            _constraint_top_videowrapper.priority = 700;
+            _constraint_leading_videowrapper.priority = 800;
+            _constraint_trailing_videowrapper.priority = 800;
+            _constraint_xcenter_videowrapper.priority = 700;
+        }
+        else{
+            _constraint_leading_videowrapper.priority = 700;
+            _constraint_trailing_videowrapper.priority = 700;
+            _constraint_xcenter_videowrapper.priority = 800;
+            _constraint_ycenter_videowrapper.priority = 700;
+            _constraint_bottom_videowrapper.priority = 800;
+            _constraint_top_videowrapper.priority = 800;
+        }
+    }
+    else{
+        _constraint_ycenter_videowrapper.priority = 700;
+        _constraint_bottom_videowrapper.priority = 800;
+        _constraint_top_videowrapper.priority = 800;
+        _constraint_leading_videowrapper.priority = 800;
+        _constraint_trailing_videowrapper.priority = 800;
+        _constraint_xcenter_videowrapper.priority = 700;
+        
+        [self.constraint_height_titlebar setConstant:40];
+        [self.viewTitlebar setHidden:NO];
+        [self.toolbtns_portrait setHidden:NO];
+        self.navigationController.navigationBar.hidden=NO;
+        _isFullscreen = NO;
+    }
+    [self.originCamera RemImgview];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.originCamera SetImgview:self.monitor];
+    });
+}
 /*
 #pragma mark - Navigation
 

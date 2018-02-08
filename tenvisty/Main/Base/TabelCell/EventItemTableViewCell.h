@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labEventType;
 @property (weak, nonatomic) IBOutlet UIImageView *imgEventThumb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_centerY_img_eventTypeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPlay;
 
 @end

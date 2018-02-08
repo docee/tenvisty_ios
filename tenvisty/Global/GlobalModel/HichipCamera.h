@@ -13,6 +13,7 @@
 #import "newTimeZone.h"
 #import "DeviceInfoExt.h"
 #import "TimeParam.h"
+#import "NetParam.h"
 
 @interface HichipCamera : HiCamera<BaseCameraDelegate,BaseCameraProtocol>
 

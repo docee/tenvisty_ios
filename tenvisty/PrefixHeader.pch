@@ -177,6 +177,7 @@
 
 
 //hichip global vars
+#define DEFAULT_CAMERA_FUNCTION ([NSArray arrayWithObjects:@"1",@"1",@"0",@"0",@"1", nil])
 #import "hi_p2p_ipc_protocol.h"
 #import "hi_base64.h"
 /************************** 报警推送服务器IP地址 20170118 **************************/

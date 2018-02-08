@@ -22,6 +22,7 @@
         self.startTime = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
         self.stopTime = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
         self.isSerach = NO;
+        self.eventType = EVENT_ALARM;
     }
     return self;
 }
@@ -59,7 +60,7 @@
     list_req->u32Chn = 0;
     list_req->sStartTime = start;
     list_req->sEndtime = stop;
-    list_req->EventType = EVENT_ALL;
+    list_req->EventType = self.eventType;
     
     
     NSTimeZone *zone = [NSTimeZone systemTimeZone];

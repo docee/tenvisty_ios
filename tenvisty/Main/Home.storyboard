@@ -976,6 +976,7 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XkC-NB-C2a">
                                                         <rect key="frame" x="62.5" y="0.0" width="62.5" height="40"/>
+                                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="btnFullscreen"/>
                                                         <connections>
                                                             <action selector="doFullScreen:" destination="Clh-uG-1TF" eventType="touchUpInside" id="SuV-nR-Y9o"/>

@@ -36,7 +36,7 @@
         [self checkAlarmEvent:userInfo];
     }
     [MyCamera initIOTC];
-    [HiChipSDK init];
+    [HiChipSDK initAsync:nil];
     [GBase initCameras];
     [self.window makeKeyAndVisible];
     

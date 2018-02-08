@@ -36,4 +36,5 @@ typedef NS_ENUM(NSInteger, DeviceOrientation) {
 + (NSDate*)zeroOfDateTime:(NSDate*)date;
 +(NSString*)createSign:(NSArray*)arr;
 + (UIViewController *)getCurrentVC;
++ (NSString *)toBinarySystemWithDecimalSystem:(NSString *)decimal;
 @end

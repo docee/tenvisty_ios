@@ -36,4 +36,5 @@
 - (id)initWithEventType:(int)eventType EventTime:(long)eventTime EventStatus:(int)status;
 - (id)initWithEventType:(int)eventType EventStartTime:(long)startTime EventEndTime:(long)endTime EventStatus:(int)status;
 - (id)initWithEventType:(int)type EventTime:(long)time EventStatus:(int)status cloudStoragePath:(NSString *)pathString_;
++ (NSString *)getHiEventTypeName:(int)eventType;
 @end

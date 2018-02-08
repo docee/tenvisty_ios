@@ -16,6 +16,31 @@
 @synthesize eventTime;
 @synthesize eventStatus;
 
++ (NSString *)getHiEventTypeName:(int)eventType {
+    
+    NSMutableString *result = [NSMutableString string];
+    switch (eventType) {
+        case EVENT_ALL:
+            [result appendString:NSLocalizedString(@"All Recording", @"")];
+            
+            break;
+        case EVENT_MANUAL:
+            [result appendString:NSLocalizedString(@"Manual Recording", @"")];
+            
+            break;
+        case EVENT_ALARM:
+            [result appendString:NSLocalizedString(@"Alarm Recording", @"")];
+            
+            break;
+        case EVENT_PLAN:
+            [result appendString:NSLocalizedString(@"Plan Recording", @"")];
+            
+            break;
+    }
+    
+    return [result copy];
+}
+
 + (NSString *)getEventTypeName:(int)eventType {
 
     NSMutableString *result = [NSMutableString string];

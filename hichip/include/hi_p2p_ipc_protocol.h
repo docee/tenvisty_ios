@@ -835,7 +835,7 @@ typedef enum
     EVENT_ALL=0,
     EVENT_MANUAL=1,
     EVENT_ALARM=2,
-    EVEN_PLAN=3
+    EVENT_PLAN=3
 }HI_P2P_ENUM_EVENT;
 
 typedef struct

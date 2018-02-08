@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoProgressBarContentView : UIView
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_btnExit;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPlay;
 @property (weak, nonatomic) IBOutlet UILabel *labPlayTime;

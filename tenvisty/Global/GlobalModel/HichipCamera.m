@@ -11,6 +11,7 @@
 #import "CameraIOSessionProtocol.h"
 #import "HiPushSDK.h"
 #import "TimeZoneModel.h"
+#import "CameraFunction.h"
 
 @interface HichipCamera()<CameraIOSessionProtocol,OnPushResult>{
     BOOL isStopManually;
@@ -24,6 +25,7 @@
 @property (nonatomic,assign) NSInteger beginRebootTime;
 @property (nonatomic,assign) NSInteger rebootTimeout;
 @property (nonatomic,assign) NSInteger connectTimeoutBeginTime;
+@property (nonatomic, strong)  NetParam *netParam;
 
 @end
 
@@ -181,7 +183,8 @@
 }
 
 - (NSString *)remoteRecordThumbName:(NSInteger)recordId type:(NSInteger)tp {
-     return nil;
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld.jpg", self.uid,(int)tp,(long)recordId];
+    return fileName;
 }
 
 - (void)saveImage:(UIImage *)image {
@@ -370,6 +373,7 @@
         }
         [self sendIOCtrl:HI_P2P_GET_TIME_PARAM Data:(char*)nil Size:0];
         [self sendIOCtrl:HI_P2P_GET_DEV_INFO_EXT Data:(char*)nil Size:0];
+        [self sendIOCtrl:HI_P2P_GET_NET_PARAM Data:(char*)nil Size:0];
         
         if ([self getCommandFunction:HI_P2P_ALARM_ADDRESS_SET]) {//如果该相机支持设置服务器地址
             [self sendPushServerAddress:camera.uid];
@@ -406,7 +410,28 @@
         case HI_P2P_GET_DEV_INFO_EXT:{
             if(size >= sizeof(HI_P2P_S_DEV_INFO_EXT)){
                 self.deviceInfoExt = [[DeviceInfoExt alloc] initWithData:data size:size];
+                NSArray<NSString*> *arrWv =  [self.deviceInfoExt.aszWebVersion componentsSeparatedByString:@"."];
+                if([arrWv count] >4){
+                    NSString *strFunc = [arrWv objectAtIndex:4];
+                    NSString *strBinFunc = [TwsTools toBinarySystemWithDecimalSystem:strFunc];
+                    while(strBinFunc.length < 5){
+                        strBinFunc = [NSString stringWithFormat:@"0%@",strBinFunc];
+                    }
+                    [self.baseCamera setStrFunctionFlag:strBinFunc];
+                    
+                }
             }
+        }
+            break;
+        case HI_P2P_GET_NET_PARAM:{
+                LOG(@"camera %@ HI_P2P_GET_DEV_INFO ",self.uid);
+                if(size >= sizeof(HI_P2P_S_NET_PARAM)){
+                    self.netParam = [[NetParam alloc] initWithData:(char*)data size:(int)size];
+                    if(![self.baseCamera hasSetFunctionFlag]){
+                        [CameraFunction DoCameraFunctionFlag:self.baseCamera ip:self.netParam.strIPAddr netmask:self.netParam.strNetMask];
+                        LOG(@"camera %@ SetFunctionFlag ",self.uid);
+                    }
+                }
         }
             break;
         case HI_P2P_GET_TIME_PARAM:
@@ -511,7 +536,9 @@
     }
 }
 - (void)receivePlayUTC:(HiCamera *)camera Time:(int)time{
-    
+    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePlayUTC:)]) {
+        [self.cameraDelegate camera:self.baseCamera _didReceivePlayUTC:time];
+    }
 }
 
 - (void)receiveDownloadState:(HiCamera*)camera Total:(int)total CurSize:(int)curSize State:(int)state Path:(NSString*)path{

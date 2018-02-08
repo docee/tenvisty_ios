@@ -18,6 +18,7 @@
 @property BOOL isSerach;
 @property NSTimeInterval startTime;
 @property NSTimeInterval stopTime;
+@property NSInteger eventType;
 
 
 @end

@@ -251,4 +251,36 @@
     
 }
 
+//  十进制转二进制
++ (NSString *)toBinarySystemWithDecimalSystem:(NSString *)decimal
+{
+    int num = [decimal intValue];
+    int remainder = 0;      //余数
+    int divisor = 0;        //除数
+    
+    NSString * prepare = @"";
+    
+    while (true)
+    {
+        remainder = num%2;
+        divisor = num/2;
+        num = divisor;
+        prepare = [prepare stringByAppendingFormat:@"%d",remainder];
+        
+        if (divisor == 0)
+        {
+            break;
+        }
+    }
+    
+    NSString * result = @"";
+    for (int i = prepare.length - 1; i >= 0; i --)
+    {
+        result = [result stringByAppendingFormat:@"%@",
+                  [prepare substringWithRange:NSMakeRange(i , 1)]];
+    }
+    
+    return result;
+}
+
 @end

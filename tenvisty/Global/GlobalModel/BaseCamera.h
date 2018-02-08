@@ -71,6 +71,15 @@
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time;
 - (void)syncWithPhoneTime;
 -(BOOL)getCommandFunction:(int)cmd;
+//begin 添加摄像机功能标识位，yilu20170316
+- (void)setFunctionFlag:(NSArray *)functionFlag;
+- (void)setStrFunctionFlag:(NSString *)strFuncFlag;
+- (BOOL)hasSetFunctionFlag;
+- (BOOL)hasPTZ;
+- (BOOL)hasListen;
+- (BOOL)hasPreset;
+- (BOOL)hasZoom;
+- (BOOL)hasSDSlot;
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>
@@ -90,5 +99,7 @@
 - (void)camera:(BaseCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size;
 - (void)camera:(BaseCamera *)camera _didReceivePushResult:(NSInteger)result type:(NSInteger)type subId:(NSInteger)subId;
 - (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)w height:(NSInteger)h;
+- (void)camera:(BaseCamera *)camera _didReceivePlayUTC:(NSInteger)time;
+
 @end
 

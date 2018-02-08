@@ -107,6 +107,13 @@
                             [self getSDCardInfo];
                         }
                     }
+                    else{
+                        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                        [[[iToast makeText:LOCALSTR(@"format success")]setDuration:1] show];
+                        isFormatting= NO;
+                        self.sdcard = sdcardTemp;
+                        [self refreshTable];
+                    }
                 }
                 else{
                     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];

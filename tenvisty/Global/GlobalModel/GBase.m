@@ -7,6 +7,7 @@
 //
 
 #define VIDEO_RATIO (@"VIDEO_RATIO")
+#define CAMERA_FUNCTION (@"CAMERA_FUNCTION")
 
 #import "GBase.h"
 #import "FMDB.h"
@@ -603,6 +604,34 @@ static GBase *base = nil;
             NSLog(@"Fail to insert video ratio to database.");
         }
     }
+}
+
+
++ (void)setCameraFunction:(NSString *)uid function:(NSString *)function {
+    GBase *base = [GBase sharedInstance];
+    if (base.db != NULL) {
+        [base.db executeUpdate:@"DELETE FROM device_diction WHERE dev_uid=? and dev_key=?", uid,CAMERA_FUNCTION];
+        if (![base.db executeUpdate:@"INSERT INTO device_diction(dev_uid, dev_key,dev_value) VALUES(?,?,?)", uid, CAMERA_FUNCTION,function]) {
+            NSLog(@"Fail to insert video ratio to database.");
+        }
+    }
+}
+
++ (NSString *)getCameraFunction:(NSString *)uid {
+    
+    GBase *base = [GBase sharedInstance];
+    NSString *strFunction = nil;
+    if(base.db){
+        FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM device_diction WHERE dev_uid=? and dev_key=?", uid,CAMERA_FUNCTION];
+        
+        while([rs next]) {
+            strFunction = [rs stringForColumn:@"dev_value"];
+            break;
+            //NSLog(@"imagePath :%@", imageName);
+        }
+        [rs close];
+    }
+    return strFunction;
 }
 
 @end

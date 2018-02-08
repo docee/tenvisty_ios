@@ -13,16 +13,22 @@
 
 @interface VideoProgressBarView : UIView
 @property (nonatomic,assign) id<VideoProgressBarDelegate> delegate;
+@property (nonatomic,assign,readonly) BOOL isVisibility;
 @property (nonatomic, weak) IBOutlet VideoProgressBarContentView *view;
 - (void)show;
 - (void)dismiss;
--(void)setTime:(long)nowTime start:(long)startTime end:(long)endTime;
+-(void)setTime:(long)startTime end:(long)endTime;
+-(void)setNowTime:(long)nowTime;
+-(void)setEnd;
+
+//-(void)showExit;
+//-(void)hideExit;
 @end
 
 @protocol VideoProgressBarDelegate <NSObject>
 @optional
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickPlayButton:(UIButton*)btn;
-- (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickExitButton:(UIButton*)btn;
+- (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickFullScreenButton:(UIButton*)btn;
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didEndSliderChanging:(UISlider*)sender time:(long)time;
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didSliderChanging:(UISlider*)sender time:(long)time;
 - (void)VideoProgressBarView:(VideoProgressBarView *)progressBar didClickSlider:(UISlider*)sender time:(long)time;
