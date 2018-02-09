@@ -19,8 +19,11 @@
 #import "UIDevice+TFDevice.h"
 #import "SwitchVideoQualityDialog.h"
 #import "HichipCamera.h"
+#import "PresetView.h"
+#import "TwsMonitor.h"
+#import "ZoomView.h"
 
-@interface LiveView_HichipController ()<MyCameraDelegate,MonitorTouchDelegate>{
+@interface LiveView_HichipController ()<MyCameraDelegate,MonitorTouchDelegate,PresetViewDelegate,TwsMonitorTouchDelegate,ZoomViewDelegate>{
     BOOL isTalking;
     BOOL isListening;
     BOOL isRecording;
@@ -45,10 +48,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_status_height;
 @property (nonatomic,assign) Boolean isFullscreen;
 @property (weak, nonatomic) IBOutlet UILabel *labConnectState;
-@property (weak, nonatomic) IBOutlet UIImageView *videoMonitor;
+@property (weak, nonatomic) IBOutlet TwsMonitor *videoMonitor;
 @property (weak, nonatomic) IBOutlet UIButton *btnListen_port;
 @property (weak, nonatomic) IBOutlet UIButton *btnListen_land;
 @property (weak, nonatomic) IBOutlet UIButton *btnRecord_port;
+@property (weak, nonatomic) IBOutlet UIButton *btnZoom;
 @property (weak, nonatomic) IBOutlet UIButton *btnRecord_land;
 @property (weak, nonatomic) IBOutlet UIView *viewRecordTime;
 @property (weak, nonatomic) IBOutlet UILabel *labRecordTime;
@@ -59,7 +63,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_viewSwitchVideoQuality_land;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_x_viewSwitchVideoQuality_land;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_top_viewSwitchVideoQuality_land;
-@property (weak, nonatomic) IBOutlet UIView *viewPreset;
+@property (weak, nonatomic) IBOutlet PresetView *viewPreset;
 @property (weak, nonatomic) IBOutlet UIView *viewToolbarTop;
 @property (weak, nonatomic) IBOutlet UIView *viewToolbarBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_viewtoolbarbottom;
@@ -69,6 +73,9 @@
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_ycenter_videowrapper;
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_top_videowrapper;
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_videowrapper;
+@property (weak, nonatomic) IBOutlet ZoomView *viewZoom;
+@property (weak, nonatomic) IBOutlet UIButton *btnPreset;
+@property (weak, nonatomic) IBOutlet UIButton *btnTalk_port;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
@@ -92,6 +99,8 @@
     if(self.camera.remoteNotifications > 1){
         [self.camera clearRemoteNotifications];
     }
+    self.viewPreset.delegate = self;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -104,20 +113,65 @@
     
 }
 
+-(void)checkFunction{
+    [_btnListen_land setHidden:![self.camera hasListen]];
+    [_btnListen_port setHidden:![self.camera hasListen]];
+     [_btnTalk_port setHidden:![self.camera hasListen]];
+    
+    [_btnPreset setHidden:![self.camera hasPTZ]];
+    [_btnZoom setHidden:![self.camera hasZoom]];
+}
+
 -(void)setup{
     self.title = self.camera.nickName;
     [_btnShowSwitchQuality_land setTitle:self.camera.videoQuality == 0?LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
     [_btnShowSwitchQuality_port setTitle:self.camera.videoQuality == 0?LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
     
+    [self.videoMonitor setMinimumGestureLength:100 MaximumVariance:50];
     [self.videoMonitor setUserInteractionEnabled:YES];
     self.videoMonitor.contentMode = UIViewContentModeScaleToFill;
     self.videoMonitor.backgroundColor = [UIColor blackColor];
+    self.videoMonitor.delegate = self;
     
     self.scrollviewVideo.minimumZoomScale = ZOOM_MIN_SCALE;
     self.scrollviewVideo.maximumZoomScale = ZOOM_MAX_SCALE;
     self.scrollviewVideo.contentMode = UIViewContentModeScaleAspectFit;
     self.scrollviewVideo.contentSize = self.videoMonitor.frame.size;
     [self resizeMonitor:self.camera.videoRatio];
+    self.viewZoom.delegate = self;
+    [self checkFunction];
+}
+
+- (void)ZoomView:(ZoomContentView *)view didClickButtonDown:(UIButton*)btn type:(NSInteger)type{
+    if(type == BTN_ZOOM_IN){
+        [self zoomWithCtrl:HI_P2P_PTZ_CTRL_ZOOMIN];
+    }
+    else if(type == BTN_ZOOM_OUT){
+        [self zoomWithCtrl:HI_P2P_PTZ_CTRL_ZOOMOUT];
+    }
+    else if(type == BTN_FOCUS_IN){
+        [self zoomWithCtrl:HI_P2P_PTZ_CTRL_FOCUSIN];
+    }
+    else if(type == BTN_FOCUS_OUT){
+        [self zoomWithCtrl:HI_P2P_PTZ_CTRL_FOCUSOUT];
+    }
+}
+- (void)ZoomView:(ZoomContentView *)view didClickButtonUp:(UIButton*)btn type:(NSInteger)type{
+    [self zoomWithCtrl:HI_P2P_PTZ_CTRL_STOP];
+}
+#pragma mark - 变焦设置
+- (void)zoomWithCtrl:(NSInteger)ctrl {
+    
+    HI_P2P_S_PTZ_CTRL* ptz = (HI_P2P_S_PTZ_CTRL*)malloc(sizeof(HI_P2P_S_PTZ_CTRL));
+    if(ptz){
+        ptz->u32Channel = 0;
+        ptz->u32Mode = HI_P2P_PTZ_MODE_RUN;
+        ptz->u32Ctrl = (int)ctrl;
+        
+        [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_PTZ_CTRL Data:(char *)ptz DataSize:sizeof(HI_P2P_S_PTZ_CTRL)];
+        free(ptz);
+        ptz = nil;
+    }
 }
 
 #pragma mark - ScrollView Delegate
@@ -137,33 +191,20 @@
 - (IBAction)toggleBtnsLand:(UITapGestureRecognizer *)sender {
     [_viewSwitchVideoQuality_port setHidden:YES];
     [_viewPreset setHidden:YES];
+    [_viewZoom setHidden:YES];
     if(ISFULLSCREEN){
         [self toggleTools:isShowingToolBtnsLand];
     }
 }
-- (IBAction)selectPreset:(UIButton *)sender {
-    [sender setBackgroundColor:Color_GrayDark];
-    _viewPreset.tag = sender.tag;
-    for(UIButton *btn in [sender.superview subviews]){
-        if(sender != btn){
-           [btn setBackgroundColor:Color_Gray];
-        }
+- (void)PresetContentView:(PresetContentView *)view didClickButton:(UIButton*)btn type:(NSInteger)btnType point:(NSInteger)point{
+    if(btnType == BTN_PRESET_POINT){
+        
     }
-    
-}
-
-- (IBAction)doPreset:(UIButton *)sender {
-    //set
-    if(sender.tag == 0){
-        if(_viewPreset.tag > 0){
-            [self presetWithNumber:(int)_viewPreset.tag action:HI_P2P_PTZ_PRESET_ACT_CALL];
-        }
+    else if(btnType == BTN_PRESET_SET){
+         [self presetWithNumber:(int)point action:HI_P2P_PTZ_PRESET_ACT_SET];
     }
-    //call
-    else if(sender.tag == 1){
-        if(_viewPreset.tag >= 0){
-            [self presetWithNumber:(int)_viewPreset.tag action:HI_P2P_PTZ_PRESET_ACT_CALL];
-        }
+    else if(btnType == BTN_PRESET_CALL){
+        [self presetWithNumber:(int)point action:HI_P2P_PTZ_PRESET_ACT_CALL];
     }
 }
 
@@ -238,7 +279,7 @@
 //    }];
     // 延时0.5s后执行，确保所有线程关闭完成
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [hiCamera RemImgview];
+        [self.videoMonitor deattachCamera];
     });
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = NO;
@@ -249,7 +290,7 @@
 
 -(void)changeStream:(NSInteger)stream{
     self.camera.videoQuality = stream;
-    [hiCamera SetImgview:_videoMonitor];
+    [self.videoMonitor attachCamera:self.camera];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.camera startVideo];
     });
@@ -351,6 +392,7 @@
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_viewPreset setHidden:YES];
+        [_viewZoom setHidden:YES];
 //        for(NSLayoutConstraint *constraint in self.video_wrapper.constraints){
 //            if([constraint.identifier isEqualToString:@"videowrapper_ratio"]){
 //                existConstraint = constraint;
@@ -359,9 +401,9 @@
 //        }
       //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     }
-    [hiCamera RemImgview];
+    [self.videoMonitor deattachCamera];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [hiCamera SetImgview:_videoMonitor];
+        [self.videoMonitor attachCamera:self.camera];
     });
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -525,6 +567,10 @@
 - (IBAction)showPreset:(id)sender {
     [_viewPreset setHidden:![_viewPreset isHidden]];
 }
+- (IBAction)clickShowZoom:(id)sender {
+    [_viewZoom setHidden:![_viewZoom isHidden]];
+}
+
 - (IBAction)doPortraitView:(id)sender {
      [self rotateOrientation:UIInterfaceOrientationPortrait];
     //切换到竖屏
@@ -683,7 +729,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [_viewLoading setHidden:YES];
-            [hiCamera SetImgview:_videoMonitor];
+            [self.videoMonitor attachCamera:self.camera];
             if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
                 [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
                 [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];

@@ -13,9 +13,11 @@
 #endif
 #import "MyCamera.h"
 #import "HiChipSDK.h"
+#import "XGPush.h"
 @interface AppDelegate ()<UNUserNotificationCenterDelegate,HiChipInitCallback>{
     BOOL isEnterBackground;
 }
+@property (nonatomic,strong)BaseCamera* LSCam;
 
 @end
 
@@ -40,11 +42,92 @@
     [GBase initCameras];
     [self.window makeKeyAndVisible];
     
+    //注册信鸽推送
+    [self registerXingePushWithOptions:launchOptions];
+    
+    // [self checkAlarmEvent:launchOptions];
+    [self saveAlarmPushServerIDAddress];
     
    // [NSThread sleepForTimeInterval:[GBase sharedInstance].cameras.count == 0 ? 2.0:1.0];
     
     return YES;
 }
+- (void)saveAlarmPushServerIDAddress {
+    
+    //    [[NSUserDefaults standardUserDefaults] setObject:@"47.91.149.233" forKey:AlarmPushServerIPAddressKey];
+    //    NSString *ipaddress = [[NSUserDefaults standardUserDefaults] objectForKey:AlarmPushServerIPAddressKey];
+    //    if (ipaddress) {
+    //        NSLog(@"alarm_push_server_ip_address : %@", ipaddress);
+    //    }
+    //    else {
+    [[NSUserDefaults standardUserDefaults] setObject:AlarmPushServerIPAddress forKey:AlarmPushServerIPAddressKey];
+    //    }
+}
+
+#pragma mark - 注册信鸽推送
+- (void)registerXingePushWithOptions:(NSDictionary *)launchOptions {
+    
+    //NSString *bundelDisplayName = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
+    //    NSString *xingeCompany = [NSBundle mainBundle].infoDictionary[@"XingGe Company"];
+    //    NSString *xingeAppId = [NSBundle mainBundle].infoDictionary[@"XingGe App Id"];
+    //    NSString *xingeAppKey = [NSBundle mainBundle].infoDictionary[@"XingGe App Key"];
+    //    int appid = [xingeAppId intValue];
+    //LOG(@"bundelDisplayName : %@", bundelDisplayName)
+    //[XGPush startApp:appid appKey:xingeAppKey];
+    [XGPush startApp:XG_APPID appKey:XG_APPKEY];
+    
+    [XGPush handleLaunching:launchOptions];
+    SystemVersion < 8 ? [self registerPush] : [self registerPushForIOS8];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:XG_Company forKey:@"xinge_push_company"];
+    
+}// @registerXingePushWithOptions
+
+
+- (void)registerPushForIOS8{
+    
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+    
+    //Types
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    //Actions
+    UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
+    
+    acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+    acceptAction.title = @"Accept";
+    
+    acceptAction.activationMode = UIUserNotificationActivationModeForeground;
+    acceptAction.destructive = NO;
+    acceptAction.authenticationRequired = NO;
+    
+    //Categories
+    UIMutableUserNotificationCategory *inviteCategory = [[UIMutableUserNotificationCategory alloc] init];
+    
+    inviteCategory.identifier = @"INVITE_CATEGORY";
+    
+    [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextDefault];
+    
+    [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextMinimal];
+    
+    NSSet *categories = [NSSet setWithObjects:inviteCategory, nil];
+    
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+#endif
+    
+}
+- (void)registerPush{
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+}
+
 #pragma mark - HiChipInitCallback
 - (void)onInitResult:(int)result {
     
@@ -169,7 +252,76 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
-
+-(void)checkHiAlarmEvent:(NSDictionary*) dic{
+    if (dic == nil) {
+        return;
+    }
+    
+    NSString *responseString = (NSString*)[dic objectForKey:@"hi"];
+    NSLog(@"checkAlarmEvent:%@",responseString);
+    
+    if (responseString == nil) {
+        NSLog(@"return:%@",responseString);
+        
+        return;
+    }
+    
+    NSData *data= [responseString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error = nil;
+    
+    
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    
+    if ([jsonObject isKindOfClass:[NSDictionary class]]){
+        
+        NSDictionary *dictionary = (NSDictionary *)jsonObject;
+        
+        NSLog(@"Dersialized JSON Dictionary = %@ %ld", dictionary[@"uid"], (long)[dictionary[@"type"] integerValue]);
+        
+        NSString *uid =[dictionary objectForKey:@"uid"];
+        //NSInteger type =[[dictionary objectForKey:@"type"]integerValue];
+        
+        NSString* dictime =[dictionary objectForKey:@"time"];
+        NSInteger time = 0;
+        if (dictime!=nil) {
+            time = [dictime integerValue];
+        }
+        if (time <=0) {
+            NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+            time = [dat timeIntervalSince1970];
+        }
+        NSLog(@"time:%ld",(long)time);
+        BOOL isNotExist = YES;
+        BOOL needForceClosePush = NO;
+        for (BaseCamera *cam in [GBase sharedInstance].cameras) {
+            // [HXProgress showText:cam.uid];
+            if ([cam.uid isEqualToString:uid]) {
+                isNotExist = NO;
+                if(cam.remoteNotifications > 0){
+                    [cam setRemoteNotification:1 EventTime:[[NSDate date] timeIntervalSince1970]];
+                }
+                //关闭推送
+                else{
+                    needForceClosePush = YES;
+                }
+                break;
+                
+            }//@isEqualToString
+            
+        }// @for
+        if(isNotExist || needForceClosePush){
+           
+            self.LSCam =  [[BaseCamera alloc] initWithUid:uid Name:@"" UserName:LSUID Password:@""];
+            [self.LSCam openPush:^(NSInteger code) {
+                [self.LSCam closePush:^(NSInteger code) {
+                    
+                }];
+            }];
+        }
+        
+    }// @jsonObject
+}
 
 -(void)checkAlarmEvent:(NSDictionary*) dic {
     
@@ -182,7 +334,7 @@
     
     if (jsonObject == nil) {
         NSLog(@"return:%@",jsonObject);
-        
+        [self checkHiAlarmEvent:dic];
         return;
     }
     

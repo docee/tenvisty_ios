@@ -218,6 +218,14 @@
 		89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */; };
 		89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */; };
 		89F0164F202C66F70098FE5F /* CameraFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0164D202C66F50098FE5F /* CameraFunction.m */; };
+		89F01651202D43820098FE5F /* PresetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F01650202D43820098FE5F /* PresetView.xib */; };
+		89F01654202D47860098FE5F /* PresetContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01653202D47860098FE5F /* PresetContentView.m */; };
+		89F01657202D48DA0098FE5F /* PresetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01656202D48DA0098FE5F /* PresetView.m */; };
+		89F0165A202D6F5B0098FE5F /* HiMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01659202D6F5B0098FE5F /* HiMonitor.m */; };
+		89F0165D202D6FA70098FE5F /* TwsMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0165C202D6FA70098FE5F /* TwsMonitor.m */; };
+		89F0165F202D7A070098FE5F /* ZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F0165E202D7A070098FE5F /* ZoomView.xib */; };
+		89F01662202D7F5E0098FE5F /* ZoomContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01661202D7F5E0098FE5F /* ZoomContentView.m */; };
+		89F01668202D81330098FE5F /* ZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01667202D81330098FE5F /* ZoomView.m */; };
 		C6D1F8203E76628784C971FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E58AE4DC4897602AE9CF48 /* Security.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
@@ -681,6 +689,20 @@
 		89EA52282019720200F2F15C /* AddCameraInputUIDTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCameraInputUIDTableViewController.m; sourceTree = "<group>"; };
 		89F0164D202C66F50098FE5F /* CameraFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFunction.m; sourceTree = "<group>"; };
 		89F0164E202C66F60098FE5F /* CameraFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFunction.h; sourceTree = "<group>"; };
+		89F01650202D43820098FE5F /* PresetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresetView.xib; sourceTree = "<group>"; };
+		89F01652202D47860098FE5F /* PresetContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresetContentView.h; sourceTree = "<group>"; };
+		89F01653202D47860098FE5F /* PresetContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PresetContentView.m; sourceTree = "<group>"; };
+		89F01655202D48DA0098FE5F /* PresetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresetView.h; sourceTree = "<group>"; };
+		89F01656202D48DA0098FE5F /* PresetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PresetView.m; sourceTree = "<group>"; };
+		89F01658202D6F5B0098FE5F /* HiMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiMonitor.h; sourceTree = "<group>"; };
+		89F01659202D6F5B0098FE5F /* HiMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HiMonitor.m; sourceTree = "<group>"; };
+		89F0165B202D6FA70098FE5F /* TwsMonitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwsMonitor.h; sourceTree = "<group>"; };
+		89F0165C202D6FA70098FE5F /* TwsMonitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwsMonitor.m; sourceTree = "<group>"; };
+		89F0165E202D7A070098FE5F /* ZoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZoomView.xib; sourceTree = "<group>"; };
+		89F01660202D7F5E0098FE5F /* ZoomContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZoomContentView.h; sourceTree = "<group>"; };
+		89F01661202D7F5E0098FE5F /* ZoomContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomContentView.m; sourceTree = "<group>"; };
+		89F01666202D81330098FE5F /* ZoomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZoomView.h; sourceTree = "<group>"; };
+		89F01667202D81330098FE5F /* ZoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomView.m; sourceTree = "<group>"; };
 		8D671A28AAADB2741242114D /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
 		A259C50E727727C3F0BF3358 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = "<group>"; };
 		C4E58AE4DC4897602AE9CF48 /* Security.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<group>"; };
@@ -988,13 +1010,13 @@
 		890B40671FAFF99400C1061A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				89A37C8A201726E700A6F0CD /* Hichip */,
 				89D811111FF63FEB00679B39 /* About */,
 				895141D51FE7780100905355 /* Model */,
 				89E6D9931FDA2B0B0049F1E7 /* Extend */,
 				896BA3CB1FD9255500EE31AB /* Image */,
 				892CE0A51FD0F57100942E28 /* Base */,
 				899AD50B1FCD64F8008ED303 /* Home */,
+				89A37C8A201726E700A6F0CD /* Hichip */,
 				890B406D1FAFF9FE00C1061A /* MainTabBarController.h */,
 				890B406E1FAFF9FE00C1061A /* MainTabBarController.m */,
 				890B40701FAFFA3600C1061A /* Home.storyboard */,
@@ -1074,6 +1096,8 @@
 				89AA50E920107838009CCA5D /* HichipCamera.m */,
 				89A37C762015D44200A6F0CD /* LANSearchCamera.h */,
 				89A37C772015D44200A6F0CD /* LANSearchCamera.m */,
+				89F0165B202D6FA70098FE5F /* TwsMonitor.h */,
+				89F0165C202D6FA70098FE5F /* TwsMonitor.m */,
 			);
 			path = GlobalModel;
 			sourceTree = "<group>";
@@ -1249,6 +1273,16 @@
 				89AD33E2202AE6B600B4520A /* VideoProgressBarView.m */,
 				89AD33E4202AF76100B4520A /* VideoProgressBarContentView.h */,
 				89AD33E5202AF76100B4520A /* VideoProgressBarContentView.m */,
+				89F01650202D43820098FE5F /* PresetView.xib */,
+				89F01652202D47860098FE5F /* PresetContentView.h */,
+				89F01653202D47860098FE5F /* PresetContentView.m */,
+				89F01655202D48DA0098FE5F /* PresetView.h */,
+				89F01656202D48DA0098FE5F /* PresetView.m */,
+				89F0165E202D7A070098FE5F /* ZoomView.xib */,
+				89F01660202D7F5E0098FE5F /* ZoomContentView.h */,
+				89F01661202D7F5E0098FE5F /* ZoomContentView.m */,
+				89F01666202D81330098FE5F /* ZoomView.h */,
+				89F01667202D81330098FE5F /* ZoomView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1676,6 +1710,8 @@
 				89A37C8F2017279F00A6F0CD /* LiveView_HichipController.h */,
 				89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */,
 				89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */,
+				89F01658202D6F5B0098FE5F /* HiMonitor.h */,
+				89F01659202D6F5B0098FE5F /* HiMonitor.m */,
 			);
 			path = Hichip;
 			sourceTree = "<group>";
@@ -2626,6 +2662,7 @@
 				89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */,
 				89AD33B22029961C00B4520A /* SliderTableViewCell.xib in Resources */,
 				892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */,
+				89F0165F202D7A070098FE5F /* ZoomView.xib in Resources */,
 				894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */,
 				890B40761FB0069400C1061A /* Image.storyboard in Resources */,
 				890B40711FAFFA3600C1061A /* Home.storyboard in Resources */,
@@ -2641,6 +2678,7 @@
 				8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */,
 				892CE0CD1FD1271300942E28 /* TextFieldDisableTableViewCell.xib in Resources */,
 				89AD33E0202AE26700B4520A /* VideoProgressBar.xib in Resources */,
+				89F01651202D43820098FE5F /* PresetView.xib in Resources */,
 				89A7E9391FECB30B00F12BFF /* Localizable.strings in Resources */,
 				892ADB6B1FD6928A00BD8929 /* SwitchTableViewCell.xib in Resources */,
 			);
@@ -2690,6 +2728,7 @@
 				89E6D98C1FDA25F30049F1E7 /* BaseViewController.m in Sources */,
 				892ADB6E1FD692B500BD8929 /* SwitchTableViewCell.m in Sources */,
 				89AD33A620295A0C00B4520A /* newTimeZone.m in Sources */,
+				89F01668202D81330098FE5F /* ZoomView.m in Sources */,
 				89545EB22021A40700151E90 /* SnapAlarm.m in Sources */,
 				89D8111B1FF63FEB00679B39 /* AppVersionController.m in Sources */,
 				89E4E96D1FCE67CA007EA336 /* CameraListViewController.m in Sources */,
@@ -2712,6 +2751,7 @@
 				898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */,
 				892CE0D71FD13E1500942E28 /* OCScanLifeViewController.m in Sources */,
 				89E6D99C1FDA61DC0049F1E7 /* MBProgressHUD+Add.m in Sources */,
+				89F01654202D47860098FE5F /* PresetContentView.m in Sources */,
 				89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */,
 				890B408D1FB02F5300C1061A /* TwsViewController.m in Sources */,
 				89241178201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m in Sources */,
@@ -2725,12 +2765,14 @@
 				89545EB12021A40700151E90 /* AlarmLink.m in Sources */,
 				8924126F202062CD001F60E8 /* WiFiSetting_HichipViewController.m in Sources */,
 				89AD33B92029A2AD00B4520A /* AudioAttr.m in Sources */,
+				89F01657202D48DA0098FE5F /* PresetView.m in Sources */,
 				892CE0BB1FD1014000942E28 /* TextFieldImgTableViewCell.m in Sources */,
 				89241267202062CD001F60E8 /* EventSetting_HichipViewController.m in Sources */,
 				89545EAB202181F900151E90 /* MdParam.m in Sources */,
 				89AA50EA20107838009CCA5D /* HichipCamera.m in Sources */,
 				892ADB821FD78B8F00BD8929 /* TimeZoneSettingViewController.m in Sources */,
 				89A37C98201879CD00A6F0CD /* AddCameraNavigationTypeViewController.m in Sources */,
+				89F0165D202D6FA70098FE5F /* TwsMonitor.m in Sources */,
 				89AD338F20283CE100B4520A /* RecAutoParam.m in Sources */,
 				89AD33D4202A937500B4520A /* EventSearchCustom_HichipViewController.m in Sources */,
 				89E1712B1FDFF126004AAD3D /* WiFiConfigContext.m in Sources */,
@@ -2778,6 +2820,8 @@
 				890B46AB1FB034C000C1061A /* MyCamera.m in Sources */,
 				892CE0BE1FD1029F00942E28 /* TextFieldDisableTableViewCell.m in Sources */,
 				89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */,
+				89F0165A202D6F5B0098FE5F /* HiMonitor.m in Sources */,
+				89F01662202D7F5E0098FE5F /* ZoomContentView.m in Sources */,
 				89241268202062CD001F60E8 /* OtherSetting_HichipViewController.m in Sources */,
 				892ADB5D1FD6524800BD8929 /* ChangeCameraNameViewController.m in Sources */,
 				89E6D99D1FDA61DC0049F1E7 /* MBProgressHUD.m in Sources */,
@@ -3067,8 +3111,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f0d9e7f-8d2e-42cf-8e39-8c4af63614fb";
-				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_appstore_20180104;
+				PROVISIONING_PROFILE = "f339e28f-cf94-44d8-878a-eaf95715e7eb";
+				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_20180102_hoc;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

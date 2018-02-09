@@ -177,6 +177,9 @@
 
 
 //hichip global vars
+#define XG_APPID (2200274193)
+#define XG_APPKEY @"IX15RLJ3U94V"
+#define XG_Company @"tenvisty"
 #define DEFAULT_CAMERA_FUNCTION ([NSArray arrayWithObjects:@"1",@"1",@"0",@"0",@"1", nil])
 #import "hi_p2p_ipc_protocol.h"
 #import "hi_base64.h"

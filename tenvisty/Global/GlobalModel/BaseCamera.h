@@ -21,6 +21,14 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
 
+typedef enum
+{
+    TwsDirectionNone = 0,
+    TwsDirectionTiltUp = 1,
+    TwsDirectionTiltDown = 2,
+    TwsDirectionPanLeft = 3,
+    TwsDirectionPanRight = 4,
+} TwsCameraDirection;
 @protocol BaseCameraDelegate;
 
 
@@ -80,6 +88,8 @@
 - (BOOL)hasPreset;
 - (BOOL)hasZoom;
 - (BOOL)hasSDSlot;
+- (void) SetImgview:(UIImageView*) imgview;
+-(void) RemImgview;
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>

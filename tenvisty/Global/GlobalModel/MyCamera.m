@@ -409,7 +409,7 @@
     else{
         self.remoteNotifications = 0;
     }
-    [GBase editCamera:self];
+    [GBase editCamera:(BaseCamera*)self];
 }
 
 #pragma mark - CameraDelegate Methods

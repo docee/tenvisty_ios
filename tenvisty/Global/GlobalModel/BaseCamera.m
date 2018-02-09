@@ -190,7 +190,14 @@
 }
 
 - (void)clearRemoteNotifications {
-    [self.orginCamera clearRemoteNotifications];
+    if(self.remoteNotifications > 0){
+        self.remoteNotifications = 1;
+    }
+    else{
+        self.remoteNotifications = 0;
+    }
+    [GBase editCamera:(BaseCamera*)self];
+    //[self.orginCamera clearRemoteNotifications];
 }
 
 - (void)start {
@@ -360,5 +367,11 @@
 }
 - (BOOL)hasSDSlot{
     return [((NSString *)[[self getFunctionFlag] objectAtIndex:4]) isEqual:@"1"];
+}
+- (void) SetImgview:(UIImageView*) imgview{
+    [self.orginCamera SetImgview:imgview];
+}
+-(void) RemImgview{
+    [self.orginCamera RemImgview];
 }
 @end

@@ -105,6 +105,7 @@
         self.view.labPlayTime.text = [[NSString alloc] initWithFormat:@"%02d:%02d",nowMinutes,nowSeconds];
     }
 }
+
 -(void)setEnd{
     self.view.sliderProgress.value = self.view.sliderProgress.maximumValue;
     self.view.btnPlay.selected = NO;

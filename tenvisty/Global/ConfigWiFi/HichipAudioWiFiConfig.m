@@ -38,6 +38,7 @@
     [self initObj];
 //    UInt32 audioRouteOverride = NO ?kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
 //    AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
+    [self.sinVoice setSSID:self.ssid KEY:self.pwd];
     [self.sinVoice startSinVoice];
     //AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
 }

@@ -240,11 +240,11 @@
     }];
     [alertController addAction:actionNO];
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:LOCALSTR(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isShowingModifyPassword = NO;
         NSString *pwd = alertController.textFields.firstObject.text;
         if(pwd.length == 0){
             return;
         }
-        isShowingModifyPassword = NO;
         camera.pwd = alertController.textFields.firstObject.text;
         [GBase editCamera:camera];
         [camera start];
@@ -275,6 +275,7 @@
     if(!isShowingModifyPassword){
         isShowingModifyPassword = YES;
         [TwsTools presentAlertMsg:self message: FORMAT(LOCALSTR(@"Your camera [%@] uses default password, please change the password for security."),((BaseCamera*)camera).nickName) actionDefaultBlock:^{
+            isShowingModifyPassword = NO;
             UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:[self getSettingStoryboardName:camera] bundle:nil];
             BaseTableViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_changcamerapassword"];  //test2为viewcontroller的StoryboardId
             test2obj.camera = camera;

@@ -11,6 +11,7 @@
 #import "BaseViewController.h"
 #import "EmailSetting_HichipViewController.h"
 #import "EventSetting_HichipViewController.h"
+#import "HiPushSDK.h"
 
 @interface EventSetting_HichipViewController (){
     NSInteger currentPush;
@@ -113,6 +114,8 @@
 }
 
 -(void)refreshViewModel{
+    ListImgTableViewCellModel *pushModel = [[self.listItems objectAtIndex:1] objectAtIndex:0];
+    pushModel.titleValue = self.camera.remoteNotifications == 0 ? @"0" : @"1";
     ListImgTableViewCellModel *sdRecordModel = [[self.listItems objectAtIndex:2] objectAtIndex:0];
     sdRecordModel.titleValue = self.alarmParas.u32SDRec == 0 ? @"0" : @"1";
     ListImgTableViewCellModel *emailSnapModel = [[self.listItems objectAtIndex:3] objectAtIndex:0];
@@ -263,5 +266,42 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)camera:(BaseCamera *)camera _didReceivePushResult:(NSInteger)result type:(NSInteger)type subId:(NSInteger)subId{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+        //开启
+        if (type == PUSH_TYPE_BIND) {
+            
+            if (result == PUSH_RESULT_FAIL) {
+                self.camera.remoteNotifications = 0;
+                   [[iToast makeText:LOCALSTR(@"Setting Failed")] show];
+            }
+            
+            if (result == PUSH_RESULT_SUCCESS) {
+                 self.camera.remoteNotifications = 1;
+                  [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+            }
+        }
+        
+        //关闭
+        if (type == PUSH_TYPE_UNBIND) {
+            
+            if (result == PUSH_RESULT_FAIL) {
+                self.camera.remoteNotifications = 1;
+                 [[iToast makeText:LOCALSTR(@"Setting Failed")] show];
+            }
+            
+            if (result == PUSH_RESULT_SUCCESS) {
+                self.camera.remoteNotifications = 0;
+                   [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+            }
+        }
+        
+            [self.tableView reloadData];
+    });
+    
+}
 
 @end

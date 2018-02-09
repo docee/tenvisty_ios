@@ -149,16 +149,41 @@
 }
 
 - (void)PTZ:(unsigned char)ctrl {
+    NSInteger direction = -1;
+    if(ctrl == TwsDirectionTiltUp){
+        direction = HI_P2P_PTZ_CTRL_UP;
+    }
+    else if(ctrl == TwsDirectionTiltDown){
+        direction = HI_P2P_PTZ_CTRL_DOWN;
+    }
+    else if(ctrl == TwsDirectionPanLeft){
+        direction = HI_P2P_PTZ_CTRL_LEFT;
+    }
+    else if(ctrl == TwsDirectionPanRight){
+        direction = HI_P2P_PTZ_CTRL_RIGHT;
+    }
+    HI_P2P_S_PTZ_CTRL* ptz_ctrl =(HI_P2P_S_PTZ_CTRL *)malloc(sizeof(HI_P2P_S_PTZ_CTRL));
+    ptz_ctrl->u32Channel = 0;
+    ptz_ctrl->u32Ctrl = (HI_U32)direction;  //转动方向
+    ptz_ctrl->u32Mode = (HI_U32)HI_P2P_PTZ_MODE_STEP;    //模式，step 单步， run 持续
+    if (self.isGoke) {
+        ptz_ctrl->u16TurnTime = 25;
+        ptz_ctrl->u16Speed = 25;
+    }else{
+        ptz_ctrl->u16TurnTime = 50;
+        ptz_ctrl->u16Speed = 50;
+    }
     
+    [self sendIOCtrl:HI_P2P_SET_PTZ_CTRL Data:(char *)ptz_ctrl Size:sizeof(HI_P2P_S_PTZ_CTRL)];
+    
+    free(ptz_ctrl);
+    ptz_ctrl = nil;
 }
 
 - (void)clearRemoteNotifications {
-    
+    self.remoteNotifications = 1;
 }
 
-- (void)closePush:(void (^)(NSInteger))successlock {
-    
-}
 
 
 
@@ -175,9 +200,33 @@
 }
 
 - (void)openPush:(void (^)(NSInteger))successlock {
+    LOG(@"开启信鸽推送");
+    LOG(@"camera_subID : %@ %d", self.uid, (int)self.subID);
     
+    // 支持新能力集才更换新推送服务器地址
+    if ([self getCommandFunction:HI_P2P_ALARM_TOKEN_REGIST]) {
+        NSLog(@"666 %@",[[NSUserDefaults standardUserDefaults] objectForKey:[self xingePushIPAddressKey]]);
+        [self.pushSDK setAlarmPushServerIPAddress:[[NSUserDefaults standardUserDefaults] objectForKey:[self xingePushIPAddressKey]]];
+        
+    }
+    
+    [self.pushSDK bind];
 }
 
+- (void)closePush:(void (^)(NSInteger))successlock {
+    //[HXProgress showProgress];
+    LOG(@"关闭信鸽推送")
+    LOG(@"camera_subID : %@ %d", self.uid, (int)self.subID);
+    // [HXProgress showText: [NSString stringWithFormat:@"uid:%@ subId:%d",self.uid,self.subID]];
+    // 区分新老接口
+    if (self.subID > 0) {
+        
+        [self.pushSDK unbindWithSubID:self.subID];
+    }
+    else{
+        [self.pushSDK unbind];
+    }
+}
 - (UIImage *)remoteRecordImage:(NSInteger)time type:(NSInteger)tp {
     return nil;
 }
@@ -230,7 +279,7 @@
 }
 
 - (void)startVideo {
-    [super startLiveShow:(int)self.videoQuality == 1?1:0 Monitor:nil];
+    [super startLiveShow:(int)self.videoQuality == 1?0:1 Monitor:nil];
 }
 
 - (void)stop {
@@ -675,9 +724,10 @@
     [self.camDefaults setObject:[NSNumber numberWithInt:subID] forKey:self.xingePushSubIDKey];
     if([self.username isEqualToString:LSUID]){
         if (type == PUSH_TYPE_BIND) {
-            if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePushResult:type:subId:)]) {
-                [self.cameraDelegate camera:self.baseCamera _didReceivePushResult:result type:type subId:subID];
-            }
+//            if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePushResult:type:subId:)]) {
+//                [self.cameraDelegate camera:self.baseCamera _didReceivePushResult:result type:type subId:subID];
+//            }
+            [self closePush:nil];
         }else if (type == PUSH_TYPE_UNBIND && result == 0){
             [[NSUserDefaults standardUserDefaults]removeObjectForKey:[NSString stringWithFormat:@"%@-%@",self.uid,AlarmPushServerIPAddressKey]];//删除存储的该设备的服务器地址
         }
@@ -748,10 +798,10 @@
     if (!_pushSDK) {
         
         //注册信鸽推送返回的deviceToken
-        NSString *token     = [self.camDefaults objectForKey:@"xinge_push_deviceToken"];
+        NSString *token     = [self.camDefaults objectForKey:@"push_deviceToken"];
         NSString *company   = [self.camDefaults objectForKey:@"xinge_push_company"];
         
-        LOG(@"xinge_push_deviceToken : %@", token)
+        LOG(@"push_deviceToken : %@", token)
         NSLog(@"xinge_push_company : %@", company);
         LOG(@"xinge_push_uid : %@", self.uid)
         
@@ -891,5 +941,11 @@
 
 -(BOOL)getCommandFunction:(int)cmd{
     return [super getCommandFunction:cmd];
+}
+- (void) SetImgview:(UIImageView*) imgview{
+    [super SetImgview:imgview];
+}
+-(void) RemImgview{
+    [super RemImgview];
 }
 @end

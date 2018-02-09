@@ -6,6 +6,8 @@
 //  Copyright © 2017年 Tenvis. All rights reserved.
 //
 #define RECORD_PLAY_WAIT_TIMEOUT 18
+#define ZOOM_MAX_SCALE 5.0
+#define ZOOM_MIN_SCALE 1.0
 
 #import "Playback_HichipViewController.h"
 #import <IOTCamera/Monitor.h>
@@ -16,8 +18,9 @@
 #import "VideoProgressBarView.h"
 #import "AppDelegate.h"
 #import "UIDevice+TFDevice.h"
+#import "TwsMonitor.h"
 
-@interface Playback_HichipViewController ()<VideoProgressBarDelegate>{
+@interface Playback_HichipViewController ()<VideoProgressBarDelegate,TwsMonitorTouchDelegate>{
     BOOL waitResize;
     long totalSeconds;
 }
@@ -34,7 +37,7 @@
 @property (nonatomic, assign) BOOL isDraging;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator_loading;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview_video;
-@property (weak, nonatomic) IBOutlet UIImageView *monitor;
+@property (weak, nonatomic) IBOutlet TwsMonitor *monitor;
 @property (weak, nonatomic) IBOutlet UILabel *labEventType;
 @property (weak, nonatomic) IBOutlet UILabel *labEventTime;
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_ratio_videowrapper;
@@ -132,7 +135,18 @@
     _isPlaying = NO;
     _isEndingFlag = NO;
     _isDraging = NO;
-    [self.originCamera SetImgview:self.monitor];
+    [self.monitor setMinimumGestureLength:100 MaximumVariance:50];
+    [self.monitor setUserInteractionEnabled:YES];
+    self.monitor.contentMode = UIViewContentModeScaleToFill;
+    self.monitor.backgroundColor = [UIColor blackColor];
+    self.monitor.delegate = self;
+    
+    self.scrollview_video.minimumZoomScale = ZOOM_MIN_SCALE;
+    self.scrollview_video.maximumZoomScale = ZOOM_MAX_SCALE;
+    self.scrollview_video.zoomScale = 1.0;
+    self.scrollview_video.contentMode = UIViewContentModeScaleAspectFit;
+    self.scrollview_video.contentSize = self.monitor.frame.size;
+    [self.monitor attachCamera:self.camera];
     if (self.originCamera.gmTimeZone && self.originCamera.gmTimeZone.u32DstMode == 1) {
         if (![self.camera getCommandFunction:HI_P2P_PB_QUERY_START_NODST]) {
             self.evt.eventTime -= 60*60;
@@ -151,6 +165,27 @@
     [self resizeMonitor:self.camera.videoRatio];
     [self startPlayback];
 }
+
+#pragma mark - ScrollView Delegate
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.monitor;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView
+                       withView:(UIView *)view
+                        atScale:(float)scale
+{
+    if (scale == ZOOM_MIN_SCALE) {
+        self.scrollview_video.contentSize = CGSizeMake(320, 240);
+    }
+}
+#pragma mark - MonitorTouchDelegate Methods
+
+- (void)monitor:(TwsMonitor *)monitor gesturePinched:(CGFloat)scale
+{
+    [self.scrollview_video setZoomScale:scale animated:YES];
+}
+
 -(void)youMoveDrag:(UISlider* )slider{
     [UIView animateWithDuration:.35 animations:^{
         self.ZKGangBar.alpha = 1;
@@ -279,6 +314,7 @@
         dispatch_block_cancel(_timeoutTask);
         _timeoutTask = nil;
     }
+    [self.monitor deattachCamera];
     [self doEndPlayback];
 }
 
@@ -397,9 +433,9 @@
         self.navigationController.navigationBar.hidden=NO;
         _isFullscreen = NO;
     }
-    [self.originCamera RemImgview];
+    [self.monitor deattachCamera];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.originCamera SetImgview:self.monitor];
+        [self.monitor attachCamera:self.camera];
     });
 }
 /*
@@ -411,5 +447,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (void)monitor:(TwsMonitor *)monitor gestureSwiped:(TwsCameraDirection)direction{
+    
+}
 
 @end
