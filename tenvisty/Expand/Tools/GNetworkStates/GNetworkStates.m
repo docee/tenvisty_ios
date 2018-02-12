@@ -126,10 +126,10 @@
     }
     
     if ([netType isEqualToString:@"wifi"]) {
-        return NO;
+        return YES;
     }
     
-    return YES;
+    return NO;
 }
 
 + (NSString *) getDeviceSSID {

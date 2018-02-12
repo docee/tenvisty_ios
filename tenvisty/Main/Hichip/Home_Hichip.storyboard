@@ -64,6 +64,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XK5-pI-aww" customClass="TwsMonitor">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <gestureRecognizers/>
                                             </imageView>
                                         </subviews>
@@ -268,7 +269,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="faz-0s-vNT" firstAttribute="centerX" secondItem="Skq-S3-eMp" secondAttribute="centerX" id="4SM-sf-JCN"/>
                                     <constraint firstItem="faz-0s-vNT" firstAttribute="centerY" secondItem="Skq-S3-eMp" secondAttribute="centerY" id="AKP-sa-JIv"/>

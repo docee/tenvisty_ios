@@ -290,7 +290,7 @@
 
 -(void)changeStream:(NSInteger)stream{
     self.camera.videoQuality = stream;
-    [self.videoMonitor attachCamera:self.camera];
+    //[self.videoMonitor attachCamera:self.camera];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.camera startVideo];
     });
@@ -723,13 +723,23 @@
 - (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)width height:(NSInteger)height{
     if (state == 0) {
         if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
+            [self.videoMonitor deattachCamera];
             self.camera.videoRatio = (CGFloat)width/height;
-            [self resizeMonitor:self.camera.videoRatio];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self resizeMonitor:(CGFloat)width/height];
+            });
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.videoMonitor attachCamera:self.camera];
+            });
             
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.videoMonitor attachCamera:self.camera];
+            });
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [_viewLoading setHidden:YES];
-            [self.videoMonitor attachCamera:self.camera];
             if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
                 [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
                 [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];

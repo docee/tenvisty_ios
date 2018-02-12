@@ -16,10 +16,29 @@
 
 @property (nonatomic, strong) NSMutableArray *searchResults;
 @property (nonatomic,strong) SearchLanAsync* lanSearcher;
+@property (nonatomic,copy) dispatch_block_t timeoutTask;
 @end
 
 @implementation SearchCameraTableViewController
-
+-(dispatch_block_t)timeoutTask{
+    if(_timeoutTask == nil){
+        _timeoutTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            [MBProgressHUD hideAllHUDsForView:self.viewSubLoading animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+            if(self.searchResults.count == 0){
+                [[iToast makeText:@"No Device on LAN"] show];
+            }
+        });
+    }
+    return _timeoutTask;
+}
+-(dispatch_block_t)newTimeoutTask{
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+    }
+    _timeoutTask = nil;
+    return self.timeoutTask;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,6 +65,10 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
     self.lanSearcher.delegate = nil;
     [MBProgressHUD hideAllHUDsForView:self.viewSubLoading animated:YES];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
@@ -77,13 +100,7 @@
     }
     //搜索结束
     else if(status == 0){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideAllHUDsForView:self.viewSubLoading animated:YES];
-            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-            if(self.searchResults.count == 0){
-                [[iToast makeText:@"No Device on LAN"] show];
-            }
-        });
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     }
     
 }
