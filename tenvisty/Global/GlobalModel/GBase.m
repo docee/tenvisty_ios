@@ -190,7 +190,7 @@ static GBase *base = nil;
     [base saveImageToFile:img imageName:imgName];
     
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path,small_file_path, recording_type, time) VALUES(?,?,?,?,?)", mycam.uid, FORMAT(@"%ld",(long)evtTime),imgName,  [NSNumber numberWithInteger:10+evtType], [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]]) {
+        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path,small_file_path, recording_type, time) VALUES(?,?,?,?,?)", mycam.uid, @"",imgName,  [NSNumber numberWithInteger:10+evtType], [NSNumber numberWithDouble:evtTime]]) {
             NSLog(@"Fail to save recording to database.");
             return NO;
         }
@@ -199,6 +199,42 @@ static GBase *base = nil;
     return YES;
 }
 
++ (BOOL)saveRemoteRecordForCamera:(BaseCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime {
+    
+    GBase *base = [GBase sharedInstance];
+    
+    NSString *imgName =[mycam remoteRecordThumbName:evtTime type:evtType];
+    //NSString *imgPath = [base imgFilePathWithImgName:imgName];
+    
+    //NSLog(@"imgPath:%@", imgName);
+    
+    if (img != nil) {
+        [base saveImageToFile:img imageName:imgName];
+    }
+    NSString *recordName = [mycam remoteRecordName:evtTime type:evtType];
+    
+    if (base.db != NULL) {
+        if (![base.db executeUpdate:@"INSERT INTO video(dev_uid, file_path,small_file_path, recording_type, time) VALUES(?,?,?,?,?)", mycam.uid, recordName,imgName,  [NSNumber numberWithInteger:10+evtType], [NSNumber numberWithDouble:evtTime]]) {
+            NSLog(@"Fail to save recording to database.");
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
++(BOOL)isVideoRecordExitForCamera:(BaseCamera *)mycam fileName:(NSString*)fileName{
+    GBase *base = [GBase sharedInstance];
+    FMResultSet *rs = [base.db executeQuery:@"SELECT * FROM video WHERE dev_uid=? and file_path=?", mycam.uid,fileName];
+    BOOL exist = NO;
+    while([rs next]) {
+        exist = YES;
+        break;
+    }
+    
+    [rs close];
+    return exist;
+}
 //删除照片
 + (void)deletePicture:(BaseCamera*)camera name:(NSString *)pictureName {
     GBase *base = [GBase sharedInstance];

@@ -396,14 +396,14 @@
     }
     if(self.isAuthConnected){
         
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
                 [self.cameraDelegate camera:self.baseCamera _didChangeChannelStatus:0 ChannelStatus:status];
             }
         });
     }
     else{
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeSessionStatus:)]) {
                 [self.cameraDelegate camera:self.baseCamera _didChangeSessionStatus:status];
             }
@@ -580,18 +580,26 @@
 }
 
 - (void)receivePlayState:(HiCamera *)camera State:(int)state Width:(int)width Height:(int)height{
-    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePlayState:witdh:height:)]) {
-        [self.cameraDelegate camera:self.baseCamera _didReceivePlayState:state witdh:width height:height];
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePlayState:witdh:height:)]) {
+                [self.cameraDelegate camera:self.baseCamera _didReceivePlayState:state witdh:width height:height];
+            }
+        });
 }
 - (void)receivePlayUTC:(HiCamera *)camera Time:(int)time{
-    if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePlayUTC:)]) {
-        [self.cameraDelegate camera:self.baseCamera _didReceivePlayUTC:time];
-    }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceivePlayUTC:)]) {
+                [self.cameraDelegate camera:self.baseCamera _didReceivePlayUTC:time];
+            }
+        });
 }
 
 - (void)receiveDownloadState:(HiCamera*)camera Total:(int)total CurSize:(int)curSize State:(int)state Path:(NSString*)path{
-    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveDownloadState:Total:CurSize:Path:)]) {
+            [self.cameraDelegate camera:self.baseCamera _didReceiveDownloadState:state Total:total CurSize:curSize Path:path];
+        }
+    });
 }
 
 - (BOOL)isGoke {

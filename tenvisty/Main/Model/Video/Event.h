@@ -30,6 +30,8 @@
 
 @property (nonatomic,assign) BOOL isDateFirstItem;
 @property (nonatomic,assign) NSTimeInterval dateTimeInterval;
+@property (nonatomic,assign) BOOL isSelected;
+@property (nonatomic,assign) NSInteger downloadState;
 + (STimeDay)getHiTimeDay:(long)time;
 + (NSString *)getEventTypeName:(int)eventType;
 + (TUTK_STimeDay)getTimeDay:(long)time;

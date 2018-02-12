@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Event.h"
 
 @interface EventItemTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *img_eventTypeIcon;
@@ -17,5 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgEventThumb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_centerY_img_eventTypeIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *imgPlay;
+@property (weak, nonatomic) IBOutlet UIButton *btnSelect;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_btnSelect;
+
+-(void)setEditMode:(BOOL)edit;
+-(void)setDisableMode:(BOOL)disable;
+-(void)setModel:(Event*)model;
 
 @end

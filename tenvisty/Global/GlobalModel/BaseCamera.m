@@ -282,7 +282,24 @@
     NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld.jpg", self.uid,(int)tp,(long)recordId];
     return fileName;
 }
+- (NSString *)remoteRecordName:(NSInteger)recordId type:(NSInteger)tp{
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld.mp4", self.uid,(int)tp,(long)recordId];
+    return fileName;
+}
 
+- (NSString *)remoteRecordDir{
+    NSString *document_uid = [self.documents stringByAppendingPathComponent: self.uid];
+    [self.gFileManager createDirectoryAtPath:document_uid withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    NSString *document_uid_download = [document_uid stringByAppendingString:@"/Download"];
+    [self.gFileManager createDirectoryAtPath:document_uid_download withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    return document_uid_download;
+}
+#pragma mark - NSFileManager
+- (NSFileManager *)gFileManager {
+    return [NSFileManager defaultManager];
+}
 
 //获取截图
 - (UIImage *)image {

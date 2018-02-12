@@ -90,6 +90,8 @@ typedef enum
 - (BOOL)hasSDSlot;
 - (void) SetImgview:(UIImageView*) imgview;
 -(void) RemImgview;
+- (NSString *)remoteRecordName:(NSInteger)recordId type:(NSInteger)tp;
+- (NSString *)remoteRecordDir;
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>
@@ -110,6 +112,8 @@ typedef enum
 - (void)camera:(BaseCamera *)camera _didReceivePushResult:(NSInteger)result type:(NSInteger)type subId:(NSInteger)subId;
 - (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)w height:(NSInteger)h;
 - (void)camera:(BaseCamera *)camera _didReceivePlayUTC:(NSInteger)time;
+- (void)camera:(BaseCamera *)camera _didReceiveDownloadState:(int)state Total:(int)total CurSize:(int)curSize Path:(NSString*)path;
+
 
 @end
 

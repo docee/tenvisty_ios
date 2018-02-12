@@ -17,9 +17,11 @@
 #import "ListReq.h"
 #import "HichipCamera.h"
 #import "TimeZoneModel.h"
+#import "CameraIOSessionProtocol.h"
 
 @interface EventList_HichipViewController ()<EventCustomSearchDelegate>{
     BOOL isSearchingTimeout;
+    BOOL isEditMode;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture_outerView;
 @property (weak, nonatomic) IBOutlet UILabel *labSearchTime;
@@ -31,8 +33,12 @@
 @property (nonatomic,strong) NSMutableArray *event_list;
 @property (nonatomic,strong) EventCustomSearchSource *searchMenu;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
+@property (weak, nonatomic) IBOutlet UIView *viewToolbarBottom;
 @property (nonatomic,strong) ListReq *listReq;
+@property (weak, nonatomic) IBOutlet UIButton *btnSelectAll;
 @property (nonatomic,strong) HichipCamera *originCamera;
+@property (nonatomic,strong) NSMutableArray *download_event_list;
+@property (nonatomic,assign) NSInteger downloadIndex;
 @end
 
 @implementation EventList_HichipViewController
@@ -72,6 +78,15 @@
     self.tableview_customSearchMenu.delegate = self.searchMenu;
     self.tableview_customSearchMenu.dataSource = self.searchMenu;
     [self beginSearch];
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    self.tableview.translatesAutoresizingMaskIntoConstraints = YES;
+    self.viewToolbarBottom.translatesAutoresizingMaskIntoConstraints = YES;
+    if(((UIView*)self.bottomLayoutGuide).frame.size.height > 0){
+        self.viewToolbarBottom.frame = CGRectMake(self.viewToolbarBottom.frame.origin.x, self.viewToolbarBottom.frame.origin.y, self.viewToolbarBottom.frame.size.width, 94);
+    }
 }
 
 -(dispatch_block_t)timeoutTask{
@@ -126,12 +141,62 @@
     [self.searchMenu dismiss];
     [_tapGesture_outerView setEnabled:NO];
 }
+- (IBAction)clickEdit:(UIBarButtonItem *)sender {
+    isEditMode = !isEditMode;
+    if(isEditMode){
+        sender.title = LOCALSTR(@"Done");
+    }
+    else{
+        sender.title = LOCALSTR(@"Edit");
+    }
+    if(!isEditMode){
+        self.btnSelectAll.selected = NO;
+        for(Event *evt in self.event_list){
+            evt.isSelected = NO;
+        }
+    }
+    else{
+        //        self.tableview.translatesAutoresizingMaskIntoConstraints = YES;
+        //        self.viewToolbarBottom.translatesAutoresizingMaskIntoConstraints = YES;
+    }
+    if([self.viewToolbarBottom isHidden]){
+        [self.viewToolbarBottom setHidden:NO];
+    }
+    if(isEditMode){
+        __block CGRect currentToolbarFrame = self.viewToolbarBottom.frame;
+        __block CGRect currentTableFrame = self.tableview.frame;
+        __weak typeof(self) weakSelf = self;
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            currentToolbarFrame.origin.y = self.view.frame.size.height - currentToolbarFrame.size.height;
+            weakSelf.viewToolbarBottom.frame = currentToolbarFrame;
+            currentTableFrame.size.height -= currentToolbarFrame.size.height;
+            weakSelf.tableview.frame = currentTableFrame;
+        }];
+    }
+    else{
+        __block CGRect currentToolbarFrame = self.viewToolbarBottom.frame;
+        __block CGRect currentTableFrame = self.tableview.frame;
+        __weak typeof(self) weakSelf = self;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            currentToolbarFrame.origin.y += 2*currentToolbarFrame.size.height;
+            weakSelf.viewToolbarBottom.frame = currentToolbarFrame;
+            currentTableFrame.size.height += currentToolbarFrame.size.height;
+            weakSelf.tableview.frame = currentTableFrame;
+        }];
+    }
+    if(!self.listReq.isSerach){
+        [self.tableview reloadData];
+    }
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath*)indexPath
 {
     Event *model = [_event_list objectAtIndex:indexPath.row];
     NSString *vid = @"tableviewCellEventItem";
     EventItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
+    [cell setModel:model];
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:model.eventTime];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -147,6 +212,7 @@
     else{
         cell.constraint_centerY_img_eventTypeIcon.constant = 0;
     }
+    [cell setEditMode:isEditMode];
     UIImage *thumb = [self.camera remoteRecordImage:model.eventTime type:model.eventType];
     //已读
     if(model.eventStatus == EVENT_READED || thumb != nil){
@@ -479,12 +545,71 @@
     }
 }
 
+- (void)camera:(BaseCamera *)camera _didReceiveDownloadState:(int)state Total:(int)total CurSize:(int)curSize Path:(NSString*)path{
+    if(state == DownloadFailed){
+        
+    }
+    else if(state == DOWNLOAD_STATE_START){
+        
+    }
+    else if(state == DOWNLOAD_STATE_DOWNLOADING){
+        
+    }
+    else if(state == DOWNLOAD_STATE_END){
+        
+    }
+    else if(state == DOWNLOAD_STATE_ERROR_PATH){
+        
+    }
+    else if(state == DOWNLOAD_STATE_ERROR_DATA){
+        
+    }
+}
+
 -(void)showCustomSearchView{
     
     [self performSegueWithIdentifier:@"EventList2EventSearchCustom" sender:self];
     [self.searchMenu dismiss];
 }
 
+- (IBAction)clickDownload:(id)sender {
+}
+- (IBAction)clickSelectAll:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    BOOL selected = sender.selected;
+    for (Event *evt in self.event_list) {
+        evt.isSelected = selected;
+    }
+    [self.tableview reloadData];
+}
+
+-(void)downloadSingle{
+    BOOL hasDownloaded = true;
+    Event *evt = nil;
+    NSString *filePath = [self.camera remoteRecordDir];
+    NSString *fileName = nil;
+    while (hasDownloaded && _downloadIndex< _download_event_list.count) {
+        evt = [_download_event_list objectAtIndex:_downloadIndex];
+        fileName = [self.camera remoteRecordName:evt.eventTime type:evt.eventType];
+        BOOL isExist =  [GBase isVideoRecordExitForCamera:self.camera fileName:fileName];
+        if(isExist){
+            hasDownloaded = true;
+            evt.downloadState = 1;
+            _downloadIndex++;
+        }
+        else{
+            evt.downloadState = 0;
+            hasDownloaded = NO;
+        }
+    }
+    if(!hasDownloaded){
+        [self.originCamera startDownloadRecording2:[Event getHiTimeDay:evt.eventTime] Dir:filePath File:fileName];
+    }
+    else{
+        //下载结束
+        
+    }
+}
 /*
 #pragma mark - Navigation
 

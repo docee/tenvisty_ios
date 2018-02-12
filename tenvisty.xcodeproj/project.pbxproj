@@ -226,6 +226,7 @@
 		89F0165F202D7A070098FE5F /* ZoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F0165E202D7A070098FE5F /* ZoomView.xib */; };
 		89F01662202D7F5E0098FE5F /* ZoomContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01661202D7F5E0098FE5F /* ZoomContentView.m */; };
 		89F01668202D81330098FE5F /* ZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01667202D81330098FE5F /* ZoomView.m */; };
+		89F0166F203151FC0098FE5F /* NSLayoutConstraint+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0166E203151FC0098FE5F /* NSLayoutConstraint+Add.m */; };
 		C6D1F8203E76628784C971FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E58AE4DC4897602AE9CF48 /* Security.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
@@ -703,6 +704,8 @@
 		89F01661202D7F5E0098FE5F /* ZoomContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomContentView.m; sourceTree = "<group>"; };
 		89F01666202D81330098FE5F /* ZoomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZoomView.h; sourceTree = "<group>"; };
 		89F01667202D81330098FE5F /* ZoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomView.m; sourceTree = "<group>"; };
+		89F0166D203151FC0098FE5F /* NSLayoutConstraint+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Add.h"; sourceTree = "<group>"; };
+		89F0166E203151FC0098FE5F /* NSLayoutConstraint+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Add.m"; sourceTree = "<group>"; };
 		8D671A28AAADB2741242114D /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
 		A259C50E727727C3F0BF3358 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = "<group>"; };
 		C4E58AE4DC4897602AE9CF48 /* Security.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<group>"; };
@@ -1105,6 +1108,7 @@
 		890B46B01FB03CD500C1061A /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				89F01669203150400098FE5F /* NSLayoutConstraint */,
 				ED04107D1FF3F19500D2DD19 /* NSString+MD5 */,
 				89A0967C1FF109C700E5EBAE /* FLAnimatedImage */,
 				ED3E88B21FE6BFF5006754E8 /* UIDevice+TFDevice */,
@@ -1901,6 +1905,15 @@
 				89E6D99B1FDA61DC0049F1E7 /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		89F01669203150400098FE5F /* NSLayoutConstraint */ = {
+			isa = PBXGroup;
+			children = (
+				89F0166D203151FC0098FE5F /* NSLayoutConstraint+Add.h */,
+				89F0166E203151FC0098FE5F /* NSLayoutConstraint+Add.m */,
+			);
+			path = NSLayoutConstraint;
 			sourceTree = "<group>";
 		};
 		ED040F681FF3F19500D2DD19 /* tenvisty */ = {
@@ -2818,6 +2831,7 @@
 				892ADB7C1FD6A8B000BD8929 /* OtherSettingViewController.m in Sources */,
 				892CE0B71FD1013100942E28 /* PasswordFieldTableViewCell.m in Sources */,
 				890B46AB1FB034C000C1061A /* MyCamera.m in Sources */,
+				89F0166F203151FC0098FE5F /* NSLayoutConstraint+Add.m in Sources */,
 				892CE0BE1FD1029F00942E28 /* TextFieldDisableTableViewCell.m in Sources */,
 				89E6D9961FDA2B280049F1E7 /* SearchLanAsync.m in Sources */,
 				89F0165A202D6F5B0098FE5F /* HiMonitor.m in Sources */,

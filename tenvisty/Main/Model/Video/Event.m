@@ -185,6 +185,7 @@
         self.eventTime = time;
         self.eventStatus = status;
         self.dateTimeInterval = [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:time]];
+        self.downloadState = -1;
         
     }
     
@@ -203,6 +204,7 @@
         self.eventEndTime = endTime;
         self.eventStatus = status;
         self.dateTimeInterval = [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:startTime]];
+        self.downloadState = -1;
         
     }
     
@@ -221,6 +223,7 @@
         self.eventTime = time;
         self.eventStatus = status;
         self.dateTimeInterval = [self zeroOfDateTimeInterval:[[NSDate alloc] initWithTimeIntervalSince1970:time]];
+        self.downloadState = -1;
     }
     
     return self;

@@ -38,4 +38,6 @@
 +(void)setCameraVideoRatio:(BaseCamera*)mycam ratio:(CGFloat)ratio;
 + (void)setCameraFunction:(NSString *)uid function:(NSString *)function;
 + (NSString *)getCameraFunction:(NSString *)uid;
++ (BOOL)saveRemoteRecordForCamera:(BaseCamera *)mycam image:(UIImage*)img eventType:(NSInteger)evtType eventTime:(NSInteger)evtTime;
++(BOOL)isVideoRecordExitForCamera:(BaseCamera *)mycam fileName:(NSString*)fileName;
 @end

@@ -33,15 +33,19 @@
 - (void)attachCamera:(BaseCamera *)cam
 {
     camera = cam;
-    [camera SetImgview:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [camera SetImgview:self];
+    });
 }
 
 - (void)deattachCamera
 {
     if(camera){
-        [camera RemImgview];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [camera RemImgview];
+            camera = nil;
+        });
     }
-    camera = nil;
 }
 
 

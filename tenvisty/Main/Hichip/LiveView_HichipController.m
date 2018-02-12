@@ -36,6 +36,7 @@
     NSInteger videoFps;
     HichipCamera *hiCamera;
     BOOL isShowing;
+    BOOL isChangingStream;
     
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollviewVideo;
@@ -303,9 +304,19 @@
         self.camera.videoQuality = 1;
         [GBase editCamera:self.camera];
         [_viewLoading setHidden:NO];
-        [self.camera stopVideoAsync:^{
-            [self changeStream:1];
-        }];
+        //[self.camera stop];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.camera start];
+//        });
+        if(!isChangingStream){
+            isChangingStream = YES;
+            [self.camera stopVideoAsync:^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self changeStream:self.camera.videoQuality];
+                    isChangingStream = NO;
+                });
+            }];
+        }
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -317,9 +328,19 @@
         self.camera.videoQuality = 0;
         [GBase editCamera:self.camera];
         [_viewLoading setHidden:NO];
-        [self.camera stopVideoAsync:^{
-            [self changeStream:0];
-        }];
+         //[self.camera stop];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.camera start];
+//        });
+        if(!isChangingStream){
+            isChangingStream = YES;
+            [self.camera stopVideoAsync:^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self changeStream:self.camera.videoQuality];
+                    isChangingStream = NO;
+                });
+            }];
+        }
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -665,7 +686,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         _labConnectState.text = camera.cameraStateDesc;
     });
-    if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
+    if(self.camera.isAuthConnected){
         [self changeStream:self.camera.videoQuality];
         if(isListening){
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -704,19 +725,19 @@
             break;
         }
     }
-    
+    [existConstraint setMultiplier:ratio];
     //if(existConstraint == nil){
-    NSLayoutConstraint *myConstraint =[NSLayoutConstraint
-                                       constraintWithItem:self.video_wrapper //子试图
-                                       attribute:NSLayoutAttributeWidth //子试图的约束属性
-                                       relatedBy:0 //属性间的关系
-                                       toItem:self.video_wrapper//相对于父试图
-                                       attribute:NSLayoutAttributeHeight//父试图的约束属性
-                                       multiplier:ratio
-                                       constant:0.0];// 固定距离
-    myConstraint.identifier = @"videowrapper_ratio";
-    [self.video_wrapper removeConstraint:existConstraint];//在父试图上将iSinaButton距离屏幕左边的约束删除
-    [self.video_wrapper addConstraint: myConstraint];
+//    NSLayoutConstraint *myConstraint =[NSLayoutConstraint
+//                                       constraintWithItem:self.video_wrapper //子试图
+//                                       attribute:NSLayoutAttributeWidth //子试图的约束属性
+//                                       relatedBy:0 //属性间的关系
+//                                       toItem:self.video_wrapper//相对于父试图
+//                                       attribute:NSLayoutAttributeHeight//父试图的约束属性
+//                                       multiplier:ratio
+//                                       constant:0.0];// 固定距离
+//    myConstraint.identifier = @"videowrapper_ratio";
+//    [self.video_wrapper removeConstraint:existConstraint];//在父试图上将iSinaButton距离屏幕左边的约束删除
+//    [self.video_wrapper addConstraint: myConstraint];
 }
 
 
@@ -725,27 +746,21 @@
         if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
             [self.videoMonitor deattachCamera];
             self.camera.videoRatio = (CGFloat)width/height;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self resizeMonitor:(CGFloat)width/height];
-            });
+            [self resizeMonitor:(CGFloat)width/height];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.videoMonitor attachCamera:self.camera];
             });
             
         }
         else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.videoMonitor attachCamera:self.camera];
-            });
+            [self.videoMonitor attachCamera:self.camera];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_viewLoading setHidden:YES];
-            if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
-                [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
-                [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
-                self.camera.videoQuality = height < 700 ? 0 :1;
-            }
-        });
+        [_viewLoading setHidden:YES];
+        if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
+            [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
+            [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
+            self.camera.videoQuality = height < 700 ? 0 :1;
+        }
         isShowing = YES;
     }
     //本地录像错误
