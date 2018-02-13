@@ -10,4 +10,6 @@
 
 @interface ImageCollectionViewController : BaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
+@property (nonatomic,assign) int selectedIndex;
+
 @end

@@ -155,6 +155,14 @@
     return result;
 }
 
+-(NSString*)strEventTime{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.eventTime];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd_HH-mm-ss"];
+    NSString* strDateTime = [formatter stringFromDate:date];
+    return strDateTime;
+}
+
 // return a new autoreleased UUID string
 - (NSString *)generateUuidString
 {

@@ -71,7 +71,7 @@
 }
 
 -(void)setup{
-    self.myCamera = self.camera.cameraDelegate;
+    self.myCamera = (MyCamera*)self.camera.orginCamera;
     updateState = -1;
     resetState = -1;
     rebootState = -1;

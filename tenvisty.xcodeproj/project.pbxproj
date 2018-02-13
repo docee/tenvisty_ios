@@ -34,7 +34,6 @@
 		89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */; };
 		89241178201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */; };
 		8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD5081FCD3DAD008ED303 /* libstdc++.6.0.9.tbd */; };
-		892411D2202010CA001F60E8 /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
 		89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89241244202062CD001F60E8 /* CameraSetting_Hichip.storyboard */; };
 		89241262202062CD001F60E8 /* CameraSetting_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241246202062CD001F60E8 /* CameraSetting_HichipViewController.m */; };
 		89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89241248202062CD001F60E8 /* ChangeCameraName_HichipViewController.m */; };
@@ -107,7 +106,6 @@
 		895141D01FE763BD00905355 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141CC1FE763BD00905355 /* iToast.m */; };
 		895141D91FE7780100905355 /* LocalVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141D81FE7780100905355 /* LocalVideoInfo.m */; };
 		895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 895141E41FE8C7FF00905355 /* SwitchVideoQualityDialog.m */; };
-		89545E992020751800151E90 /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
 		89545EA420207F6900151E90 /* WifiAp.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545E9D20207F6800151E90 /* WifiAp.m */; };
 		89545EA520207F6900151E90 /* WifiCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545E9F20207F6800151E90 /* WifiCheck.m */; };
 		89545EA620207F6900151E90 /* WifiList.m in Sources */ = {isa = PBXBuildFile; fileRef = 89545EA120207F6800151E90 /* WifiList.m */; };
@@ -155,7 +153,6 @@
 		89A096841FF109C700E5EBAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89A096811FF109C700E5EBAE /* Info.plist */; };
 		89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBD2010AF7D00A6F0CD /* libXG-SDK.a */; };
 		89A37C782015D44200A6F0CD /* LANSearchCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C772015D44200A6F0CD /* LANSearchCamera.m */; };
-		89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
 		89A37C8C201726FB00A6F0CD /* Home_Hichip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A37C8B201726FB00A6F0CD /* Home_Hichip.storyboard */; };
 		89A37C90201727A000A6F0CD /* LiveView_HichipController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A37C8E2017279F00A6F0CD /* LiveView_HichipController.m */; };
 		89A37C912018359B00A6F0CD /* IOTCamera.framework in Embed Frameworks (1 item) (1 item) */ = {isa = PBXBuildFile; fileRef = 890B46A41FB032A400C1061A /* IOTCamera.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -206,6 +203,9 @@
 		89D869831FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D869821FDE416000B91D5B /* AddDeviceWirelessNoteViewController.m */; };
 		89D946691FDF7D90000ABB0A /* GNetworkStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946661FDF7D90000ABB0A /* GNetworkStates.m */; };
 		89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946681FDF7D90000ABB0A /* Reachability.m */; };
+		89DAEFA720330C400033A19A /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D3F6EA1FFE344400E3E8EA /* IOTCamera */; };
+		89DAEFA820330C590033A19A /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
+		89DAEFA920330C600033A19A /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
 		89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DBE539201085D500B79617 /* libz.1.2.5.tbd */; };
 		89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171201FDFD48F004AAD3D /* BaseWiFiConfig.m */; };
 		89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171231FDFD7F0004AAD3D /* FaceberAudioConfig.m */; };
@@ -227,6 +227,9 @@
 		89F01662202D7F5E0098FE5F /* ZoomContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01661202D7F5E0098FE5F /* ZoomContentView.m */; };
 		89F01668202D81330098FE5F /* ZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F01667202D81330098FE5F /* ZoomView.m */; };
 		89F0166F203151FC0098FE5F /* NSLayoutConstraint+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0166E203151FC0098FE5F /* NSLayoutConstraint+Add.m */; };
+		89F01671203279B20098FE5F /* DownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F01670203279B20098FE5F /* DownloadView.xib */; };
+		89F0167420327E2A0098FE5F /* DownloadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0167320327E2A0098FE5F /* DownloadView.m */; };
+		89F0167720327E4E0098FE5F /* DownloadContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F0167620327E4E0098FE5F /* DownloadContentView.m */; };
 		C6D1F8203E76628784C971FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E58AE4DC4897602AE9CF48 /* Security.framework */; };
 		ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED040F581FF1588C00D2DD19 /* EventSearchCustomViewController.m */; };
 		ED0410801FF3F19500D2DD19 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = ED04107F1FF3F19500D2DD19 /* NSString+MD5.m */; };
@@ -706,6 +709,11 @@
 		89F01667202D81330098FE5F /* ZoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZoomView.m; sourceTree = "<group>"; };
 		89F0166D203151FC0098FE5F /* NSLayoutConstraint+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Add.h"; sourceTree = "<group>"; };
 		89F0166E203151FC0098FE5F /* NSLayoutConstraint+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Add.m"; sourceTree = "<group>"; };
+		89F01670203279B20098FE5F /* DownloadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DownloadView.xib; sourceTree = "<group>"; };
+		89F0167220327E2A0098FE5F /* DownloadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadView.h; sourceTree = "<group>"; };
+		89F0167320327E2A0098FE5F /* DownloadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadView.m; sourceTree = "<group>"; };
+		89F0167520327E4E0098FE5F /* DownloadContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadContentView.h; sourceTree = "<group>"; };
+		89F0167620327E4E0098FE5F /* DownloadContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadContentView.m; sourceTree = "<group>"; };
 		8D671A28AAADB2741242114D /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
 		A259C50E727727C3F0BF3358 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = "<group>"; };
 		C4E58AE4DC4897602AE9CF48 /* Security.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<group>"; };
@@ -980,10 +988,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89545E992020751800151E90 /* libavconVoiceRecognize.a in Frameworks */,
-				892411D2202010CA001F60E8 /* libHiP2PSDK.a in Frameworks */,
+				89DAEFA920330C600033A19A /* libHiP2PSDK.a in Frameworks */,
+				89DAEFA820330C590033A19A /* libavconVoiceRecognize.a in Frameworks */,
+				89DAEFA720330C400033A19A /* IOTCamera in Frameworks */,
 				8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */,
-				89A37C832016DC1100A6F0CD /* IOTCamera.framework in Frameworks */,
 				89A37BBE2010AF7D00A6F0CD /* libXG-SDK.a in Frameworks */,
 				89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */,
 				890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */,
@@ -1287,6 +1295,11 @@
 				89F01661202D7F5E0098FE5F /* ZoomContentView.m */,
 				89F01666202D81330098FE5F /* ZoomView.h */,
 				89F01667202D81330098FE5F /* ZoomView.m */,
+				89F01670203279B20098FE5F /* DownloadView.xib */,
+				89F0167220327E2A0098FE5F /* DownloadView.h */,
+				89F0167320327E2A0098FE5F /* DownloadView.m */,
+				89F0167520327E4E0098FE5F /* DownloadContentView.h */,
+				89F0167620327E4E0098FE5F /* DownloadContentView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2675,6 +2688,7 @@
 				89241261202062CD001F60E8 /* CameraSetting_Hichip.storyboard in Resources */,
 				89AD33B22029961C00B4520A /* SliderTableViewCell.xib in Resources */,
 				892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */,
+				89F01671203279B20098FE5F /* DownloadView.xib in Resources */,
 				89F0165F202D7A070098FE5F /* ZoomView.xib in Resources */,
 				894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */,
 				890B40761FB0069400C1061A /* Image.storyboard in Resources */,
@@ -2731,6 +2745,7 @@
 				89AD33D1202A925700B4520A /* Playback_HichipViewController.m in Sources */,
 				896BA3DE1FD94DC500EE31AB /* AboutListViewController.m in Sources */,
 				892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */,
+				89F0167420327E2A0098FE5F /* DownloadView.m in Sources */,
 				89AD33B02029951D00B4520A /* AudioSetting_HichipViewController.m in Sources */,
 				892CE0C31FD121DB00942E28 /* BaseTableViewController.m in Sources */,
 				892ADB7F1FD781F800BD8929 /* TimeSettingViewController.m in Sources */,
@@ -2875,6 +2890,7 @@
 				EDF1C1851FD5A99D00DAE334 /* CameraSettingViewController.m in Sources */,
 				892ADB661FD67A0A00BD8929 /* ChangeWiFiViewController.m in Sources */,
 				890B40931FB02FD000C1061A /* TwsCell.m in Sources */,
+				89F0167720327E4E0098FE5F /* DownloadContentView.m in Sources */,
 				892477961FE263F70021D8E6 /* TwsTableViewCell.m in Sources */,
 				8924126D202062CD001F60E8 /* TimeSetting_HichipViewController.m in Sources */,
 				896BA3E11FD950A200EE31AB /* ImageCameraListViewController.m in Sources */,

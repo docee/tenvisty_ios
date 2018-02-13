@@ -39,6 +39,7 @@
     BOOL isChangingStream;
     
 }
+@property (weak, nonatomic) IBOutlet UILabel *labResolution;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollviewVideo;
 @property (weak, nonatomic) IBOutlet UIView *viewSwitchVideoQuality_port;
 //@property (weak, nonatomic) IBOutlet SwitchVideoQualityDialog *viewSwitchVideoQuality_land;
@@ -743,6 +744,7 @@
 
 - (void)camera:(BaseCamera *)camera _didReceivePlayState:(NSInteger)state witdh:(NSInteger)width height:(NSInteger)height{
     if (state == 0) {
+        self.labResolution.text = FORMAT(@"%ld x %ld",width,height);
         if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
             [self.videoMonitor deattachCamera];
             self.camera.videoRatio = (CGFloat)width/height;

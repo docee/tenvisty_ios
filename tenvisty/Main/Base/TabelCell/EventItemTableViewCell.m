@@ -35,14 +35,28 @@
     }
 }
 - (IBAction)clickSelect:(UIButton*)sender {
-    sender.selected = !sender.selected;
-    _model.isSelected = sender.selected;
+    if(sender.isEnabled){
+        sender.selected = !sender.selected;
+        _model.isSelected = sender.selected;
+    }
 }
 -(void)setDisableMode:(BOOL)disable{
     [self.btnSelect setEnabled:!disable];
 }
 -(void)setModel:(Event*)model{
     _model = model;
-    self.btnSelect.selected = model.isSelected;
+    if(model.downloadState == 1){
+        [self.btnSelect setEnabled:NO];
+        self.btnSelect.selected = NO;
+        model.isSelected = NO;
+    }
+    else{
+        self.btnSelect.selected = model.isSelected;
+        [self.btnSelect setEnabled:YES];
+    }
 }
+-(void)toggleSelect{
+    [self clickSelect:self.btnSelect];
+}
+
 @end

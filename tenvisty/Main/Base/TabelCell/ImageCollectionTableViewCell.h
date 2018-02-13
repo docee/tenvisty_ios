@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
 @property (weak, nonatomic) IBOutlet UILabel *labDesc;
 @property (weak, nonatomic) IBOutlet UIButton *btnSelectAll;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *imgDownload;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionImages;
 @end

@@ -32,6 +32,7 @@
     double lostVideoTime;
     NSInteger videoFps;
 }
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *labResolution;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollviewVideo;
 @property (weak, nonatomic) IBOutlet UIView *viewSwitchVideoQuality_port;
 //@property (weak, nonatomic) IBOutlet SwitchVideoQualityDialog *viewSwitchVideoQuality_land;
@@ -665,6 +666,7 @@
 
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.labResolution.text = FORMAT(@"%ld x %ld",width,height);
         if(switchTime == nil ||  [[NSDate date] timeIntervalSinceReferenceDate] -[switchTime timeIntervalSinceReferenceDate] > 5){
             [_btnShowSwitchQuality_port setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
             [_btnShowSwitchQuality_land setTitle:height < 700 ? LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];

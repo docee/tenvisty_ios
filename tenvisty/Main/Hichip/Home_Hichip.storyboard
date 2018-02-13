@@ -46,14 +46,22 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWz-im-PTb">
+                                        <rect key="frame" x="10" y="20.5" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.32114955360000003" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="OFq-3R-rxp" secondAttribute="trailing" constant="10" id="J3a-gc-bBq"/>
                                     <constraint firstAttribute="bottom" secondItem="OFq-3R-rxp" secondAttribute="bottom" constant="7" id="Uho-1x-V7V"/>
+                                    <constraint firstItem="FWz-im-PTb" firstAttribute="leading" secondItem="QfG-kR-4qf" secondAttribute="leading" constant="10" id="clr-AD-S8Y"/>
                                     <constraint firstAttribute="height" constant="40" id="csh-Rz-u3Z"/>
                                     <constraint firstItem="OFq-3R-rxp" firstAttribute="top" secondItem="QfG-kR-4qf" secondAttribute="top" constant="7" id="dYn-0U-eEe"/>
+                                    <constraint firstItem="FWz-im-PTb" firstAttribute="centerY" secondItem="QfG-kR-4qf" secondAttribute="centerY" id="hD1-Ai-WaI"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skq-S3-eMp">
@@ -627,6 +635,7 @@
                         <outlet property="constraint_ycenter_videowrapper" destination="OY3-qZ-dDl" id="iit-A8-gQd"/>
                         <outlet property="labConnectState" destination="OFq-3R-rxp" id="EZb-Qu-aij"/>
                         <outlet property="labRecordTime" destination="oKd-Yl-Npe" id="jtN-Ap-LPY"/>
+                        <outlet property="labResolution" destination="FWz-im-PTb" id="Vkm-HG-1CH"/>
                         <outlet property="scrollviewVideo" destination="1EB-wk-irx" id="bFj-Lc-CAg"/>
                         <outlet property="toolbtns_portrait" destination="t59-cs-8WD" id="KWj-AY-PWH"/>
                         <outlet property="videoMonitor" destination="XK5-pI-aww" id="w4K-KS-Qip"/>
@@ -1021,6 +1030,7 @@
                                                         <constraint firstAttribute="width" constant="52" id="RFL-Oo-w9L"/>
                                                     </constraints>
                                                     <state key="normal" image="btnUnSelected"/>
+                                                    <state key="disabled" image="btnSelectDisable"/>
                                                     <state key="selected" image="btnSelected"/>
                                                     <connections>
                                                         <action selector="clickSelect:" destination="shN-Yn-jcS" eventType="touchUpInside" id="zMM-Yn-sqo"/>
@@ -1267,10 +1277,10 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vym-dj-dtW">
                                                 <rect key="frame" x="0.0" y="0.0" width="187.5" height="60"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Download" image="ic_mail">
-                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Download" image="ic_download">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="clickDownload:" destination="evT-8d-shS" eventType="touchUpInside" id="lbR-Ew-6JK"/>
@@ -1278,8 +1288,9 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrE-J0-tt0">
                                                 <rect key="frame" x="187.5" y="0.0" width="187.5" height="60"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Select All" image="ic_save">
+                                                <state key="normal" title="Select All" image="ic_selectall">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1344,6 +1355,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnDownload" destination="Vym-dj-dtW" id="0b1-9Z-1Zr"/>
                         <outlet property="btnSelectAll" destination="YrE-J0-tt0" id="iqr-0n-Yr6"/>
                         <outlet property="btnSelectSearchTime" destination="Ibr-ST-KOc" id="Syv-El-WGM"/>
                         <outlet property="labCurrentEventDate" destination="XHS-2x-pSk" id="UMv-tP-cLZ"/>
@@ -1464,6 +1476,7 @@
         <image name="btnRecord_closed_portrait" width="105" height="105"/>
         <image name="btnRecord_opened_land" width="40" height="40"/>
         <image name="btnRecord_opened_portrait" width="105" height="105"/>
+        <image name="btnSelectDisable" width="30" height="30"/>
         <image name="btnSelected" width="30" height="30"/>
         <image name="btnSnap_land" width="40" height="40"/>
         <image name="btnSnap_nor_portrait" width="105" height="105"/>
@@ -1476,13 +1489,13 @@
         <image name="btnSpeak_press_portrait" width="150" height="150"/>
         <image name="btnUnSelected" width="30" height="30"/>
         <image name="ic_dialog_alert" width="32" height="32"/>
-        <image name="ic_mail" width="30" height="30"/>
+        <image name="ic_download" width="20" height="25"/>
         <image name="ic_menu_play" width="20" height="20"/>
         <image name="ic_menu_search_inverse" width="20" height="20"/>
         <image name="ic_motion_detection_read" width="23" height="23"/>
         <image name="ic_popuwindow_down" width="10" height="5"/>
         <image name="ic_popuwindow_left" width="5" height="10"/>
-        <image name="ic_save" width="30" height="30"/>
+        <image name="ic_selectall" width="25" height="25"/>
         <image name="navBack" width="30" height="30"/>
         <image name="navDone" width="30" height="30"/>
         <image name="navRefresh" width="30" height="30"/>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DownloadView">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="y65-5k-rbu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DownloadContentView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1VU-z7-0vY">
+                    <rect key="frame" x="20" y="221.5" width="335" height="223"/>
+                    <subviews>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gWx-13-JZs">
+                            <rect key="frame" x="10" y="110.5" width="315" height="2"/>
+                        </progressView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBI-QN-QG9">
+                            <rect key="frame" x="158.5" y="86.5" width="19" height="14"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJz-VS-yL4">
+                            <rect key="frame" x="142.5" y="122.5" width="50" height="14"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2wr-5p-AQT">
+                            <rect key="frame" x="144" y="172.5" width="47" height="30"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="clickCancel:" destination="iN0-l3-epB" eventType="touchUpInside" id="iL8-kn-5Je"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading (1/0)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTe-Xv-BZc">
+                            <rect key="frame" x="107" y="33" width="122" height="17.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.74848533163265307" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="2wr-5p-AQT" firstAttribute="centerX" secondItem="1VU-z7-0vY" secondAttribute="centerX" id="0j4-GG-AFX"/>
+                        <constraint firstItem="RBI-QN-QG9" firstAttribute="centerX" secondItem="1VU-z7-0vY" secondAttribute="centerX" id="2dK-De-NJU"/>
+                        <constraint firstItem="yJz-VS-yL4" firstAttribute="top" secondItem="gWx-13-JZs" secondAttribute="bottom" constant="10" id="KCd-Ea-jj5"/>
+                        <constraint firstItem="gWx-13-JZs" firstAttribute="top" secondItem="BTe-Xv-BZc" secondAttribute="bottom" constant="60" id="MoJ-1k-qp4"/>
+                        <constraint firstItem="gWx-13-JZs" firstAttribute="centerX" secondItem="1VU-z7-0vY" secondAttribute="centerX" id="NOM-Ki-fYc"/>
+                        <constraint firstAttribute="trailing" secondItem="gWx-13-JZs" secondAttribute="trailing" constant="10" id="Rdn-go-nXQ"/>
+                        <constraint firstItem="gWx-13-JZs" firstAttribute="centerY" secondItem="1VU-z7-0vY" secondAttribute="centerY" id="ZBF-1D-uHi"/>
+                        <constraint firstItem="BTe-Xv-BZc" firstAttribute="centerX" secondItem="1VU-z7-0vY" secondAttribute="centerX" id="fxH-Fz-BfI"/>
+                        <constraint firstItem="gWx-13-JZs" firstAttribute="leading" secondItem="1VU-z7-0vY" secondAttribute="leading" constant="10" id="jmx-yq-0Gr"/>
+                        <constraint firstItem="2wr-5p-AQT" firstAttribute="top" secondItem="gWx-13-JZs" secondAttribute="bottom" constant="60" id="u3r-rd-I03"/>
+                        <constraint firstItem="yJz-VS-yL4" firstAttribute="centerX" secondItem="1VU-z7-0vY" secondAttribute="centerX" id="xah-Jd-6F4"/>
+                        <constraint firstAttribute="width" secondItem="1VU-z7-0vY" secondAttribute="height" multiplier="3:2" id="y1Z-od-YQk"/>
+                        <constraint firstItem="gWx-13-JZs" firstAttribute="top" secondItem="RBI-QN-QG9" secondAttribute="bottom" constant="10" id="yeY-Ti-b5g"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="224" id="zDq-rK-s2S"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.90821641156462585" alpha="0.5" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1VU-z7-0vY" secondAttribute="trailing" priority="800" constant="20" id="CgU-Ss-sI2"/>
+                <constraint firstItem="1VU-z7-0vY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DwP-j0-O99"/>
+                <constraint firstItem="1VU-z7-0vY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="800" constant="20" id="Jr8-Ix-Vs4"/>
+                <constraint firstItem="1VU-z7-0vY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zxj-kM-BaQ"/>
+            </constraints>
+            <connections>
+                <outlet property="btnCancel" destination="2wr-5p-AQT" id="GXI-H1-yFh"/>
+                <outlet property="labDesc" destination="yJz-VS-yL4" id="G6k-HL-pb2"/>
+                <outlet property="labPercent" destination="RBI-QN-QG9" id="Wki-pJ-amK"/>
+                <outlet property="labTitle" destination="BTe-Xv-BZc" id="40V-Zd-wTS"/>
+                <outlet property="progressBar" destination="gWx-13-JZs" id="WQe-mw-dks"/>
+            </connections>
+            <point key="canvasLocation" x="13" y="-61"/>
+        </view>
+    </objects>
+</document>

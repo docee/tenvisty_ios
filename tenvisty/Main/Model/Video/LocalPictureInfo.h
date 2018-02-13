@@ -20,4 +20,5 @@
 @property (nonatomic,strong,readonly) NSString *date;
 @property (nonatomic,strong,readonly) NSString *desc;
 @property (nonatomic, assign) BOOL isChecked;
+@property (nonatomic, assign) NSInteger type;   // 对应的录像类型（下载／本地录制）
 @end

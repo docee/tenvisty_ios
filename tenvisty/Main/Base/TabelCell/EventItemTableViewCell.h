@@ -24,5 +24,6 @@
 -(void)setEditMode:(BOOL)edit;
 -(void)setDisableMode:(BOOL)disable;
 -(void)setModel:(Event*)model;
+-(void)toggleSelect;
 
 @end

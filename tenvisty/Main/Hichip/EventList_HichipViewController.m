@@ -18,10 +18,13 @@
 #import "HichipCamera.h"
 #import "TimeZoneModel.h"
 #import "CameraIOSessionProtocol.h"
+#import "DownloadView.h"
+#import "ImageCollectionViewController.h"
 
-@interface EventList_HichipViewController ()<EventCustomSearchDelegate>{
+@interface EventList_HichipViewController ()<EventCustomSearchDelegate,DownloadViewDelegate>{
     BOOL isSearchingTimeout;
     BOOL isEditMode;
+    BOOL isDownloading;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture_outerView;
 @property (weak, nonatomic) IBOutlet UILabel *labSearchTime;
@@ -38,7 +41,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSelectAll;
 @property (nonatomic,strong) HichipCamera *originCamera;
 @property (nonatomic,strong) NSMutableArray *download_event_list;
-@property (nonatomic,assign) NSInteger downloadIndex;
+@property (nonatomic,assign) int downloadIndex;
+@property (weak, nonatomic) IBOutlet UIButton *btnDownload;
+@property (nonatomic, strong) DownloadView *downloadView;
 @end
 
 @implementation EventList_HichipViewController
@@ -78,6 +83,8 @@
     self.tableview_customSearchMenu.delegate = self.searchMenu;
     self.tableview_customSearchMenu.dataSource = self.searchMenu;
     [self beginSearch];
+    self.btnSelectAll.tintColor = Color_GrayDark;
+    self.btnDownload.tintColor = Color_GrayDark;
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -151,6 +158,8 @@
     }
     if(!isEditMode){
         self.btnSelectAll.selected = NO;
+        self.btnSelectAll.tintColor = Color_GrayDark;
+        [self.btnSelectAll setTitleColor:Color_GrayDark forState:UIControlStateNormal];
         for(Event *evt in self.event_list){
             evt.isSelected = NO;
         }
@@ -196,7 +205,6 @@
     Event *model = [_event_list objectAtIndex:indexPath.row];
     NSString *vid = @"tableviewCellEventItem";
     EventItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vid forIndexPath:indexPath];
-    [cell setModel:model];
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:model.eventTime];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -213,6 +221,12 @@
         cell.constraint_centerY_img_eventTypeIcon.constant = 0;
     }
     [cell setEditMode:isEditMode];
+    if(model.downloadState == -1){
+        NSString *fileName = [self.camera remoteRecordName:model.eventTime type:model.eventType];
+        BOOL isExist =  [GBase isVideoRecordExitForCamera:self.camera fileName:fileName];
+        model.downloadState = isExist?1:0;
+    }
+    [cell setModel:model];
     UIImage *thumb = [self.camera remoteRecordImage:model.eventTime type:model.eventType];
     //已读
     if(model.eventStatus == EVENT_READED || thumb != nil){
@@ -264,8 +278,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"EventList2Playback" sender:self];
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(isEditMode){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            Event *evt = [self.event_list objectAtIndex:indexPath.row];
+            if(evt.downloadState == 1){
+                [[iToast makeText:LOCALSTR(@"The video has been downloaded yet")] show];
+            }
+            else{
+                EventItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:indexPath];
+                [cell toggleSelect];
+            }
+        });
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+    else{
+        [self performSegueWithIdentifier:@"EventList2Playback" sender:self];
+    }
 }
 
 //其他界面返回到此界面调用的方法
@@ -547,22 +575,46 @@
 
 - (void)camera:(BaseCamera *)camera _didReceiveDownloadState:(int)state Total:(int)total CurSize:(int)curSize Path:(NSString*)path{
     if(state == DownloadFailed){
-        
+        [self stopDownload];
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"download error")];
     }
     else if(state == DOWNLOAD_STATE_START){
-        
+        isDownloading = YES;
+        Event *evt = [self.download_event_list objectAtIndex:_downloadIndex];
+        [self.downloadView.contentView setAccFile:_downloadIndex total:(int)self.download_event_list.count desc:evt.strEventTime];
+        NSString *suffix = FORMAT(@".%@",[[path componentsSeparatedByString:@"."] lastObject]);
+        [GBase saveRemoteRecordForCamera:self.camera image:nil eventType:evt.eventType eventTime:evt.eventTime suffix:suffix];
     }
     else if(state == DOWNLOAD_STATE_DOWNLOADING){
-        
+        if(!isDownloading){
+            return;
+        }
+        int percent = 100*curSize/total;
+        if(percent > 100){
+            percent = 100;
+        }
+        [self.downloadView.contentView setPercent:percent];
     }
     else if(state == DOWNLOAD_STATE_END){
-        
+        isDownloading = NO;
+        [self.downloadView.contentView setPercent:100];
+        Event* evt = [self.download_event_list objectAtIndex:_downloadIndex];
+        evt.downloadState = 1;
+        [self.tableview reloadData];
+        _downloadIndex++;
+        [self downloadSingle];
     }
     else if(state == DOWNLOAD_STATE_ERROR_PATH){
-        
+        LOG(@"error download path");
+        [self stopDownload];
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"download error")];
     }
     else if(state == DOWNLOAD_STATE_ERROR_DATA){
-        
+        if(isDownloading){
+            [self.camera stop];
+            [self.camera start];
+        }
+        [self stopDownload];
     }
 }
 
@@ -573,10 +625,28 @@
 }
 
 - (IBAction)clickDownload:(id)sender {
+    [self.download_event_list removeAllObjects];
+    for (Event *evt in self.event_list) {
+        if(evt.isSelected && evt.downloadState != 1){
+            [self.download_event_list addObject:evt];
+        }
+    }
+    if(self.download_event_list.count > 0){
+        [self.downloadView refreshView];
+        _downloadIndex = 0;
+        [self.downloadView show];
+        
+        [self downloadSingle];
+    }
+    else{
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"Please select the record")];
+    }
 }
 - (IBAction)clickSelectAll:(UIButton*)sender {
     sender.selected = !sender.selected;
     BOOL selected = sender.selected;
+    sender.tintColor = selected?Color_Primary:Color_GrayDark;
+    [sender setTitleColor:selected?Color_Primary:Color_GrayDark forState:UIControlStateNormal];
     for (Event *evt in self.event_list) {
         evt.isSelected = selected;
     }
@@ -603,12 +673,58 @@
         }
     }
     if(!hasDownloaded){
-        [self.originCamera startDownloadRecording2:[Event getHiTimeDay:evt.eventTime] Dir:filePath File:fileName];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self.originCamera startDownloadRecording2:[Event getHiTimeDay:evt.eventTime] Dir:filePath File:fileName];
+        });
     }
     else{
+        [self.downloadView dismiss];
         //下载结束
-        
+        [TwsTools presentAlertTitle:self title:LOCALSTR(@"Prompt") message:LOCALSTR(@"Download complete, you can downloaded videos under this path: Image - Video -Download") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"To view") actionDefaultBlock:^{
+            [self go2ImageCollection];
+        } actionCancelTitle:LOCALSTR(@"OK") actionCancelBlock:^{
+            
+        }];
     }
+}
+- (void)go2ImageCollection {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Image" bundle:nil];
+    ImageCollectionViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_imagecollection"];  //test2为viewcontroller的StoryboardId
+    test2obj.selectedIndex = 1;
+    test2obj.camera = self.camera;
+    [self.navigationController pushViewController:test2obj animated:YES];
+}
+
+
+- (DownloadView *)downloadView {
+    if (!_downloadView) {
+        _downloadView = [[DownloadView alloc] init];
+        _downloadView.contentView.delegate = self;
+    }
+    return _downloadView;
+}
+
+
+- (void)DownloadContentView:(DownloadContentView *)view didClickButton:(UIButton*)btn type:(NSInteger)type{
+    [self stopDownload];
+}
+
+-(void)stopDownload{
+    if(_downloadIndex >= 0 && self.download_event_list.count >0 && _downloadIndex < self.download_event_list.count){
+        Event *evt = [self.download_event_list objectAtIndex:_downloadIndex];
+        [GBase deleteRemoteRecordForCamera:self.camera eventType:evt.eventType eventTime:evt.eventTime];
+    }
+    isDownloading = NO;
+    [self.originCamera stopDownloadRecording];
+    [self.downloadView dismiss];
+    [self.tableview reloadData];
+}
+
+-(NSMutableArray*)download_event_list{
+    if(!_download_event_list){
+        _download_event_list = [[NSMutableArray alloc] init];
+    }
+    return _download_event_list;
 }
 /*
 #pragma mark - Navigation

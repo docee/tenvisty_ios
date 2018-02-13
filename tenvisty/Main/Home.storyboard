@@ -651,6 +651,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPH-BK-I2g">
+                                        <rect key="frame" x="10" y="20" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.32114955357142855" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -658,7 +664,9 @@
                                     <constraint firstAttribute="height" constant="40" id="4OC-13-FiM"/>
                                     <constraint firstAttribute="trailing" secondItem="C4W-14-BpJ" secondAttribute="trailing" constant="10" id="DDM-Of-typ"/>
                                     <constraint firstAttribute="bottom" secondItem="C4W-14-BpJ" secondAttribute="bottom" constant="7" id="Fio-qk-Jgy"/>
+                                    <constraint firstItem="ZPH-BK-I2g" firstAttribute="leading" secondItem="2Di-zb-hug" secondAttribute="leading" constant="10" id="NBd-yw-RYx"/>
                                     <constraint firstItem="C4W-14-BpJ" firstAttribute="top" secondItem="2Di-zb-hug" secondAttribute="top" constant="7" id="ezC-tz-sMB"/>
+                                    <constraint firstItem="ZPH-BK-I2g" firstAttribute="centerY" secondItem="2Di-zb-hug" secondAttribute="centerY" id="zGe-7N-QG1"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEB-va-RUZ">
@@ -1485,6 +1493,7 @@
                         <outlet property="constraint_ycenter_videowrapper" destination="f89-dn-b2a" id="axQ-jJ-CNa"/>
                         <outlet property="labConnectState" destination="C4W-14-BpJ" id="AJA-hf-KvK"/>
                         <outlet property="labRecordTime" destination="K3E-Tk-PWz" id="M59-th-7Dr"/>
+                        <outlet property="labResolution" destination="ZPH-BK-I2g" id="LzN-nJ-eiZ"/>
                         <outlet property="scrollviewVideo" destination="jEH-rg-a1Z" id="AAo-ze-TGs"/>
                         <outlet property="toolbtns_portrait" destination="ZAP-Xc-HbE" id="EM9-vi-5Ed"/>
                         <outlet property="videoMonitor" destination="Lqe-ji-dgY" id="lxV-iQ-hj7"/>

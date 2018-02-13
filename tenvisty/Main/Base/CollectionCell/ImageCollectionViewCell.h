@@ -11,5 +11,6 @@
 @interface ImageCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgThumb;
 @property (weak, nonatomic) IBOutlet UIButton *btnMask;
+@property (weak, nonatomic) IBOutlet UIImageView *imgDownload;
 
 @end

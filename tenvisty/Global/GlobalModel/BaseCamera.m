@@ -267,7 +267,7 @@
 //保存图片沙盒路径
 - (NSString *)remoteRecordImagePath:(NSInteger)recordId type:(NSInteger)tp{
     NSString *fileName = [self remoteRecordThumbName:recordId type:tp];
-    NSString *filePath = [[self documents] stringByAppendingPathComponent:fileName];
+    NSString *filePath = [[self remoteRecordDir] stringByAppendingPathComponent:fileName];
     return filePath;
 }
 - (UIImage *)remoteRecordImage:(NSInteger)time type:(NSInteger)tp{
@@ -283,7 +283,7 @@
     return fileName;
 }
 - (NSString *)remoteRecordName:(NSInteger)recordId type:(NSInteger)tp{
-    NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld.mp4", self.uid,(int)tp,(long)recordId];
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d_%ld", self.uid,(int)tp,(long)recordId];
     return fileName;
 }
 
@@ -291,7 +291,7 @@
     NSString *document_uid = [self.documents stringByAppendingPathComponent: self.uid];
     [self.gFileManager createDirectoryAtPath:document_uid withIntermediateDirectories:YES attributes:nil error:nil];
     
-    NSString *document_uid_download = [document_uid stringByAppendingString:@"/Download"];
+    NSString *document_uid_download = [document_uid stringByAppendingString:@"/Download/"];
     [self.gFileManager createDirectoryAtPath:document_uid_download withIntermediateDirectories:YES attributes:nil error:nil];
     
     return document_uid_download;

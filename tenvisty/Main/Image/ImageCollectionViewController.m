@@ -56,6 +56,7 @@
     [self.btnEmail setBackgroundImage:[UIImage imageWithColor:Color_GrayLight wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
     [self.btnSave setBackgroundImage:[UIImage imageWithColor:Color_GrayLight wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
     [self.btnDelete setBackgroundImage:[UIImage imageWithColor:Color_GrayLight wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    self.segment_type.selectedSegmentIndex = _selectedIndex;
     // Do any additional setup after loading the view.
 }
 - (IBAction)clickSelectAll:(UIButton*)sender {
@@ -362,7 +363,7 @@
                 NSMutableArray *cellList = nil;
                 if(_sourceList.count > 0){
                     cellList = _sourceList[_sourceList.count-1];
-                    if(cellList.count == 0 || ![((LocalPictureInfo*)cellList[0]).date isEqualToString:recording.date]){
+                    if(cellList.count == 0 || ![((LocalPictureInfo*)cellList[0]).date isEqualToString:recording.date] || ((LocalVideoInfo*)cellList[0]).type != recording.type){
                         cellList = nil;
                     }
                 }
@@ -412,6 +413,12 @@
     else{
         cell.collectionImages.delegate = self;
         cell.collectionImages.dataSource = self;
+    }
+    if(model.type == 0){
+        [cell.imgDownload setHidden:YES];
+    }
+    else{
+        [cell.imgDownload setHidden:NO];
     }
     cell.btnSelectAll.tag = indexPath.row;
     [cell.btnSelectAll removeTarget:self action:@selector(clickSelectAll:) forControlEvents:UIControlEventTouchUpInside];
@@ -482,6 +489,7 @@
     
     cell.btnMask.tag = [self.originSourceList indexOfObject:model];// collectionView.tag * 1000 + indexPath.row;
     cell.btnMask.selected = NO;
+    [cell.imgDownload setHidden:model.type == 0];
     if(isEdit){
         [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Primary_alpha_3 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateSelected];
         [cell.btnMask setBackgroundImage:[UIImage imageWithColor:Color_Black_alpha_2 wihtSize:CGSizeMake(1, 1)] forState:UIControlStateNormal];

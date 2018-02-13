@@ -254,6 +254,13 @@
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bn-Ip-NZh">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                     </imageView>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_download" translatesAutoresizingMaskIntoConstraints="NO" id="dm4-dz-aWg">
+                                                                        <rect key="frame" x="30" y="30" width="15" height="15"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="15" id="eob-DR-LEN"/>
+                                                                            <constraint firstAttribute="width" constant="15" id="lce-lB-awi"/>
+                                                                        </constraints>
+                                                                    </imageView>
                                                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5i-7H-DE9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,7 +270,9 @@
                                                             </view>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="dm4-dz-aWg" secondAttribute="bottom" constant="5" id="32p-du-XeA"/>
                                                                 <constraint firstItem="0bn-Ip-NZh" firstAttribute="leading" secondItem="V9o-ke-HCl" secondAttribute="leading" id="9gT-Em-5gV"/>
+                                                                <constraint firstAttribute="trailing" secondItem="dm4-dz-aWg" secondAttribute="trailing" constant="5" id="JJV-J8-FYQ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="0bn-Ip-NZh" secondAttribute="trailing" id="RVT-6P-4sT"/>
                                                                 <constraint firstItem="q5i-7H-DE9" firstAttribute="leading" secondItem="V9o-ke-HCl" secondAttribute="leading" id="avL-kR-feJ"/>
                                                                 <constraint firstItem="0bn-Ip-NZh" firstAttribute="top" secondItem="V9o-ke-HCl" secondAttribute="top" id="oCC-F3-Nwf"/>
@@ -274,6 +283,7 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="btnMask" destination="q5i-7H-DE9" id="ATG-8K-INM"/>
+                                                                <outlet property="imgDownload" destination="dm4-dz-aWg" id="mdl-gF-AH4"/>
                                                                 <outlet property="imgThumb" destination="0bn-Ip-NZh" id="6rn-d5-F2A"/>
                                                             </connections>
                                                         </collectionViewCell>
@@ -559,6 +569,7 @@
         <image name="checkbox_checked" width="16" height="16"/>
         <image name="ic_delete" width="30" height="30"/>
         <image name="ic_dot_circle" width="10" height="10"/>
+        <image name="ic_download" width="20" height="25"/>
         <image name="ic_mail" width="30" height="30"/>
         <image name="ic_photos" width="42" height="31"/>
         <image name="ic_save" width="30" height="30"/>

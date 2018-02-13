@@ -32,6 +32,7 @@
 @property (nonatomic,assign) NSTimeInterval dateTimeInterval;
 @property (nonatomic,assign) BOOL isSelected;
 @property (nonatomic,assign) NSInteger downloadState;
+@property (nonatomic,strong,readonly) NSString* strEventTime;
 + (STimeDay)getHiTimeDay:(long)time;
 + (NSString *)getEventTypeName:(int)eventType;
 + (TUTK_STimeDay)getTimeDay:(long)time;
