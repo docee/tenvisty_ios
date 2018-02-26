@@ -125,6 +125,7 @@
             [_btnCameraSetting setEnabled:YES];
         }
         else if(self.camera.isWrongPassword){
+            LOG(@"wrong passwordsssss");
             [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:NO];
@@ -159,6 +160,7 @@
 
 -(void)refreshState{
     if(self.camera){
+        NSLog(@"%@ %@ %s %d %ld",[self.camera uid],[self class],__func__,__LINE__,(long)self.camera.cameraConnectState);
         [self setState:self.camera.cameraConnectState];
     }
 }
@@ -190,6 +192,7 @@
 
 -(void)setCamera:(BaseCamera *)camera{
     _camera = camera;
+    NSLog(@"%@ %@ %s %d %ld",[camera uid],[self class],__func__,__LINE__,(long)camera.cameraConnectState);
     if(_camera){
         [self refreshState];
         [self refreshSnapshot];

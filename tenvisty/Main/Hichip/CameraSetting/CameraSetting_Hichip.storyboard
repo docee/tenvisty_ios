@@ -755,7 +755,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7i-w9-OSs">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the timezone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngr-cV-Ssd">
                                         <rect key="frame" x="20" y="0.0" width="355" height="40"/>
@@ -763,18 +763,27 @@
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notice: Change timezone will reboot device" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tb5-Px-qq4">
+                                        <rect key="frame" x="20" y="24" width="271.5" height="36"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Ngr-cV-Ssd" firstAttribute="height" secondItem="w7i-w9-OSs" secondAttribute="height" multiplier="2/3" id="1bu-Se-jZ3"/>
                                     <constraint firstItem="Ngr-cV-Ssd" firstAttribute="top" secondItem="w7i-w9-OSs" secondAttribute="top" id="6iO-Zi-Fo0"/>
                                     <constraint firstItem="Ngr-cV-Ssd" firstAttribute="leading" secondItem="w7i-w9-OSs" secondAttribute="leading" constant="20" id="CN7-KU-PA7"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ngr-cV-Ssd" secondAttribute="bottom" id="SDO-JW-57Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="tb5-Px-qq4" secondAttribute="bottom" id="JUB-x3-SXN"/>
+                                    <constraint firstItem="tb5-Px-qq4" firstAttribute="height" secondItem="w7i-w9-OSs" secondAttribute="height" multiplier="3/5" id="LxY-6h-wRJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Ngr-cV-Ssd" secondAttribute="trailing" id="fhB-p1-VTz"/>
-                                    <constraint firstAttribute="height" constant="40" id="tFr-Te-rz1"/>
+                                    <constraint firstItem="tb5-Px-qq4" firstAttribute="leading" secondItem="Ngr-cV-Ssd" secondAttribute="leading" id="lQa-OO-FQT"/>
+                                    <constraint firstAttribute="height" constant="60" id="tFr-Te-rz1"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wy7-eT-n2u">
-                                <rect key="frame" x="0.0" y="40" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>

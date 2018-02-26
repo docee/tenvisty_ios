@@ -19,10 +19,10 @@ static   BaseCamera *tryCamera;
     return tryCamera;
 }
 +(void) setTryConnectCamera:(BaseCamera*)camera{
-    if(tryCamera != camera && tryCamera != nil){
+    if(tryCamera != nil && (camera == nil || ![camera.uid isEqualToString:tryCamera.uid])){
         BOOL added = NO;
         for(BaseCamera *c in [GBase sharedInstance].cameras){
-            if(c == tryCamera){
+            if([c.uid isEqualToString:tryCamera.uid]){
                 added = YES;
                 break;
             }

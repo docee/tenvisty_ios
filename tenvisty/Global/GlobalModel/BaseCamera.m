@@ -311,6 +311,14 @@
         return [UIImage imageNamed:@"videoclip"];
     }
 }
+- (UIImage *)thumbImage:(NSString*)defaultImg{
+    if ([self fileExistsAtPath:self.imagePath]) {
+        return [UIImage imageWithContentsOfFile:self.imagePath];
+    }
+    else {
+        return [UIImage imageNamed:defaultImg];
+    }
+}
 
 -(void)openPush:(void (^)(NSInteger code))successlock{
     [self.orginCamera openPush:successlock];

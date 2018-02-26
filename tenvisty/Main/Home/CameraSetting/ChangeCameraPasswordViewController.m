@@ -140,13 +140,16 @@
         case IOTYPE_USER_IPCAM_SETPASSWORD_RESP:
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-               
-                [[[iToast makeText:LOCALSTR(@"Password changed successfully, device will reconnect soon.")] setDuration:1] show];
+                
                 self.camera.pwd = newCameraPassword;
                 [GBase editCamera:self.camera];
                 [self.camera stop];
                 [self.camera start];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[iToast makeText:LOCALSTR(@"Password changed successfully, device will reconnect soon.")] show];
+                });
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                
                 
             });
             break;

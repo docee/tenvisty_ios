@@ -92,6 +92,7 @@ typedef enum
 -(void) RemImgview;
 - (NSString *)remoteRecordName:(NSInteger)recordId type:(NSInteger)tp;
 - (NSString *)remoteRecordDir;
+- (UIImage *)thumbImage:(NSString*)defaultImg;
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>

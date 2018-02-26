@@ -65,12 +65,9 @@
     if(self.progressView.progress >= 1){
         [[WiFiConfigContext sharedInstance] stopConfig];
         [self.pTimer invalidate];
-
-        if(self.configWifiResult == CONFIG_WIFI_SUCCESS){
-            [self saveCamera];
-            [self go2List];
-        }
-        else if(self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
+        if(self.configWifiResult == CONFIG_WIFI_SUCCESS || self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
+            [self.camera stop];
+            [self.camera start];
             [self saveCamera];
             [self go2List];
         }
@@ -91,6 +88,7 @@
             }
             else if(self.camera.isSessionConnected){
                 self.configWifiResult = CONFIG_WIFI_SUCCESS;
+                [[WiFiConfigContext sharedInstance] stopConfig];
                 [self setTimerInterval:0.01f];
             }
         }
@@ -119,10 +117,12 @@
 
 
 -(void)onReceived:(NSString *)status ip:(NSString*) ip uid:(NSString*)uid{
+    LOG(@"%@ %@ config wifi success",uid,ip);
     if(self.configWifiResult == CONFIG_WIFI_FAIL && [self.uid isEqualToString:uid]){
         self.configWifiResult = CONFIG_WIFI_SUCCESS;
+        [[WiFiConfigContext sharedInstance] stopConfig];
         self.camera.uid = uid;
-        [self setTimerInterval:0.01f];
+        [self setTimerInterval:0.1f];
     }
 }
 

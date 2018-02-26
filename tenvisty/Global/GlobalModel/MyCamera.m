@@ -10,14 +10,19 @@
 #import "MyCamera.h"
 #import <IOTCamera/AVIOCTRLDEFs.h>
 #import <IOTCamera/AVFrameInfo.h>
+#import "TimeZoneModel.h"
+#import "Event.h"
 
-@interface MyCamera()<CameraDelegate>
+@interface MyCamera()<CameraDelegate>{
+    
+}
 @property (nonatomic,assign) NSInteger beginRebootTime;
 @property (nonatomic,assign) NSInteger rebootTimeout;
 @property (nonatomic,assign) NSInteger connectTimeoutBeginTime;
 @property (nonatomic, strong) NSUserDefaults *camDefaults;
 @property (nonatomic, strong) NSString *pushToken;
 @property (nonatomic,assign) CGFloat vRatio;
+@property (nonatomic,strong) TimeZoneModel *timezone;
 @end
 
 @implementation MyCamera
@@ -195,7 +200,15 @@
     return self.cameraConnectState == CONNECTION_STATE_WRONG_PASSWORD;
 }
 - (void)syncWithPhoneTime{
-    
+    SMsgAVIoctrlSetTimeReq *req = malloc(sizeof(SMsgAVIoctrlSetTimeReq));
+    memset(req, 0, sizeof(SMsgAVIoctrlSetTimeReq));
+    memcpy(req->NtpServ, NTP_SERVER, NTP_SERVER.length);
+    req->NtpEnable = 1;
+    req->AdjustFlg = 1;
+    req->TimeInfo = [Event getTimeDay:[[NSDate date] timeIntervalSince1970]];
+    [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_TIME_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetTimeReq)];
+    free(req);
+    req = nil;
 }
 
 
@@ -365,7 +378,7 @@
     [self send_PTZ:AVIOCTRL_PTZ_STOP isStop:NO];
 }
 
--(void)setResolutionModel:(ResolutionModel)resolutionModel{
+-(void)setResolutionModel:(int)resolutionModel{
     NSLog(@"%@ %s %d",[self class],__func__,__LINE__);
     [self stopVideo];
     
@@ -394,7 +407,7 @@
     NSLog(@"setRemoteNotification %@ %@ %s %d",[self class],[self.cameraDelegate class],__func__,__LINE__);
     if(self.remoteNotifications > 0){
         self.remoteNotifications++;
-        [GBase editCamera:self];
+        [GBase editCamera:(BaseCamera*)self];
         if(self.cameraDelegate != nil && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]){
             [self.cameraDelegate camera:self.baseCamera _didReceiveRemoteNotification:type EventTime:time];
         }
@@ -474,6 +487,9 @@
                 });
             }
         }
+        else{
+            [self stop];
+        }
     }
     
     
@@ -486,20 +502,24 @@
 
 - (void)camera:(Camera *)camera didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status
 {
+    LOG(@"%@ %@ %s %d %ld",[self uid],[self class],__func__,__LINE__,(long)status);
     if(status == CONNECTION_STATE_CONNECTED && self.processState != CAMERASTATE_WILLUPGRADING && self.processState != CAMERASTATE_WILLREBOOTING && self.processState != CAMERASTATE_WILLRESETING){
         self.processState = CAMERASTATE_NONE;
     }
     else if(status == CONNECTION_STATE_WRONG_PASSWORD){
         if(self.processState == CAMERASTATE_RESETING){
+            LOG(@"%@ %@ %s %d %ld",[self uid],[self class],__func__,__LINE__,(long)status);
             [self setPwd:DEFAULT_PASSWORD];
-            [GBase editCamera:self];
+            [GBase editCamera:(BaseCamera*)self];
             [self start:0];
         }
     }
     if(channel == 0){
         self.cameraConnectState = status;
     }
+    LOG(@"%@ %@ %s %d %ld",[self uid],[self class],__func__,__LINE__,(long)status);
     if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didChangeChannelStatus:ChannelStatus:)]) {
+        LOG(@"%@ %@ %s %d %ld",[self uid],[self class],__func__,__LINE__,(long)status);
         [self.cameraDelegate camera:self.baseCamera _didChangeChannelStatus:channel ChannelStatus:status];
     }
     
@@ -514,6 +534,8 @@
         s->channel = (unsigned int)channel;
         [self sendIOCtrlToChannel:channel Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
         free(s);
+        
+        [self getTime];
     }
 }
 
@@ -584,6 +606,33 @@
             });
         }
     }
+    else if(type == IOTYPE_USER_IPCAM_GET_TIME_INFO_RESP){
+        SMsgAVIoctrlGetTimeResp *devTime = (SMsgAVIoctrlGetTimeResp*)data;
+        
+        if(devTime->TimeType == 0 && devTime->AdjustFlg == 0){
+            [self syncWithPhoneTime];
+//            if(self.timezone){
+//                [self syncWithPhoneTime];
+//            }
+//            else{
+//                [self getTimezone];
+//            }
+        }
+    }
+//    else if(type == IOTYPE_USER_IPCAM_GET_ZONE_INFO_RESP){
+//        if(needSyncTime){
+//            SMsgAVIoctrlGetDstResp *resp = (SMsgAVIoctrlGetDstResp*)data;
+//            for(int i=0; i < [TimeZoneModel getAll].count; i++){
+//                TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
+//                if([tz.area isEqualToString:[NSString stringWithUTF8String:resp->DstDistrictInfo.DstDistId]]){
+//                    self.timezone = [TimeZoneModel initObj:tz.timezone area:tz.area gmt:tz.strGMT daylight:tz.dst];
+//                    self.timezone.dst = resp->enable && tz.dst;
+//                    break;
+//                }
+//            }
+//            [self syncWithPhoneTime];
+//        }
+//    }
 }
 
 
@@ -693,7 +742,7 @@
             if(numberCode){
                 if(numberCode.intValue == 0){
                     self.remoteNotifications = 1;
-                    [GBase editCamera:self];
+                    [GBase editCamera:(BaseCamera*)self];
                 }
                 respCode = numberCode.intValue;
             }
@@ -753,7 +802,7 @@
             if(numberCode){
                 if(numberCode.intValue == 0){
                     self.remoteNotifications = 0;
-                    [GBase editCamera:self];
+                    [GBase editCamera:(BaseCamera*)self];
                 }
                 respCode = numberCode.intValue;
             }
@@ -837,5 +886,17 @@
     return YES;
 }
 
+-(void)getTime{
+    SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
+    //req->ReqTimeType = 0;
+    [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_TIME_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
+    free(req);
+}
+
+-(void)getTimezone{
+    SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
+    [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
+    free(req);
+}
 
 @end

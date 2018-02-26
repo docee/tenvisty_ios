@@ -51,8 +51,8 @@
     cell.rightLabDesc.text = FORMAT(@"%d photos, %d videos",(int)[GBase countSnapshot:camera.uid],(int)[GBase countVideo:camera.uid]);
     NSString *thumbPath = [GBase thumbPath:camera];
     if(thumbPath == nil){
-        [cell.leftImg setImage:[UIImage imageNamed:@"default_img"]];
-        [cell.leftImg setContentMode:UIViewContentModeCenter];
+        [cell.leftImg setImage:[camera thumbImage:@"default_img"]];
+        [cell.leftImg setContentMode:UIViewContentModeScaleToFill];
     }
     else{
         [cell.leftImg setImage:[UIImage imageWithContentsOfFile:thumbPath]];

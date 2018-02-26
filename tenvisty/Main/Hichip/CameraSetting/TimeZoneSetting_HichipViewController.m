@@ -118,13 +118,18 @@
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
     switch (type) {
+        case HI_P2P_SET_REBOOT:{
+            [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
+            [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+            break;
         case HI_P2P_SET_TIME_ZONE:
         case HI_P2P_SET_TIME_ZONE_EXT:{
             if(size >= 0){
-                [self getTimezone];
-                [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
-                [[iToast makeText:LOCALSTR(@"Setting Successfully")] show];
-                [self.navigationController popViewControllerAnimated:YES];
+                //[self getTimezone];
+                
+                [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_REBOOT Data:(char*)nil DataSize:0];
             }
             else{
                 [[iToast makeText:LOCALSTR(@"setting failed, please try again later")] show];

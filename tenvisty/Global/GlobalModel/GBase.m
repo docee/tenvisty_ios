@@ -328,7 +328,7 @@ static GBase *base = nil;
         if(path != nil){
             fullPath = [base snapshotPathWithCamera:camera imgName:path];
             if(![[base gFileManager] fileExistsAtPath: fullPath]){
-                 if (![base.db executeUpdate:@"DELETE FROM snapshot where file_path=?", path]){
+                 if (![base.db executeUpdate:@"DELETE FROM snapshot where file_path=? and uid=?", path,camera.uid]){
                  }
                 fullPath = nil;
             }
@@ -337,7 +337,7 @@ static GBase *base = nil;
     if(fullPath == nil){
         if([self countVideo:camera.uid] > 0){
             if (base.db != NULL) {
-                FMResultSet *rs = [base.db executeQuery:@"SELECT small_file_path FROM video WHERE dev_uid=? and recording_type=0 order by id desc limit 1", camera.uid];
+                FMResultSet *rs = [base.db executeQuery:@"SELECT small_file_path FROM video WHERE dev_uid=? order by id desc limit 1", camera.uid];
                 while([rs next]) {
                     path =  [rs stringForColumn:@"small_file_path"];
                     break;
@@ -347,7 +347,7 @@ static GBase *base = nil;
             if(path != nil){
                 fullPath = [base recordingPathWithCamera:camera recordingName:path recordType:0];
                 if(![[base gFileManager] fileExistsAtPath:fullPath]){
-                    if (![base.db executeUpdate:@"DELETE FROM video where small_file_path=?", path]){
+                    if (![base.db executeUpdate:@"DELETE FROM video where small_file_path=? and uid=?", path,camera.uid]){
                     }
                     fullPath = nil;
                 }

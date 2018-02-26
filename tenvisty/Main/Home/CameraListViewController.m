@@ -54,6 +54,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    for(BaseCamera *camera in [GBase sharedInstance].cameras){
+        camera.cameraDelegate = self;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [TwsDataValue setTryConnectCamera:nil];
     });
@@ -68,11 +71,13 @@
     [self setTitle:FORMAT(@"%@ (%lu)",LOCALSTR(@"Camera List"),(unsigned long)[GBase sharedInstance].cameras.count)];
     [self.navigationController setTitle:LOCALSTR(@"Home")];
     for(BaseCamera *camera in [GBase sharedInstance].cameras){
-        camera.cameraDelegate = self;
         //强制改密码；
         if(camera.isAuthConnected && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
             [self showChangePasswordStrict:camera];
         }
+//        else if(camera.isDisconnect){
+//            [camera start];
+//        }
     }
 }
 
@@ -298,6 +303,7 @@
 }
 
 - (void)camera:(BaseCamera *)camera _didChangeChannelStatus:(NSInteger)channel ChannelStatus:(NSInteger)status{
+    LOG(@"%@ %@ %s %d %ld",[camera uid],[self class],__func__,__LINE__,(long)status);
     NSInteger row = [GBase getCameraIndex:camera];
     if(camera.isAuthConnected && [camera.pwd isEqualToString:DEFAULT_PASSWORD]){
         [self showChangePasswordStrict:camera];

@@ -17,6 +17,7 @@
 }
 @property(nonatomic,strong)VoicePlayer *player;
 @property(nonatomic,assign)NSInteger playCnt;
+@property (nonatomic,copy) dispatch_block_t replayTask;
 @end
 int freqss[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,17000,17200,17400,17600,17800,18000,18200,18400,18600};
 
@@ -27,9 +28,27 @@ int freqss[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,1700
     [self initObj];
      [_player playSSIDWiFi:self.ssid pwd:self.pwd playCount:1 muteInterval:200];
 }
+-(dispatch_block_t)replayTask{
+    if(_replayTask == nil){
+        _replayTask = dispatch_block_create(DISPATCH_BLOCK_BARRIER, ^{
+            [_player playSSIDWiFi:self.ssid pwd:self.pwd playCount:1 muteInterval:200];
+        });
+    }
+    return _replayTask;
+}
+-(dispatch_block_t)newReplayTask{
+    if(_replayTask != nil){
+        dispatch_block_cancel(_replayTask);
+    }
+    _replayTask = nil;
+    return self.replayTask;
+}
 
 -(void) stopConfig{
     isStopped = YES;
+    if(_replayTask){
+         dispatch_block_cancel(_replayTask);
+    }
     if(![_player isStopped]){
         [_player stop];
     }
@@ -101,9 +120,7 @@ int freqss[] = {15000,15200,15400,15600,15800,16000,16200,16400,16600,16800,1700
             });
         }else{
             _playCnt++;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_player playSSIDWiFi:self.ssid pwd:self.pwd playCount:1 muteInterval:200];
-            });
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3* NSEC_PER_SEC)), dispatch_get_main_queue(), [self newReplayTask]);
         }
     }
 }

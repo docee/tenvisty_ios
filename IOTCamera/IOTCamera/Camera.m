@@ -504,14 +504,16 @@ int bLocalSearch = 0;
 - (void)connect:(NSString *)uid_ 
 {
     self.uid = uid_;
-    
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     if (connectThread == nil) {
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         connectThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         connectThread = [[TwsThread alloc] initWithTarget:self selector:@selector(doConnect) object:nil];
         [connectThread runThread];
     }
 
     if (checkThread == nil) {
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         checkThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         checkThread = [[TwsThread alloc] initWithTarget:self selector:@selector(doCheckStatus) object:nil];
         [checkThread runThread];
@@ -520,16 +522,19 @@ int bLocalSearch = 0;
 
 - (void)connect:(NSString *)uid_ AesKey:(NSString *)aesKey_
 {
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     self.uid = uid_;
     self.aesKey = aesKey_;
-    
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     if (connectThread == nil) {
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         connectThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         connectThread = [[TwsThread alloc] initWithTarget:self selector:@selector(doConnect) object:nil];
         [connectThread runThread];
     }
     
     if (checkThread == nil) {
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         checkThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         checkThread = [[TwsThread alloc] initWithTarget:self selector:@selector(doCheckStatus) object:nil];
         [checkThread runThread];
@@ -537,7 +542,7 @@ int bLocalSearch = 0;
 }
 
 - (void)disconnect {
-    
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     NSArray *ary = [NSArray arrayWithArray:arrayAVChannel];
     for (AVChannel *ch in ary) {
         
@@ -585,10 +590,12 @@ int bLocalSearch = 0;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
         [self.delegate camera:self didChangeSessionStatus:self.sessionState];
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
 }
 
 - (void)start:(NSInteger)channel viewAccount:(NSString *)viewAcc viewPassword:(NSString *)viewPwd
 {
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     for (AVChannel *ch in arrayAVChannel) {
         if (ch.avChannel == channel){
             [ch setPassword:viewPwd];
@@ -605,7 +612,7 @@ int bLocalSearch = 0;
     ch.isRunningRecvIOCtrlThread = TRUE;  
     
     if (ch.startThread == nil) {
-        
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         ch.startThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         
         ch.startThread = [[TwsThread alloc] initWithTarget:self selector:@selector(doStart:) object:ch];
@@ -613,7 +620,7 @@ int bLocalSearch = 0;
     }
     
     if (ch.sendIOCtrlThread == nil) {
-        
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         ch.sendIOCtrlThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         
         ch.isRunningSendIOCtrlThread = TRUE;
@@ -623,7 +630,7 @@ int bLocalSearch = 0;
     
     
     if (ch.recvIOCtrlThread == nil) {
-        
+        LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
         ch.recvIOCtrlThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
         
         ch.isRunningRecvIOCtrlThread = TRUE;
@@ -636,7 +643,8 @@ int bLocalSearch = 0;
 }
 
 - (void)stop:(NSInteger)channel 
-{    
+{
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     AVChannel *stoppedChannel = nil;
     
     for (AVChannel *ch in arrayAVChannel) {
@@ -656,15 +664,18 @@ int bLocalSearch = 0;
         stoppedChannel.isRunningSendIOCtrlThread = FALSE;
         stoppedChannel.isRunningRecvIOCtrlThread = FALSE;
         if (stoppedChannel.startThread != nil) {
+            LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
             [stoppedChannel.startThread stopThread];
         }
         if (stoppedChannel.sendIOCtrlThread != nil) {
+            LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
             avSendIOCtrlExit((int)stoppedChannel.avIndex);
         }
                 
         // close threads and wait for threads exit        
         if (stoppedChannel.recvIOCtrlThread != nil) {
             
+            LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
             [stoppedChannel.recvIOCtrlThreadLock lockWhenCondition:DONE];
             [stoppedChannel.recvIOCtrlThreadLock unlock];
             [stoppedChannel.recvIOCtrlThreadLock release];
@@ -675,6 +686,7 @@ int bLocalSearch = 0;
         
         if (stoppedChannel.sendIOCtrlThread != nil) {
             
+            LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
             avSendIOCtrlExit((int)stoppedChannel.avIndex);
             // LOG(@"avSendIOCtrlExit(%d)", stoppedChannel.avIndex);
 
@@ -687,6 +699,7 @@ int bLocalSearch = 0;
         }
                         
         if (stoppedChannel.startThread != nil) {
+            LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
             avClientExit((int)sessionID, stoppedChannel.avChannel);
             // LOG(@"avClientExit(%d)", stoppedChannel.avChannel);
 
@@ -699,7 +712,8 @@ int bLocalSearch = 0;
         }
         
         // close avClient        
-        if (stoppedChannel.avIndex >= 0) {            
+        if (stoppedChannel.avIndex >= 0) {
+            LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
             avClientStop((int)stoppedChannel.avIndex);
             // LOG(@"avClientStop(%d)", stoppedChannel.avIndex);
         }               
@@ -709,8 +723,10 @@ int bLocalSearch = 0;
         
         [arrayAVChannel removeObject:stoppedChannel];
     }
+    self.sessionState = CONNECTION_STATE_DISCONNECTED;
     if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeChannelStatus:ChannelStatus:)])
         [self.delegate camera:self didChangeChannelStatus:channel ChannelStatus:CONNECTION_STATE_DISCONNECTED];
+    LOG(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
 }
 
 - (Boolean)isStarting:(NSInteger)channel
@@ -1117,16 +1133,16 @@ int bLocalSearch = 0;
             ret = IOTC_Session_Check((int)sessionID, info);
             
             self.sessionMode = info->Mode;
-            if(info -> Mode == 0){
-                LOG(@"uid:%@ Remote: [%s:%d; Mode=P2P]",self.uid, info->RemoteIP, info->RemotePort);
-            }
-            else if(info->Mode == 1){
-                LOG(@"uid:%@ Remote: [%s:%d; Mode=RLY]",self.uid, info->RemoteIP, info->RemotePort);
-            }
-            else if(info->Mode == 2){
-                LOG(@"uid:%@ Remote: [%s:%d; Mode=LAN]",self.uid, info->RemoteIP, info->RemotePort);
-            }
-            LOG(@"uid:%@ Remote: [IOTCAPIVer=%@] NateType:%d", self.uid, [self parseIOTCAPIsVerion:info->IOTCVersion],info->NatType);
+//            if(info -> Mode == 0){
+//                LOG(@"uid:%@ Remote: [%s:%d; Mode=P2P]",self.uid, info->RemoteIP, info->RemotePort);
+//            }
+//            else if(info->Mode == 1){
+//                LOG(@"uid:%@ Remote: [%s:%d; Mode=RLY]",self.uid, info->RemoteIP, info->RemotePort);
+//            }
+//            else if(info->Mode == 2){
+//                LOG(@"uid:%@ Remote: [%s:%d; Mode=LAN]",self.uid, info->RemoteIP, info->RemotePort);
+//            }
+            //LOG(@"uid:%@ Remote: [IOTCAPIVer=%@] NateType:%d", self.uid, [self parseIOTCAPIsVerion:info->IOTCVersion],info->NatType);
 
             if (ret >= 0) {
                 
