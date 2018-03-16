@@ -12,8 +12,8 @@
 
 - (id)initWithData:(char *)data size:(int)size {
     if (self = [super init]) {
-        
-        if (size != sizeof(HI_P2P_S_DEV_INFO_EXT)) {
+        int needSize = sizeof(HI_P2P_S_DEV_INFO_EXT);
+        if (size != needSize) {
             return self;
         }
         HI_P2P_S_DEV_INFO_EXT *model = (HI_P2P_S_DEV_INFO_EXT *)malloc(sizeof(HI_P2P_S_DEV_INFO_EXT));

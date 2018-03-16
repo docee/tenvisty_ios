@@ -295,10 +295,11 @@
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = 0;
     switch (type) {
         case HI_P2P_GET_EMAIL_PARAM:{
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
-            if(size >= sizeof(HI_P2P_S_EMAIL_PARAM)){
+            if(size >= needSize){
                 self.paras =[[EmailParam alloc] initWithData:(char*)data size:(int)size];
                 self.enableAdvance = ![self isDefaultConf];
                 [self refreshTable];
@@ -338,7 +339,8 @@
             break;
         case HI_P2P_GET_ALARM_PARAM:{
             if(isSetting){
-                if(size >= sizeof(HI_P2P_S_ALARM_PARAM)){
+                needSize = sizeof(HI_P2P_S_ALARM_PARAM);
+                if(size >= needSize){
                     alarmParas =[[AlarmLink alloc] initWithData:(char*)data size:(int)size];
                     [self doSetEmailEnable];
                 }

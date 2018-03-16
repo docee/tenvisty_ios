@@ -66,8 +66,13 @@
         [[WiFiConfigContext sharedInstance] stopConfig];
         [self.pTimer invalidate];
         if(self.configWifiResult == CONFIG_WIFI_SUCCESS || self.configWifiResult == CONFIG_WIFI_WRONG_PWD){
-            [self.camera stop];
-            [self.camera start];
+            if(!self.camera.isConnecting && !self.camera.isSessionConnected){
+                if(self.camera.p2pType ==  P2P_Tutk){
+                    [self.camera stop];
+                }
+                [self.camera start];
+            }
+            
             [self saveCamera];
             [self go2List];
         }
@@ -106,9 +111,9 @@
     if(!isExist){
         [GBase addCamera:self.camera];
     }
-    if(!self.camera.isDisconnect){
-        [self.camera start];
-    }
+//    if(!self.camera.isDisconnect){
+//        [self.camera start];
+//    }
 }
 - (IBAction)goBack:(id)sender {
     [self stopConfig];
@@ -121,6 +126,7 @@
     if(self.configWifiResult == CONFIG_WIFI_FAIL && [self.uid isEqualToString:uid]){
         self.configWifiResult = CONFIG_WIFI_SUCCESS;
         [[WiFiConfigContext sharedInstance] stopConfig];
+        //[self.camera stop];
         self.camera.uid = uid;
         [self setTimerInterval:0.1f];
     }

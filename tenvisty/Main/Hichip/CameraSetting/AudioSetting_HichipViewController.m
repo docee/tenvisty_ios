@@ -81,10 +81,12 @@
     }
 }
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = 0;
     switch (type) {
         case HI_P2P_GET_AUDIO_ATTR:{
+            needSize = sizeof(HI_P2P_S_AUDIO_ATTR);
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
-            if(size >= sizeof(HI_P2P_S_AUDIO_ATTR)){
+            if(size >= needSize){
                 self.audio = [[AudioAttr alloc] initWithData:(char*)data size:(int)size];
                 [self refreshTable];
             }

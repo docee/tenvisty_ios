@@ -90,9 +90,10 @@
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = sizeof(HI_P2P_S_SD_INFO);
     switch (type) {
         case HI_P2P_GET_SD_INFO:{
-            if(size >= sizeof(HI_P2P_S_SD_INFO)){
+            if(size >= needSize){
                 SDCard *sdcardTemp = [[SDCard alloc] initWithData:(char*)data size:(int)size];
                 if(self.sdcard  && isFormatting){
                     if(self.sdcard.u32Space > 0){

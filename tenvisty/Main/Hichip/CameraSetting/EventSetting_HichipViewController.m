@@ -190,6 +190,7 @@
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = 0;
     switch (type) {
         case HI_P2P_GET_MD_PARAM:{
             ListImgTableViewCellModel *model = [[self.listItems objectAtIndex:0] objectAtIndex:0];
@@ -211,7 +212,8 @@
             break;
         }
         case HI_P2P_GET_ALARM_PARAM:{
-            if(size >= sizeof(HI_P2P_S_ALARM_PARAM)){
+            needSize = sizeof(HI_P2P_S_ALARM_PARAM);
+            if(size >= needSize){
                 self.alarmParas =[[AlarmLink alloc] initWithData:(char*)data size:(int)size];
                 [self refreshViewModel];
             }

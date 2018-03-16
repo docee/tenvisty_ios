@@ -12,8 +12,8 @@
 
 - (id)initWithData:(char *)data size:(int)size {
     if (self = [super init]) {
-        
-        if (size != sizeof(HI_P2P_WHITE_LIGHT_INFO)) {
+        int needSize = sizeof(HI_P2P_WHITE_LIGHT_INFO);
+        if (size != needSize) {
             return self;
         }
         
@@ -34,8 +34,8 @@
     if (self = [super init]) {
         
         if (cmd == HI_P2P_WHITE_LIGHT_GET_EXT) {
-            
-            if (size != sizeof(HI_P2P_WHITE_LIGHT_INFO_EXT)) {
+            int needSize = sizeof(HI_P2P_WHITE_LIGHT_INFO_EXT);
+            if (size != needSize) {
                 return self;
             }
             
@@ -51,8 +51,8 @@
         
         
         if (cmd == HI_P2P_WHITE_LIGHT_GET) {
-            
-            if (size != sizeof(HI_P2P_WHITE_LIGHT_INFO)) {
+            int needSize = sizeof(HI_P2P_WHITE_LIGHT_INFO);
+            if (size != needSize) {
                 return self;
             }
             

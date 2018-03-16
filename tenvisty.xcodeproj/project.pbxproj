@@ -3061,7 +3061,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
@@ -3086,8 +3086,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4ec898b5-418d-4caa-8127-e4e305cdc1e6";
-				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_20171229_profile;
+				PROVISIONING_PROFILE = "f339e28f-cf94-44d8-878a-eaf95715e7eb";
+				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_20180102_hoc;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

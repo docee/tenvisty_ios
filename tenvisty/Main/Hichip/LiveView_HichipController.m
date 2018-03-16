@@ -379,6 +379,7 @@
         [_constraint_width_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
+        [_connectStatus_port setHidden:YES];
         if(width/height < self.camera.videoRatio){
             _constraint_ycenter_videowrapper.priority = 800;
             _constraint_bottom_videowrapper.priority = 700;
@@ -422,6 +423,7 @@
 //            }
 //        }
       //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+        [_connectStatus_port setHidden:NO];
     }
     [self.videoMonitor deattachCamera];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

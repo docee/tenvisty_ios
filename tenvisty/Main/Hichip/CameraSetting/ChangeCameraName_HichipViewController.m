@@ -31,6 +31,7 @@
 -(NSArray *)listItems{
     if(!_listItems){
         NSArray *sec1 = [[NSArray alloc] initWithObjects:
+                         [ListImgTableViewCellModel initObj:nil title:LOCALSTR(@"UID") showValue:YES value:self.camera.uid viewId:TableViewCell_TextField_Disable],
                          [ListImgTableViewCellModel initObj:LOCALSTR(@"Name") value:self.camera.nickName placeHodler:LOCALSTR(@"Camera Name")  maxLength:20 viewId:TableViewCell_TextField_Normal],
                          nil];
         _listItems = [[NSArray alloc] initWithObjects:sec1, nil];
@@ -40,7 +41,7 @@
 
 - (IBAction)save:(id)sender {
     [self.view endEditing:YES];
-    NSString *nickName = [self getRowValue:0 section:0];
+    NSString *nickName = [self getRowValue:1 section:0];
     // 用于过滤空格和Tab换行符
     NSCharacterSet *characterSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     nickName = [nickName stringByTrimmingCharactersInSet:characterSet];

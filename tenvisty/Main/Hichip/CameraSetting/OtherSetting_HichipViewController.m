@@ -123,9 +123,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = 0;
     switch (type) {
         case HI_P2P_GET_DISPLAY_PARAM:{
-            if(size >= sizeof(HI_P2P_S_DISPLAY)){
+            needSize = sizeof(HI_P2P_S_DISPLAY);
+            if(size >= needSize){
                 self.display = [[Display alloc] initWithData:(char*)data size:(int)size];
                 [self refreshTable];
             }

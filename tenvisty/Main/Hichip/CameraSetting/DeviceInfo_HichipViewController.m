@@ -94,9 +94,11 @@
 
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = 0;
     switch (type) {
         case HI_P2P_GET_DEV_INFO_EXT:{
-            if(size>=sizeof(HI_P2P_S_DEV_INFO_EXT)){
+            needSize = sizeof(HI_P2P_S_DEV_INFO_EXT);
+            if(size>=needSize){
                 self.originCamera.deviceInfoExt = [[DeviceInfoExt alloc] initWithData:(char*)data size:(int)size];
                 if(self.originCamera.deviceInfoExt !=nil && [[self.originCamera.deviceInfoExt.aszWebVersion substringWithRange:NSMakeRange(1, 2)] intValue] >= 16){
                     hasFm = YES;
@@ -107,7 +109,8 @@
             break;
         }
         case HI_P2P_GET_NET_PARAM:{
-            if(size >= sizeof(HI_P2P_S_NET_PARAM)){
+            needSize = sizeof(HI_P2P_S_NET_PARAM);
+            if(size >= needSize){
                 self.netParam = [[NetParam alloc] initWithData:(char*)data size:(int)size];
                 [self refreshTable];
             }

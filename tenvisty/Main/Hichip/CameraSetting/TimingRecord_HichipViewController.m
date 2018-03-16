@@ -159,10 +159,12 @@
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
+    int needSize = 0;
     switch (type) {
         case HI_P2P_GET_REC_AUTO_PARAM:{
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
-            if(size >= sizeof(HI_P2P_S_REC_AUTO_PARAM)){
+            needSize = sizeof(HI_P2P_S_REC_AUTO_PARAM);
+            if(size >= needSize){
                 self.recAutoParam =[[RecAutoParam alloc] initWithData:(char*)data size:(int)size];
                 self.recAutoParamOrigin =[[RecAutoParam alloc] initWithData:(char*)data size:(int)size];
                 if(self.recAutoParam.u32Enable == 0){
@@ -178,8 +180,9 @@
         }
             break;
         case HI_P2P_GET_REC_AUTO_SCHEDULE:{
+            needSize = sizeof(HI_P2P_QUANTUM_TIME);
             [MBProgressHUD hideAllHUDsForView:self.tableview animated:YES];
-            if(size >= sizeof(HI_P2P_QUANTUM_TIME)){
+            if(size >= needSize){
                 self.quantumTime =[[QuantumTime alloc] initWithData:(char*)data size:(int)size];
                 self.quantumTimeOrigin =[[QuantumTime alloc] initWithData:(char*)data size:(int)size];
                 if(self.recAutoParam){

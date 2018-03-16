@@ -13,8 +13,8 @@
 
 - (id)initWithData:(char *)data size:(int)size {
     if (self = [super init]) {
-        
-        if (size != sizeof(HI_P2P_S_DISPLAY)) {
+        int needSize = sizeof(HI_P2P_S_DISPLAY);
+        if (size != needSize) {
             return self;
         }
         HI_P2P_S_DISPLAY *model = (HI_P2P_S_DISPLAY*)malloc(sizeof(HI_P2P_S_DISPLAY));

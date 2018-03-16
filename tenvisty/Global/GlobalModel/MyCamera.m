@@ -193,7 +193,7 @@
 }
 
 -(BOOL)isDisconnect{
-    return self.cameraConnectState == CONNECTION_STATE_DISCONNECTED;
+    return self.cameraConnectState == CONNECTION_STATE_DISCONNECTED || self.cameraConnectState == CONNECTION_STATE_CONNECT_FAILED || self.cameraConnectState == CONNECTION_STATE_UNSUPPORTED || self.cameraConnectState == CONNECTION_STATE_NONE || self.cameraConnectState == CONNECTION_STATE_UNKNOWN_DEVICE || self.cameraConnectState == CONNECTION_STATE_TIMEOUT || self.cameraConnectState == CONNECTION_STATE_NETWORK_FAILED;
 }
 
 -(BOOL)isWrongPassword{

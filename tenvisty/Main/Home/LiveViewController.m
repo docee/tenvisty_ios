@@ -309,6 +309,7 @@
         [_constraint_width_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultHigh];
+        [_connectStatus_port setHidden:YES];
         if(width/height < self.camera.videoRatio){
             _constraint_ycenter_videowrapper.priority = 800;
             _constraint_bottom_videowrapper.priority = 700;
@@ -344,6 +345,7 @@
         [_constraint_x_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_constraint_top_viewSwitchVideoQuality_land setPriority:UILayoutPriorityDefaultLow];
         [_viewPreset setHidden:YES];
+        [_connectStatus_port setHidden:NO];
 //        for(NSLayoutConstraint *constraint in self.video_wrapper.constraints){
 //            if([constraint.identifier isEqualToString:@"videowrapper_ratio"]){
 //                existConstraint = constraint;

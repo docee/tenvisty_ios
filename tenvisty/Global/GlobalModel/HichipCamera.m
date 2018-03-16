@@ -86,7 +86,7 @@
 }
 
 -(NSInteger)remoteNotifications{
-    return 0;
+    return [self isPushOn];
 }
 
 -(BOOL)isSessionConnected{
@@ -98,14 +98,14 @@
 }
 
 -(BOOL)isConnecting{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED || self.getConnectState == CAMERA_CONNECTION_STATE_UIDERROR;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTED;
 }
 -(BOOL)isSessionConnecting{
     return self.getConnectState == CAMERA_CONNECTION_STATE_CONNECTING || self.getConnectState == CAMERA_CONNECTION_STATE_UIDERROR;
 }
 
 -(BOOL)isDisconnect{
-    return self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED ;
+    return self.getConnectState == CAMERA_CONNECTION_STATE_DISCONNECTED  || self.getConnectState == CAMERA_CONNECTION_STATE_UIDERROR;
 }
 
 -(BOOL)isWrongPassword{
@@ -434,10 +434,12 @@
 
 - (void)receiveIOCtrl:(HiCamera *)camera Type:(int)type Data:(char*)data Size:(int)size Status:(int)status {
     LOG(@">>>HiCamera_receiveIOCtrl %@ %x %d %d",camera.uid, type, size, status);
+    int needSize = 0;
     switch (type) {
             //获取时区（新命令）
         case HI_P2P_GET_TIME_ZONE_EXT:{
-            if(size >= sizeof(HI_P2P_S_TIME_ZONE_EXT)){
+            needSize = sizeof(HI_P2P_S_TIME_ZONE_EXT);
+            if(size >= needSize){
                 self.zkGmTimeZone = [[newTimeZone alloc] initWithData:data withSize:size];
                 if(self.deviceLoginTime != nil && self.deviceLoginTime.u32Year <= 1970){
                     self.deviceLoginTime = nil;
@@ -447,7 +449,8 @@
         }
             break;
         case HI_P2P_GET_TIME_ZONE:{
-            if(size >= sizeof(HI_P2P_S_TIME_ZONE)){
+            needSize = sizeof(HI_P2P_S_TIME_ZONE);
+            if(size >= needSize){
                 self.gmTimeZone = [[TimeZone alloc] initWithData:data size:size];
                 if(self.deviceLoginTime != nil && self.deviceLoginTime.u32Year <= 1970){
                     self.deviceLoginTime = nil;
@@ -457,7 +460,8 @@
         }
             break;
         case HI_P2P_GET_DEV_INFO_EXT:{
-            if(size >= sizeof(HI_P2P_S_DEV_INFO_EXT)){
+            needSize = sizeof(HI_P2P_S_DEV_INFO_EXT);
+            if(size >= needSize){
                 self.deviceInfoExt = [[DeviceInfoExt alloc] initWithData:data size:size];
                 NSArray<NSString*> *arrWv =  [self.deviceInfoExt.aszWebVersion componentsSeparatedByString:@"."];
                 if([arrWv count] >4){
@@ -474,7 +478,8 @@
             break;
         case HI_P2P_GET_NET_PARAM:{
                 LOG(@"camera %@ HI_P2P_GET_DEV_INFO ",self.uid);
-                if(size >= sizeof(HI_P2P_S_NET_PARAM)){
+                needSize = sizeof(HI_P2P_S_NET_PARAM);
+                if(size >= needSize){
                     self.netParam = [[NetParam alloc] initWithData:(char*)data size:(int)size];
                     if(![self.baseCamera hasSetFunctionFlag]){
                         [CameraFunction DoCameraFunctionFlag:self.baseCamera ip:self.netParam.strIPAddr netmask:self.netParam.strNetMask];
@@ -483,8 +488,9 @@
                 }
         }
             break;
-        case HI_P2P_GET_TIME_PARAM:
-            if(size >= sizeof(HI_P2P_GET_TIME_PARAM)){
+        case HI_P2P_GET_TIME_PARAM:{
+            needSize = sizeof(HI_P2P_S_TIME_PARAM);
+            if(size >= needSize){
                 self.deviceLoginTime = [[TimeParam alloc] initWithData:data size:size];
                 if(self.deviceLoginTime.u32Year <= 1970){
                     if(self.gmTimeZone || self.zkGmTimeZone){
@@ -493,6 +499,7 @@
                     }
                 }
             }
+        }
             break;
         case HI_P2P_SET_TIME_PARAM:{
             [self sendIOCtrl:HI_P2P_GET_TIME_PARAM Data:(char*)nil Size:0];
