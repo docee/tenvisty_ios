@@ -194,18 +194,30 @@
                                                         <action selector="showModifyPassword:" destination="BDn-US-UtP" eventType="touchUpInside" id="NaY-oP-2gm"/>
                                                     </connections>
                                                 </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcI-ig-1Ze">
+                                                    <rect key="frame" x="0.0" y="40" width="375" height="100"/>
+                                                    <state key="normal" title="tap to wake up" image="btn_reconnect">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="wakeUpCamera:" destination="BDn-US-UtP" eventType="touchUpInside" id="o9f-yh-l2U"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="d58-C2-ZfB" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="2Ur-Fq-FMp"/>
                                                 <constraint firstItem="7Rl-LW-pyl" firstAttribute="top" secondItem="d58-C2-ZfB" secondAttribute="bottom" id="39d-HV-dxT"/>
+                                                <constraint firstAttribute="trailing" secondItem="bcI-ig-1Ze" secondAttribute="trailing" id="5KK-Hk-56B"/>
                                                 <constraint firstItem="F7b-aV-gWV" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="64F-gq-Tan"/>
                                                 <constraint firstItem="F7b-aV-gWV" firstAttribute="top" secondItem="a8w-WP-BwO" secondAttribute="bottom" id="6fS-uw-kPl"/>
+                                                <constraint firstItem="bcI-ig-1Ze" firstAttribute="top" secondItem="a8w-WP-BwO" secondAttribute="bottom" id="8PW-4g-4iW"/>
                                                 <constraint firstAttribute="trailing" secondItem="7Rl-LW-pyl" secondAttribute="trailing" id="9Ei-gU-zeY"/>
                                                 <constraint firstAttribute="bottom" secondItem="7Rl-LW-pyl" secondAttribute="bottom" id="9vH-wI-nRC"/>
                                                 <constraint firstItem="fvd-pr-T2T" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="ClZ-lO-ymH"/>
                                                 <constraint firstAttribute="trailing" secondItem="fvd-pr-T2T" secondAttribute="trailing" id="DYo-Hl-AfN"/>
                                                 <constraint firstItem="o5f-YR-My6" firstAttribute="top" secondItem="a8w-WP-BwO" secondAttribute="bottom" id="Dht-je-9Kh"/>
                                                 <constraint firstItem="o5f-YR-My6" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="EdY-me-psD"/>
+                                                <constraint firstItem="7Rl-LW-pyl" firstAttribute="top" secondItem="bcI-ig-1Ze" secondAttribute="bottom" id="FBc-cw-j1I"/>
                                                 <constraint firstItem="7Rl-LW-pyl" firstAttribute="top" secondItem="o5f-YR-My6" secondAttribute="bottom" id="L4S-Yj-oM4"/>
                                                 <constraint firstItem="a8w-WP-BwO" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="Qyf-pV-Mjx"/>
                                                 <constraint firstItem="7Rl-LW-pyl" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="RR2-h2-7Pn"/>
@@ -217,6 +229,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="fvd-pr-T2T" secondAttribute="bottom" id="nT9-jH-CFO"/>
                                                 <constraint firstItem="7Rl-LW-pyl" firstAttribute="top" secondItem="F7b-aV-gWV" secondAttribute="bottom" id="oIj-Hs-vlH"/>
                                                 <constraint firstItem="d58-C2-ZfB" firstAttribute="top" secondItem="a8w-WP-BwO" secondAttribute="bottom" id="uRa-47-gEK"/>
+                                                <constraint firstItem="bcI-ig-1Ze" firstAttribute="leading" secondItem="Pg6-ky-YSE" secondAttribute="leading" id="wKn-73-tsD"/>
                                                 <constraint firstItem="a8w-WP-BwO" firstAttribute="top" secondItem="Pg6-ky-YSE" secondAttribute="top" id="zAJ-Ve-8cc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -228,6 +241,7 @@
                                             <outlet property="btnModifyPassword" destination="d58-C2-ZfB" id="wEv-AO-EET"/>
                                             <outlet property="btnPlay" destination="o5f-YR-My6" id="hZZ-mR-H8k"/>
                                             <outlet property="btnReconnect" destination="F7b-aV-gWV" id="JNd-fJ-Tf1"/>
+                                            <outlet property="btnWakeUp" destination="bcI-ig-1Ze" id="5F3-vF-gM5"/>
                                             <outlet property="constraint_width_labConnectstate" destination="sHr-Lh-q03" id="V1L-jA-c5a"/>
                                             <outlet property="imgAlarm" destination="UYs-mg-7QU" id="k1C-oo-iyB"/>
                                             <outlet property="imgCameraSnap" destination="IRz-r0-26P" id="XJ1-Ms-TMp"/>

@@ -95,7 +95,7 @@
         return;
     }
      self.labCameraConnectState.text = self.camera.cameraStateDesc;
-    if(self.camera.isConnecting || self.camera.processState != CAMERASTATE_NONE){
+    if(self.camera.isConnecting || self.camera.processState != CAMERASTATE_NONE || self.camera.isWakingUp){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
         MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
@@ -104,6 +104,7 @@
         [self.btnReconnect setHidden:YES];
         [self.btnModifyPassword setHidden:YES];
         [self.btnPlay setHidden:YES];
+        [self.btnWakeUp setHidden:YES];
         //self.labCameraConnectState.text = LOCALSTR(@"Connecting");
         [self.labCameraConnectState setBackgroundColor:Color_Primary];
         self.constraint_width_labConnectstate.constant = 75;
@@ -117,6 +118,7 @@
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:YES];
             [self.btnPlay setHidden:NO];
+            [self.btnWakeUp setHidden:YES];
             //self.labCameraConnectState.text = LOCALSTR(@"Online");
             [self.labCameraConnectState setBackgroundColor:Color_GreenDark];
             [TwsViewTools setButtonContentCenter:self.btnPlay];
@@ -130,10 +132,25 @@
             [self.btnReconnect setHidden:YES];
             [self.btnModifyPassword setHidden:NO];
             [self.btnPlay setHidden:YES];
+            [self.btnWakeUp setHidden:YES];
             [TwsViewTools setButtonContentCenter:self.btnModifyPassword];
             //self.labCameraConnectState.text = LOCALSTR(@"Wrong Password");
             [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
             self.constraint_width_labConnectstate.constant = 105;
+            [_btnCameraEvent setEnabled:NO];
+            [_btnCameraSetting setEnabled:NO];
+        }
+        else if(self.camera.isSleeping){
+            LOG(@"sleeping");
+            [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
+            [self.btnWakeUp setHidden:NO];
+            [self.btnReconnect setHidden:YES];
+            [self.btnModifyPassword setHidden:YES];
+            [self.btnPlay setHidden:YES];
+            [TwsViewTools setButtonContentCenter:self.btnWakeUp];
+            //self.labCameraConnectState.text = LOCALSTR(@"Offline");
+            [self.labCameraConnectState setBackgroundColor:Color_GrayDark];
+            self.constraint_width_labConnectstate.constant = 75;
             [_btnCameraEvent setEnabled:NO];
             [_btnCameraSetting setEnabled:NO];
         }
@@ -142,6 +159,7 @@
             [self.btnReconnect setHidden:NO];
             [self.btnModifyPassword setHidden:YES];
             [self.btnPlay setHidden:YES];
+            [self.btnWakeUp setHidden:YES];
             [TwsViewTools setButtonContentCenter:self.btnReconnect];
             //self.labCameraConnectState.text = LOCALSTR(@"Offline");
             [self.labCameraConnectState setBackgroundColor:Color_GrayDark];

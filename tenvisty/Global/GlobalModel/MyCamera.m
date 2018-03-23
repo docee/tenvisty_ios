@@ -14,7 +14,7 @@
 #import "Event.h"
 
 @interface MyCamera()<CameraDelegate>{
-    
+    BOOL isWakingUp;
 }
 @property (nonatomic,assign) NSInteger beginRebootTime;
 @property (nonatomic,assign) NSInteger rebootTimeout;
@@ -143,11 +143,14 @@
 #pragma mark -
 -(NSString*)cameraStateDesc{
     if(self.processState == CAMERASTATE_NONE){
-        if(self.isConnecting){
+        if(self.isConnecting || self.isWakingUp){
             return LOCALSTR(@"Connecting");
         }
         else{
-            if(self.isAuthConnected){
+            if(self.isSleeping){
+                return LOCALSTR(@"Sleeping");
+            }
+            else if(self.isAuthConnected){
                 return LOCALSTR(@"Online");
             }
             else if(self.isWrongPassword){
@@ -491,6 +494,9 @@
             [self stop];
         }
     }
+    if(status == CONNECTION_STATE_CONNECTED){
+        isWakingUp = NO;
+    }
     
     
     self.cameraConnectState = status;
@@ -524,12 +530,13 @@
     }
     
     if (status == CONNECTION_STATE_WRONG_PASSWORD) {
-        
+        isWakingUp = NO;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
         });
     }
     else if(status == CONNECTION_STATE_CONNECTED){
+        isWakingUp = NO;
         SMsgAVIoctrlGetAudioOutFormatReq *s = (SMsgAVIoctrlGetAudioOutFormatReq *)malloc(sizeof(SMsgAVIoctrlGetAudioOutFormatReq));
         s->channel = (unsigned int)channel;
         [self sendIOCtrlToChannel:channel Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
@@ -899,4 +906,16 @@
     free(req);
 }
 
+-(void)wakeUp{
+    isWakingUp = YES;
+    [self stop];
+    [super wakeup:self.uid];
+}
+-(BOOL)isSleeping{
+    return self.cameraConnectState == CONNECTION_STATE_SLEEPING;
+}
+
+-(BOOL)isWakingUp{
+    return self.cameraConnectState == CONNECTION_STATE_WAKINGUP || isWakingUp;
+}
 @end

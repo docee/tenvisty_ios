@@ -53,6 +53,8 @@ typedef enum
 @property(nonatomic,assign,readonly) BOOL isDisconnect;
 @property(nonatomic,assign,readonly) BOOL isWrongPassword;
 @property(nonatomic,assign) BOOL isSessionConnecting;
+@property(nonatomic,assign,readonly) BOOL isSleeping;
+@property(nonatomic,assign,readonly) BOOL isWakingUp;
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_;
 -(id)init;
 -(void)connect;
@@ -93,6 +95,7 @@ typedef enum
 - (NSString *)remoteRecordName:(NSInteger)recordId type:(NSInteger)tp;
 - (NSString *)remoteRecordDir;
 - (UIImage *)thumbImage:(NSString*)defaultImg;
+-(void)wakeUp;
 
 @end
 @interface BaseCamera : NSObject<BaseCameraProtocol>

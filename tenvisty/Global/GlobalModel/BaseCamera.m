@@ -66,6 +66,8 @@
 @synthesize isConnecting;
 @synthesize isDisconnect;
 @synthesize isWrongPassword;
+@synthesize isSleeping;
+@synthesize isWakingUp;
 
 - (id<BaseCameraDelegate>)cameraDelegate{
     return self.orginCamera.cameraDelegate;
@@ -375,6 +377,7 @@
         functionFlag = [arrFuc copy];
     }
 }
+
 - (BOOL)hasSetFunctionFlag{
     return functionFlag != nil && [functionFlag count] > 0;
 }
@@ -396,7 +399,18 @@
 - (void) SetImgview:(UIImageView*) imgview{
     [self.orginCamera SetImgview:imgview];
 }
+
 -(void) RemImgview{
     [self.orginCamera RemImgview];
+}
+
+-(void)wakeUp{
+    [self.orginCamera wakeUp];
+}
+-(BOOL)isSleeping{
+    return self.orginCamera.isSleeping;
+}
+-(BOOL)isWakingUp{
+    return self.orginCamera.isWakingUp;
 }
 @end

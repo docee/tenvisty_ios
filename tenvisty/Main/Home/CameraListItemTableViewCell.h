@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPlay;
 @property (weak, nonatomic) IBOutlet UIButton *btnReconnect;
 @property (weak, nonatomic) IBOutlet UIButton *btnModifyPassword;
+@property (weak, nonatomic) IBOutlet UIButton *btnWakeUp;;
 
 @property (weak, nonatomic) BaseCamera* camera;
 

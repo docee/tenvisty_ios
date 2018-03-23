@@ -140,6 +140,11 @@
 		898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BA91FE0F66600062F04 /* FMDatabaseQueue.m */; };
 		898D8BB11FE0F66600062F04 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BAC1FE0F66600062F04 /* FMResultSet.m */; };
 		898D8BB41FE0F75B00062F04 /* GBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BB31FE0F75B00062F04 /* GBase.m */; };
+		899A90512064A4F5003F634C /* AoniWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 899A90502064A4F5003F634C /* AoniWiFiConfig.m */; };
+		899A90562064D6F2003F634C /* libcooee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 899A90542064D6F2003F634C /* libcooee.a */; };
+		899A90572064D6F2003F634C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 899A90552064D6F2003F634C /* libcrypto.a */; };
+		899A90582064E66E003F634C /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB92010AF4700A6F0CD /* libIOTCAPIs_ALL.a */; };
+		899A90592064E68F003F634C /* IOTCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896F638D1FF10212005E0E4A /* IOTCamera.framework */; };
 		899AD4F91FCD3B40008ED303 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4F81FCD3B40008ED303 /* CoreGraphics.framework */; };
 		899AD4FB1FCD3B52008ED303 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4FA1FCD3B52008ED303 /* UIKit.framework */; };
 		899AD4FD1FCD3B61008ED303 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 899AD4FC1FCD3B61008ED303 /* Foundation.framework */; };
@@ -204,7 +209,6 @@
 		89D9466A1FDF7D90000ABB0A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D946681FDF7D90000ABB0A /* Reachability.m */; };
 		89DAEFB220401B650033A19A /* libavconVoiceRecognize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BBB2010AF5200A6F0CD /* libavconVoiceRecognize.a */; };
 		89DAEFB320401B6D0033A19A /* libHiP2PSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37BB72010AF3700A6F0CD /* libHiP2PSDK.a */; };
-		89DAEFB420401E070033A19A /* IOTCamera in Frameworks */ = {isa = PBXBuildFile; fileRef = 89D3F6EA1FFE344400E3E8EA /* IOTCamera */; };
 		89DBE53A201085D500B79617 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DBE539201085D500B79617 /* libz.1.2.5.tbd */; };
 		89E171211FDFD48F004AAD3D /* BaseWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171201FDFD48F004AAD3D /* BaseWiFiConfig.m */; };
 		89E171241FDFD7F0004AAD3D /* FaceberAudioConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E171231FDFD7F0004AAD3D /* FaceberAudioConfig.m */; };
@@ -516,6 +520,11 @@
 		898D8BAC1FE0F66600062F04 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		898D8BB21FE0F75B00062F04 /* GBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBase.h; sourceTree = "<group>"; };
 		898D8BB31FE0F75B00062F04 /* GBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBase.m; sourceTree = "<group>"; };
+		899A904F2064A4F5003F634C /* AoniWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AoniWiFiConfig.h; sourceTree = "<group>"; };
+		899A90502064A4F5003F634C /* AoniWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AoniWiFiConfig.m; sourceTree = "<group>"; };
+		899A90532064D6F2003F634C /* cooee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cooee.h; sourceTree = "<group>"; };
+		899A90542064D6F2003F634C /* libcooee.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcooee.a; sourceTree = "<group>"; };
+		899A90552064D6F2003F634C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		899AD4D81FC7F471008ED303 /* libH264Dec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libH264Dec.a; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-gvepaawyhxzeqzhfiehsxgdjfcjf/Build/Products/Debug-iphoneos/libH264Dec.a"; sourceTree = "<group>"; };
 		899AD4DA1FC7F474008ED303 /* libmpg123.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmpg123.a; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-gvepaawyhxzeqzhfiehsxgdjfcjf/Build/Products/Debug-iphoneos/libmpg123.a"; sourceTree = "<group>"; };
 		899AD4DC1FC7F477008ED303 /* libSpeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSpeex.a; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-gvepaawyhxzeqzhfiehsxgdjfcjf/Build/Products/Debug-iphoneos/libSpeex.a"; sourceTree = "<group>"; };
@@ -980,7 +989,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89DAEFB420401E070033A19A /* IOTCamera in Frameworks */,
+				899A90592064E68F003F634C /* IOTCamera.framework in Frameworks */,
+				899A90582064E66E003F634C /* libIOTCAPIs_ALL.a in Frameworks */,
+				899A90562064D6F2003F634C /* libcooee.a in Frameworks */,
+				899A90572064D6F2003F634C /* libcrypto.a in Frameworks */,
 				89DAEFB320401B6D0033A19A /* libHiP2PSDK.a in Frameworks */,
 				89DAEFB220401B650033A19A /* libavconVoiceRecognize.a in Frameworks */,
 				8924117A201F26C1001F60E8 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -1641,6 +1653,16 @@
 			path = fmdb;
 			sourceTree = "<group>";
 		};
+		899A90522064D6F2003F634C /* cooee */ = {
+			isa = PBXGroup;
+			children = (
+				899A90532064D6F2003F634C /* cooee.h */,
+				899A90542064D6F2003F634C /* libcooee.a */,
+				899A90552064D6F2003F634C /* libcrypto.a */,
+			);
+			path = cooee;
+			sourceTree = "<group>";
+		};
 		899AD50B1FCD64F8008ED303 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1870,6 +1892,7 @@
 		89E171191FDFD2EF004AAD3D /* ConfigWiFi */ = {
 			isa = PBXGroup;
 			children = (
+				899A90522064D6F2003F634C /* cooee */,
 				89E1711D1FDFD3B1004AAD3D /* Source */,
 				89E1711F1FDFD48F004AAD3D /* BaseWiFiConfig.h */,
 				89E171201FDFD48F004AAD3D /* BaseWiFiConfig.m */,
@@ -1881,6 +1904,8 @@
 				89241174201F1DF9001F60E8 /* HichipAudioWiFiConfig.m */,
 				89241176201F1FE7001F60E8 /* HichipSmarkWiFiConfig.h */,
 				89241177201F1FE7001F60E8 /* HichipSmarkWiFiConfig.m */,
+				899A904F2064A4F5003F634C /* AoniWiFiConfig.h */,
+				899A90502064A4F5003F634C /* AoniWiFiConfig.m */,
 			);
 			path = ConfigWiFi;
 			sourceTree = "<group>";
@@ -2742,6 +2767,7 @@
 				892CE0C31FD121DB00942E28 /* BaseTableViewController.m in Sources */,
 				892ADB7F1FD781F800BD8929 /* TimeSettingViewController.m in Sources */,
 				89870A241FDA83AA005207AB /* TwsTools.m in Sources */,
+				899A90512064A4F5003F634C /* AoniWiFiConfig.m in Sources */,
 				89241269202062CD001F60E8 /* RecordSetting_HichipViewController.m in Sources */,
 				892ADB761FD6A26100BD8929 /* SelectItemTableViewCell.m in Sources */,
 				89E4E9721FCE7EC1007EA336 /* CameraListItemTableViewCell.m in Sources */,
@@ -3061,7 +3087,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
@@ -3077,6 +3103,7 @@
 					"$(PROJECT_DIR)/UM",
 					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/tenvisty/Global/ConfigWiFi/cooee",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-fembed-bitcode";
@@ -3086,8 +3113,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f339e28f-cf94-44d8-878a-eaf95715e7eb";
-				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_20180102_hoc;
+				PROVISIONING_PROFILE = "4ec898b5-418d-4caa-8127-e4e305cdc1e6";
+				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_20171229_profile;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -3116,6 +3143,7 @@
 					"$(PROJECT_DIR)/UM",
 					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/tenvisty/Global/ConfigWiFi/cooee",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";

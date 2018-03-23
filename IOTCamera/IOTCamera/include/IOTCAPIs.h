@@ -156,10 +156,6 @@ extern "C" {
      * disconnection from the device or that device does not login yet. */
 #define IOTC_ER_CAN_NOT_FIND_DEVICE                 -19
     
-    /** The client is already connecting to a device currently
-     * so it is prohibited to invoke connection again at this moment. */
-#define IOTC_ER_CONNECT_IS_CALLING                  -20
-    
     /** The remote site already closes this IOTC session.
      * Please call IOTC_Session_Close() to release IOTC session resource in locate site. */
 #define IOTC_ER_SESSION_CLOSE_BY_REMOTE             -22
@@ -206,10 +202,6 @@ extern "C" {
     
     /** A device does not support connection in non-secure mode */
 #define IOTC_ER_DEVICE_SECURE_MODE                    -37
-    
-    /** The IOTC session mode specified in IOTC_Listen2(), IOTC_Connect_ByUID2()
-     * is not valid. Please see #IOTCSessionMode for possible modes. */
-#define IOTC_ER_INVALID_MODE                        -38
     
     /** A device stops listening for connections from clients. */
 #define IOTC_ER_EXIT_LISTEN                         -39
@@ -275,7 +267,7 @@ extern "C" {
     /** Out of memory*/
 #define IOTC_ER_NOT_ENOUGH_MEMORY                   -58
     
-    /** The device is banned and locked*/
+    /** The device is banned and locked, this error code is no longer being used*/
 #define IOTC_ER_DEVICE_IS_BANNED                    -59
     
     /** IOTC master servers have no response, probably caused by many types of Internet connection issues. */
@@ -494,6 +486,8 @@ extern "C" {
     {
         char IsParallel; //!< 0: Turn off parallel connection. 1: Turn on parallel connection.
         char IsLowConnectionBandwidth; //!< 0: Normal connection mode 1: Low bandwidth mode (This mode might reduce the P2P traversal rate)
+        char IsP2PRequestRoundRobin; //!< 0: Normal connection mode 1: P2P Request round robin mode (This mode might reduce the P2P traversal rate)
+        char IsNotToCheckLanIpforP2P; //!< 0: Check the P2P connected IP if it is change mode to LAN 1: Do not check the P2P connected IP
     };
     
     typedef struct st_ConnectOption st_ConnectOption_t;
@@ -521,10 +515,11 @@ extern "C" {
      *
      * \param pnLoginInfo [out] The login info with meanings of following bits
      *            - bit 0: the device is ready for connection by client from LAN if this bit is 1
-     *            - bit 1: the device is ready for connection by client from Internet if this bit is 1
+     *            - bit 1: once the device can contact with masters and p2p servers, this bit will be set as 1
      *            - bit 2: if this bit is 1, it means the device has received login
      *                        response from IOTC servers since IOTC_Get_Login_Info()
-     *                        is called last time.
+     *                        is called last time. This bit will be set as 0 if p2p server has not
+     *                        responsed about 75 seconds.
      *
      */
     typedef void (__stdcall *loginInfoCB)(unsigned int nLoginInfo);
@@ -571,7 +566,6 @@ extern "C" {
      *        errCode [out] The error code represents what the problems it during the connect. To be noted,
      *        This value is meaningful when state is IOTC_CONNECT_UID_ST_FAILED.
      *            - #IOTC_ER_NOT_INITIALIZED The IOTC module is not initialized yet
-     *            - #IOTC_ER_CONNECT_IS_CALLING The client is already connecting to a device
      *            - #IOTC_ER_UNLICENSE The specified UID of that device is not licensed or expired
      *            - #IOTC_ER_EXCEED_MAX_SESSION The number of IOTC sessions has reached maximum in client side
      *            - #IOTC_ER_DEVICE_NOT_LISTENING The device is not listening for connection now
@@ -973,7 +967,6 @@ extern "C" {
      *            - #IOTC_ER_LISTEN_ALREADY_CALLED The device is already in listen process
      *            - #IOTC_ER_TIMEOUT No connection is established from clients before timeout expires
      *            - #IOTC_ER_EXIT_LISTEN The device stops listening for connections from clients.
-     *            - #IOTC_ER_DEVICE_IS_BANNED The device might be banned if another device has already logined on servers
      *
      * \attention (1) This function is a block process, waiting for following two
      *                conditions happens before executing    sequential instructions
@@ -1012,51 +1005,9 @@ extern "C" {
      *            - IOTC_ER_INVALID_ARG   Invalid input argument.
      *            - IOTC_ER_NOT_INITIALIZED     The module has not bee initialized.
      *            - IOTC_ER_EXCEED_MAX_SESSION     It reaches the max session number.
-     *            - IOTC_ER_DEVICE_IS_BANNED     The device is banned.
      */
     
     P2PAPI_API int  IOTC_Accept(int *SID);
-    
-    
-    /**
-     * \brief Used by a device to listen connections from clients
-     *
-     * \details This function is for a device to listen any connection from clients.
-     *            If connection is established with the help of IOTC servers, the
-     *            IOTC session ID will be returned in this function and then device and
-     *            client can communicate for the other later by using this IOTC session ID.
-     *            <br> <br>
-     *            The difference between this function and IOTC_Listen() is that
-     *            this function supports IOTC session established in secure mode. Also,
-     *            by specifying IOTC_ARBITRARY_MODE as IOTC session mode, this function can
-     *            let devices establish IOTC session in either non-secure mode and secure
-     *            mode according to clients' request.
-     *
-     * \param nTimeout [in] The timeout for this function in unit of millisecond, give 0 means block forever
-     * \param cszAESKey [in] The AES key for certification. Specify it as NULL will make
-     *            IOTC module use predefined AES key.
-     * \param nSessionMode [in] The IOTC session mode that a device want to connect.
-     *            Please refer to #IOTCSessionMode for more detail
-     *
-     * \return IOTC session ID if return value >= 0
-     * \return Error code if return value < 0
-     *            - #IOTC_ER_NOT_INITIALIZED The IOTC module is not initialized yet
-     *            - #IOTC_ER_EXCEED_MAX_SESSION The number of IOTC sessions has reached maximum in device side
-     *            - #IOTC_ER_LISTEN_ALREADY_CALLED The device is already in listen process
-     *            - #IOTC_ER_TIMEOUT No connection is established from clients before timeout expires
-     *            - #IOTC_ER_EXIT_LISTEN The device stops listening for connections from clients.
-     *            - #IOTC_ER_INVALID_MODE The IOTC session mode is not valid. Please refer to #IOTCSessionMode
-     *            - #IOTC_ER_CLIENT_NOT_SECURE_MODE A client wants to connect to a device in
-     *                    non-secure mode while that device supports secure mode only.
-     *            - #IOTC_ER_CLIENT_SECURE_MODE A client wants to connect to a device
-     *                    in secure mode while that device does not support secure mode.
-     *            - #IOTC_ER_AES_CERTIFY_FAIL The AES certification fails
-     *
-     * \attention (1) This function is available on Win32, Linux, Android, iOS and ARC platforms.<br><br>
-     *                (2) The AES key shall be matched between a device and a client
-     *                in order to establish connection successfully.
-     */
-    P2PAPI_API int  IOTC_Listen2(unsigned int nTimeout, const char *cszAESKey, IOTCSessionMode nSessionMode);
     
     
     /**
@@ -1073,7 +1024,6 @@ extern "C" {
      * \return IOTC session ID if return value >= 0
      * \return Error code if return value < 0
      *            - #IOTC_ER_NOT_INITIALIZED The IOTC module is not initialized yet
-     *            - #IOTC_ER_CONNECT_IS_CALLING The client is already connecting to a device
      *            - #IOTC_ER_UNLICENSE The specified UID of that device is not licensed or expired
      *            - #IOTC_ER_EXCEED_MAX_SESSION The number of IOTC sessions has reached maximum in client side
      *            - #IOTC_ER_DEVICE_NOT_LISTENING The device is not listening for connection now
@@ -1122,7 +1072,6 @@ extern "C" {
      * \return IOTC session ID if return value >= 0
      * \return Error code if return value < 0
      *            - #IOTC_ER_NOT_INITIALIZED The IOTC module is not initialized yet
-     *            - #IOTC_ER_CONNECT_IS_CALLING The client is already connecting to a device
      *            - #IOTC_ER_UNLICENSE The specified UID of that device is not licensed or expired
      *            - #IOTC_ER_EXCEED_MAX_SESSION The number of IOTC sessions has reached maximum in client side
      *            - #IOTC_ER_DEVICE_NOT_LISTENING The device is not listening for connection now
@@ -1257,66 +1206,6 @@ extern "C" {
     
     
     /**
-     * \brief Used by a client to connect a device
-     *
-     * \details This function is for a client to connect a device by specifying
-     *            the UID of that device. If connection is established with the
-     *            help of IOTC servers, the IOTC session ID will be returned in this
-     *            function and then device and client can communicate for the other
-     *            later by using this IOTC session ID.
-     *            <br> <br>
-     *            The different between this function and IOTC_Connect_ByUID() is
-     *            that this function supports IOTC session established in secure mode.
-     *            Also, by specifying IOTC_ARBITRARY_MODE as IOTC session mode, this
-     *            function can let clients establish IOTC session in either non-secure
-     *            mode and secure    mode according to devices' secure settings.
-     *
-     * \param cszUID [in] The UID of a device that client wants to connect
-     * \param cszAESKey [in] The AES key for certification. Specify it as NULL will make
-     *            IOTC module use predefined AES key.
-     * \param nSessionMode [in] The IOTC session mode that a client want to connect.
-     *            Please refer to #IOTCSessionMode for more detail
-     *
-     * \return IOTC session ID if return value >= 0
-     * \return Error code if return value < 0
-     *            - #IOTC_ER_NOT_INITIALIZED The IOTC module is not initialized yet
-     *            - #IOTC_ER_CONNECT_IS_CALLING The client is already connecting to a device
-     *            - #IOTC_ER_UNLICENSE The specified UID of that device is not licensed or expired
-     *            - #IOTC_ER_EXCEED_MAX_SESSION The number of IOTC sessions has reached maximum in client side
-     *            - #IOTC_ER_DEVICE_NOT_LISTENING The device is not listening for connection now
-     *            - #IOTC_ER_FAIL_CONNECT_SEARCH The client stop connecting to the device
-     *            - #IOTC_ER_FAIL_RESOLVE_HOSTNAME Cannot resolve masters' host name
-     *            - #IOTC_ER_FAIL_CREATE_THREAD Fails to create threads
-     *            - #IOTC_ER_TCP_TRAVEL_FAILED Cannot connect to masters in neither UDP nor TCP
-     *            - #IOTC_ER_TCP_CONNECT_TO_SERVER_FAILED Cannot connect to IOTC servers in TCP
-     *            - #IOTC_ER_CAN_NOT_FIND_DEVICE IOTC servers cannot locate the specified device
-     *            - #IOTC_ER_NO_PERMISSION The specified device does not support TCP relay
-     *            - #IOTC_ER_SERVER_NOT_RESPONSE IOTC servers have no response
-     *            - #IOTC_ER_FAIL_GET_LOCAL_IP Fails to get the client's local IP address
-     *            - #IOTC_ER_FAIL_SETUP_RELAY Fails to connect the device via relay mode
-     *            - #IOTC_ER_INVALID_MODE The IOTC session mode is not valid. Please refer to #IOTCSessionMode
-     *            - #IOTC_ER_DEVICE_NOT_SECURE_MODE A client wants to connect to a device in
-     *                    secure mode while that device supports non-secure mode only.
-     *            - #IOTC_ER_DEVICE_SECURE_MODE A client wants to connect to a device
-     *                    in non-secure mode while that device supports secure mode only.
-     *            - #IOTC_ER_AES_CERTIFY_FAIL The AES certification fails
-     *            - #IOTC_ER_FAIL_CREATE_SOCKET Fails to create sockets
-     *            - #IOTC_ER_FAIL_SOCKET_OPT Fails to set up socket options
-     *            - #IOTC_ER_FAIL_SOCKET_BIND Fails to bind sockets
-     *            - #IOTC_ER_NOT_SUPPORT_RELAY Not support relay connection by IOTC servers
-     *            - #IOTC_ER_NO_SERVER_LIST No IOTC server information while client connect
-     *            - #IOTC_ER_DEVICE_MULTI_LOGIN The connecting device duplicated loggin and may unconnectable
-     *
-     * \attention (1) This process is a block process.<br><br>
-     *                (2) The AES key shall be matched between a device and a client in
-     *                order to establish connection successfully.<br><br>
-     *                (3) This function is available on Win32, Linux, Android, iOS and ARC platforms.
-     *
-     */
-    P2PAPI_API int  IOTC_Connect_ByUID2(const char *cszUID, const char *cszAESKey, IOTCSessionMode nSessionMode);
-    
-    
-    /**
      * \brief Used by a client to stop connecting a device
      *
      * \details This function is for a client to stop connecting a device. Since
@@ -1387,8 +1276,6 @@ extern "C" {
      *                expires because    remote site has no response
      *            - #IOTC_ER_TIMEOUT The timeout specified by nTimeout expires before
      *                read process is performed completely
-     *            - #IOTC_ER_DEVICE_IS_BANNED The device might be banned if another device has already
-     *                logined on servers
      *
      * \attention The IOTC channel of ID 0 is enabled by default when a IOTC session is established.
      *                That means nIOTCChannelID can be specified as 0 if only one IOTC channel
@@ -1494,8 +1381,6 @@ extern "C" {
      *                expires because    remote site has no response
      *            - #IOTC_ER_TIMEOUT The timeout specified by nTimeout expires before
      *                read process is performed completely
-     *            - #IOTC_ER_DEVICE_IS_BANNED The device might be banned if another device has already
-     *                logined on servers
      *
      * \attention (1) The IOTC channel of ID 0 is enabled by default when a IOTC session is established.
      *                That means nIOTCChannelID can be specified as 0 if only one IOTC channel
@@ -1538,8 +1423,6 @@ extern "C" {
      *                session ID has been closed by remote site
      *            - #IOTC_ER_REMOTE_TIMEOUT_DISCONNECT The timeout defined by #IOTC_SESSION_ALIVE_TIMEOUT
      *                expires because    remote site has no response
-     *            - #IOTC_ER_DEVICE_IS_BANNED The device might be banned if another device has already
-     *                logined on servers
      *            - #IOTC_ER_INVALID_ARG The buffer size is not accepted
      *            - #IOTC_ER_NO_PATH_TO_WRITE_DATA IOTC internal error, cannot find a path to send data
      *
@@ -2137,4 +2020,3 @@ extern "C" {
 
 
 #endif /* _IOTCAPIs_H_ */
-

@@ -10,6 +10,7 @@
 #import "FaceberAudioConfig.h"
 #import "HichipAudioWiFiConfig.h"
 #import "HichipSmarkWiFiConfig.h"
+#import "AoniWiFiConfig.h"
 
 @interface WiFiConfigContext(){
     id<WiFiConfigDelegate> configDelegate;
@@ -77,8 +78,9 @@
     }
     else{
         [self add:[FaceberAudioConfig sharedInstance]];
+        [self add:[AoniWiFiConfig sharedInstance]];
     }
-    [self add:[HichipSmarkWiFiConfig sharedInstance]];
+   [self add:[HichipSmarkWiFiConfig sharedInstance]];
     for(BaseWiFiConfig *config in self.configList){
         config.pwd = pwd;
         config.ssid = ssid;

@@ -82,5 +82,6 @@ typedef struct SUB_STREAM SubStream_t;
 - (NSString *)getViewAccountOfChannel:(NSInteger)channel;
 - (NSString *)getViewPasswordOfChannel:(NSInteger)channel;
 - (unsigned long)getServiceTypeOfChannel:(NSInteger)channel;
+- (void)wakeup:(NSString *)uid;
 @end
 

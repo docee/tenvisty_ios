@@ -57,7 +57,7 @@
 
 // ALog always displays output regardless of the DEBUG setting
 #define RLOG(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-
+#import "IOTCWakeUp.h"
 
 @interface Camera() <AudioRecordDelegate>
 {
@@ -1053,15 +1053,22 @@ int bLocalSearch = 0;
 //            LOG(@"Remote: [IOTCAPIVer=%@] NateType:%d", [self parseIOTCAPIsVerion:Sinfo.IOTCVersion],Sinfo.NatType);
 
 
-        }else{
+        }
+        else if(sid == IOTC_ER_DEVICE_IS_SLEEP){
+            self.sessionState = CONNECTION_STATE_SLEEPING;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LOG(@"session: CONNECTION_STATE: %d", (int)self.sessionState);
+                if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+                    [self.delegate camera:self didChangeSessionStatus:self.sessionState];
+            });
+            break;
+        }
+        else{
             int wait = 0;
             if (sid == IOTC_ER_UNLICENSE || sid == IOTC_ER_UNKNOWN_DEVICE ) {
                 wait = 4;
             }
             else if (sid == IOTC_ER_TIMEOUT) {
-                wait = 1;
-            }
-            else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
                 wait = 1;
             }
             else if(sid == IOTC_ER_NETWORK_UNREACHABLE){
@@ -1075,9 +1082,6 @@ int bLocalSearch = 0;
                 }
                 else if (sid == IOTC_ER_TIMEOUT) {
                     self.sessionState = CONNECTION_STATE_TIMEOUT;;
-                }
-                else if (sid == IOTC_ER_CONNECT_IS_CALLING) {
-                    self.sessionState = CONNECTION_STATE_CONNECT_FAILED;
                 }
                 else if(sid == IOTC_ER_NETWORK_UNREACHABLE){
                     self.sessionState = CONNECTION_STATE_NETWORK_FAILED;
@@ -1146,7 +1150,20 @@ int bLocalSearch = 0;
 
             if (ret >= 0) {
                 
-            } else if (ret == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT || ret == IOTC_ER_TIMEOUT || ret == IOTC_SESSION_ALIVE_TIMEOUT) {
+            }
+            else if(ret == IOTC_ER_DEVICE_IS_SLEEP){
+                self.sessionState = CONNECTION_STATE_SLEEPING;
+                for (AVChannel *ch in arrayAVChannel) {
+                    ch.connectionState = CONNECTION_STATE_SLEEPING;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    LOG(@"session: CONNECTION_STATE: %d", (int)self.sessionState);
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(camera:didChangeSessionStatus:)])
+                        [self.delegate camera:self didChangeSessionStatus:self.sessionState];
+                });
+                break;
+            }
+            else if (ret == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT || ret == IOTC_ER_TIMEOUT || ret == IOTC_SESSION_ALIVE_TIMEOUT) {
 
                 LOG(@"IOTC_Session_Check(%@) : %d", self.uid, ret);
                 if(self.sessionState != CONNECTION_STATE_TIMEOUT){
@@ -3364,6 +3381,11 @@ int bLocalSearch = 0;
             r = avSendAudioData(avIndex, (char *)outG711, outLen, &frameInfo, sizeof(FRAMEINFO_t));
         }
     }
+}
+
+- (void)wakeup:(NSString *)uid{
+    self.sessionState = CONNECTION_STATE_WAKINGUP;
+    IOTC_WakeUp_WakeDevice([uid UTF8String]);
 }
 
 @end

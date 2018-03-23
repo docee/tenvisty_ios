@@ -963,4 +963,15 @@
 -(void) RemImgview{
     [super RemImgview];
 }
+-(void)wakeUp{
+    
+}
+
+-(BOOL)isSleeping{
+    return NO;;
+}
+
+-(BOOL)isWakingUp{
+    return NO;
+}
 @end

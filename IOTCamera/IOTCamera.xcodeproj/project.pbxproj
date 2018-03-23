@@ -45,6 +45,7 @@
 		61E550FC15D9F7A400AA6184 /* libH264Dec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E550FB15D9F71C00AA6184 /* libH264Dec.a */; };
 		89479E2C1A272956003A6566 /* g711T.c in Sources */ = {isa = PBXBuildFile; fileRef = 89479E2A1A272956003A6566 /* g711T.c */; };
 		89479E2D1A272956003A6566 /* g711T.h in Headers */ = {isa = PBXBuildFile; fileRef = 89479E2B1A272956003A6566 /* g711T.h */; };
+		899A905E2064EB45003F634C /* IOTCWakeUp.h in Headers */ = {isa = PBXBuildFile; fileRef = 899A905D2064EB44003F634C /* IOTCWakeUp.h */; };
 		89A37C5F2011D9F500A6F0CD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6101935315B505B4008E5D04 /* AudioToolbox.framework */; };
 		89A37C612011D9FB00A6F0CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A37C602011D9FB00A6F0CD /* SystemConfiguration.framework */; };
 		89A37C662011DA3100A6F0CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612B292515999D6F002E82F9 /* CoreGraphics.framework */; };
@@ -165,6 +166,7 @@
 		8912D4E51FF117FF00C660AB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		89479E2A1A272956003A6566 /* g711T.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = g711T.c; sourceTree = "<group>"; };
 		89479E2B1A272956003A6566 /* g711T.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = g711T.h; sourceTree = "<group>"; };
+		899A905D2064EB44003F634C /* IOTCWakeUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOTCWakeUp.h; path = IOTCamera/IOTCWakeUp.h; sourceTree = SOURCE_ROOT; };
 		89A37C602011D9FB00A6F0CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		89A37C622011DA0800A6F0CD /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		89A37C642011DA1700A6F0CD /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
@@ -290,6 +292,7 @@
 		612B289115999A29002E82F9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				899A905D2064EB44003F634C /* IOTCWakeUp.h */,
 				89A37C7E2015E95C00A6F0CD /* CameraProtocol.h */,
 				89A37C7B2015E90300A6F0CD /* LANSearchDevice.h */,
 				89A37C7A2015E90300A6F0CD /* LANSearchDevice.m */,
@@ -423,6 +426,7 @@
 				89C62B171ACE77C40004FF08 /* IOTCAPIs.h in Headers */,
 				61B9490815A66B210000BCF8 /* AVIOCTRLDEFs.h in Headers */,
 				B29F5C6F17F95BE7000CCC8A /* MjpegCamera.h in Headers */,
+				899A905E2064EB45003F634C /* IOTCWakeUp.h in Headers */,
 				B27738401808F5A300CA52DA /* NSCamera.h in Headers */,
 				89C62B161ACE77C40004FF08 /* AVAPIs.h in Headers */,
 				614AF7AC15A6675F009869D3 /* IOTCamera-Prefix.pch in Headers */,
