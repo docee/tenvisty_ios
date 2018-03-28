@@ -46,6 +46,7 @@
     req->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetMotionDetectReq)];
     free(req);
+    req = nil;
 }
 -(NSArray *)listItems{
     if(!_listItems){

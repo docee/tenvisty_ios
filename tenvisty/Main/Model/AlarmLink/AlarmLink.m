@@ -29,6 +29,7 @@
         _u32Svr         = model->u32Svr;
         
         free(model);
+        model = nil;
     }
     return self;
 

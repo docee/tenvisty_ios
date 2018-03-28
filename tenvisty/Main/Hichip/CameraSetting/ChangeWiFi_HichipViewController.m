@@ -121,6 +121,7 @@
     memcpy(req->strKey, [password UTF8String], password.length);
     [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_WIFI_PARAM Data:(char*)req DataSize:sizeof(HI_P2P_S_WIFI_PARAM)];
     free(req);
+    req = nil;
 }
 -(void)doGetWifi{
     [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_GET_WIFI_PARAM Data:(char*)nil DataSize:0];

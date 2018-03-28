@@ -41,6 +41,7 @@
     memset(req, 0, sizeof(SMsgAVIoctrlGetWifiReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetWifiReq)];
     free(req);
+    req = nil;
     [self.tableview reloadData];
 }
 
@@ -64,6 +65,7 @@
     req->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETRECORD_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetRecordReq)];
     free(req);
+    req = nil;
 }
 
 -(NSArray *)listItems{

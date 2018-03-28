@@ -9,6 +9,11 @@
 #define P2P_Tutk 0
 #define P2P_Hichip 1
 
+#define SUPLLIER_UNKNOWN    0
+#define SUPLLIER_AN         1
+#define SUPLLIER_FB         2
+#define SUPLLIER_HX         3
+
 #define CAMERASTATE_NONE 0
 #define CAMERASTATE_WILLREBOOTING 1
 #define CAMERASTATE_REBOOTING 2
@@ -55,6 +60,11 @@ typedef enum
 @property(nonatomic,assign) BOOL isSessionConnecting;
 @property(nonatomic,assign,readonly) BOOL isSleeping;
 @property(nonatomic,assign,readonly) BOOL isWakingUp;
+@property (nonatomic, assign,readonly) NSInteger supplier;
+@property (nonatomic,strong) NSString *modelName;
+@property (nonatomic, assign) NSInteger batteryMode;
+@property (nonatomic, assign) NSInteger batteryTime;
+@property (nonatomic, assign) NSInteger batterPercent;
 - (id)initWithUid:(NSString *)uid Name:(NSString*)name UserName:(NSString *)viewAcc_ Password:(NSString *)viewPwd_;
 -(id)init;
 -(void)connect;

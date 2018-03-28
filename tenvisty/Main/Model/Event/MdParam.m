@@ -35,6 +35,7 @@
         LOG(@"_u32Sensi:%d", _u32Sensi)
         
         free(model);
+        model = nil;
         
     }
     return self;

@@ -81,8 +81,8 @@ typedef struct _FRAMEINFO
 	unsigned int reserve2;	//
 	unsigned int timestamp;	// Timestamp of the frame, in milliseconds
 
-     //unsigned int videoWidth;
-    // unsigned int videoHeight;
+//     unsigned int videoWidth;
+//     unsigned int videoHeight;
     
 }FRAMEINFO_t;
 #endif

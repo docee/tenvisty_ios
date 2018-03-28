@@ -25,6 +25,7 @@
         _sReserved      = [NSString stringWithUTF8String:model->sReserved];
         
         free(model);
+        model = nil;
     }
     return self;
 

@@ -847,9 +847,9 @@ int bLocalSearch = 0;
             
             playedChannel.recvAudioThreadLock = [[NSConditionLock alloc] initWithCondition:NOTDONE];
             
-            playedChannel.isRunningRecvAudioThread = TRUE;        
+            playedChannel.isRunningRecvAudioThread = TRUE;
             playedChannel.recvAudioThread = [[NSThread alloc] initWithTarget:self selector:@selector(doRecvAudio:) object:playedChannel];
-            [playedChannel.recvAudioThread start];             
+            [playedChannel.recvAudioThread start];
         }
                 
         /*
@@ -864,7 +864,7 @@ int bLocalSearch = 0;
         */
         
         int camIndex = 0;
-        [self sendIOCtrlToChannel:channel Type:IOTYPE_USER_IPCAM_AUDIOSTART Data:(char *)&camIndex DataSize:4];        
+        [self sendIOCtrlToChannel:channel Type:IOTYPE_USER_IPCAM_AUDIOSTART Data:(char *)&camIndex DataSize:4];
     }
 }
 
@@ -1584,8 +1584,8 @@ int bLocalSearch = 0;
                 timestamp = t;
                 channel.videoFps = channel.videoBps = channel.audioBps = 0;
             }
-            //avSendIOCtrl(channel.avIndex, 0x0392, <#const char *cabIOCtrlData#>, <#int nIOCtrlDataSize#>)
-            readSize = avRecvFrameData2(channel.avIndex, recvBuf, RECV_VIDEO_BUFFER_SIZE, &outBufSize, &outFrmSize, (char *)&frmInfo, sizeof(frmInfo), &outFrmInfoSize, &frmNo);
+            //avSendIOCtrl(channel.avIndex, 0x0392, const char *cabIOCtrlData, int nIOCtrlDataSize)
+            readSize = avRecvFrameData2((int)channel.avIndex, recvBuf, RECV_VIDEO_BUFFER_SIZE, &outBufSize, &outFrmSize, (char *)&frmInfo, sizeof(frmInfo), &outFrmInfoSize, &frmNo);
 
             // readSize = avRecvFrameData(channel.avIndex, recvBuf, RECV_VIDEO_BUFFER_SIZE, (char *)&frmInfo, sizeof(frmInfo), &frmNo);
 
@@ -2416,12 +2416,14 @@ int bLocalSearch = 0;
     unsigned int nFrmNo = 0;
     
     channel.audioBps = 0;
-    
+    if(sessionID >= 0 && channel.avIndex >= 0){
+        avClientCleanAudioBuf((int)channel.avIndex);
+    }
     while(channel.isRunningRecvAudioThread) {
                         
         if (sessionID >= 0 && channel.avIndex >= 0) {
             
-            readSize = avRecvAudioData(channel.avIndex, recvBuf, RECV_AUDIO_BUFFER_SIZE, (char *)&stFrmInfo, sizeof(FRAMEINFO_t), &nFrmNo);
+            readSize = avRecvAudioData((int)channel.avIndex, recvBuf, RECV_AUDIO_BUFFER_SIZE, (char *)&stFrmInfo, sizeof(FRAMEINFO_t), &nFrmNo);
      
             if (readSize >= 0) {
                                 
@@ -3224,9 +3226,9 @@ int bLocalSearch = 0;
             
             if ([channel dequeueSendIOCtrl:&type :buff :&size] == 1) {
                 
-                avSendIOCtrl(channel.avIndex, type, buff, size);
+                avSendIOCtrl((int)channel.avIndex, type, buff, size);
                 
-                LOG(@">>> avSendIOCtrl( %d, %d, %X, %@)", self.sessionID, channel.avIndex, type, [self _getHexString:buff Size:size]);
+                LOG(@">>> avSendIOCtrl( %d, %d, %X, %@)", (int)self.sessionID, channel.avIndex, type, [self _getHexString:buff Size:size]);
 
             }
         }

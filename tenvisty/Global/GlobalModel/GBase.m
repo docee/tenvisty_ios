@@ -15,7 +15,7 @@
 #import "LocalPictureInfo.h"
 
 
-#define SQLCMD_CREATE_TABLE_DEVICE @"CREATE TABLE IF NOT EXISTS device(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_nickname TEXT, dev_name TEXT, dev_pwd TEXT, view_acc TEXT, view_pwd TEXT, ask_format_sdcard INTEGER, channel INTEGER, video_quality INTEGER, event_notification INTEGER)"
+#define SQLCMD_CREATE_TABLE_DEVICE @"CREATE TABLE IF NOT EXISTS device(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_nickname TEXT, dev_name TEXT, dev_pwd TEXT, view_acc TEXT, view_pwd TEXT, ask_format_sdcard INTEGER, channel INTEGER, video_quality INTEGER, event_notification INTEGER, dev_model_name TEXT, dev_battery_model INTEGER, dev_battery_percent INTEGER, dev_battery_time INTEGER)"
 
 #define SQLCMD_CREATE_TABLE_SNAPSHOT @"CREATE TABLE IF NOT EXISTS snapshot(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, file_path TEXT, time REAL, snapshot_type INTEGER)"
 
@@ -27,6 +27,12 @@
 //#define SQLCMD_CREATE_TABLE_DEVICE_FUNCTION @"CREATE TABLE IF NOT EXISTS device_function(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_function TEXT)"
 //
 #define SQLCMD_CREATE_TABLE_DEVICE_DICTION @"CREATE TABLE IF NOT EXISTS device_diction(id INTEGER PRIMARY KEY AUTOINCREMENT, dev_uid TEXT, dev_key TEXT, dev_value TEXT)"
+
+#define SQLCMD_ALTER_TABLE_DEVICE_MODELNAME @"ALTER TABLE device add dev_model_name TEXT"
+#define SQLCMD_ALTER_TABLE_DEVICE_BATTERY_PERCENT @"ALTER TABLE device add dev_battery_percent INTEGER"
+#define SQLCMD_ALTER_TABLE_DEVICE_BATTERY_MODE @"ALTER TABLE device add dev_battery_mode INTEGER"
+#define SQLCMD_ALTER_TABLE_DEVICE_BATTERY_TIME @"ALTER TABLE device add dev_battery_time INTEGER"
+
 @interface GBase()
 @property (atomic,strong) FMDatabase *db;
 @end
@@ -78,6 +84,27 @@ static GBase *base = nil;
             
         }
         
+        if (![self.db columnExists:@"dev_model_name" inTableWithName:@"device"]) {
+            if (![self.db executeUpdate:SQLCMD_ALTER_TABLE_DEVICE_MODELNAME]) {
+                LOG(@"cann't add dev_model_name to table device");
+            }
+        }
+        if (![self.db columnExists:@"dev_battery_percent" inTableWithName:@"device"]) {
+            if (![self.db executeUpdate:SQLCMD_ALTER_TABLE_DEVICE_BATTERY_PERCENT]) {
+                LOG(@"cann't add dev_battery_percent to table device");
+            }
+        }
+        if (![self.db columnExists:@"dev_battery_mode" inTableWithName:@"device"]) {
+            if (![self.db executeUpdate:SQLCMD_ALTER_TABLE_DEVICE_BATTERY_MODE]) {
+                LOG(@"cann't add dev_battery_mode to table device");
+            }
+        }
+        if (![self.db columnExists:@"dev_battery_time" inTableWithName:@"device"]) {
+            if (![self.db executeUpdate:SQLCMD_ALTER_TABLE_DEVICE_BATTERY_TIME]) {
+                LOG(@"cann't add dev_battery_time to table device");
+            }
+        }
+        
     }
     return self;
 }
@@ -103,7 +130,16 @@ static GBase *base = nil;
             //NSInteger tchannel = [rs intForColumn:@"channel"];
             NSInteger tvideoQuality = [rs intForColumn:@"video_quality"];
             NSInteger eventNotification = [rs intForColumn:@"event_notification"];
+            NSString *dev_modelName = [rs stringForColumn:@"dev_model_name"];
+            NSInteger dev_battery_mode = [rs intForColumn:@"dev_battery_mode"];
+            NSInteger dev_battery_time = [rs intForColumn:@"dev_battery_time"];
+            NSInteger dev_battery_percent = [rs intForColumn:@"dev_battery_percent"];
+            
             BaseCamera *mycam = [[BaseCamera alloc] initWithUid:tuid Name:tname UserName:tuser Password:tpwd];
+            mycam.modelName = dev_modelName;
+            mycam.batterPercent = dev_battery_percent;
+            mycam.batteryMode = dev_battery_mode;
+            mycam.batteryTime = dev_battery_time;
             mycam.videoQuality = tvideoQuality;
             mycam.remoteNotifications = eventNotification;
             [base.cameras addObject:mycam];
@@ -145,7 +181,7 @@ static GBase *base = nil;
     GBase *base = [GBase sharedInstance];
     
     if (base.db != NULL) {
-        if (![base.db executeUpdate:@"UPDATE device SET dev_nickname=?, view_pwd=? ,view_acc=? ,video_quality=? ,event_notification=? WHERE dev_uid=?", mycam.nickName, mycam.pwd, mycam.user , [NSNumber numberWithInteger:mycam.videoQuality],[NSNumber numberWithInteger:mycam.remoteNotifications], mycam.uid]) {
+        if (![base.db executeUpdate:@"UPDATE device SET dev_nickname=?, view_pwd=? ,view_acc=? ,video_quality=? ,event_notification=? ,dev_model_name=? ,dev_battery_mode=? , dev_battery_percent=? ,dev_battery_time=? WHERE dev_uid=?", mycam.nickName, mycam.pwd, mycam.user , [NSNumber numberWithInteger:mycam.videoQuality],[NSNumber numberWithInteger:mycam.remoteNotifications],mycam.modelName, [NSNumber numberWithInteger:mycam.batteryMode], [NSNumber numberWithInteger:mycam.batterPercent],[NSNumber numberWithInteger:mycam.batteryTime], mycam.uid]) {
             NSLog(@"Fail_to_update_device_to_database.");
         }
     }

@@ -24,6 +24,7 @@
         _s32TimeZone    = model->s32TimeZone;
         
         free(model);
+        model = nil;
     }
     return self;
 }

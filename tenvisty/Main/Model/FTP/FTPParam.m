@@ -34,6 +34,7 @@
         _strReserved    = [NSString stringWithUTF8String:model->strReserved];
         
         free(model);
+        model = nil;
     }
     return self;
 }

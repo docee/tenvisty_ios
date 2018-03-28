@@ -26,6 +26,7 @@
         _u32OutVol      = model->u32OutVol;
         
         free(model);
+        model = nil;
     }
     return self;
 }

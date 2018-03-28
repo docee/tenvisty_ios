@@ -57,6 +57,7 @@
             _strText = @"";
         }
         free(model);
+        model = nil;
     }
     return self;
 }

@@ -145,6 +145,7 @@
         req->u32DstMode = enable ? 1 : 0;
         [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_TIME_ZONE Data:(char*)req DataSize:sizeof(HI_P2P_S_TIME_ZONE)];
         free(req);
+        req = nil;
     }
 }
 

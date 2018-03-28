@@ -94,6 +94,7 @@
     req->stTimeDay = [Event getTimeDay:self.evt.eventTime];
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
     free(req);
+    req = nil;
 }
 
 #pragma mark - MyCameraDelegate Methods
@@ -190,6 +191,7 @@
     req->stTimeDay = [Event getTimeDay:self.evt.eventTime];
     [self.myCamera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
     free(req);
+    req = nil;
 }
 
 
@@ -223,6 +225,7 @@
     req->stTimeDay = [Event getTimeDay:self.evt.eventTime];
     [self.myCamera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RECORD_PLAYCONTROL Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPlayRecord)];
     free(req);
+    req = nil;
 }
 
 - (void)camera:(BaseCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{

@@ -154,6 +154,7 @@
     //    [myCamera sendIOCtrl:HI_P2P_SET_USERNAME Data:(char *)auth Size:sizeof(HI_P2P_SET_AUTH)];
     [self.camera sendIOCtrlToChannel:0 Type:HI_P2P_SET_USER_PARAM Data:(char*)auth DataSize:sizeof(HI_P2P_SET_AUTH)];
     free(auth);
+    auth = nil;
 }
 
 

@@ -68,6 +68,11 @@
 @synthesize isWrongPassword;
 @synthesize isSleeping;
 @synthesize isWakingUp;
+@synthesize supplier;
+@synthesize modelName;
+@synthesize batteryTime;
+@synthesize batteryMode;
+@synthesize batterPercent;
 
 - (id<BaseCameraDelegate>)cameraDelegate{
     return self.orginCamera.cameraDelegate;
@@ -413,4 +418,9 @@
 -(BOOL)isWakingUp{
     return self.orginCamera.isWakingUp;
 }
+
+-(NSInteger)supplier{
+    return self.orginCamera.supplier;
+}
+
 @end

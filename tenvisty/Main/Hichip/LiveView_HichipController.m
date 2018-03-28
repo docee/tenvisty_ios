@@ -552,6 +552,7 @@
 
 -(void)startListen:(BOOL)changeUI{
     if(!isTalking){
+        
         [self.camera startAudio];
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
         [[AVAudioSession sharedInstance] setActive:YES error:nil];

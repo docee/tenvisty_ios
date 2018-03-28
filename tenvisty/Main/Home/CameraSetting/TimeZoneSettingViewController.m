@@ -37,6 +37,7 @@
     SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
     free(req);
+    req = nil;
 }
 
 -(void)setTimezone:(NSInteger)index{
@@ -51,6 +52,7 @@
     memcpy(req->DstDistId, [area UTF8String], area.length);
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetTimeReq)];
     free(req);
+    req = nil;
 }
 
 - (void)didReceiveMemoryWarning {

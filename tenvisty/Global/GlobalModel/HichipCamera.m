@@ -69,6 +69,14 @@
 @synthesize cameraStateDesc;
 @synthesize isSessionConnecting;
 
+@synthesize supplier;
+@synthesize isWakingUp;
+@synthesize isSleeping;
+
+@synthesize modelName;
+@synthesize batteryTime;
+@synthesize batteryMode;
+@synthesize batterPercent;
 
 -(NSString*)pwd{
     return super.password;
@@ -973,5 +981,11 @@
 
 -(BOOL)isWakingUp{
     return NO;
+}
+-(NSInteger)supplier{
+    return SUPLLIER_HX;
+}
+-(NSString*)modelName{
+    return nil;
 }
 @end

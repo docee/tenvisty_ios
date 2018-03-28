@@ -34,6 +34,7 @@
     req->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetVideoModeReq)];
     free(req);
+    req = nil;
 }
 -(void) doSetVideoMode:(NSInteger)mode{
     SMsgAVIoctrlSetVideoModeReq *req = malloc(sizeof(SMsgAVIoctrlSetVideoModeReq));
@@ -41,6 +42,7 @@
     req->mode = (int)mode;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_VIDEOMODE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetVideoModeReq)];
     free(req);
+    req = nil;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

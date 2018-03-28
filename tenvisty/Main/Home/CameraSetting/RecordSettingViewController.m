@@ -36,6 +36,7 @@
     req->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETRECORD_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetRecordReq)];
     free(req);
+    req = nil;
 }
 
 -(void)doSetRecordSetting:(NSInteger)type{
@@ -45,6 +46,7 @@
     req->recordType = (int)type;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETRECORD_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetRecordReq)];
     free(req);
+    req = nil;
 }
 
 

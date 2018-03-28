@@ -85,6 +85,7 @@
     SMsgAVIoctrlListWifiApReq *req = malloc(sizeof(SMsgAVIoctrlListWifiApReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_LISTWIFIAP_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlListWifiApReq)];
     free(req);
+    req = nil;
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
 }
 

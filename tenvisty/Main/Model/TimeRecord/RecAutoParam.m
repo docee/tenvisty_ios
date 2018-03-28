@@ -23,6 +23,7 @@
         _u32Stream      = model->u32Stream;
         
         free(model);
+        model = nil;
     }
     return self;
 }

@@ -34,6 +34,7 @@
         _u32Night       = model->u32Night;
         
         free(model);
+        model = nil;
     }
     return self;
 }

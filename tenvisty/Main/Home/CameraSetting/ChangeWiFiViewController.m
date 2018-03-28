@@ -88,6 +88,7 @@
     SMsgAVIoctrlListWifiApReq *req = malloc(sizeof(SMsgAVIoctrlListWifiApReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_LISTWIFIAP_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlListWifiApReq)];
     free(req);
+    req = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,12 +106,14 @@
     memcpy(req->password, [password UTF8String], password.length);
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetWifiReq)];
     free(req);
+    req = nil;
 }
 -(void)doGetWifi{
     SMsgAVIoctrlGetWifiReq *req = malloc(sizeof(SMsgAVIoctrlGetWifiReq));
     memset(req, 0, sizeof(SMsgAVIoctrlGetWifiReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETWIFI_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetWifiReq)];
     free(req);
+    req = nil;
 }
 
 

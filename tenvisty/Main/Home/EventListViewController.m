@@ -281,6 +281,7 @@
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_LISTEVENT_REQ Data:(char *)req DataSize:sizeof(SMsgAVIoctrlListEventReq)];
     
     free(req);
+    req = nil;
     NSLog(@"load TF card video list...%d/%d/%d -> %d/%d/%d", start.year, start.month, start.day,stop.year, stop.month, stop.day);
     _fromDate = from;
     _toDate = to;

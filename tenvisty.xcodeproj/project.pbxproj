@@ -126,6 +126,10 @@
 		896BA3DA1FD9375400EE31AB /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3D91FD9375400EE31AB /* ShowImageViewController.m */; };
 		896BA3DE1FD94DC500EE31AB /* AboutListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3DD1FD94DC500EE31AB /* AboutListViewController.m */; };
 		896BA3E11FD950A200EE31AB /* ImageCameraListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896BA3E01FD950A200EE31AB /* ImageCameraListViewController.m */; };
+		89836808206B7D7C001FFE2F /* Home_Aoni.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89836807206B7D7C001FFE2F /* Home_Aoni.storyboard */; };
+		8983680B206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8983680A206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard */; };
+		8983680E206B7F7B001FFE2F /* CameraSetting_AoniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8983680C206B7F7B001FFE2F /* CameraSetting_AoniViewController.m */; };
+		89836811206B8778001FFE2F /* DeviceInfo_TUTK.m in Sources */ = {isa = PBXBuildFile; fileRef = 89836810206B8778001FFE2F /* DeviceInfo_TUTK.m */; };
 		89870A241FDA83AA005207AB /* TwsTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 89870A231FDA83AA005207AB /* TwsTools.m */; };
 		89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 89870A271FDA8EF2005207AB /* TwsProgress.m */; };
 		8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8989EC2D1FF1E9BA004989A9 /* EventSearchCustom.xib */; };
@@ -491,6 +495,12 @@
 		896BA3DF1FD950A200EE31AB /* ImageCameraListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCameraListViewController.h; sourceTree = "<group>"; };
 		896BA3E01FD950A200EE31AB /* ImageCameraListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCameraListViewController.m; sourceTree = "<group>"; };
 		896F638D1FF10212005E0E4A /* IOTCamera.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOTCamera.framework; path = "../../../Library/Developer/Xcode/DerivedData/tenvisty-fycuslvikdnqxmdpeyjhoobtrrln/Build/Intermediates.noindex/UninstalledProducts/iphoneos/IOTCamera.framework"; sourceTree = "<group>"; };
+		89836807206B7D7C001FFE2F /* Home_Aoni.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home_Aoni.storyboard; sourceTree = "<group>"; };
+		8983680A206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraSetting_Aoni.storyboard; sourceTree = "<group>"; };
+		8983680C206B7F7B001FFE2F /* CameraSetting_AoniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSetting_AoniViewController.m; sourceTree = "<group>"; };
+		8983680D206B7F7B001FFE2F /* CameraSetting_AoniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSetting_AoniViewController.h; sourceTree = "<group>"; };
+		8983680F206B8778001FFE2F /* DeviceInfo_TUTK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceInfo_TUTK.h; sourceTree = "<group>"; };
+		89836810206B8778001FFE2F /* DeviceInfo_TUTK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo_TUTK.m; sourceTree = "<group>"; };
 		89870A221FDA83AA005207AB /* TwsTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsTools.h; sourceTree = "<group>"; };
 		89870A231FDA83AA005207AB /* TwsTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwsTools.m; sourceTree = "<group>"; };
 		89870A261FDA8EF2005207AB /* TwsProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsProgress.h; sourceTree = "<group>"; };
@@ -1032,6 +1042,7 @@
 				892CE0A51FD0F57100942E28 /* Base */,
 				899AD50B1FCD64F8008ED303 /* Home */,
 				89A37C8A201726E700A6F0CD /* Hichip */,
+				89836805206B7D59001FFE2F /* Aoni */,
 				890B406D1FAFF9FE00C1061A /* MainTabBarController.h */,
 				890B406E1FAFF9FE00C1061A /* MainTabBarController.m */,
 				890B40701FAFFA3600C1061A /* Home.storyboard */,
@@ -1585,6 +1596,25 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		89836805206B7D59001FFE2F /* Aoni */ = {
+			isa = PBXGroup;
+			children = (
+				89836809206B7E29001FFE2F /* CameraSetting */,
+				89836807206B7D7C001FFE2F /* Home_Aoni.storyboard */,
+			);
+			path = Aoni;
+			sourceTree = "<group>";
+		};
+		89836809206B7E29001FFE2F /* CameraSetting */ = {
+			isa = PBXGroup;
+			children = (
+				8983680D206B7F7B001FFE2F /* CameraSetting_AoniViewController.h */,
+				8983680C206B7F7B001FFE2F /* CameraSetting_AoniViewController.m */,
+				8983680A206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard */,
+			);
+			path = CameraSetting;
+			sourceTree = "<group>";
+		};
 		89870A1F1FDA839B005207AB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1839,6 +1869,8 @@
 				89AD33C72029B9DE00B4520A /* DeviceInfo.m */,
 				89AD33C82029B9DE00B4520A /* NetParam.h */,
 				89AD33C92029B9DE00B4520A /* NetParam.m */,
+				8983680F206B8778001FFE2F /* DeviceInfo_TUTK.h */,
+				89836810206B8778001FFE2F /* DeviceInfo_TUTK.m */,
 			);
 			path = DeviceInformation;
 			sourceTree = "<group>";
@@ -2706,7 +2738,9 @@
 				89AD33B22029961C00B4520A /* SliderTableViewCell.xib in Resources */,
 				892ADB5A1FD64CC000BD8929 /* CameraSetting.storyboard in Resources */,
 				89F01671203279B20098FE5F /* DownloadView.xib in Resources */,
+				89836808206B7D7C001FFE2F /* Home_Aoni.storyboard in Resources */,
 				89F0165F202D7A070098FE5F /* ZoomView.xib in Resources */,
+				8983680B206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard in Resources */,
 				894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */,
 				890B40761FB0069400C1061A /* Image.storyboard in Resources */,
 				890B40711FAFFA3600C1061A /* Home.storyboard in Resources */,
@@ -2756,6 +2790,7 @@
 				89AD339B2029567300B4520A /* Display.m in Sources */,
 				89545EC32022F5E300151E90 /* TwsAutoKeyboardTextView.m in Sources */,
 				8924126E202062CD001F60E8 /* TimeZoneSetting_HichipViewController.m in Sources */,
+				8983680E206B7F7B001FFE2F /* CameraSetting_AoniViewController.m in Sources */,
 				89241175201F1DF9001F60E8 /* HichipAudioWiFiConfig.m in Sources */,
 				89AD33BD2029B1F900B4520A /* SDCard.m in Sources */,
 				89241263202062CD001F60E8 /* ChangeCameraName_HichipViewController.m in Sources */,
@@ -2789,6 +2824,7 @@
 				890B40971FB0306A00C1061A /* VideoSetCell.m in Sources */,
 				89AD33DB202ACF6B00B4520A /* PlayView.m in Sources */,
 				892CE0D21FD12DC700942E28 /* DetailTableViewCell.m in Sources */,
+				89836811206B8778001FFE2F /* DeviceInfo_TUTK.m in Sources */,
 				89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */,
 				89AD337B2028252000B4520A /* FTPParam.m in Sources */,
 				8924126C202062CD001F60E8 /* SystemSettingTable_HichipViewController.m in Sources */,

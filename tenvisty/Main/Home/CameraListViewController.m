@@ -302,6 +302,13 @@
     }
 }
 - (void)camera:(BaseCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+    if(camera.isSleeping && camera.isWakingUp){
+        [camera wakeUp];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //回调或者说是通知主线程刷新，
+            [camera start];
+        });
+    }
     NSInteger row = [GBase getCameraIndex:(BaseCamera*)camera];
     
     if(row >= 0){
@@ -346,6 +353,16 @@
                 [iToast makeText:LOCALSTR(@"Firmware update success, camera will reboot later, please wait a moment.")];
             });
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+            if(cell){
+                LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
+                [cell refreshState];
+            }
+        });
+    }
+    else if(type == IOTYPE_USER_IPCAM_DEVINFO_RESP){
+          NSInteger row = [GBase getCameraIndex:(BaseCamera*)camera];
         dispatch_async(dispatch_get_main_queue(), ^{
             CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
             if(cell){

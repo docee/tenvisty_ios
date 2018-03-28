@@ -96,6 +96,7 @@
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_RESET_DEFAULT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
+    req = nil;
 }
 -(void)doReboot{
     rebootState = 0;
@@ -104,6 +105,7 @@
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_REBOOT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
+    req = nil;
     
 }
 -(void)doGetAccFmInfo{
@@ -113,6 +115,7 @@
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_FIRMWARE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
+    req = nil;
 }
 
 //根据url获取固件信息
@@ -221,6 +224,7 @@
     SMsgAVIoctrlExGetAlarmRingReq *req = malloc(sizeof(SMsgAVIoctrlExGetAlarmRingReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_UPRADE_URL_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlExGetAlarmRingReq)];
     free(req);
+    req = nil;
 }
 -(void)upgradeFM:(NSString*)sysTypeVersion systemCheck:(NSString*)sysCheck webCheck:(NSString*)wbcheck userCheck:(NSString*)usrCheck customTypeVersion:(NSString*)cusTypeVersion customTypeCheck:(NSString*)cusTypeCheck vendorTypeVersion:(NSString*)vendTypeVersion vendorTypeCheck:(NSString*)vendTypeCheck{
     
@@ -239,6 +243,7 @@
     req->SerType = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_UPRADE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetUpgradeReq)];
     free(req);
+    req = nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

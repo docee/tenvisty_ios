@@ -23,6 +23,7 @@
         _u32LeftSpace   = model->u32LeftSpace;
         
         free(model);
+        model = nil;
     }
     return self;
 }

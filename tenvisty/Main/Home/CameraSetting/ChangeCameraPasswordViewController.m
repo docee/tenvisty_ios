@@ -132,6 +132,7 @@
     memcpy(req->newpasswd, [newPassword UTF8String], newPassword.length);
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETPASSWORD_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetPasswdReq)];
     free(req);
+    req = nil;
 }
 
 

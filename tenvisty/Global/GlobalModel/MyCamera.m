@@ -6,15 +6,18 @@
 //  Copyright (c) 2012年 TUTK. All rights reserved.
 //
 #define CONNECT_TIMEOUT_WAITTIME 30
+#define MAX_RECONNECT_TIMES 2
 
 #import "MyCamera.h"
 #import <IOTCamera/AVIOCTRLDEFs.h>
 #import <IOTCamera/AVFrameInfo.h>
 #import "TimeZoneModel.h"
 #import "Event.h"
+#import "DeviceInfo_TUTK.h"
 
 @interface MyCamera()<CameraDelegate>{
     BOOL isWakingUp;
+    int reConnectTimes;
 }
 @property (nonatomic,assign) NSInteger beginRebootTime;
 @property (nonatomic,assign) NSInteger rebootTimeout;
@@ -23,6 +26,7 @@
 @property (nonatomic, strong) NSString *pushToken;
 @property (nonatomic,assign) CGFloat vRatio;
 @property (nonatomic,strong) TimeZoneModel *timezone;
+@property (nonatomic,strong) DeviceInfo_TUTK *deviceInfo;
 @end
 
 @implementation MyCamera
@@ -35,6 +39,10 @@
 
 @synthesize cameraDelegate;
 @synthesize isSessionConnecting;
+@synthesize modelName;
+@synthesize batteryTime;
+@synthesize batteryMode;
+@synthesize batterPercent;
 
 #pragma mark - Public Methods
 
@@ -226,6 +234,7 @@
         self.port = @"";
         self.ddns = @"";
         self.cameraModel = CAMERA_MODEL_H264;
+        reConnectTimes = 0;
     }
     return self;
 }
@@ -306,6 +315,7 @@
 
 -(void)startAudio{
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
+    
     [self startSoundToPhone:0];
 }
 -(void)startAudio:(NSInteger)channel{
@@ -373,6 +383,7 @@
     [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_PTZ_COMMAND Data:(char *)request DataSize:sizeof(SMsgAVIoctrlPtzCmd)];
     
     free(request);
+    request = nil;
 }
 
 - (void)stopPT
@@ -403,6 +414,7 @@
                      DataSize:sizeof(SMsgAVIoctrlSetStreamCtrlReq)];
     
     free(s);
+    s = nil;
 }
 
 - (void)setRemoteNotification:(NSInteger)type EventTime:(long)time
@@ -483,19 +495,31 @@
             if(self.connectTimeoutBeginTime == 0){
                 self.connectTimeoutBeginTime = [NSDate timeIntervalSinceReferenceDate];
             }
-            else if([NSDate timeIntervalSinceReferenceDate] - self.connectTimeoutBeginTime < CONNECT_TIMEOUT_WAITTIME){
+            if([NSDate timeIntervalSinceReferenceDate] - self.connectTimeoutBeginTime < CONNECT_TIMEOUT_WAITTIME){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self stop];
                     [self start];
                 });
             }
+            else{
+                [self stop];
+            }
         }
         else{
-            [self stop];
+            
+            if(reConnectTimes < MAX_RECONNECT_TIMES){
+                reConnectTimes++;
+                [self stop];
+                [self start];
+            }
+            else{
+                [self stop];
+            }
         }
     }
-    if(status == CONNECTION_STATE_CONNECTED){
+    if(self.isSessionConnected){
         isWakingUp = NO;
+        reConnectTimes = 0;
     }
     
     
@@ -541,13 +565,26 @@
         s->channel = (unsigned int)channel;
         [self sendIOCtrlToChannel:channel Type:IOTYPE_USER_IPCAM_GETAUDIOOUTFORMAT_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
         free(s);
+        s = nil;
         
-        [self getTime];
+        [self getInitConfig];
     }
 }
 
 - (void)camera:(Camera *)camera didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size
 {
+    if(type == IOTYPE_USER_IPCAM_DEVINFO_RESP){
+        self.deviceInfo = [[DeviceInfo_TUTK alloc] initWithData:(char*)data size:(int)size];
+        if(self.modelName == nil || ![self.modelName isEqualToString:self.deviceInfo.model]){
+            self.modelName = self.deviceInfo.model;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [GBase editCamera:(BaseCamera*)self];
+            });
+            [self getInitConfig];
+        }
+    }
+    
+    
     if (self.cameraDelegate && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveIOCtrlWithType:Data:DataSize:)]) {
         [self.cameraDelegate camera:self.baseCamera _didReceiveIOCtrlWithType:type Data:data DataSize:size];
     }
@@ -581,6 +618,7 @@
                 }
             }
             free(def);
+            def = nil;
         }
     }
     else if(type == IOTYPE_USER_IPCAM_REBOOT_RESP){
@@ -898,12 +936,14 @@
     //req->ReqTimeType = 0;
     [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_TIME_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
     free(req);
+    req = nil;
 }
 
 -(void)getTimezone{
     SMsgAVIoctrlGetTimeReq *req = malloc(sizeof(SMsgAVIoctrlGetTimeReq));
     [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_ZONE_INFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetTimeReq)];
     free(req);
+    req = nil;
 }
 
 -(void)wakeUp{
@@ -918,4 +958,29 @@
 -(BOOL)isWakingUp{
     return self.cameraConnectState == CONNECTION_STATE_WAKINGUP || isWakingUp;
 }
+-(NSInteger)supplier{
+    if(self.modelName == nil){
+        return SUPLLIER_UNKNOWN;
+    }
+    else if([self.modelName isEqualToString:@"E936"]){
+        return SUPLLIER_AN;
+    }
+    else{
+        return SUPLLIER_FB;
+    }
+    //return self.deviceInfo == nil ? SUPLLIER_UNKNOWN : ([self.deviceInfo.] SUPLLIER_HX);
+}
+
+-(void)getInitConfig{
+    if(self.modelName == nil){
+        SMsgAVIoctrlDeviceInfoReq *req = malloc(sizeof(SMsgAVIoctrlDeviceInfoReq));
+        [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_DEVINFO_REQ Data:(char *)req DataSize:sizeof(SMsgAVIoctrlDeviceInfoReq)];
+        free(req);
+        req = nil;
+    }
+    if(self.supplier == SUPLLIER_FB){
+        [self getTime];
+    }
+}
+
 @end

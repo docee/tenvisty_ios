@@ -40,6 +40,7 @@
         _aszWebVersion   = [NSString stringWithUTF8String:model->aszWebVersion];
         
         free(model);
+        model = nil;
     }
     return self;
 }

@@ -39,6 +39,7 @@
     req->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlGetMotionDetectReq)];
     free(req);
+    req = nil;
 }
 
 -(void)doSetEventSetting:(NSInteger)sens{
@@ -48,6 +49,7 @@
     req->sensitivity = (int)sens;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETMOTIONDETECT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetMotionDetectReq)];
     free(req);
+    req = nil;
 }
 
 -(NSArray *)items{

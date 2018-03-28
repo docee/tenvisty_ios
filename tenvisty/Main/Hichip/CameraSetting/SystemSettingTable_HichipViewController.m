@@ -517,7 +517,8 @@
         
         free(head);
         free(pBuf);
-        
+        head = nil;
+        pBuf = nil;
         close(s32Sock);
         
         printf("1-------------url--------------:%s \n",redirect_url);
@@ -533,6 +534,7 @@
         });
         if(redirect_url) {
             free(redirect_url);
+            redirect_url = nil;
         }
     });
     

@@ -105,7 +105,7 @@
     self.title = self.camera.nickName;
     [_btnShowSwitchQuality_land setTitle:self.camera.videoQuality == 0?LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
     [_btnShowSwitchQuality_port setTitle:self.camera.videoQuality == 0?LOCALSTR(@"SD"):LOCALSTR(@"HD") forState:UIControlStateNormal];
-    [self getPresetList];
+   // [self getPresetList];
     [self.videoMonitor setMinimumGestureLength:100 MaximumVariance:50];
     [self.videoMonitor setUserInteractionEnabled:YES];
     self.videoMonitor.contentMode = UIViewContentModeScaleToFill;
@@ -162,6 +162,7 @@
             req->BitID = (int)_viewPreset.tag;
             [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SET_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetPointReq)];
             free(req);
+            req = nil;
         }
     }
     //call
@@ -172,6 +173,7 @@
             req->BitID = (int)_viewPreset.tag;
             [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_OPR_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPointOprReq)];
             free(req);
+            req = nil;
         }
     }
     //clear
@@ -182,6 +184,7 @@
             req->BitID = (int)_viewPreset.tag;
             [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_OPR_PRESET_POINT_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlPointOprReq)];
             free(req);
+            req = nil;
         }
     }
 }
@@ -211,7 +214,8 @@
     _labConnectState.text = self.camera.cameraStateDesc;
     [_videoMonitor attachCamera:(MyCamera*)self.camera.orginCamera];
     [_viewLoading setHidden:NO];
-    [self changeStream:self.camera.videoQuality];
+    //[self changeStream:self.camera.videoQuality];
+    [self.camera startVideo];
     if(isListening){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.camera startAudio];
@@ -248,6 +252,7 @@
     req->quality = stream == 0?5:1;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_SETSTREAMCTRL_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlSetStreamCtrlReq)];
     free(req);
+    req = nil;
 }
 - (IBAction)doSwitchVideoToHD:(UIButton *)sender {
     [_btnShowSwitchQuality_land setTitle:[sender currentTitle] forState:UIControlStateNormal];
@@ -256,9 +261,10 @@
         switchTime = [NSDate date];
         self.camera.videoQuality = 1;
         [GBase editCamera:self.camera];
-        [self.camera stopVideoAsync:^{
-            [self changeStream:1];
-        }];
+        [self changeStream:1];
+//        [self.camera stopVideoAsync:^{
+//            [self changeStream:1];
+//        }];
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -269,9 +275,10 @@
         switchTime = [NSDate date];
         self.camera.videoQuality = 0;
         [GBase editCamera:self.camera];
-        [self.camera stopVideoAsync:^{
-            [self changeStream:0];
-        }];
+        [self changeStream:0];
+//        [self.camera stopVideoAsync:^{
+//            [self changeStream:0];
+//        }];
     }
     [_viewSwitchVideoQuality_port setHidden:YES];
 }
@@ -477,6 +484,7 @@
 
 -(void)startListen:(BOOL)changeUI{
     if(!isTalking){
+        
         [self.camera startAudio];
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
@@ -608,7 +616,8 @@
         _labConnectState.text = camera.cameraStateDesc;
     });
     if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
-        [self changeStream:self.camera.videoQuality];
+        [self.camera startVideo];
+       // [self changeStream:self.camera.videoQuality];
         if(isListening){
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.camera startAudio];
@@ -682,6 +691,7 @@
     s->channel = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_PRESET_LIST_REQ Data:(char *)s DataSize:sizeof(SMsgAVIoctrlGetAudioOutFormatReq)];
     free(s);
+    s = nil;
 }
 
 - (void)camera:(NSCamera *)camera _didReceiveIOCtrlWithType:(NSInteger)type Data:(const char*)data DataSize:(NSInteger)size{
@@ -716,7 +726,8 @@
             }
             break;
         case IOTYPE_USER_IPCAM_SETSTREAMCTRL_RESP: {
-                 [self.camera startVideo];
+                [self.camera stop];
+                [self.camera start];
              }
             break;
         default:

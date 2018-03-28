@@ -25,6 +25,7 @@
         _u32Second  = model->u32Second;
         
         free(model);
+        model = nil;
     }
     return self;
 }

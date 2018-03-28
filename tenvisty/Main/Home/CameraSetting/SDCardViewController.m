@@ -34,6 +34,7 @@
     SMsgAVIoctrlDeviceInfoReq *req = malloc(sizeof(SMsgAVIoctrlDeviceInfoReq));
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_DEVINFO_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlDeviceInfoReq)];
     free(req);
+    req = nil;
 }
 
 -(void)doFormatSDCard{
@@ -42,6 +43,7 @@
     req->storage = 0;
     [self.camera sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ Data:(char*)req DataSize:sizeof(SMsgAVIoctrlFormatExtStorageReq)];
     free(req);
+    req = nil;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
