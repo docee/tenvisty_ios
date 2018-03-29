@@ -130,6 +130,10 @@
 		8983680B206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8983680A206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard */; };
 		8983680E206B7F7B001FFE2F /* CameraSetting_AoniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8983680C206B7F7B001FFE2F /* CameraSetting_AoniViewController.m */; };
 		89836811206B8778001FFE2F /* DeviceInfo_TUTK.m in Sources */ = {isa = PBXBuildFile; fileRef = 89836810206B8778001FFE2F /* DeviceInfo_TUTK.m */; };
+		8983681A206C988C001FFE2F /* ChangeWiFi_AoniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89836816206C988A001FFE2F /* ChangeWiFi_AoniViewController.m */; };
+		8983681B206C988C001FFE2F /* WiFiSetting_AoniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89836817206C988B001FFE2F /* WiFiSetting_AoniViewController.m */; };
+		8983681E206CB6E9001FFE2F /* EventSetting_AoniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8983681C206CB6E9001FFE2F /* EventSetting_AoniViewController.m */; };
+		89836821206CB887001FFE2F /* SensSetting_AoniViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8983681F206CB887001FFE2F /* SensSetting_AoniViewController.m */; };
 		89870A241FDA83AA005207AB /* TwsTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 89870A231FDA83AA005207AB /* TwsTools.m */; };
 		89870A281FDA8EF2005207AB /* TwsProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 89870A271FDA8EF2005207AB /* TwsProgress.m */; };
 		8989EC2E1FF1E9BA004989A9 /* EventSearchCustom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8989EC2D1FF1E9BA004989A9 /* EventSearchCustom.xib */; };
@@ -501,6 +505,14 @@
 		8983680D206B7F7B001FFE2F /* CameraSetting_AoniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSetting_AoniViewController.h; sourceTree = "<group>"; };
 		8983680F206B8778001FFE2F /* DeviceInfo_TUTK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceInfo_TUTK.h; sourceTree = "<group>"; };
 		89836810206B8778001FFE2F /* DeviceInfo_TUTK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo_TUTK.m; sourceTree = "<group>"; };
+		89836816206C988A001FFE2F /* ChangeWiFi_AoniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeWiFi_AoniViewController.m; sourceTree = "<group>"; };
+		89836817206C988B001FFE2F /* WiFiSetting_AoniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSetting_AoniViewController.m; sourceTree = "<group>"; };
+		89836818206C988B001FFE2F /* ChangeWiFi_AoniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeWiFi_AoniViewController.h; sourceTree = "<group>"; };
+		89836819206C988B001FFE2F /* WiFiSetting_AoniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSetting_AoniViewController.h; sourceTree = "<group>"; };
+		8983681C206CB6E9001FFE2F /* EventSetting_AoniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSetting_AoniViewController.m; sourceTree = "<group>"; };
+		8983681D206CB6E9001FFE2F /* EventSetting_AoniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSetting_AoniViewController.h; sourceTree = "<group>"; };
+		8983681F206CB887001FFE2F /* SensSetting_AoniViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensSetting_AoniViewController.m; sourceTree = "<group>"; };
+		89836820206CB887001FFE2F /* SensSetting_AoniViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensSetting_AoniViewController.h; sourceTree = "<group>"; };
 		89870A221FDA83AA005207AB /* TwsTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsTools.h; sourceTree = "<group>"; };
 		89870A231FDA83AA005207AB /* TwsTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwsTools.m; sourceTree = "<group>"; };
 		89870A261FDA8EF2005207AB /* TwsProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwsProgress.h; sourceTree = "<group>"; };
@@ -1608,6 +1620,14 @@
 		89836809206B7E29001FFE2F /* CameraSetting */ = {
 			isa = PBXGroup;
 			children = (
+				89836820206CB887001FFE2F /* SensSetting_AoniViewController.h */,
+				8983681F206CB887001FFE2F /* SensSetting_AoniViewController.m */,
+				8983681D206CB6E9001FFE2F /* EventSetting_AoniViewController.h */,
+				8983681C206CB6E9001FFE2F /* EventSetting_AoniViewController.m */,
+				89836818206C988B001FFE2F /* ChangeWiFi_AoniViewController.h */,
+				89836816206C988A001FFE2F /* ChangeWiFi_AoniViewController.m */,
+				89836819206C988B001FFE2F /* WiFiSetting_AoniViewController.h */,
+				89836817206C988B001FFE2F /* WiFiSetting_AoniViewController.m */,
 				8983680D206B7F7B001FFE2F /* CameraSetting_AoniViewController.h */,
 				8983680C206B7F7B001FFE2F /* CameraSetting_AoniViewController.m */,
 				8983680A206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard */,
@@ -2844,6 +2864,7 @@
 				892ADB851FD78E5400BD8929 /* TimeZoneModel.m in Sources */,
 				898D8BAD1FE0F66600062F04 /* FMDatabase.m in Sources */,
 				89545EA720207F6900151E90 /* WifiParam.m in Sources */,
+				8983681E206CB6E9001FFE2F /* EventSetting_AoniViewController.m in Sources */,
 				89545EB12021A40700151E90 /* AlarmLink.m in Sources */,
 				8924126F202062CD001F60E8 /* WiFiSetting_HichipViewController.m in Sources */,
 				89AD33B92029A2AD00B4520A /* AudioAttr.m in Sources */,
@@ -2865,6 +2886,7 @@
 				89AD33882028327300B4520A /* LinkButtonTableViewCell.m in Sources */,
 				892ADB581FD63CEA00BD8929 /* ListImgTableViewCellModel.m in Sources */,
 				ED040F591FF1588C00D2DD19 /* EventSearchCustomViewController.m in Sources */,
+				8983681A206C988C001FFE2F /* ChangeWiFi_AoniViewController.m in Sources */,
 				89EA52292019720200F2F15C /* AddCameraInputUIDTableViewController.m in Sources */,
 				8924116F201EEAA7001F60E8 /* AddCameraWiredNoteViewController.m in Sources */,
 				8924116C201ED810001F60E8 /* TwsDataValue.m in Sources */,
@@ -2889,6 +2911,7 @@
 				898D8BAE1FE0F66600062F04 /* FMDatabaseAdditions.m in Sources */,
 				89AD338E20283CE100B4520A /* QuantumTime.m in Sources */,
 				89545EBA2021D1FE00151E90 /* MutilTextFieldTableViewCell.m in Sources */,
+				89836821206CB887001FFE2F /* SensSetting_AoniViewController.m in Sources */,
 				89AD33E3202AE6B600B4520A /* VideoProgressBarView.m in Sources */,
 				89AD339220285C4A00B4520A /* SelectItemDetailTableViewCell.m in Sources */,
 				89AD33DE202AD08D00B4520A /* ZKGangTimeBar.m in Sources */,
@@ -2927,6 +2950,7 @@
 				894D7E5A1FAB01D900C58BB2 /* tenvisty.xcdatamodeld in Sources */,
 				890B40791FB006A000C1061A /* ImageViewController.m in Sources */,
 				89AD339520285F8D00B4520A /* TimingRecordSchedule_HichipViewController.m in Sources */,
+				8983681B206C988C001FFE2F /* WiFiSetting_AoniViewController.m in Sources */,
 				895141E51FE8C7FF00905355 /* SwitchVideoQualityDialog.m in Sources */,
 				89AD337E20282DD300B4520A /* TimingRecord_HichipViewController.m in Sources */,
 				89D2B4E81FDF804A00639DD3 /* AddDeviceWirelessViewController.m in Sources */,

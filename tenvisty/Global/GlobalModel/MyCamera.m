@@ -506,15 +506,15 @@
             }
         }
         else{
-            
-            if(reConnectTimes < MAX_RECONNECT_TIMES){
-                reConnectTimes++;
-                [self stop];
-                [self start];
-            }
-            else{
-                [self stop];
-            }
+            [self stop];
+//            if(reConnectTimes < MAX_RECONNECT_TIMES){
+//                reConnectTimes++;
+//                [self stop];
+//                [self start];
+//            }
+//            else{
+//                [self stop];
+//            }
         }
     }
     if(self.isSessionConnected){

@@ -85,6 +85,10 @@
                         <outlet property="imgCameraSnapShot" destination="LH1-sE-thf" id="uVs-Xd-0ss"/>
                         <outlet property="labUID" destination="BOt-Ka-God" id="Bx3-Oi-g91"/>
                         <outlet property="tableview" destination="Fep-sb-v0H" id="B14-nY-B2n"/>
+                        <segue destination="sUY-a1-7JH" kind="show" identifier="CameraSetting2ChangeCameraName" id="Qzp-uL-dgr"/>
+                        <segue destination="hCS-ym-4uR" kind="show" identifier="CameraSetting2ChangeCameraPassword" id="SZM-C3-IDn"/>
+                        <segue destination="UmW-Re-IcB" kind="show" identifier="CameraSetting2WiFiSetting" id="cLa-du-LB7"/>
+                        <segue destination="748-4d-9Cz" kind="show" identifier="CameraSetting2EventiSetting" id="BDO-YV-ORJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4p2-3E-LFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -118,8 +122,276 @@
             </objects>
             <point key="canvasLocation" x="3195.1999999999998" y="-771.8140929535233"/>
         </scene>
+        <!--Camera Name-->
+        <scene sceneID="Jh1-gh-fBV">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="sUY-a1-7JH" customClass="ChangeCameraNameViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="sQt-z9-1nQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qpj-ln-yqU">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qpj-ln-yqU" id="m0r-GI-GS0">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sUY-a1-7JH" id="7Tu-1H-JAw"/>
+                            <outlet property="delegate" destination="sUY-a1-7JH" id="cPZ-mM-CXw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Camera Name" id="IDq-7s-Qqk">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="Lu1-IF-lpo">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="5Xe-gP-0Ox" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="bEa-HO-Kbu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navDone" id="AdN-7I-RyZ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="save:" destination="sUY-a1-7JH" id="x03-w7-t5V"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0HN-yR-NRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5Xe-gP-0Ox" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Change Camera Password-->
+        <scene sceneID="mWW-5Y-z3J">
+            <objects>
+                <tableViewController storyboardIdentifier="storyboard_changcamerapassword" hidesBottomBarWhenPushed="YES" id="hCS-ym-4uR" customClass="ChangeCameraPasswordViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="LtR-CU-dyV" customClass="BaseTableView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewCellFooter" rowHeight="280" id="sKq-F7-r11">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="280"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sKq-F7-r11" id="Orw-V5-58B">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="279.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwc-Jc-Tok">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-RE-Uad">
+                                                    <rect key="frame" x="238" y="8" width="122" height="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <state key="normal" title="show password" image="checkbox_uncheck">
+                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <state key="selected" image="checkbox_checked"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHQ-Xd-AnY">
+                                                    <rect key="frame" x="10" y="36" width="365" height="122.5"/>
+                                                    <string key="text">Please make sure your password length is 6-12 characters and contaqins at least two combinations of below characters.
+1.capital
+2.small letter
+3.number
+4.special character:~!@$%^()_-,|/*.</string>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="T5C-RE-Uad" firstAttribute="top" secondItem="Zwc-Jc-Tok" secondAttribute="top" constant="8" id="3mg-7j-bWF"/>
+                                                <constraint firstItem="uHQ-Xd-AnY" firstAttribute="top" secondItem="T5C-RE-Uad" secondAttribute="bottom" constant="10" id="B0t-ec-0QG"/>
+                                                <constraint firstAttribute="trailing" secondItem="uHQ-Xd-AnY" secondAttribute="trailing" id="hxk-UC-CZu"/>
+                                                <constraint firstAttribute="trailing" secondItem="T5C-RE-Uad" secondAttribute="trailing" constant="15" id="mMt-eA-gun"/>
+                                                <constraint firstItem="uHQ-Xd-AnY" firstAttribute="leading" secondItem="Zwc-Jc-Tok" secondAttribute="leading" constant="10" id="oiz-fA-2al"/>
+                                                <constraint firstAttribute="height" constant="230" id="x78-Go-wFK"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Zwc-Jc-Tok" secondAttribute="trailing" id="R8w-hl-eLF"/>
+                                        <constraint firstItem="Zwc-Jc-Tok" firstAttribute="top" secondItem="Orw-V5-58B" secondAttribute="top" id="RRS-qq-3Ie"/>
+                                        <constraint firstItem="Zwc-Jc-Tok" firstAttribute="leading" secondItem="Orw-V5-58B" secondAttribute="leading" id="Yox-8G-ig9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hCS-ym-4uR" id="Gsj-7T-1qZ"/>
+                            <outlet property="delegate" destination="hCS-ym-4uR" id="h49-6M-gc2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Change Camera Password" id="UKu-Zv-T7g">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="VTq-ip-9Mj">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="VmB-Q7-6Dz" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="Veg-FX-gkF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navDone" id="gKK-R0-5K1">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="save:" destination="hCS-ym-4uR" id="m4r-eM-0xg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fAG-Ao-LLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="VmB-Q7-6Dz" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="329.68515742128938"/>
+        </scene>
+        <!--Wi-Fi Setting-->
+        <scene sceneID="YZG-Zv-txx">
+            <objects>
+                <tableViewController id="UmW-Re-IcB" customClass="WiFiSetting_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="18" sectionFooterHeight="18" id="heD-Iv-Rv8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="UmW-Re-IcB" id="1pa-I0-lj2"/>
+                            <outlet property="delegate" destination="UmW-Re-IcB" id="nsg-dW-cqz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Wi-Fi Setting" id="iKU-ed-j7m">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="z5m-yH-Sfe">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="uLc-TI-CpW" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="b3j-5Q-lgb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navRefresh" id="IVv-eQ-QlZ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="refreshWifiList:" destination="UmW-Re-IcB" id="Rpi-wW-z2C"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="A6e-2z-Kdj" kind="show" identifier="WiFiSetting2ChangeWiFi" id="4Bi-kh-oBe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oap-vE-U4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="uLc-TI-CpW" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Wi-Fi Setting-->
+        <scene sceneID="T8z-cF-3NT">
+            <objects>
+                <tableViewController id="A6e-2z-Kdj" customClass="ChangeWiFi_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="eJG-VO-6F1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fls-Zh-V4Z">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fls-Zh-V4Z" id="2ok-mZ-e3Q">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="A6e-2z-Kdj" id="c7n-8h-R9d"/>
+                            <outlet property="delegate" destination="A6e-2z-Kdj" id="kmv-fO-N6v"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Wi-Fi Setting" id="5dq-M4-U5q">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="UOM-jX-Y7T">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="NWb-zP-9aF" kind="unwind" identifier="ChangeWiFi2WiFiSetting" unwindAction="WiFiSettingViewController1UnwindSegue:" id="Jpi-zt-696"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="navDone" id="SVV-sb-MFv">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="save:" destination="A6e-2z-Kdj" id="c2t-RL-Izg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pfF-xg-NIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NWb-zP-9aF" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Event Setting-->
+        <scene sceneID="fQD-IC-Bgn">
+            <objects>
+                <tableViewController id="748-4d-9Cz" customClass="EventSetting_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="8DN-L7-RWx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="748-4d-9Cz" id="Ihf-x1-cBE"/>
+                            <outlet property="delegate" destination="748-4d-9Cz" id="no4-rh-loY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Event Setting" id="CuU-pl-9Xo">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="Dwt-eV-Vza">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="oE4-N2-ybT" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="Nnl-mu-Mqy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="ObH-M8-kcT" kind="show" identifier="EventSetting2SensSetting" id="R3u-8s-iRg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y2b-DQ-Xsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oE4-N2-ybT" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Sensitivity Setting-->
+        <scene sceneID="psf-t7-Ke6">
+            <objects>
+                <tableViewController id="ObH-M8-kcT" customClass="SensSetting_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="wLP-hK-inc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="ObH-M8-kcT" id="8aC-8l-N5O"/>
+                            <outlet property="delegate" destination="ObH-M8-kcT" id="m5z-We-kpF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Sensitivity Setting" id="8VL-rb-GbK">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="JH4-Ib-I8t">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="pJ3-lC-Bsm" kind="unwind" unwindAction="EventSettingViewController1UnwindSegue:" id="xya-Pn-v1c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uf6-3P-b9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pJ3-lC-Bsm" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
+        <image name="checkbox_checked" width="16" height="16"/>
+        <image name="checkbox_uncheck" width="16" height="16"/>
         <image name="navBack" width="30" height="30"/>
+        <image name="navDone" width="30" height="30"/>
+        <image name="navRefresh" width="30" height="30"/>
     </resources>
 </document>

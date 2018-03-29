@@ -211,6 +211,80 @@ typedef enum
 #define IOTYPE_USER_IPCAM_UPDATE_WIFI_STATUS        (0x202C)
 
 
+//aoni  20180329
+#define IOTYPE_USER_IPCAM_GET_ALARMLED_CONTRL_REQ   (0x40086)
+#define IOTYPE_USER_IPCAM_GET_ALARMLED_CONTRL_RESP (0x40087)
+#define IOTYPE_USER_IPCAM_SET_ALARMLED_CONTRL_REQ (0x40084)
+#define IOTYPE_USER_IPCAM_SET_ALARMLED_CONTRL_RESP (0x40085)
+
+#define IOTYPE_USER_IPCAM_GET_OSD_ONOFF_REQ (0x50023)
+#define IOTYPE_USER_IPCAM_GET_OSD_ONOFF_RESP (0x50024)
+#define IOTYPE_USER_IPCAM_SET_OSD_ONOFF_REQ (0x50021)
+#define IOTYPE_USER_IPCAM_SET_OSD_ONOFF_RESP (0x50022)
+#define IOTYPE_USER_IPCAM_GET_AUSDOM_PIR_SENSITIVITY_REQ (0x40072)
+#define IOTYPE_USER_IPCAM_GET_AUSDOM_PIR_SENSITIVITY_RESP (0x40073)
+#define IOTYPE_USER_IPCAM_SET_AUSDOM_PIR_SENSITIVITY_REQ (0x40070)
+#define IOTYPE_USER_IPCAM_SET_AUSDOM_PIR_SENSITIVITY_RESP (0x40071)
+#define IOTYPE_USER_IPCAM_GET_ALARM_TIME_REQ (0x50031)
+#define IOTYPE_USER_IPCAM_GET_ALARM_TIME_RESP (0x50032)
+#define IOTYPE_USER_IPCAM_SET_ALARM_TIME_REQ (0x50033)
+#define IOTYPE_USER_IPCAM_SET_ALARM_TIME_RESP (0x50034)
+#define IOTYPE_USER_IPCAM_GET_FORAMT_RESULT_REQ (0x0382) // Format external storage
+#define IOTYPE_USER_IPCAM_GET_FORAMT_RESULT_RESP (0x0383)
+#define IOTYPE_USER_IPCAM_SET_TIMEMODE_TO_SHARE_REQ (0X40074)    // set time mode 0 Chinese 1 America 2 Europe
+#define IOTYPE_USER_IPCAM_SET_TIMEMODE_TO_SHARE_RESP (0X40075)
+#define IOTYPE_USER_IPCAM_GET_TIMEMODE_TO_SHARE_REQ (0X40076)    // get time mode 0 Chinese 1 America 2 Europe
+#define IOTYPE_USER_IPCAM_GET_TIMEMODE_TO_SHARE_RESP (0X40077)
+#define IOTYPE_USER_IPCAM_REBOOT_SYSTEM_REQ (0x40019)
+#define IOTYPE_USER_IPCAM_REBOOT_SYSTEM_RESP (0x40020)
+#define IOTYPE_USER_IPCAM_GET_DEVICEMODEL_CONFIG_REQ (0X40056)    //读取装备信息
+#define IOTYPE_USER_IPCAM_GET_DEVICEMODEL_CONFIG_RESP (0X40057)
+#define IOTYPE_USER_IPCAM_SET_DEVICEMODEL_CONFIG_REQ (0X40058)    //写入装备信息
+#define IOTYPE_USER_IPCAM_SET_DEVICEMODEL_CONFIG_RESP (0X40059)
+
+#define IOTYPE_USER_IPCAM_AUSDOM_LISTDIR_REQ (0x50035)
+#define IOTYPE_USER_IPCAM_AUSDOM_LISTDIR_RESP (0x50036)
+// 20、获取电池当前状态
+#define IOTYPE_USER_IPCAM_GET_BAT_PRAM_REQ (0x50058)
+#define IOTYPE_USER_IPCAM_GET_BAT_PRAM_RESP (0x50059)
+//电池电量推送提醒
+#define IOTYPE_USER_IPCAM_SET_BAT_PUSH_EN_REQ (0X400A3)
+#define IOTYPE_USER_IPCAM_SET_BAT_PUSH_EN_RESP (0X400A4)
+#define IOTYPE_USER_IPCAM_GET_BAT_PUSH_EN_REQ (0X400A5)
+#define IOTYPE_USER_IPCAM_GET_BAT_PUSH_EN_RESP (0X400A6)
+//门铃推送
+#define IOTYPE_USER_IPCAM_SET_DB_PUSH_EN_REQ (0X400A7)
+#define IOTYPE_USER_IPCAM_SET_DB_PUSH_EN_RESP (0X400A8)
+#define IOTYPE_USER_IPCAM_GET_DB_PUSH_EN_REQ (0X400A9)
+#define IOTYPE_USER_IPCAM_GET_DB_PUSH_EN_RESP (0X400AA)
+//24、OTA升级固件相关
+// AUSDOM REMOTE UPGRADE  升级请求
+#define IOTYPE_USER_IPCAM_REMOTE_UPGRADE_REQ (0X6008E)
+#define IOTYPE_USER_IPCAM_REMOTE_UPGRADE_RESP (0X6008F)
+#define IOTYPE_USER_IPCAM_UPGRADE_PROGRESS_REQ (0X60090)
+#define IOTYPE_USER_IPCAM_UPGRADE_PROGRESS_RESP (0X60091)
+
+//PIR灵敏度设置
+#define IOTYPE_USER_IPCAM_SET_PIR_SENSITIVITY_REQ (0X6000c) //PIR SENSITIVITY
+#define IOTYPE_USER_IPCAM_SET_PIR_SENSITIVITY_RESP (0X6000d)
+#define IOTYPE_USER_IPCAM_GET_PIR_SENSITIVITY_REQ (0X6000e)
+#define IOTYPE_USER_IPCAM_GET_PIR_SENSITIVITY_RESP (0X6000f)
+//PIR开关：
+#define IOTYPE_USER_IPCAM_SET_ARM_STATUS_REQ (0X60008) // ARM/DISARM
+#define IOTYPE_USER_IPCAM_SET_ARM_STATUS_RESP (0X60009)
+#define IOTYPE_USER_IPCAM_GET_ARM_STATUS_REQ (0X6000a)
+#define IOTYPE_USER_IPCAM_GET_ARM_STATUS_RESP (0X6000b)
+
+#define IOTYPE_USER_IPCAM_SET_NTP_CONFIG_REQ (0X40050)    //写入ntp的配置信息
+#define IOTYPE_USER_IPCAM_SET_NTP_CONFIG_RESP (0X40051)
+#define IOTYPE_USER_IPCAM_GET_NTP_CONFIG_REQ (0X40052)    //读取ntp的配置信息
+#define IOTYPE_USER_IPCAM_GET_NTP_CONFIG_RESP (0X40053)
+
+
+
+//end anni
+
+
 
 /*********************   æﬂÃÂÀµ√˜   **************************************/
 
@@ -1469,4 +1543,174 @@ typedef struct
     char ssid[32];        //连接的无线的ssid
     int status;            //ENUM_WIRELESS_STATUS
 }SMsgAVIoctrlUpdateWifiStatus;
+
+
+
+//aoni  20180329
+/*PIR开关： IOTYPE_USER_IPCAM_SET_ARM_STATUS_REQ        = 0X60008, // ARMDISARM     IOTYPE_USER_IPCAM_SET_ARM_STATUS_RESP       = 0X60009,     IOTYPE_USER_IPCAM_GET_ARM_STATUS_REQ        = 0X6000a,     IOTYPE_USER_IPCAM_GET_ARM_STATUS_RESP       = 0X6000b,*/
+typedef struct
+{
+    int arm_enable;// 1:enable 0:disable
+    unsigned char reserved[4];
+}SMsgSetArmEnableReq,SMsgGetArmEnableResp;
+
+typedef struct
+{
+    int result; // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgSetArmEnableResp;
+
+
+
+/*
+ IOTYPE_USER_IPCAM_SET_NTP_CONFIG_REQ        = 0X40050,    //写入ntp的配置信息
+ IOTYPE_USER_IPCAM_SET_NTP_CONFIG_RESP        = 0X40051,
+ IOTYPE_USER_IPCAM_GET_NTP_CONFIG_REQ        = 0X40052,    //读取ntp的配置信息
+ IOTYPE_USER_IPCAM_GET_NTP_CONFIG_RESP        = 0X40053,
+ */
+typedef struct _ntp_set_time
+{
+    unsigned int year;
+    unsigned int month;
+    unsigned int date;
+    unsigned int hour;
+    unsigned int minute;
+    unsigned int second;
+    
+} ntp_set_time;
+typedef struct
+{
+    unsigned int     mod;     ///1,ntp 2 manul
+    unsigned char     Server[32];//NTP Server:
+    ntp_set_time     time;//manul time
+    unsigned char     TimeZone;//TimeZone:  0~25:(GMT-12)~GMT~(GMT+12)
+} SMsgAVIoctrlSetNtpConfigReq, SMsgAVIoctrlGetNtpConfigResp;
+
+typedef struct
+{
+    int             result;     //return 0 if succeed
+    unsigned char    reserved[4];
+}SMsgAVIoctrlSetNtpConfigResp;
+
+/*
+ IOTYPE_USER_IPCAM_GET_NET_REQ                = 0X40037,    //获取网络配置
+ IOTYPE_USER_IPCAM_GET_NET_RESP                = 0X40038,
+ IOTYPE_USER_IPCAM_SET_NET_REQ                = 0X40039,    //设置网络配置
+ IOTYPE_USER_IPCAM_SET_NET_RESP                = 0X40040,
+ */
+#define MACADDR_LEN     20
+#define NAME_LEN          32
+#define PASSWD_LEN         16
+
+typedef struct
+{
+    int     web_port;
+    int     video_port;
+    int     onvif_port;                    /*onvif通讯端口*/
+    int     rtsp_port;                    /*RTSP通讯端口*/
+    char     ipcamIP[16];                 /* ipcam IP地址 */
+    char     ipcamIPMask[16];             /* ipcam IP地址掩码 */
+    char     ipcamGatewayIP[16];         /* 网关地址 */
+    char     byMACAddr[MACADDR_LEN];     /* 只读：服务器的物理地址 */
+    char     byDnsaddr[2][16];             /* DNS地址 */
+    char     sPPPoEUser[NAME_LEN];         /* PPPoE用户名 */
+    char     sPPPoEPassword[PASSWD_LEN];    /* PPPoE密码 */
+    char     sPPPoEIP[16];                 //PPPoE IP地址(只读)
+    unsigned char dwPPPOE;                     /* 0-不启用,1-启用 */
+    unsigned char conn_mod;                    /*0-静态地址 1-DHCP 2-pppoe*/
+    unsigned char reserved[2];
+}SMsgAVIoctrlSetNetReq, SMsgAVIoctrlGetNetResp;
+
+typedef struct
+{
+    int             result;     //return 0 if succeed
+    unsigned char     reserved[4];
+}SMsgAVIoctrlSetNetResp;
+
+//电池电量推送提醒
+//IOTYPE_USER_IPCAM_SET_BAT_PUSH_EN_REQ            = 0X400A3,
+//IOTYPE_USER_IPCAM_SET_BAT_PUSH_EN_RESP            = 0X400A4,
+//IOTYPE_USER_IPCAM_GET_BAT_PUSH_EN_REQ            = 0X400A5,
+//IOTYPE_USER_IPCAM_GET_BAT_PUSH_EN_RESP            = 0X400A6,
+typedef struct
+{
+    unsigned int channel;     // Camera Index
+    unsigned char reserved[4];
+}SMsgAVIoctrlGetBatPushReq;
+
+typedef struct
+{
+    unsigned int push_en;
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetBatPushReq,SMsgAVIoctrlGetBatPushResp;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+} SMsgAVIoctrlSetBatPushResp;
+
+//门铃推送
+//IOTYPE_USER_IPCAM_SET_DB_PUSH_EN_REQ                = 0X400A7,
+//IOTYPE_USER_IPCAM_SET_DB_PUSH_EN_RESP            = 0X400A8,
+//IOTYPE_USER_IPCAM_GET_DB_PUSH_EN_REQ                = 0X400A9,
+//IOTYPE_USER_IPCAM_GET_DB_PUSH_EN_RESP            = 0X400AA,
+typedef struct
+{
+    unsigned int channel;     // Camera Index
+    unsigned char reserved[4];
+}SMsgAVIoctrlGetDbPushReq;
+
+typedef struct
+{
+    unsigned int push_en;
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetDbPushReq, SMsgAVIoctrlGetDbPushResp;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+} __attribute__((packed))SMsgAVIoctrlSetDbPushResp;
+//20、获取电池当前状态
+//IOTYPE_USER_IPCAM_GET_BAT_PRAM_REQ = 0x50058,
+//IOTYPE_USER_IPCAM_GET_BAT_PRAM_RESP = 0x50059,
+typedef struct
+{
+    int work_mode;// 0:bat; 1:usb无电池；2:usb有电池，充电中；3:usb有电池，充电满
+    int bat_percent;    //当前电池电量百分比
+    char reserved[4];
+}SMsgGetBatPramResp;
+//SD卡格式化流程
+    //b、间隔时间获取格式化最终状态:
+    //IOTYPE_USER_IPCAM_GET_FORAMT_RESULT_REQ = 0x0382, // Format external storage
+    //IOTYPE_USER_IPCAM_GET_FORAMT_RESULT_RESP = 0x0383,
+typedef struct
+{
+    int result; //0:格式化完毕；1:格式化中；-1:格式化失败
+    unsigned char reserved[4];
+}SMsgAVIoctrlGetFormatStatusResp;
+
+/*
+[0~19]
+[20~39]
+[40~59]
+[60~79]
+[80~99]
+100
+IOTYPE_USER_IPCAM_SET_PIR_SENSITIVITY_REQ   = 0X6000c, //PIR SENSITIVITY     IOTYPE_USER_IPCAM_SET_PIR_SENSITIVITY_RESP = 0X6000d,     IOTYPE_USER_IPCAM_GET_PIR_SENSITIVITY_REQ = 0X6000e,     IOTYPE_USER_IPCAM_GET_PIR_SENSITIVITY_RESP  = 0X6000f,
+ */
+typedef struct
+{
+    int sensitivity;//0-100
+    unsigned char reserved[4];
+}SMsgSetPirSensitivityReq,SMsgGetPirSensitivityResp;
+
+typedef struct
+{
+    int result; // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgSetPirSensitivityResp;
+
+//end aoni
 #endif

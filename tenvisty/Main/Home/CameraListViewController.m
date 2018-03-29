@@ -284,7 +284,15 @@
     
 }
 -(NSString*)getSettingStoryboardName:(BaseCamera*)camera{
-    return camera.p2pType == P2P_Hichip?@"CameraSetting_Hichip":@"CameraSetting";
+    if(camera.supplier ==  SUPLLIER_AN){
+        return @"CameraSetting_Aoni";
+    }
+    else if(camera.supplier == SUPLLIER_HX){
+        return @"CameraSetting_Hichip";
+    }
+    else{
+        return @"CameraSetting";
+    }
 }
 -(NSString*)getHomeStoryboardName:(BaseCamera*)camera{
     return camera.p2pType == P2P_Hichip?@"Home_Hichip":@"Home";

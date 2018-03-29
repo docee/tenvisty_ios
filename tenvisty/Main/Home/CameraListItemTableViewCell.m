@@ -98,8 +98,10 @@
     if(self.camera.isConnecting || self.camera.processState != CAMERASTATE_NONE || self.camera.isWakingUp || (self.camera.supplier == SUPLLIER_UNKNOWN && self.camera.isAuthConnected)){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
-        MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
-        [p setColor:[UIColor clearColor]];
+        if([MBProgressHUD HUDForView:self] == nil){
+            MBProgressHUD *p = [MBProgressHUD showHUDAddedTo:self animated:YES];
+            [p setColor:[UIColor clearColor]];
+        }
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = [UIColor whiteColor];
         [self.btnReconnect setHidden:YES];
         [self.btnModifyPassword setHidden:YES];
@@ -232,7 +234,16 @@
 }
 
 -(NSString*)getSettingStoryboardName{
-    return _camera.p2pType == P2P_Hichip?@"CameraSetting_Hichip":@"CameraSetting";
+    if(_camera.supplier ==  SUPLLIER_AN){
+        return @"CameraSetting_Aoni";
+    }
+    else if(_camera.supplier == SUPLLIER_HX){
+        return @"CameraSetting_Hichip";
+    }
+    else{
+        return @"CameraSetting";
+    }
+    //return _camera.p2pType == P2P_Hichip?@"CameraSetting_Hichip":@"CameraSetting";
 }
 
 @end

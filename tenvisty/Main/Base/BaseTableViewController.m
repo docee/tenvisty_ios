@@ -118,6 +118,14 @@
 -(void)setRowValue:(NSString*)val row:(NSInteger)row section:(NSInteger)section{
     ((ListImgTableViewCellModel*)self.listItems[section][row]).titleValue = val;
 }
+
+- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+    if(self.camera != nil && self.camera.isSleeping){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"the camera is sleeping, you need to wake it up first.") actionDefaultBlock:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }
+}
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];

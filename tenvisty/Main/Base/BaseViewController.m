@@ -78,6 +78,13 @@
     }
     return nil;
 }
+- (void)camera:(NSCamera *)camera _didChangeSessionStatus:(NSInteger)status{
+    if(self.camera != nil && self.camera.isSleeping){
+        [TwsTools presentAlertMsg:self message:LOCALSTR(@"the camera is sleeping, you need to wake it up first.") actionDefaultBlock:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }
+}
 //-(void) keyboardWillChangeFrame: (NSNotification *)notification
 //{
 //    self.doneButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
