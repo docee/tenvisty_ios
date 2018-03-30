@@ -108,7 +108,7 @@
     BaseCamera *camera = [GBase getCamera:sender.tag];
     NSString *storyboardName = [self getHomeStoryboardName:camera];
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-    BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_eventlist"];  //test2为viewcontroller的StoryboardId
+    BaseViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:camera.supplier == SUPLLIER_AN?@"storyboard_eventlist_aoni": @"storyboard_eventlist"];  //test2为viewcontroller的StoryboardId
     test2obj.camera = camera;
     [self.navigationController pushViewController:test2obj animated:YES];
     //[self performSegueWithIdentifier:@"CameraList2EventList" sender:sender];

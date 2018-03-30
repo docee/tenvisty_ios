@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -89,6 +91,8 @@
                         <segue destination="hCS-ym-4uR" kind="show" identifier="CameraSetting2ChangeCameraPassword" id="SZM-C3-IDn"/>
                         <segue destination="UmW-Re-IcB" kind="show" identifier="CameraSetting2WiFiSetting" id="cLa-du-LB7"/>
                         <segue destination="748-4d-9Cz" kind="show" identifier="CameraSetting2EventiSetting" id="BDO-YV-ORJ"/>
+                        <segue destination="2oj-mF-WLS" kind="show" identifier="CameraSetting2OtherSetting" id="mlo-o0-W6p"/>
+                        <segue destination="Gf2-zz-nFE" kind="show" identifier="CameraSetting2SystemSetting" id="SOj-FM-EJj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4p2-3E-LFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -389,9 +393,9 @@
         <!--Other Setting-->
         <scene sceneID="CgU-Fu-jDD">
             <objects>
-                <tableViewController id="2oj-mF-WLS" customClass="OtherSettingViewController" sceneMemberID="viewController">
+                <tableViewController id="2oj-mF-WLS" customClass="OtherSetting_AoniViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="kxK-7e-gb5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -403,10 +407,321 @@
                     <navigationItem key="navigationItem" title="Other Setting" id="FAg-LV-J3q">
                         <barButtonItem key="leftBarButtonItem" image="navBack" id="Iso-hn-4PH">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="Phl-wj-1rs" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="dEP-1v-jE0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="YgJ-ar-MvY" kind="show" identifier="OtherSetting2TimeSetting" id="5W0-nj-ZbS"/>
+                        <segue destination="Op5-UP-wLu" kind="show" identifier="OtherSetting2SDCard" id="Gtb-3a-4du"/>
+                        <segue destination="80S-vR-wCp" kind="show" identifier="OtherSetting2DeviceInfo" id="h8S-yx-v5t"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MUG-12-WTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Phl-wj-1rs" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Time Setting-->
+        <scene sceneID="ApZ-DW-LVj">
+            <objects>
+                <tableViewController id="YgJ-ar-MvY" customClass="TimeSetting_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="40" sectionFooterHeight="18" id="ELN-0F-E11">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="6000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewcell_synctime" id="WtH-ox-QFq" customClass="SyncTimeTableViewCell">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WtH-ox-QFq" id="Eu3-bY-eL8">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45/06/2017 01:44:25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsP-Y0-Gbs">
+                                            <rect key="frame" x="10" y="16" width="139.5" height="17.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to adjust time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8J-Yp-fwi">
+                                            <rect key="frame" x="231.5" y="16" width="117.5" height="17.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" red="0.031372549020000001" green="0.54901960780000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="t8J-Yp-fwi" firstAttribute="centerY" secondItem="Eu3-bY-eL8" secondAttribute="centerY" id="1If-4b-kIp"/>
+                                        <constraint firstItem="WsP-Y0-Gbs" firstAttribute="centerY" secondItem="Eu3-bY-eL8" secondAttribute="centerY" id="Kyp-Vk-f1s"/>
+                                        <constraint firstItem="WsP-Y0-Gbs" firstAttribute="leading" secondItem="Eu3-bY-eL8" secondAttribute="leading" constant="10" id="OHB-WH-MKe"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="t8J-Yp-fwi" secondAttribute="trailing" constant="10" id="y4C-CC-4Ch"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="labTime" destination="WsP-Y0-Gbs" id="r76-Zh-7fv"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="YgJ-ar-MvY" id="K6Q-jd-DrV"/>
+                            <outlet property="delegate" destination="YgJ-ar-MvY" id="iZk-bo-hqP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Time Setting" id="cSd-oe-mse">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="1ST-Q5-yXa">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="KVH-4H-3af" kind="unwind" unwindAction="OtherSettingViewController1UnwindSegue:" id="vCg-va-d59"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="YcS-eJ-nbA" kind="show" identifier="TimeSetting2TimeZoneSetting" id="wdK-tb-kIv"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OlI-GE-yIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="KVH-4H-3af" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--SD Card-->
+        <scene sceneID="TEr-cY-qkh">
+            <objects>
+                <tableViewController id="Op5-UP-wLu" customClass="SDCard_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="90" sectionHeaderHeight="18" sectionFooterHeight="18" id="PhM-qt-qe1" customClass="BaseTableView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableviewCellFooter" id="5Ba-Ao-ksW">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Ba-Ao-ksW" id="yKk-eW-uqw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oR9-bb-oLF">
+                                            <rect key="frame" x="0.0" y="18.5" width="375" height="40"/>
+                                            <color key="backgroundColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="3FF-c6-kha"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <state key="normal" title="FORMAT SDCARD">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Format command will ERASE all data of SD Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzR-Wj-u6v">
+                                            <rect key="frame" x="5" y="73" width="306.5" height="16.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="oR9-bb-oLF" firstAttribute="centerY" secondItem="yKk-eW-uqw" secondAttribute="centerY" multiplier="6/7" id="FCt-fB-YKY"/>
+                                        <constraint firstAttribute="trailing" secondItem="oR9-bb-oLF" secondAttribute="trailing" id="Kcx-la-TNm"/>
+                                        <constraint firstAttribute="bottom" secondItem="tzR-Wj-u6v" secondAttribute="bottom" id="Y8q-nD-hql"/>
+                                        <constraint firstItem="oR9-bb-oLF" firstAttribute="leading" secondItem="yKk-eW-uqw" secondAttribute="leading" id="ZFe-tB-ltO"/>
+                                        <constraint firstItem="tzR-Wj-u6v" firstAttribute="leading" secondItem="yKk-eW-uqw" secondAttribute="leading" constant="5" id="dQ2-yl-C0s"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="Op5-UP-wLu" id="1PO-3E-WWf"/>
+                            <outlet property="delegate" destination="Op5-UP-wLu" id="HAv-XP-sQ9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="SD Card" id="YtW-Sn-m8l">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="Cj9-MR-7K4">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="sDK-0D-kOq" kind="unwind" unwindAction="OtherSettingViewController1UnwindSegue:" id="cmf-Ol-JOo"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MUG-12-WTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FYY-QO-bjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sDK-0D-kOq" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Device Information-->
+        <scene sceneID="Vr5-uk-e49">
+            <objects>
+                <tableViewController id="80S-vR-wCp" customClass="DeviceInfo_AoniViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" id="KJU-oZ-GCt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="80S-vR-wCp" id="jWC-hT-U7p"/>
+                            <outlet property="delegate" destination="80S-vR-wCp" id="3wk-0R-Zb4"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Device Information" id="roW-Ti-XLd">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="D2R-ID-fcS">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="i4l-oG-tLp" kind="unwind" unwindAction="OtherSettingViewController1UnwindSegue:" id="e0j-ii-c8O"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SfG-8C-Y3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="i4l-oG-tLp" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--System Setting-->
+        <scene sceneID="Vb0-Ba-9a7">
+            <objects>
+                <tableViewController id="Gf2-zz-nFE" customClass="SystemSetting_AoniTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="40" sectionHeaderHeight="18" sectionFooterHeight="18" id="NqN-X3-pIm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="UCl-cM-ni5">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JAT-FQ-B2P">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JAT-FQ-B2P" id="hhh-R7-ecI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reboot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGz-ic-qkb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LGz-ic-qkb" firstAttribute="leading" secondItem="hhh-R7-ecI" secondAttribute="leading" id="Tqk-6L-Tja"/>
+                                                <constraint firstAttribute="bottom" secondItem="LGz-ic-qkb" secondAttribute="bottom" id="giw-kO-9XK"/>
+                                                <constraint firstItem="LGz-ic-qkb" firstAttribute="top" secondItem="hhh-R7-ecI" secondAttribute="top" id="jK3-7V-mMq"/>
+                                                <constraint firstAttribute="trailing" secondItem="LGz-ic-qkb" secondAttribute="trailing" id="qXF-H7-2A6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="Nek-JF-FI4">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UaG-FL-NvS">
+                                        <rect key="frame" x="0.0" y="111" width="375" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaG-FL-NvS" id="lFZ-Lk-Jgc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check New Firmware" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiU-We-kBx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.54901960780000003" blue="0.020276521379999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wiU-We-kBx" firstAttribute="leading" secondItem="lFZ-Lk-Jgc" secondAttribute="leading" id="98n-ou-pVi"/>
+                                                <constraint firstAttribute="bottom" secondItem="wiU-We-kBx" secondAttribute="bottom" id="aZf-Ew-wp0"/>
+                                                <constraint firstItem="wiU-We-kBx" firstAttribute="top" secondItem="lFZ-Lk-Jgc" secondAttribute="top" id="euM-Kr-c2L"/>
+                                                <constraint firstAttribute="trailing" secondItem="wiU-We-kBx" secondAttribute="trailing" id="q6n-Gk-ECh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="delegate" destination="Gf2-zz-nFE" id="2bF-S2-mYL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="System Setting" id="qGu-DB-RZK">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="hcL-m7-y6i">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="Y4h-EV-5xT" kind="unwind" unwindAction="CameraSettingViewController1UnwindSegue:" id="KPr-C9-tSc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOE-zF-A7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Y4h-EV-5xT" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+        </scene>
+        <!--Time Zone-->
+        <scene sceneID="83s-Xx-JMj">
+            <objects>
+                <viewController id="YcS-eJ-nbA" customClass="TimeZoneSetting_AoniViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3F8-PM-UEV"/>
+                        <viewControllerLayoutGuide type="bottom" id="gbS-cH-ixf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ffg-8m-pD3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEY-Ls-uWs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the timezone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSU-o5-2rX">
+                                        <rect key="frame" x="20" y="0.0" width="355" height="40"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="jSU-o5-2rX" secondAttribute="bottom" id="4u1-pA-aRB"/>
+                                    <constraint firstItem="jSU-o5-2rX" firstAttribute="leading" secondItem="NEY-Ls-uWs" secondAttribute="leading" constant="20" id="Ajq-57-MdU"/>
+                                    <constraint firstItem="jSU-o5-2rX" firstAttribute="top" secondItem="NEY-Ls-uWs" secondAttribute="top" id="LtU-6a-bG6"/>
+                                    <constraint firstAttribute="height" constant="40" id="tH0-vZ-ksi"/>
+                                    <constraint firstAttribute="trailing" secondItem="jSU-o5-2rX" secondAttribute="trailing" id="xzr-4t-ydo"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-3Z-jWc">
+                                <rect key="frame" x="0.0" y="40" width="375" height="563"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="60000" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YcS-eJ-nbA" id="iLv-bk-0yO"/>
+                                    <outlet property="delegate" destination="YcS-eJ-nbA" id="8aL-kB-4Zq"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NEY-Ls-uWs" secondAttribute="trailing" id="FhO-yA-Qir"/>
+                            <constraint firstItem="NEY-Ls-uWs" firstAttribute="leading" secondItem="ffg-8m-pD3" secondAttribute="leading" id="YUq-Zt-puO"/>
+                            <constraint firstItem="NEY-Ls-uWs" firstAttribute="top" secondItem="3F8-PM-UEV" secondAttribute="bottom" id="gKc-Nz-52k"/>
+                            <constraint firstItem="gbS-cH-ixf" firstAttribute="top" secondItem="dQS-3Z-jWc" secondAttribute="bottom" id="hv5-gP-gQX"/>
+                            <constraint firstAttribute="trailing" secondItem="dQS-3Z-jWc" secondAttribute="trailing" id="r5i-LO-hag"/>
+                            <constraint firstItem="dQS-3Z-jWc" firstAttribute="leading" secondItem="ffg-8m-pD3" secondAttribute="leading" id="xit-TO-fDC"/>
+                            <constraint firstItem="dQS-3Z-jWc" firstAttribute="top" secondItem="NEY-Ls-uWs" secondAttribute="bottom" id="zIK-5F-Ezs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Time Zone" id="P5y-sR-Rwf">
+                        <barButtonItem key="leftBarButtonItem" image="navBack" id="rAu-1A-GYG">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="Meo-jQ-6ex" kind="unwind" unwindAction="TimeSettingViewController1UnwindSegue:" id="Qki-CK-TKP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableview" destination="dQS-3Z-jWc" id="LhY-wU-d5m"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jDg-o1-dLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Meo-jQ-6ex" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
         </scene>
     </scenes>

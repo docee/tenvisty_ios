@@ -621,7 +621,7 @@
             def = nil;
         }
     }
-    else if(type == IOTYPE_USER_IPCAM_REBOOT_RESP){
+    else if(type == IOTYPE_USER_IPCAM_REBOOT_RESP || type == IOTYPE_USER_IPCAM_REBOOT_SYSTEM_RESP){
         SMsgAVIoctrlResultResp *resp = (SMsgAVIoctrlResultResp*)data;
         if(resp->result == 0){
             self.processState = CAMERASTATE_WILLREBOOTING;

@@ -1712,5 +1712,190 @@ typedef struct
     unsigned char reserved[4];
 }SMsgSetPirSensitivityResp;
 
+
+//11、状态指示灯
+//IOTYPE_USER_IPCAM_SET_ALARMLED_CONTRL_REQ            = 0x40084,    //设置指示灯设置0:off    1:on
+//IOTYPE_USER_IPCAM_SET_ALARMLED_CONTRL_RESP            = 0x40085,
+//IOTYPE_USER_IPCAM_GET_ALARMLED_CONTRL_REQ            = 0x40086,    //获取指示灯状态0:off    1:on
+//IOTYPE_USER_IPCAM_GET_ALARMLED_CONTRL_RESP            = 0x40087,
+typedef struct
+{
+    int led_status;     //1:on 0:off
+} SMsgAVIoctrlSetLedStatusReq, SMsgAVIoctrlGetLedStatusResp;
+
+typedef struct
+{
+    int             result;     //return 0 if succeed
+    unsigned char    reserved[4];
+} SMsgAVIoctrlSetLedStatusResp;
+
+//此版本按照设备本地时间形式交互数据
+//a、录像按日存放，搜索日期目录
+//IOTYPE_USER_IPCAM_AUSDOM_LISTDIR_REQ = 0x50035,
+//IOTYPE_USER_IPCAM_AUSDOM_LISTDIR_RESP = 0x50036,
+typedef struct
+{
+    unsigned short year;    // The number of year.
+    unsigned char month;    // The number of months since January, in the range 1 to 12.
+    unsigned char day;        // The day of the month, in the range 1 to 31.
+}STimeDay1;
+
+typedef struct
+{
+    unsigned int  total;
+    unsigned char endflag;
+    unsigned char count;
+    unsigned char type;
+    // 0、所有录像；1、全时录像；2、报警录像        ENUM_RECORD_TYPE
+    unsigned char res[1];
+    STimeDay1 stTime[0];
+}SMsgAVIoctrlListDirResp;
+
+typedef struct
+{
+    int type;        // 0、所有录像；1、全时录像；2、报警录像        ENUM_RECORD_TYPE
+}SMsgAVIoctrlListDirReq;
+
+//b、搜索某一天的文件
+/*
+ IOTYPE_USER_IPCAM_LISTEVENT_REQ            = 0x0318,
+ ** @struct SMsgAVIoctrlListEventReq
+ */
+typedef struct
+{
+    unsigned int year;
+    unsigned int month;
+    unsigned int day;
+    unsigned char type;        //ENUM_RECORD_TYPE
+    unsigned char res[3];
+}SMsgAVIoctrlListEventReq_Ausdom;
+
+
+typedef struct
+{
+    TUTK_STimeDay stTime;
+    unsigned char event;    //ENUM_EVENTTYPE
+    unsigned char reserved[3];
+}SAvEvent_Ausdom;
+
+/*
+ IOTYPE_USER_IPCAM_LISTEVENT_RESP        = 0x0319,
+ ** @struct SMsgAVIoctrlListEventResp
+ */
+typedef struct
+{
+    unsigned int  channel;        // Camera Index
+    unsigned int  total;        // Total event amount in this search session
+    unsigned char index;        // package index, 0,1,2...;
+    // because avSendIOCtrl() send package up to 1024 bytes one time, you may want split search results to serveral package to send.
+    unsigned char endflag;        // end flag; endFlag = 1 means this package is the last one.
+    unsigned char count;        // how much events in this package
+    unsigned char type;
+    SAvEvent_Ausdom stEvent[0];        // The first memory address of the events in this package
+    //    int videotime[MAX_VIDEO_NUM];  //max is 100
+}SMsgAVIoctrlListEventResp_Ausdom;
+//c、删除文件或目录
+//删除SD文件
+//IOTYPE_USER_IPCAM_RM_FILE_REQ = 0x50044,
+//IOTYPE_USER_IPCAM_RM_FILE_RESP = 0x50045,
+typedef struct
+{
+    unsigned short year;
+    unsigned char month;
+    unsigned char day;
+    unsigned char hour;
+    unsigned char minute;
+    unsigned char second;
+    unsigned char type; // 1 rec , 2 alarm
+}SMsgAVIoctrlRmFileReq;
+
+typedef struct
+{
+    int     result;  //0 ok, -1 erro , -2 no sd card
+    unsigned char   reserved[4];
+}SMsgAVIoctrlRmFileResp;
+
+//删除SD目录
+//IOTYPE_USER_IPCAM_RM_DIRECORY_REQ = 0x50046,
+//IOTYPE_USER_IPCAM_RM_DIRECORY_RESP = 0x50047,
+typedef struct
+{
+    unsigned short year;
+    unsigned char month;
+    unsigned char day;
+    unsigned char type; // 1 rec , 2 alarm
+    unsigned char reserved[3];
+}SMsgAVIoctrlRmDirectoryReq;
+
+typedef struct
+{
+    int result;  //0 ok, -1 erro , -2 no sd card
+    unsigned char reserved[4];
+}SMsgAVIoctrlRmDirectoryResp;
+//18、布防策略
+//V3.0.8以下版本，此布防只关联推送，即报警发生时设备依旧唤醒启动。
+//V3.0.8版本，将关联PIR报警唤醒。
+//IOTYPE_USER_IPCAM_GET_ALARM_TIME_REQ    = 0x50031,
+//IOTYPE_USER_IPCAM_GET_ALARM_TIME_RESP   = 0x50032,
+//IOTYPE_USER_IPCAM_SET_ALARM_TIME_REQ    = 0x50033,
+//IOTYPE_USER_IPCAM_SET_ALARM_TIME_RESP   = 0x50034,
+// 支持布防策略的数量，默认3组
+#define ALARM_SCHED_TIME_NUM    3
+/**
+ * 布防策略
+ */
+typedef struct _sched_time_s
+{
+    unsigned char status;                               // APP是否显示此策略，0：不显示（初始没设置过/删除状态）、1：显示（已设置过）
+    unsigned char enable;                               // 是否启用此策略，0：禁用、1：启用
+    unsigned char start_hour;                           // 开始时间，整型：小时
+    unsigned char start_min;                            // 开始时间，正想：分钟
+    unsigned char stop_hour;                            // 结束时间，整型：小时
+    unsigned char stop_min;                             // 结束时间，正想：分钟
+    unsigned char week[7];                              // 0……6数组元素分别对应：周日……周六，数组元素值：0：关闭、1：打开
+}sched_time_t;
+
+typedef struct
+{
+    int result;                //0 :succeed  -1 : error
+}SMsgAVIoctrlSetAlarmTimeResp;
+
+typedef struct
+{
+    char            enable;
+    // 布防设置开关，-1：不支持、0:关闭布放，即全天PIR侦测、1:打开，根据排程布放
+    sched_time_t    time_info[ALARM_SCHED_TIME_NUM];    // 布防策略
+}SMsgAVIoctrlGetAlarmTimeResp,SMsgAVIoctrlSetAlarmTimeReq;
+
+typedef struct
+{
+    int result;                           //return 0 if succeed
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetAlarmArgResp;
+//19、推送开关设置
+//开关推送设置请求/获取
+//报警推送设置
+//IOTYPE_USER_IPCAM_SET_ALARM_PUSH_EN_REQ     = 0X4009F,
+//IOTYPE_USER_IPCAM_SET_ALARM_PUSH_EN_RESP     = 0X400A0,
+//IOTYPE_USER_IPCAM_GET_ALARM_PUSH_EN_REQ     = 0X400A1,
+//IOTYPE_USER_IPCAM_GET_ALARM_PUSH_EN_RESP     = 0X400A2,
+typedef struct
+{
+    unsigned int channel;     // Camera Index
+    unsigned char reserved[4];
+}SMsgAVIoctrlGetAlarmPushReq;
+
+typedef struct
+{
+    unsigned int push_en;
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetAlarmPushReq, SMsgAVIoctrlGetAlarmPushResp;
+
+typedef struct
+{
+    int result;    // 0: success; otherwise: failed.
+    unsigned char reserved[4];
+}SMsgAVIoctrlSetAlarmPushResp;
+
 //end aoni
 #endif

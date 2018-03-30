@@ -519,7 +519,12 @@
     [self.navigationController pushViewController:test2obj animated:YES];
 }
 - (IBAction)goEventList:(id)sender {
-    [self performSegueWithIdentifier:@"LiveView2EventList" sender:self];
+    if(self.camera.supplier == SUPLLIER_AN){
+        [self performSegueWithIdentifier:@"LiveView2EventList_Aoni" sender:self];
+    }
+    else{
+        [self performSegueWithIdentifier:@"LiveView2EventList" sender:self];
+    }
 }
 - (IBAction)showPreset:(id)sender {
     [_viewPreset setHidden:![_viewPreset isHidden]];
