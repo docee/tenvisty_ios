@@ -16,7 +16,7 @@
 @interface EventCustomSearchSource : NSObject<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,weak) id<EventCustomSearchDelegate> delegate;
-
+@property (nonatomic,assign) NSInteger type;
 -(void)show;
 -(BOOL)toggleShow;
 -(void)dismiss;

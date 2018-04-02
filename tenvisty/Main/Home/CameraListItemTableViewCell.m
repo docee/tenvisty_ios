@@ -16,6 +16,7 @@
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_width_labConnectstate;
 @property (weak, nonatomic) IBOutlet UIView *viewSnapshotMask;
+@property (weak, nonatomic) IBOutlet UIImageView *imgBattery;
 
 @end
 
@@ -95,6 +96,73 @@
         return;
     }
      self.labCameraConnectState.text = self.camera.cameraStateDesc;
+    
+    if(self.camera.batteryTime > 0){
+        [self.imgBattery setHidden:NO];
+        NSString *imgName = nil;
+        if([[NSDate date] timeIntervalSince1970] - self.camera.batteryTime > 10*60){
+           imgName = @"ic_battery_unknown_charging";
+        }
+        else if(self.camera.batteryMode == 0){
+            if(self.camera.batterPercent < 10){
+                imgName = @"ic_battery_alert";
+            }
+            else if(self.camera.batterPercent < 30){
+                imgName = @"ic_battery_20";
+            }
+            else if(self.camera.batterPercent < 40){
+                imgName = @"ic_battery_30";
+            }
+            else if(self.camera.batterPercent < 60){
+                imgName = @"ic_battery_50";
+            }
+            else if(self.camera.batterPercent < 70){
+                imgName = @"ic_battery_60";
+            }
+            else if(self.camera.batterPercent < 90){
+                imgName = @"ic_battery_80";
+            }
+            else if(self.camera.batterPercent < 95){
+                imgName = @"ic_battery_90";
+            }
+            else{
+                imgName = @"ic_battery_full";
+            }
+        }
+        else if(self.camera.batteryMode == 1){
+            imgName = @"ic_battery_no_charging";
+        }
+        else if(self.camera.batteryMode == 2){
+            if(self.camera.batterPercent < 30){
+                imgName = @"ic_battery_20_charging";
+            }
+            else if(self.camera.batterPercent < 40){
+                imgName = @"ic_battery_30_charging";
+            }
+            else if(self.camera.batterPercent < 60){
+                imgName = @"ic_battery_50_charging";
+            }
+            else if(self.camera.batterPercent < 70){
+                imgName = @"ic_battery_60_charging";
+            }
+            else if(self.camera.batterPercent < 90){
+                imgName = @"ic_battery_80_charging";
+            }
+            else if(self.camera.batterPercent < 95){
+                imgName = @"ic_battery_90_charging";
+            }
+            else{
+                imgName = @"ic_battery_full_charging";
+            }
+        }
+        else if(self.camera.batteryMode == 3){
+             imgName = @"ic_battery_full_charging";
+        }
+        [self.imgBattery setImage:[UIImage imageNamed:imgName]];
+    }
+    else{
+        [self.imgBattery setHidden:YES];
+    }
     if(self.camera.isConnecting || self.camera.processState != CAMERASTATE_NONE || self.camera.isWakingUp || (self.camera.supplier == SUPLLIER_UNKNOWN && self.camera.isAuthConnected)){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;

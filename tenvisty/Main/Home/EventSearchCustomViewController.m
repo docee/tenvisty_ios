@@ -21,9 +21,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(self.mode == UIDatePickerModeDate){
+        _datepicker_from.datePickerMode = UIDatePickerModeDate;
+        _datepicker_to.datePickerMode = UIDatePickerModeDate;
+       // [_datepicker_to addTarget:self action:@selector(dateToChanged:) forControlEvents:UIControlEventValueChanged];
+       // [_datepicker_from addTarget:self action:@selector(dateFromChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    else{
+        _datepicker_from.datePickerMode = UIDatePickerModeDateAndTime;
+        _datepicker_to.datePickerMode = UIDatePickerModeDateAndTime;
+    }
     // Do any additional setup after loading the view.
 }
 
+-(void)dateFromChanged:(UIDatePicker*)datePicker{
+    _datepicker_to.minimumDate = [_datepicker_from.date dateByAddingTimeInterval:-7*24*60*60];
+    _datepicker_to.maximumDate = [_datepicker_from.date dateByAddingTimeInterval:+7*24*60*60];
+}
+-(void)dateToChanged:(UIDatePicker*)datePicker{
+    _datepicker_from.minimumDate = [_datepicker_from.date dateByAddingTimeInterval:-7*24*60*60];
+    _datepicker_from.maximumDate = [_datepicker_from.date dateByAddingTimeInterval:+7*24*60*60];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

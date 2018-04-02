@@ -577,11 +577,18 @@
         self.deviceInfo = [[DeviceInfo_TUTK alloc] initWithData:(char*)data size:(int)size];
         if(self.modelName == nil || ![self.modelName isEqualToString:self.deviceInfo.model]){
             self.modelName = self.deviceInfo.model;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [GBase editCamera:(BaseCamera*)self];
-            });
             [self getInitConfig];
         }
+    }
+    else if(type == IOTYPE_USER_IPCAM_GET_BAT_PRAM_RESP){
+        SMsgGetBatPramResp *resp = (SMsgGetBatPramResp*)data;
+        self.batterPercent = resp->bat_percent;
+        self.batteryMode = resp->work_mode;
+        self.batteryTime = [[NSDate date] timeIntervalSince1970];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [GBase editCamera:(BaseCamera*)self];
+        });
+        
     }
     
     
@@ -980,6 +987,9 @@
     }
     if(self.supplier == SUPLLIER_FB){
         [self getTime];
+    }
+    else if(self.supplier == SUPLLIER_AN){
+        [self sendIOCtrlToChannel:0 Type:IOTYPE_USER_IPCAM_GET_BAT_PRAM_REQ Data:(char *)nil DataSize:0];
     }
 }
 

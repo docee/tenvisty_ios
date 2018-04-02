@@ -41,6 +41,7 @@
 -(EventCustomSearchSource*)searchMenu{
     if(!_searchMenu){
         _searchMenu = [[EventCustomSearchSource alloc] init];
+        _searchMenu.type = 1;
     }
     return _searchMenu;
 }
@@ -206,6 +207,7 @@
         if(controller.dateTo&&controller.dateFrom){
             _fromDate = controller.dateFrom;
             _toDate = controller.dateTo;
+            
             [self searchEventFrom:_fromDate To:_toDate];
         }
     }
@@ -254,6 +256,11 @@
 -(void)beginSearch{
     NSDate *now = [NSDate date];
     NSDate *from = [TwsTools zeroOfDateTime:[NSDate date]];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger intervalFrom = [zone secondsFromGMTForDate: from];
+    from = [from  dateByAddingTimeInterval: intervalFrom];
+    NSInteger intervalTo = [zone secondsFromGMTForDate: now];
+    now = [now  dateByAddingTimeInterval: intervalTo];
     [self searchEventFrom:from To:now];
 }
 
@@ -293,7 +300,7 @@
 -(void)doCreateSearchEventList:(NSDate*)from  To:(NSDate*) to{
     [self.listReq removeAllObjects];
 
-    while (to >= from) {
+    while ([to timeIntervalSince1970] >= [from timeIntervalSince1970]) {
         NSCalendar *myCal =[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *dateComponentsFrom = [myCal componentsInTimeZone:[NSTimeZone systemTimeZone] fromDate:from];
         [dateComponentsFrom setHour:0];
@@ -401,18 +408,24 @@
     NSDate *from;
     
     if (index == 0) {
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60)];
+        from = [TwsTools zeroOfDateTime:[NSDate date]];
     }
     else if (index == 1) {
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 12)];
-        
+        from = [NSDate dateWithTimeIntervalSinceNow:- (24 * 60 * 60)];
+       
     }
     else if (index == 2) {
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24)];
+         from = [NSDate dateWithTimeIntervalSinceNow:- (2 * 24 * 60 * 60)];
+       
     }
     else if (index == 3) {
-        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24 * 7)];
+        from = [NSDate dateWithTimeIntervalSinceNow:- (60 * 60 * 24 * 6)];
     }
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger intervalFrom = [zone secondsFromGMTForDate: from];
+    from = [from  dateByAddingTimeInterval: intervalFrom];
+    NSInteger intervalTo = [zone secondsFromGMTForDate: now];
+    now = [now  dateByAddingTimeInterval: intervalTo];
     [self searchEventFrom:from To:now];
     [self.searchMenu toggleShow];
 }
@@ -464,6 +477,10 @@
         controller.camera = self.camera;
         controller.evt = [self.event_list objectAtIndex:[self.tableview indexPathForSelectedRow].row];
         controller.needCreateSnapshot = [self.camera remoteRecordImage: controller.evt.eventTime type:controller.evt.eventType] == nil;
+    }
+    else if([segue.identifier isEqualToString:@"EventList2EventSearchCustom"]){
+        EventSearchCustomViewController *controller = (EventSearchCustomViewController*)segue.destinationViewController;
+        controller.mode = UIDatePickerModeDate;
     }
 }
 

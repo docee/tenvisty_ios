@@ -29,20 +29,39 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableviewcell_eventsearch" forIndexPath:indexPath];
     UILabel *labTitle = [cell.contentView.subviews objectAtIndex:0];
-    if(indexPath.row == 0){
-        labTitle.text = LOCALSTR(@"With an hour");
+    if(self.type == 1){
+        if(indexPath.row == 0){
+            labTitle.text = LOCALSTR(@"Within a day");
+        }
+        else if(indexPath.row == 1){
+            labTitle.text = LOCALSTR(@"Within 2 days");
+        }
+        else if(indexPath.row == 2){
+            labTitle.text = LOCALSTR(@"Within 3 days");
+        }
+        else if(indexPath.row == 3){
+            labTitle.text = LOCALSTR(@"Within a week");
+        }
+        else if(indexPath.row == 4){
+            labTitle.text = LOCALSTR(@"Custom");
+        }
     }
-    else if(indexPath.row == 1){
-        labTitle.text = LOCALSTR(@"With half a day");
-    }
-    else if(indexPath.row == 2){
-        labTitle.text = LOCALSTR(@"With a day");
-    }
-    else if(indexPath.row == 3){
-        labTitle.text = LOCALSTR(@"With a week");
-    }
-    else if(indexPath.row == 4){
-        labTitle.text = LOCALSTR(@"Custom");
+    else{
+        if(indexPath.row == 0){
+            labTitle.text = LOCALSTR(@"Within an hour");
+        }
+        else if(indexPath.row == 1){
+            labTitle.text = LOCALSTR(@"Within half a day");
+        }
+        else if(indexPath.row == 2){
+            labTitle.text = LOCALSTR(@"Within a day");
+        }
+        else if(indexPath.row == 3){
+            labTitle.text = LOCALSTR(@"Within a week");
+        }
+        else if(indexPath.row == 4){
+            labTitle.text = LOCALSTR(@"Custom");
+        }
     }
     [cell setBackgroundColor:Color_Primary];
     return cell;

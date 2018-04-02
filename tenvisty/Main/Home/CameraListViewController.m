@@ -369,7 +369,7 @@
             }
         });
     }
-    else if(type == IOTYPE_USER_IPCAM_DEVINFO_RESP){
+    else if(type == IOTYPE_USER_IPCAM_DEVINFO_RESP || type == IOTYPE_USER_IPCAM_GET_BAT_PRAM_RESP){
           NSInteger row = [GBase getCameraIndex:(BaseCamera*)camera];
         dispatch_async(dispatch_get_main_queue(), ^{
             CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
