@@ -100,7 +100,7 @@
     if(self.camera.batteryTime > 0){
         [self.imgBattery setHidden:NO];
         NSString *imgName = nil;
-        if([[NSDate date] timeIntervalSince1970] - self.camera.batteryTime > 10*60){
+        if(!self.camera.isAuthConnected ||  [[NSDate date] timeIntervalSince1970] - self.camera.batteryTime > 10*60){
            imgName = @"ic_battery_unknown_charging";
         }
         else if(self.camera.batteryMode == 0){

@@ -422,5 +422,30 @@
 -(NSInteger)supplier{
     return self.orginCamera.supplier;
 }
+-(NSString*) modelName{
+    return self.orginCamera.modelName;
+}
+-(void)setModelName:(NSString *)modelName{
+    self.orginCamera.modelName = modelName;
+}
+-(NSInteger) batteryTime{
+    return self.orginCamera.batteryTime;
+}
+-(void)setBatteryTime:(NSInteger)batteryTime{
+    self.orginCamera.batteryTime = batteryTime;
+}
+-(NSInteger) batteryMode{
+    return self.orginCamera.batteryMode;
+}
+-(void)setBatteryMode:(NSInteger)batteryMode{
+    self.orginCamera.batteryMode = batteryMode;
+}
+
+-(NSInteger) batterPercent{
+    return self.orginCamera.batterPercent;
+}
+-(void)setBatteryPercent:(NSInteger)batterPercent{
+    self.orginCamera.batterPercent = batterPercent;
+}
 
 @end
