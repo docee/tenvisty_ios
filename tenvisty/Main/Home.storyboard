@@ -178,6 +178,13 @@
                                                         <action selector="go2LiveView:" destination="BDn-US-UtP" eventType="touchUpInside" id="BGI-lg-cbD"/>
                                                     </connections>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dzW-Q7-nfW">
+                                                    <rect key="frame" x="355" y="45" width="15" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="YEy-hB-zYl"/>
+                                                        <constraint firstAttribute="height" constant="30" id="hig-tu-x4j"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7b-aV-gWV">
                                                     <rect key="frame" x="0.0" y="40" width="375" height="100"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -203,13 +210,6 @@
                                                         <action selector="wakeUpCamera:" destination="BDn-US-UtP" eventType="touchUpInside" id="o9f-yh-l2U"/>
                                                     </connections>
                                                 </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dzW-Q7-nfW">
-                                                    <rect key="frame" x="355" y="45" width="15" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="15" id="YEy-hB-zYl"/>
-                                                        <constraint firstAttribute="height" constant="30" id="hig-tu-x4j"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dzW-Q7-nfW" firstAttribute="top" secondItem="o5f-YR-My6" secondAttribute="top" constant="5" id="0If-ua-Ioa"/>
