@@ -90,18 +90,12 @@
     return self;
 }
 
-
--(void)setState:(NSInteger)state{
-    if(!self.camera){
-        return;
-    }
-     self.labCameraConnectState.text = self.camera.cameraStateDesc;
-    
+-(void)setBatteryState{
     if(self.camera.batteryTime > 0){
         [self.imgBattery setHidden:NO];
         NSString *imgName = nil;
         if(!self.camera.isAuthConnected ||  [[NSDate date] timeIntervalSince1970] - self.camera.batteryTime > 10*60){
-           imgName = @"ic_battery_unknown_charging";
+            imgName = @"ic_battery_unknown_charging";
         }
         else if(self.camera.batteryMode == 0){
             if(self.camera.batterPercent < 10){
@@ -156,13 +150,22 @@
             }
         }
         else if(self.camera.batteryMode == 3){
-             imgName = @"ic_battery_full_charging";
+            imgName = @"ic_battery_full_charging";
         }
         [self.imgBattery setImage:[UIImage imageNamed:imgName]];
     }
     else{
         [self.imgBattery setHidden:YES];
     }
+}
+
+-(void)setState:(NSInteger)state{
+    if(!self.camera){
+        return;
+    }
+     self.labCameraConnectState.text = self.camera.cameraStateDesc;
+    
+    [self setBatteryState];
     if(self.camera.isConnecting || self.camera.processState != CAMERASTATE_NONE || self.camera.isWakingUp || (self.camera.supplier == SUPLLIER_UNKNOWN && self.camera.isAuthConnected)){
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;

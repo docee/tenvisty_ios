@@ -52,7 +52,7 @@
     if(!_listItems){
         NSArray *sec1 = [[NSArray alloc] initWithObjects:
                          [ListImgTableViewCellModel initObj:@"ic_sens" title:LOCALSTR(@"Sensitivity Setting") showValue:YES value:nil viewId:TableViewCell_ListImg],
-                         [ListImgTableViewCellModel initObj:@"ic_push" title:LOCALSTR(@"Alarm Push") showValue:YES value:self.camera.remoteNotifications >0?@"1":@"0" viewId:TableViewCell_Switch],
+                         [ListImgTableViewCellModel initObj:@"ic_push2" title:LOCALSTR(@"Alarm Push") showValue:YES value:self.camera.remoteNotifications >0?@"1":@"0" viewId:TableViewCell_Switch],
                          
                          nil];
         _listItems = [[NSArray alloc] initWithObjects:sec1, nil];

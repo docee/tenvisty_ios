@@ -285,6 +285,7 @@
     _toDate = to;
   
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     [formatter setDateFormat:@"yyyy/MM/dd"];
     if([[formatter stringFromDate:_fromDate] isEqualToString:[formatter stringFromDate:_toDate]]){
         _labSearchTime.text = [formatter stringFromDate:_fromDate];

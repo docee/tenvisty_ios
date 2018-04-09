@@ -14,7 +14,7 @@
 {
     CGSize imgViewSize,titleSize,btnSize;
     UIEdgeInsets imageViewEdge,titleEdge;
-    CGFloat heightSpace = 15.0f;
+    CGFloat heightSpace = 5.0f;
     
     //设置按钮内边距
     imgViewSize = btn.imageView.bounds.size;

@@ -51,7 +51,7 @@
 -(NSArray *)listItems{
     if(!_listItems){
        NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_timezone" title:LOCALSTR(@"Time Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
-                        [ListImgTableViewCellModel initObj:@"ic_systemsetting" title:LOCALSTR(@"Audio Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
+                        [ListImgTableViewCellModel initObj:@"ic_setting_audio" title:LOCALSTR(@"Audio Setting") showValue:NO value:nil viewId:TableViewCell_ListImg],
         [ListImgTableViewCellModel initObj:@"ic_reverse" title:LOCALSTR(@"Mirror") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_inverse" title:LOCALSTR(@"Flip") showValue:YES value:nil viewId:TableViewCell_Switch],
         [ListImgTableViewCellModel initObj:@"ic_sd" title:LOCALSTR(@"SD Card") showValue:NO value:nil viewId:TableViewCell_ListImg],

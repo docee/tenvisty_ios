@@ -14,6 +14,7 @@
 #import <IOTCamera/Camera.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import "BaseCamera.h"
+#import "DeviceInfo_TUTK.h"
 
 @interface MyCamera : Camera
 <CameraDelegate,BaseCameraProtocol>
@@ -34,6 +35,7 @@
 @property (nonatomic,assign) NSInteger upgradePercent;
 @property (nonatomic,assign) CGFloat videoRatio;
 @property (nonatomic,strong) BaseCamera *baseCamera;
+@property (nonatomic,strong) DeviceInfo_TUTK *deviceInfo;
 
 //  ---- 传感器 ---- //
 

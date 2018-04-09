@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  tenvisty
+
+  Created by Tenvis on 2017/12/22.
+  Copyright © 2017年 Tenvis. All rights reserved.
+*/
+
+"Etc/GMT-12" = "International date change line west 12 district";
+"Pacific/Apia" = "Midway, Samoa";
+"Pacific/Honolulu" = "Hawaii";
+"America/Anchorage" = "Alaska";
+"America/Los_Angeles" = "Pacific Time (US and Canada)";
+"America/Denver" = "Chihuahua, La Paz, Mazatlan";
+"America/Tegucigalpa" = "Mountain time (US and Canada)";
+"America/Phoenix" = "Arizona";
+"America/Saskatchewan"= "Saskatchewan";
+"America/Mexico_City" = "Guadalajara, Mexico City, Monterrey";
+"America/Chicago" = "Central time (US and Canada)";
+"America/Costa_Rica" = "Costa Rica";
+"America/Indianapolis" = "Indiana";
+"America/New_York" = "Eastern Time (US and Canada)";
+"America/Bogota" = "Bogota, Lima, Quito";
+"America/Caracas" = "Caracas";
+"America/Santiago" = "Santiago";
+"America/Montreal" = "Atlantic Time (Canada)";
+"America/St_Johns" = "Newfoundland";
+"America/Thule" = "Montevideo";
+"America/Buenos_Aires" = "Buenos Aires";
+"America/Sao_Paulo" = "Sao Paulo";
+"Atlantic/South_Georgia" = "In the Atlantic";
+"Atlantic/Cape_Verde" = "Cape Verde Islands";
+"Atlantic/Azores" = "The Azores";
+"Europe/Dublin" = "Greenwich Mean Time: Dublin, London, Lisbon";
+"Africa/Casablanca" = "Casablanca";
+"Europe/Amsterdam" = "Amsterdam, Paris, Berlin, Rome, Madrid, Stockholm";
+"Europe/Belgrade" = "Belgrade, Bratislava, Budapest, Ljubljana";
+"Europe/Brussels" = "Brussels, Copenhagen, Madrid, Paris";
+"Europe/Warsaw" = "Sarajevo, Skopje, Warsaw, Zagreb";
+"Africa/Lagos" = "West Africa";
+"Europe/Athens" = "Amman";
+"Europe/Bucharest" = "Athens, Bucharest, Istanbul";
+"Africa/Cairo" = "Cairo";
+"Africa/Harare" = "Harare, Pretoria";
+"Europe/Helsinki" = "Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius";
+"Asia/Jerusalem" = "Jerusalem";
+"Asia/Baghdad" = "Baghdad";
+"Asia/Kuwait" = "Kuwait, Riyadh";
+"Europe/Moscow" = "Moscow";
+"Africa/Nairobi" = "Nairobi";
+"Asia/Tehran" = "Tehran";
+"Asia/Dubai" = "Abu Dhabi, Muscat";
+"Asia/Baku" = "Baku";
+"Asia/Kabul" = "Kabul";
+"Asia/Yekaterinburg" = "Yekaterinburg";
+"Asia/Karachi" = "Islamabad, Karachi";
+"Asia/Calcutta" = "Calcutta, Mumbai, Madras, New Delhi";
+"Asia/Katmandu" = "Katmandu";
+"Asia/Novosibirsk" = "Novosibirsk";
+"Asia/Dhaka" = "Dhaka";
+"Asia/Astana" = "Astana";
+"Asia/Rangoon" = "Rangoon";
+"Asia/Bangkok" = "Bangkok, Hanoi, Jakarta";
+"Asia/Krasnoyarsk" = "Krasnoyarsk";
+"Asia/Hong_Kong" = "Beijing, Chongqing, Hong Kong Special Administrative Region, Urumqi";
+"Asia/Irkutsk" = "Irkutsk";
+"Asia/Kuala_Lumpur" = "Kuala Lumpur, Singapore";
+"Australia/Perth" = "Perth";
+"Asia/Taipei" = "Taipei";
+"Asia/Tokyo" = "Osaka, Sapporo, Tokyo";
+"Asia/Seoul" = "Seoul";
+"Asia/Yakutsk" = "Yakutsk";
+"Australia/Adelaide" = "Adelaide";
+"Australia/Brisbane" = "Brisbane";
+"Australia/Sydney" = "Canberra, Melbourne, Sydney";
+"Pacific/Guam" = "Guam, Port Moresby";
+"Australia/Hobart" = "Hobart";
+"Asia/Vladivostok" = "Vladivostok";
+"Asia/Magadan" = "Magadan";
+"Pacific/Auckland"= "Auckland, Wellington";
+"Pacific/Fiji" = "Fiji";
+"Pacific/Tongatapu" = "Tongatapu";
+
+"Detection Alarm" = "移动侦测报警";

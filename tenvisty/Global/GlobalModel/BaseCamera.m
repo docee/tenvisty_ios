@@ -203,7 +203,7 @@
     else{
         self.remoteNotifications = 0;
     }
-    [GBase editCamera:(BaseCamera*)self];
+    [GBase editCamera:self];
     //[self.orginCamera clearRemoteNotifications];
 }
 

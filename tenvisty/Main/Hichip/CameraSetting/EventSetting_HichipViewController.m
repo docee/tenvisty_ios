@@ -44,8 +44,8 @@
 -(NSArray *)listItems{
     if(!_listItems){
         NSArray *sec1 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_sens" title:LOCALSTR(@"Sensitivity Setting") showValue:YES value:nil viewId:TableViewCell_ListImg],nil];
-        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_push" title:LOCALSTR(@"Alarm Push") showValue:YES value:self.camera.remoteNotifications>0?@"1":@"0" viewId:TableViewCell_Switch],nil];
-        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_othersetting" title:LOCALSTR(@"SD-Card Recording") showValue:YES value:nil viewId:TableViewCell_Switch],nil];
+        NSArray *sec2 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_push2" title:LOCALSTR(@"Alarm Push") showValue:YES value:self.camera.remoteNotifications>0?@"1":@"0" viewId:TableViewCell_Switch],nil];
+        NSArray *sec3 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_record_alarm" title:LOCALSTR(@"Alarm Recording") showValue:YES value:nil viewId:TableViewCell_Switch],nil];
         NSArray *sec4 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_email" title:LOCALSTR(@"Email Alert") showValue:YES value:nil viewId:TableViewCell_ListImg],nil];
         NSArray *sec5 = [[NSArray alloc] initWithObjects:[ListImgTableViewCellModel initObj:@"ic_ftp_pic" title:LOCALSTR(@"Save Picture to FTP Server") showValue:YES value:nil viewId:TableViewCell_Switch],
             [ListImgTableViewCellModel initObj:@"ic_ftp_video" title:LOCALSTR(@"Save Video to FTP Server") showValue:YES value:nil viewId:TableViewCell_Switch],

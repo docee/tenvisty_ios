@@ -13,7 +13,6 @@
 #import <IOTCamera/AVFrameInfo.h>
 #import "TimeZoneModel.h"
 #import "Event.h"
-#import "DeviceInfo_TUTK.h"
 
 @interface MyCamera()<CameraDelegate>{
     BOOL isWakingUp;
@@ -26,7 +25,6 @@
 @property (nonatomic, strong) NSString *pushToken;
 @property (nonatomic,assign) CGFloat vRatio;
 @property (nonatomic,strong) TimeZoneModel *timezone;
-@property (nonatomic,strong) DeviceInfo_TUTK *deviceInfo;
 @end
 
 @implementation MyCamera
@@ -422,7 +420,7 @@
     NSLog(@"setRemoteNotification %@ %@ %s %d",[self class],[self.cameraDelegate class],__func__,__LINE__);
     if(self.remoteNotifications > 0){
         self.remoteNotifications++;
-        [GBase editCamera:(BaseCamera*)self];
+        [GBase editCamera:self.baseCamera];
         if(self.cameraDelegate != nil && [self.cameraDelegate respondsToSelector:@selector(camera:_didReceiveRemoteNotification:EventTime:)]){
             [self.cameraDelegate camera:self.baseCamera _didReceiveRemoteNotification:type EventTime:time];
         }
@@ -437,7 +435,7 @@
     else{
         self.remoteNotifications = 0;
     }
-    [GBase editCamera:(BaseCamera*)self];
+    [GBase editCamera:self.baseCamera];
 }
 
 #pragma mark - CameraDelegate Methods
@@ -477,8 +475,13 @@
             self.processState = CAMERASTATE_RESETING;
             _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
             _rebootTimeout = 120;
-            
         }
+        else if(self.processState == CAMERASTATE_WILLUPGRADING){
+            self.processState = CAMERASTATE_UPGRADING;
+            _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            _rebootTimeout = 180;
+        }
+        
         if([NSDate timeIntervalSinceReferenceDate] - _beginRebootTime > _rebootTimeout){
             if(_processState != CAMERASTATE_NONE){
                 _processState = CAMERASTATE_NONE;
@@ -540,7 +543,7 @@
         if(self.processState == CAMERASTATE_RESETING){
             LOG(@"%@ %@ %s %d %ld",[self uid],[self class],__func__,__LINE__,(long)status);
             [self setPwd:DEFAULT_PASSWORD];
-            [GBase editCamera:(BaseCamera*)self];
+            [GBase editCamera:self.baseCamera];
             [self start:0];
         }
     }
@@ -586,9 +589,17 @@
         self.batteryMode = resp->work_mode;
         self.batteryTime = [[NSDate date] timeIntervalSince1970];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [GBase editCamera:(BaseCamera*)self];
+            [GBase editCamera:self.baseCamera];
         });
         
+    }
+    else if(type == IOTYPE_USER_IPCAM_REMOTE_UPGRADE_RESP){
+        SMsgAVIoctrlRemoteUpgradeResp *resp = (SMsgAVIoctrlRemoteUpgradeResp*)data;
+        if(resp->result == 0 || resp->result == -1){
+            _beginRebootTime = [NSDate timeIntervalSinceReferenceDate];
+            _rebootTimeout = 120;
+            self.processState = CAMERASTATE_WILLUPGRADING;
+        }
     }
     
     
@@ -781,8 +792,8 @@
     NSString *uid = self.uid;
     NSString *token2 = self.pushToken;
     NSString *token1 = @"";
-    NSString *sign = [TwsTools createSign:@[appid,key,uid,token1,token2,timestamp]];
-    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=%@&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios",token1,token2,uid,timestamp,appid,sign);
+    NSString *sign = [TwsTools createSign:@[appid,key,uid,token1,token2,timestamp,self.modelName]];
+    NSString *url =FORMAT(@"http://push.tenvis.com:8001/api/push/open?token1=%@&token2=%@&uid=%@&timestamp=%@&appid=%@&sign=%@&platform=ios&feature=%@",token1,token2,uid,timestamp,appid,sign,self.modelName);
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
        NSInteger respCode = -1;
        NSString *result = [self getHttpResp:url];
@@ -794,7 +805,7 @@
             if(numberCode){
                 if(numberCode.intValue == 0){
                     self.remoteNotifications = 1;
-                    [GBase editCamera:(BaseCamera*)self];
+                    [GBase editCamera:self.baseCamera];
                 }
                 respCode = numberCode.intValue;
             }
@@ -854,7 +865,7 @@
             if(numberCode){
                 if(numberCode.intValue == 0){
                     self.remoteNotifications = 0;
-                    [GBase editCamera:(BaseCamera*)self];
+                    [GBase editCamera:self.baseCamera];
                 }
                 respCode = numberCode.intValue;
             }
@@ -926,13 +937,13 @@
 
 -(CGFloat)videoRatio{
     if(!_vRatio){
-        _vRatio = [GBase getCameraVideoRatio:(BaseCamera*)self];
+        _vRatio = [GBase getCameraVideoRatio:self.baseCamera];
     }
     return _vRatio;
 }
 -(void)setVideoRatio:(CGFloat)videoRatio{
     _vRatio = videoRatio;
-    [GBase setCameraVideoRatio:(BaseCamera*)self ratio:videoRatio];
+    [GBase setCameraVideoRatio:self.baseCamera ratio:videoRatio];
 }
 -(BOOL)getCommandFunction:(int)cmd{
     return YES;

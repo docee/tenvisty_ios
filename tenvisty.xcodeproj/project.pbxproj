@@ -157,6 +157,7 @@
 		898D8BB01FE0F66600062F04 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BA91FE0F66600062F04 /* FMDatabaseQueue.m */; };
 		898D8BB11FE0F66600062F04 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BAC1FE0F66600062F04 /* FMResultSet.m */; };
 		898D8BB41FE0F75B00062F04 /* GBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 898D8BB31FE0F75B00062F04 /* GBase.m */; };
+		8997B7412077043A00ABA35C /* UpgradeModel_Aoni.m in Sources */ = {isa = PBXBuildFile; fileRef = 8997B7402077043A00ABA35C /* UpgradeModel_Aoni.m */; };
 		899A90512064A4F5003F634C /* AoniWiFiConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 899A90502064A4F5003F634C /* AoniWiFiConfig.m */; };
 		899A90562064D6F2003F634C /* libcooee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 899A90542064D6F2003F634C /* libcooee.a */; };
 		899A90572064D6F2003F634C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 899A90552064D6F2003F634C /* libcrypto.a */; };
@@ -292,6 +293,9 @@
 		8900738D1FF4AC3800FB36B1 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		8905CD2C207B5D8C004AA3F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		8905CD2D207B5D8C004AA3F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		8905CD2E207B5D8C004AA3F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		890B406D1FAFF9FE00C1061A /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		890B406E1FAFF9FE00C1061A /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		890B40701FAFFA3600C1061A /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -569,6 +573,8 @@
 		898D8BAC1FE0F66600062F04 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		898D8BB21FE0F75B00062F04 /* GBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GBase.h; sourceTree = "<group>"; };
 		898D8BB31FE0F75B00062F04 /* GBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBase.m; sourceTree = "<group>"; };
+		8997B73F2077043A00ABA35C /* UpgradeModel_Aoni.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeModel_Aoni.h; sourceTree = "<group>"; };
+		8997B7402077043A00ABA35C /* UpgradeModel_Aoni.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeModel_Aoni.m; sourceTree = "<group>"; };
 		899A904F2064A4F5003F634C /* AoniWiFiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AoniWiFiConfig.h; sourceTree = "<group>"; };
 		899A90502064A4F5003F634C /* AoniWiFiConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AoniWiFiConfig.m; sourceTree = "<group>"; };
 		899A90532064D6F2003F634C /* cooee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cooee.h; sourceTree = "<group>"; };
@@ -1921,6 +1927,8 @@
 				89AD33C02029B9AF00B4520A /* DeviceInfoExt.m */,
 				89AD33C12029B9AF00B4520A /* SetDownload.h */,
 				89AD33C22029B9AF00B4520A /* SetDownload.m */,
+				8997B73F2077043A00ABA35C /* UpgradeModel_Aoni.h */,
+				8997B7402077043A00ABA35C /* UpgradeModel_Aoni.m */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -2764,6 +2772,7 @@
 				en,
 				Base,
 				fr,
+				"zh-Hans",
 			);
 			mainGroup = 894D7E401FAB01D900C58BB2;
 			productRefGroup = 894D7E4A1FAB01D900C58BB2 /* Products */;
@@ -2845,6 +2854,7 @@
 				ED3E88B81FE6C012006754E8 /* UIDevice+TFDevice.m in Sources */,
 				8989EC381FF262CE004989A9 /* PhotoBroswerViewController.m in Sources */,
 				890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */,
+				8997B7412077043A00ABA35C /* UpgradeModel_Aoni.m in Sources */,
 				89D2B4EE1FDF8B9800639DD3 /* AddDeviceWirelessSettingViewController.m in Sources */,
 				896BA3D01FD9257600EE31AB /* ImageCollectionViewController.m in Sources */,
 				ED9DD5F82018E03A00C3C2CF /* HyperlinksButton.m in Sources */,
@@ -3043,6 +3053,7 @@
 			children = (
 				894D7E561FAB01D900C58BB2 /* Base */,
 				89A7E9331FECB2CC00F12BFF /* fr */,
+				8905CD2C207B5D8C004AA3F0 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3052,6 +3063,7 @@
 			children = (
 				89A7E93A1FECB30B00F12BFF /* en */,
 				89A7E93C1FECB31A00F12BFF /* fr */,
+				8905CD2E207B5D8C004AA3F0 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3060,6 +3072,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				ED040F6D1FF3F19500D2DD19 /* Base */,
+				8905CD2D207B5D8C004AA3F0 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

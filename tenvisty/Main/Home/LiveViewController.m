@@ -69,6 +69,10 @@
 @property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *constraint_bottom_videowrapper;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnPreset;
+@property (weak, nonatomic) IBOutlet UIButton *btnTalk_port;
+
 @end
 
 @implementation LiveViewController
@@ -117,6 +121,7 @@
     self.scrollviewVideo.contentMode = UIViewContentModeScaleAspectFit;
     self.scrollviewVideo.contentSize = self.videoMonitor.frame.size;
     [self resizeMonitor:self.camera.videoRatio];
+    [self checkFunction];
 }
 
 #pragma mark - ScrollView Delegate
@@ -457,7 +462,13 @@
     
     [_labRecordTime setText:[NSString stringWithFormat:@"%@:%@",[NSString stringWithFormat:minute>9?@"%d":@"0%d",minute],[NSString stringWithFormat:second>9?@"%d":@"0%d",second]]];
 }
-
+-(void)checkFunction{
+    [_btnListen_land setHidden:![self.camera hasListen]];
+    [_btnListen_port setHidden:![self.camera hasListen]];
+    [_btnTalk_port setHidden:![self.camera hasListen]];
+    
+    [_btnPreset setHidden:![self.camera hasPTZ]];
+}
 - (IBAction)doFullScreen:(id)sender {
     [self rotateOrientation:UIInterfaceOrientationLandscapeLeft];
     [UIDevice switchNewOrientation:UIInterfaceOrientationLandscapeRight];

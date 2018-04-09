@@ -397,7 +397,7 @@
         else if(self.isWrongPassword){
             if(self.processState == CAMERASTATE_RESETING){
                 [self setPwd:DEFAULT_PASSWORD];
-                [GBase editCamera:(BaseCamera*)self];
+                [GBase editCamera:self.baseCamera];
                 [self start];
             }
         }

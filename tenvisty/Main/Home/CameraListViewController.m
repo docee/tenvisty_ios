@@ -300,7 +300,7 @@
 -(void)showChangePasswordStrict:(BaseCamera*)camera{
     if(!isShowingModifyPassword){
         isShowingModifyPassword = YES;
-        [TwsTools presentAlertMsg:self message: FORMAT(LOCALSTR(@"Your camera [%@] uses default password, please change the password for security."),((BaseCamera*)camera).nickName) actionDefaultBlock:^{
+        [TwsTools presentAlertMsg:self message: FORMAT(LOCALSTR(@"Your camera [%@] uses default password, please change the password for security."),camera.nickName) actionDefaultBlock:^{
             isShowingModifyPassword = NO;
             UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:[self getSettingStoryboardName:camera] bundle:nil];
             BaseTableViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"storyboard_changcamerapassword"];  //test2为viewcontroller的StoryboardId

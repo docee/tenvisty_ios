@@ -1897,5 +1897,27 @@ typedef struct
     unsigned char reserved[4];
 }SMsgAVIoctrlSetAlarmPushResp;
 
+//OTA升级固件相关
+//IOTYPE_USER_IPCAM_REMOTE_UPGRADE_RESP   = 0X6008F,
+
+typedef struct
+{
+    char new_version[64];  //即将升级的产品版本号
+    char url_parth[128];    //升级文件存放的服务器地址
+}SMsgAVIoctrlRemoteUpgradeReq;
+
+typedef struct
+{
+    int result;   //0 : 可以升级 1:当前已经是最新版本，无需升级   -1:正在升级中
+    unsigned char reserved[4];
+}SMsgAVIoctrlRemoteUpgradeResp;
+
+//IOTYPE_USER_IPCAM_UPGRADE_PROGRESS_REQ  = 0X60090,
+//IOTYPE_USER_IPCAM_UPGRADE_PROGRESS_RESP  = 0X60091,
+typedef struct
+{
+    int progress_value; //升级进度 :0~100  表示升级进度   -1:正在升级中
+    char reserv[4]; //保留
+}SMsgAVIoctrlProgressResp;
 //end aoni
 #endif

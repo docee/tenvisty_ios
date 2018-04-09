@@ -14,6 +14,7 @@
 @property (nonatomic, assign) unsigned int total;
 @property (nonatomic,strong) NSString *model;
 @property (nonatomic,strong) NSString *vendor;
+@property (nonatomic,strong) NSString *fmVersion;
 
 - (id)initWithData:(char *)data size:(int)size;
 @end

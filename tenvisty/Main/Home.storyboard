@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -203,7 +204,8 @@
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcI-ig-1Ze">
                                                     <rect key="frame" x="0.0" y="40" width="375" height="100"/>
-                                                    <state key="normal" title="tap to wake up" image="btn_reconnect">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <state key="normal" title="tap to wake up" image="btn_wakeup">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -1499,11 +1501,13 @@
                     <connections>
                         <outlet property="btnListen_land" destination="we4-Y2-7c1" id="0AN-CF-onS"/>
                         <outlet property="btnListen_port" destination="Jcf-Ud-PAY" id="v5r-Nx-Nvi"/>
+                        <outlet property="btnPreset" destination="fhj-bf-m19" id="1fx-zf-fZo"/>
                         <outlet property="btnRecord_land" destination="rJ8-Hf-4xs" id="t4r-GJ-cWj"/>
                         <outlet property="btnRecord_port" destination="Z4V-Zq-vxw" id="o1b-XI-np3"/>
                         <outlet property="btnShowSwitchQuality_land" destination="orD-Hb-W61" id="fx9-Wp-iZe"/>
                         <outlet property="btnShowSwitchQuality_port" destination="ChE-Oy-vbq" id="u4g-Ra-Vur"/>
                         <outlet property="btnTalk_land" destination="4kE-U2-S3h" id="dJt-Ui-ePX"/>
+                        <outlet property="btnTalk_port" destination="d0F-rM-YlL" id="oDp-Cu-Y2y"/>
                         <outlet property="connectStatus_port" destination="2Di-zb-hug" id="uaA-SZ-9xk"/>
                         <outlet property="constraint_bottom_videowrapper" destination="Wsc-W6-cAa" id="B3w-4i-P0j"/>
                         <outlet property="constraint_bottom_viewtoolbarbottom" destination="3dU-H0-yll" id="MGM-vB-7gx"/>
@@ -1531,6 +1535,7 @@
                         <outlet property="viewToolbarBottom" destination="6pH-cP-QwW" id="HTj-yg-DdE"/>
                         <outlet property="viewToolbarTop" destination="Ubj-6M-Oic" id="osr-wa-xXe"/>
                         <segue destination="KYR-hL-4XR" kind="show" identifier="LiveView2EventList" id="wsG-cn-sSa"/>
+                        <segue destination="CGF-yc-xZl" kind="show" identifier="LiveView2EventList_Aoni" id="zHK-JC-grH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWz-Cm-f6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3312,6 +3317,7 @@
         <image name="btn_scan_flash_off_nor" width="43" height="45"/>
         <image name="btn_scan_flash_on_nor" width="43" height="45"/>
         <image name="btn_search_trans" width="38" height="45"/>
+        <image name="btn_wakeup" width="40" height="40"/>
         <image name="configwifi_note" width="335" height="132"/>
         <image name="configwifi_setting" width="335" height="279"/>
         <image name="ethnet_page" width="230" height="75"/>
@@ -3335,15 +3341,16 @@
         <image name="wifi_page" width="230" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zHK-JC-grH"/>
         <segue reference="5hR-ki-RRl"/>
         <segue reference="EX6-uk-LQP"/>
         <segue reference="DpT-VP-pBt"/>
-        <segue reference="zSX-HR-9iJ"/>
+        <segue reference="JdR-Cy-kRK"/>
         <segue reference="7i4-VV-h0I"/>
         <segue reference="eUF-Gt-E62"/>
-        <segue reference="Ekd-dn-ODp"/>
-        <segue reference="APm-Wv-oAf"/>
-        <segue reference="Y28-Yq-DHg"/>
+        <segue reference="wsG-cn-sSa"/>
+        <segue reference="wkI-hP-L0S"/>
+        <segue reference="SOf-2T-VCX"/>
         <segue reference="xAs-AT-dZ3"/>
     </inferredMetricsTieBreakers>
 </document>

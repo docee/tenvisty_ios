@@ -20,9 +20,6 @@
     NSInteger updateState;
     NSInteger resetState;
     NSInteger rebootState;
-    NSString *accCustomTypeVersion;
-    NSString *accVendorTypeVersion;
-    NSString *accSystemTypeVersion;
 }
 
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
@@ -223,6 +220,7 @@
             break;
     }
 }
+
 -(void) requestOnlineVersion {
     
     //20160706  更换新的服务器地址以及新格式json数据
