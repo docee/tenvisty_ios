@@ -30,6 +30,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Audio Setting");
     [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
     [self doGetAudioSetting];
 }

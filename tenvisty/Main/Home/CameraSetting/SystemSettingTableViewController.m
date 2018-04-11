@@ -20,7 +20,10 @@
     NSString *accVendorTypeVersion;
     NSString *accSystemTypeVersion;
 }
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *btnReboot;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *btnUpdate;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *btnReset;
 @property (nonatomic,copy) dispatch_block_t timeoutTask;
 @property (nonatomic,strong) MyCamera *myCamera;
 @end
@@ -71,6 +74,10 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"System Setting");
+    [self.btnReboot setText:LOCALSTR(@"Reboot")];
+    [self.btnReset setText:LOCALSTR(@"Reset")];
+    [self.btnUpdate setText:LOCALSTR(@"Check New Firmware")];
     self.myCamera = (MyCamera*)self.camera.orginCamera;
     updateState = -1;
     resetState = -1;
@@ -200,7 +207,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     });
-    dispatch_block_cancel(_timeoutTask);
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
     if(systemTypeVersion == nil || systemCheck == nil|| webCheck == nil|| usrCheck == nil|| customTypeVersion == nil|| customTypeCheck == nil|| vendorTypeVersion == nil|| vendorTypeCheck == nil){
         [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
         return;
@@ -210,7 +220,8 @@
         if([systemTypeVersion compare:accSystemTypeVersion] >0 || [customTypeVersion compare:accCustomTypeVersion] >0 || [vendorTypeVersion compare:accVendorTypeVersion]>0 ){
             [TwsTools presentAlertTitle:self title:LOCALSTR(@"Prompt") message:LOCALSTR(@"new firmware is available, update?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
                 [self upgradeFM:systemTypeVersion systemCheck:systemCheck webCheck:webCheck userCheck:usrCheck customTypeVersion:customTypeVersion customTypeCheck:customTypeCheck vendorTypeVersion:vendorTypeVersion vendorTypeCheck:vendorTypeCheck];
-            } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+            } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+            }];
         }
         else{
             [TwsTools presentAlertMsg:self message:LOCALSTR(@"It is the latest version already")];
@@ -247,17 +258,24 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     //reset
     if(indexPath.section == 0){
         [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Setup data will be initialized. Are you sure to reset?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
             [self doReset];
-        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+        }];
     }
     //reboot
     else if(indexPath.section == 1){
         [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to reboot camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
             [self doReboot];
-        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+        }];
     }
     //check new firmware
     else if(indexPath.section == 2){

@@ -129,7 +129,13 @@
     if(indexPath.section == 0){
         [TwsTools presentAlertTitle:self title:LOCALSTR(@"Warning") message:LOCALSTR(@"Are you sure to reboot camera?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
             [self doReboot];
-        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+        } defaultActionStyle:UIAlertActionStyleDestructive actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
+            [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+        }];
     }
     else if(indexPath.section == 1){
         [self doGetAccFmInfo];\
@@ -175,11 +181,11 @@
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             SMsgAVIoctrlRemoteUpgradeResp *resp = (SMsgAVIoctrlRemoteUpgradeResp*)data;
             //upgrading...
+            if(_timeoutTask != nil){
+                dispatch_block_cancel(_timeoutTask);
+                _timeoutTask = nil;
+            }
             if(resp->result == 0){
-                if(_timeoutTask != nil){
-                    dispatch_block_cancel(_timeoutTask);
-                    _timeoutTask = nil;
-                }
                 updateState =1;
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
@@ -534,11 +540,18 @@
     if (url_ != nil) {
         _download.url = url_;
     }
-    
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    if(_timeoutTask != nil){
+        dispatch_block_cancel(_timeoutTask);
+        _timeoutTask = nil;
+    }
     LOG(@">>> _download.sFileName:%@", _download.url);
     [TwsTools presentAlertTitle:self title:LOCALSTR(@"Prompt") message:LOCALSTR(@"new firmware is available, update?") alertStyle:UIAlertControllerStyleAlert actionDefaultTitle:LOCALSTR(@"OK") actionDefaultBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(REBOOT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
+        [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
         [self doStartUpgrade];
-    } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:nil];
+    } actionCancelTitle:LOCALSTR(@"Cancel") actionCancelBlock:^{
+    }];
     
 }
 

@@ -1,0 +1,297 @@
+
+/* Class = "UILabel"; text = "tap to add camera"; ObjectID = "0kP-BJ-mYi"; */
+"0kP-BJ-mYi.text" = "tap to add camera";
+
+/* Class = "UILabel"; text = "Camera Name"; ObjectID = "0uo-o7-fYX"; */
+"0uo-o7-fYX.text" = "Camera Name";
+
+/* Class = "UINavigationItem"; title = "Playback"; ObjectID = "3UZ-6b-tz9"; */
+"3UZ-6b-tz9.title" = "Playback";
+
+/* Class = "UILabel"; text = "Wireless Installation"; ObjectID = "4Xz-wj-TXB"; */
+"4Xz-wj-TXB.text" = "Wireless Installation";
+
+/* Class = "UINavigationItem"; title = "Search Camera"; ObjectID = "4jf-TI-uMJ"; */
+"4jf-TI-uMJ.title" = "Search Camera";
+
+/* Class = "UILabel"; text = "18:40:48"; ObjectID = "4lT-Jm-7PK"; */
+"4lT-Jm-7PK.text" = "18:40:48";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "5Po-f8-pRK"; */
+"5Po-f8-pRK.normalTitle" = "4";
+
+/* Class = "UILabel"; text = "Add camera by Ethernet cable.\n(Only support by Ethernet port device)"; ObjectID = "5hQ-W6-ayC"; */
+"5hQ-W6-ayC.text" = "Add camera by Ethernet cable.\n(Only support by Ethernet port device)";
+
+/* Class = "UILabel"; text = "18:40:48"; ObjectID = "70d-P0-FNg"; */
+"70d-P0-FNg.text" = "18:40:48";
+
+/* Class = "UILabel"; text = "LAN Search"; ObjectID = "8i8-KU-5vd"; */
+"8i8-KU-5vd.text" = "LAN Search";
+
+/* Class = "UINavigationItem"; title = "View Event"; ObjectID = "96q-Sa-JBn"; */
+"96q-Sa-JBn.title" = "View Event";
+
+/* Class = "UILabel"; text = "Configuring Wi-Fi, please wait..."; ObjectID = "99k-sP-KYz"; */
+"99k-sP-KYz.text" = "Configuring Wi-Fi, please wait...";
+
+/* Class = "UILabel"; text = "Within half a day"; ObjectID = "9YO-6N-yTW"; */
+"9YO-6N-yTW.text" = "Within half a day";
+
+/* Class = "UILabel"; text = "Online"; ObjectID = "C4W-14-BpJ"; */
+"C4W-14-BpJ.text" = "Online";
+
+/* Class = "UIButton"; normalTitle = "HD"; ObjectID = "ChE-Oy-vbq"; */
+"ChE-Oy-vbq.normalTitle" = "HD";
+
+/* Class = "UILabel"; text = "Align camera QR Code winthin frame to scan"; ObjectID = "DAV-af-tmf"; */
+"DAV-af-tmf.text" = "Align camera QR Code winthin frame to scan";
+
+/* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "E85-qu-nXt"; */
+"E85-qu-nXt.headerTitle" = " ";
+
+/* Class = "UIButton"; normalTitle = "tap to reconnect"; ObjectID = "F7b-aV-gWV"; */
+"F7b-aV-gWV.normalTitle" = "tap to reconnect";
+
+/* Class = "UINavigationItem"; title = "Add Camera Wireless Input"; ObjectID = "Ffj-KL-7fv"; */
+"Ffj-KL-7fv.title" = "Add Camera Wireless Input";
+
+/* Class = "UIButton"; normalTitle = "Input UID manually"; ObjectID = "Gd2-yV-4zn"; */
+"Gd2-yV-4zn.normalTitle" = "Input UID manually";
+
+/* Class = "UILabel"; text = "12-05-2017"; ObjectID = "Gm2-ob-cs7"; */
+"Gm2-ob-cs7.text" = "12-05-2017";
+
+/* Class = "UILabel"; text = "Cam Name"; ObjectID = "HYV-Kb-4XJ"; */
+"HYV-Kb-4XJ.text" = "Cam Name";
+
+/* Class = "UIButton"; normalTitle = "Ready"; ObjectID = "Hxa-bK-P3R"; */
+"Hxa-bK-P3R.normalTitle" = "Ready";
+
+/* Class = "UILabel"; text = "Please enter the Wi-Fi password."; ObjectID = "IAa-II-yIU"; */
+"IAa-II-yIU.text" = "Please enter the Wi-Fi password.";
+
+/* Class = "UINavigationItem"; title = "Add Camera Navigation"; ObjectID = "Ivv-ZY-xkF"; */
+"Ivv-ZY-xkF.title" = "Add Camera Navigation";
+
+/* Class = "UILabel"; text = "Keep phone near to camera and turn up the phone volume"; ObjectID = "K0i-a5-fae"; */
+"K0i-a5-fae.text" = "Keep phone near to camera and turn up the phone volume";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "K3E-Tk-PWz"; */
+"K3E-Tk-PWz.text" = "00:00";
+
+/* Class = "UILabel"; text = "With a day"; ObjectID = "LVJ-9k-geG"; */
+"LVJ-9k-geG.text" = "With a day";
+
+/* Class = "UINavigationItem"; title = "Add Camera Wireless Note"; ObjectID = "MkF-F1-S8C"; */
+"MkF-F1-S8C.title" = "Add Camera Wireless Note";
+
+/* Class = "UIButton"; highlightedTitle = "SD"; ObjectID = "Nh6-4g-UY3"; */
+"Nh6-4g-UY3.highlightedTitle" = "SD";
+
+/* Class = "UIButton"; normalTitle = "SD"; ObjectID = "Nh6-4g-UY3"; */
+"Nh6-4g-UY3.normalTitle" = "SD";
+
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "OVl-oD-1zP"; */
+"OVl-oD-1zP.normalTitle" = "5";
+
+/* Class = "UIButton"; normalTitle = "Ready"; ObjectID = "PjI-Ts-x1X"; */
+"PjI-Ts-x1X.normalTitle" = "Ready";
+
+/* Class = "UILabel"; text = "Custom"; ObjectID = "QUv-cX-nrt"; */
+"QUv-cX-nrt.text" = "Custom";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "RaW-Id-s07"; */
+"RaW-Id-s07.normalTitle" = "7";
+
+/* Class = "UIButton"; normalTitle = "SET"; ObjectID = "Rf8-OO-VhM"; */
+"Rf8-OO-VhM.normalTitle" = "SET";
+
+/* Class = "UILabel"; text = "Full-time recording"; ObjectID = "S52-7E-aAr"; */
+"S52-7E-aAr.text" = "Full-time recording";
+
+/* Class = "UINavigationItem"; title = "Add Camera Wired Note"; ObjectID = "Sem-hR-b76"; */
+"Sem-hR-b76.title" = "Add Camera Wired Note";
+
+/* Class = "UIButton"; highlightedTitle = "HD"; ObjectID = "Tis-c2-VTh"; */
+"Tis-c2-VTh.highlightedTitle" = "HD";
+
+/* Class = "UIButton"; normalTitle = "HD"; ObjectID = "Tis-c2-VTh"; */
+"Tis-c2-VTh.normalTitle" = "HD";
+
+/* Class = "UILabel"; text = "Full-time recording"; ObjectID = "TxE-5L-QE1"; */
+"TxE-5L-QE1.text" = "Full-time recording";
+
+/* Class = "UIButton"; normalTitle = "CALL"; ObjectID = "VP9-EH-mAb"; */
+"VP9-EH-mAb.normalTitle" = "CALL";
+
+/* Class = "UILabel"; text = "12-05-2017"; ObjectID = "Vm7-0U-j34"; */
+"Vm7-0U-j34.text" = "12-05-2017";
+
+/* Class = "UINavigationItem"; title = "Edit Camera"; ObjectID = "WOl-8N-dJx"; */
+"WOl-8N-dJx.title" = "Edit Camera";
+
+/* Class = "UILabel"; text = "Please power on the camera and plug into the Ethernet cable (Yellow & Green light will on if all is OK)."; ObjectID = "Whd-l1-BO2"; */
+"Whd-l1-BO2.text" = "Please power on the camera and plug into the Ethernet cable (Yellow & Green light will on if all is OK).";
+
+/* Class = "UILabel"; text = "Camera has been connected to internet？"; ObjectID = "XFo-1F-NcR"; */
+"XFo-1F-NcR.text" = "Camera has been connected to internet？";
+
+/* Class = "UILabel"; text = "Camera Name"; ObjectID = "XKQ-UT-tMc"; */
+"XKQ-UT-tMc.text" = "Camera Name";
+
+/* Class = "UIButton"; normalTitle = "CLEAR"; ObjectID = "XmY-aB-vXg"; */
+"XmY-aB-vXg.normalTitle" = "CLEAR";
+
+/* Class = "UIButton"; normalTitle = "RETRY"; ObjectID = "Zrf-VK-eeK"; */
+"Zrf-VK-eeK.normalTitle" = "RETRY";
+
+/* Class = "UILabel"; text = "Full-time recording"; ObjectID = "a9C-fk-2wp"; */
+"a9C-fk-2wp.text" = "Full-time recording";
+
+/* Class = "UILabel"; text = "Camera On LAN"; ObjectID = "aws-Ae-pPR"; */
+"aws-Ae-pPR.text" = "Camera On LAN";
+
+/* Class = "UILabel"; text = "Connecting"; ObjectID = "b4c-sk-rEc"; */
+"b4c-sk-rEc.text" = "Connecting";
+
+/* Class = "UIButton"; normalTitle = "tap to wake up"; ObjectID = "bcI-ig-1Ze"; */
+"bcI-ig-1Ze.normalTitle" = "tap to wake up";
+
+/* Class = "UILabel"; text = "Note:"; ObjectID = "bdc-kY-VRO"; */
+"bdc-kY-VRO.text" = "Note:";
+
+/* Class = "UILabel"; text = "1%"; ObjectID = "bsY-8a-ziu"; */
+"bsY-8a-ziu.text" = "1%";
+
+/* Class = "UILabel"; text = "To"; ObjectID = "bwd-oZ-vir"; */
+"bwd-oZ-vir.text" = "To";
+
+/* Class = "UILabel"; text = "No result found"; ObjectID = "bzh-za-gkJ"; */
+"bzh-za-gkJ.text" = "No result found";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "c4m-Gu-uUg"; */
+"c4m-Gu-uUg.normalTitle" = "6";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "cI1-dQ-ukI"; */
+"cI1-dQ-ukI.text" = "From";
+
+/* Class = "UILabel"; text = "Scan QR Code"; ObjectID = "cid-JX-f8f"; */
+"cid-JX-f8f.text" = "Scan QR Code";
+
+/* Class = "UIButton"; normalTitle = "tap to enter password"; ObjectID = "d58-C2-ZfB"; */
+"d58-C2-ZfB.normalTitle" = "tap to enter password";
+
+/* Class = "UILabel"; text = "Only support 2.4Ghz Wi-Fi."; ObjectID = "dcw-uz-hCE"; */
+"dcw-uz-hCE.text" = "Only support 2.4Ghz Wi-Fi.";
+
+/* Class = "UILabel"; text = "Notes for Wi-Fi configuration of IP camera:\n1. Please make sure your Wi-Fi password is correct.\n2. Please confirm your Wi-Fi is 2.4GHz.\n3. DHCP is enabled in Router.\n4. Please keep camera near to your router & your phone and connect to stable network."; ObjectID = "elt-p4-Eia"; */
+"elt-p4-Eia.text" = "Notes for Wi-Fi configuration of IP camera:\n1. Please make sure your Wi-Fi password is correct.\n2. Please confirm your Wi-Fi is 2.4GHz.\n3. DHCP is enabled in Router.\n4. Please keep camera near to your router & your phone and connect to stable network.";
+
+/* Class = "UILabel"; text = "Add camera by 2.4GHz Wi-Fi."; ObjectID = "ex7-aP-gBg"; */
+"ex7-aP-gBg.text" = "Add camera by 2.4GHz Wi-Fi.";
+
+/* Class = "UILabel"; text = "Wi-Fi Conifgure Failed"; ObjectID = "f72-lM-mrB"; */
+"f72-lM-mrB.text" = "Wi-Fi Conifgure Failed";
+
+/* Class = "UILabel"; text = "Within an hour"; ObjectID = "fKI-IM-29l"; */
+"fKI-IM-29l.text" = "Within an hour";
+
+/* Class = "UILabel"; text = "12/05/2017 14:26 - 12/06/2017 14:26"; ObjectID = "fyM-Qc-y2s"; */
+"fyM-Qc-y2s.text" = "12/05/2017 14:26 - 12/06/2017 14:26";
+
+/* Class = "UINavigationItem"; title = "Input Camera UID"; ObjectID = "g2N-us-41x"; */
+"g2N-us-41x.title" = "Input Camera UID";
+
+/* Class = "UILabel"; text = "Within a day"; ObjectID = "gvp-xL-gbw"; */
+"gvp-xL-gbw.text" = "Within a day";
+
+/* Class = "UINavigationItem"; title = "Live View"; ObjectID = "h29-hI-td0"; */
+"h29-hI-td0.title" = "Live View";
+
+/* Class = "UINavigationItem"; title = "Add Camera Wireless Setting"; ObjectID = "hK8-jb-8UP"; */
+"hK8-jb-8UP.title" = "Add Camera Wireless Setting";
+
+/* Class = "UIButton"; normalTitle = "8"; ObjectID = "iYR-39-arl"; */
+"iYR-39-arl.normalTitle" = "8";
+
+/* Class = "UILabel"; text = "12/05/2017 18:40:48"; ObjectID = "j2X-Nl-bhc"; */
+"j2X-Nl-bhc.text" = "12/05/2017 18:40:48";
+
+/* Class = "UILabel"; text = "No result found"; ObjectID = "l31-d5-w5U"; */
+"l31-d5-w5U.text" = "No result found";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "ltd-FD-s6k"; */
+"ltd-FD-s6k.normalTitle" = "1";
+
+/* Class = "UINavigationItem"; title = "Add Camera"; ObjectID = "mBv-zg-9XA"; */
+"mBv-zg-9XA.title" = "Add Camera";
+
+/* Class = "UIButton"; normalTitle = "Camera has been connected to network?"; ObjectID = "mV4-J2-W6V"; */
+"mV4-J2-W6V.normalTitle" = "Camera has been connected to network?";
+
+/* Class = "UISegmentedControl"; o0x-Jt-LWq.segmentTitles[0] = "EVENT RECORD"; ObjectID = "o0x-Jt-LWq"; */
+"o0x-Jt-LWq.segmentTitles[0]" = "EVENT RECORD";
+
+/* Class = "UISegmentedControl"; o0x-Jt-LWq.segmentTitles[1] = "TIMING RECORD"; ObjectID = "o0x-Jt-LWq"; */
+"o0x-Jt-LWq.segmentTitles[1]" = "TIMING RECORD";
+
+/* Class = "UIButton"; normalTitle = "tap to live view"; ObjectID = "o5f-YR-My6"; */
+"o5f-YR-My6.normalTitle" = "tap to live view";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "o7P-rt-HrT"; */
+"o7P-rt-HrT.normalTitle" = "3";
+
+/* Class = "UILabel"; text = "Flash"; ObjectID = "oO4-I1-0fl"; */
+"oO4-I1-0fl.text" = "Flash";
+
+/* Class = "UIButton"; normalTitle = "HD"; ObjectID = "orD-Hb-W61"; */
+"orD-Hb-W61.normalTitle" = "HD";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "paY-ln-a6q"; */
+"paY-ln-a6q.normalTitle" = "2";
+
+/* Class = "UILabel"; text = "Please power on the camera, and wait till the music comes out."; ObjectID = "qM0-XO-crD"; */
+"qM0-XO-crD.text" = "Please power on the camera, and wait till the music comes out.";
+
+/* Class = "UINavigationItem"; title = "Save Camera"; ObjectID = "qPk-ZA-s1S"; */
+"qPk-ZA-s1S.title" = "Save Camera";
+
+/* Class = "UINavigationItem"; title = "View Event"; ObjectID = "rJz-OU-x3U"; */
+"rJz-OU-x3U.title" = "View Event";
+
+/* Class = "UILabel"; text = "LAN Search"; ObjectID = "sxX-T7-fVB"; */
+"sxX-T7-fVB.text" = "LAN Search";
+
+/* Class = "UILabel"; text = "Wireless"; ObjectID = "tpd-iF-Ms5"; */
+"tpd-iF-Ms5.text" = "Wireless";
+
+/* Class = "UILabel"; text = "Wired"; ObjectID = "uCK-Vr-bnE"; */
+"uCK-Vr-bnE.text" = "Wired";
+
+/* Class = "UILabel"; text = "With a week"; ObjectID = "uEz-QF-iAO"; */
+"uEz-QF-iAO.text" = "With a week";
+
+/* Class = "UINavigationItem"; title = "Scan QR Code"; ObjectID = "uXg-AR-9D7"; */
+"uXg-AR-9D7.title" = "Scan QR Code";
+
+/* Class = "UILabel"; text = "12-05-2017"; ObjectID = "vAQ-73-z6Y"; */
+"vAQ-73-z6Y.text" = "12-05-2017";
+
+/* Class = "UINavigationItem"; title = "Camera List"; ObjectID = "vc9-aF-leI"; */
+"vc9-aF-leI.title" = "Camera List";
+
+/* Class = "UILabel"; text = "12-05-2017"; ObjectID = "vgh-0w-n76"; */
+"vgh-0w-n76.text" = "12-05-2017";
+
+/* Class = "UILabel"; text = "12/05/2017 14:26 - 12/06/2017 14:26"; ObjectID = "wLD-UY-jru"; */
+"wLD-UY-jru.text" = "12/05/2017 14:26 - 12/06/2017 14:26";
+
+/* Class = "UITableViewSection"; headerTitle = " "; ObjectID = "wZg-7m-PpV"; */
+"wZg-7m-PpV.headerTitle" = " ";
+
+/* Class = "UINavigationItem"; title = "Add Camera Failed"; ObjectID = "xFm-ae-s2A"; */
+"xFm-ae-s2A.title" = "Add Camera Failed";
+
+/* Class = "UINavigationItem"; title = "Search Event"; ObjectID = "xsm-iP-lMK"; */
+"xsm-iP-lMK.title" = "Search Event";

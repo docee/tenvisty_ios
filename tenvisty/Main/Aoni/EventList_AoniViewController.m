@@ -67,6 +67,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = LOCALSTR(@"View Event");
     // Do any additional setup after loading the view.
     
     [_labCurrentEventDate.superview setHidden:YES];
@@ -277,7 +278,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SEARCHEVENT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     [_labCurrentEventDate.superview setHidden:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES].userInteractionEnabled = YES;
-    //[MBProgressHUD showMessag:LOCALSTR(@"loading...") toView:self.tableview].userInteractionEnabled = YES;
+    //[MBProgressHUD showMessag:LOCALSTR(@"Loading...") toView:self.tableview].userInteractionEnabled = YES;
     [self.event_list removeAllObjects];
     [self.tableview reloadData];
    
@@ -449,7 +450,7 @@
                     UILabel *labDesc = (UILabel*)view;
                     if(self.camera.cameraConnectState == CONNECTION_STATE_CONNECTED){
                          if(isSearchingEvent){
-                             labDesc.text = LOCALSTR(@"loading...");
+                             labDesc.text = LOCALSTR(@"Loading...");
                          }
                          else if(isSearchingTimeout){
                              labDesc.text = LOCALSTR(@"Connection timeout");

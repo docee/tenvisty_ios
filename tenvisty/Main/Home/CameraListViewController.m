@@ -231,6 +231,13 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         // 处理耗时操作的代码块...
         [[GBase getCamera:row] wakeUp];
+        dispatch_async(dispatch_get_main_queue(),^{
+            CameraListItemTableViewCell *cell = [self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+            if(cell){
+                LOG(@"reresh row:%d cell isnull:%d",(int)row,cell== nil?1:0);
+                [cell refreshState];
+            }
+        });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //回调或者说是通知主线程刷新，
             [sender setEnabled:YES];

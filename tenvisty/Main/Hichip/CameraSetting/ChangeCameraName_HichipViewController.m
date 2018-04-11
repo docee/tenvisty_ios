@@ -19,6 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setup];
+}
+
+-(void)setup{
+    self.navigationController.title = LOCALSTR(@"Camera Name");
 }
 
 - (void)didReceiveMemoryWarning {

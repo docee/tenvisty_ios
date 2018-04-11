@@ -26,6 +26,7 @@
     BOOL isEditMode;
     BOOL isDownloading;
 }
+
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture_outerView;
 @property (weak, nonatomic) IBOutlet UILabel *labSearchTime;
 @property (weak, nonatomic) IBOutlet UILabel *labCurrentEventDate;
@@ -76,6 +77,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.title = LOCALSTR(@"View Event");
+    self.navigationItem.rightBarButtonItem.title = LOCALSTR(@"Edit");
     self.originCamera = (HichipCamera*)self.camera.orginCamera;
     [_labCurrentEventDate.superview setHidden:YES];
     [self.btnSelectSearchTime setBackgroundImage:[UIImage imageWithColor:Color_Gray_alpha wihtSize:CGSizeMake(1, 1)] forState:UIControlStateHighlighted];
@@ -380,7 +383,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SEARCHEVENT_WAIT_TIMEOUT * NSEC_PER_SEC)), dispatch_get_main_queue(), [self newTimeoutTask]);
     [_labCurrentEventDate.superview setHidden:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES].userInteractionEnabled = YES;
-    //[MBProgressHUD showMessag:LOCALSTR(@"loading...") toView:self.tableview].userInteractionEnabled = YES;
+    //[MBProgressHUD showMessag:LOCALSTR(@"Loading...") toView:self.tableview].userInteractionEnabled = YES;
     [self.event_list removeAllObjects];
     [self.tableview reloadData];
     
@@ -541,7 +544,7 @@
                     UILabel *labDesc = (UILabel*)view;
                     if(self.camera.isAuthConnected){
                          if(self.listReq.isSerach){
-                             labDesc.text = LOCALSTR(@"loading...");
+                             labDesc.text = LOCALSTR(@"Loading...");
                          }
                          else if(isSearchingTimeout){
                              labDesc.text = LOCALSTR(@"Connection timeout");

@@ -365,6 +365,12 @@
 
 //begin 添加摄像机功能标识位，yilu20170316
 - (NSArray *)getFunctionFlag{
+    if(self.supplier == SUPLLIER_AN){
+        defaultFunctionFlag = DEFAULT_CAMERA_FUNCTION_BATTERY;
+    }
+    else{
+        defaultFunctionFlag = DEFAULT_CAMERA_FUNCTION;
+    }
     if(functionFlag == nil || [functionFlag count] == 0){
         return defaultFunctionFlag;
     }

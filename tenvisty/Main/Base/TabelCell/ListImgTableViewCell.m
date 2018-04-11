@@ -60,7 +60,7 @@
     [super refreshCell];
     if(self.cellModel){
         _leftLabTitle.text = self.cellModel.titleText;
-        _rightLabValue.text = (self.cellModel.titleValue == nil && self.cellModel.showValue)? LOCALSTR(@"loading...") :self.cellModel.titleValue;
+        _rightLabValue.text = (self.cellModel.titleValue == nil && self.cellModel.showValue)? LOCALSTR(@"Loading...") :self.cellModel.titleValue;
         [self setLeftImage:self.cellModel.titleImgName];
     }
 }

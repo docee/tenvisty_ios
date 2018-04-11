@@ -22,6 +22,7 @@
     // Do any additional setup after loading the view.
 }
 -(void) setup{
+    self.navigationController.title = LOCALSTR(@"Other Setting");
     [self doGetVideoMode];
 }
 

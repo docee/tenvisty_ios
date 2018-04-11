@@ -22,11 +22,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [self setup];
     if([self.camera.pwd isEqualToString:DEFAULT_PASSWORD]){
         [self.navigationItem.leftBarButtonItem setEnabled:NO];// = nil;
     }
 //    [_btnChangePassword setTitleEdgeInsets:UIEdgeInsetsMake(0, -_btnChangePassword.currentImage.size.width, 0, _btnChangePassword.currentImage.size.width)];
 //    [_btnChangePassword setImageEdgeInsets:UIEdgeInsetsMake(0, _btnChangePassword.titleLabel.bounds.size.width, 0, -_btnChangePassword.titleLabel.bounds.size.width)];
+}
+-(void)setup{
+    self.navigationController.title = LOCALSTR(@"Change Camera Password");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +97,7 @@
     for (UIView *view in [[cell.contentView subviews] objectAtIndex:0].subviews) {
         if([view isKindOfClass:[UIButton class]]){
             UIButton * btn = (UIButton *)view;
+            [btn setTitle:LOCALSTR(@"show password") forState:UIControlStateNormal];
             CGFloat btnImageWidth = btn.imageView.bounds.size.width;
             CGFloat btnLabelWidth = btn.titleLabel.bounds.size.width;
             CGFloat margin = 3;
@@ -106,6 +111,10 @@
 //            [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -btn.currentImage.size.width - btn.titleLabel.bounds.size.width, 0, btn.currentImage.size.width)];
 //            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, btn.titleLabel.bounds.size.width+btn.currentImage.size.width, 0, -btn.titleLabel.bounds.size.width)];
             break;
+        }
+        else if([view isKindOfClass:[UILabel class]]){
+               UILabel *lab = (UILabel *)view;
+                lab.text = LOCALSTR(@"Please make sure your password length is 6-12 characters and contains at least two combinations of below characters.\n    1.capital\n    2.small letter\n    3.number\n    4.special character：~!@$%^()_-,|/*.");
         }
     }
     return cell.contentView;

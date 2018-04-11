@@ -27,9 +27,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setup];
     self.originCamera = (HichipCamera*)self.camera.orginCamera;
     [self getDeviceInfo];
     // Do any additional setup after loading the view.
+}
+
+-(void)setup{
+    self.navigationController.title = LOCALSTR(@"Camera Information");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -732,6 +732,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnReboot" destination="a54-SQ-UqV" id="yK0-Ea-aRS"/>
+                        <outlet property="btnReset" destination="zN4-RK-gmB" id="GKH-yW-QtS"/>
+                        <outlet property="btnUpdate" destination="zS6-cZ-I1L" id="v9G-Bc-zch"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xaS-Y6-uDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Fo9-aW-jhu" userLabel="Exit" sceneMemberID="exit"/>
@@ -798,6 +803,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="labDesc" destination="Ngr-cV-Ssd" id="V6L-dZ-0za"/>
                         <outlet property="tableview" destination="Wy7-eT-n2u" id="4UW-Xs-5ec"/>
                     </connections>
                 </viewController>

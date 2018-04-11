@@ -13,7 +13,6 @@
 		890073901FF4AC3F00FB36B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8900738F1FF4AC3F00FB36B1 /* SystemConfiguration.framework */; };
 		890073921FF4BA0500FB36B1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 890073911FF4BA0500FB36B1 /* libsqlite3.0.tbd */; };
 		890B406F1FAFF9FE00C1061A /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B406E1FAFF9FE00C1061A /* MainTabBarController.m */; };
-		890B40711FAFFA3600C1061A /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890B40701FAFFA3600C1061A /* Home.storyboard */; };
 		890B40741FAFFA6200C1061A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B40731FAFFA6200C1061A /* HomeViewController.m */; };
 		890B40761FB0069400C1061A /* Image.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890B40751FB0069400C1061A /* Image.storyboard */; };
 		890B40791FB006A000C1061A /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 890B40781FB006A000C1061A /* ImageViewController.m */; };
@@ -92,6 +91,7 @@
 		892CE0DE1FD13E6300942E28 /* AddCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0D91FD13E6200942E28 /* AddCameraViewController.m */; };
 		892CE0DF1FD13E6300942E28 /* SaveCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DB1FD13E6200942E28 /* SaveCameraTableViewController.m */; };
 		892CE0E01FD13E6300942E28 /* SearchCameraTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */; };
+		892CE9AE207C96F700BE1CA0 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892CE9B0207C96F700BE1CA0 /* Home.storyboard */; };
 		89368D9F1FEA13EF000FCDC0 /* BaseFragmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */; };
 		89368DA61FEB6305000FCDC0 /* SyncTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89368DA51FEB6305000FCDC0 /* SyncTimeTableViewCell.m */; };
 		893E6BEC1FF5FD0F00502F55 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E6BEA1FF5FD0F00502F55 /* libUMessage_Sdk_1.5.0a.a */; };
@@ -298,7 +298,6 @@
 		8905CD2E207B5D8C004AA3F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		890B406D1FAFF9FE00C1061A /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		890B406E1FAFF9FE00C1061A /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		890B40701FAFFA3600C1061A /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		890B40721FAFFA6200C1061A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		890B40731FAFFA6200C1061A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		890B40751FB0069400C1061A /* Image.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Image.storyboard; sourceTree = "<group>"; };
@@ -449,6 +448,7 @@
 		892CE0DB1FD13E6200942E28 /* SaveCameraTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveCameraTableViewController.m; sourceTree = "<group>"; };
 		892CE0DC1FD13E6200942E28 /* SearchCameraTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCameraTableViewController.h; sourceTree = "<group>"; };
 		892CE0DD1FD13E6300942E28 /* SearchCameraTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCameraTableViewController.m; sourceTree = "<group>"; };
+		892CE9AF207C96F700BE1CA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		89368D9D1FEA13EF000FCDC0 /* BaseFragmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseFragmentViewController.h; sourceTree = "<group>"; };
 		89368D9E1FEA13EF000FCDC0 /* BaseFragmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseFragmentViewController.m; sourceTree = "<group>"; };
 		89368DA41FEB6305000FCDC0 /* SyncTimeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncTimeTableViewCell.h; sourceTree = "<group>"; };
@@ -1090,7 +1090,7 @@
 				89836805206B7D59001FFE2F /* Aoni */,
 				890B406D1FAFF9FE00C1061A /* MainTabBarController.h */,
 				890B406E1FAFF9FE00C1061A /* MainTabBarController.m */,
-				890B40701FAFFA3600C1061A /* Home.storyboard */,
+				892CE9B0207C96F700BE1CA0 /* Home.storyboard */,
 				890B40721FAFFA6200C1061A /* HomeViewController.h */,
 				890B40731FAFFA6200C1061A /* HomeViewController.m */,
 				890B40751FB0069400C1061A /* Image.storyboard */,
@@ -2817,7 +2817,7 @@
 				8983680B206B7E4A001FFE2F /* CameraSetting_Aoni.storyboard in Resources */,
 				894D7E571FAB01D900C58BB2 /* Main.storyboard in Resources */,
 				890B40761FB0069400C1061A /* Image.storyboard in Resources */,
-				890B40711FAFFA3600C1061A /* Home.storyboard in Resources */,
+				892CE9AE207C96F700BE1CA0 /* Home.storyboard in Resources */,
 				892ADB731FD6A05000BD8929 /* SelectItemTableViewCell.xib in Resources */,
 				892CE0CB1FD126F200942E28 /* PasswordFieldTableViewCell.xib in Resources */,
 				89A37C8C201726FB00A6F0CD /* Home_Hichip.storyboard in Resources */,
@@ -3048,6 +3048,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		892CE9B0207C96F700BE1CA0 /* Home.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				892CE9AF207C96F700BE1CA0 /* Base */,
+			);
+			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
 		894D7E551FAB01D900C58BB2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3214,7 +3222,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = tenvisty/tenvisty.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6HDH3DS77K;
 				ENABLE_BITCODE = NO;
@@ -3240,8 +3248,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tws.newtenvisty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f339e28f-cf94-44d8-878a-eaf95715e7eb";
-				PROVISIONING_PROFILE_SPECIFIER = dis_tenvisty_profile_20180102_hoc;
+				PROVISIONING_PROFILE = "4ec898b5-418d-4caa-8127-e4e305cdc1e6";
+				PROVISIONING_PROFILE_SPECIFIER = dev_tenvisty_20171229_profile;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

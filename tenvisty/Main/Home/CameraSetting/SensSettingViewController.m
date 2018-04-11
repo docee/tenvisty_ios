@@ -24,6 +24,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Sensitivity Setting");
     _sensValue = @[@90,@70,@50,@30,@0];
     [self doGetEventSetting];
 }

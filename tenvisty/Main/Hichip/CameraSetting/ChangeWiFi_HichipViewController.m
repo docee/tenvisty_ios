@@ -34,7 +34,7 @@
 }
 
 -(void)setup{
-    
+    self.navigationController.title = LOCALSTR(@"Wi-Fi Setting");
 }
 -(dispatch_block_t)timeoutTask{
     if(_timeoutTask == nil){

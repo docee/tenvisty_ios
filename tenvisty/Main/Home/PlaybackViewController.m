@@ -230,8 +230,7 @@
 
 - (void)camera:(BaseCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(fps > 1){
-            [self.indicator_loading setHidden:NO];
+        if(fps > 0){
             if(_timeoutTask != nil){
                 dispatch_block_cancel(_timeoutTask);
                 _timeoutTask = nil;

@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = LOCALSTR(@"Event Setting");
     _sensValue = @[@80,@60,@40,@20,@0];
     _sensValueDesc = @[LOCALSTR(@"Highest"),LOCALSTR(@"High"),LOCALSTR(@"General"),LOCALSTR(@"Low"),LOCALSTR(@"Close")];
     [self.tableView setBackgroundColor:Color_GrayLightest];

@@ -30,6 +30,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"FTP Setting");
     [self.tableview setBackgroundColor:Color_GrayLightest];
     [self.view setBackgroundColor:Color_GrayLightest];
     [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];

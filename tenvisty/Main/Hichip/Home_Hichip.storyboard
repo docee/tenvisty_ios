@@ -611,11 +611,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnHD" destination="XyC-aI-yVT" id="sB1-Nd-qyB"/>
                         <outlet property="btnListen_land" destination="J8w-o8-amZ" id="xHg-5d-yG7"/>
                         <outlet property="btnListen_port" destination="D5b-JH-68a" id="JdD-w7-cQt"/>
                         <outlet property="btnPreset" destination="AsW-KJ-fZR" id="AEW-GM-uVo"/>
                         <outlet property="btnRecord_land" destination="gyj-iE-Xfo" id="bSd-Yk-3NA"/>
                         <outlet property="btnRecord_port" destination="QfS-pd-49t" id="fIM-V3-006"/>
+                        <outlet property="btnSD" destination="Qeg-IO-H9k" id="hoV-Ml-cOT"/>
                         <outlet property="btnShowSwitchQuality_land" destination="5yD-7i-oVV" id="Pj0-1G-oHl"/>
                         <outlet property="btnShowSwitchQuality_port" destination="9dI-Cf-Jsv" id="3kq-gz-HuA"/>
                         <outlet property="btnTalk_land" destination="Fyv-FA-zBz" id="lg7-EV-bh9"/>

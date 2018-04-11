@@ -111,6 +111,10 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="btnFocusIn" destination="lBB-oh-VwN" id="VWm-Sw-2xy"/>
+                <outlet property="btnFocusOut" destination="uho-Hp-OoM" id="a1v-iA-RFE"/>
+                <outlet property="btnZoomIn" destination="Rn3-e7-tQ1" id="Zjj-i5-NjN"/>
+                <outlet property="btnZoomOut" destination="8HD-yx-BuF" id="Qkl-tm-9IK"/>
                 <outlet property="viewInnerContainer" destination="DfR-qj-WL0" id="9b8-cZ-Afk"/>
             </connections>
         </view>

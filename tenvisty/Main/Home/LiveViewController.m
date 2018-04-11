@@ -645,7 +645,7 @@
 - (void)camera:(BaseCamera *)camera _didReceiveFrameInfoWithVideoWidth:(NSInteger)videoWidth VideoHeight:(NSInteger)videoHeight VideoFPS:(NSInteger)fps VideoBPS:(NSInteger)videoBps AudioBPS:(NSInteger)audioBps OnlineNm:(NSInteger)onlineNm FrameCount:(unsigned long)frameCount IncompleteFrameCount:(unsigned long)incompleteFrameCount{
     videoFps = fps;
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(fps > 1 ){
+        if(fps > 0){
             receiveVideoTime = [[NSDate date] timeIntervalSinceReferenceDate];
             [_viewLoading setHidden:YES];
         }
@@ -690,7 +690,6 @@
     if(fabs(self.camera.videoRatio-(CGFloat)width/height) > 0.2){
         self.camera.videoRatio = (CGFloat)width/height;
         [self resizeMonitor:self.camera.videoRatio];
-
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         self.labResolution.text = FORMAT(@"%ld x %ld",width,height);

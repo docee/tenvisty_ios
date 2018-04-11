@@ -26,6 +26,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"SD Card");
     [self getSDCardInfo];
 }
 -(void)getSDCardInfo{
@@ -66,7 +67,13 @@
     for(UIView *view in cell.contentView.subviews){
         if([view isKindOfClass:[UIButton class]]){
             UIButton *btn = (UIButton*)view;
+            [btn setTitle:LOCALSTR(@"FORMAT SDCARD") forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(clickFormat:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        }
+        else if([view isKindOfClass:[UILabel class]]){
+            UILabel *lab = (UILabel*)view;
+            lab.text = LOCALSTR(@"Format command will ERASE all data of SD Card");
             break;
         }
     }

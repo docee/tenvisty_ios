@@ -21,6 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = LOCALSTR(@"Search Event");
+    self.labFrom.text = LOCALSTR(@"From");
+    self.labTo.text = LOCALSTR(@"To");
     // Do any additional setup after loading the view.
 }
 

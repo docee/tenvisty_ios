@@ -55,7 +55,7 @@
     [super refreshCell];
     if(self.cellModel){
         _leftLabel.text = self.cellModel.titleText;
-        [_rightButton setTitle:@"loading..." forState:UIControlStateDisabled];
+        [_rightButton setTitle:@"Loading..." forState:UIControlStateDisabled];
         [_rightButton setTitle:self.cellModel.titleValue forState:UIControlStateNormal];
         if(self.cellModel.showValue && self.cellModel.titleValue == nil){
             [_rightButton setEnabled:NO];

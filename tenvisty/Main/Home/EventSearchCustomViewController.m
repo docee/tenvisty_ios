@@ -21,6 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.labFrom.text = LOCALSTR(@"From");
+    self.labTo.text = LOCALSTR(@"To");
     if(self.mode == UIDatePickerModeDate){
         _datepicker_from.datePickerMode = UIDatePickerModeDate;
         _datepicker_to.datePickerMode = UIDatePickerModeDate;

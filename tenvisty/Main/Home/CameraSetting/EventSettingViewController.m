@@ -23,6 +23,7 @@
     [super viewDidLoad];
     _sensValue = @[@90,@70,@50,@30,@0];
     _sensValueDesc = @[LOCALSTR(@"Highest"),LOCALSTR(@"High"),LOCALSTR(@"General"),LOCALSTR(@"Low"),LOCALSTR(@"Close")];
+    self.navigationController.title = LOCALSTR(@"Event Setting");
     // Do any additional setup after loading the view.
 }
 

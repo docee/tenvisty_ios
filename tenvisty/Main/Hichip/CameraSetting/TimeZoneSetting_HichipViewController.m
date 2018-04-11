@@ -14,6 +14,8 @@
 @interface TimeZoneSetting_HichipViewController (){
     NSInteger timezoneIndex;
 }
+@property (weak, nonatomic) IBOutlet UILabel *labReboot;
+@property (weak, nonatomic) IBOutlet UILabel *labDesc;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic,strong) HichipCamera *originCamera;
 @property (nonatomic,strong) NSArray *timezoneList;
@@ -28,6 +30,9 @@
     // Do any additional setup after loading the view.
 }
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Time Zone");
+    self.labDesc.text = LOCALSTR(@"Select time zone");
+    self.labReboot.text = LOCALSTR(@"Notice: Change timezone will reboot device");
     self.originCamera = (HichipCamera*)self.camera.orginCamera;
     [self.tableview registerNib:[UINib nibWithNibName:@"DetailTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Detail];
     [MBProgressHUD showHUDAddedTo:self.tableview animated:YES].userInteractionEnabled = YES;

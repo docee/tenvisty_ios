@@ -64,7 +64,7 @@
     [super refreshCell];
     if(self.cellModel){
         if(self.cellModel.showValue && self.cellModel.titleValue == nil){
-            _rightTextField.text = LOCALSTR(@"loading...");
+            _rightTextField.text = LOCALSTR(@"Loading...");
         }
         else{
             _rightTextField.text = self.cellModel.titleValue;

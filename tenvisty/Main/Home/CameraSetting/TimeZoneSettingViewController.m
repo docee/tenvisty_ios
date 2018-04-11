@@ -14,6 +14,7 @@
     NSInteger timezoneIndex;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *labDesc;
 
 @end
 
@@ -25,6 +26,8 @@
     // Do any additional setup after loading the view.
 }
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Time Zone");
+    self.labDesc.text = LOCALSTR(@"Select time zone");
     [self.tableview registerNib:[UINib nibWithNibName:@"DetailTableViewCell" bundle:nil] forCellReuseIdentifier:TableViewCell_Detail];
     [self getTimezone];
 }

@@ -38,6 +38,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Timing Record");
     self.autoRecTimeMin = 15;
     self.autoRecTimeMax = [((HichipCamera*)self.camera.orginCamera) isGoke]?600:900;
     [self.tableview setBackgroundColor:Color_GrayLightless];

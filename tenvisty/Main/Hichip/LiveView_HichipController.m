@@ -78,6 +78,8 @@
 @property (weak, nonatomic) IBOutlet ZoomView *viewZoom;
 @property (weak, nonatomic) IBOutlet UIButton *btnPreset;
 @property (weak, nonatomic) IBOutlet UIButton *btnTalk_port;
+@property (weak, nonatomic) IBOutlet UIButton *btnHD;
+@property (weak, nonatomic) IBOutlet UIButton *btnSD;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint_toolbar_portrait_height;
 @end
@@ -86,6 +88,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = self.camera.nickName;
+    [self.btnHD setTitle:LOCALSTR(@"HD") forState:UIControlStateNormal];
+    [self.btnSD setTitle:LOCALSTR(@"SD") forState:UIControlStateNormal];
     hiCamera = (HichipCamera*)self.camera.orginCamera;
     _isFullscreen = self.view.bounds.size.width > self.view.bounds.size.height;// self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight;
     [self rotateOrientation:_isFullscreen?UIInterfaceOrientationLandscapeLeft:UIInterfaceOrientationPortrait];

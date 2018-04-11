@@ -189,10 +189,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JiJ-eD-K2J">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="230"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-e0-0f5">
-                                                    <rect key="frame" x="463" y="8" width="122" height="18"/>
+                                                    <rect key="frame" x="238" y="8" width="122" height="18"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <state key="normal" title="show password" image="checkbox_uncheck">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -200,7 +200,7 @@
                                                     <state key="selected" image="checkbox_checked"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgD-YU-DJU">
-                                                    <rect key="frame" x="10" y="36" width="590" height="105"/>
+                                                    <rect key="frame" x="10" y="36" width="365" height="122.5"/>
                                                     <string key="text">Please make sure your password length is 6-12 characters and contaqins at least two combinations of below characters.
 1.capital
 2.small letter
@@ -564,7 +564,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tax-ik-R4h">
-                                            <rect key="frame" x="0.0" y="18.5" width="600" height="40"/>
+                                            <rect key="frame" x="0.0" y="18.5" width="375" height="40"/>
                                             <color key="backgroundColor" red="0.78823529411764703" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="yy8-cN-YfZ"/>
@@ -656,7 +656,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zN4-RK-gmB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -682,7 +682,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reboot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a54-SQ-UqV">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.78823529410000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -708,7 +708,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check New Firmware" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zS6-cZ-I1L">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.54901960780000003" blue="0.020276521379999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -812,6 +812,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="labDesc" destination="Ngr-cV-Ssd" id="Sel-Np-rFI"/>
+                        <outlet property="labReboot" destination="tb5-Px-qq4" id="yZR-Y4-BaI"/>
                         <outlet property="tableview" destination="Wy7-eT-n2u" id="4UW-Xs-5ec"/>
                     </connections>
                 </viewController>

@@ -76,6 +76,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"System Setting");
     updateState = -1;
     resetState = -1;
     rebootState = -1;

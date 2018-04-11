@@ -26,6 +26,8 @@
 }
 
 -(void)setup{
+    [_btnSet setTitle:LOCALSTR(@"Set") forState:UIControlStateNormal];
+    [_btnCall setTitle:LOCALSTR(@"Call") forState:UIControlStateNormal];
     [_btnSet setBackgroundImage:[UIImage imageWithColor:Color_GrayDark wihtSize:CGSizeMake(1.0, 1.0)] forState:UIControlStateHighlighted];
     [_btnCall setBackgroundImage:[UIImage imageWithColor:Color_GrayDark wihtSize:CGSizeMake(1.0, 1.0)] forState:UIControlStateHighlighted];
     for (UIButton* btn in self.viewPresetPointContainer.subviews) {

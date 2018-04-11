@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = LOCALSTR(@"Time Setting");
     // Do any additional setup after loading the view.
 }
 
@@ -170,8 +171,9 @@
             for(int i=0; i < [TimeZoneModel getAll].count; i++){
                 TimeZoneModel *tz = [[TimeZoneModel getAll] objectAtIndex:i];
                 if([tz.area isEqualToString:[NSString stringWithUTF8String:resp->DstDistrictInfo.DstDistId]]){
-                    NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:i]).area;
-                    [self setRowValue:LOCALSTR(timezoneId) row:0 section:1];
+                    TimeZoneModel *tzModel = ((TimeZoneModel*)[[TimeZoneModel getAll] objectAtIndex:i]);
+                    [self setRowValue:[NSString stringWithFormat:@"(%@)%@",tzModel.strGMT,LOCALSTR(tzModel.area)]  row:0 section:1];
+                    //[self setRowValue:LOCALSTR(timezoneId) row:0 section:1];
                     timezoneIndex = i;
                     if(tz.dst){
                         dst = resp->enable;

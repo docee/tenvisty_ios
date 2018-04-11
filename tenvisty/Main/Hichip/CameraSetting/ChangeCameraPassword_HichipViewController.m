@@ -21,12 +21,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    [self setup];
     if([self.camera.pwd isEqualToString:DEFAULT_PASSWORD]){
         [self.navigationItem.leftBarButtonItem setEnabled:NO];// = nil;
     }
 //    [_btnChangePassword setTitleEdgeInsets:UIEdgeInsetsMake(0, -_btnChangePassword.currentImage.size.width, 0, _btnChangePassword.currentImage.size.width)];
 //    [_btnChangePassword setImageEdgeInsets:UIEdgeInsetsMake(0, _btnChangePassword.titleLabel.bounds.size.width, 0, -_btnChangePassword.titleLabel.bounds.size.width)];
+}
+
+-(void)setup{
+    self.navigationController.title = LOCALSTR(@"Change Camera Password");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -135,8 +135,8 @@
             self.timeModel = [[NtpTimeModel alloc] initWithData:(char*)data size:(int)size];
             time = FORMAT(@"%d-%d-%d %d:%d:%d",self.timeModel.u32Year, self.timeModel.u32Month, self.timeModel.u32Day, self.timeModel.u32Hour, self.timeModel.u32Minute, self.timeModel.u32Second);
             timezoneIndex = self.timeModel.u32Timezone - 1;
-            NSString *timezoneId = ((TimeZoneModel*)[[TimeZoneModel getAllOld] objectAtIndex:timezoneIndex]).area;
-            [self setRowValue:LOCALSTR(timezoneId) row:0 section:1];
+            TimeZoneModel *tzModel = ((TimeZoneModel*)[[TimeZoneModel getAllOld] objectAtIndex:timezoneIndex]);
+            [self setRowValue:[NSString stringWithFormat:@"(%@)%@",tzModel.strGMT,LOCALSTR(tzModel.area)]  row:0 section:1];
             dst = -1;
             [self.tableView reloadData];
             break;

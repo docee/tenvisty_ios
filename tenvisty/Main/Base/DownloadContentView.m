@@ -24,6 +24,9 @@
     [self setup];
 }
 -(void)setup{
+    [_labTitle setText:FORMAT(@"%@ (%d/%d)",LOCALSTR(@"Downloading"),1,0)];
+    [_labPercent setText:@"0%"];
+    [_labDesc setText:LOCALSTR(@"Waiting...")];
     [_btnCancel setTitle:LOCALSTR(@"Cancel") forState:UIControlStateNormal];
 }
 - (IBAction)clickCancel:(id)sender {
@@ -37,7 +40,8 @@
     _progressBar.progress = per/100.0;
 }
 -(void)setAccFile:(int)index total:(int)total desc:(NSString*)desc{
-    _labTitle.text = FORMAT(@"%@ (%d/%d)",LOCALSTR(@"Downloading"),index+1,total);
+    NSString *p = FORMAT(@"%d/%d",index+1,total);
+    _labTitle.text = FORMAT(LOCALSTR(@"Downloading (%@)"),p);
     _labDesc.text = desc;
 }
 

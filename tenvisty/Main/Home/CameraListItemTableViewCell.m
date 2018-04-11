@@ -167,6 +167,7 @@
     
     [self setBatteryState];
     if(self.camera.isConnecting || self.camera.processState != CAMERASTATE_NONE || self.camera.isWakingUp || (self.camera.supplier == SUPLLIER_UNKNOWN && self.camera.isAuthConnected)){
+        
         [self.viewSnapshotMask setBackgroundColor:Color_Black_alpha_5];
         [UIActivityIndicatorView appearanceWhenContainedIn:[MBProgressHUD class], nil].color = Color_Primary;
         if([MBProgressHUD HUDForView:self] == nil){
@@ -270,6 +271,7 @@
         self.btnReconnect.tag = index;
         self.btnModifyPassword.tag = index;
         self.btnCameraEvent.tag = index;
+        self.btnWakeUp.tag = index;
         
     }
 }

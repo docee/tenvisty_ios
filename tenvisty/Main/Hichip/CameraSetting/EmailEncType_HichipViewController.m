@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = LOCALSTR(@"Email Setting");
     // Do any additional setup after loading the view.
 }
 

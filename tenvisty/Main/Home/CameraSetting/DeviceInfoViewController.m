@@ -18,8 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setup];
     [self getSDCardInfo];
     // Do any additional setup after loading the view.
+}
+
+-(void)setup{
+    self.navigationController.title = LOCALSTR(@"Camera Information");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -23,6 +23,7 @@
     if(self.type == 2){
         [self setCustomTime];
     }
+    self.navigationController.title = LOCALSTR(@"Timing Record");
     [self.view setBackgroundColor:Color_GrayLightest];
     [self.tableview setBackgroundColor:Color_GrayLightest];
     // Do any additional setup after loading the view.

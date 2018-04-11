@@ -54,7 +54,7 @@
     [super refreshCell];
     if(self.cellModel){
         _leftLabTitle.text = self.cellModel.titleText;
-        _rightLabLoading.text = LOCALSTR(@"loading...");
+        _rightLabLoading.text = LOCALSTR(@"Loading...");
         [_rightLabLoading setHidden:!self.cellModel.showValue || self.cellModel.titleValue != nil];
         [_rightSwitch setEnabled:self.cellModel.titleValue != nil];
         [_rightSwitch setOn:[self.cellModel.titleValue isEqualToString:@"1"]];

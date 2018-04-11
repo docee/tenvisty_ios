@@ -188,6 +188,9 @@
             [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
             wifiSSIDList = [[WifiList alloc] initWithData:(char*)data size:(int)size];
             if(wifiSSIDList.u32Num > 0){
+                [wifiSSIDList.wifis sortUsingComparator:^NSComparisonResult(WifiAp *obj1, WifiAp *obj2) {
+                    return obj1.Signal > obj2.Signal ? NSOrderedAscending : (obj1.Signal == obj2.Signal ? NSOrderedSame :NSOrderedDescending);
+                }];
                 WifiAp *firstAp = [wifiSSIDList.wifis objectAtIndex:0];
                 if([firstAp.strSSID isEqualToString:self.ssid]){
                     for(int i=0;i<wifiSSIDList.u32Num;i++){

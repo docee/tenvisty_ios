@@ -57,6 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.title = self.camera.nickName;
     // Do any additional setup after loading the view.
     totalSeconds = self.evt.eventEndTime - self.evt.eventTime;
     self.title = self.camera.nickName;

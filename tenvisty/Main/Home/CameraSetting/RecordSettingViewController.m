@@ -23,6 +23,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Record Setting");
     recordType = -1;
     [self doGetRecordSetting];
 }

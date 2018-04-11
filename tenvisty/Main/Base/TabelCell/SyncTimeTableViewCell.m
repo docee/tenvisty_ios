@@ -17,7 +17,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _labTime.text  = LOCALSTR(@"loading...");
+    _labTime.text  = LOCALSTR(@"Loading...");
     // Initialization code
 }
 
@@ -33,7 +33,7 @@
 
 -(void)setTime:(NSString *)time{
     if(time == nil){
-        time = LOCALSTR(@"loading...");
+        time = LOCALSTR(@"Loading...");
     }
     _labTime.text = time;
 }

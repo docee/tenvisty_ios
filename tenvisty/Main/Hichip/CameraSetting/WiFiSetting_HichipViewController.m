@@ -29,6 +29,7 @@
     [self setup];
 }
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Wi-Fi Setting");
     [self getWiFiList];
 }
 -(dispatch_block_t)timeoutTask{

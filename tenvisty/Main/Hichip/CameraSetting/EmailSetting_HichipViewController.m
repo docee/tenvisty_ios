@@ -48,6 +48,7 @@
     originEmailSwitch = self.enableEmail;
 }
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Email Setting");
     [MBProgressHUD showHUDAddedTo:self.tableview animated:YES];
     emailArray = [[NSMutableArray alloc]initWithObjects:
                   [[EmailModel alloc] initWithData:@"yahoo.com" smtpServer:@"smtp.mail.yahoo.com" port:465 encryptType:ENCTYPE_SSL],
@@ -192,22 +193,34 @@
     UITableViewCell *cell = nil;
     if(section == 0){
         cell = [tableView dequeueReusableCellWithIdentifier:@"tableviewCell_emailSwitch"];
-        for(UISwitch *view in cell.contentView.subviews){
+        for(UIView *view in cell.contentView.subviews){
             if([view isKindOfClass:[UISwitch class]]){
-                [view addTarget:self action:@selector(doEnableEmail:) forControlEvents:UIControlEventTouchUpInside];
-                [view setOn:self.enableEmail];
+                UISwitch *sw = (UISwitch*)view;
+                [sw addTarget:self action:@selector(doEnableEmail:) forControlEvents:UIControlEventTouchUpInside];
+                [sw setOn:self.enableEmail];
+                break;
+            }
+            else if([view isKindOfClass:[UILabel class]]){
+                 UILabel *lab = (UILabel*)view;
+                lab.text = LOCALSTR(@"Enable Email Alert");
                 break;
             }
         }
     }
     else if(section == 1){
         cell = [tableView dequeueReusableCellWithIdentifier:@"tableviewcell_emailAdvanceSwitch"];
-        for(UISwitch *view in cell.contentView.subviews){
+        for(UIView *view in cell.contentView.subviews){
              if([view isKindOfClass:[UISwitch class]]){
-                [view addTarget:self action:@selector(doEnableAdvance:) forControlEvents:UIControlEventTouchUpInside];
-                 [view setOn:self.enableAdvance];
+                UISwitch *sw = (UISwitch*)view;
+                [sw addTarget:self action:@selector(doEnableAdvance:) forControlEvents:UIControlEventTouchUpInside];
+                 [sw setOn:self.enableAdvance];
                 break;
-            }
+             }
+             else if([view isKindOfClass:[UILabel class]]){
+                 UILabel *lab = (UILabel*)view;
+                 lab.text = LOCALSTR(@"Advanced Setting");
+                 break;
+             }
         }
     }
     [cell.contentView setBackgroundColor:Color_GrayLightest];

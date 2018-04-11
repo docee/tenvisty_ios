@@ -17,6 +17,7 @@
 @interface MyCamera()<CameraDelegate>{
     BOOL isWakingUp;
     int reConnectTimes;
+    BOOL isStopManually;
 }
 @property (nonatomic,assign) NSInteger beginRebootTime;
 @property (nonatomic,assign) NSInteger rebootTimeout;
@@ -277,11 +278,13 @@
 
 -(void)connect{
      NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
+    isStopManually = NO;
      [self connect:self.uid];
 }
 
 -(void)stop{
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
+    isStopManually = YES;
     [self stop:0];
     [self disconnect];
 }
@@ -310,7 +313,14 @@
         }
     });
 }
-
+-(void)stopAsync:(void (^)(void))block{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self stop];
+        if(block != nil){
+            block();
+        }
+    });
+}
 -(void)startAudio{
     NSLog(@"%@ %@ %s %d",[self uid],[self class],__func__,__LINE__);
     
@@ -462,7 +472,9 @@
 
 - (void)camera:(Camera *)camera didChangeSessionStatus:(NSInteger)status
 {
-    
+    if(isStopManually){
+        return;
+    }
 
     //手动调用stop接口才是CONNECTION_STATE_DISCONNECTED ||
     if(status == CONNECTION_STATE_TIMEOUT || status == CONNECTION_STATE_CONNECT_FAILED ||  status == CONNECTION_STATE_UNKNOWN_DEVICE || status == CONNECTION_STATE_NETWORK_FAILED){
@@ -495,18 +507,21 @@
             });
         }
         else if(status == CONNECTION_STATE_TIMEOUT){
-            if(self.connectTimeoutBeginTime == 0){
-                self.connectTimeoutBeginTime = [NSDate timeIntervalSinceReferenceDate];
-            }
-            if([NSDate timeIntervalSinceReferenceDate] - self.connectTimeoutBeginTime < CONNECT_TIMEOUT_WAITTIME){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self stop];
-                    [self start];
-                });
-            }
-            else{
-                [self stop];
-            }
+            [self stopAsync:^{
+                [self start];
+            }];
+//            if(self.connectTimeoutBeginTime == 0){
+//                self.connectTimeoutBeginTime = [NSDate timeIntervalSinceReferenceDate];
+//            }
+//            if([NSDate timeIntervalSinceReferenceDate] - self.connectTimeoutBeginTime < CONNECT_TIMEOUT_WAITTIME){
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self stop];
+//                    [self start];
+//                });
+//            }
+//            else{
+//                [self stop];
+//            }
         }
         else{
             [self stop];
@@ -557,10 +572,7 @@
     }
     
     if (status == CONNECTION_STATE_WRONG_PASSWORD) {
-        isWakingUp = NO;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            
-        });
+        isWakingUp = NO;    
     }
     else if(status == CONNECTION_STATE_CONNECTED){
         isWakingUp = NO;

@@ -1163,7 +1163,7 @@ int bLocalSearch = 0;
                 });
                 break;
             }
-            else if (ret == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT || ret == IOTC_ER_TIMEOUT || ret == IOTC_SESSION_ALIVE_TIMEOUT) {
+            else if (ret == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT || ret == IOTC_ER_TIMEOUT || ret == IOTC_SESSION_ALIVE_TIMEOUT || ret == IOTC_ER_SESSION_CLOSE_BY_REMOTE) {
 
                 LOG(@"IOTC_Session_Check(%@) : %d", self.uid, ret);
                 if(self.sessionState != CONNECTION_STATE_TIMEOUT){

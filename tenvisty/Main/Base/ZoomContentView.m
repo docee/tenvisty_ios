@@ -10,6 +10,10 @@
 @interface ZoomContentView(){
     
 }
+@property (weak, nonatomic) IBOutlet UIButton *btnFocusOut;
+@property (weak, nonatomic) IBOutlet UIButton *btnFocusIn;
+@property (weak, nonatomic) IBOutlet UIButton *btnZoomOut;
+@property (weak, nonatomic) IBOutlet UIButton *btnZoomIn;
 @property (weak, nonatomic) IBOutlet UIView *viewInnerContainer;
 @end
 
@@ -20,6 +24,10 @@
     [self setup];
 }
 -(void)setup{
+    [_btnFocusOut setTitle:LOCALSTR(@"Focus Out") forState:UIControlStateNormal];
+    [_btnFocusIn setTitle:LOCALSTR(@"Focus In") forState:UIControlStateNormal];
+    [_btnZoomIn setTitle:LOCALSTR(@"Zoom In") forState:UIControlStateNormal];
+    [_btnFocusOut setTitle:LOCALSTR(@"Zoom Out") forState:UIControlStateNormal];
     for (UIButton* btn in self.viewInnerContainer.subviews) {
         if([btn isKindOfClass:[UIButton class]]){
             [btn setBackgroundColor:Color_Transparent];

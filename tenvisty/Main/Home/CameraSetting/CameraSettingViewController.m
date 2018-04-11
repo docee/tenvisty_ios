@@ -29,6 +29,7 @@
 }
 
 -(void)setup{
+    self.navigationController.title = LOCALSTR(@"Camera Setting");
     [_imgCameraSnapShot setImage:self.camera.image];
     [_labUID setText:self.camera.uid];
     [self doGetRecordSetting];
